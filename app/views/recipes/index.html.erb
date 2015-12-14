@@ -5,8 +5,9 @@
     <tr>
       <th>Name</th>
       <th>Description</th>
-      <th>Public</th>
-      <th colspan="3"></th>
+      <th>Owner</th>
+      <th>Visibility</th>
+      <th></th>
     </tr>
   </thead>
 
@@ -15,10 +16,15 @@
       <tr>
         <td><%= recipe.name %></td>
         <td><%= recipe.description %></td>
-        <td><%= recipe.public %></td>
-        <td><%= link_to 'Show', recipe %></td>
-        <td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>
-        <td><%= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= recipe.user.name %></td>
+        <td><%= recipe.public? ? 'Public' : 'Private' %></td>
+        <td>
+          <%= link_to 'Show', recipe %>
+          <% if user_signed_in? && current_user.can_modify?(recipe) %>
+            <%= link_to 'Edit', edit_recipe_path(recipe) %>
+            <%= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +32,6 @@
 
 <br>
 
+<% if user_signed_in? %>
 <%= link_to 'New Recipe', new_recipe_path %>
+<% end %>

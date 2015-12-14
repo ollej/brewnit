@@ -1,16 +1,29 @@
 class RecipesController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
+  before_action :authorize!, only: [:edit, :update, :destroy]
 
   # GET /recipes
   # GET /recipes.json
   def index
-    @recipes = Recipe.all
+    if user_signed_in?
+      @recipes = Recipe.for_user(current_user)
+    else
+      @recipes = Recipe.all
+    end
   end
 
   # GET /recipes/1
   # GET /recipes/1.json
   def show
-    @beerxml = parse_beerxml
+    if @recipe.public? || user_signed_in? && current_user.can_show?(@recipe)
+      respond_to do |format|
+        @beerxml = parse_beerxml
+        format.html { render :show }
+      end
+    else
+      raise ActiveRecord::RecordNotFound
+    end
   end
 
   # GET /recipes/new
@@ -26,6 +39,7 @@ class RecipesController < ApplicationController
   # POST /recipes.json
   def create
     @recipe = Recipe.new(recipe_params)
+    @recipe.user = current_user
 
     respond_to do |format|
       if @recipe.save
@@ -65,7 +79,7 @@ class RecipesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_recipe
-      @recipe = Recipe.find(params[:id])
+      @recipe = Recipe.unscoped.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -80,5 +94,9 @@ class RecipesController < ApplicationController
       xml = StringIO.new(@recipe.beerxml)
       recipe = parser.parse(xml)
       BeerRecipe::RecipeWrapper.new(recipe.records.first)
+    end
+
+    def authorize!
+      raise ActiveRecord::RecordNotFound unless current_user.can_modify?(@recipe)
     end
 end
