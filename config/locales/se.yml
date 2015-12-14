@@ -1,0 +1,102 @@
+---
+en:
+  beerxml:
+    information: Information
+    style: Ölstil
+    type: Typ
+    grains: Maltvikt
+    kilograms: kg
+    hops: Humle
+    grams: gr
+    equipment: Utrustning
+    brew_date: Bryggdatum
+    brewer: Bryggare
+    assisted_by: med hjälp av %{assistant}
+    notes: Anteckningar
+    recipe_details: Ölrecept
+    batch_size: Mängd
+    boil_time: Koktid
+    ibu: IBU
+    og: OG
+    fg: FG
+    abv: ABV
+    calories_per_liter: Kalorier / L
+    color: Färg
+    liter_abbr: L
+    degrees: '°C'
+    minutes: min
+    sg: SG
+    percent: '%'
+    percent_sign: '%'
+    ebc: EBC
+    fermentables: Malt
+    fermentable_name: Namn
+    fermentable_amount: Mängd
+    fermentable_type: Typ
+    fermentable_color: Färg
+    Grain: Malt
+    Dry Extract: Extrakt
+    Sugar: Socker
+    Adjunct: Adjunkt
+    hops_name: Namn
+    hops_amount: Mängd
+    hops_time: Tid
+    hops_use: Användning
+    hops_form: Form
+    hops_alpha: Alfa
+    hops_ibu: IBU
+    Pellet: Pellet
+    Leaf: Kottar
+    Plug: Puck
+    days: dgr
+    min: min
+    Dry Hop: Torrhumling
+    Boil: Kok
+    Aroma: Arom
+    yeasts: Jäst
+    yeast_name: Namn
+    yeast_product_id: Produkt ID
+    yeast_lab: Labb
+    yeast_form: Form
+    yeast_attenuation: Förjäsbarhet
+    yeast_temperature: Temperatur
+    Dry: Torr
+    Liquid: Flytande
+    mash: Mäskning
+    mash_name: Namn
+    mash_type: Typ
+    mash_infuse_amount: Vatten
+    mash_step_temp: Stegtemperatur
+    mash_ramp_time: Höjningstid
+    mash_step_time: Stegtid
+    Temperature: Temperatur
+    Infusion: Infusion
+    Mash In: Inmäskning
+    Protein Rest: Proteinrast
+    Saccharification: Försockringsrast
+    Low Saccharification: Låg försockring
+    High Saccharification: Hög försockring
+    Mash Out: Utmäskning
+    generated_by: Genererad av
+    miscs: Övriga ingredienser
+    misc_name: Namn
+    misc_type: Typ
+    misc_amount: Mängd
+    misc_use: Användning
+    misc_use_for: Användningsområde
+    misc_time: Tid
+    Fining: Klarning
+    Herb: Ört
+    Spice: Krydda
+    Flavor: Smak
+    Water Agent: Vattenjustering
+    Other: Övrigt
+    Secondary: Sekundär
+    Yeast Nutrient: Jästnäring
+    Ginger Root: Ingefära
+    Fermentation: Jäsning
+    Coffee: Kaffe
+    Seeds of Paradise: Paradisfrön
+    items: stycken
+    Primary: Primär
+    Bottling: Buteljering

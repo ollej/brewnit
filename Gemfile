@@ -28,6 +28,7 @@ gem 'libxml-xmlrpc'
 gem 'devise'
 gem 'omniauth-google-oauth2'
 gem 'unicorn-rails'
+gem 'beer_recipe'
 
 group :production do
   gem 'rails_12factor'

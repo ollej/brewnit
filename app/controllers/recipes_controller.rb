@@ -10,6 +10,7 @@ class RecipesController < ApplicationController
   # GET /recipes/1
   # GET /recipes/1.json
   def show
+    @beerxml = parse_beerxml
   end
 
   # GET /recipes/new
@@ -72,5 +73,12 @@ class RecipesController < ApplicationController
       recipe = params.require(:recipe).permit(:name, :description, :beerxml, :public)
       recipe[:beerxml] = recipe[:beerxml].read if recipe[:beerxml].present?
       recipe
+    end
+
+    def parse_beerxml
+      parser = NRB::BeerXML::Parser.new
+      xml = StringIO.new(@recipe.beerxml)
+      recipe = parser.parse(xml)
+      BeerRecipe::RecipeWrapper.new(recipe.records.first)
     end
 end

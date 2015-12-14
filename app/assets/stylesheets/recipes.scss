@@ -1,3 +1,207 @@
-// Place all the styles related to the recipes controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@-ms-viewport{
+  width: device-width;
+}
+.colorbox {
+  width: 1em;
+  height: 1em;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  border-width: 1px;
+  border-color: beige;
+  border-style: solid;
+  display: inline-block;
+  vertical-align: text-top;
+}
+.srm-min { background-color: #FFFFFF; }
+.srm-max { background-color: #000000; }
+.srm1 { background-color: #FFE699; }
+.srm2 { background-color: #FFD878; }
+.srm3 { background-color: #FFCA5A; }
+.srm4 { background-color: #FFBF42; }
+.srm5 { background-color: #FBB123; }
+.srm6 { background-color: #F8A600; }
+.srm7 { background-color: #F39C00; }
+.srm8 { background-color: #EA8F00; }
+.srm9 { background-color: #E58500; }
+.srm10 { background-color: #DE7C00; }
+.srm11 { background-color: #D77200; }
+.srm12 { background-color: #CF6900; }
+.srm13 { background-color: #CB6200; }
+.srm14 { background-color: #C35900; }
+.srm15 { background-color: #BB5100; }
+.srm16 { background-color: #B54C00; }
+.srm17 { background-color: #B04500; }
+.srm18 { background-color: #A63E00; }
+.srm19 { background-color: #A13700; }
+.srm20 { background-color: #9B3200; }
+.srm21 { background-color: #952D00; }
+.srm22 { background-color: #8E2900; }
+.srm23 { background-color: #882300; }
+.srm24 { background-color: #821E00; }
+.srm25 { background-color: #7B1A00; }
+.srm26 { background-color: #771900; }
+.srm27 { background-color: #701400; }
+.srm28 { background-color: #6A0E00; }
+.srm29 { background-color: #660D00; }
+.srm30 { background-color: #5E0B00; }
+.srm31 { background-color: #5A0A02; }
+.srm32 { background-color: #600903; }
+.srm33 { background-color: #520907; }
+.srm34 { background-color: #4C0505; }
+.srm35 { background-color: #470606; }
+.srm36 { background-color: #440607; }
+.srm37 { background-color: #3F0708; }
+.srm38 { background-color: #3B0607; }
+.srm39 { background-color: #3A070B; }
+.srm40 { background-color: #36080A; }
+
+body {
+  font-family: "Montserrat",sans-serif;
+  font-size: 12pt;
+  line-height: 18pt;
+  color: #4a4a4a;
+  background-color: #fafafa;
+}
+.beer_recipe section {
+  float: left;
+  width: 70%;
+}
+.beer_recipe footer {
+  clear: both;
+}
+.beer_recipe table {
+  border-collapse: separate;
+  border: 1px solid #e0e0e0;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  border-spacing: 0;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 0 10px 0;
+}
+.beer_recipe thead:first-child tr:first-child th:first-child {
+  border-top-left-radius: 3px;
+  border-left: 0;
+}
+.beer_recipe thead:first-child tr:first-child th:last-child {
+  border-top-right-radius: 3px;
+}
+.beer_recipe thead tr:first-child th,
+.beer_recipe thead tr:first-child td {
+  border-top: 0;
+}
+.beer_recipe thead th {
+  vertical-align: left;
+  background-color: #cacaca;
+}
+.beer_recipe tbody tr {
+  text-align: left;
+  background-color: #eaeaea;
+}
+.beer_recipe tbody tr:nth-child(even) {
+  background-color: #f5f5f5;
+}
+.beer_recipe td, .beer_recipe th {
+  border-top: 1px solid #e0e0e0;
+  border-left: 1px solid #e0e0e0;
+  padding: 6px;
+}
+.beer_recipe tbody tr td:first-child {
+  border-left: 0;
+}
+.beer_recipe tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 3px;
+  border-radius: 0 0 0 3px;
+}
+.beer_recipe tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 3px;
+  border-radius: 0 0 3px 0;
+}
+.beer_recipe .format_number {
+  text-align: right;
+}
+.beer_recipe .recipe_information {
+  float: right;
+  width: 25%;
+  border: 1px solid #e0e0e0;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  background-color: #eaeaea;
+  padding: 0 8px 0 8px;
+  margin: 0 5px 15px 5px;
+}
+.beer_recipe .recipe_information h3 {
+  margin-bottom: 0;
+}
+.beer_recipe .recipe_information p {
+  margin-top: 1pt;
+}
+.beer_recipe td {
+  white-space: nowrap
+}
+@media only screen and (max-width: 740px) {
+  section {
+    overflow-x: scroll;
+  }
+  .beer_recipe .recipe_information {
+    float: left;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 0 15px 0;
+  }
+  .beer_recipe .recipe_information p,
+  .beer_recipe .recipe_information h3 {
+    display: inline;
+  }
+  .beer_recipe .recipe_information h3:after {
+    content: ":"
+  }
+  .beer_recipe .recipe_information .recipe_notes p,
+  .beer_recipe .recipe_information .recipe_notes h3 {
+    display: block;
+  }
+  .beer_recipe section {
+    float: left;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+@media screen and (max-width: 320px) {
+  .beer_recipe .recipe_information {
+    width: 95%;
+  }
+}
+@media print {
+  nav {
+    display: none;
+  }
+  #logo {
+    font-size: 36pt;
+    line-height: 48pt;
+  }
+  #header-wrapper {
+    border-bottom: 0;
+  }
+  #footer-wrapper {
+    padding-top: 20pt;
+    margin-top: 20pt;
+  }
+  section {
+    page-break-inside: avoid;
+  }
+  span.image.featured {
+    display: none;
+  }
+  li.fa-google-plus:after {
+    content: 'http://www.exalted.beer';
+  }
+  li.fa-google-plus a {
+    display: none;
+  }
+  #copyright {
+    padding-top: 20pt;
+  }
+}

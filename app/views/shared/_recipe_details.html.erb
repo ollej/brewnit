@@ -1,0 +1,241 @@
+    <article class="box post beer_recipe" itemscope itemtype="http://schema.org/Recipe">
+      <meta itemprop="name" content="<%= @beerxml.name %>">
+      <meta itemprop="author" content="<%= @beerxml.brewer %>">
+      <meta itemprop="recipeCategory" content="beverage">
+      <meta itemprop="totalTime" content="<%= @beerxml.total_time_period %>">
+      <meta itemprop="cookTime" content="<%= @beerxml.boil_time_period %>">
+
+      <aside class="recipe_information">
+        <h2><%= I18n.t(:'beerxml.information') %></h2>
+
+        <div class="recipe_style">
+          <h3><%= I18n.t(:'beerxml.style') %></h3>
+          <p><%= @beerxml.style.name %> (<%= @beerxml.style_code %> / <%= @beerxml.style.style_guide %>)</p>
+        </div>
+
+        <div class="recipe_type">
+          <h3><%= I18n.t(:'beerxml.type') %></h3>
+          <p><%= @beerxml.style.type %></p>
+        </div>
+
+        <div class="recipe_grains">
+          <h3><%= I18n.t(:'beerxml.grains') %></h3>
+          <p><%= '%.2f' % @beerxml.total_grains %> <%= I18n.t(:'beerxml.kilograms') %></p>
+        </div>
+
+        <div class="recipe_hops">
+          <h3><%= I18n.t(:'beerxml.hops') %></h3>
+          <p><%= '%.0f' % @beerxml.total_hops %> <%= I18n.t(:'beerxml.grams') %></p>
+        </div>
+
+        <div class="recipe_equipment">
+          <h3><%= I18n.t(:'beerxml.equipment') %></h3>
+          <p><%= @beerxml.equipment.name %> (<%= @beerxml.equipment.tun_volume %><%= I18n.t(:'beerxml.liter_abbr') %>)</p>
+        </div>
+
+        <div class="recipe_date">
+          <h3><%= I18n.t(:'beerxml.brew_date') %></h3>
+          <p><%= @beerxml.date %></p>
+        </div>
+
+        <div class="recipe_brewer">
+          <h3><%= I18n.t(:'beerxml.brewer') %></h3>
+          <p>
+            <%= @beerxml.brewer %> <% unless @beerxml.asst_brewer.blank? %>(<%= I18n.t(:'beerxml.assisted_by', assistant: @beerxml.asst_brewer) %>)<% end %>
+          </p>
+        </div>
+
+      </aside>
+
+      <section class="recipe_details">
+        <h2><%= I18n.t(:'beerxml.recipe_details') %></h2>
+        <table>
+          <thead>
+            <tr>
+              <th><%= I18n.t(:'beerxml.batch_size') %></th>
+              <th><%= I18n.t(:'beerxml.boil_time') %></th>
+              <th><%= I18n.t(:'beerxml.ibu') %></th>
+              <th><%= I18n.t(:'beerxml.og') %></th>
+              <th><%= I18n.t(:'beerxml.fg') %></th>
+              <th><%= I18n.t(:'beerxml.abv') %></th>
+              <th><%= I18n.t(:'beerxml.calories_per_liter') %></th>
+              <th><%= I18n.t(:'beerxml.color') %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="recipe_batch_size format_number" itemprop="recipeYield"><%= '%.1f' % @beerxml.batch_size %> <%= I18n.t(:'beerxml.liter_abbr') %></td>
+              <td class="recipe_boil_time format_number"><%= '%.0f' % @beerxml.boil_time %> <%= I18n.t(:'beerxml.minutes') %></td>
+              <td class="recipe_ibu format_number"><%= '%.0f' % @beerxml.ibu %></td>
+              <td class="recipe_og format_number"><%= '%.3f' % @beerxml.og %> <%= I18n.t(:'beerxml.sg') %></td>
+              <td class="recipe_fg format_number"><%= '%.3f' % @beerxml.fg %> <%= I18n.t(:'beerxml.sg') %></td>
+              <td class="recipe_abv format_number"><%= '%.1f' % @beerxml.abv %><%= I18n.t(:'beerxml.percent_sign') %></td>
+              <td class="recipe_calories format_number" itemprop="nutrition" itemscope
+                itemtype="http://schema.org/NutritionInformation">
+                <span itemprop="calories"><%= '%.0f' % @beerxml.calories %></span>
+                <meta itemprop="servingSize" content="1 L">
+              </td>
+              <td class="recipe_color format_number">
+                <%= '%.0f' % @beerxml.color_ebc %> <%= I18n.t(:'beerxml.ebc') %>
+                <div class="colorbox" style="background-color: <%= @beerxml.color_hex %>">&nbsp;</div>
+                <!-- <div class="colorbox <%= @beerxml.color_class %>">&nbsp;</div> --></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="recipe_fermentables">
+        <h2><%= I18n.t(:'beerxml.fermentables') %></h2>
+        <table>
+          <thead>
+            <tr>
+              <th><%= I18n.t(:'beerxml.percent') %></th>
+              <th><%= I18n.t(:'beerxml.fermentable_name') %></th>
+              <th><%= I18n.t(:'beerxml.fermentable_amount') %></th>
+              <th><%= I18n.t(:'beerxml.fermentable_type') %></th>
+              <th><%= I18n.t(:'beerxml.fermentable_color') %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @beerxml.fermentables.each do |f| %>
+            <meta itemprop="recipeIngredient"
+              content="<%= f.formatted_amount %> <%= I18n.t(:'beerxml.kilograms') %> <%= f.name %>">
+            <tr>
+              <td class="fermentable_percent format_number"><%= '%.1f' % f.amount_percent %><%= I18n.t(:'beerxml.percent_sign') %></td>
+              <td class="fermentable_name"><%= f.name %></td>
+              <td class="fermentable_amount format_number"><%= f.formatted_amount %> <%= I18n.t(:'beerxml.kilograms') %></td>
+              <td class="fermentable_type"><%= I18n.t("beerxml.#{f.type}", default: f.type) %></td>
+              <td class="fermentable_color format_number">
+                <%= '%.0f' % f.color_ebc %> <%= I18n.t(:'beerxml.ebc') %>
+                <div class="colorbox" style="background-color: <%= f.color_hex %>">&nbsp;</div>
+                <!-- <div class="colorbox <%= f.color_class %>">&nbsp;</div> --></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="recipe_hops">
+        <h2><%= I18n.t(:'beerxml.hops') %></h2>
+        <table>
+          <thead>
+            <tr>
+              <th><%= I18n.t(:'beerxml.percent_sign') %></th>
+              <th><%= I18n.t(:'beerxml.hops_name') %></th>
+              <th><%= I18n.t(:'beerxml.hops_amount') %></th>
+              <th><%= I18n.t(:'beerxml.hops_time') %></th>
+              <th><%= I18n.t(:'beerxml.hops_use') %></th>
+              <th><%= I18n.t(:'beerxml.hops_form') %></th>
+              <th><%= I18n.t(:'beerxml.hops_alpha') %></th>
+              <th><%= I18n.t(:'beerxml.hops_ibu') %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @beerxml.hops.each do |hop| %>
+            <meta itemprop="recipeIngredient"
+            content="<%= hop.formatted_amount %> <%= I18n.t(:'beerxml.grams') %> <%= hop.name %> (<%= I18n.t("beerxml.#{hop.use}", default: hop.use) %> <%= hop.formatted_time %> <%= I18n.t("beerxml.#{hop.time_unit}", default: hop.time_unit) %>)">
+            <tr>
+              <td class="hops_percent format_number"><%= '%.1f' % hop.amount_percent %><%= I18n.t(:'beerxml.percent_sign') %></td>
+              <td class="hops_name"><%= hop.name %></td>
+              <td class="hops_amount format_number"><%= hop.formatted_amount %> <%= I18n.t(:'beerxml.grams') %></td>
+              <td class="hops_time format_number"><%= hop.formatted_time %> <%= I18n.t("beerxml.#{hop.time_unit}", default: hop.time_unit) %></td>
+              <td class="hops_use"><%= I18n.t("beerxml.#{hop.use}", default: hop.use) %></td>
+              <td class="hops_form"><%= I18n.t("beerxml.#{hop.form}", default: hop.form) %></td>
+              <td class="hops_alpha format_number"><%= hop.alpha %><%= I18n.t(:'beerxml.percent_sign') %></td>
+              <td class="hops_ibu format_number"><%= hop.formatted_ibu %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </section>
+
+      <% if @beerxml.miscs.count > 0 %>
+      <section class="recipe_miscs">
+        <h2><%= I18n.t(:'beerxml.miscs') %></h2>
+        <table>
+          <thead>
+            <tr>
+              <th><%= I18n.t(:'beerxml.misc_name') %></th>
+              <th><%= I18n.t(:'beerxml.misc_amount') %></th>
+              <th><%= I18n.t(:'beerxml.misc_type') %></th>
+              <th><%= I18n.t(:'beerxml.misc_use') %></th>
+              <th><%= I18n.t(:'beerxml.misc_time') %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @beerxml.miscs.each do |m| %>
+            <meta itemprop="recipeIngredient"
+            content="<%= m.formatted_amount %> <%= I18n.t("beerxml.#{m.unit}", default: m.unit) %> <%= m.name %>">
+            <tr>
+              <td class="misc_name"><%= I18n.t("beerxml.#{m.name}", default: m.name) %></td>
+              <td class="misc_amount format_number"><%= m.formatted_amount %> <%= I18n.t("beerxml.#{m.unit}", default: m.unit) %></td>
+              <td class="misc_type"><%= I18n.t("beerxml.#{m.type}", default: m.type) %></td>
+              <td class="misc_use"><%= I18n.t("beerxml.#{m.use}", default: m.use) %></td>
+              <td class="misc_time"><%= m.formatted_time %> <%= I18n.t("beerxml.#{m.time_unit}", default: m.time_unit) %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </section>
+      <% end %>
+
+      <section class="yeasts">
+        <h2><%= I18n.t(:'beerxml.yeasts') %></h2>
+        <table>
+          <thead>
+            <tr>
+              <th><%= I18n.t(:'beerxml.yeast_name') %></th>
+              <th><%= I18n.t(:'beerxml.yeast_product_id') %></th>
+              <th><%= I18n.t(:'beerxml.yeast_lab') %></th>
+              <th><%= I18n.t(:'beerxml.yeast_form') %></th>
+              <th><%= I18n.t(:'beerxml.yeast_attenuation') %></th>
+              <th><%= I18n.t(:'beerxml.yeast_temperature') %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @beerxml.yeasts.each do |yeast| %>
+            <tr>
+              <meta itemprop="recipeIngredient" content="<%= yeast.name %> (<%= yeast.product_id %>) <%= yeast.laboratory %>">
+              <td class="yeast_name"><%= yeast.name %></td>
+              <td class="yeast_product_id"><%= yeast.product_id %></td>
+              <td class="yeast_laboratory"><%= yeast.laboratory %></td>
+              <td class="yeast_form"><%= I18n.t("beerxml.#{yeast.form}", default: yeast.form) %></td>
+              <td class="yeast_attenuation format_number"><%= yeast.formatted_attenuation %></td>
+              <td class="yeast_temperatures format_number"><%= yeast.formatted_temperatures %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="recipe_mash" itemprop="recipeInstructions"
+        itemscope itemtype="https://schema.org/ItemList">
+        <h2><%= I18n.t(:'beerxml.mash') %></h2>
+        <table>
+          <thead>
+            <tr>
+              <th><%= I18n.t(:'beerxml.mash_name') %></th>
+              <th><%= I18n.t(:'beerxml.mash_type') %></th>
+              <th><%= I18n.t(:'beerxml.mash_infuse_amount') %></th>
+              <th><%= I18n.t(:'beerxml.mash_step_temp') %></th>
+              <th><%= I18n.t(:'beerxml.mash_ramp_time') %></th>
+              <th><%= I18n.t(:'beerxml.mash_step_time') %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @beerxml.mash.steps.each do |step| %>
+              <tr>
+                <meta itemprop="name" content="<%= I18n.t("beerxml.#{step.name}", default: step.name) %> (<%= I18n.t("beerxml.#{step.type}", default: step.type) %>) <%= step.formatted_step_temp %><%= I18n.t(:'beerxml.degrees') %> @ <%= step.formatted_step_time %> <%= I18n.t(:'beerxml.minutes') %>">
+                <td class="mash_name"><%= I18n.t("beerxml.#{step.name}", default: step.name) %></td>
+                <td class="mash_type"><%= I18n.t("beerxml.#{step.type}", default: step.type) %></td>
+                <td class="mash_infuse_amount format_number"><%= step.formatted_infuse_amount %> <%= I18n.t(:'beerxml.liter_abbr') %></td>
+                <td class="mash_step_temp format_number"><%= step.formatted_step_temp %><%= I18n.t(:'beerxml.degrees') %></td>
+                <td class="mash_ramp_time format_number"><%= step.formatted_ramp_time %> <%= I18n.t(:'beerxml.minutes') %></td>
+                <td class="mash_step_time format_number"><%= step.formatted_step_time %> <%= I18n.t(:'beerxml.minutes') %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </section>
+
+    </article>
