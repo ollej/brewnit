@@ -27,6 +27,7 @@ gem 'pg'
 gem 'libxml-xmlrpc'
 gem 'devise'
 gem 'omniauth-google-oauth2'
+gem 'unicorn-rails'
 
 group :production do
   gem 'rails_12factor'
