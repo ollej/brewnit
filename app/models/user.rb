@@ -1,8 +1,7 @@
 class User < ActiveRecord::Base
-  # Unused: :lockable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable, :timeoutable, :omniauthable, omniauth_providers: [:google_oauth2]
+  # Unused: :recoverable, :registerable, :confirmable, :lockable
+  devise :database_authenticatable, :rememberable, :trackable, :validatable,
+         :timeoutable, :omniauthable, omniauth_providers: [:google_oauth2]
 
   def self.from_omniauth(access_token)
     data = access_token.info
