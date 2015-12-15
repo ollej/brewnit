@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
   has_many :recipes
 
-  # Unused: :recoverable, :registerable, :confirmable, :lockable
+  # Unused: :recoverable, :confirmable, :lockable
   devise :database_authenticatable, :rememberable, :trackable, :validatable,
-         :timeoutable, :omniauthable, omniauth_providers: [:google_oauth2]
+         :registerable, :timeoutable, :omniauthable, omniauth_providers: [:google]
 
   def admin?
     admin
@@ -21,16 +21,11 @@ class User < ActiveRecord::Base
 
   def self.from_omniauth(access_token)
     data = access_token.info
-    user = User.find_by(email: data['email'])
 
-    unless user
-      user = User.create(
-        name: data['name'],
-        email: data['email'],
-        password: Devise.friendly_token[0,20]
-      )
+    User.find_or_create_by(email: data[:email]) do |u|
+      u.name = data[:name]
+      u.password = Devise.friendly_token[0,20]
+      u.avatar = data[:image]
     end
-
-    user
   end
 end

@@ -16,7 +16,7 @@
       <tr>
         <td><%= recipe.name %></td>
         <td><%= recipe.description %></td>
-        <td><%= recipe.user.name %></td>
+        <td><%= recipe.owner_name %></td>
         <td><%= recipe.public? ? 'Public' : 'Private' %></td>
         <td>
           <%= link_to 'Show', recipe %>

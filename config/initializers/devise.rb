@@ -161,7 +161,7 @@ Devise.setup do |config|
   # The time you want to timeout the user session without activity. After this
   # time the user will be asked for credentials again. Default is 30 minutes.
   # config.timeout_in = 30.minutes
-  config.timeout_in = 1.hour
+  config.timeout_in = 8.hour
 
   # ==> Configuration for :lockable
   # Defines which strategy will be used to lock an account.
@@ -271,6 +271,14 @@ Devise.setup do |config|
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 
   config.omniauth :google_oauth2, Rails.application.secrets.google_client_id, Rails.application.secrets.google_client_secret, {
+    name: 'google',
+    prompt: 'select_account',
+    image_aspect_ratio: 'square',
+    image_size: 100,
     provider_ignores_state: true
   }
+
+  config.warden do |manager|
+    manager.failure_app = AuthenticationFailure
+  end
 end
