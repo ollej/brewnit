@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :recipes
+  has_many :recipes, dependent: :destroy
 
   # Unused: :recoverable, :confirmable, :lockable
   devise :database_authenticatable, :rememberable, :trackable, :validatable,
@@ -17,6 +17,14 @@ class User < ActiveRecord::Base
 
   def can_show?(resource)
     resource.public? || can_modify?(resource)
+  end
+
+  def avatar_link
+    if avatar.present?
+      avatar
+    elsif email.present?
+      "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email)}?s=100"
+    end
   end
 
   def self.from_omniauth(access_token)

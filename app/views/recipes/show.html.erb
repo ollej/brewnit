@@ -1,21 +1,13 @@
-<p>
-  <strong>Name:</strong>
-  <%= @recipe.name %>
-</p>
+<h1><%= @recipe.name %></h1>
 
 <p>
-  <strong>Description:</strong>
+  <strong><%= I18n.t(:'recipes.visibility') %>:</strong>
+  <%= @recipe.public? ? I18n.t(:'common.public') : I18n.t(:'common.private') %>
+</p>
+
+<h2><%= I18n.t(:'recipes.description') %></h2>
+<p class="recipe-description">
   <%= @recipe.description %>
 </p>
-
-<p>
-  <strong>Public:</strong>
-  <%= @recipe.public? ? 'yes' : 'no' %>
-</p>
-
-<aside>
-<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
-<%= link_to 'Back', recipes_path %>
-</aside>
 
 <%= render 'shared/recipe_details' %>

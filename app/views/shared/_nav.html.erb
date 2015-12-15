@@ -1,0 +1,18 @@
+<ul>
+  <li><%= link_to I18n.t(:'recipes.index'), recipes_path, class: 'icon fa-home' %></li>
+<% if user_signed_in? %>
+  <li><%= link_to I18n.t(:'recipes.new'), new_recipe_path %></li>
+  <% if @recipe.present? && controller_name == 'recipes' %>
+     <% if action_name == 'show' %>
+  <li><%= link_to I18n.t(:'recipes.edit'), edit_recipe_path(@recipe) %></li>
+    <% elsif action_name == 'edit' %>
+  <li><%= link_to I18n.t(:'recipes.show'), recipe_path(@recipe) %></li>
+    <% end %>
+  <% end %>
+  <li><%= link_to I18n.t(:'users.profile'), edit_user_registration_path %></li>
+  <li><%= link_to I18n.t(:'users.sign_out'), destroy_user_session_path %></li>
+<% else %>
+  <li><%= link_to I18n.t(:'users.sign_in'), new_user_session_path %></li>
+  <li><%= link_to I18n.t(:'users.sign_up'), new_user_registration_path %></li>
+<% end %>
+</ul>

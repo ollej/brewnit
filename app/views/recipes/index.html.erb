@@ -1,12 +1,12 @@
-<h1>Listing Recipes</h1>
+<h1><%= I18n.t(:'recipes.index') %></h1>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Owner</th>
-      <th>Visibility</th>
+      <th><%= I18n.t(:'recipes.name') %></th>
+      <th><%= I18n.t(:'recipes.description') %></th>
+      <th><%= I18n.t(:'recipes.owner') %></th>
+      <th><%= I18n.t(:'recipes.visibility') %></th>
       <th></th>
     </tr>
   </thead>
@@ -17,21 +17,15 @@
         <td><%= recipe.name %></td>
         <td><%= recipe.description %></td>
         <td><%= recipe.owner_name %></td>
-        <td><%= recipe.public? ? 'Public' : 'Private' %></td>
+        <td><%= recipe.public? ? I18n.t(:'common.public') : I18n.t(:'common.private') %></td>
         <td>
-          <%= link_to 'Show', recipe %>
+          <%= link_to I18n.t(:'recipes.show'), recipe %>
           <% if user_signed_in? && current_user.can_modify?(recipe) %>
-            <%= link_to 'Edit', edit_recipe_path(recipe) %>
-            <%= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%= link_to I18n.t(:'recipes.edit'), edit_recipe_path(recipe) %>
+            <%= link_to I18n.t(:'recipes.destroy.link'), recipe, method: :delete, data: { confirm: I18n.t(:'common.are_you_sure') } %>
           <% end %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<% if user_signed_in? %>
-<%= link_to 'New Recipe', new_recipe_path %>
-<% end %>

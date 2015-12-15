@@ -45,6 +45,10 @@
           </p>
         </div>
 
+        <div class="download-button">
+          <%= link_to I18n.t(:'recipes.download'), recipe_path(@recipe, format: :xml) %>
+        </div>
+
       </aside>
 
       <section class="recipe_details">

@@ -1,0 +1,210 @@
+---
+sv:
+  common:
+    are_you_sure: Är du säker?
+    public: Offentlig
+    private: Privat
+  recipes:
+    name: Namn
+    description: Beskrivning
+    owner: Bryggare
+    visibility: Visning
+    index: Recept
+    new: Nytt recept
+    edit: Ändra recept
+    show: Visa recept
+    save: Spara recept
+    download: Ladda ner
+    update:
+      successful: Receptet har uppdaterats.
+    create:
+      successful: Receptet har skapats.
+    destroy:
+      link: Ta bort
+      successful: Receptet har tagits bort.
+  users:
+    profile: Profil
+    sign_up: Skapa användare
+    sign_in: Logga in
+    sign_out: Logga ut
+    sign_in_with_provider: Logga in med %{provider}
+    min_pwd_length: Minst %{min_length} tecken
+  activerecord:
+    attributes:
+      user:
+        sign_in: Logga in
+        email: E-post
+        password: Lösenord
+        remember_me: Kom ihåg mig
+        password_confirmation: Lösenordsverifiering
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: får inte vara tomt.
+              invalid: kunde inte valideras.
+            password:
+              blank: får inte vara tomt.
+              too_short: är för kort.
+            password_confirmation:
+              confirmation: stämmer inte överrens.
+  beerxml:
+    information: Information
+    style: Ölstil
+    type: Typ
+    grains: Maltvikt
+    kilograms: kg
+    hops: Humle
+    grams: gr
+    equipment: Utrustning
+    brew_date: Bryggdatum
+    brewer: Bryggare
+    assisted_by: med hjälp av %{assistant}
+    notes: Anteckningar
+    recipe_details: Ölrecept
+    batch_size: Mängd
+    boil_time: Koktid
+    ibu: IBU
+    og: OG
+    fg: FG
+    abv: ABV
+    calories_per_liter: Kalorier / L
+    color: Färg
+    liter_abbr: L
+    degrees: '°C'
+    minutes: min
+    sg: SG
+    percent: '%'
+    percent_sign: '%'
+    ebc: EBC
+    fermentables: Malt
+    fermentable_name: Namn
+    fermentable_amount: Mängd
+    fermentable_type: Typ
+    fermentable_color: Färg
+    Grain: Malt
+    Dry Extract: Extrakt
+    Sugar: Socker
+    Adjunct: Adjunkt
+    hops_name: Namn
+    hops_amount: Mängd
+    hops_time: Tid
+    hops_use: Användning
+    hops_form: Form
+    hops_alpha: Alfa
+    hops_ibu: IBU
+    Pellet: Pellet
+    Leaf: Kottar
+    Plug: Puck
+    days: dgr
+    min: min
+    Dry Hop: Torrhumling
+    Boil: Kok
+    Aroma: Arom
+    yeasts: Jäst
+    yeast_name: Namn
+    yeast_product_id: Produkt ID
+    yeast_lab: Labb
+    yeast_form: Form
+    yeast_attenuation: Förjäsbarhet
+    yeast_temperature: Temperatur
+    Dry: Torr
+    Liquid: Flytande
+    mash: Mäskning
+    mash_name: Namn
+    mash_type: Typ
+    mash_infuse_amount: Vatten
+    mash_step_temp: Stegtemperatur
+    mash_ramp_time: Höjningstid
+    mash_step_time: Stegtid
+    Temperature: Temperatur
+    Infusion: Infusion
+    Mash In: Inmäskning
+    Protein Rest: Proteinrast
+    Saccharification: Försockringsrast
+    Low Saccharification: Låg försockring
+    High Saccharification: Hög försockring
+    Mash Out: Utmäskning
+    generated_by: Genererad av
+    miscs: Övriga ingredienser
+    misc_name: Namn
+    misc_type: Typ
+    misc_amount: Mängd
+    misc_use: Användning
+    misc_use_for: Användningsområde
+    misc_time: Tid
+    Fining: Klarning
+    Herb: Ört
+    Spice: Krydda
+    Flavor: Smak
+    Water Agent: Vattenjustering
+    Other: Övrigt
+    Secondary: Sekundär
+    Yeast Nutrient: Jästnäring
+    Ginger Root: Ingefära
+    Fermentation: Jäsning
+    Coffee: Kaffe
+    Seeds of Paradise: Paradisfrön
+    items: stycken
+    Primary: Primär
+    Bottling: Buteljering
+  devise:
+    confirmations:
+      confirmed: "Ditt konto har bekräftats. Du är nu inloggad."
+      send_instructions: "Du kommer att få epost med instruktioner om hur du kan bekräfta ditt konto inom några minuter."
+      send_paranoid_instructions: "Om din email är i vår databas, kommer du att få ett mail med instruktioner om hur du ska aktivera ditt konto inom några minuter."
+    failure:
+      already_authenticated: "Du har redan loggat in."
+      inactive: "Ditt konto har inte aktiverats ännu."
+      invalid: "Ogiltig epost eller lösenord."
+      locked: "Ditt konto är låst."
+      last_attempt: "Du har ett till försök innan ditt konto blir låst."
+      not_found_in_database: "Ogiltig epost eller lösenord."
+      timeout: "Din session är inte längre giltig, vänligen logga in igen för att fortsätta."
+      unauthenticated: "Du måste logga in eller skapa ett konto innan du kan fortsätta."
+      unconfirmed: "Du måste bekräfta ditt konto innan du kan fortsätta."
+    mailer:
+      confirmation_instructions:
+        subject: "Instruktioner för att bekräfta konto"
+      reset_password_instructions:
+        subject: "Instrukionter för att återställa lösenord"
+      unlock_instructions:
+        subject: "Instruktioner för att låsa up konto"
+    omniauth_callbacks:
+      failure: "Kunde inte autentisera dig med %{kind} för \"%{reason}\"."
+      success: "Autentiserat med %{kind}-konto."
+    passwords:
+      no_token: "Du har endast tillgång till den här sidan via ett epost för att återställa ditt lösenord. Om detta är fallet, var god kontrollera att du använder den fullständiga adressen i meddelandet."
+      send_instructions: "Du kommer få epost med instruktioner om hur du kan återställa ditt lösenord inom några minuter."
+      send_paranoid_instructions: "Om din email är i vår databas, kommer du att få en lösenordslänk till din mail."
+      updated: "Ditt lösenord har uppdaterats. Du är nu inloggad."
+      updated_not_active: "Ditt lösenord har uppdaterats."
+    registrations:
+      destroyed: "Ditt konto är nu avregistrerat. Vi hoppas få se dig snart igen."
+      signed_up: "Välkommen! Ett nytt konto har skapats."
+      signed_up_but_inactive: "Ett nytt konto har skapats. Men vi kunde tyvärr inte logga in dig eftersom ditt konto inte är aktiverat."
+      signed_up_but_locked: "Ett nytt konto har skapats. Men vi kunde tyvärr inte logga in dig eftersom ditt konto inte är låst."
+      signed_up_but_unconfirmed: "En bekräftelse har skickats till din epost. Klicka på länken i meddelandet för att aktivera ditt konto."
+      update_needs_confirmation: "Ditt konto har uppdaterats, men vi behöver bekräfta din epostadress. En bekräftelse har skickats till din nya epostadress."
+      updated: "Ditt konto har uppdaterats."
+      user:
+        destroyed: Ditt konto har tagits bort.
+    sessions:
+      signed_in: "Du är inloggad."
+      signed_out: "Du är utloggad."
+      already_signed_out: "Du är utloggad."
+    unlocks:
+      send_instructions: "Du kommer få epost med instruktioner om hur du kan låsa upp ditt konto inom några minuter."
+      send_paranoid_instructions: "Om ditt konto finns, kommer du att få ett email med instruktioner om hur du låser upp det inom några minuter."
+      unlocked: "Ditt konto är upp låsts. Du kan nu logga in."
+  errors:
+    messages:
+      already_confirmed: "är redan bekräftad, vänligen logga in igen"
+      confirmation_period_expired: "needs to be confirmed within %{period}, please request a new one"
+      expired: "har löpt ut, var god begär en ny"
+      not_found: "hittades inte"
+      not_locked: "var inte låst"
+      not_saved:
+        one: "1 fel hindrade denna %{resource} från att sparas:"
+        other: "%{count} fel hindrade denna %{resource} från att sparas:"

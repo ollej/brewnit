@@ -8,7 +8,7 @@ class Recipe < ActiveRecord::Base
     if user.present?
       user.name
     else
-      '[deleted]'
+      '[N/A]'
     end
   end
 end
