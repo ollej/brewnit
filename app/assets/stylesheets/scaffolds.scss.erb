@@ -161,16 +161,33 @@ nav {
 }
 
 div.google-signin {
-  background: url(<%= asset_path 'buttons/btn_google_signin_light_normal_web.png' %>);
+  background: url(<%= asset_path 'buttons/btn_google_signin_light_normal_web.png' %>) 0 0 no-repeat;
+  background-size: 191px 46px;
   cursor: pointer;
   height: 46px;
   width: 191px;
 
   &:hover {
-    background: url(<%= asset_path 'buttons/btn_google_signin_light_focus_web.png' %>);
+    background-image: url(<%= asset_path 'buttons/btn_google_signin_light_focus_web.png' %>);
   }
 
   &:active {
-    background: url(<%= asset_path 'buttons/btn_google_signin_light_pressed_web.png' %>);
+    background-image: url(<%= asset_path 'buttons/btn_google_signin_light_pressed_web.png' %>);
+  }
+}
+@media
+screen and (-webkit-min-device-pixel-ratio: 1.5),
+screen and (-moz-min-device-pixel-ratio: 1.5),
+screen and (min-device-pixel-ratio: 1.5) {
+  div.google-signin {
+    background-image: url(<%= asset_path 'buttons/btn_google_signin_light_normal_web@2x.png' %>);
+
+    &:hover {
+      background-image: url(<%= asset_path 'buttons/btn_google_signin_light_focus_web@2x.png' %>);
+    }
+
+    &:active {
+      background-image: url(<%= asset_path 'buttons/btn_google_signin_light_pressed_web@2x.png' %>);
+    }
   }
 }
