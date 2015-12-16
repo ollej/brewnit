@@ -3,6 +3,10 @@ class Recipe < ActiveRecord::Base
 
   default_scope { where(public: true) }
   scope :for_user, -> (user) { unscoped.where('user_id = ? OR public = true', user.id) }
+  scope :by_user, -> (user) { where(user: user) }
+
+  validates :name, presence: true
+  validates :beerxml, presence: true
 
   def owner_name
     if user.present?

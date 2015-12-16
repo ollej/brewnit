@@ -152,6 +152,7 @@ nav {
 
 .recipe_information {
   .download-button {
+    padding-top: 6px;
     padding-bottom: 12px;
     a {
       margin: 0 auto;
@@ -159,3 +160,17 @@ nav {
   }
 }
 
+div.google-signin {
+  background: url(/assets/buttons/btn_google_signin_light_normal_web.png);
+  cursor: pointer;
+  height: 46px;
+  width: 191px;
+
+  &:hover {
+    background: url(/assets/buttons/btn_google_signin_light_focus_web.png);
+  }
+
+  &:active {
+    background: url(/assets/buttons/btn_google_signin_light_pressed_web.png);
+  }
+}
