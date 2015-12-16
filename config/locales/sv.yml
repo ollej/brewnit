@@ -22,21 +22,42 @@ sv:
     destroy:
       link: Ta bort
       successful: Receptet har tagits bort.
+    new: Skapa recept
   users:
     profile: Profil
+    edit: Ändra profil
     sign_up: Skapa användare
     sign_in: Logga in
     sign_out: Logga ut
     sign_in_with_provider: Logga in med %{provider}
     min_pwd_length: Minst %{min_length} tecken
+    leave_pwd_blank: lämna blankt om du inte vill ändra lösenord
+    pwd_needed_to_confirm: behövs för att verifiera dina ändringar
+    save: Spara ändringar
+    cancel_account: Avsluta konto
+    cancel_my_account: Avsluta mitt konto
+    cancel_account_description: Om du avslutar ditt konto kommer även alla de recept du har lagt upp att tas bort.
+    confirm_cancel: |
+      Är du säker på att du vill avsluta kontot?
+
+      Alla dina recept kommer också tas bort.
   activerecord:
+    models:
+      user: Användare
+      recipe: Recept
     attributes:
       user:
         sign_in: Logga in
         email: E-post
         password: Lösenord
+        current_password: Nuvarande lösenord
         remember_me: Kom ihåg mig
         password_confirmation: Lösenordsverifiering
+      recipe:
+        name: Namn
+        description: Beskrivning
+        beerxml: Beer XML
+        public: Offentlig?
     errors:
       models:
         user:
@@ -49,6 +70,8 @@ sv:
               too_short: är för kort.
             password_confirmation:
               confirmation: stämmer inte överrens.
+            current_password:
+              blank: måste fyllas i.
   beerxml:
     information: Information
     style: Ölstil
