@@ -161,16 +161,16 @@ nav {
 }
 
 div.google-signin {
-  background: url(/assets/buttons/btn_google_signin_light_normal_web.png);
+  background: url(<%= asset_path 'buttons/btn_google_signin_light_normal_web.png' %>);
   cursor: pointer;
   height: 46px;
   width: 191px;
 
   &:hover {
-    background: url(/assets/buttons/btn_google_signin_light_focus_web.png);
+    background: url(<%= asset_path 'buttons/btn_google_signin_light_focus_web.png' %>);
   }
 
   &:active {
-    background: url(/assets/buttons/btn_google_signin_light_pressed_web.png);
+    background: url(<%= asset_path 'buttons/btn_google_signin_light_pressed_web.png' %>);
   }
 }
