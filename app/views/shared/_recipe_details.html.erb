@@ -44,11 +44,6 @@
             <%= @beerxml.brewer %> <% unless @beerxml.asst_brewer.blank? %>(<%= I18n.t(:'beerxml.assisted_by', assistant: @beerxml.asst_brewer) %>)<% end %>
           </p>
         </div>
-
-        <div class="download-button">
-          <%= link_to I18n.t(:'recipes.download'), recipe_path(@recipe, format: :xml) %>
-        </div>
-
       </aside>
 
       <section class="recipe_details">

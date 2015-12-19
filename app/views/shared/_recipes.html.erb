@@ -1,0 +1,20 @@
+<% unless @recipes.nil? %>
+<div id="list" class="pure-u-1">
+<% @recipes.each do |recipe| %>
+  <div class="recipe-item pure-g <%= item_classes_for(recipe, current_user, @recipe) %>"
+    data-href="<%= recipe_path(recipe) %>">
+    <div class="pure-u">
+      <%= image_tag avatar_for(recipe), class: 'recipe-avatar', alt: recipe.owner_name, height: 64, width: 64 %>
+    </div>
+
+    <div class="pure-u-3-4">
+      <h5 class="recipe-name"><%= recipe.owner_name %></h5>
+      <h4 class="recipe-subject"><%= link_to recipe.name, recipe_path(recipe) %></h4>
+      <p class="recipe-desc">
+        <%= recipe.description %>
+      </p>
+    </div>
+  </div>
+<% end %>
+</div>
+<% end %>

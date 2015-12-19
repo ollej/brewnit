@@ -15,6 +15,10 @@ sv:
     show: Visa recept
     save: Spara recept
     download: Ladda ner
+    private: Privat
+    own: Egna recept
+    winner: Medaljör
+    labels: Etiketter
     update:
       successful: Receptet har uppdaterats.
     create:

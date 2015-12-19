@@ -18,7 +18,7 @@
     </div>
     <div class="field pure-control-group">
       <%= f.label :beerxml %>
-      <%= f.file_field :beerxml, accept: 'application/xml', required: true %>
+      <%= f.file_field :beerxml, accept: 'application/xml', required: @recipe.new_record? %>
     </div>
     <div class="field pure-control-group">
       <%= f.label :description %>

@@ -1,29 +1,42 @@
-<h2><%= I18n.t(:'users.sign_up') %></h2>
+      <div class="recipe-content-header pure-g">
+        <div class="pure-u">
+          <h1 class="recipe-content-title"><%= I18n.t(:'users.sign_up') %></h1>
+        </div>
+      </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <div class="recipe-content-body">
+        <%= form_for(resource, as: resource_name,
+                     url: registration_path(resource_name),
+                     html: { class: 'pure-form pure-form-aligned' }) do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+  <fieldset>
+    <div class="field pure-control-group">
+      <%= f.label :email %>
+      <%= f.email_field :email, autofocus: true, required: true %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= I18n.t(:'users.min_pwd_length', min_length: @minimum_password_length) %>)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+    <div class="field pure-control-group">
+      <%= f.label :password %>
+      <%= f.password_field :password, autocomplete: 'off', required: true %>
+      <% if @minimum_password_length %>
+      <em>(<%= I18n.t(:'users.min_pwd_length', min_length: @minimum_password_length) %>)</em>
+      <% end %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+    <div class="field pure-control-group">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, autocomplete: 'off' %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit I18n.t(:'users.sign_up') %>
-  </div>
-<% end %>
+    <div class="actions pure-controls">
+      <%= f.submit I18n.t(:'users.sign_up'), class: 'pure-button pure-button-primary' %>
+    </div>
 
-<%= render "devise/shared/links" %>
+    <div class="actions pure-controls">
+      <%= render "devise/shared/links" %>
+    </div>
+  <% end %>
+
+  </fieldset>
+        </div>

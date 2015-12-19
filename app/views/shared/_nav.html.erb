@@ -1,18 +1,26 @@
-<ul>
-  <li><%= link_to I18n.t(:'recipes.index'), recipes_path, class: 'icon fa-home' %></li>
-<% if user_signed_in? %>
-  <li><%= link_to I18n.t(:'recipes.new'), new_recipe_path %></li>
-  <% if @recipe.present? && controller_name == 'recipes' %>
-     <% if action_name == 'show' %>
-  <li><%= link_to I18n.t(:'recipes.edit'), edit_recipe_path(@recipe) %></li>
-    <% elsif action_name == 'edit' %>
-  <li><%= link_to I18n.t(:'recipes.show'), recipe_path(@recipe) %></li>
+<div id="nav" class="pure-u">
+  <a href="#" class="nav-menu-button">Menu</a>
+
+  <div class="nav-inner">
+    <% if user_signed_in? %>
+      <%= link_to I18n.t(:'recipes.new'), new_recipe_path, class: 'primary-button pure-button' %>
     <% end %>
-  <% end %>
-  <li><%= link_to I18n.t(:'users.profile'), edit_user_registration_path %></li>
-  <li><%= link_to I18n.t(:'users.sign_out'), destroy_user_session_path %></li>
-<% else %>
-  <li><%= link_to I18n.t(:'users.sign_in'), new_user_session_path %></li>
-  <li><%= link_to I18n.t(:'users.sign_up'), new_user_registration_path %></li>
-<% end %>
-</ul>
+
+    <div class="pure-menu">
+      <ul class="pure-menu-list">
+      <li class="pure-menu-item"><%= link_to I18n.t(:'recipes.index'), recipes_path, class: 'pure-menu-link' %></li>
+      <% if user_signed_in? %>
+        <li class="pure-menu-item"><%= link_to I18n.t(:'users.profile'), edit_user_registration_path, class: 'pure-menu-link' %></li>
+        <li class="pure-menu-item"><%= link_to I18n.t(:'users.sign_out'), destroy_user_session_path, class: 'pure-menu-link' %></li>
+      <% else %>
+        <li class="pure-menu-item"><%= link_to I18n.t(:'users.sign_in'), new_user_session_path, class: 'pure-menu-link' %></li>
+        <li class="pure-menu-item"><%= link_to I18n.t(:'users.sign_up'), new_user_registration_path, class: 'pure-menu-link' %></li>
+      <% end %>
+      <li class="pure-menu-heading"><%= I18n.t(:'recipes.labels') %></li>
+        <li class="pure-menu-item"><a href="#" class="pure-menu-link"><span class="recipe-label-private"></span><%= I18n.t(:'recipes.private') %></a></li>
+        <li class="pure-menu-item"><a href="#" class="pure-menu-link"><span class="recipe-label-own"></span><%= I18n.t(:'recipes.own') %></a></li>
+        <!-- <li class="pure-menu-item"><a href="#" class="pure-menu-link"><span class="recipe-label-winner"></span><%= I18n.t(:'recipes.winner') %></a></li> -->
+      </ul>
+    </div>
+  </div>
+</div>

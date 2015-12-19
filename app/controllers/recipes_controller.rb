@@ -6,11 +6,6 @@ class RecipesController < ApplicationController
   # GET /recipes
   # GET /recipes.json
   def index
-    if user_signed_in?
-      @recipes = Recipe.for_user(current_user)
-    else
-      @recipes = Recipe.all
-    end
   end
 
   # GET /recipes/1
@@ -25,7 +20,7 @@ class RecipesController < ApplicationController
         send_data @recipe.beerxml, {
           type: 'application/xml',
           disposition: 'attachment',
-          filename: 'beerxml.xml'
+          filename: "#{@recipe.name}.xml"
         }
       }
     end

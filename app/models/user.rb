@@ -19,21 +19,18 @@ class User < ActiveRecord::Base
     resource.public? || can_modify?(resource)
   end
 
-  def avatar_link
-    if avatar.present?
-      avatar
-    elsif email.present?
-      "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email)}?s=100"
-    end
-  end
-
   def self.from_omniauth(access_token)
     data = access_token.info
 
-    User.find_or_create_by(email: data[:email]) do |u|
+    user = User.find_or_create_by(email: data[:email]) do |u|
       u.name = data[:name]
       u.password = Devise.friendly_token[0,20]
       u.avatar = data[:image]
     end
+    if data[:image].present? && user.avatar.blank?
+      user.avatar = data[:image]
+      user.save
+    end
+    user
   end
 end

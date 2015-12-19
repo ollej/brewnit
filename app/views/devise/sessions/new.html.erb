@@ -1,5 +1,10 @@
-<h2><%= I18n.t(:'users.sign_in') %></h2>
+      <div class="recipe-content-header pure-g">
+        <div class="pure-u">
+          <h1 class="recipe-content-title"><%= I18n.t(:'users.sign_in') %></h1>
+        </div>
+      </div>
 
+      <div class="recipe-content-body">
 <%= form_for(resource, as: resource_name,
              url: session_path(resource_name),
              html: { class: 'pure-form pure-form-aligned' }) do |f| %>
@@ -27,7 +32,11 @@
 
       <%= f.submit I18n.t(:'users.sign_in'), class: 'pure-button pure-button-primary' %>
     </div>
+
+    <div class="actions pure-controls">
+<%= render "devise/shared/links" %>
+    </div>
   </fieldset>
 <% end %>
 
-<%= render "devise/shared/links" %>
+      </div>
