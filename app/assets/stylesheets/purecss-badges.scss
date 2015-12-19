@@ -4,32 +4,39 @@
 .pure-badge-warning,
 .pure-badge-success,
 .pure-badge-info,
-.pure-badge-inverse {
-    padding: 0.35em 0.9em 0.35em;
-    background-color: #9D988E;
-    color: #fff;
-    display: inline-block;
-    font-size: 11.844px;
-    font-weight: bold;
-    line-height: 1.2em;
-    vertical-align: baseline;
-    white-space: nowrap;
-    border-radius: 20px;
-    margin: 0.2em;
+.pure-badge-inverse,
+.pure-badge-private,
+.pure-badge-public {
+  padding: 0.35em 0.9em 0.35em;
+  background-color: #9D988E;
+  color: #fff;
+  display: inline-block;
+  font-size: 11.844px;
+  font-weight: bold;
+  line-height: 1.2em;
+  vertical-align: baseline;
+  white-space: nowrap;
+  border-radius: 20px;
+  margin: 0.2em;
 }
 .pure-badge-error {
-    background-color: #D13C38;
+  background-color: #D13C38;
 }
 .pure-badge-warning {
-    background-color: #E78C05;
+  background-color: #E78C05;
 }
 .pure-badge-success {
-    background-color: rgb(83, 180, 79);
+  background-color: rgb(83, 180, 79);
 }
 .pure-badge-info {
-    background-color: rgb(18, 169, 218);
+  background-color: rgb(18, 169, 218);
 }
 .pure-badge-inverse {
-    background-color: #4D370C;
+  background-color: #4D370C;
 }
-
+.pure-badge-private {
+  background-color: #41ccb4;
+}
+.pure-badge-public {
+  background-color: #40c365;
+}

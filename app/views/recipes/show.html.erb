@@ -5,8 +5,6 @@
             <%= @recipe.description %>
           </p>
 
-          <br>
-          <%= visibility_badge(@recipe) %>
         </div>
 
         <div class="recipe-content-controls pure-u-1-2">
@@ -19,6 +17,11 @@
             <% end %>
           <% end %>
         </div>
+
+        <div class="recipe-badge-list pure-u">
+        <%= visibility_badge(@recipe) %>
+        </div>
+
       </div>
 
       <div class="recipe-content-body">

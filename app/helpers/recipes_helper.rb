@@ -34,9 +34,9 @@ module RecipesHelper
 
   def visibility_badge(recipe)
     if recipe.public?
-      badge(I18n.t(:'common.public'), 'success')
+      badge(I18n.t(:'common.public'), 'public')
     else
-      badge(I18n.t(:'common.private'), 'info')
+      badge(I18n.t(:'common.private'), 'private')
     end
   end
 end
