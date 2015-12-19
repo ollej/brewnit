@@ -19,10 +19,10 @@
   <div id="main" class="pure-u-1">
     <div class="recipe-content">
 <% if flash[:notice] %>
-<div class="flash flash-notice"><%= flash[:notice] %></div>
+<div class="pure-alert pure-alert-success"><%= flash[:notice] %></div>
 <% end %>
 <% if flash[:alert] %>
-<div class="flash flash-alert"><%= flash[:alert] %></div>
+<div class="pure-alert pure-alert-error"><%= flash[:alert] %></div>
 <% end %>
 
 <%= yield %>

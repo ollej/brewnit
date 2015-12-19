@@ -3,13 +3,10 @@
           <h1 class="recipe-content-title"><%= @recipe.name %></h1>
           <p class="recipe-content-subtitle">
             <%= @recipe.description %>
-
-            <br>
-            <span>
-              <strong><%= I18n.t(:'recipes.visibility') %>:</strong>
-              <%= @recipe.public? ? I18n.t(:'common.public') : I18n.t(:'common.private') %>
-            </span>
           </p>
+
+          <br>
+          <%= visibility_badge(@recipe) %>
         </div>
 
         <div class="recipe-content-controls pure-u-1-2">

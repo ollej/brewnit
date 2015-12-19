@@ -26,4 +26,17 @@ module RecipesHelper
     end
     cls.join(' ')
   end
+
+  def badge(content, type=nil)
+    css = type.nil? ? 'pure-badge' : "pure-badge-#{type}"
+    %Q{<span class="#{css}">#{content}</span>}.html_safe
+  end
+
+  def visibility_badge(recipe)
+    if recipe.public?
+      badge(I18n.t(:'common.public'), 'success')
+    else
+      badge(I18n.t(:'common.private'), 'info')
+    end
+  end
 end
