@@ -22,7 +22,7 @@ module RecipesHelper
       cls << 'recipe-item-own'
     end
     if current_recipe.present? && current_recipe == recipe
-      cls << 'email-item-selected'
+      cls << 'recipe-item-selected'
     end
     cls.join(' ')
   end
