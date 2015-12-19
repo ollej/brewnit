@@ -1,0 +1,26 @@
+.flash {
+  position: relative;
+  margin: 1em;
+  padding: 1em;
+  background: #c0c0c0;
+  border-radius: 3px;
+}
+
+.flash-alert label {
+  display: inline-block;
+  display: inline-block;
+  *display: inline;
+  /* IE7 inline-block hack */
+  *zoom: 1;
+  white-space: nowrap;
+}
+
+.flash-alert {
+  background-color: #d13c38;
+  color: #f0f0f0;
+}
+
+.flash-notice {
+  background-color: #53b44f;
+  color: #f0f0f0;
+}

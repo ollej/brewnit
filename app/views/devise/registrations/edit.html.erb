@@ -1,37 +1,47 @@
 <h2><%= I18n.t(:'users.edit') %></h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+<%= form_for(resource,
+             as: resource_name,
+             url: registration_path(resource_name),
+             html: { method: :put, class: 'pure-form pure-form-aligned' }) do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+  <fieldset>
+    <div class="field pure-control-group">
+      <%= f.label :email %>
+      <%= f.email_field :email, autofocus: true %>
+    </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <% end %>
 
-  <div class="field">
-    <%= f.label :password %> <em>(<%= I18n.t(:'users.leave_pwd_blank') %>)</em><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+    <div class="field pure-control-group">
+      <%= f.label :password %>
+      <%= f.password_field :password, required: true, autocomplete: 'off', placeholder: I18n.t(:'activerecord.attributes.user.password') %><br />
+      <em>(<%= I18n.t(:'users.leave_pwd_blank') %>)</em>
+    </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+    <div class="field pure-control-group">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, autocomplete: 'off', placeholder: I18n.t(:'activerecord.attributes.user.password_confirmation') %>
+    </div>
 
-  <div class="field">
-    <%= f.label :current_password %> <em>(<%= I18n.t(:'users.pwd_needed_to_confirm') %>)</em><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
+    <div class="field pure-control-group">
+      <%= f.label :current_password %>
+      <%= f.password_field :current_password, autocomplete: 'off', placeholder: I18n.t(:'activerecord.attributes.user.current_password')  %><br>
+      <em>(<%= I18n.t(:'users.pwd_needed_to_confirm') %>)</em>
+    </div>
 
-  <div class="actions">
-    <%= f.submit I18n.t(:'users.save') %>
-  </div>
+    <div class="actions pure-controls">
+      <%= f.submit I18n.t(:'users.save'), class: 'pure-button pure-button-primary' %>
+    </div>
+  </fieldset>
 <% end %>
 
 <h3><%= I18n.t(:'users.cancel_account') %></h3>
 <p><%= I18n.t(:'users.cancel_account_description') %></p>
-<p><%= button_to I18n.t(:'users.cancel_my_account'), registration_path(resource_name), data: { confirm: I18n.t(:'users.confirm_cancel')}, method: :delete %></p>
+<p><%= button_to I18n.t(:'users.cancel_my_account'),
+  registration_path(resource_name),
+  data: { confirm: I18n.t(:'users.confirm_cancel')},
+  method: :delete, class: 'pure-button button-error' %></p>

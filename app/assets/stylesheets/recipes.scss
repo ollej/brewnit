@@ -182,24 +182,8 @@ body {
     font-size: 36pt;
     line-height: 48pt;
   }
-  #header-wrapper {
-    border-bottom: 0;
-  }
-  #footer-wrapper {
-    padding-top: 20pt;
-    margin-top: 20pt;
-  }
   section {
     page-break-inside: avoid;
-  }
-  span.image.featured {
-    display: none;
-  }
-  li.fa-google-plus:after {
-    content: 'http://www.exalted.beer';
-  }
-  li.fa-google-plus a {
-    display: none;
   }
   #copyright {
     padding-top: 20pt;

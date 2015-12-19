@@ -20,6 +20,7 @@ class RecipesController < ApplicationController
     @beerxml = parse_beerxml
     respond_to do |format|
       format.html { render :show }
+      format.json { render json: @recipe }
       format.xml {
         send_data @recipe.beerxml, {
           type: 'application/xml',
@@ -80,7 +81,7 @@ class RecipesController < ApplicationController
   def destroy
     @recipe.destroy
     respond_to do |format|
-      format.html { redirect_to recipes_url, notice: I18n.t(:'recipes.destroy.succesful') }
+      format.html { redirect_to recipes_url, notice: I18n.t(:'recipes.destroy.successful') }
       format.json { head :no_content }
     end
   end

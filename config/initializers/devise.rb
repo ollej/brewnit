@@ -275,7 +275,6 @@ Devise.setup do |config|
     prompt: 'select_account',
     image_aspect_ratio: 'square',
     image_size: 100,
-    provider_ignores_state: true
   }
 
   config.warden do |manager|

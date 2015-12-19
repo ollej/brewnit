@@ -1,4 +1,4 @@
-<%= form_for(@recipe) do |f| %>
+<%= form_for(@recipe, html: { class: 'pure-form pure-form-aligned' }) do |f| %>
   <% if @recipe.errors.any? %>
     <div id="error_explanation">
       <h2><%= I18n.t(:'activerecord.errors.models.recipe.header', count: @recipe.errors.count) %></h2>
@@ -11,23 +11,26 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :beerxml %><br>
-    <%= f.file_field :beerxml, accept: 'application/xml' %>
-  </div>
-  <div class="field">
-    <%= f.label :public %><br>
-    <%= f.check_box :public %>
-  </div>
-  <div class="actions">
-    <%= f.submit I18n.t(:'recipes.save') %>
-  </div>
+  <fieldset>
+    <div class="field pure-control-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, required: true, placeholder: I18n.t(:'activerecord.attributes.recipe.name') %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :beerxml %>
+      <%= f.file_field :beerxml, accept: 'application/xml', required: true %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :description %>
+      <%= f.text_area :description, placeholder: I18n.t(:'activerecord.attributes.recipe.description') %>
+    </div>
+    <div class="actions pure-controls">
+      <%= f.label :public, class: 'pure-checkbox' do %>
+        <%= f.check_box :public %> <%= I18n.t(:'activerecord.attributes.recipe.public') %>
+      <% end %>
+      <br>
+
+      <%= f.submit I18n.t(:'recipes.save'), class: 'pure-button pure-button-primary' %>
+    </div>
+  </fieldset>
 <% end %>
