@@ -174,17 +174,21 @@ body {
   }
 }
 @media print {
+  .recipe-content-controls,
+  .recipe-badge-list,
+  #list,
+  footer,
+  .tabs label,
+  #nav,
   nav {
     display: none;
-  }
-  #logo {
-    font-size: 36pt;
-    line-height: 48pt;
   }
   section {
     page-break-inside: avoid;
   }
-  #copyright {
-    padding-top: 20pt;
-  }
+}
+
+#pie-chart-malt > svg {
+  display: block;
+  margin: auto;
 }

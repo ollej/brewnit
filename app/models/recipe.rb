@@ -15,4 +15,23 @@ class Recipe < ActiveRecord::Base
       '[N/A]'
     end
   end
+
+  def beerxml_details
+    @beerxml_details ||= begin
+      parser = NRB::BeerXML::Parser.new
+      xml = StringIO.new(self.beerxml)
+      recipe = parser.parse(xml)
+      BeerRecipe::RecipeWrapper.new(recipe.records.first)
+    end
+  end
+
+  def malt_data
+    beerxml_details.fermentables.map do |f|
+      {
+        label: f.name,
+        value: f.formatted_amount.to_f,
+        color: f.color_hex,
+      }
+    end
+  end
 end

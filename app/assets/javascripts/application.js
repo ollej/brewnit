@@ -14,23 +14,24 @@
 //= require jquery_ujs
 //= require_tree .
 
-YUI().use('node-base', 'node-event-delegate', 'node-event-simulate', function (Y) {
-  var menuButton = Y.one('.nav-menu-button'),
-      nav        = Y.one('#nav');
-
-  // Setting the active class name expands the menu vertically on small screens.
-  menuButton.on('click', function (e) {
-    nav.toggleClass('active');
-  });
-
+$( document ).ready(function() {
+  // Expand menu on small screens
+  $(".nav-menu-button").on("click", function() {
+    $("#nav").toggleClass("active");
+    return false;
+  })
 
   // Handle clicks in recipe list
-  var handleClick = function handleClick(ev) {
-    Y.all('#list .recipe-item').removeClass('recipe-item-selected');
-    this.addClass('recipe-item-selected');
-    location.href = this.one('a').get('href');
+  $("#list").on("click", ".recipe-item", function(ev) {
+    $("#list .recipe-item").removeClass("recipe-item-selected");
+    $(this).addClass("recipe-item-selected");
+    document.location = $("a", this).attr("href");
     return false;
-  }
-  Y.delegate("click", handleClick, '#list', ".recipe-item");
+  });
 
+  // Trigger redraw-d3 event on tab change
+  $(".tabs").on("change", '[id^="tab"]', function() {
+    $("body").trigger("redraw-d3", [$(this).attr("id")]);
+    return false;
+  });
 });

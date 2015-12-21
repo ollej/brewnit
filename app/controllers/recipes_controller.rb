@@ -12,7 +12,7 @@ class RecipesController < ApplicationController
   # GET /recipes/1.json
   def show
     raise ActiveRecord::RecordNotFound unless can_show(@recipe)
-    @beerxml = parse_beerxml
+    @beerxml = @recipe.beerxml_details
     respond_to do |format|
       format.html { render :show }
       format.json { render json: @recipe }
@@ -90,13 +90,6 @@ class RecipesController < ApplicationController
       recipe = params.require(:recipe).permit(:name, :description, :beerxml, :public)
       recipe[:beerxml] = recipe[:beerxml].read if recipe[:beerxml].present?
       recipe
-    end
-
-    def parse_beerxml
-      parser = NRB::BeerXML::Parser.new
-      xml = StringIO.new(@recipe.beerxml)
-      recipe = parser.parse(xml)
-      BeerRecipe::RecipeWrapper.new(recipe.records.first)
     end
 
     def authorize!

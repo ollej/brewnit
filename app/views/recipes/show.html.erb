@@ -25,5 +25,20 @@
       </div>
 
       <div class="recipe-content-body">
+        <div class="tabs">
+          <input type="radio" name="tabs" id="tab1" checked>
+          <label for="tab1">
+            <i class="fa fa-html5"></i><span>Recept</span>
+          </label>
+          <input type="radio" name="tabs" id="tab2">
+          <label for="tab2">
+            <i class="fa fa-css3"></i><span>Analys</span>
+          </label>
+          <div id="tab-content1" class="tab-content">
 <%= render 'shared/recipe_details' %>
+          </div>
+          <div id="tab-content2" class="tab-content">
+<%= render 'shared/malt_pie' %>
+          </div>
+        </div>
       </div>
