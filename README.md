@@ -9,6 +9,7 @@ Requirements
 This application needs the following:
 
  * Ruby v2.2.3
+ * Postgres
 
 ### Ruby installation
 
@@ -40,7 +41,19 @@ Basically just clone the Github repository and run `bundle install`.
 $ git clone https://github.com/ollej/brewnit.git brewnit
 $ cd brewnit
 $ bundle install
+$ createdb brewnit_dev
+$ bundle exec rake db:migrate
 ```
+
+Run `bundle exec rake secret` twice and add them to the `config/secrets.yml`
+where it says 'changeme' (secret_key_base and devise_pepper).
+
+For the Google signin support, you need to create credentials on the Google
+Developers console and add client_id and client_secret to the
+config/secrets.yml
+
+https://console.developers.google.com
+
 
 Usage
 -----
