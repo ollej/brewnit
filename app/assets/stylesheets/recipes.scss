@@ -196,3 +196,11 @@ body {
   display: block;
   margin: auto;
 }
+
+.gauges {
+  text-align: center;
+
+  .gauge-chart {
+    padding: 0 1em;
+  }
+}

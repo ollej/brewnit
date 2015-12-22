@@ -3,7 +3,7 @@ class BeerPie
 
   constructor: (@el, @tab, @data) ->
     @d3 = new d3pie(@el, @config())
-    $("body").on("redraw-d3", @draw)
+    $("body").on("tab-changed", @draw)
 
   draw: (ev, id) =>
     return unless id == @tab

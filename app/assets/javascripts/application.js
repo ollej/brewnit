@@ -31,7 +31,12 @@ $( document ).ready(function() {
 
   // Trigger redraw-d3 event on tab change
   $(".tabs").on("change", '[id^="tab"]', function() {
-    $("body").trigger("redraw-d3", [$(this).attr("id")]);
+    $("body").trigger("tab-changed", [$(this).attr("id")]);
     return false;
   });
+
+  // Setup gauges
+  var dataGauge = new DataGauge(".gauge-chart");
+  dataGauge.init();
+
 });

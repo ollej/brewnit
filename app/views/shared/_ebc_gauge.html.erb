@@ -1,0 +1,13 @@
+<span id="ebc-gauge" class="gauge-chart"
+  data-value="<%= @beerxml.color_ebc.to_json.html_safe %>"
+  data-size="120"
+  data-label="<%= I18n.t(:'beerxml.ebc') %>"
+  data-value-template="{value}"
+  data-min="0"
+  data-max="150"
+  data-minor-ticks="1"
+  data-yellow-from="80"
+  data-yellow-to="120"
+  data-red-from="120"
+  data-red-to="150"
+  ></span>

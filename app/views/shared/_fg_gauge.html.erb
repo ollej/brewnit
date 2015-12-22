@@ -1,0 +1,13 @@
+<span id="fg-gauge" class="gauge-chart"
+  data-value="<%= (@beerxml.fg * 1000).to_json.html_safe %>"
+  data-size="120"
+  data-label="<%= I18n.t(:'beerxml.fg') %>"
+  data-value-template="{value}"
+  data-min="1000"
+  data-max="1130"
+  data-minor-ticks="1"
+  data-yellow-from="1080"
+  data-yellow-to="1100"
+  data-red-from="1100"
+  data-red-to="1130"
+  ></span>

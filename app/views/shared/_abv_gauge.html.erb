@@ -1,0 +1,13 @@
+<span id="abv-gauge" class="gauge-chart"
+  data-value="<%= @beerxml.abv.to_json.html_safe %>"
+  data-size="120"
+  data-label="<%= I18n.t(:'beerxml.abv') %>"
+  data-value-template="{value}%"
+  data-min="0"
+  data-max="25"
+  data-minor-ticks="0.1"
+  data-yellow-from="12"
+  data-yellow-to="20"
+  data-red-from="20"
+  data-red-to="25"
+  ></span>
