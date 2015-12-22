@@ -27,12 +27,12 @@
       <div class="recipe-content-body">
         <div class="tabs">
           <input type="radio" name="tabs" id="tab1" checked>
-          <label for="tab1">
-            <i class="fa fa-html5"></i><span>Recept</span>
+          <label for="tab1" class="tab-trigger">
+            <i class="fa fa-beer"></i><span><%= I18n.t(:'recipes.recipe_details') %></span>
           </label>
           <input type="radio" name="tabs" id="tab2">
-          <label for="tab2">
-            <i class="fa fa-css3"></i><span>Analys</span>
+          <label for="tab2" class="tab-trigger">
+            <i class="fa fa-pie-chart"></i><span><%= I18n.t(:'recipes.recipe_analytics') %></span>
           </label>
           <div id="tab-content1" class="tab-content">
 <%= render 'shared/recipe_details' %>

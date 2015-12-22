@@ -19,6 +19,8 @@ sv:
     own: Egna recept
     winner: Medaljör
     labels: Etiketter
+    recipe_details: Recept
+    recipe_analytics: Analys
     update:
       successful: Receptet har uppdaterats.
     create:
@@ -30,7 +32,7 @@ sv:
   users:
     profile: Profil
     edit: Ändra profil
-    sign_up: Skapa användare
+    sign_up: Registrera
     sign_in: Logga in
     sign_out: Logga ut
     sign_in_with_provider: Logga in med %{provider}

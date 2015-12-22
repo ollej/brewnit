@@ -1,6 +1,5 @@
 .tabs {
   float: none;
-  list-style: none;
   padding: 0;
 }
 
@@ -14,24 +13,42 @@
   display:none;
 }
 
-.tabs label {
-  display: block;
+.tabs > label {
   float: left;
-  width: 50%;
-  /*
-  width: 33.3333%;
-  */
-
-  color: #ccc;
-  font-size: 30px;
-  font-weight: normal;
+  position: relative;
+  color: #eee;
   text-decoration: none;
-  text-align: center;
-  line-height: 2;
-
+  text-transform: uppercase;
+  font-weight: bold;
   cursor: pointer;
-  box-shadow: inset 0 4px #ccc;
-  border-bottom: 4px solid #ccc;
+  padding: 0 2.5em;
+  height: 0;
+  line-height: 2.5em;
+  border-right: 2.5em solid transparent;
+  border-bottom: 2.5em solid #3D3D3D;
+  background-clip: border-box;
+  border-bottom-color: #777\9;
+  margin: 0 -1em -1px 0; /* wtf? why is -1px needed? */
+  opacity: 0.3;
+  filter: alpha(opacity=30);
+}
+
+/* selected */
+.tabs [id^="tab"]:checked + label {
+  z-index: 3;
+  border-bottom-color: #252a3a;
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+
+.tabs label:hover,
+.tabs label:focus {
+  border-bottom-color: #777;
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+.tabs label:focus {
+  outline: 0;
 }
 
 .tabs label span {
@@ -43,25 +60,13 @@
   margin-right: 0;
 }
 
-.tabs label:hover {
-  color: #3498db;
-  box-shadow: inset 0 4px #3498db;
-  border-bottom: 4px solid #3498db;
-}
-
 .tab-content {
   display: none;
   width: 100%;
   float: left;
   box-sizing: border-box;
-  background-color:#ffffff;
-  margin-top: 2em;
-}
-
-.tabs [id^="tab"]:checked + label {
-  box-shadow: inset 0 4px #3498db;
-  border-bottom: 4px solid #3498db;
-  color: #3498db;
+  padding-top: 2em;
+  border-top: solid black 1px;
 }
 
 #tab1:checked ~ #tab-content1,
@@ -84,7 +89,7 @@
   }
 }
 
-.tab-content  {
+.tab-content {
   -webkit-animation: tabTransition 0.7s ease-in-out;
   -moz-animation: tabTransition 0.7s ease-in-out;
   animation: tabTransition 0.7s ease-in-out;

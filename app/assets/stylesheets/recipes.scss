@@ -141,6 +141,10 @@ body {
 .beer_recipe td {
   white-space: nowrap
 }
+.beer_recipe .recipe_details h2:first-child {
+  margin-top: 0;
+}
+
 @media only screen and (max-width: 740px) {
   section {
     overflow-x: scroll;
