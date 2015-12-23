@@ -2,6 +2,6 @@
 <div id="hops-burst"></div>
 
 <script>
-var hopsBurst = new Sunburst('#hops-burst', <%= @recipe.hops_data.to_json.html_safe %>);
+var hopsBurst = new Sunburst("#hops-burst", "tab2", <%= @recipe.hops_data.to_json.html_safe %>);
 hopsBurst.init();
 </script>
