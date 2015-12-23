@@ -147,6 +147,9 @@ sv:
     items: stycken
     Primary: Primär
     Bottling: Buteljering
+    addition_bitter: Bittergiva
+    addition_flavour: Smakgiva
+    addition_aroma: Aromgiva
   devise:
     confirmations:
       confirmed: "Ditt konto har bekräftats. Du är nu inloggad."

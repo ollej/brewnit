@@ -34,4 +34,36 @@ class Recipe < ActiveRecord::Base
       }
     end
   end
+
+  def hop_addition(hop)
+    if hop.time > 50
+      I18n.t(:'beerxml.addition_bitter')
+    elsif hop.time >= 10
+      I18n.t(:'beerxml.addition_flavour')
+    else
+      I18n.t(:'beerxml.addition_aroma')
+    end
+  end
+
+  def hops_data
+    hops = {}
+    beerxml_details.hops.map do |h|
+      hop_data = { name: h.name, size: h.amount }
+      addition = hop_addition(h)
+      if hops[addition]
+        hops[addition] << hop_data
+      else
+        hops[addition] = [hop_data]
+      end
+    end
+    {
+      name: "hops",
+      children: hops.map do |use, hops|
+        {
+          name: use,
+          children: hops
+        }
+      end
+    }
+  end
 end

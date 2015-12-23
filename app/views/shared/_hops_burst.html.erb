@@ -1,0 +1,7 @@
+<h2><%= I18n.t(:'beerxml.hops') %></h2>
+<div id="hops-burst"></div>
+
+<script>
+var hopsBurst = new Sunburst('#hops-burst', <%= @recipe.hops_data.to_json.html_safe %>);
+hopsBurst.init();
+</script>

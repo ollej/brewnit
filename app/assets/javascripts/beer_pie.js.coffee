@@ -13,20 +13,6 @@ class BeerPie
 
   config: ->
     {
-      "header": {
-        "title": {
-          "text": "Malt",
-          "fontSize": 22,
-          "font": "Montserrat"
-        },
-        "subtitle": {
-          "text": "",
-          "color": "#999999",
-          "fontSize": 10,
-          "font": "Montserrat"
-        },
-        "titleSubtitlePadding": 12
-      },
       "footer": {
         "color": "#999999",
         "fontSize": 11,
@@ -34,7 +20,7 @@ class BeerPie
         "location": "bottom-center"
       },
       "size": {
-        "canvasHeight": 400,
+        "canvasHeight": 320,
         "canvasWidth": 590,
         "pieOuterRadius": "90%"
       },
