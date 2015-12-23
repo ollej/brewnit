@@ -6,7 +6,7 @@ class Sunburst
   constructor: (@sel, @tab, @data) ->
     @radius = Math.min(@width, @height) / 2
     @color = d3.scale.ordinal().range(["#637939", "#8ca252", "#b5cf6b", "#cedb9c"]) #category20b()
-    @setup()
+    $("body").on("tab-changed", @redraw)
 
   setup: ->
     @svg = d3.select(@sel).append("svg")
@@ -26,20 +26,14 @@ class Sunburst
       .innerRadius((d) -> Math.sqrt(d.y))
       .outerRadius((d) -> Math.sqrt(d.y + d.dy))
 
-    $("body").on("tab-changed", @redraw)
-
-  reset: ->
-    @svg.remove()
-    
   redraw: (ev, id) =>
     return unless id == @tab
     return if @drawn
-    @reset()
-    @setup()
     @init()
     @drawn = true
 
   init: ->
+    @setup()
     path = @svg.datum(@data).selectAll("path")
       .data(@partition.nodes)
       .enter().append("g")
