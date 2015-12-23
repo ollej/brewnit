@@ -6,7 +6,8 @@
 .pure-badge-info,
 .pure-badge-inverse,
 .pure-badge-private,
-.pure-badge-public {
+.pure-badge-public,
+.pure-badge-comments {
   padding: 0.35em 0.9em 0.35em;
   background-color: #9D988E;
   color: #fff;
@@ -39,4 +40,7 @@
 }
 .pure-badge-public {
   background-color: #40c365;
+}
+.pure-badge-comments {
+  background-color: #B590D4;
 }

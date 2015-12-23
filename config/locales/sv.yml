@@ -29,6 +29,10 @@ sv:
       link: Ta bort
       successful: Receptet har tagits bort.
     new: Skapa recept
+    recipe_comments: Kommentarer
+    comments_count:
+      one: 1 kommentar
+      other: '%{count} kommentarer'
   users:
     profile: Profil
     edit: Ändra profil

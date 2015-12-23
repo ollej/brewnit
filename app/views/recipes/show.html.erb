@@ -19,7 +19,8 @@
         </div>
 
         <div class="recipe-badge-list pure-u">
-        <%= visibility_badge(@recipe) %>
+          <%= visibility_badge(@recipe) %>
+          <%= comments_badge(@recipe) %>
         </div>
 
       </div>
@@ -34,6 +35,10 @@
           <label for="tab2" class="tab-trigger">
             <i class="fa fa-pie-chart"></i><span><%= I18n.t(:'recipes.recipe_analytics') %></span>
           </label>
+          <input type="radio" name="tabs" id="tab3">
+          <label for="tab3" class="tab-trigger">
+            <i class="fa fa-comments"></i><span><%= I18n.t(:'recipes.recipe_comments') %></span>
+          </label>
           <div id="tab-content1" class="tab-content">
 <%= render 'shared/recipe_details' %>
           </div>
@@ -41,6 +46,9 @@
 <%= render 'shared/gauges' %>
 <%= render 'shared/malt_pie' %>
 <%= render 'shared/hops_burst' %>
+          </div>
+          <div id="tab-content3" class="tab-content">
+            <%= commontator_thread(@recipe) %>
           </div>
         </div>
       </div>

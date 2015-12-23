@@ -1,0 +1,18 @@
+.thumb-upvote-active,
+.thumb-upvote {
+  border: none;
+  background: none;
+
+  i {
+    font-size: 120%;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}
+.upvote-disabled {
+  opacity: 0.5;
+  font-size: 120%;
+}
+

@@ -1,0 +1,80 @@
+---
+sv:
+  activerecord:
+    attributes:
+      commontator/comment:
+        body: Kommentar
+        creator: Skribent
+        editor: Redigerare
+        thread: Diskussion
+      commontator/subscription:
+        subscriber: Prenumerant
+        thread: Diskussion
+      commontator/thread:
+        commontable: Commontable
+    models:
+      commontator/comment:
+        one: kommentar
+        other: kommentarer
+      commontator/subscription:
+        one: prenumeration
+        other: prenumerationer
+      commontator/thread:
+        one: diskussion
+        other: disussioner
+  commontator:
+    anonymous: Anonym
+    comment:
+      actions:
+        cancel: Avbryt
+        confirm_delete: "Är du verkligen säker på att du vill ta bort denna kommentar?"
+        create: Skriv kommentar
+        delete: Ta bort
+        edit: Ändra
+        new: Ny kommentar
+        undelete: Återställ
+        update: Ändra kommentar
+      errors:
+        already_deleted: "Denna kommentar har redan tagits bort."
+        create: "Kommentaren kunde int sparas på grund av:"
+        double_posted: "är en dublett av en annan kommentar."
+        not_deleted: "Denna kommentar är inte borttagen."
+        update: "Denna kommentar kunde inte ändras på grund av:"
+      status:
+        created_at: "Skrevs den %{created_at}."
+        deleted_by: "Kommentar borttagen av %{deleter_name}."
+        updated_at: "Senast ändrad av %{editor_name} den %{updated_at}."
+    email:
+      comment_created:
+        body: "%{creator_name} kommenterade på %{commontable_name}:"
+        subject: "%{creator_name} skrev en kommentar till %{commontable_name}"
+      thread_link_html: "Visa <a href=\"%{comment_url}\">alla kommentarer</a> till %{commontable_name}."
+      undisclosed_recipients: "Mottagare konfidentiella"
+    require_login: "Du måste logga in för att skriva kommentarer"
+    subscription:
+      actions:
+        confirm_unsubscribe: "Är du säker på att du vill avsluta din prenumeration på denna diskussion?"
+        subscribe: Prenumerera
+        unsubscribe: Avsluta prenumeration
+      errors:
+        already_subscribed: "Du prenumererar redan på denna diskussion."
+        not_subscribed: "Du prenumererar inte på denna diskussion."
+    thread:
+      actions:
+        show_all: Visa alla kommentarer
+        filter: Filtrera kommentarer
+        close: Avsluta diskussion
+        confirm_close: Är du säker på att du vill avsluta denna diskussion?
+        reopen: Öppna diskussion
+        show: Visa kommentarer
+        hide: Göm kommentarer
+      errors:
+        already_closed: Den här diskussionen har redan avslutats.
+        not_closed: Den här diskussionen är inte avslutad.
+      status:
+        cannot_post: Det går inte att skriva nya kommentarer för tillfället.
+        closed: "Kommentarer (Avslutats av %{closer_name})"
+        open: Kommentarer
+  time:
+    formats:
+      commontator: "%d %b %Y kl %H:%M"

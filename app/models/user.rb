@@ -1,12 +1,30 @@
 class User < ActiveRecord::Base
   has_many :recipes, dependent: :destroy
 
+  acts_as_commontator
+  acts_as_voter
+
   # Unused: :recoverable, :confirmable, :lockable
   devise :database_authenticatable, :rememberable, :trackable, :validatable,
          :registerable, :timeoutable, :omniauthable, omniauth_providers: [:google]
 
+  scope :by_query, lambda { |query, col = :name|
+    where arel_table[col].matches("%#{query}%")
+  }
+
   def admin?
     admin
+  end
+
+  def avatar_image
+    if avatar.present?
+      avatar
+    elsif email.present?
+      hash = Digest::MD5.hexdigest(email)
+      "https://secure.gravatar.com/avatar/#{hash}?s=100&d=retro"
+    else
+      nil
+    end
   end
 
   def can_modify?(resource)

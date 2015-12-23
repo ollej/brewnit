@@ -1,10 +1,7 @@
 module RecipesHelper
   def avatar_for(recipe)
-    if recipe.user.present? && recipe.user.avatar.present?
-      recipe.user.avatar
-    elsif recipe.user.present? && recipe.user.email.present?
-      hash = Digest::MD5.hexdigest(recipe.user.email)
-      "https://secure.gravatar.com/avatar/#{hash}?s=100&d=retro"
+    if recipe.user.present? && avatar = recipe.user.avatar_image
+      avatar
     else
       hash = Digest::MD5.hexdigest("#{recipe.id}/#{recipe.name}")
       "http://api.adorable.io/avatars/100/#{hash}.png"
@@ -38,5 +35,9 @@ module RecipesHelper
     else
       badge(I18n.t(:'common.private'), 'private')
     end
+  end
+
+  def comments_badge(recipe)
+    badge(I18n.t(:'recipes.comments_count', count: recipe.comments), 'comments')
   end
 end

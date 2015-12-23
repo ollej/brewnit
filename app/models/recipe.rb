@@ -1,6 +1,9 @@
 class Recipe < ActiveRecord::Base
   belongs_to :user
 
+  acts_as_commontable
+  acts_as_votable
+
   default_scope { where(public: true) }
   scope :for_user, -> (user) { unscoped.where('user_id = ? OR public = true', user.id) }
   scope :by_user, -> (user) { where(user: user) }
@@ -8,12 +11,20 @@ class Recipe < ActiveRecord::Base
   validates :name, presence: true
   validates :beerxml, presence: true
 
+  def owned_by?(u)
+    self.user == u
+  end
+
   def owner_name
     if user.present?
       user.name
     else
       '[N/A]'
     end
+  end
+
+  def comments
+    thread.comments.size
   end
 
   def beerxml_details

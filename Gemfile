@@ -29,7 +29,10 @@ gem 'libxml-xmlrpc'
 gem 'devise'
 gem 'omniauth-google-oauth2'
 gem 'unicorn-rails'
+
 gem 'beer_recipe'
+gem 'commontator', '~> 4.11.0'
+gem 'acts_as_votable'
 
 group :production do
   gem 'rails_12factor'
