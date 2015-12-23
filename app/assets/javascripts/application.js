@@ -40,4 +40,13 @@ $( document ).ready(function() {
   var dataGauge = new DataGauge(".gauge-chart");
   dataGauge.init();
 
+  // Click on comments count opens comments tab.
+  $(".pure-badge-comments").on("click", function() {
+    $("#tab3").click();
+  });
+
+  // Update like button
+  $(".recipe-content").on("ajax:success", "a.like-link", function(e, data, status, xhr) {
+    $(this).replaceWith(xhr.responseText);
+  });
 });

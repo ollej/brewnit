@@ -24,9 +24,13 @@ module RecipesHelper
     cls.join(' ')
   end
 
-  def badge(content, type=nil)
+  def icon(type=nil)
+    %{<i class="fa fa-#{type}"></i>} if type
+  end
+
+  def badge(content, type=nil, icon=nil)
     css = type.nil? ? 'pure-badge' : "pure-badge-#{type}"
-    %Q{<span class="#{css}">#{content}</span>}.html_safe
+    %Q{<span class="#{css}">#{icon(icon)}#{content}</span>}.html_safe
   end
 
   def visibility_badge(recipe)
@@ -38,6 +42,22 @@ module RecipesHelper
   end
 
   def comments_badge(recipe)
-    badge(I18n.t(:'recipes.comments_count', count: recipe.comments), 'comments')
+    badge(I18n.t(:'recipes.comments_count', count: recipe.comments), 'comments', 'comments')
+  end
+
+  def likes_badge(recipe)
+    badge(I18n.t(:'recipes.votes_count', count: recipe.get_likes.size), 'likes', 'thumbs-up')
+  end
+
+  def like_tag(recipe, user)
+    if user.liked? recipe
+      link_to unlike_recipe_path(recipe), method: :delete, remote: true, class: 'thumb-like like-link pure-button secondary-button' do
+        (content_tag(:i, '', class: 'fa fa-thumbs-up') + ' ' + I18n.t(:'recipes.likes.unlike')).html_safe
+      end
+    else
+      link_to like_recipe_path(recipe), method: :post, remote: true, class: 'thumb-unlike like-link pure-button secondary-button' do
+        (content_tag(:i, '', class: 'fa fa-thumbs-o-up') + ' ' + I18n.t(:'recipes.likes.like')).html_safe
+      end
+    end
   end
 end

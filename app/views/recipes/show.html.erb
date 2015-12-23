@@ -8,19 +8,27 @@
         </div>
 
         <div class="recipe-content-controls pure-u-1-2">
-          <%= link_to I18n.t(:'recipes.download'), recipe_path(@recipe, format: :xml), method: :get, class: 'pure-button secondary-button' %>
+          <%= link_to recipe_path(@recipe, format: :xml), method: :get, class: 'pure-button secondary-button' do %>
+            <i class="fa fa-download"></i> <%= I18n.t(:'recipes.download') %>
+          <% end %>
           <% if user_signed_in? %>
             <%#= link_to I18n.t(:'recipes.clone'), clone_recipe_path(@recipe), class: 'pure-button secondary-button' %>
             <% if current_user.can_modify?(@recipe) %>
-            <%= link_to I18n.t(:'recipes.edit'), edit_recipe_path(@recipe), class: 'pure-button secondary-button' %>
-            <%= link_to I18n.t(:'recipes.destroy.link'), @recipe, method: :delete, data: { confirm: I18n.t(:'common.are_you_sure') }, class: 'pure-button secondary-button' %>
+              <%= link_to edit_recipe_path(@recipe), class: 'pure-button secondary-button' do %>
+                <i class="fa fa-pencil-square-o"></i> <%= I18n.t(:'recipes.edit') %>
+              <% end %>
+              <%= link_to @recipe, method: :delete, data: { confirm: I18n.t(:'common.are_you_sure') }, class: 'pure-button secondary-button' do %>
+                <i class="fa fa-trash"></i> <%= I18n.t(:'recipes.destroy.link') %>
+              <% end %>
             <% end %>
+            <%= like_tag(@recipe, current_user) %>
           <% end %>
         </div>
 
         <div class="recipe-badge-list pure-u">
           <%= visibility_badge(@recipe) %>
           <%= comments_badge(@recipe) %>
+          <%= likes_badge(@recipe) %>
         </div>
 
       </div>

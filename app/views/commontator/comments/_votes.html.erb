@@ -16,14 +16,14 @@
       <%= form_tag commontator.upvote_comment_path(comment),
             :method => :put,
             :remote => true do %>
-        <%= button_tag type: :submit, class: 'thumb-upvote' do %>
+        <%= button_tag type: :submit, class: 'thumb-like' do %>
           <i class="fa fa-thumbs-o-up"></i>
         <% end %>
       <% end %>
     <% elsif can_vote %>
       <%= form_tag commontator.unvote_comment_path(comment),
             :method => :put, :remote => true do %>
-        <%= button_tag type: :submit, class: 'thumb-upvote-active' do %>
+        <%= button_tag type: :submit, class: 'thumb-unlike' do %>
           <i class="fa fa-thumbs-up"></i>
         <% end %>
       <% end %>

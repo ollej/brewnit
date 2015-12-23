@@ -11,7 +11,7 @@ class RecipesController < ApplicationController
   # GET /recipes/1
   # GET /recipes/1.json
   def show
-    raise ActiveRecord::RecordNotFound unless can_show(@recipe)
+    raise ActiveRecord::RecordNotFound unless can_show?(@recipe)
     @beerxml = @recipe.beerxml_details
     commontator_thread_show(@recipe)
     respond_to do |format|
@@ -28,7 +28,7 @@ class RecipesController < ApplicationController
   end
 
   def download
-    raise ActiveRecord::RecordNotFound unless can_show(@recipe)
+    raise ActiveRecord::RecordNotFound unless can_show?(@recipe)
     send_data @recipe.beerxml, type: 'application/xml', disposition: 'attachment'
   end
 
@@ -97,7 +97,4 @@ class RecipesController < ApplicationController
       raise ActiveRecord::RecordNotFound unless current_user.can_modify?(@recipe)
     end
 
-    def can_show(resource)
-      resource.public? || user_signed_in? && current_user.can_show?(resource)
-    end
 end

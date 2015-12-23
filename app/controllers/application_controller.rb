@@ -21,4 +21,8 @@ class ApplicationController < ActionController::Base
       @recipes = Recipe.all
     end
   end
+
+  def can_show?(resource)
+    resource.public? || user_signed_in? && current_user.can_show?(resource)
+  end
 end

@@ -33,6 +33,14 @@ sv:
     comments_count:
       one: 1 kommentar
       other: '%{count} kommentarer'
+    votes_count:
+      one: 1 gillade
+      other: '%{count} gillade'
+    likes:
+      like: Gilla!
+      unlike: Avgilla
+      successful: Tack för att du gillade receptet!
+      successful_unlike: Du har avgillat receptet.
   users:
     profile: Profil
     edit: Ändra profil
