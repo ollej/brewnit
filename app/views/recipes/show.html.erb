@@ -1,7 +1,16 @@
+<% content_for :head do -%>
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="<%= @recipe.user.try(:twitter) || '@ollej' %>" />
+  <meta name="twitter:title" content="<%= @recipe.name %> - Brewn.it" />
+  <meta name="twitter:description" content="<%= @recipe.description %>" />
+<% end -%>
+
       <div class="recipe-content-header pure-g">
         <div class="pure-u-1-2">
           <h1 class="recipe-content-title"><%= @recipe.name %></h1>
           <p class="recipe-content-subtitle">
+            <%= I18n.t(:'recipes.owner') %>: <%= @recipe.owner_name %>
+            <%= I18n.t(:'recipes.created') %>: <%= @recipe.created_at.to_formatted_s(:long) %><br/>
             <%= @recipe.description %>
           </p>
 

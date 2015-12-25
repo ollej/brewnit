@@ -9,6 +9,7 @@ sv:
     description: Beskrivning
     owner: Bryggare
     visibility: Visning
+    created: Upplagd
     index: Recept
     new: Nytt recept
     edit: Ändra recept
