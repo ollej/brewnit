@@ -446,9 +446,9 @@ sv:
       - :year
   time:
     formats:
-      default: "%a, %e %b %Y %H:%M:%S %z"
+      default: "%Y-%m-%d %H:%M:%S"
       short: "%e %b %H:%M"
-      long: "%e %B %Y %H:%M"
+      long: "%e %B %Y kl %H:%M"
     am: ""
     pm: ""
   support:

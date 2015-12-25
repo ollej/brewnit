@@ -35,7 +35,7 @@
 
         <div class="recipe_date">
           <h3><%= I18n.t(:'beerxml.brew_date') %></h3>
-          <p><%= @beerxml.date %></p>
+          <p><%= l(Date.parse(@beerxml.date), format: :long) %></p>
         </div>
 
         <div class="recipe_brewer">
