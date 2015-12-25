@@ -1,0 +1,3 @@
+<%= likes_badge(@recipe) %>
+<div id="likes-list" class="modal"><%= @recipe.get_likes.map(&:voter).map(&:name).to_sentence %></div>
+

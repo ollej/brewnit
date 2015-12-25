@@ -49,14 +49,25 @@
 .pure-badge-comments {
   background-color: #B590D4;
   cursor: pointer;
-
+}
+.pure-badge-likes {
+  background-color: rgb(18, 169, 218);
+}
+#likes-list {
+  display: none;
+  position: absolute;
+  border: 1px solid rgb(119, 119, 119);
+  border-radius: 4px;
+  padding: 5px;
+  max-width: 250px;
+  background: white;
+  z-index: 1000;
+}
+.badge-link {
   &:hover {
     background-image: linear-gradient(transparent,rgba(0,0,0,.05) 40%,rgba(0,0,0,.1));
   }
   &:active {
     box-shadow: 0 0 0 1px rgba(0,0,0,.15) inset,0 0 6px rgba(0,0,0,.2) inset;
   }
-}
-.pure-badge-likes {
-  background-color: rgb(18, 169, 218);
 }

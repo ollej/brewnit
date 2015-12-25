@@ -49,4 +49,23 @@ $( document ).ready(function() {
   $(".recipe-content").on("ajax:success", "a.like-link", function(e, data, status, xhr) {
     $(this).replaceWith(xhr.responseText);
   });
+
+  // Show liked by list
+  $(".recipe-content").on("click", ".pure-badge-likes", function(e, data, status, xhr) {
+    if ($("#likes-list").is(':empty')) {
+      return false;
+    }
+    var $el = $(this);
+    $("#likes-list").css({
+      'position': 'absolute',
+      'left': $el.offset().left,
+      'top': $el.offset().top + $el.height() + 10
+    }).toggle();
+    return false;
+  });
+
+  // Close modals
+  $("body").on("click", function() {
+    $(".modal").hide();
+  });
 });

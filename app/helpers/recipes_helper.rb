@@ -28,25 +28,26 @@ module RecipesHelper
     %{<i class="fa fa-#{type}"></i>} if type
   end
 
-  def badge(content, type=nil, icon=nil)
-    css = type.nil? ? 'pure-badge' : "pure-badge-#{type}"
-    %Q{<span class="#{css}">#{icon(icon)}#{content}</span>}.html_safe
+  def badge(content, opts={})
+    opts[:class] ||= ''
+    opts[:class] += opts[:type].nil? ? ' pure-badge' : " pure-badge-#{opts[:type]}"
+    %Q{<span class="#{opts[:class]}">#{icon(opts[:icon])}#{content}</span>}.html_safe
   end
 
   def visibility_badge(recipe)
     if recipe.public?
-      badge(I18n.t(:'common.public'), 'public')
+      badge(I18n.t(:'common.public'), type: 'public')
     else
-      badge(I18n.t(:'common.private'), 'private')
+      badge(I18n.t(:'common.private'), type: 'private')
     end
   end
 
   def comments_badge(recipe)
-    badge(I18n.t(:'recipes.comments_count', count: recipe.comments), 'comments', 'comments')
+    badge(I18n.t(:'recipes.comments_count', count: recipe.comments), type: 'comments', icon: 'comments', class: 'badge-link')
   end
 
   def likes_badge(recipe)
-    badge(I18n.t(:'recipes.votes_count', count: recipe.get_likes.size), 'likes', 'thumbs-up')
+    badge(I18n.t(:'recipes.votes_count', count: recipe.get_likes.size), type: 'likes', icon: 'thumbs-up', class: 'badge-link')
   end
 
   def like_tag(recipe, user)
