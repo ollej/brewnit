@@ -55,13 +55,14 @@
         &nbsp;
       <% end %>
 
-      <%= link_to t("commontator.thread.actions.#{close_string}"),
-                  commontator.polymorphic_path([close_string, thread]),
+      <%= link_to commontator.polymorphic_path([close_string, thread]),
                   :confirm => (!is_closed ? t('commontator.thread.actions.confirm_close') : nil),
                   :method => :put,
                   :id => "thread_#{thread.id.to_s}_#{close_string}_link",
                   :class => "thread_#{close_string}_link pure-button pure-button-secondary",
-                  :remote => true %>
+                  :remote => true do %>
+        <i class="fa <%= is_closed ? 'fa-unlock' : 'fa-lock' %>"></i> <%= t("commontator.thread.actions.#{close_string}") %>
+      <% end %>
     <% end %>
   </span>
 

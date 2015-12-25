@@ -33,10 +33,10 @@
 
   <div class="comment_form_actions">
     <%= button_tag name: 'commit', type: :submit, class: 'pure-button pure-button-primary' do %>
-      <i class="fa fa-commenting"></i><%= t("commontator.comment.actions.#{comment.id.blank? ? 'create' : 'update'}") %>
+      <i class="fa fa-commenting"></i> <%= t("commontator.comment.actions.#{comment.id.blank? ? 'create' : 'update'}") %>
     <% end %>
     <%= button_tag name: 'cancel', type: :submit, class: 'pure-button pure-button-secondary' do %>
-      <i class="fa fa-times-circle"></i><%= t("commontator.comment.actions.cancel") %>
+      <i class="fa fa-times-circle"></i> <%= t("commontator.comment.actions.cancel") %>
     <% end %>
   </div>
 

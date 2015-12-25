@@ -8,11 +8,8 @@
         </div>
 
         <div class="recipe-content-controls pure-u-1-2">
-          <%= link_to recipe_path(@recipe, format: :xml), method: :get, class: 'pure-button secondary-button' do %>
-            <i class="fa fa-download"></i> <%= I18n.t(:'recipes.download') %>
-          <% end %>
           <% if user_signed_in? %>
-            <%#= link_to I18n.t(:'recipes.clone'), clone_recipe_path(@recipe), class: 'pure-button secondary-button' %>
+            <%= like_tag(@recipe, current_user) %>
             <% if current_user.can_modify?(@recipe) %>
               <%= link_to edit_recipe_path(@recipe), class: 'pure-button secondary-button' do %>
                 <i class="fa fa-pencil-square-o"></i> <%= I18n.t(:'recipes.edit') %>
@@ -21,7 +18,10 @@
                 <i class="fa fa-trash"></i> <%= I18n.t(:'recipes.destroy.link') %>
               <% end %>
             <% end %>
-            <%= like_tag(@recipe, current_user) %>
+            <%#= link_to I18n.t(:'recipes.clone'), clone_recipe_path(@recipe), class: 'pure-button secondary-button' %>
+          <% end %>
+          <%= link_to recipe_path(@recipe, format: :xml), method: :get, class: 'pure-button secondary-button' do %>
+            <i class="fa fa-download"></i> <%= I18n.t(:'recipes.download') %>
           <% end %>
         </div>
 
