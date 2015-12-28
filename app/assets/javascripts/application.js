@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require commontator/application
+//= require thirdparty/d3
 //= require_tree .
 
 $( document ).ready(function() {

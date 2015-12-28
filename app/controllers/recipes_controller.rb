@@ -13,7 +13,9 @@ class RecipesController < ApplicationController
   def show
     raise ActiveRecord::RecordNotFound unless can_show?(@recipe)
     @beerxml = @recipe.beerxml_details
-    commontator_thread_show(@recipe)
+    Recipe.unscoped do
+      commontator_thread_show(@recipe)
+    end
     respond_to do |format|
       format.html { render :show }
       format.json { render json: @recipe }

@@ -4,9 +4,10 @@ class Recipe < ActiveRecord::Base
   acts_as_commontable
   acts_as_votable
 
-  default_scope { where(public: true) }
-  scope :for_user, -> (user) { unscoped.where('user_id = ? OR public = true', user.id) }
+  default_scope { where(public: true).ordered }
+  scope :for_user, -> (user) { unscoped.where('user_id = ? OR public = true', user.id).ordered }
   scope :by_user, -> (user) { where(user: user) }
+  scope :ordered, -> { order(created_at: :desc) }
 
   validates :name, presence: true
   validates :beerxml, presence: true
@@ -47,32 +48,39 @@ class Recipe < ActiveRecord::Base
   end
 
   def hop_addition(hop)
-    if hop.time > 50
-      I18n.t(:'beerxml.addition_bitter')
-    elsif hop.time >= 10
-      I18n.t(:'beerxml.addition_flavour')
+    if hop.use == 'Boil'
+      if hop.time >= 30
+        I18n.t(:'beerxml.addition_bitter')
+      elsif hop.time >= 10
+        I18n.t(:'beerxml.addition_flavour')
+      else
+        I18n.t(:'beerxml.addition_aroma')
+      end
     else
-      I18n.t(:'beerxml.addition_aroma')
+      I18n.t("beerxml.#{hop.use}")
     end
   end
 
-  def hops_data
+  def hop_additions
     hops = {}
     beerxml_details.hops.map do |h|
       hop_data = { name: h.name, size: h.amount }
-      addition = hop_addition(h)
-      if hops[addition]
-        hops[addition] << hop_data
+      if hops[h.time]
+        hops[h.time][:children] << hop_data
       else
-        hops[addition] = [hop_data]
+        hops[h.time] = { name: hop_addition(h), children: [hop_data] }
       end
     end
+    hops
+  end
+
+  def hops_data
     {
       name: "hops",
-      children: hops.map do |use, hops|
+      children: hop_additions.map do |t, hop|
         {
-          name: use,
-          children: hops
+          name: hop[:name],
+          children: hop[:children]
         }
       end
     }

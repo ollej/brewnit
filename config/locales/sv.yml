@@ -22,6 +22,8 @@ sv:
     labels: Etiketter
     recipe_details: Recept
     recipe_analytics: Analys
+    recipe_comments: Kommentarer
+    recipe_style: Stiltyp
     update:
       successful: Receptet har uppdaterats.
     create:
@@ -30,7 +32,6 @@ sv:
       link: Ta bort
       successful: Receptet har tagits bort.
     new: Skapa recept
-    recipe_comments: Kommentarer
     comments_count:
       one: 1 kommentar
       other: '%{count} kommentarer'
@@ -163,6 +164,13 @@ sv:
     addition_bitter: Bittergiva
     addition_flavour: Smakgiva
     addition_aroma: Aromgiva
+    addition_dry_hop: Torrhumling
+    style_guide: Stilguide
+    style_type: Typ
+    style_examples: Förebild
+    style_ingredients: Ingredienser
+    style_notes: Anteckningar
+    style_profile: Profil
   devise:
     confirmations:
       confirmed: "Ditt konto har bekräftats. Du är nu inloggad."
