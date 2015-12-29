@@ -29,11 +29,6 @@ class RecipesController < ApplicationController
     end
   end
 
-  def download
-    raise ActiveRecord::RecordNotFound unless can_show?(@recipe)
-    send_data @recipe.beerxml, type: 'application/xml', disposition: 'attachment'
-  end
-
   # GET /recipes/new
   def new
     @recipe = Recipe.new

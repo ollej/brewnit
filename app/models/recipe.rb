@@ -10,7 +10,7 @@ class Recipe < ActiveRecord::Base
   scope :ordered, -> { order(created_at: :desc) }
 
   validates :name, presence: true
-  validates :beerxml, presence: true
+  validates :beerxml, presence: true, beerxml: true
 
   def owned_by?(u)
     self.user == u
