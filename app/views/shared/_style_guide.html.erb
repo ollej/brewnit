@@ -1,0 +1,128 @@
+<% style = @beerxml.style %>
+
+<h2><%= style.category_number %><%= style.style_letter %>. <%= style.category %></h2>
+<h3 class="inline-heading"><%= t(:'beerxml.style_guide') %></h3> <%= style.style_guide %><br>
+<h3 class="inline-heading"><%= t(:'beerxml.style_type') %></h3> <%= style.type %><br>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="height:0px;width:0px">
+    <defs>
+        <linearGradient id="NORMAL_COLOR" x1="0%" y1="0%" x2="0%" y2="100%" spreadMethod="pad">
+            <stop offset="0%" stop-color="#C1DC99" stop-opacity="1" />
+            <stop offset="100%" stop-color="#669900" stop-opacity="1" />
+        </linearGradient>
+        <linearGradient id="CRITICAL_COLOR" x1="0%" y1="0%" x2="0%" y2="100%" spreadMethod="pad">
+            <stop offset="0%" stop-color="#E70030" stop-opacity="1" />
+            <stop offset="100%" stop-color="#B30020" stop-opacity="1" />
+        </linearGradient>
+    </defs>
+</svg>
+<style>
+  .gauge-box {
+    display: inline-block;
+    padding: 0 2em;
+  }
+  .linear-gauge {
+    margin-bottom: 1em;
+  }
+  .axis text {
+    font-size: 0.7em;
+    font-weight: normal;
+  }
+  .axis path {
+    display: none;
+  }
+  .axis line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+  }
+</style>
+
+<div class="gauge-box">
+<h3><%= t(:'beerxml.og') %></h3>
+<div id="linear-gauge-og" class="linear-gauge"></div>
+<p><%= style.og_min %> - <%= style.og_max %></p>
+<script>
+var ogGauge = new LinearGauge("#linear-gauge-og", {});
+ogGauge.data({
+  value: <%= @beerxml.og %>,
+  ranges: [
+    { from: 1.020, to: <%= style.og_min %>, color: "CRITICAL" },
+    { from: <%= style.og_min %>, to: <%= style.og_max %>, color: "NORMAL" },
+    { from: <%= style.og_max %>, to: 1.130, color: "CRITICAL" }
+  ]
+});
+</script>
+</div>
+
+<div class="gauge-box">
+<h3><%= t(:'beerxml.fg') %></h3>
+<div id="linear-gauge-fg" class="linear-gauge"></div>
+<p><%= style.fg_min %> - <%= style.fg_max %></p>
+<script>
+var fgGauge = new LinearGauge("#linear-gauge-fg", {});
+fgGauge.data({
+  value: <%= @beerxml.fg %>,
+  ranges: [
+    { from: 1.000, to: <%= style.fg_min %>, color: "CRITICAL" },
+    { from: <%= style.fg_min %>, to: <%= style.fg_max %>, color: "NORMAL" },
+    { from: <%= style.fg_max %>, to: 1.060, color: "CRITICAL" }
+  ]
+});
+</script>
+</div>
+
+<div class="gauge-box">
+<h3><%= t(:'beerxml.ibu') %></h3>
+<div id="linear-gauge-ibu" class="linear-gauge"></div>
+<p><%= style.ibu_min %> - <%= style.ibu_max %></p>
+<script>
+var ibuGauge = new LinearGauge("#linear-gauge-ibu", { labelFormat: ".0f" });
+ibuGauge.data({
+  value: <%= @beerxml.ibu %>,
+  ranges: [
+    { from: 0, to: <%= style.ibu_min %>, color: "CRITICAL" },
+    { from: <%= style.ibu_min %>, to: <%= style.ibu_max %>, color: "NORMAL" },
+    { from: <%= style.ibu_max %>, to: 120, color: "CRITICAL" }
+  ]
+});
+</script>
+</div>
+
+<div class="gauge-box">
+<h3><%= t(:'beerxml.color') %></h3>
+<div id="linear-gauge-color" class="linear-gauge"></div>
+<p><%= style.color_min %> - <%= style.color_max %></p>
+<script>
+var colorGauge = new LinearGauge("#linear-gauge-color", { labelFormat: ".0f" });
+colorGauge.data({
+  value: <%= @beerxml.color_ebc %>,
+  ranges: [
+    { from: 0, to: <%= style.color_min %>, color: "CRITICAL" },
+    { from: <%= style.color_min %>, to: <%= style.color_max %>, color: "NORMAL" },
+    { from: <%= style.color_max %>, to: 120, color: "CRITICAL" }
+  ]
+});
+</script>
+</div>
+
+<% if style.notes.present? %>
+<h3><%= t(:'beerxml.style_notes') %>
+<p><%= style.notes %></p>
+<% end %>
+
+<% if style.examples.present? %>
+<h3><%= t(:'beerxml.style_examples') %>
+<p><%= style.examples %></p>
+<% end %>
+
+<% if style.ingredients.present? %>
+<h3><%= t(:'beerxml.style_ingredients') %>
+<p><%= style.ingredients %></p>
+<% end %>
+
+<% if style.profile.present? %>
+<h3><%= t(:'beerxml.style_profile') %>
+<p><%= style.profile %></p>
+<% end %>
+

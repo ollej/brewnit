@@ -58,6 +58,10 @@
           <label for="tab3" class="tab-trigger">
             <i class="fa fa-comments"></i><span><%= I18n.t(:'recipes.recipe_comments') %></span>
           </label>
+          <input type="radio" name="tabs" id="tab4">
+          <label for="tab4" class="tab-trigger">
+            <i class="fa fa-sliders"></i><span><%= I18n.t(:'recipes.recipe_style') %></span>
+          </label>
           <div id="tab-content1" class="tab-content">
 <%= render 'shared/recipe_details' %>
           </div>
@@ -68,6 +72,9 @@
           </div>
           <div id="tab-content3" class="tab-content">
             <%= commontator_thread(@recipe) %>
+          </div>
+          <div id="tab-content4" class="tab-content">
+            <%= render 'shared/style_guide' %>
           </div>
         </div>
       </div>
