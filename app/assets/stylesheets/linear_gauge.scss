@@ -1,0 +1,21 @@
+.gauge-box {
+  display: inline-block;
+  padding: 0 2em;
+
+  .linear-gauge {
+    margin-bottom: 1em;
+
+    .axis text {
+      font-size: 0.7em;
+      font-weight: normal;
+    }
+    .axis path {
+      display: none;
+    }
+    .axis line {
+      fill: none;
+      stroke: black;
+      shape-rendering: crispEdges;
+    }
+  }
+}

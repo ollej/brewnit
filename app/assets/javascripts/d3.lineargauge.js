@@ -18,7 +18,7 @@
       this.options.scaleY = this.options.marginY + 1;
       this.options.svgWidth = this.options.width + this.options.marginX * 2 + this.options.labelWidth;
       this.options.svgHeight = this.options.height + this.options.marginY * 2;
-      console.log(this.options);
+      //console.log(this.options);
     };
 
     this.data = function data(data) {
@@ -81,7 +81,7 @@
       var fromX = this.scale(rect.from);
       var toX = this.scale(rect.to);
       var height = fromX - toX;
-      console.log(rect, fromX, toX, height, rect.from, rect.to, this.options.marginX, this.options.marginY);
+      //console.log(rect, fromX, toX, height, rect.from, rect.to, this.options.marginX, this.options.marginY);
 
       this.svg.append("rect")
         .attr("x", this.options.marginX + 1)

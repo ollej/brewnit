@@ -47,7 +47,7 @@ class Recipe < ActiveRecord::Base
     end
   end
 
-  def hop_addition(hop)
+  def hop_addition_name(hop)
     if hop.use == 'Boil'
       if hop.time >= 30
         I18n.t(:'beerxml.addition_bitter')
@@ -61,14 +61,23 @@ class Recipe < ActiveRecord::Base
     end
   end
 
+  def hop_data(hop)
+    {
+      name: hop.name,
+      size: hop.amount,
+      time: hop.time,
+      ibu: hop.ibu,
+      tooltip: "#{hop.formatted_amount} #{I18n.t(:'beerxml.grams')} #{hop.name} @ #{hop.formatted_time} #{I18n.t("beerxml.#{hop.time_unit}", default: hop.time_unit)}"
+    }
+  end
+
   def hop_additions
     hops = {}
     beerxml_details.hops.map do |h|
-      hop_data = { name: h.name, size: h.amount }
       if hops[h.time]
-        hops[h.time][:children] << hop_data
+        hops[h.time][:children] << hop_data(h)
       else
-        hops[h.time] = { name: hop_addition(h), children: [hop_data] }
+        hops[h.time] = { name: hop_addition_name(h), children: [hop_data(h)] }
       end
     end
     hops
@@ -76,13 +85,8 @@ class Recipe < ActiveRecord::Base
 
   def hops_data
     {
-      name: "hops",
-      children: hop_additions.map do |t, hop|
-        {
-          name: hop[:name],
-          children: hop[:children]
-        }
-      end
+      name: I18n.t(:'beerxml.hops'),
+      children: hop_additions.values
     }
   end
 end

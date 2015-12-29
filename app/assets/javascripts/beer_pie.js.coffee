@@ -60,7 +60,13 @@ class BeerPie
         "type": "placeholder",
         "string": "{label}: {value} kg, {percentage}%",
         "styles": {
-          "font": "Montserrat"
+          "font": "Montserrat",
+          "fontSize": 13,
+          "lineHeight": 1,
+          "padding": 12,
+          "backgroundOpacity": 0.8,
+          "color": "#fff",
+          "borderRadius": 2,
         }
       },
       "effects": {
