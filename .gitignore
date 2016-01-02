@@ -24,3 +24,7 @@
 
 # Ignore logs
 /log
+
+# Ansible stuff
+config/unicorn.development.rb
+.envrc
