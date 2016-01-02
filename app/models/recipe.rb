@@ -1,6 +1,8 @@
 class Recipe < ActiveRecord::Base
   belongs_to :user
 
+  before_validation :extract_details
+
   acts_as_commontable
   acts_as_votable
 
@@ -35,6 +37,19 @@ class Recipe < ActiveRecord::Base
       recipe = parser.parse(xml)
       BeerRecipe::RecipeWrapper.new(recipe.records.first)
     end
+  end
+
+  def extract_details
+    self.name = beerxml_details.name unless self.name.present?
+    self.abv = beerxml_details.abv
+    self.ibu = beerxml_details.ibu
+    self.og = beerxml_details.og
+    self.fg = beerxml_details.fg
+    self.style_code = beerxml_details.style_code
+    self.style_guide = beerxml_details.style.style_guide
+    self.style_name = beerxml_details.style.name
+    self.batch_size = beerxml_details.batch_size
+    self.color = beerxml_details.color_ebc
   end
 
   def malt_data
