@@ -1,4 +1,15 @@
 class Recipe < ActiveRecord::Base
+  include SearchCop
+
+  search_scope :search do
+    attributes all: [:name, :description, :style_name]
+    attributes :abv, :ibu, :og, :fg, :color, :batch_size, :style_code, :style_guide, :created_at
+    attributes owner: 'user.name'
+    options :all, type: :fulltext, default: true
+    options :owner, type: :fulltext, default: true
+    options :style_name, type: :fulltext, default: false
+  end
+
   belongs_to :user
 
   before_validation :extract_details

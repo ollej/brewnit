@@ -28,10 +28,24 @@ div {
   color: green;
 }
 
-.field_with_errors {
-  padding: 2px;
-  background-color: red;
-  display: table;
+div.field_with_errors {
+  display: inline-block;
+}
+.field_with_errors input {
+  background: red;
+  color: #fff;
+  &::-webkit-input-placeholder {
+     color: #fff;
+  }
+  &:-moz-placeholder { /* Firefox 18- */
+     color: #fff;
+  }
+  &::-moz-placeholder {  /* Firefox 19+ */
+     color: #fff;
+  }
+  &:-ms-input-placeholder {
+     color: #fff;
+  }
 }
 
 #error_explanation {
@@ -89,10 +103,6 @@ screen and (min-device-pixel-ratio: 1.5) {
       background-image: url(<%= asset_path 'buttons/btn_google_signin_light_pressed_web@2x.png' %>);
     }
   }
-}
-
-img.empty-page-image {
-  opacity: 0.2;
 }
 
 #main {

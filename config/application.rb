@@ -32,5 +32,7 @@ module Brewnit
     config.sass.preferred_syntax = :scss
     config.sass.line_comments = false
     config.sass.cache = false
+
+    config.active_record.schema_format = :sql
   end
 end

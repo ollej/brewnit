@@ -1,0 +1,12 @@
+ <%= form_tag(recipes_path, method: 'get', class: 'pure-form', id: 'search-form') do %>
+  <fieldset>
+    <legend><%= I18n.t(:'recipes.search_description') %></legend>
+    <%= search_field_tag :search, nil, autocomplete: 'off',
+          placeholder: I18n.t(:'recipes.search_freetext'),
+          results: 5, autosave: 'brygglogg-search' %>
+    <%= button_tag type: :submit, class: 'pure-button pure-button-primary' do %>
+      <i class="fa fa-search"></i> <%= I18n.t(:'recipes.search') %>
+    <% end %>
+  </fieldset>
+ <% end %>
+

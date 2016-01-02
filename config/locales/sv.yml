@@ -15,6 +15,9 @@ sv:
     edit: Ändra recept
     show: Visa recept
     save: Spara recept
+    search: Sök recept
+    search_description: Sök recept
+    search_freetext: Fritext
     download: Ladda ner
     private: Privat
     own: Egna recept

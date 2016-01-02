@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_user!
   before_action :load_recipes
+  before_action :filter_recipes
 
   def after_sign_in_path_for(resource)
     recipes_path
@@ -15,10 +16,16 @@ class ApplicationController < ActionController::Base
 
   private
   def load_recipes
-    if user_signed_in?
-      @recipes = Recipe.for_user(current_user)
+    @recipes = if user_signed_in?
+      Recipe.for_user(current_user)
     else
-      @recipes = Recipe.all
+      Recipe.all
+    end
+  end
+
+  def filter_recipes
+    if params[:search].present?
+      @recipes = @recipes.search(params[:search])
     end
   end
 

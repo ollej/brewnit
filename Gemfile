@@ -16,7 +16,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 4.0.5'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 #gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -24,18 +24,19 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem 'pg'
-gem 'libxml-xmlrpc'
-gem 'devise'
-gem 'omniauth-google-oauth2'
-gem 'unicorn-rails'
+gem 'pg', '~> 0.18.4'
+gem 'libxml-xmlrpc', '~> 0.1.5'
+gem 'devise', '~> 3.5.3'
+gem 'omniauth-google-oauth2', '~> 0.2.10'
+gem 'unicorn-rails', '~> 2.2.0'
 
 gem 'beer_recipe'
 gem 'commontator', '~> 4.11.0'
-gem 'acts_as_votable'
+gem 'acts_as_votable', '~> 0.10.0'
+gem 'search_cop', '~> 1.0.5'
 
 group :production do
-  gem 'rails_12factor'
+  gem 'rails_12factor', '~> 0.0.3'
 end
 
 # Use ActiveModel has_secure_password
