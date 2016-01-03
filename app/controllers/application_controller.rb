@@ -42,6 +42,7 @@ class ApplicationController < ActionController::Base
   end
 
   def search_params
-    params.permit(:q, :style, :ogfrom, :ogto, :fgfrom, :fgto)
+    params.permit(:q, :style, :ogfrom, :ogto, :fgfrom, :fgto, :ibufrom, :ibuto,
+                  :colorfrom, :colorto, :abvfrom, :abvto)
   end
 end

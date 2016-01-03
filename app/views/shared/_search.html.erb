@@ -1,7 +1,6 @@
 <div class="search-form">
  <%= form_tag(recipes_path, method: 'get', class: 'pure-form', id: 'search-form') do %>
   <fieldset>
-    <legend><%= I18n.t(:'recipes.search.description') %></legend>
     <%= hidden_field_tag :clear_search, true %>
     <div class="field pure-control-group">
       <%= search_field_tag :q, @search[:q], autocomplete: 'off',
@@ -35,6 +34,42 @@
           data-range-min="<%= FilterRecipes::FGMIN %>"
           data-range-max="<%= FilterRecipes::FGMAX %>" data-range-step="0.005"
           data-range-margin="0.005" data-range-formatter="formatSG"
+          ></div>
+      </div>
+    </div>
+    <div class="field pure-control-group">
+      <h3><%= I18n.t(:'beerxml.ibu') %></h3>
+      <%= hidden_field_tag :ibufrom, @search[:ibufrom] || FilterRecipes::IBUMIN, class: 'slider-ibu-from' %>
+      <%= hidden_field_tag :ibuto, @search[:ibuto] || FilterRecipes::IBUMAX, class: 'slider-ibu-to' %>
+      <div class="range-div">
+        <div id="slider-ibu" class="range-slider"
+          data-range-min="<%= FilterRecipes::IBUMIN %>"
+          data-range-max="<%= FilterRecipes::IBUMAX %>" data-range-step="5"
+          data-range-margin="5" data-range-formatter="formatNumber"
+          ></div>
+      </div>
+    </div>
+    <div class="field pure-control-group">
+      <h3><%= I18n.t(:'beerxml.color') %></h3>
+      <%= hidden_field_tag :colorfrom, @search[:colorfrom] || FilterRecipes::COLORMIN, class: 'slider-color-from' %>
+      <%= hidden_field_tag :colorto, @search[:colorto] || FilterRecipes::COLORMAX, class: 'slider-color-to' %>
+      <div class="range-div">
+        <div id="slider-color" class="range-slider"
+          data-range-min="<%= FilterRecipes::COLORMIN %>"
+          data-range-max="<%= FilterRecipes::COLORMAX %>" data-range-step="5"
+          data-range-margin="5" data-range-formatter="formatNumber"
+          ></div>
+      </div>
+    </div>
+    <div class="field pure-control-group">
+      <h3><%= I18n.t(:'beerxml.abv') %></h3>
+      <%= hidden_field_tag :abvfrom, @search[:abvfrom] || FilterRecipes::ABVMIN, class: 'slider-abv-from' %>
+      <%= hidden_field_tag :abvto, @search[:abvto] || FilterRecipes::ABVMAX, class: 'slider-abv-to' %>
+      <div class="range-div">
+        <div id="slider-abv" class="range-slider"
+          data-range-min="<%= FilterRecipes::ABVMIN %>"
+          data-range-max="<%= FilterRecipes::ABVMAX %>" data-range-step="1"
+          data-range-margin="1" data-range-formatter="formatNumber"
           ></div>
       </div>
     </div>

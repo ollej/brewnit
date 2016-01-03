@@ -12,6 +12,11 @@ class RangeSliders
     to: (val) -> val?.toFixed(3)
   }
 
+  formatNumber: {
+    from: (val) -> val?.toString(),
+    to: (val) -> val?.toFixed(0)
+  }
+
   constructor: (@cls) ->
 
   options: ($el) ->
