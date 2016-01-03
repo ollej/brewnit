@@ -70,4 +70,7 @@ $( document ).ready(function() {
     $(".modal").hide();
   });
 
+  // Setup range sliders
+  var sliders = new RangeSliders(".range-slider");
+  sliders.init();
 });

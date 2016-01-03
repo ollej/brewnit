@@ -25,11 +25,12 @@ class ApplicationController < ActionController::Base
   end
 
   def query_hash
-    session[:search] = search_hash.merge(FilterRecipes.parse_params(params))
+    session[:search] = search_hash
   end
 
   def search_hash
-    session.fetch(:search, {}).symbolize_keys
+    Rails.logger.debug { "search_params #{search_params}" }
+    session.fetch(:search, {}).merge(search_params).deep_symbolize_keys
   end
 
   def clear_search
@@ -38,5 +39,9 @@ class ApplicationController < ActionController::Base
 
   def can_show?(resource)
     resource.public? || user_signed_in? && current_user.can_show?(resource)
+  end
+
+  def search_params
+    params.permit(:q, :style, :ogfrom, :ogto, :fgfrom, :fgto)
   end
 end

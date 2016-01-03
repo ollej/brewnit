@@ -1,4 +1,6 @@
 class FilterRecipes
+  SGMIN = "1.000"
+  SGMAX = "1.150"
   # X TODO: Change to search hash
   # X TODO: Store search hash in session
   # X TODO: Populate search form with prior search
@@ -10,13 +12,13 @@ class FilterRecipes
   # X TODO: Clear search
   # X TODO: Search all fields by default
   # TODO: Search comments
-  def initialize(scope, query)
+  def initialize(scope, hash)
     @scope = scope
-    @query = query
+    @hash = hash
   end
 
   def query?
-    !@query.empty?
+    !@hash.empty?
   end
 
   def resolve
@@ -28,18 +30,32 @@ class FilterRecipes
   end
 
   def search
-    Rails.logger.debug { "Searching with query: #{@query.inspect}" }
+    Rails.logger.debug { "Searching with query: #{query.inspect}" }
     if Rails.env.development?
-      @scope.unsafe_search(@query)
+      @scope.unsafe_search(query)
     else
-      @scope.search(@query)
+      @scope.search(query)
     end
   end
 
-  def self.parse_params(params)
-    hash = {}
-    hash[:query] = params[:q] if params[:q].present?
-    hash[:style_name] = params[:style] if params[:style].present?
-    hash
+  def query
+    ands = []
+    ands << { query: @hash[:q] } if @hash[:q].present?
+    ands << { style_name: @hash[:style] } if @hash[:style].present?
+    if @hash[:ogfrom].present?
+      ands << { og: { gt: @hash[:ogfrom] || SGMIN } }
+    end
+    if @hash[:ogto].present?
+      ands << { og: { lt: @hash[:ogto] || SGMAX } }
+    end
+    if @hash[:fgfrom].present?
+      ands << { fg: { gt: @hash[:fgfrom] || SGMIN } }
+    end
+    if @hash[:fgto].present?
+      ands << { fg: { lt: @hash[:fgto] || SGMAX } }
+    end
+    {
+      and: ands
+    }
   end
 end
