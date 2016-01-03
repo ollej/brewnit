@@ -8,7 +8,7 @@
 
     <div class="pure-menu">
       <ul class="pure-menu-list">
-        <li class="pure-menu-item"><i class="fa fa-beer"></i><%= link_to I18n.t(:'recipes.index'), recipes_path, class: 'pure-menu-link' %></li>
+        <li class="pure-menu-item"><i class="fa fa-beer"></i><%= link_to I18n.t(:'recipes.index'), recipes_path(clear_search: true), class: 'pure-menu-link' %></li>
       <% if user_signed_in? %>
         <li class="pure-menu-item"><i class="fa fa-user"></i><%= link_to I18n.t(:'users.profile'), edit_user_registration_path, class: 'pure-menu-link' %></li>
         <li class="pure-menu-item"><i class="fa fa-sign-out"></i><%= link_to I18n.t(:'users.sign_out'), destroy_user_session_path, class: 'pure-menu-link' %></li>

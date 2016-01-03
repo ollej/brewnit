@@ -1,16 +1,18 @@
 class RecipesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
-  before_action :set_recipe, only: [:show, :edit, :update, :destroy]
   before_action :authorize!, only: [:edit, :update, :destroy]
 
   # GET /recipes
   # GET /recipes.json
   def index
+    @styles = Recipe.styles
+    @search = search_hash
   end
 
   # GET /recipes/1
   # GET /recipes/1.json
   def show
+    @recipe = find_recipe
     raise ActiveRecord::RecordNotFound unless can_show?(@recipe)
     @beerxml = @recipe.beerxml_details
     Recipe.unscoped do
@@ -36,6 +38,7 @@ class RecipesController < ApplicationController
 
   # GET /recipes/1/edit
   def edit
+    @recipe = find_recipe
   end
 
   # POST /recipes
@@ -58,6 +61,7 @@ class RecipesController < ApplicationController
   # PATCH/PUT /recipes/1
   # PATCH/PUT /recipes/1.json
   def update
+    @recipe = find_recipe
     respond_to do |format|
       if @recipe.update(recipe_params)
         format.html { redirect_to @recipe, notice: I18n.t(:'recipes.update.successful') }
@@ -72,6 +76,7 @@ class RecipesController < ApplicationController
   # DELETE /recipes/1
   # DELETE /recipes/1.json
   def destroy
+    @recipe = find_recipe
     @recipe.destroy
     respond_to do |format|
       format.html { redirect_to recipes_url, notice: I18n.t(:'recipes.destroy.successful') }
@@ -80,8 +85,8 @@ class RecipesController < ApplicationController
   end
 
   private
-    def set_recipe
-      @recipe = Recipe.unscoped.find(params[:id])
+    def find_recipe
+      Recipe.unscoped.find(params[:id])
     end
 
     def recipe_params

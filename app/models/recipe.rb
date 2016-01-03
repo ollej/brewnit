@@ -2,10 +2,10 @@ class Recipe < ActiveRecord::Base
   include SearchCop
 
   search_scope :search do
-    attributes all: [:name, :description, :style_name]
-    attributes :abv, :ibu, :og, :fg, :color, :batch_size, :style_code, :style_guide, :created_at
+    attributes primary: [:name, :description, :style_name]
+    attributes :abv, :ibu, :og, :fg, :color, :batch_size, :style_code, :style_guide, :style_name, :created_at
     attributes owner: 'user.name'
-    options :all, type: :fulltext, default: true
+    options :primary, type: :fulltext, default: true
     options :owner, type: :fulltext, default: true
     options :style_name, type: :fulltext, default: false
   end
@@ -17,8 +17,8 @@ class Recipe < ActiveRecord::Base
   acts_as_commontable
   acts_as_votable
 
-  default_scope { where(public: true).ordered }
-  scope :for_user, -> (user) { unscoped.where('user_id = ? OR public = true', user.id).ordered }
+  default_scope { where(public: true) }
+  scope :for_user, -> (user) { unscoped.where('user_id = ? OR public = true', user.id) }
   scope :by_user, -> (user) { where(user: user) }
   scope :ordered, -> { order(created_at: :desc) }
 
@@ -114,5 +114,9 @@ class Recipe < ActiveRecord::Base
       name: I18n.t(:'beerxml.hops'),
       children: hop_additions.values
     }
+  end
+
+  def self.styles
+    self.uniq.pluck(:style_name).map(&:capitalize).uniq.sort
   end
 end

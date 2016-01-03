@@ -3,8 +3,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :authenticate_user!
+  before_action :clear_search
   before_action :load_recipes
-  before_action :filter_recipes
 
   def after_sign_in_path_for(resource)
     recipes_path
@@ -16,17 +16,24 @@ class ApplicationController < ActionController::Base
 
   private
   def load_recipes
-    @recipes = if user_signed_in?
+    scope = if user_signed_in?
       Recipe.for_user(current_user)
     else
       Recipe.all
     end
+    @recipes = FilterRecipes.new(scope, query_hash).resolve.ordered
   end
 
-  def filter_recipes
-    if params[:search].present?
-      @recipes = @recipes.search(params[:search])
-    end
+  def query_hash
+    session[:search] = search_hash.merge(FilterRecipes.parse_params(params))
+  end
+
+  def search_hash
+    session.fetch(:search, {}).symbolize_keys
+  end
+
+  def clear_search
+    session.delete(:search) if params[:clear_search].present?
   end
 
   def can_show?(resource)

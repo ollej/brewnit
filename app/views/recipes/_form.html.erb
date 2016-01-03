@@ -1,4 +1,5 @@
 <%= form_for(@recipe, html: { class: 'pure-form pure-form-aligned' }) do |f| %>
+  <%= hidden_field_tag :clear_search, true %>
   <% if @recipe.errors.any? %>
     <div id="error_explanation">
       <h2><%= I18n.t(:'activerecord.errors.models.recipe.header', count: @recipe.errors.count) %></h2>
