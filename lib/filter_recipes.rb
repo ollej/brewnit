@@ -1,6 +1,8 @@
 class FilterRecipes
-  SGMIN = "1.000"
-  SGMAX = "1.150"
+  OGMIN = "1.020"
+  OGMAX = "1.150"
+  FGMIN = "1.000"
+  FGMAX = "1.060"
   # X TODO: Change to search hash
   # X TODO: Store search hash in session
   # X TODO: Populate search form with prior search
@@ -43,16 +45,16 @@ class FilterRecipes
     ands << { query: @hash[:q] } if @hash[:q].present?
     ands << { style_name: @hash[:style] } if @hash[:style].present?
     if @hash[:ogfrom].present?
-      ands << { og: { gt: @hash[:ogfrom] || SGMIN } }
+      ands << { og: { gt: @hash[:ogfrom] || OGMIN } }
     end
     if @hash[:ogto].present?
-      ands << { og: { lt: @hash[:ogto] || SGMAX } }
+      ands << { og: { lt: @hash[:ogto] || OGMAX } }
     end
     if @hash[:fgfrom].present?
-      ands << { fg: { gt: @hash[:fgfrom] || SGMIN } }
+      ands << { fg: { gt: @hash[:fgfrom] || FGMIN } }
     end
     if @hash[:fgto].present?
-      ands << { fg: { lt: @hash[:fgto] || SGMAX } }
+      ands << { fg: { lt: @hash[:fgto] || FGMAX } }
     end
     {
       and: ands
