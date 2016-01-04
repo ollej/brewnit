@@ -1,6 +1,5 @@
 class RecipesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
-  before_action :authorize!, only: [:edit, :update, :destroy]
 
   # GET /recipes
   # GET /recipes.json
@@ -39,6 +38,7 @@ class RecipesController < ApplicationController
   # GET /recipes/1/edit
   def edit
     @recipe = find_recipe
+    raise ActiveRecord::RecordNotFound unless current_user.can_modify?(@recipe)
   end
 
   # POST /recipes
@@ -62,6 +62,7 @@ class RecipesController < ApplicationController
   # PATCH/PUT /recipes/1.json
   def update
     @recipe = find_recipe
+    raise ActiveRecord::RecordNotFound unless current_user.can_modify?(@recipe)
     respond_to do |format|
       if @recipe.update(recipe_params)
         format.html { redirect_to @recipe, notice: I18n.t(:'recipes.update.successful') }
@@ -77,6 +78,7 @@ class RecipesController < ApplicationController
   # DELETE /recipes/1.json
   def destroy
     @recipe = find_recipe
+    raise ActiveRecord::RecordNotFound unless current_user.can_modify?(@recipe)
     @recipe.destroy
     respond_to do |format|
       format.html { redirect_to recipes_url, notice: I18n.t(:'recipes.destroy.successful') }
@@ -94,9 +96,4 @@ class RecipesController < ApplicationController
       recipe[:beerxml] = recipe[:beerxml].read if recipe[:beerxml].present?
       recipe
     end
-
-    def authorize!
-      raise ActiveRecord::RecordNotFound unless current_user.can_modify?(@recipe)
-    end
-
 end
