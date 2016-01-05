@@ -4,6 +4,17 @@ sv:
     are_you_sure: Är du säker?
     public: Offentlig
     private: Privat
+    share:
+      single_title: Dela recept!
+      facebook:
+        title: Facebook
+        description: Dela receptet på Facebook
+      twitter:
+        title: Twitter
+        description: Dela receptet på Twitter
+      plusone:
+        title: Google+
+        description: Dela receptet på Google+
   recipes:
     name: Namn
     description: Beskrivning
