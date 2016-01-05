@@ -171,7 +171,8 @@ CREATE TABLE recipes (
     style_guide character varying,
     style_name character varying,
     batch_size numeric,
-    color numeric
+    color numeric,
+    brewer character varying
 );
 
 
@@ -381,10 +382,10 @@ ALTER TABLE ONLY votes
 
 
 --
--- Name: fulltext_index_recipes_on_all; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: fulltext_index_recipes_on_primary; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX fulltext_index_recipes_on_all ON recipes USING gin (to_tsvector('simple'::regconfig, (((((name)::text || ' '::text) || description) || ' '::text) || (style_name)::text)));
+CREATE INDEX fulltext_index_recipes_on_primary ON recipes USING gin (to_tsvector('simple'::regconfig, (((((((name)::text || ' '::text) || description) || ' '::text) || (style_name)::text) || ' '::text) || (brewer)::text)));
 
 
 --
@@ -462,6 +463,13 @@ CREATE INDEX index_recipes_on_abv ON recipes USING btree (abv);
 --
 
 CREATE INDEX index_recipes_on_batch_size ON recipes USING btree (batch_size);
+
+
+--
+-- Name: index_recipes_on_brewer; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_recipes_on_brewer ON recipes USING btree (brewer);
 
 
 --
@@ -615,4 +623,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160102165716');
 INSERT INTO schema_migrations (version) VALUES ('20160102173544');
 
 INSERT INTO schema_migrations (version) VALUES ('20160102210028');
+
+INSERT INTO schema_migrations (version) VALUES ('20160105190205');
 

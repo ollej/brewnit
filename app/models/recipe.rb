@@ -2,8 +2,8 @@ class Recipe < ActiveRecord::Base
   include SearchCop
 
   search_scope :search do
-    attributes primary: [:name, :description, :style_name]
-    attributes :abv, :ibu, :og, :fg, :color, :batch_size, :style_code, :style_guide, :style_name, :created_at
+    attributes primary: [:name, :description, :style_name, :brewer]
+    attributes :abv, :ibu, :og, :fg, :color, :batch_size, :style_code, :style_guide, :style_name, :created_at, :brewer
     attributes owner: 'user.name'
     options :primary, type: :fulltext, default: true
     options :owner, type: :fulltext, default: true
@@ -61,6 +61,7 @@ class Recipe < ActiveRecord::Base
     self.style_name = beerxml_details.style.name
     self.batch_size = beerxml_details.batch_size
     self.color = beerxml_details.color_ebc
+    self.brewer = beerxml_details.brewer
   end
 
   def malt_data
@@ -93,6 +94,9 @@ class Recipe < ActiveRecord::Base
       size: hop.amount,
       time: hop.time,
       ibu: hop.ibu,
+      aau: hop.aau,
+      mgl_alpha: hop.mgl_added_alpha_acids,
+      grams_per_liter: hop.amount / batch_size,
       tooltip: "#{hop.formatted_amount} #{I18n.t(:'beerxml.grams')} #{hop.name} @ #{hop.formatted_time} #{I18n.t("beerxml.#{hop.time_unit}", default: hop.time_unit)}"
     }
   end
