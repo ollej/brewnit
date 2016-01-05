@@ -61,4 +61,8 @@ module RecipesHelper
       end
     end
   end
+
+  def formatted_abv(abv)
+    "#{(abv > 10 ? '%.0f' : '%.1f') % abv}#{I18n.t(:'beerxml.percent_sign')}"
+  end
 end

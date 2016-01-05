@@ -37,6 +37,14 @@ class Recipe < ActiveRecord::Base
     end
   end
 
+  def brewer_name
+    if brewer.present?
+      brewer
+    else
+      owner_name
+    end
+  end
+
   def comments
     thread.comments.size
   end
