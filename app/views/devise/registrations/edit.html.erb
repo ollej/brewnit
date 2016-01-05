@@ -24,7 +24,7 @@
 
     <div class="field pure-control-group">
       <%= f.label :password %>
-      <%= f.password_field :password, required: true, autocomplete: 'off', placeholder: I18n.t(:'activerecord.attributes.user.password') %><br />
+      <%= f.password_field :password, required: true, autocomplete: 'off', placeholder: I18n.t(:'activerecord.attributes.user.password') %>
       <em>(<%= I18n.t(:'users.leave_pwd_blank') %>)</em>
     </div>
 
@@ -35,7 +35,7 @@
 
     <div class="field pure-control-group">
       <%= f.label :current_password %>
-      <%= f.password_field :current_password, autocomplete: 'off', placeholder: I18n.t(:'activerecord.attributes.user.current_password')  %><br>
+      <%= f.password_field :current_password, autocomplete: 'off', placeholder: I18n.t(:'activerecord.attributes.user.current_password')  %>
       <em>(<%= I18n.t(:'users.pwd_needed_to_confirm') %>)</em>
     </div>
 

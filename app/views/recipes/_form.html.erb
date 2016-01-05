@@ -14,12 +14,13 @@
 
   <fieldset>
     <div class="field pure-control-group">
-      <%= f.label :name %>
-      <%= f.text_field :name, placeholder: I18n.t(:'activerecord.attributes.recipe.name') %>
-    </div>
-    <div class="field pure-control-group">
       <%= f.label :beerxml %>
       <%= f.file_field :beerxml, accept: 'application/xml', required: @recipe.new_record? %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, placeholder: I18n.t(:'activerecord.attributes.recipe.name') %>
+      <em>(<%= I18n.t(:'recipes.name_not_needed') %>)</em>
     </div>
     <div class="field pure-control-group">
       <%= f.label :description %>

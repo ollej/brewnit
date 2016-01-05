@@ -9,7 +9,7 @@
         <div class="pure-u-1-2">
           <h1 class="recipe-content-title"><%= @recipe.name %></h1>
           <p class="recipe-content-details">
-            <%= I18n.t(:'recipes.owner') %>: <%= @recipe.owner_name %><br>
+            <%= I18n.t(:'recipes.owner') %>: <%= @recipe.brewer_name %><br>
             <%= I18n.t(:'recipes.created') %>: <%= l(@recipe.created_at, format: :long) %>
           </p>
           <p class="recipe-content-subtitle">

@@ -46,9 +46,10 @@ sv:
       other: '%{count} gillade'
     likes:
       like: Gilla!
-      unlike: Avgilla
+      unlike: Sluta gilla
       successful: Tack för att du gillade receptet!
-      successful_unlike: Du har avgillat receptet.
+      successful_unlike: Du gillar inte längre receptet.
+    name_not_needed: Namn hämtas från BeerXML-filen om det inte fylls i.
   users:
     profile: Profil
     edit: Ändra profil
