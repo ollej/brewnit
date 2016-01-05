@@ -45,6 +45,14 @@ class Recipe < ActiveRecord::Base
     end
   end
 
+  def display_desc
+    if description.present?
+      description
+    else
+      style_name
+    end
+  end
+
   def comments
     thread.comments.size
   end
