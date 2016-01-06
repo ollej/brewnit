@@ -8,6 +8,9 @@ Rails.application.routes.draw do
       delete :like, controller: :likes, action: :destroy, as: :unlike
     end
   end
-  devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
+  devise_for :users, controllers: {
+    omniauth_callbacks: 'omniauth_callbacks',
+    registrations: 'users/registrations'
+  }
   root to: 'recipes#index'
 end

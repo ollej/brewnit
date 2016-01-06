@@ -231,7 +231,12 @@ CREATE TABLE users (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     admin boolean,
-    avatar character varying
+    avatar character varying,
+    presentation text,
+    location character varying,
+    brewery character varying,
+    twitter character varying,
+    url character varying
 );
 
 
@@ -625,4 +630,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160102173544');
 INSERT INTO schema_migrations (version) VALUES ('20160102210028');
 
 INSERT INTO schema_migrations (version) VALUES ('20160105190205');
+
+INSERT INTO schema_migrations (version) VALUES ('20160105234837');
 

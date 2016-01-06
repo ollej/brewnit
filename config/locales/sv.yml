@@ -377,6 +377,12 @@ sv:
         current_password: Nuvarande lösenord
         remember_me: Kom ihåg mig
         password_confirmation: Lösenordsverifiering
+        presentation: Presentation
+        location: Hemort
+        url: Hemsida
+        brewery: Bryggeri
+        twitter: Twitter
+        name: Namn
       recipe:
         name: Namn
         description: Beskrivning

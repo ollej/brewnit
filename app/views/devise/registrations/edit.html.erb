@@ -23,8 +23,38 @@
     <% end %>
 
     <div class="field pure-control-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, placeholder: I18n.t(:'activerecord.attributes.user.name') %>
+    </div>
+
+    <div class="field pure-control-group">
+      <%= f.label :brewery %>
+      <%= f.text_field :brewery, placeholder: I18n.t(:'activerecord.attributes.user.brewery') %>
+    </div>
+
+    <div class="field pure-control-group">
+      <%= f.label :location %>
+      <%= f.text_field :location, placeholder: I18n.t(:'activerecord.attributes.user.location') %>
+    </div>
+
+    <div class="field pure-control-group">
+      <%= f.label :url %>
+      <%= f.text_field :url, placeholder: I18n.t(:'activerecord.attributes.user.url') %>
+    </div>
+
+    <div class="field pure-control-group">
+      <%= f.label :twitter %>
+      <%= f.text_field :twitter, placeholder: I18n.t(:'activerecord.attributes.user.twitter') %>
+    </div>
+
+    <div class="field pure-control-group">
+      <%= f.label :presentation %>
+      <%= f.text_area :presentation, placeholder: I18n.t(:'activerecord.attributes.user.presentation') %>
+    </div>
+
+    <div class="field pure-control-group">
       <%= f.label :password %>
-      <%= f.password_field :password, required: true, autocomplete: 'off', placeholder: I18n.t(:'activerecord.attributes.user.password') %>
+      <%= f.password_field :password, autocomplete: 'off', placeholder: I18n.t(:'activerecord.attributes.user.password') %>
       <em>(<%= I18n.t(:'users.leave_pwd_blank') %>)</em>
     </div>
 

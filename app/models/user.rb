@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  ALLOWED_TAGS = %w(b i strong em br p small del strike s ins u sub sup mark hr q)
+  before_validation :cleanup_fields
   has_many :recipes, dependent: :destroy
 
   acts_as_commontator
@@ -37,6 +39,18 @@ class User < ActiveRecord::Base
     resource.public? || can_modify?(resource)
   end
 
+  def cleanup_fields
+    if !url.blank? && !url.start_with?('http')
+      self.url = "http://#{url.strip}"
+    end
+    if !twitter.blank? && !twitter.start_with?('@')
+      self.twitter = "@#{twitter.strip}"
+    end
+    if !presentation.blank? && presentation_changed?
+      self.presentation = Rails::Html::WhiteListSanitizer.new(presentation, ALLOWED_TAGS)
+    end
+  end
+
   def self.from_omniauth(access_token)
     data = access_token.info
 
@@ -51,4 +65,5 @@ class User < ActiveRecord::Base
     end
     user
   end
+
 end
