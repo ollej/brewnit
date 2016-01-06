@@ -1,6 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
 # before_filter :configure_sign_up_params, only: [:create]
-# before_filter :configure_account_update_params, only: [:update]
+  before_filter :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
   # def new
@@ -59,8 +59,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
   protected
 
+  def after_update_path_for(resource)
+    edit_user_registration_path
+  end
+
   def configure_account_update_params
-    devise_parameter_sanitizer.for(:account_update).push(*[:presentation, :location, :brewery, :twitter, :url])
+    devise_parameter_sanitizer.for(:account_update).push(*[:presentation, :location, :brewery, :twitter, :url, :equipment]).delete(:email)
   end
 
   def update_resource(resource, params)

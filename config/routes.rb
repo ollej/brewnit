@@ -12,5 +12,6 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'omniauth_callbacks',
     registrations: 'users/registrations'
   }
+  resources :users, only: [:index, :show]
   root to: 'recipes#index'
 end

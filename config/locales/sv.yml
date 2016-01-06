@@ -62,6 +62,7 @@ sv:
       successful_unlike: Du gillar inte längre receptet.
     name_not_needed: Namn hämtas från BeerXML-filen om det inte fylls i.
   users:
+    index: Bryggare
     profile: Profil
     edit: Ändra profil
     sign_up: Registrera
@@ -79,6 +80,10 @@ sv:
       Är du säker på att du vill avsluta kontot?
 
       Alla dina recept kommer också tas bort.
+    recipes:
+      one: 1 recept
+      other: "%{count} recept"
+    recipe_count: Antal recept
   beerxml:
     information: Information
     style: Ölstil
@@ -382,6 +387,7 @@ sv:
         url: Hemsida
         brewery: Bryggeri
         twitter: Twitter
+        equipment: Utrustning
         name: Namn
       recipe:
         name: Namn

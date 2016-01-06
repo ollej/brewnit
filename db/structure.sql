@@ -236,7 +236,8 @@ CREATE TABLE users (
     location character varying,
     brewery character varying,
     twitter character varying,
-    url character varying
+    url character varying,
+    equipment character varying
 );
 
 

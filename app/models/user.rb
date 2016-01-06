@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   scope :by_query, lambda { |query, col = :name|
     where arel_table[col].matches("%#{query}%")
   }
+  scope :ordered, -> { order(name: :asc) }
 
   def admin?
     admin
@@ -47,7 +48,7 @@ class User < ActiveRecord::Base
       self.twitter = "@#{twitter.strip}"
     end
     if !presentation.blank? && presentation_changed?
-      self.presentation = Rails::Html::WhiteListSanitizer.new(presentation, ALLOWED_TAGS)
+      self.presentation = Rails::Html::WhiteListSanitizer.new.sanitize(presentation, tags: ALLOWED_TAGS)
     end
   end
 

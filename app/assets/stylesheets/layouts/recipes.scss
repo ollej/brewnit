@@ -148,7 +148,9 @@ a {
   }
   .recipe-name {
     text-transform: uppercase;
-    color: #999;
+    a {
+      color: #999;
+    }
   }
   .recipe-desc {
   /* font-size: 80%; */
@@ -178,11 +180,16 @@ a {
 }
 
 /* recipe Content Styles */
-.recipe-content-header, .recipe-content-body, .recipe-content-footer {
+.page-content-header, .page-content-body, .page-content-footer {
   padding: 1em 2em;
 }
-.recipe-content-header {
+.page-content-header {
   border-bottom: 1px solid #ddd;
+
+  h1 {
+    margin: 0.5em 0 0.5em;
+    color: #333
+  }
 }
 .recipe-content-title {
   margin: 0.5em 0 0.5em;

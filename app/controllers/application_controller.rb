@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :clear_search
   before_action :load_recipes
+  before_action :filter_recipes
 
   def after_sign_in_path_for(resource)
     recipes_path
@@ -15,13 +16,17 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
   def load_recipes
-    scope = if user_signed_in?
+    @recipes = if user_signed_in?
       Recipe.for_user(current_user)
     else
       Recipe.all
     end
-    @recipes = FilterRecipes.new(scope, query_hash).resolve.ordered
+  end
+
+  def filter_recipes
+    @recipes = FilterRecipes.new(@recipes, query_hash).resolve.ordered
   end
 
   def query_hash

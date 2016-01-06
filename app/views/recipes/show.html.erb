@@ -7,7 +7,7 @@ set_meta_tags title: @recipe.name,
     title: :title,
     description: :description,
     site_name: 'Brygglogg.se',
-    url: recipes_url(@recipe),
+    url: recipe_url(@recipe),
     type: 'product',
     locale: 'sv_SE',
   },
@@ -22,12 +22,12 @@ set_meta_tags title: @recipe.name,
   <meta name="author" content="<%= @recipe.brewer_name %>">
 <% end %>
 
-      <div class="recipe-content-header pure-g">
+      <div class="page-content-header pure-g">
         <div class="pure-u-1-2">
           <h1 class="recipe-content-title"><%= title @recipe.name %></h1>
           <p class="recipe-content-details">
             <%= I18n.t(:'beerxml.style') %>: <%= @recipe.style_name %><br>
-            <%= I18n.t(:'recipes.owner') %>: <%= @recipe.brewer_name %><br>
+            <%= I18n.t(:'recipes.owner') %>: <%= link_to @recipe.brewer_name, @recipe.user %><br>
             <%= I18n.t(:'recipes.created') %>: <%= l(@recipe.created_at, format: :long) %>
           </p>
           <p class="recipe-content-subtitle">
@@ -36,7 +36,7 @@ set_meta_tags title: @recipe.name,
 
         </div>
 
-        <div class="recipe-content-controls pure-u-1-2">
+        <div class="page-content-controls pure-u-1-2">
           <% if user_signed_in? %>
             <%= like_tag(@recipe, current_user) %>
             <% if current_user.can_modify?(@recipe) %>
@@ -63,7 +63,7 @@ set_meta_tags title: @recipe.name,
 
       </div>
 
-      <div class="recipe-content-body">
+      <div class="page-content-body recipe-show">
         <div class="tabs">
           <input type="radio" name="tabs" id="tab1" checked>
           <label for="tab1" class="tab-trigger">

@@ -5,5 +5,6 @@ class AddMoreFieldsToUser < ActiveRecord::Migration
     add_column :users, :brewery, :string
     add_column :users, :twitter, :string
     add_column :users, :url, :string
+    add_column :users, :equipment, :string
   end
 end

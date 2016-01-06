@@ -24,10 +24,12 @@ $( document ).ready(function() {
   })
 
   // Handle clicks in recipe list
-  $("#list").on("click", ".recipe-item", function(ev) {
-    $("#list .recipe-item").removeClass("recipe-item-selected");
-    $(this).addClass("recipe-item-selected");
-    document.location = $("a", this).attr("href");
+  $(".linked-list").on("click", ".linked-item", function(ev) {
+    var $target = $(ev.target);
+    if ($target.is("a") && !$target.is(".item-link")) {
+      return true;
+    }
+    document.location = $("a.item-link", this).attr("href");
     return false;
   });
 
