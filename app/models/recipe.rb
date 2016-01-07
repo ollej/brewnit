@@ -14,8 +14,7 @@ class Recipe < ActiveRecord::Base
 
   after_create :notify_pushover
 
-  before_validation :extract_details
-  validates :name, presence: true
+  before_save :extract_details, if: Proc.new { |r| r.errors.empty? }
   validates :beerxml, presence: true, beerxml: true
 
   acts_as_commontable
