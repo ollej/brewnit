@@ -16,6 +16,7 @@ sv:
         title: Google+
         description: Dela receptet på Google+
     notification:
+      subscribe_button: Prenumerera
       recipe:
         created:
           title: "Nytt recept: %{recipe_name}"

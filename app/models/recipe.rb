@@ -145,7 +145,13 @@ class Recipe < ActiveRecord::Base
       brewer_name: brewer_name,
       style_name: style_name
     }
+    user = if public?
+      Rails.application.secrets.pushover_group_recipe
+    else
+      Rails.application.secrets.pushover_user
+    end
     Pushover.notification(
+      user: user,
       title: I18n.t(:'common.notification.recipe.created.title', values),
       message: I18n.t(:'common.notification.recipe.created.message', values),
       url: Rails.application.routes.url_helpers.recipe_url(self)

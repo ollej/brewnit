@@ -1,16 +1,11 @@
 default: &default
   adapter: postgresql
   pool: 5
-  timeout: 5000
 
 development:
   <<: *default
-  database: brewnit_dev
+  database: brewnit
 
 test:
   <<: *default
   database: brewnit_test
-
-production:
-  <<: *default
-  database: brewnit
