@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   scope :by_query, lambda { |query, col = :name|
     where arel_table[col].matches("%#{query}%")
   }
-  scope :ordered, -> { order(name: :asc) }
+  scope :ordered, -> { order("name = '', name ASC, brewery ASC") }
 
   def admin?
     admin
