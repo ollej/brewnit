@@ -15,6 +15,15 @@ sv:
       plusone:
         title: Google+
         description: Dela receptet på Google+
+    notification:
+      recipe:
+        created:
+          title: "Nytt recept: %{recipe_name}"
+          message: "%{brewer_name} har lagt upp en %{style_name} som heter '%{recipe_name}'."
+      user:
+        created:
+          title: "Ny bryggare: %{name}"
+          message: "%{name} med e-post %{email} har registrerat sig på Brygglogg.se"
   recipes:
     name: Namn
     description: Beskrivning
@@ -227,12 +236,12 @@ sv:
       updated_not_active: "Ditt lösenord har uppdaterats."
     registrations:
       destroyed: "Ditt konto är nu avregistrerat. Vi hoppas få se dig snart igen."
-      signed_up: "Välkommen! Ett nytt konto har skapats."
+      signed_up: "Välkommen till Brygglogg.se! Fyll gärna i uppgifterna nedan."
       signed_up_but_inactive: "Ett nytt konto har skapats. Men vi kunde tyvärr inte logga in dig eftersom ditt konto inte är aktiverat."
       signed_up_but_locked: "Ett nytt konto har skapats. Men vi kunde tyvärr inte logga in dig eftersom ditt konto inte är låst."
       signed_up_but_unconfirmed: "En bekräftelse har skickats till din epost. Klicka på länken i meddelandet för att aktivera ditt konto."
       update_needs_confirmation: "Ditt konto har uppdaterats, men vi behöver bekräfta din epostadress. En bekräftelse har skickats till din nya epostadress."
-      updated: "Ditt konto har uppdaterats."
+      updated: "Din profil har uppdaterats."
       user:
         destroyed: Ditt konto har tagits bort.
     sessions:

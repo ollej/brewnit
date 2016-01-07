@@ -12,7 +12,11 @@ class Recipe < ActiveRecord::Base
 
   belongs_to :user
 
+  after_create :notify_pushover
+
   before_validation :extract_details
+  validates :name, presence: true
+  validates :beerxml, presence: true, beerxml: true
 
   acts_as_commontable
   acts_as_votable
@@ -21,9 +25,6 @@ class Recipe < ActiveRecord::Base
   scope :for_user, -> (user) { unscoped.where('user_id = ? OR public = true', user.id) }
   scope :by_user, -> (user) { where(user: user) }
   scope :ordered, -> { order(created_at: :desc) }
-
-  validates :name, presence: true
-  validates :beerxml, presence: true, beerxml: true
 
   def owned_by?(u)
     self.user == u
@@ -136,6 +137,19 @@ class Recipe < ActiveRecord::Base
       name: I18n.t(:'beerxml.hops'),
       children: hop_additions.values
     }
+  end
+
+  def notify_pushover
+    values = {
+      recipe_name: name,
+      brewer_name: brewer_name,
+      style_name: style_name
+    }
+    Pushover.notification(
+      title: I18n.t(:'common.notification.recipe.created.title', values),
+      message: I18n.t(:'common.notification.recipe.created.message', values),
+      url: Rails.application.routes.url_helpers.recipe_url(self)
+    )
   end
 
   def self.styles

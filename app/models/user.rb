@@ -3,6 +3,10 @@ class User < ActiveRecord::Base
   before_validation :cleanup_fields
   has_many :recipes, dependent: :destroy
 
+  after_create :notify_pushover
+
+  validates :name, presence: true
+
   acts_as_commontator
   acts_as_voter
 
@@ -65,6 +69,18 @@ class User < ActiveRecord::Base
       user.save
     end
     user
+  end
+
+  def notify_pushover
+    values = {
+      name: name.blank? ? email : name,
+      email: email,
+    }
+    Pushover.notification(
+      title: I18n.t(:'common.notification.user.created.title', values),
+      message: I18n.t(:'common.notification.user.created.message', values),
+      url: Rails.application.routes.url_helpers.user_url(self)
+    )
   end
 
 end

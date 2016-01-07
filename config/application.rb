@@ -34,5 +34,9 @@ module Brewnit
     config.sass.cache = false
 
     config.active_record.schema_format = :sql
+
+    config.after_initialize do
+      Rails.application.routes.default_url_options = config.action_mailer.default_url_options
+    end
   end
 end

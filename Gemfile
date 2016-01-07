@@ -35,6 +35,7 @@ gem 'commontator', '~> 4.11.0'
 gem 'acts_as_votable', '~> 0.10.0'
 gem 'search_cop', '~> 1.0.5'
 gem 'meta-tags', '~> 2.1.0'
+gem 'pushover', '~> 1.0.4'
 
 group :production do
   gem 'rails_12factor', '~> 0.0.3'
