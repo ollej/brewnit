@@ -13,5 +13,5 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
   resources :users, only: [:index, :show]
-  root to: 'recipes#index'
+  root to: 'users#index'
 end

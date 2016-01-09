@@ -2,9 +2,7 @@
   <a href="#" class="nav-menu-button">Menu</a>
 
   <div class="nav-inner">
-    <% if user_signed_in? %>
-      <%= link_to I18n.t(:'recipes.new'), new_recipe_path, class: 'primary-button pure-button' %>
-    <% end %>
+    <%= link_to I18n.t(:'recipes.new'), new_recipe_path, class: 'primary-button pure-button' %>
 
     <div class="pure-menu">
       <ul class="pure-menu-list">

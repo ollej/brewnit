@@ -8,11 +8,11 @@ class ApplicationController < ActionController::Base
   before_action :filter_recipes
 
   def after_sign_in_path_for(resource)
-    recipes_path
+    stored_location_for(resource) || request.referer || root_path
   end
 
   def after_sign_out_path_for(resource)
-    recipes_path
+    root_path
   end
 
   private
