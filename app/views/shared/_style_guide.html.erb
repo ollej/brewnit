@@ -1,8 +1,14 @@
 <% style = @beerxml.style %>
 
+<% if style.category.present? %>
 <h2><%= style.category_number %><%= style.style_letter %>. <%= style.category %></h2>
+<% end %>
+<% if style.style_guide.present? %>
 <h3 class="inline-heading"><%= t(:'beerxml.style_guide') %></h3> <%= style.style_guide %><br>
+<% end %>
+<% if style.type.present? %>
 <h3 class="inline-heading"><%= t(:'beerxml.style_type') %></h3> <%= style.type %><br>
+<% end %>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="height:0px;width:0px">
     <defs>
@@ -17,10 +23,11 @@
     </defs>
 </svg>
 
+<% if style.og_min.present? && style.og_max.present? %>
 <div class="gauge-box">
 <h3><%= t(:'beerxml.og') %></h3>
 <div id="linear-gauge-og" class="linear-gauge"></div>
-<p><%= '%.3f' % style.og_min %> - <%= '%.3f' % style.og_max %></p>
+<p><%= @presenter.og_min %> - <%= @presenter.og_max %></p>
 <script>
 var ogGauge = new LinearGauge("#linear-gauge-og", {});
 ogGauge.data({
@@ -33,7 +40,9 @@ ogGauge.data({
 });
 </script>
 </div>
+<% end %>
 
+<% if style.fg_min.present? && style.fg_max.present? %>
 <div class="gauge-box">
 <h3><%= t(:'beerxml.fg') %></h3>
 <div id="linear-gauge-fg" class="linear-gauge"></div>
@@ -50,7 +59,9 @@ fgGauge.data({
 });
 </script>
 </div>
+<% end %>
 
+<% if style.ibu_min.present? && style.ibu_max.present? %>
 <div class="gauge-box">
 <h3><%= t(:'beerxml.ibu') %></h3>
 <div id="linear-gauge-ibu" class="linear-gauge"></div>
@@ -67,7 +78,9 @@ ibuGauge.data({
 });
 </script>
 </div>
+<% end %>
 
+<% if style.color_min.present? && style.color_max.present? %>
 <div class="gauge-box">
 <h3><%= t(:'beerxml.color') %></h3>
 <div id="linear-gauge-color" class="linear-gauge"></div>
@@ -84,6 +97,7 @@ colorGauge.data({
 });
 </script>
 </div>
+<% end %>
 
 <% if style.notes.present? %>
 <h3><%= t(:'beerxml.style_notes') %>

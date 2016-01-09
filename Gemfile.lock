@@ -1,3 +1,12 @@
+GIT
+  remote: git@github.com:ollej/beerxml.git
+  revision: 6ca3507081d0b47d0fcd2963c710fc3e3085b003
+  ref: 6ca3507081d0b47d0fcd2963c710fc3e3085b003
+  specs:
+    nrb-beerxml (0.1.1)
+      activemodel
+      nokogiri
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -107,9 +116,6 @@ GEM
     multipart-post (2.0.0)
     nokogiri (1.6.7.1)
       mini_portile2 (~> 2.0.0.rc2)
-    nrb-beerxml (0.1.1)
-      activemodel
-      nokogiri
     oauth2 (1.0.0)
       faraday (>= 0.8, < 0.10)
       jwt (~> 1.0)
@@ -233,6 +239,7 @@ DEPENDENCIES
   jquery-rails (~> 4.0.5)
   libxml-xmlrpc (~> 0.1.5)
   meta-tags (~> 2.1.0)
+  nrb-beerxml!
   omniauth-google-oauth2 (~> 0.2.10)
   pg (~> 0.18.4)
   pushover (~> 1.0.4)

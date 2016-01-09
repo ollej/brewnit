@@ -71,6 +71,7 @@ sv:
       successful: Tack för att du gillade receptet!
       successful_unlike: Du gillar inte längre receptet.
     name_not_needed: Namn hämtas från BeerXML-filen om det inte fylls i.
+    no_style_information: Det finns ingen stiltypsinformation för detta recept.
   users:
     index: Bryggare
     profile: Profil
@@ -204,6 +205,9 @@ sv:
     style_ingredients: Ingredienser
     style_notes: Anteckningar
     style_profile: Profil
+    Bittering: Bitter
+    Culture: Kultur
+    Slant: Slant
   devise:
     confirmations:
       confirmed: "Ditt konto har bekräftats. Du är nu inloggad."

@@ -61,7 +61,7 @@ class Recipe < ActiveRecord::Base
 
   def beerxml_details
     @beerxml_details ||= begin
-      parser = NRB::BeerXML::Parser.new
+      parser = NRB::BeerXML::Parser.new(perform_validations: false)
       xml = StringIO.new(self.beerxml)
       recipe = parser.parse(xml)
       BeerRecipe::RecipeWrapper.new(recipe.records.first)

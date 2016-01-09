@@ -93,7 +93,11 @@ set_meta_tags title: @recipe.name,
             <%= commontator_thread(@recipe) %>
           </div>
           <div id="tab-content4" class="tab-content">
+            <% if @presenter.style_has_values? %>
             <%= render 'shared/style_guide' %>
+            <% else %>
+              <p><%= t(:'recipes.no_style_information') %></p>
+            <% end %>
           </div>
         </div>
       </div>

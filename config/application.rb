@@ -28,6 +28,7 @@ module Brewnit
 
     config.autoload_paths << Rails.root.join('lib')
     config.autoload_paths << Rails.root.join('/app/validators')
+    config.autoload_paths << Rails.root.join('/app/presenters')
 
     config.sass.preferred_syntax = :scss
     config.sass.line_comments = false

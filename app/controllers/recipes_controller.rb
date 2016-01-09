@@ -14,6 +14,7 @@ class RecipesController < ApplicationController
     @recipe = find_recipe
     raise ActiveRecord::RecordNotFound unless can_show?(@recipe)
     @beerxml = @recipe.beerxml_details
+    @presenter = RecipePresenter.new(@recipe)
     Recipe.unscoped do
       commontator_thread_show(@recipe)
     end
