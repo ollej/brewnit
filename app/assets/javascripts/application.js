@@ -55,11 +55,12 @@ $( document ).ready(function() {
 
   // Show liked by list
   $(".recipe-content").on("click", ".pure-badge-likes", function(e, data, status, xhr) {
-    if ($("#likes-list").is(':empty')) {
+    var $likes = $("#likes-list");
+    if ($likes.is(':empty')) {
       return false;
     }
     var $el = $(this);
-    $("#likes-list").css({
+    $likes.css({
       'position': 'absolute',
       'left': $el.offset().left,
       'top': $el.offset().top + $el.height() + 10
