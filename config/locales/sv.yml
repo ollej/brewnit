@@ -438,7 +438,8 @@ sv:
               blank: måste fyllas i.
             beerxml:
               blank: måste skickas med.
-              invalid: är inte en giltig Beer XML-fil.
+              invalid: är inte en giltig BeerXML-fil.
+              parse_error: kunde inte läsas in på grund av syntax-fel.
 
   date:
     formats:
