@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:ollej/beerxml.git
+  remote: https://github.com/ollej/beerxml.git
   revision: 6ca3507081d0b47d0fcd2963c710fc3e3085b003
   ref: 6ca3507081d0b47d0fcd2963c710fc3e3085b003
   specs:
