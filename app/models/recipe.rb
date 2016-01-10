@@ -60,12 +60,14 @@ class Recipe < ActiveRecord::Base
   end
 
   def beerxml_details
-    @beerxml_details ||= begin
-      parser = NRB::BeerXML::Parser.new(perform_validations: false)
-      xml = StringIO.new(self.beerxml)
-      recipe = parser.parse(xml)
-      BeerRecipe::RecipeWrapper.new(recipe.records.first)
-    end
+    @beerxml_details ||= parse_beerxml(self.beerxml)
+  end
+
+  def parse_beerxml(beerxml)
+    parser = NRB::BeerXML::Parser.new(perform_validations: false)
+    xml = StringIO.new(beerxml)
+    recipe = parser.parse(xml)
+    BeerRecipe::RecipeWrapper.new(recipe.records.first)
   end
 
   def extract_details
