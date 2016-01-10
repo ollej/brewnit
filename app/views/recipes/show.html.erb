@@ -23,21 +23,27 @@ set_meta_tags title: @recipe.name,
 <% end %>
 
       <div class="page-content-header pure-g">
-        <div class="pure-u-1-2">
+        <div class="pure-u-3-5 recipe-header">
           <h1 class="recipe-content-title"><%= title @recipe.name %></h1>
           <p class="recipe-content-details">
             <%= t(:'beerxml.style') %>: <%= @recipe.style_name %><br>
             <%= t(:'recipes.owner') %>: <%= link_to @recipe.brewer_name, @recipe.user %><br>
             <%= t(:'recipes.created') %>: <%= l(@recipe.created_at, format: :long) %>
           </p>
-          <p class="recipe-content-subtitle">
-            <%= @recipe.description %>
-          </p>
 
         </div>
 
-        <div class="page-content-controls pure-u-1-2">
+        <div class="page-content-controls pure-u-2-5">
+          <div class="controls-public">
+          <%= link_to recipe_path(@recipe, format: :xml), method: :get, class: 'pure-button secondary-button' do %>
+            <i class="fa fa-download"></i> <%= t(:'recipes.download') %>
+          <% end %>
+          <%= link_to "javascript:window.print()", class: 'pure-button secondary-button' do %>
+            <i class="fa fa-print"></i> <%= t(:'recipes.print') %>
+          <% end %>
+        </div>
           <% if user_signed_in? %>
+            <div class="controls-signed-in">
             <%= like_tag(@recipe, current_user) %>
             <% if current_user.can_modify?(@recipe) %>
               <%= link_to edit_recipe_path(@recipe), class: 'pure-button secondary-button' do %>
@@ -48,13 +54,14 @@ set_meta_tags title: @recipe.name,
               <% end %>
             <% end %>
             <%#= link_to t(:'recipes.clone'), clone_recipe_path(@recipe), class: 'pure-button secondary-button' %>
+            </div>
           <% end %>
-          <%= link_to recipe_path(@recipe, format: :xml), method: :get, class: 'pure-button secondary-button' do %>
-            <i class="fa fa-download"></i> <%= t(:'recipes.download') %>
-          <% end %>
-          <%= link_to "javascript:window.print()", class: 'pure-button secondary-button' do %>
-            <i class="fa fa-print"></i> <%= t(:'recipes.print') %>
-          <% end %>
+        </div>
+
+        <div class="pure-u">
+          <p class="recipe-content-subtitle">
+            <%= @recipe.description %>
+          </p>
         </div>
 
         <div class="recipe-badge-list pure-u">
