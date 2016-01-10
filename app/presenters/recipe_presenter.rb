@@ -58,4 +58,24 @@ class RecipePresenter
     return unless @beerxml.style_code.present? && @style.style_guide.present?
     "(#{[ @beerxml.style_code, @style.style_guide ].join(' / ')})"
   end
+
+  def hop_grams_per_liter(hop)
+    if @beerxml.batch_size > 0
+      '%.1f' % (hop.amount / @beerxml.batch_size)
+    else
+      0
+    end
+  end
+
+  def mgl_added_alpha_acids(hop)
+    if @beerxml.batch_size > 0
+      '%.1f' % ((hop.alpha * hop.amount) / @beerxml.batch_size)
+    else
+      0
+    end
+  end
+
+  def hop_aau(hop)
+    '%.1f' % hop.aau
+  end
 end

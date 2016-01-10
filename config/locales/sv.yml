@@ -214,6 +214,15 @@ sv:
     Slant: Slant
     Mash: Mäskning
     Step: Delsteg
+    mg_per_liter_aa: mg/L AA
+    aau: AAU
+    grams_per_liter: gr/L
+    beta: Beta
+    caryophyllene: Caryophyllene
+    cohumulone: Cohumulone
+    hsi: HSI
+    myrcene: Myrcene
+    origin: Ursprung
   devise:
     confirmations:
       confirmed: "Ditt konto har bekräftats. Du är nu inloggad."

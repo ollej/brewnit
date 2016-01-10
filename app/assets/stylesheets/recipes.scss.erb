@@ -55,8 +55,24 @@ body {
     text-align: left;
     background-color: #eaeaea;
   }
-  tbody tr:nth-child(even) {
-    background-color: #f5f5f5;
+  .zebra {
+    tbody tr:nth-child(even) {
+      background-color: #f5f5f5;
+    }
+  }
+  .recipe_hops {
+    tbody tr:nth-child(4n), tbody tr:nth-child(4n-1) {
+      background-color: #f5f5f5;
+    }
+    tr.details-row:hover + tr {
+      display: table-row;
+    }
+    tr.info-row {
+      display: none;
+      &:hover {
+        display: table-row;
+      }
+    }
   }
   td, th {
     border-top: 1px solid #e0e0e0;
@@ -94,8 +110,14 @@ body {
   td {
     white-space: nowrap
   }
+  td.hops-info {
+    white-space: normal;
+  }
   .recipe_details h2:first-child {
     margin-top: 0;
+  }
+  .hop-notes {
+    text-overflow: wrap;
   }
 }
 
@@ -156,6 +178,7 @@ body {
   .page-content-controls,
   .recipe-badge-list,
   .recipe-content-details,
+  .recipe-index,
   #list,
   footer,
   .tabs label,
