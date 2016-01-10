@@ -25,6 +25,9 @@ sv:
         created:
           title: "Ny bryggare: %{name}"
           message: "%{name} med e-post %{email} har registrerat sig på Brygglogg.se"
+    search:
+      advanced: Utökad sökning
+      open_advanced: Fler sökmöjligheter
   recipes:
     name: Namn
     description: Beskrivning
@@ -43,13 +46,14 @@ sv:
       style: Stiltyp
       clear: Nollställ sökning
     download: Ladda ner
+    print: Skriv ut
     private: Privat
     own: Egna recept
     winner: Medaljör
     labels: Etiketter
     recipe_details: Recept
     recipe_analytics: Analys
-    recipe_comments: Kommentarer
+    recipe_comments: Diskussion
     recipe_style: Stiltyp
     update:
       successful: Receptet har uppdaterats.
@@ -208,6 +212,8 @@ sv:
     Bittering: Bitter
     Culture: Kultur
     Slant: Slant
+    Mash: Mäskning
+    Step: Delsteg
   devise:
     confirmations:
       confirmed: "Ditt konto har bekräftats. Du är nu inloggad."

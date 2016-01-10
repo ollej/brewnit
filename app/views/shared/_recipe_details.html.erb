@@ -1,60 +1,15 @@
-    <article class="box post beer_recipe" itemscope itemtype="http://schema.org/Recipe">
+    <article class="box post beer_recipe pure-g" itemscope
+        itemtype="http://schema.org/Recipe">
       <meta itemprop="name" content="<%= @beerxml.name %>">
       <meta itemprop="author" content="<%= @beerxml.brewer %>">
       <meta itemprop="recipeCategory" content="beverage">
       <meta itemprop="totalTime" content="<%= @beerxml.total_time_period %>">
       <meta itemprop="cookTime" content="<%= @beerxml.boil_time_period %>">
 
-      <aside class="recipe_information">
-        <h2><%= t(:'beerxml.information') %></h2>
-
-        <div class="recipe_style">
-          <h3><%= t(:'beerxml.style') %></h3>
-          <p><%= @beerxml.style.name %> <%= @presenter.style_type %></p>
-        </div>
-
-        <% if @beerxml.style.type.present? %>
-        <div class="recipe_type">
-          <h3><%= t(:'beerxml.type') %></h3>
-          <p><%= @beerxml.style.type %></p>
-        </div>
-        <% end %>
-
-        <div class="recipe_grains">
-          <h3><%= t(:'beerxml.grains') %></h3>
-          <p><%= '%.2f' % @beerxml.total_grains %> <%= t(:'beerxml.kilograms') %></p>
-        </div>
-
-        <div class="recipe_hops">
-          <h3><%= t(:'beerxml.hops') %></h3>
-          <p><%= '%.0f' % @beerxml.total_hops %> <%= t(:'beerxml.grams') %></p>
-        </div>
-
-        <div class="recipe_equipment">
-          <% if @presenter.equipment_name.present? %>
-          <h3><%= t(:'beerxml.equipment') %></h3>
-          <p><%= @presenter.equipment_name %></p>
-          <% end %>
-        </div>
-
-        <div class="recipe_date">
-          <h3><%= t(:'beerxml.brew_date') %></h3>
-          <p><%= @presenter.date %></p>
-        </div>
-
-        <% if @beerxml.brewer.present? %>
-        <div class="recipe_brewer">
-          <h3><%= t(:'beerxml.brewer') %></h3>
-          <p>
-            <%= @beerxml.brewer %> <% unless @beerxml.asst_brewer.blank? %>(<%= t(:'beerxml.assisted_by', assistant: @beerxml.asst_brewer) %>)<% end %>
-          </p>
-        </div>
-        <% end %>
-      </aside>
-
-      <section class="recipe_details">
+      <div class="recipe-tables pure-u-1 pure-u-xl-4-5">
+      <section class="recipe_details recipe-section">
         <h2><%= t(:'beerxml.recipe_details') %></h2>
-        <table>
+        <table class="recipe-table">
           <thead>
             <tr>
               <th><%= t(:'beerxml.batch_size') %></th>
@@ -83,15 +38,20 @@
               <td class="recipe_color format_number">
                 <%= @presenter.color_of(@beerxml) %> <%= t(:'beerxml.ebc') %>
                 <div class="colorbox" style="background-color: <%= @beerxml.color_hex %>">&nbsp;</div>
-                <!-- <div class="colorbox <%= @beerxml.color_class %>">&nbsp;</div> --></td>
+              </td>
             </tr>
           </tbody>
         </table>
       </section>
 
-      <section class="recipe_fermentables">
+      <% if @beerxml.fermentables.count > 0 %>
+      <section class="recipe_fermentables recipe-section">
         <h2><%= t(:'beerxml.fermentables') %></h2>
-        <table>
+        <% @beerxml.fermentables.each do |f| %>
+        <meta itemprop="recipeIngredient"
+          content="<%= f.formatted_amount %> <%= t(:'beerxml.kilograms') %> <%= f.name %>">
+        <% end %>
+        <table class="recipe-table">
           <thead>
             <tr>
               <th><%= t(:'beerxml.percent') %></th>
@@ -103,8 +63,6 @@
           </thead>
           <tbody>
             <% @beerxml.fermentables.each do |f| %>
-            <meta itemprop="recipeIngredient"
-              content="<%= f.formatted_amount %> <%= t(:'beerxml.kilograms') %> <%= f.name %>">
             <tr>
               <td class="fermentable_percent format_number"><%= @presenter.amount_percent(f) %></td>
               <td class="fermentable_name"><%= f.name %></td>
@@ -113,15 +71,22 @@
               <td class="fermentable_color format_number">
                 <%= @presenter.color_of(f) %> <%= t(:'beerxml.ebc') %>
                 <div class="colorbox" style="background-color: <%= f.color_hex %>">&nbsp;</div>
+              </td>
             </tr>
             <% end %>
           </tbody>
         </table>
       </section>
+      <% end %>
 
-      <section class="recipe_hops">
+      <% if @beerxml.hops.count > 0 %>
+      <section class="recipe_hops recipe-section">
         <h2><%= t(:'beerxml.hops') %></h2>
-        <table>
+        <% @beerxml.hops.each do |hop| %>
+          <meta itemprop="recipeIngredient"
+            content="<%= hop.formatted_amount %> <%= t(:'beerxml.grams') %> <%= hop.name %> (<%= trans(hop.use, 'Boil') %> <%= hop.formatted_time %> <%= trans(hop.time_unit, 'min') %>)">
+        <% end %>
+        <table class="recipe-table">
           <thead>
             <tr>
               <th><%= t(:'beerxml.percent_sign') %></th>
@@ -136,8 +101,6 @@
           </thead>
           <tbody>
             <% @beerxml.hops.each do |hop| %>
-            <meta itemprop="recipeIngredient"
-            content="<%= hop.formatted_amount %> <%= t(:'beerxml.grams') %> <%= hop.name %> (<%= trans(hop.use, 'Boil') %> <%= hop.formatted_time %> <%= trans(hop.time_unit, 'min') %>)">
             <tr>
               <td class="hops_percent format_number"><%= '%.1f' % hop.amount_percent %><%= t(:'beerxml.percent_sign') %></td>
               <td class="hops_name"><%= hop.name %></td>
@@ -152,11 +115,16 @@
           </tbody>
         </table>
       </section>
+      <% end %>
 
       <% if @beerxml.miscs.count > 0 %>
-      <section class="recipe_miscs">
+      <section class="recipe_miscs recipe-section">
         <h2><%= t(:'beerxml.miscs') %></h2>
-        <table>
+        <% @beerxml.miscs.each do |m| %>
+          <meta itemprop="recipeIngredient"
+            content="<%= m.formatted_amount %> <%= trans(m.unit, 'min') %> <%= m.name %>">
+        <% end %>
+        <table class="recipe-table">
           <thead>
             <tr>
               <th><%= t(:'beerxml.misc_name') %></th>
@@ -168,8 +136,6 @@
           </thead>
           <tbody>
             <% @beerxml.miscs.each do |m| %>
-            <meta itemprop="recipeIngredient"
-            content="<%= m.formatted_amount %> <%= trans(m.unit, 'min') %> <%= m.name %>">
             <tr>
               <td class="misc_name"><%= trans(m.name, 'Other') %></td>
               <td class="misc_amount format_number"><%= m.formatted_amount %> <%= trans(m.unit, 'min') %></td>
@@ -183,9 +149,13 @@
       </section>
       <% end %>
 
-      <section class="yeasts">
+      <% if @beerxml.yeasts.count > 0 %>
+      <section class="yeasts recipe-section">
         <h2><%= t(:'beerxml.yeasts') %></h2>
-        <table>
+        <% @beerxml.yeasts.each do |yeast| %>
+          <meta itemprop="recipeIngredient" content="<%= yeast.name %> (<%= yeast.product_id %>) <%= yeast.laboratory %>">
+        <% end %>
+        <table class="recipe-table">
           <thead>
             <tr>
               <th><%= t(:'beerxml.yeast_name') %></th>
@@ -199,7 +169,6 @@
           <tbody>
             <% @beerxml.yeasts.each do |yeast| %>
             <tr>
-              <meta itemprop="recipeIngredient" content="<%= yeast.name %> (<%= yeast.product_id %>) <%= yeast.laboratory %>">
               <td class="yeast_name"><%= yeast.name %></td>
               <td class="yeast_product_id"><%= yeast.product_id %></td>
               <td class="yeast_laboratory"><%= yeast.laboratory %></td>
@@ -211,11 +180,16 @@
           </tbody>
         </table>
       </section>
+      <% end %>
 
-      <section class="recipe_mash" itemprop="recipeInstructions"
+      <% if @beerxml.mash.steps.count > 0 %>
+      <section class="recipe_mash recipe-section" itemprop="recipeInstructions"
         itemscope itemtype="https://schema.org/ItemList">
         <h2><%= t(:'beerxml.mash') %></h2>
-        <table>
+        <% @beerxml.mash.steps.each do |step| %>
+          <meta itemprop="name" content="<%= t("beerxml.#{step.name}", default: step.name) %> (<%= t("beerxml.#{step.type}", default: step.type) %>) <%= step.formatted_step_temp %><%= t(:'beerxml.degrees') %> @ <%= step.formatted_step_time %> <%= t(:'beerxml.minutes') %>">
+        <% end %>
+        <table class="recipe-table">
           <thead>
             <tr>
               <th><%= t(:'beerxml.mash_name') %></th>
@@ -229,7 +203,6 @@
           <tbody>
             <% @beerxml.mash.steps.each do |step| %>
               <tr>
-                <meta itemprop="name" content="<%= t("beerxml.#{step.name}", default: step.name) %> (<%= t("beerxml.#{step.type}", default: step.type) %>) <%= step.formatted_step_temp %><%= t(:'beerxml.degrees') %> @ <%= step.formatted_step_time %> <%= t(:'beerxml.minutes') %>">
                 <td class="mash_name"><%= t("beerxml.#{step.name}", default: step.name) %></td>
                 <td class="mash_type"><%= t("beerxml.#{step.type}", default: step.type) %></td>
                 <td class="mash_infuse_amount format_number"><%= step.formatted_infuse_amount %> <%= t(:'beerxml.liter_abbr') %></td>
@@ -241,6 +214,57 @@
           </tbody>
         </table>
       </section>
+      <% end %>
+      </div>
+
+      <div class="recipe-aside pure-u-1 pure-u-xl-1-5">
+        <aside class="recipe_information">
+          <h2><%= t(:'beerxml.information') %></h2>
+
+          <div class="recipe_style">
+            <h3><%= t(:'beerxml.style') %></h3>
+            <p><%= @beerxml.style.name %> <%= @presenter.style_type %></p>
+          </div>
+
+          <% if @beerxml.style.type.present? %>
+          <div class="recipe_type">
+            <h3><%= t(:'beerxml.type') %></h3>
+            <p><%= @beerxml.style.type %></p>
+          </div>
+          <% end %>
+
+          <div class="recipe_grains">
+            <h3><%= t(:'beerxml.grains') %></h3>
+            <p><%= '%.2f' % @beerxml.total_grains %> <%= t(:'beerxml.kilograms') %></p>
+          </div>
+
+          <div class="recipe_hops">
+            <h3><%= t(:'beerxml.hops') %></h3>
+            <p><%= '%.0f' % @beerxml.total_hops %> <%= t(:'beerxml.grams') %></p>
+          </div>
+
+          <div class="recipe_equipment">
+            <% if @presenter.equipment_name.present? %>
+            <h3><%= t(:'beerxml.equipment') %></h3>
+            <p><%= @presenter.equipment_name %></p>
+            <% end %>
+          </div>
+
+          <div class="recipe_date">
+            <h3><%= t(:'beerxml.brew_date') %></h3>
+            <p><%= @presenter.date %></p>
+          </div>
+
+          <% if @beerxml.brewer.present? %>
+          <div class="recipe_brewer">
+            <h3><%= t(:'beerxml.brewer') %></h3>
+            <p>
+              <%= @beerxml.brewer %> <% unless @beerxml.asst_brewer.blank? %>(<%= t(:'beerxml.assisted_by', assistant: @beerxml.asst_brewer) %>)<% end %>
+            </p>
+          </div>
+          <% end %>
+        </aside>
+      </div>
 
     </article>
 

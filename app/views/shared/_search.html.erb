@@ -5,64 +5,16 @@
     <div class="field pure-control-group">
       <%= search_field_tag :q, @search[:q], autocomplete: 'off',
             class: 'pure-input-1-3 pure-input-rounded',
-            placeholder: I18n.t(:'recipes.search.freetext'),
+            placeholder: t(:'recipes.search.freetext'),
             results: 5, autosave: 'brygglogg-search' %>
     </div>
     <div class="field pure-control-group">
       <%= select_tag :style, options_for_select(@styles, @search[:style_name]),
             class: 'pure-input-1-3',
-            include_blank: I18n.t(:'recipes.search.style') %>
+            include_blank: t(:'recipes.search.style') %>
     </div>
     <div class="field pure-control-group">
-      <h3><%= I18n.t(:'beerxml.og') %></h3>
-      <%= hidden_field_tag :ogfrom, @search[:ogfrom] || FilterRecipes::OGMIN, class: 'slider-og-from' %>
-      <%= hidden_field_tag :ogto, @search[:ogto] || FilterRecipes::OGMAX, class: 'slider-og-to' %>
-      <div class="range-div">
-        <div id="slider-og" class="range-slider"
-          data-range-min="<%= FilterRecipes::OGMIN %>"
-          data-range-max="<%= FilterRecipes::OGMAX %>" data-range-step="0.005"
-          data-range-margin="0.005" data-range-formatter="formatSG"
-          ></div>
-      </div>
-    </div>
-    <div class="field pure-control-group">
-      <h3><%= I18n.t(:'beerxml.fg') %></h3>
-      <%= hidden_field_tag :fgfrom, @search[:fgfrom] || FilterRecipes::FGMIN, class: 'slider-fg-from' %>
-      <%= hidden_field_tag :fgto, @search[:fgto] || FilterRecipes::FGMAX, class: 'slider-fg-to' %>
-      <div class="range-div">
-        <div id="slider-fg" class="range-slider"
-          data-range-min="<%= FilterRecipes::FGMIN %>"
-          data-range-max="<%= FilterRecipes::FGMAX %>" data-range-step="0.005"
-          data-range-margin="0.005" data-range-formatter="formatSG"
-          ></div>
-      </div>
-    </div>
-    <div class="field pure-control-group">
-      <h3><%= I18n.t(:'beerxml.ibu') %></h3>
-      <%= hidden_field_tag :ibufrom, @search[:ibufrom] || FilterRecipes::IBUMIN, class: 'slider-ibu-from' %>
-      <%= hidden_field_tag :ibuto, @search[:ibuto] || FilterRecipes::IBUMAX, class: 'slider-ibu-to' %>
-      <div class="range-div">
-        <div id="slider-ibu" class="range-slider"
-          data-range-min="<%= FilterRecipes::IBUMIN %>"
-          data-range-max="<%= FilterRecipes::IBUMAX %>" data-range-step="5"
-          data-range-margin="5" data-range-formatter="formatNumber"
-          ></div>
-      </div>
-    </div>
-    <div class="field pure-control-group">
-      <h3><%= I18n.t(:'beerxml.color') %></h3>
-      <%= hidden_field_tag :colorfrom, @search[:colorfrom] || FilterRecipes::COLORMIN, class: 'slider-color-from' %>
-      <%= hidden_field_tag :colorto, @search[:colorto] || FilterRecipes::COLORMAX, class: 'slider-color-to' %>
-      <div class="range-div">
-        <div id="slider-color" class="range-slider"
-          data-range-min="<%= FilterRecipes::COLORMIN %>"
-          data-range-max="<%= FilterRecipes::COLORMAX %>" data-range-step="5"
-          data-range-margin="5" data-range-formatter="formatNumber"
-          ></div>
-      </div>
-    </div>
-    <div class="field pure-control-group">
-      <h3><%= I18n.t(:'beerxml.abv') %></h3>
+      <h3><%= t(:'beerxml.abv') %></h3>
       <%= hidden_field_tag :abvfrom, @search[:abvfrom] || FilterRecipes::ABVMIN, class: 'slider-abv-from' %>
       <%= hidden_field_tag :abvto, @search[:abvto] || FilterRecipes::ABVMAX, class: 'slider-abv-to' %>
       <div class="range-div">
@@ -73,14 +25,70 @@
           ></div>
       </div>
     </div>
-    <div class="actions pure-controls">
-      <%= button_tag type: :submit, class: 'pure-button pure-button-primary' do %>
-        <i class="fa fa-search"></i> <%= I18n.t(:'recipes.search.button') %>
-      <% end %>
-      <%= link_to recipes_path(clear_search: true), class: 'pure-button' do %>
-        <i class="fa fa-times-circle"></i> <%= I18n.t(:'recipes.search.clear') %>
-      <% end %>
+    <div class="field pure-control-group">
+      <h3><%= t(:'beerxml.ibu') %></h3>
+      <%= hidden_field_tag :ibufrom, @search[:ibufrom] || FilterRecipes::IBUMIN, class: 'slider-ibu-from' %>
+      <%= hidden_field_tag :ibuto, @search[:ibuto] || FilterRecipes::IBUMAX, class: 'slider-ibu-to' %>
+      <div class="range-div">
+        <div id="slider-ibu" class="range-slider"
+          data-range-min="<%= FilterRecipes::IBUMIN %>"
+          data-range-max="<%= FilterRecipes::IBUMAX %>" data-range-step="5"
+          data-range-margin="5" data-range-formatter="formatNumber"
+          ></div>
+      </div>
     </div>
+    <%= link_to "#search-advanced" do %>
+      <i class="fa fa-search-plus"></i> <%= t(:'common.search.open_advanced') %>
+    <% end %>
   </fieldset>
+  <div id="search-advanced" class="search-advanced expand-div">
+    <fieldset>
+      <legend><%= t(:'common.search.advanced') %></legend>
+      <div class="field pure-control-group">
+        <h3><%= t(:'beerxml.og') %></h3>
+        <%= hidden_field_tag :ogfrom, @search[:ogfrom] || FilterRecipes::OGMIN, class: 'slider-og-from' %>
+        <%= hidden_field_tag :ogto, @search[:ogto] || FilterRecipes::OGMAX, class: 'slider-og-to' %>
+        <div class="range-div">
+          <div id="slider-og" class="range-slider"
+            data-range-min="<%= FilterRecipes::OGMIN %>"
+            data-range-max="<%= FilterRecipes::OGMAX %>" data-range-step="0.005"
+            data-range-margin="0.005" data-range-formatter="formatSG"
+            ></div>
+        </div>
+      </div>
+      <div class="field pure-control-group">
+        <h3><%= t(:'beerxml.fg') %></h3>
+        <%= hidden_field_tag :fgfrom, @search[:fgfrom] || FilterRecipes::FGMIN, class: 'slider-fg-from' %>
+        <%= hidden_field_tag :fgto, @search[:fgto] || FilterRecipes::FGMAX, class: 'slider-fg-to' %>
+        <div class="range-div">
+          <div id="slider-fg" class="range-slider"
+            data-range-min="<%= FilterRecipes::FGMIN %>"
+            data-range-max="<%= FilterRecipes::FGMAX %>" data-range-step="0.005"
+            data-range-margin="0.005" data-range-formatter="formatSG"
+            ></div>
+        </div>
+      </div>
+      <div class="field pure-control-group">
+        <h3><%= t(:'beerxml.color') %></h3>
+        <%= hidden_field_tag :colorfrom, @search[:colorfrom] || FilterRecipes::COLORMIN, class: 'slider-color-from' %>
+        <%= hidden_field_tag :colorto, @search[:colorto] || FilterRecipes::COLORMAX, class: 'slider-color-to' %>
+        <div class="range-div">
+          <div id="slider-color" class="range-slider"
+            data-range-min="<%= FilterRecipes::COLORMIN %>"
+            data-range-max="<%= FilterRecipes::COLORMAX %>" data-range-step="5"
+            data-range-margin="5" data-range-formatter="formatNumber"
+            ></div>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+  <div class="actions pure-controls">
+    <%= button_tag type: :submit, class: 'pure-button pure-button-primary' do %>
+      <i class="fa fa-search"></i> <%= t(:'recipes.search.button') %>
+    <% end %>
+    <%= link_to recipes_path(clear_search: true), class: 'pure-button' do %>
+      <i class="fa fa-times-circle"></i> <%= t(:'recipes.search.clear') %>
+    <% end %>
+  </div>
  <% end %>
 </div>

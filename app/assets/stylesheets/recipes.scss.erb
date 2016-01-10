@@ -1,172 +1,144 @@
 @-ms-viewport{
   width: device-width;
 }
-.colorbox {
-  width: 1em;
-  height: 1em;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  border-width: 1px;
-  border-color: beige;
-  border-style: solid;
-  display: inline-block;
-  vertical-align: text-top;
-}
-.srm-min { background-color: #FFFFFF; }
-.srm-max { background-color: #000000; }
-.srm1 { background-color: #FFE699; }
-.srm2 { background-color: #FFD878; }
-.srm3 { background-color: #FFCA5A; }
-.srm4 { background-color: #FFBF42; }
-.srm5 { background-color: #FBB123; }
-.srm6 { background-color: #F8A600; }
-.srm7 { background-color: #F39C00; }
-.srm8 { background-color: #EA8F00; }
-.srm9 { background-color: #E58500; }
-.srm10 { background-color: #DE7C00; }
-.srm11 { background-color: #D77200; }
-.srm12 { background-color: #CF6900; }
-.srm13 { background-color: #CB6200; }
-.srm14 { background-color: #C35900; }
-.srm15 { background-color: #BB5100; }
-.srm16 { background-color: #B54C00; }
-.srm17 { background-color: #B04500; }
-.srm18 { background-color: #A63E00; }
-.srm19 { background-color: #A13700; }
-.srm20 { background-color: #9B3200; }
-.srm21 { background-color: #952D00; }
-.srm22 { background-color: #8E2900; }
-.srm23 { background-color: #882300; }
-.srm24 { background-color: #821E00; }
-.srm25 { background-color: #7B1A00; }
-.srm26 { background-color: #771900; }
-.srm27 { background-color: #701400; }
-.srm28 { background-color: #6A0E00; }
-.srm29 { background-color: #660D00; }
-.srm30 { background-color: #5E0B00; }
-.srm31 { background-color: #5A0A02; }
-.srm32 { background-color: #600903; }
-.srm33 { background-color: #520907; }
-.srm34 { background-color: #4C0505; }
-.srm35 { background-color: #470606; }
-.srm36 { background-color: #440607; }
-.srm37 { background-color: #3F0708; }
-.srm38 { background-color: #3B0607; }
-.srm39 { background-color: #3A070B; }
-.srm40 { background-color: #36080A; }
-
 body {
   color: #4a4a4a;
 }
-.beer_recipe section {
-  float: left;
-  width: 70%;
-}
-.beer_recipe footer {
-  clear: both;
-}
-.beer_recipe table {
-  border-collapse: separate;
-  border: 1px solid #e0e0e0;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-  border-spacing: 0;
+.beer_recipe {
   width: 100%;
-  max-width: 100%;
-  margin: 0 0 10px 0;
-}
-.beer_recipe thead:first-child tr:first-child th:first-child {
-  border-top-left-radius: 3px;
-  border-left: 0;
-}
-.beer_recipe thead:first-child tr:first-child th:last-child {
-  border-top-right-radius: 3px;
-}
-.beer_recipe thead tr:first-child th,
-.beer_recipe thead tr:first-child td {
-  border-top: 0;
-}
-.beer_recipe thead th {
-  vertical-align: left;
-  background-color: #cacaca;
-}
-.beer_recipe tbody tr {
-  text-align: left;
-  background-color: #eaeaea;
-}
-.beer_recipe tbody tr:nth-child(even) {
-  background-color: #f5f5f5;
-}
-.beer_recipe td, .beer_recipe th {
-  border-top: 1px solid #e0e0e0;
-  border-left: 1px solid #e0e0e0;
-  padding: 6px;
-}
-.beer_recipe tbody tr td:first-child {
-  border-left: 0;
-}
-.beer_recipe tbody tr:last-child td:first-child {
-  border-bottom-left-radius: 3px;
-  border-radius: 0 0 0 3px;
-}
-.beer_recipe tbody tr:last-child td:last-child {
-  border-bottom-right-radius: 3px;
-  border-radius: 0 0 3px 0;
-}
-.beer_recipe .format_number {
-  text-align: right;
-}
-.beer_recipe .recipe_information {
-  float: right;
-  width: 25%;
-  border: 1px solid #e0e0e0;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
-  background-color: #eaeaea;
-  padding: 0 8px 0 8px;
-  margin: 0 5px 15px 5px;
-}
-.beer_recipe .recipe_information h3 {
-  margin-bottom: 0;
-}
-.beer_recipe .recipe_information p {
-  margin-top: 1pt;
-}
-.beer_recipe td {
-  white-space: nowrap
-}
-.beer_recipe .recipe_details h2:first-child {
-  margin-top: 0;
+
+  .colorbox {
+    width: 1em;
+    height: 1em;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border-width: 1px;
+    border-color: beige;
+    border-style: solid;
+    display: inline-block;
+    vertical-align: text-top;
+  }
+
+  .recipe-section {
+    margin: 0 1em 1em 0;
+  }
+  section {
+    max-width: 100%;
+  }
+  table {
+    border-collapse: separate;
+    border: 1px solid #e0e0e0;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border-spacing: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+  thead:first-child tr:first-child th:first-child {
+    border-top-left-radius: 3px;
+    border-left: 0;
+  }
+  thead:first-child tr:first-child th:last-child {
+    border-top-right-radius: 3px;
+  }
+  thead tr:first-child th,
+  thead tr:first-child td {
+    border-top: 0;
+  }
+  thead th {
+    vertical-align: left;
+    background-color: #cacaca;
+  }
+  tbody tr {
+    text-align: left;
+    background-color: #eaeaea;
+  }
+  tbody tr:nth-child(even) {
+    background-color: #f5f5f5;
+  }
+  td, th {
+    border-top: 1px solid #e0e0e0;
+    border-left: 1px solid #e0e0e0;
+    padding: 6px;
+  }
+  tbody tr td:first-child {
+    border-left: 0;
+  }
+  tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 3px;
+    border-radius: 0 0 0 3px;
+  }
+  tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 3px;
+    border-radius: 0 0 3px 0;
+  }
+  .format_number {
+    text-align: right;
+  }
+  .recipe_information {
+    border: 1px solid #e0e0e0;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    background-color: #eaeaea;
+    padding: 0 8px 0 8px;
+  }
+  .recipe_information h3 {
+    margin-bottom: 0;
+  }
+  .recipe_information p {
+    margin-top: 1pt;
+  }
+  td {
+    white-space: nowrap
+  }
+  .recipe_details h2:first-child {
+    margin-top: 0;
+  }
 }
 
-@media only screen and (max-width: 740px) {
+@media only screen {
   section {
     overflow-x: scroll;
   }
-  .beer_recipe .recipe_information {
-    float: left;
-    width: 100%;
-    max-width: 100%;
-    margin: 0 0 15px 0;
+}
+/*
+@media only screen and (max-width: 1024px) {
+*/
+@media only print {
+  .beer_recipe {
+    display: table;
+    .recipe-tables {
+      display: table-footer-group;
+    }
+    .recipe-aside {
+      display: table-header-group;
+    }
   }
-  .beer_recipe .recipe_information p,
-  .beer_recipe .recipe_information h3 {
-    display: inline;
-  }
-  .beer_recipe .recipe_information h3:after {
-    content: ":"
-  }
-  .beer_recipe .recipe_information .recipe_notes p,
-  .beer_recipe .recipe_information .recipe_notes h3 {
-    display: block;
-  }
-  .beer_recipe section {
-    float: left;
-    width: 100%;
-    max-width: 100%;
+}
+/*
+@media only screen and (max-width: 1024px) {
+*/
+@media only screen and (max-width: 768px) {
+  .beer_recipe {
+    .recipe-section {
+      margin: 0 0 1em 0;
+    }
+    .recipe_information {
+      padding-bottom: 1em;
+      p, h3 {
+        display: inline;
+      }
+      h3:after {
+        content: ":"
+      }
+      .recipe_notes p,
+      .recipe_notes h3 {
+        display: block;
+      }
+    }
   }
 }
 @media screen and (max-width: 320px) {
@@ -175,8 +147,15 @@ body {
   }
 }
 @media print {
-  .recipe-content-controls,
+  body {
+    background: white;
+  }
+  #main {
+    background: transparent;
+  }
+  .page-content-controls,
   .recipe-badge-list,
+  .recipe-content-details,
   #list,
   footer,
   .tabs label,
@@ -184,8 +163,52 @@ body {
   nav {
     display: none;
   }
-  section {
-    page-break-inside: avoid;
+  div.tab-content {
+    border-top: none;
+  }
+  .beer_recipe {
+    width: 100%;
+
+    .recipe-tables {
+      width: 100%;
+    }
+    h2 {
+      page-break-after: avoid;
+    }
+    .recipe-section {
+      -webkit-region-break-inside: avoid;
+      page-break-inside: avoid;
+      width: 100%;
+    }
+    tr {
+      page-break-after: auto;
+    }
+    .colorbox {
+      display: none;
+    }
+    .recipe-aside {
+      width: 98%;
+    }
+    .recipe_information {
+      margin: 0 0 1.5em 0;
+      padding-bottom: 1em;
+
+      h3 {
+        font-size: 13px;
+        line-height: 18px;
+      }
+      p, h3 {
+        display: inline;
+      }
+      h3:after {
+        content: ":"
+      }
+      .recipe_notes {
+        p, h3 {
+          display: block;
+        }
+      }
+    }
   }
 }
 

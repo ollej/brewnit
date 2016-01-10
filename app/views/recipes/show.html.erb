@@ -26,9 +26,9 @@ set_meta_tags title: @recipe.name,
         <div class="pure-u-1-2">
           <h1 class="recipe-content-title"><%= title @recipe.name %></h1>
           <p class="recipe-content-details">
-            <%= I18n.t(:'beerxml.style') %>: <%= @recipe.style_name %><br>
-            <%= I18n.t(:'recipes.owner') %>: <%= link_to @recipe.brewer_name, @recipe.user %><br>
-            <%= I18n.t(:'recipes.created') %>: <%= l(@recipe.created_at, format: :long) %>
+            <%= t(:'beerxml.style') %>: <%= @recipe.style_name %><br>
+            <%= t(:'recipes.owner') %>: <%= link_to @recipe.brewer_name, @recipe.user %><br>
+            <%= t(:'recipes.created') %>: <%= l(@recipe.created_at, format: :long) %>
           </p>
           <p class="recipe-content-subtitle">
             <%= @recipe.description %>
@@ -41,16 +41,19 @@ set_meta_tags title: @recipe.name,
             <%= like_tag(@recipe, current_user) %>
             <% if current_user.can_modify?(@recipe) %>
               <%= link_to edit_recipe_path(@recipe), class: 'pure-button secondary-button' do %>
-                <i class="fa fa-pencil-square-o"></i> <%= I18n.t(:'recipes.edit') %>
+                <i class="fa fa-pencil-square-o"></i> <%= t(:'recipes.edit') %>
               <% end %>
-              <%= link_to @recipe, method: :delete, data: { confirm: I18n.t(:'common.are_you_sure') }, class: 'pure-button secondary-button' do %>
-                <i class="fa fa-trash"></i> <%= I18n.t(:'recipes.destroy.link') %>
+              <%= link_to @recipe, method: :delete, data: { confirm: t(:'common.are_you_sure') }, class: 'pure-button secondary-button' do %>
+                <i class="fa fa-trash"></i> <%= t(:'recipes.destroy.link') %>
               <% end %>
             <% end %>
-            <%#= link_to I18n.t(:'recipes.clone'), clone_recipe_path(@recipe), class: 'pure-button secondary-button' %>
+            <%#= link_to t(:'recipes.clone'), clone_recipe_path(@recipe), class: 'pure-button secondary-button' %>
           <% end %>
           <%= link_to recipe_path(@recipe, format: :xml), method: :get, class: 'pure-button secondary-button' do %>
-            <i class="fa fa-download"></i> <%= I18n.t(:'recipes.download') %>
+            <i class="fa fa-download"></i> <%= t(:'recipes.download') %>
+          <% end %>
+          <%= link_to "javascript:window.print()", class: 'pure-button secondary-button' do %>
+            <i class="fa fa-print"></i> <%= t(:'recipes.print') %>
           <% end %>
         </div>
 
@@ -67,19 +70,19 @@ set_meta_tags title: @recipe.name,
         <div class="tabs">
           <input type="radio" name="tabs" id="tab1" checked>
           <label for="tab1" class="tab-trigger">
-            <i class="fa fa-beer"></i><span><%= I18n.t(:'recipes.recipe_details') %></span>
+            <i class="fa fa-beer"></i><span><%= t(:'recipes.recipe_details') %></span>
           </label>
           <input type="radio" name="tabs" id="tab2">
           <label for="tab2" class="tab-trigger">
-            <i class="fa fa-pie-chart"></i><span><%= I18n.t(:'recipes.recipe_analytics') %></span>
+            <i class="fa fa-pie-chart"></i><span><%= t(:'recipes.recipe_analytics') %></span>
           </label>
           <input type="radio" name="tabs" id="tab3">
           <label for="tab3" class="tab-trigger">
-            <i class="fa fa-comments"></i><span><%= I18n.t(:'recipes.recipe_comments') %></span>
+            <i class="fa fa-comments"></i><span><%= t(:'recipes.recipe_comments') %></span>
           </label>
           <input type="radio" name="tabs" id="tab4">
           <label for="tab4" class="tab-trigger">
-            <i class="fa fa-sliders"></i><span><%= I18n.t(:'recipes.recipe_style') %></span>
+            <i class="fa fa-sliders"></i><span><%= t(:'recipes.recipe_style') %></span>
           </label>
           <div id="tab-content1" class="tab-content">
 <%= render 'shared/recipe_details' %>
