@@ -28,6 +28,8 @@ sv:
     search:
       advanced: Utökad sökning
       open_advanced: Fler sökmöjligheter
+    yes: Ja
+    no: No
   recipes:
     name: Namn
     description: Beskrivning
@@ -159,6 +161,7 @@ sv:
     yeast_form: Form
     yeast_attenuation: Förjäsbarhet
     yeast_temperature: Temperatur
+    yeast_type: Typ
     Dry: Torr
     Liquid: Flytande
     mash: Mäskning
@@ -223,6 +226,36 @@ sv:
     hsi: HSI
     myrcene: Myrcene
     origin: Ursprung
+    unknown: ""
+    supplier: Leverantör
+    substitutes: Kan ersättas med
+    coarse_fine_difference: Coarse fine difference
+    moisture: Fuktighet
+    yield: Utbyte
+    diastatic_power: Enzymatisk aktivitet
+    max_in_batch: Rekommenderad max giva
+    ibu_gal_per_lb: IBU gallon/liter
+    protein: Protein
+    recommend_mash: Mäskning rekommenderad
+    add_after_boil: Använd efter kokning
+    SWE: Sverige
+    Sweden: Sverige
+    United Kingdom: Storbritannien
+    Wheat: Vete
+    Wine: Vin
+    Ale: Ale
+    Lager: Lager
+    Champagne: Champagne
+    flocculation: Flockulering
+    Low: Låg
+    Medium: Medium
+    High: Hög
+    Very High: Väldigt hög
+    best_for: Bäst till
+    times_cultured: Generation
+    max_reuse: Max antal generationer
+    add_to_secondary: Använd till sekundärjäsning
+    use_for: Används till
   devise:
     confirmations:
       confirmed: "Ditt konto har bekräftats. Du är nu inloggad."

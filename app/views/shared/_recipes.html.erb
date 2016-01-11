@@ -16,8 +16,8 @@
 
     <div class="pure-u-1-5 recipe-item-details">
       <%= '%.0f' % recipe.batch_size %> <%= I18n.t(:'beerxml.liter_abbr') %><br>
-      <%= I18n.t(:'beerxml.abv') %>: <%= formatted_abv(recipe.abv) %><br>
-      <%= I18n.t(:'beerxml.ibu') %>: <%= '%.0f' % recipe.ibu %>
+      <%= I18n.t(:'beerxml.abv') %>: <%= format_abv(recipe.abv) %><br>
+      <%= I18n.t(:'beerxml.ibu') %>: <%= number_with_precision(recipe.ibu, precision: 0) %>
     </div>
   </div>
 <% end %>

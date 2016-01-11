@@ -72,6 +72,7 @@ class User < ActiveRecord::Base
   end
 
   def notify_pushover
+    return if Rails.env.development?
     values = {
       name: name.blank? ? email : name,
       email: email,

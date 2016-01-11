@@ -18,10 +18,6 @@ class RecipePresenter
     I18n.l(date, format: :long)
   end
 
-  def color_of(item)
-    '%.0f' % item.color_ebc
-  end
-
   def amount_percent(f)
     "#{'%.1f' % f.amount_percent} #{I18n.t(:'beerxml.percent_sign')}"
   end
@@ -35,14 +31,6 @@ class RecipePresenter
     else
       ""
     end
-  end
-
-  def og_min
-    '%.3f' % (@beerxml.style.og_min || 0)
-  end
-
-  def og_max
-    '%.3f' % (@beerxml.style.og_max || 0)
   end
 
   def style_has_values?
@@ -61,7 +49,7 @@ class RecipePresenter
 
   def hop_grams_per_liter(hop)
     if @beerxml.batch_size > 0
-      '%.1f' % (hop.amount / @beerxml.batch_size)
+      (hop.amount / @beerxml.batch_size)
     else
       0
     end

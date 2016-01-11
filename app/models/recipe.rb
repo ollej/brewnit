@@ -141,6 +141,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def notify_pushover
+    return if Rails.env.development?
     values = {
       recipe_name: name,
       brewer_name: brewer_name,

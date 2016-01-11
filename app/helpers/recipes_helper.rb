@@ -62,12 +62,17 @@ module RecipesHelper
     end
   end
 
-  def formatted_abv(abv)
-    "#{(abv > 10 ? '%.0f' : '%.1f') % abv}#{I18n.t(:'beerxml.percent_sign')}"
+  def format_abv(abv)
+    precision = abv > 10 ? 0 : 1
+    number_to_percentage(abv, precision: precision)
   end
 
-  def trans(field, default)
+  def trans(field, default='unknown')
     key = field.present? ? "beerxml.#{field}" : "beerxml.#{default}"
     I18n.t(key, default: field)
+  end
+
+  def format_sg(value)
+    number_to_percentage(value, precision: 3, separator: '.')
   end
 end

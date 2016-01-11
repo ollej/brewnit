@@ -27,7 +27,7 @@
 <div class="gauge-box">
 <h3><%= t(:'beerxml.og') %></h3>
 <div id="linear-gauge-og" class="linear-gauge"></div>
-<p><%= @presenter.og_min %> - <%= @presenter.og_max %></p>
+<p><%= format_sg(style.og_min) %> - <%= format_sg(style.og_max) %></p>
 <script>
 var ogGauge = new LinearGauge("#linear-gauge-og", {});
 ogGauge.data({
@@ -46,7 +46,7 @@ ogGauge.data({
 <div class="gauge-box">
 <h3><%= t(:'beerxml.fg') %></h3>
 <div id="linear-gauge-fg" class="linear-gauge"></div>
-<p><%= '%.3f' % style.fg_min %> - <%= '%.3f' % style.fg_max %></p>
+<p><%= format_sg(style.fg_min) %> - <%= format_sg(style.fg_max) %></p>
 <script>
 var fgGauge = new LinearGauge("#linear-gauge-fg", {});
 fgGauge.data({
@@ -65,7 +65,7 @@ fgGauge.data({
 <div class="gauge-box">
 <h3><%= t(:'beerxml.ibu') %></h3>
 <div id="linear-gauge-ibu" class="linear-gauge"></div>
-<p><%= style.ibu_min.round %> - <%= style.ibu_max.round %></p>
+<p><%= number_with_precision(style.ibu_min, precision: 0) %> - <%= number_with_precision(style.ibu_max, precision: 0) %></p>
 <script>
 var ibuGauge = new LinearGauge("#linear-gauge-ibu", { labelFormat: ".0f" });
 ibuGauge.data({
@@ -84,7 +84,7 @@ ibuGauge.data({
 <div class="gauge-box">
 <h3><%= t(:'beerxml.color') %></h3>
 <div id="linear-gauge-color" class="linear-gauge"></div>
-<p><%= style.color_min.round %> - <%= style.color_max.round %></p>
+<p><%= number_with_precision(style.color_min, precision: 0) %> - <%= number_with_precision(style.color_max, precision: 0) %></p>
 <script>
 var colorGauge = new LinearGauge("#linear-gauge-color", { labelFormat: ".0f" });
 colorGauge.data({
