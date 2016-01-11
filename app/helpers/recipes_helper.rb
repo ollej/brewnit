@@ -73,6 +73,6 @@ module RecipesHelper
   end
 
   def format_sg(value)
-    number_to_percentage(value, precision: 3, separator: '.')
+    number_with_precision(value, precision: 3, separator: '.')
   end
 end
