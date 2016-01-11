@@ -28,8 +28,8 @@ sv:
     search:
       advanced: Utökad sökning
       open_advanced: Fler sökmöjligheter
-    yes: Ja
-    no: No
+    "yes": Ja
+    "no": Nej
   recipes:
     name: Namn
     description: Beskrivning

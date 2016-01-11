@@ -86,7 +86,7 @@
                     <span class="hop-info"><%= t(:'beerxml.yield') %>: <%= number_to_percentage(f.yield, precision: 0) %></span><br>
                   <% end %>
                   <% if f.potential.present? %>
-                    <span class="hop-info"><%= t(:'beerxml.potential') %>: <%= number_with_precision(f.potential) %></span><br>
+                    <span class="hop-info"><%= t(:'beerxml.potential') %>: <%= format_sg(f.potential) %></span><br>
                   <% end %>
                   <% if f.diastatic_power.present? %>
                     <span class="hop-info"><%= t(:'beerxml.diastatic_power') %>: <%= number_with_precision(f.diastatic_power, precision: 1) %> Lintner</span><br>
