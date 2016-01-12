@@ -172,7 +172,8 @@ CREATE TABLE recipes (
     style_name character varying,
     batch_size numeric,
     color numeric,
-    brewer character varying
+    brewer character varying,
+    downloads integer DEFAULT 0 NOT NULL
 );
 
 
@@ -633,4 +634,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160102210028');
 INSERT INTO schema_migrations (version) VALUES ('20160105190205');
 
 INSERT INTO schema_migrations (version) VALUES ('20160105234837');
+
+INSERT INTO schema_migrations (version) VALUES ('20160112215316');
 

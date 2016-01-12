@@ -36,9 +36,9 @@ module RecipesHelper
 
   def visibility_badge(recipe)
     if recipe.public?
-      badge(I18n.t(:'common.public'), type: 'public')
+      badge(I18n.t(:'common.public'), type: 'public', icon: 'unlock')
     else
-      badge(I18n.t(:'common.private'), type: 'private')
+      badge(I18n.t(:'common.private'), type: 'private', icon: 'lock')
     end
   end
 
@@ -48,6 +48,10 @@ module RecipesHelper
 
   def likes_badge(recipe)
     badge(I18n.t(:'recipes.votes_count', count: recipe.get_likes.size), type: 'likes', icon: 'thumbs-up', class: 'badge-link')
+  end
+
+  def downloads_badge(recipe)
+    badge(I18n.t(:'recipes.downloads_count', count: recipe.downloads), type: 'downloads', icon: 'bolt', class: 'badge-link')
   end
 
   def like_tag(recipe, user)

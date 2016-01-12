@@ -79,6 +79,9 @@ sv:
     name_not_needed: Namn hämtas från BeerXML-filen om det inte fylls i.
     no_style_information: Det finns ingen stiltypsinformation för detta recept.
     show_all: Visa alla %{count} recept
+    downloads_count:
+      one: 1 nedladdning
+      other: '%{count} nedladdningar'
   users:
     index: Bryggare
     profile: Profil

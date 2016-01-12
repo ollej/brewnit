@@ -8,7 +8,8 @@
 .pure-badge-private,
 .pure-badge-public,
 .pure-badge-comments,
-.pure-badge-likes {
+.pure-badge-likes,
+.pure-badge-downloads {
   padding: 0.35em 0.9em 0.35em;
   background-color: #9D988E;
   color: #fff;
@@ -52,6 +53,9 @@
 }
 .pure-badge-likes {
   background-color: rgb(18, 169, 218);
+}
+.pure-badge-downloads {
+  background-color: #e67110;
 }
 #likes-list {
   display: none;
