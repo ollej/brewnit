@@ -75,4 +75,14 @@ module RecipesHelper
   def format_sg(value)
     number_with_precision(value, precision: 3, separator: '.')
   end
+
+  def misc_amount(misc)
+    if misc.large_amount?
+      precision = misc.weight? ? 0 : 2
+      number_with_precision(misc.amount, precision: precision)
+    else
+      precision = misc.type == 'Water Agent' ? 2 : 0
+      number_with_precision(misc.amount * 1000, precision: precision)
+    end
+  end
 end
