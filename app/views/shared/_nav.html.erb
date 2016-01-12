@@ -6,18 +6,42 @@
 
     <div class="pure-menu">
       <ul class="pure-menu-list">
-        <li class="pure-menu-item"><i class="fa fa-beer"></i><%= link_to I18n.t(:'recipes.index'), recipes_path(clear_search: true), class: 'pure-menu-link' %></li>
-        <li class="pure-menu-item"><i class="fa fa-user"></i><%= link_to I18n.t(:'users.index'), users_path, class: 'pure-menu-link' %></li>
+        <li class="pure-menu-item">
+          <i class="fa fa-beer"></i><%= link_to I18n.t(:'recipes.index'),
+            recipes_path(clear_search: true), class: 'pure-menu-link' %>
+        </li>
+        <li class="pure-menu-item">
+          <i class="fa fa-user"></i><%= link_to I18n.t(:'users.index'),
+            users_path, class: 'pure-menu-link' %>
+        </li>
       <% if user_signed_in? %>
-        <li class="pure-menu-item"><i class="fa fa-user"></i><%= link_to I18n.t(:'users.profile'), edit_user_registration_path, class: 'pure-menu-link' %></li>
-        <li class="pure-menu-item"><i class="fa fa-sign-out"></i><%= link_to I18n.t(:'users.sign_out'), destroy_user_session_path, class: 'pure-menu-link' %></li>
+        <li class="pure-menu-item">
+          <i class="fa fa-user"></i><%= link_to I18n.t(:'users.profile'),
+            edit_user_registration_path, class: 'pure-menu-link' %>
+        </li>
+        <li class="pure-menu-item">
+          <i class="fa fa-sign-out"></i><%= link_to I18n.t(:'users.sign_out'),
+            destroy_user_session_path, class: 'pure-menu-link' %>
+        </li>
       <% else %>
-        <li class="pure-menu-item"><i class="fa fa-sign-in"></i><%= link_to I18n.t(:'users.sign_in'), new_user_session_path, class: 'pure-menu-link' %></li>
-        <li class="pure-menu-item"><i class="fa fa-user-plus"></i><%= link_to I18n.t(:'users.sign_up'), new_user_registration_path, class: 'pure-menu-link' %></li>
+        <li class="pure-menu-item">
+          <i class="fa fa-sign-in"></i><%= link_to I18n.t(:'users.sign_in'),
+            new_user_session_path, class: 'pure-menu-link' %>
+        </li>
+        <li class="pure-menu-item">
+          <i class="fa fa-user-plus"></i><%= link_to I18n.t(:'users.sign_up'),
+            new_user_registration_path, class: 'pure-menu-link' %>
+        </li>
       <% end %>
+      <% if user_signed_in? %>
         <li class="pure-menu-heading"><%= I18n.t(:'recipes.labels') %></li>
         <li class="pure-menu-item"><a href="#" class="pure-menu-link"><span class="recipe-label-private"></span><%= I18n.t(:'recipes.private') %></a></li>
-        <li class="pure-menu-item"><a href="#" class="pure-menu-link"><span class="recipe-label-own"></span><%= I18n.t(:'recipes.own') %></a></li>
+        <li class="pure-menu-item">
+          <%= link_to user_path(current_user), class: 'pure-menu-link' do %>
+            <span class="recipe-label-own"></span><%= I18n.t(:'recipes.own') %>
+          <% end %>
+        </li>
+      <% end %>
         <!-- <li class="pure-menu-item"><a href="#" class="pure-menu-link"><span class="recipe-label-winner"></span><%= I18n.t(:'recipes.winner') %></a></li> -->
       </ul>
     </div>

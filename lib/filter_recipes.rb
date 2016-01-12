@@ -15,11 +15,12 @@ class FilterRecipes
   # TODO: Add search link to menu
   # X TODO: Show droplist with styles
   # TODO: search by user with autocomplete
-  # TODO: Search by value ranges
+  # X TODO: Search by value ranges
   # TODO: Search by date range
   # X TODO: Clear search
   # X TODO: Search all fields by default
   # TODO: Search comments
+
   def initialize(scope, hash)
     @scope = scope
     @hash = hash

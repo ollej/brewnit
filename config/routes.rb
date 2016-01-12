@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'open_search/show'
   get 'likes/update'
 
   mount Commontator::Engine => '/commontator'

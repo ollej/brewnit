@@ -26,7 +26,12 @@ class ApplicationController < ActionController::Base
   end
 
   def filter_recipes
-    @recipes = FilterRecipes.new(@recipes, query_hash).resolve.ordered
+    @recipes = FilterRecipes.new(@recipes, query_hash).resolve
+      .limit(limit_items).ordered
+  end
+
+  def limit_items
+    params.fetch(:limit, 50).to_i
   end
 
   def query_hash

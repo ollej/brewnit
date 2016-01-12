@@ -179,6 +179,18 @@ a {
   }
 }
 
+.list-details {
+  padding: 0.9em 1em;
+  border-left: 6px solid transparent;
+  font-size: 1em;
+  text-transform: uppercase;
+  color: #999;
+  a {
+    font-size: 1em;
+    color: #999;
+  }
+}
+
 /* recipe Content Styles */
 .page-content-header, .page-content-body, .page-content-footer {
   padding: 1em 2em;

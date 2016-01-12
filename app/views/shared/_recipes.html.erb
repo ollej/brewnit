@@ -3,12 +3,17 @@
 <% @recipes.each do |recipe| %>
   <div class="recipe-item linked-item pure-g <%= item_classes_for(recipe, current_user, @recipe) %>">
     <div class="pure-u">
-      <%= image_tag avatar_for(recipe), class: 'recipe-avatar', alt: recipe.owner_name, height: 64, width: 64 %>
+      <%= image_tag avatar_for(recipe), class: 'recipe-avatar',
+        alt: recipe.owner_name, height: 64, width: 64 %>
     </div>
 
     <div class="pure-u-5-8 recipe-item-description">
-      <h5 class="recipe-name"><%= link_to recipe.brewer_name, recipe.user, class: 'user-link' %></h5>
-      <h4 class="recipe-subject"><%= link_to recipe.name, recipe, class: 'recipe-link item-link' %></h4>
+      <h5 class="recipe-name">
+        <%= link_to recipe.brewer_name, recipe.user, class: 'user-link' %>
+      </h5>
+      <h4 class="recipe-subject">
+        <%= link_to recipe.name, recipe, class: 'recipe-link item-link' %>
+      </h4>
       <p class="recipe-desc">
         <%= recipe.style_name %>
       </p>
@@ -19,6 +24,13 @@
       <%= I18n.t(:'beerxml.abv') %>: <%= format_abv(recipe.abv) %><br>
       <%= I18n.t(:'beerxml.ibu') %>: <%= number_with_precision(recipe.ibu, precision: 0) %>
     </div>
+  </div>
+<% end %>
+<% if @recipes.size < Recipe.count %>
+  <div class="pure-u-1 list-details">
+      <p><%= link_to t(:'recipes.show_all', count: Recipe.count),
+        recipes_path(limit: Recipe.count),
+        class: 'recipe-all' %></p>
   </div>
 <% end %>
 </div>

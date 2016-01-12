@@ -78,6 +78,7 @@ sv:
       successful_unlike: Du gillar inte längre receptet.
     name_not_needed: Namn hämtas från BeerXML-filen om det inte fylls i.
     no_style_information: Det finns ingen stiltypsinformation för detta recept.
+    show_all: Visa alla %{count} recept
   users:
     index: Bryggare
     profile: Profil

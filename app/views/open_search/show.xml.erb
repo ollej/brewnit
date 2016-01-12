@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+   <ShortName>Brygglogg.se Receptsökning</ShortName>
+   <Description>Sök efter recept till hembryggd öl.</Description>
+   <Tags>beer homebrew brew recipe malt hops yeast brewer</Tags>
+   <Contact>brewmaster@brygglogg.se</Contact>
+   <Query role="example" searchTerms="stout" />
+   <Language>sv-SE</Language>
+   <InputEncoding>UTF-8</InputEncoding>
+   <OutputEncoding>UTF-8</OutputEncoding>
+   <Url type="application/text/html" rel="results"
+     template="http://brygglogg.se/recipes?q={searchTerms}&amp;limit={count?}"/>
+   <Url type="application/json" rel="results"
+     template="http://brygglogg.se/recipes.json?q={searchTerms}&amp;limit={count?}"/>
+ </OpenSearchDescription>
