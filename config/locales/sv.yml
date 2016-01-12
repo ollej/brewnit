@@ -229,7 +229,7 @@ sv:
     unknown: ""
     supplier: Leverantör
     substitutes: Kan ersättas med
-    coarse_fine_difference: Coarse fine difference
+    coarse_fine_difference: Malningsgrad
     moisture: Fuktighet
     yield: Utbyte
     diastatic_power: Enzymatisk aktivitet

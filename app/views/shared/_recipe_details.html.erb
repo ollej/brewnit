@@ -218,7 +218,7 @@
             <% @beerxml.miscs.each do |misc| %>
             <tr class="details-row">
               <td class="misc_name"><%= trans(misc.name, 'Other') %></td>
-              <td class="misc_amount format_number"><%= number_with_precision(misc.amount, precision: 0) %> <%= trans(misc.unit, 'gr') %></td>
+              <td class="misc_amount format_number"><%= misc.formatted_amount %> <%= trans(misc.unit, 'gr') %></td>
               <td class="misc_type"><%= trans(misc.type, 'Other') %></td>
               <td class="misc_use"><%= trans(misc.use) %></td>
               <td class="misc_time">
