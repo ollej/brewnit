@@ -1,0 +1,41 @@
+{
+    "master_picture": "app/assets/images/brygglogg-logo.png",
+    "favicon_design": {
+        "ios": {
+            "picture_aspect": "background_and_margin",
+            "background_color": "#ffffff",
+            "margin": "7%",
+            "app_name": "Brygglogg.se"
+        },
+        "desktop_browser": [
+
+        ],
+        "windows": {
+            "picture_aspect": "no_change",
+            "background_color": "#da532c",
+            "on_conflict": "override",
+            "app_name": "Brygglogg.se"
+        },
+        "android_chrome": {
+            "picture_aspect": "background_and_margin",
+            "margin": "4%",
+            "background_color": "#ffffff",
+            "theme_color": "#ffffff",
+            "manifest": {
+                "name": "Brygglogg.se",
+                "display": "browser",
+                "orientation": "not_set",
+                "on_conflict": "override"
+            }
+        },
+        "safari_pinned_tab": {
+            "picture_aspect": "silhouette",
+            "theme_color": "#5bbad5"
+        }
+    },
+    "settings": {
+        "compression": 1,
+        "scaling_algorithm": "Mitchell",
+        "error_on_image_too_small": false
+    }
+}
