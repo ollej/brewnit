@@ -10,12 +10,14 @@ set_meta_tags title: @recipe.name,
     url: recipe_url(@recipe),
     type: 'product',
     locale: 'sv_SE',
+    image: asset_path('brygglogg-logo.png'),
   },
   twitter: {
     card: 'summary',
     site: @recipe.user.try(:twitter) || '@ollej',
     title: :title,
     description: :description,
+    image: asset_path('brygglogg-logo.png'),
   }
 %>
 <% content_for :head do %>
