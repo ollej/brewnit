@@ -58,4 +58,22 @@ class ApplicationController < ActionController::Base
     params.permit(:q, :style, :ogfrom, :ogto, :fgfrom, :fgto, :ibufrom, :ibuto,
                   :colorfrom, :colorto, :abvfrom, :abvto)
   end
+
+  def honeypot
+    @honeypot ||= ProjectHoneypot.lookup(request.remote_ip)
+  end
+
+  def spammer?
+    honeypot.suspicious?
+  end
+
+  def redirect_spammers!
+    Rails.logger.debug { "Spam registration detected! #{request.remote_ip}" }
+    flash[:alert] = I18n.t(:'common.spammer_detected')
+    redirect_to root_path
+  end
+
+  def deny_spammers!
+    redirect_spammers! if spammer?
+  end
 end

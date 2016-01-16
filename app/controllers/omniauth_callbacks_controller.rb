@@ -1,5 +1,6 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   skip_before_filter :verify_authenticity_token
+  before_filter :deny_spammers!
 
   def google
     @user = User.from_omniauth(request.env['omniauth.auth'])
@@ -12,4 +13,5 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       redirect_to new_user_registration_url
     end
   end
+
 end

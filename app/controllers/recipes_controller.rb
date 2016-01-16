@@ -1,5 +1,6 @@
 class RecipesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
+  before_action :deny_spammers!, only: [:create, :update, :destroy]
 
   # GET /recipes
   # GET /recipes.json

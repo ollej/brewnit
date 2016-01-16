@@ -30,6 +30,7 @@ sv:
       open_advanced: Fler sökmöjligheter
     "yes": Ja
     "no": Nej
+    spammer_detected: Kunde inte skapa kontot då du verkar vara en spammare.
   recipes:
     name: Namn
     description: Beskrivning
