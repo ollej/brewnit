@@ -8,6 +8,11 @@ class RecipesController < ApplicationController
   def index
     @styles = Recipe.styles
     @search = search_hash
+    respond_to do |format|
+      format.html { render :index }
+      format.rss { render :layout => false }
+      format.json { render :layout => false }
+    end
   end
 
   # GET /recipes/1

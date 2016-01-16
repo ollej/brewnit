@@ -15,6 +15,7 @@
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
   <%= render 'favicon' %>
+  <%= auto_discovery_link_tag(:rss, recipes_url(format: :rss)) %>
 </head>
 <body>
 
