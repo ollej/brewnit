@@ -8,7 +8,10 @@ class ApplicationController < ActionController::Base
   before_action :filter_recipes
 
   def after_sign_in_path_for(resource)
-    stored_location_for(resource) || request.referer || root_path
+    after_sign_in_path = stored_location_for(resource) || root_path
+    Rails.logger.debug { "stored_location_for resource: #{stored_location_for(resource)}" }
+    Rails.logger.debug { "after_sign_in_path: #{after_sign_in_path}" }
+    after_sign_in_path
   end
 
   def after_sign_out_path_for(resource)
