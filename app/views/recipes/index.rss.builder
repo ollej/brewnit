@@ -9,7 +9,7 @@ xml.rss version: '2.0' do
       xml.item do
         xml.title recipe.name
         xml.category recipe.style_name
-        xml.description recipe.description
+        xml.description recipe.display_desc
         xml.author recipe.brewer_name
         xml.pubDate recipe.created_at.to_s(:rfc822)
         xml.link recipe_url(recipe)

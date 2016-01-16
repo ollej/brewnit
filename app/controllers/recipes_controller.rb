@@ -27,7 +27,7 @@ class RecipesController < ApplicationController
     end
     respond_to do |format|
       format.html { render :show }
-      format.json { render json: @recipe }
+      format.json { render :layout => false }
       format.xml {
         send_data @recipe.beerxml, {
           type: 'application/xml',

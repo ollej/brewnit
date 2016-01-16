@@ -3,6 +3,11 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all.ordered
+
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render :layout => false }
+    end
   end
 
   def show
@@ -11,7 +16,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html { render :show }
-      format.json { render json: @user }
+      format.json { render :layout => false }
     end
   end
 end

@@ -38,7 +38,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def brewer_name
-    if user.present? && !user.brewery.blank?
+    if user.present? && user.brewery.present?
       user.brewery
     elsif brewer.present?
       brewer
