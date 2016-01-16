@@ -68,7 +68,7 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_spammers!
-    Rails.logger.debug { "Spam registration detected! #{request.remote_ip}" }
+    Rails.logger.debug { "Spammer detected! #{request.remote_ip}" }
     flash[:alert] = I18n.t(:'common.spammer_detected')
     redirect_to root_path
   end

@@ -2,6 +2,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_filter :deny_spammers!, only: [:create, :update]
   before_filter :configure_sign_up_params, only: [:create]
   before_filter :configure_account_update_params, only: [:update]
+  invisible_captcha only: [:create, :update], on_spam: :redirect_spammers!
 
   # GET /resource/sign_up
   # def new

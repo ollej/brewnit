@@ -1,4 +1,5 @@
 <%= form_for(@recipe, html: { class: 'pure-form pure-form-aligned' }) do |f| %>
+  <%= invisible_captcha %>
   <%= hidden_field_tag :clear_search, true %>
   <% if @recipe.errors.any? %>
     <div id="error_explanation">

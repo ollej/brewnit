@@ -93,6 +93,8 @@ GEM
       multi_json (~> 1.0)
       multi_xml (>= 0.5.2)
     i18n (0.7.0)
+    invisible_captcha (0.8.0)
+      rails
     jbuilder (2.4.0)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
@@ -256,6 +258,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   commontator (~> 4.11.0)
   devise (~> 3.5.3)
+  invisible_captcha (~> 0.8.0)
   jbuilder (~> 2.0)
   jquery-rails (~> 4.0.5)
   libxml-xmlrpc (~> 0.1.5)
