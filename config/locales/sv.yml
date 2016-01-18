@@ -456,6 +456,7 @@ sv:
         twitter: Twitter
         equipment: Utrustning
         name: Namn
+        avatar: Avatar
       recipe:
         name: Namn
         description: Beskrivning
@@ -486,6 +487,8 @@ sv:
               confirmation: stämmer inte överrens.
             current_password:
               blank: måste fyllas i.
+            avatar:
+              format: verkar inte vara en URL till en bild.
         recipe:
           header:
             one: "Ett fel förhindrade detta recept från att sparas"

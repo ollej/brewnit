@@ -74,7 +74,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def configure_account_update_params
-    devise_parameter_sanitizer.for(:account_update).push(:name, :presentation, :location, :brewery, :twitter, :url, :equipment).delete(:email)
+    devise_parameter_sanitizer.for(:account_update).push(:name, :presentation, :location, :brewery, :twitter, :url, :equipment, :avatar).delete(:email)
   end
 
   def update_resource(resource, params)

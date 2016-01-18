@@ -29,6 +29,14 @@
     </div>
 
     <div class="field pure-control-group">
+      <%= f.label :avatar %>
+      <%= f.text_field :avatar, placeholder: I18n.t(:'activerecord.attributes.user.avatar') %>
+      <% if resource.avatar.present? %>
+        <%= image_tag resource.avatar, class: 'recipe-avatar' %>
+      <% end %>
+    </div>
+
+    <div class="field pure-control-group">
       <%= f.label :brewery %>
       <%= f.text_field :brewery, placeholder: I18n.t(:'activerecord.attributes.user.brewery') %>
     </div>

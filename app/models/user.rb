@@ -6,6 +6,10 @@ class User < ActiveRecord::Base
   after_create :notify_pushover
 
   validates :name, presence: true
+  validates_format_of :avatar,
+    with: %r{\Ahttps?://.+/.+\.(gif|jpe?g|png)\z}i,
+    message: I18n.t(:'activerecord.errors.models.user.attributes.avatar.format'),
+    allow_blank: true
 
   acts_as_commontator
   acts_as_voter
