@@ -93,7 +93,7 @@ sv:
     sign_in_with_provider: Logga in med %{provider}
     min_pwd_length: Minst %{min_length} tecken
     leave_pwd_blank: lämna blankt om du inte vill ändra lösenord
-    pwd_needed_to_confirm: behövs för att verifiera dina ändringar
+    pwd_needed_to_confirm: behövs bara för att ändra lösenord
     save: Spara ändringar
     cancel_account: Avsluta konto
     cancel_my_account: Avsluta mitt konto
