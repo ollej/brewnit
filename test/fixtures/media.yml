@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  file: MyString
+  caption: MyString
+  sorting: 1
+  parent_id: 
+  parent_type: Parent
+
+two:
+  file: MyString
+  caption: MyString
+  sorting: 1
+  parent_id: 
+  parent_type: Parent

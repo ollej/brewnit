@@ -74,6 +74,12 @@ class RecipesController < ApplicationController
     raise ActiveRecord::RecordNotFound unless current_user.can_modify?(@recipe)
     respond_to do |format|
       if @recipe.update(recipe_params)
+        if params[:media]
+          params[:media].each do |file|
+            Rails.logger.debug { file.inspect }
+            @recipe.media.create(file: file)
+          end
+        end
         format.html { redirect_to @recipe, notice: I18n.t(:'recipes.update.successful') }
         format.json { render :show, status: :ok, location: @recipe }
       else

@@ -65,7 +65,7 @@ sv:
     destroy:
       link: Ta bort
       successful: Receptet har tagits bort.
-    new: Skapa recept
+    new: Lägg till recept
     comments_count:
       one: 1 kommentar
       other: '%{count} kommentarer'

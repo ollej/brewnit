@@ -74,6 +74,7 @@ set_meta_tags title: @recipe.name,
           <%= render 'shared/share_buttons' %>
         </div>
 
+        <%= render partial: 'shared/image_slider', locals: { media: @recipe.media } %>
       </div>
 
       <div class="page-content-body recipe-show">

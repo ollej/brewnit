@@ -78,4 +78,9 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.default_url_options = { :host => 'brygglogg.se' }
+
+  config.paperclip_defaults = {
+    path: ':rails_root/uploads/:class/:id_partition/:style/:filename',
+    url: '/uploads/:class/:id_partition/:style/:filename'
+  }
 end

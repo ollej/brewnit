@@ -39,6 +39,7 @@ gem 'meta-tags', '~> 2.1.0'
 gem 'pushover', '~> 1.0.4'
 gem 'project_honeypot', '~> 0.3.1'
 gem 'invisible_captcha', '~> 0.8.0'
+gem 'paperclip', '~> 4.3.2'
 
 group :production do
   gem 'rails_12factor', '~> 0.0.3'

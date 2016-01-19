@@ -42,4 +42,9 @@ Rails.application.configure do
   config.log_level = :debug
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 8088 }
+
+  config.paperclip_defaults = {
+    path: ':rails_root/public/uploads/:class/:id_partition/:style/:filename',
+    url: '/uploads/:class/:id_partition/:style/:filename'
+  }
 end

@@ -11,6 +11,8 @@ class Recipe < ActiveRecord::Base
   end
 
   belongs_to :user
+  has_many :media, as: :parent, dependent: :destroy
+  accepts_nested_attributes_for :media, :reject_if => lambda { |r| r['media'].nil? }
 
   after_create :notify_pushover
 

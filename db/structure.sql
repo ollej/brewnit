@@ -151,6 +151,45 @@ ALTER SEQUENCE commontator_threads_id_seq OWNED BY commontator_threads.id;
 
 
 --
+-- Name: media; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE media (
+    id integer NOT NULL,
+    file character varying,
+    caption character varying,
+    sorting integer,
+    parent_id integer,
+    parent_type character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    file_file_name character varying,
+    file_content_type character varying,
+    file_file_size integer,
+    file_updated_at timestamp without time zone
+);
+
+
+--
+-- Name: media_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE media_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: media_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE media_id_seq OWNED BY media.id;
+
+
+--
 -- Name: recipes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -323,6 +362,13 @@ ALTER TABLE ONLY commontator_threads ALTER COLUMN id SET DEFAULT nextval('common
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY media ALTER COLUMN id SET DEFAULT nextval('media_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY recipes ALTER COLUMN id SET DEFAULT nextval('recipes_id_seq'::regclass);
 
 
@@ -362,6 +408,14 @@ ALTER TABLE ONLY commontator_subscriptions
 
 ALTER TABLE ONLY commontator_threads
     ADD CONSTRAINT commontator_threads_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: media_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY media
+    ADD CONSTRAINT media_pkey PRIMARY KEY (id);
 
 
 --
@@ -456,6 +510,13 @@ CREATE INDEX index_commontator_subscriptions_on_thread_id ON commontator_subscri
 --
 
 CREATE UNIQUE INDEX index_commontator_threads_on_c_id_and_c_type ON commontator_threads USING btree (commontable_id, commontable_type);
+
+
+--
+-- Name: index_media_on_parent_type_and_parent_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_media_on_parent_type_and_parent_id ON media USING btree (parent_type, parent_id);
 
 
 --
@@ -636,4 +697,8 @@ INSERT INTO schema_migrations (version) VALUES ('20160105190205');
 INSERT INTO schema_migrations (version) VALUES ('20160105234837');
 
 INSERT INTO schema_migrations (version) VALUES ('20160112215316');
+
+INSERT INTO schema_migrations (version) VALUES ('20160119204655');
+
+INSERT INTO schema_migrations (version) VALUES ('20160119214911');
 
