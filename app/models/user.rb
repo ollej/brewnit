@@ -80,6 +80,7 @@ class User < ActiveRecord::Base
     values = {
       name: name.blank? ? email : name,
       email: email,
+      sound: 'bugle',
     }
     Pushover.notification(
       title: I18n.t(:'common.notification.user.created.title', values),

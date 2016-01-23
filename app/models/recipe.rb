@@ -158,6 +158,7 @@ class Recipe < ActiveRecord::Base
       user: user,
       title: I18n.t(:'common.notification.recipe.created.title', values),
       message: I18n.t(:'common.notification.recipe.created.message', values),
+      sound: 'incoming',
       url: Rails.application.routes.url_helpers.recipe_url(self)
     )
   end
