@@ -28,9 +28,9 @@ set_meta_tags title: @recipe.name,
         <div class="pure-u-3-5 recipe-header">
           <h1 class="recipe-content-title"><%= title @recipe.name %></h1>
           <p class="recipe-content-details">
-            <%= t(:'beerxml.style') %>: <%= @recipe.style_name %><br>
-            <%= t(:'recipes.owner') %>: <%= link_to @recipe.brewer_name, @recipe.user %><br>
-            <%= t(:'recipes.created') %>: <%= l(@recipe.created_at, format: :long) %>
+            <span class="recipe-style"><%= @recipe.style_name %></span><br>
+            <span class="recipe-brewer"><%= link_to @recipe.brewer_name, @recipe.user %></span><br>
+            <span class="recipe-created"><%= l(@recipe.created_at, format: :long) %></span>
           </p>
 
         </div>
@@ -56,6 +56,17 @@ set_meta_tags title: @recipe.name,
               <% end %>
             <% end %>
             <%#= link_to t(:'recipes.clone'), clone_recipe_path(@recipe), class: 'pure-button secondary-button' %>
+            <%= form_tag recipe_media_path(@recipe), method: :post, id: 'mediaUploadForm', remote: true, html: { multipart: true } do %>
+              <%= link_to '#', class: 'pure-button secondary-button upload-button' do %>
+                <i class="fa fa-upload"></i> <%= t(:'recipes.media.upload') %>
+              <% end %>
+              <%= file_field_tag 'media[]', type: :file, multiple: true,
+                accept: 'image/png,image/gif,image/jpeg,image/jpg',
+                id: 'uploadMediaField' %>
+              <div id="progress">
+                <div class="bar" style="width: 0%;"></div>
+              </div>
+            <% end %>
             </div>
           <% end %>
         </div>

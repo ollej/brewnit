@@ -76,7 +76,6 @@ class RecipesController < ApplicationController
       if @recipe.update(recipe_params)
         if params[:media]
           params[:media].each do |file|
-            Rails.logger.debug { file.inspect }
             @recipe.media.create(file: file)
           end
         end

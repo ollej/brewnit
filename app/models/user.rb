@@ -39,6 +39,7 @@ class User < ActiveRecord::Base
   end
 
   def can_modify?(resource)
+    return true if self == resource
     return true if self == resource.user
     return true if admin?
     return false

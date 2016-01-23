@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require commontator/application
 //= require thirdparty/d3
 //= require_tree .
@@ -76,4 +77,8 @@ $( document ).ready(function() {
   // Setup range sliders
   var sliders = new RangeSliders(".range-slider");
   sliders.init();
+
+  // Image upload
+  var uploader = new MediaUpload(".upload-button", "#uploadMediaField", "#media-thumbnails");
+  uploader.init();
 });

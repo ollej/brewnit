@@ -5,12 +5,12 @@ class Medium < ActiveRecord::Base
       small_thumbnail: '40x40#',
       medium_thumbnail: '64x64#',
       large_thumbnail: '80x80#',
-      small: '160x120>',
+      small: '160x120#',
       medium: '320x240>',
       large: '640x480>'
     },
     convert_options: {
-      all: '-strip',
+      all: '-strip -quality 75',
       negative: '-negate'
     }
   validates_attachment :file, presence: true,

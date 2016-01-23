@@ -1,7 +1,7 @@
 <% if media.size > 0 %>
 <div id="slider" class="pure-u-1 mThumbnailScroller"
   data-mts-axis="x" data-mts-theme="hover-full">
-  <ul>
+  <ul id="media-thumbnails">
   <% media.each do |medium| %>
     <li>
       <%= link_to medium.file.url do %>

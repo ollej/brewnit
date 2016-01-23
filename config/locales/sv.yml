@@ -83,6 +83,8 @@ sv:
     downloads_count:
       one: 1 nedladdning
       other: '%{count} nedladdningar'
+    media:
+      upload: Ladda upp bild
   users:
     index: Bryggare
     profile: Profil
@@ -462,6 +464,9 @@ sv:
         description: Beskrivning
         beerxml: Beer XML
         public: Offentlig?
+      media:
+        created: Mediat har sparats.
+        destroyed: Mediat har tagits bort.
     errors:
       template:
         header:
