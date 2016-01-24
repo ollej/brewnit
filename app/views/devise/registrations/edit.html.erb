@@ -1,6 +1,6 @@
       <div class="page-content-header pure-g">
         <div class="pure-u">
-          <h1 class="recipe-content-title"><%= I18n.t(:'users.edit') %></h1>
+          <h1 class="recipe-content-title"><%= t(:'users.edit') %></h1>
         </div>
       </div>
 
@@ -25,12 +25,12 @@
 
     <div class="field pure-control-group">
       <%= f.label :name %>
-      <%= f.text_field :name, placeholder: I18n.t(:'activerecord.attributes.user.name') %>
+      <%= f.text_field :name, placeholder: t(:'activerecord.attributes.user.name') %>
     </div>
 
     <div class="field pure-control-group">
       <%= f.label :avatar %>
-      <%= f.text_field :avatar, placeholder: I18n.t(:'activerecord.attributes.user.avatar') %>
+      <%= f.text_field :avatar, placeholder: t(:'activerecord.attributes.user.avatar') %>
       <% if resource.avatar.present? %>
         <%= image_tag resource.avatar, class: 'recipe-avatar' %>
       <% end %>
@@ -38,61 +38,86 @@
 
     <div class="field pure-control-group">
       <%= f.label :brewery %>
-      <%= f.text_field :brewery, placeholder: I18n.t(:'activerecord.attributes.user.brewery') %>
+      <%= f.text_field :brewery, placeholder: t(:'activerecord.attributes.user.brewery') %>
     </div>
 
     <div class="field pure-control-group">
       <%= f.label :equipment %>
-      <%= f.text_field :equipment, placeholder: I18n.t(:'activerecord.attributes.user.equipment') %>
+      <%= f.text_field :equipment, placeholder: t(:'activerecord.attributes.user.equipment') %>
     </div>
 
     <div class="field pure-control-group">
       <%= f.label :location %>
-      <%= f.text_field :location, placeholder: I18n.t(:'activerecord.attributes.user.location') %>
+      <%= f.text_field :location, placeholder: t(:'activerecord.attributes.user.location') %>
     </div>
 
     <div class="field pure-control-group">
       <%= f.label :url %>
-      <%= f.text_field :url, placeholder: I18n.t(:'activerecord.attributes.user.url') %>
+      <%= f.text_field :url, placeholder: t(:'activerecord.attributes.user.url') %>
     </div>
 
     <div class="field pure-control-group">
       <%= f.label :twitter %>
-      <%= f.text_field :twitter, placeholder: I18n.t(:'activerecord.attributes.user.twitter') %>
+      <%= f.text_field :twitter, placeholder: t(:'activerecord.attributes.user.twitter') %>
     </div>
 
     <div class="field pure-control-group">
       <%= f.label :presentation %>
-      <%= f.text_area :presentation, placeholder: I18n.t(:'activerecord.attributes.user.presentation') %>
+      <%= f.text_area :presentation, placeholder: t(:'activerecord.attributes.user.presentation') %>
     </div>
 
     <div class="field pure-control-group">
       <%= f.label :password %>
-      <%= f.password_field :password, autocomplete: 'off', placeholder: I18n.t(:'activerecord.attributes.user.password') %>
-      <em>(<%= I18n.t(:'users.leave_pwd_blank') %>)</em>
+      <%= f.password_field :password, autocomplete: 'off', placeholder: t(:'activerecord.attributes.user.password') %>
+      <em>(<%= t(:'users.leave_pwd_blank') %>)</em>
     </div>
 
     <div class="field pure-control-group">
       <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation, autocomplete: 'off', placeholder: I18n.t(:'activerecord.attributes.user.password_confirmation') %>
+      <%= f.password_field :password_confirmation, autocomplete: 'off', placeholder: t(:'activerecord.attributes.user.password_confirmation') %>
     </div>
 
     <div class="field pure-control-group">
       <%= f.label :current_password %>
-      <%= f.password_field :current_password, autocomplete: 'off', placeholder: I18n.t(:'activerecord.attributes.user.current_password')  %>
-      <em>(<%= I18n.t(:'users.pwd_needed_to_confirm') %>)</em>
+      <%= f.password_field :current_password, autocomplete: 'off', placeholder: t(:'activerecord.attributes.user.current_password')  %>
+      <em>(<%= t(:'users.pwd_needed_to_confirm') %>)</em>
     </div>
 
     <div class="actions pure-controls">
-      <%= f.submit I18n.t(:'users.save'), class: 'pure-button pure-button-primary' %>
+      <%= f.submit t(:'users.save'), class: 'pure-button pure-button-primary' %>
+
     </div>
   </fieldset>
 <% end %>
 
-          <h3><%= I18n.t(:'users.cancel_account') %></h3>
-          <p><%= I18n.t(:'users.cancel_account_description') %></p>
-          <%= button_to I18n.t(:'users.cancel_my_account'),
+        <div class="profile-images pure-g">
+          <div class="pure-u-1">
+            <h3><%= t(:'users.media.title') %></h3>
+          </div>
+          <div class="pure-u pure-u-1-5">
+            <%= form_tag user_media_path(resource), method: :post,
+              id: 'mediaUploadForm', remote: true, html: { multipart: true } do %>
+              <%= link_to '#', class: 'pure-button secondary-button upload-button' do %>
+                <i class="fa fa-upload"></i> <%= t(:'common.media.upload') %>
+              <% end %>
+              <%= file_field_tag 'media[]', type: :file, multiple: true,
+                accept: 'image/png,image/gif,image/jpeg,image/jpg',
+                id: 'uploadMediaField' %>
+            <% end %>
+          </div>
+          <div class="pure-u pure-u-4-5">
+            <div id="progressbar"></div>
+          </div>
+          <%= render partial: 'shared/image_slider', locals: { media: resource.media } %>
+        </div>
+
+        <div class="profile-deletion">
+          <h3><%= t(:'users.cancel_account') %></h3>
+          <p><%= t(:'users.cancel_account_description') %></p>
+          <%= button_to t(:'users.cancel_my_account'),
             registration_path(resource_name),
-            data: { confirm: I18n.t(:'users.confirm_cancel')},
+            data: { confirm: t(:'users.confirm_cancel')},
             method: :delete, class: 'pure-button secondary-button button-error' %></p>
+        </div>
+
       </div>

@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   ALLOWED_TAGS = %w(b i strong em br p small del strike s ins u sub sup mark hr q)
   before_validation :cleanup_fields
   has_many :recipes, dependent: :destroy
+  has_many :media, as: :parent, dependent: :destroy
+  accepts_nested_attributes_for :media, :reject_if => lambda { |r| r['media'].nil? }
 
   after_create :notify_pushover
 
@@ -27,6 +29,10 @@ class User < ActiveRecord::Base
     admin
   end
 
+  def owned_by?(user)
+    self == user
+  end
+
   def avatar_image
     if avatar.present?
       avatar
@@ -40,7 +46,7 @@ class User < ActiveRecord::Base
 
   def can_modify?(resource)
     return true if self == resource
-    return true if self == resource.user
+    return true if resource.owned_by?(self)
     return true if admin?
     return false
   end

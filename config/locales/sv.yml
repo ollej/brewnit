@@ -31,6 +31,8 @@ sv:
     "yes": Ja
     "no": Nej
     spammer_detected: Kunde inte skapa kontot då du verkar vara en spammare.
+    media:
+      upload: Ladda upp bild
   recipes:
     name: Namn
     description: Beskrivning
@@ -83,8 +85,6 @@ sv:
     downloads_count:
       one: 1 nedladdning
       other: '%{count} nedladdningar'
-    media:
-      upload: Ladda upp bild
   users:
     index: Bryggare
     profile: Profil
@@ -108,6 +108,8 @@ sv:
       one: 1 recept
       other: "%{count} recept"
     recipe_count: Antal recept
+    media:
+      title: Bilder
   beerxml:
     information: Information
     style: Ölstil

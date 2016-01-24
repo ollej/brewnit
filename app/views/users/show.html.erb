@@ -6,6 +6,7 @@
           <h1 class="user-content-title"><%= title @user.name %></h1>
           <p><%= @user.brewery %></p>
         </div>
+        <%= render partial: 'shared/image_slider', locals: { media: @user.media } %>
       </div>
 
       <div class="page-content-body user-show">
