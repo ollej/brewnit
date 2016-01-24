@@ -41,6 +41,7 @@ gem 'project_honeypot', '~> 0.3.1'
 gem 'invisible_captcha', '~> 0.8.0'
 gem 'paperclip', '~> 4.3.2'
 gem 'jquery-ui-rails', '~> 5.0.5'
+gem 'fancybox2-rails', '~> 0.2.8'
 
 group :production do
   gem 'rails_12factor', '~> 0.0.3'

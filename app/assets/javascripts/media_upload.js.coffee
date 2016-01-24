@@ -1,32 +1,43 @@
 class MediaUpload
-  constructor: (@button, @filefield, @images) ->
+  constructor: (@button, @filefield, @slider) ->
     @$button = $(@button)
-    @$images = $(@images)
+    @$slider = $(@slider)
 
   init: ->
-    @$button.click(=> $(@filefield).trigger('click'))
+    @$slider.on("media:update", => @updateScroller())
+    @updateScroller()
+    @$button.click(=> $(@filefield).trigger("click"))
     $(@filefield).fileupload({
-      dataType: 'json',
-      done: (e, data) => @handleUploads(data.result.media),
-      progressall: (e, data) => @updateProgress(data)
+      dataType: "json",
+      done: @handleUploads,
+      always: @afterUpload,
+      progressall: @updateProgress
     })
+  
+  updateScroller: ->
+    images = @$slider.find("img").length
+    console.log("updateScroller", images)
+    @$slider.toggle(images > 0)
+    @$slider.mThumbnailScroller("update")
+    @$slider.mThumbnailScroller("scrollTo", "last")
 
-  updateProgress: (data) ->
+  updateProgress: (ev, data) =>
+    # FIXME: Uploading multiple images only show progress for first image.
     progress = parseInt(data.loaded / data.total * 100, 10)
-    console.log('progress', progress, data)
-    $("#upload-progress .bar").css("width", "#{progress}%")
+    #$("#upload-progress .bar").css("width", "#{progress}%")
+    progress = false if progress == 100
+    $("#progressbar").show().progressbar({ value: progress })
 
-  handleUploads: (media) ->
+  handleUploads: (ev, data) =>
+    media = data.result.media
     $.each(media, (idx, medium) => @addMedium(medium))
+    @$slider.trigger('media:update')
+
+  afterUpload: (ev, data) =>
+    $("#progressbar").hide()
 
   addMedium: (medium) ->
-    console.log('addMedia', medium)
-    console.log(@imageTemplate(medium))
-    @$images.append(@imageTemplate(medium))
-    $("#slider").mThumbnailScroller("scrollTo", "last")
+    @$slider.find("ul").append(medium.template)
 
-  imageTemplate: (medium) ->
-    "<li><a href='#{medium.url}'><img src='#{medium.scaled.small}'></a></li>"
-  
 (exports ? this).MediaUpload = MediaUpload
 

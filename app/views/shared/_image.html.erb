@@ -1,0 +1,14 @@
+    <li class="media-thumbnail">
+      <%= link_to medium.file.url, class: 'fancybox', rel: :group do %>
+        <%= image_tag medium.file.url(:small) %>
+      <% end %>
+      <% if current_user.can_modify?(recipe) %>
+        <%= link_to recipe_medium_path(recipe, medium, format: :json),
+          remote: true, method: :delete,
+          data: { confirm: I18n.t(:'activerecord.attributes.medium.confirm_destroy') },
+          class: 'media-destroy-button' do %>
+          <i class="fa fa-times"></i>&nbsp;
+        <% end %>
+      <% end %>
+    </li>
+

@@ -37,7 +37,7 @@ set_meta_tags title: @recipe.name,
 
         <div class="page-content-controls pure-u-2-5">
           <div class="controls-public">
-          <%= link_to recipe_path(@recipe, format: :xml), method: :get, class: 'pure-button secondary-button' do %>
+          <%= link_to recipe_path(@recipe, format: :xml), rel: nofollow, method: :get, class: 'pure-button secondary-button' do %>
             <i class="fa fa-download"></i> <%= t(:'recipes.download') %>
           <% end %>
           <%= link_to "javascript:window.print()", class: 'pure-button secondary-button' do %>
@@ -54,18 +54,16 @@ set_meta_tags title: @recipe.name,
               <%= link_to @recipe, method: :delete, data: { confirm: t(:'common.are_you_sure') }, class: 'pure-button secondary-button' do %>
                 <i class="fa fa-trash"></i> <%= t(:'recipes.destroy.link') %>
               <% end %>
-            <% end %>
-            <%#= link_to t(:'recipes.clone'), clone_recipe_path(@recipe), class: 'pure-button secondary-button' %>
-            <%= form_tag recipe_media_path(@recipe), method: :post, id: 'mediaUploadForm', remote: true, html: { multipart: true } do %>
-              <%= link_to '#', class: 'pure-button secondary-button upload-button' do %>
-                <i class="fa fa-upload"></i> <%= t(:'recipes.media.upload') %>
+              <%= form_tag recipe_media_path(@recipe), method: :post, id: 'mediaUploadForm', remote: true, html: { multipart: true } do %>
+                <%= link_to '#', class: 'pure-button secondary-button upload-button' do %>
+                  <i class="fa fa-upload"></i> <%= t(:'recipes.media.upload') %>
+                <% end %>
+                <%= file_field_tag 'media[]', type: :file, multiple: true,
+                  accept: 'image/png,image/gif,image/jpeg,image/jpg',
+                  id: 'uploadMediaField' %>
+                <div id="progressbar"></div>
               <% end %>
-              <%= file_field_tag 'media[]', type: :file, multiple: true,
-                accept: 'image/png,image/gif,image/jpeg,image/jpg',
-                id: 'uploadMediaField' %>
-              <div id="progress">
-                <div class="bar" style="width: 0%;"></div>
-              </div>
+              <%#= link_to t(:'recipes.clone'), clone_recipe_path(@recipe), class: 'pure-button secondary-button' %>
             <% end %>
             </div>
           <% end %>

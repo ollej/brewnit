@@ -11,6 +11,9 @@
  * file per style scope.
  *
  *= require_tree .
- *= require_self
+ *= require jquery-ui/progressbar
+ *= require jquery-ui/autocomplete
  *= require commontator/application
+ *= require fancybox
+ *= require_self
  */

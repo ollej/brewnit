@@ -1,3 +1,5 @@
+@import 'mixins';
+
 html, body, button, input, select, textarea, p, ol, ul, td,
 .pure-g [class *= "pure-u"] {
   font-family: Montserrat,FreeSans,Arimo,"Droid Sans",verdana,arial,helvetica,sans-serif;
@@ -185,6 +187,7 @@ screen and (min-device-pixel-ratio: 1.5) {
   overflow: auto;
   height: auto;
   margin-top: 1em;
+  display: none;
 }
 
 #mediaUploadForm {
@@ -192,9 +195,23 @@ screen and (min-device-pixel-ratio: 1.5) {
     display: none;
   }
 }
-#progress {
-  .bar {
-    height: 18px;
-    background: green;
+.media-thumbnail-list {
+  background: #ddd !important;
+
+  .media-thumbnail {
+    background: white;
+  }
+  .media-destroy-button {
+    display: none;
+    position: absolute;
+    color: red;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding-left: 4px;
+    padding-bottom: 2px;
+    z-index: 1000;
+    opacity: 0.9;
+    @include hover-gradient;
   }
 }

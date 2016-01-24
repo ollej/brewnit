@@ -1,14 +1,8 @@
-<% if media.size > 0 %>
-<div id="slider" class="pure-u-1 mThumbnailScroller"
-  data-mts-axis="x" data-mts-theme="hover-full">
-  <ul id="media-thumbnails">
+<div id="slider" class="pure-u-1 mThumbnailScroller media-thumbnail-list"
+  data-mts-axis="x" data-mts-theme="buttons-in" data-mts-type="click-80">
+  <ul>
   <% media.each do |medium| %>
-    <li>
-      <%= link_to medium.file.url do %>
-        <%= image_tag medium.file.url(:small) %>
-      <% end %>
-    </li>
+    <%= render partial: 'shared/image', locals: { recipe: @recipe, medium: medium } %>
   <% end %>
 </ul>
 </div>
-<% end %>

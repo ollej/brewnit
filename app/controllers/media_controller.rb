@@ -16,14 +16,18 @@ class MediaController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     @medium = Medium.find(params[:id])
     @parent = @medium.parent
     raise ActiveRecord::RecordNotFound unless current_user.can_modify?(@parent)
     @medium.destroy
-    respond_to do |format|
-      format.html { redirect_to @parent, notice: I18n.t(:'activerecord.attributes.medium.destroyed') }
-      format.json { head :no_content }
+    if request.xhr?
+      head :no_content
+    else
+      respond_to do |format|
+        format.html { redirect_to @parent, notice: I18n.t(:'activerecord.attributes.medium.destroyed') }
+        format.json { head :no_content }
+      end
     end
   end
 

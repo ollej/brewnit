@@ -464,9 +464,10 @@ sv:
         description: Beskrivning
         beerxml: Beer XML
         public: Offentlig?
-      media:
+      medium:
         created: Mediat har sparats.
         destroyed: Mediat har tagits bort.
+        confirm_destroy: Är du säker på att du vill ta bort bilden?
     errors:
       template:
         header:

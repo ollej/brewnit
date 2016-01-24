@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require fancybox
 //= require commontator/application
 //= require thirdparty/d3
 //= require_tree .
@@ -79,6 +80,10 @@ $( document ).ready(function() {
   sliders.init();
 
   // Image upload
-  var uploader = new MediaUpload(".upload-button", "#uploadMediaField", "#media-thumbnails");
+  var uploader = new MediaUpload(".upload-button", "#uploadMediaField", "#slider");
   uploader.init();
+
+  // Media Tools
+  var mediaTools = new MediaTools("li.media-thumbnail", ".media-destroy-button", "#slider");
+  mediaTools.init();
 });
