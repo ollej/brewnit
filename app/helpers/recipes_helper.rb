@@ -1,7 +1,7 @@
 module RecipesHelper
   def avatar_for(recipe)
-    if recipe.user.present? && avatar = recipe.user.avatar_image
-      avatar
+    if recipe.main_image.present?
+      recipe.main_image
     else
       hash = Digest::MD5.hexdigest("#{recipe.id}/#{recipe.name}")
       "http://api.adorable.io/avatars/100/#{hash}.png"

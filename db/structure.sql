@@ -212,7 +212,8 @@ CREATE TABLE recipes (
     batch_size numeric,
     color numeric,
     brewer character varying,
-    downloads integer DEFAULT 0 NOT NULL
+    downloads integer DEFAULT 0 NOT NULL,
+    media_main_id integer
 );
 
 
@@ -277,7 +278,9 @@ CREATE TABLE users (
     brewery character varying,
     twitter character varying,
     url character varying,
-    equipment character varying
+    equipment character varying,
+    media_avatar_id integer,
+    media_brewery_id integer
 );
 
 
@@ -569,6 +572,13 @@ CREATE INDEX index_recipes_on_ibu ON recipes USING btree (ibu);
 
 
 --
+-- Name: index_recipes_on_media_main_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_recipes_on_media_main_id ON recipes USING btree (media_main_id);
+
+
+--
 -- Name: index_recipes_on_og; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -625,6 +635,20 @@ CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
 
 
 --
+-- Name: index_users_on_media_avatar_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_media_avatar_id ON users USING btree (media_avatar_id);
+
+
+--
+-- Name: index_users_on_media_brewery_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_media_brewery_id ON users USING btree (media_brewery_id);
+
+
+--
 -- Name: index_users_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -667,6 +691,30 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 
 
 --
+-- Name: fk_rails_0fd2ed4eeb; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY recipes
+    ADD CONSTRAINT fk_rails_0fd2ed4eeb FOREIGN KEY (media_main_id) REFERENCES media(id);
+
+
+--
+-- Name: fk_rails_793a220a68; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT fk_rails_793a220a68 FOREIGN KEY (media_avatar_id) REFERENCES media(id);
+
+
+--
+-- Name: fk_rails_9c9dd5b0b7; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT fk_rails_9c9dd5b0b7 FOREIGN KEY (media_brewery_id) REFERENCES media(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -701,4 +749,8 @@ INSERT INTO schema_migrations (version) VALUES ('20160112215316');
 INSERT INTO schema_migrations (version) VALUES ('20160119204655');
 
 INSERT INTO schema_migrations (version) VALUES ('20160119214911');
+
+INSERT INTO schema_migrations (version) VALUES ('20160124162437');
+
+INSERT INTO schema_migrations (version) VALUES ('20160124174400');
 

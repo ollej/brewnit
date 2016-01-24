@@ -1,9 +1,10 @@
 class MediaController < ApplicationController
+  include MediaConcern
   before_action :deny_spammers!
 
   def create
     @parent = load_parent
-    raise ActiveRecord::RecordNotFound unless current_user.can_modify?(@parent)
+    raise AuthorizationException unless current_user.can_modify?(@parent)
     @media = []
     if params[:media]
       params[:media].each do |file|
@@ -19,7 +20,7 @@ class MediaController < ApplicationController
   def destroy
     @medium = Medium.find(params[:id])
     @parent = @medium.parent
-    raise ActiveRecord::RecordNotFound unless current_user.can_modify?(@parent)
+    raise AuthorizationException unless current_user.can_modify?(@parent)
     @medium.destroy
     if request.xhr?
       head :no_content
@@ -31,12 +32,4 @@ class MediaController < ApplicationController
     end
   end
 
-  private
-
-  def load_parent
-    case
-      when params[:recipe_id] then Recipe.find_by_id(params[:recipe_id])
-      when params[:user_id] then User.find_by_id(params[:user_id])
-    end
-  end
 end

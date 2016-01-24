@@ -16,7 +16,7 @@ class MediaUpload
   
   updateScroller: ->
     images = @$slider.find("img").length
-    console.log("updateScroller", images)
+    #console.log("updateScroller", images)
     @$slider.toggle(images > 0)
     @$slider.mThumbnailScroller("update")
     @$slider.mThumbnailScroller("scrollTo", "last")

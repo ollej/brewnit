@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
+  get 'add_media/create'
+
   get 'open_search/show'
   get 'likes/update'
 
   mount Commontator::Engine => '/commontator'
   resources :recipes do
     resources :media, only: [:create, :destroy]
+    resource :add_medium, only: [:create], controller: :add_medium
     member do
       post :like, controller: :likes, action: :create
       delete :like, controller: :likes, action: :destroy, as: :unlike
@@ -17,6 +20,7 @@ Rails.application.routes.draw do
   }
   resources :users, only: [:index, :show] do
     resources :media, only: [:create, :destroy]
+    resource :add_medium, only: [:create], controller: :add_medium
   end
   root to: 'users#index'
 end

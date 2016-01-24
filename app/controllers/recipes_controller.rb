@@ -19,7 +19,7 @@ class RecipesController < ApplicationController
   # GET /recipes/1.json
   def show
     @recipe = find_recipe
-    raise ActiveRecord::RecordNotFound unless can_show?(@recipe)
+    raise AuthorizationException unless can_show?(@recipe)
     @beerxml = @recipe.beerxml_details
     @presenter = RecipePresenter.new(@recipe)
     Recipe.unscoped do
@@ -47,7 +47,7 @@ class RecipesController < ApplicationController
   # GET /recipes/1/edit
   def edit
     @recipe = find_recipe
-    raise ActiveRecord::RecordNotFound unless current_user.can_modify?(@recipe)
+    raise AuthorizationException unless current_user.can_modify?(@recipe)
   end
 
   # POST /recipes
@@ -71,7 +71,7 @@ class RecipesController < ApplicationController
   # PATCH/PUT /recipes/1.json
   def update
     @recipe = find_recipe
-    raise ActiveRecord::RecordNotFound unless current_user.can_modify?(@recipe)
+    raise AuthorizationException unless current_user.can_modify?(@recipe)
     respond_to do |format|
       if @recipe.update(recipe_params)
         if params[:media]
@@ -92,7 +92,7 @@ class RecipesController < ApplicationController
   # DELETE /recipes/1.json
   def destroy
     @recipe = find_recipe
-    raise ActiveRecord::RecordNotFound unless current_user.can_modify?(@recipe)
+    raise AuthorizationException unless current_user.can_modify?(@recipe)
     @recipe.destroy
     respond_to do |format|
       format.html { redirect_to recipes_url, notice: I18n.t(:'recipes.destroy.successful') }

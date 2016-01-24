@@ -27,6 +27,7 @@ module Brewnit
     config.active_record.raise_in_transactional_callbacks = true
 
     config.autoload_paths << Rails.root.join('lib')
+    config.autoload_paths << Rails.root.join('lib/errors')
     config.autoload_paths << Rails.root.join('/app/validators')
     config.autoload_paths << Rails.root.join('/app/presenters')
 
@@ -35,6 +36,10 @@ module Brewnit
     config.sass.cache = false
 
     config.active_record.schema_format = :sql
+
+    config.action_dispatch.rescue_responses.merge!(
+      'AuthorizationException' => :unauthorized
+    )
 
     config.after_initialize do
       Rails.application.routes.default_url_options = config.action_mailer.default_url_options

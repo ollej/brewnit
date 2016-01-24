@@ -461,15 +461,23 @@ sv:
         equipment: Utrustning
         name: Namn
         avatar: Avatar
+        medium_avatar: Avatarbild
+        medium_brewery: Bryggerilogga
+        destroy:
+          media: Ta bort
       recipe:
         name: Namn
         description: Beskrivning
         beerxml: Beer XML
         public: Offentlig?
+        medium_main: Huvudbild
       medium:
         created: Mediat har sparats.
         destroyed: Mediat har tagits bort.
         confirm_destroy: Är du säker på att du vill ta bort bilden?
+        confirm_avatar: Sätt denna bild som din avatar-bild?
+        confirm_brewery: Sätt denna bild som logga for ditt bryggeri?
+        confirm_main: Sätt denna bild som huvudbild för detta recept?
     errors:
       template:
         header:
@@ -508,6 +516,8 @@ sv:
               blank: måste skickas med.
               invalid: är inte en giltig BeerXML-fil.
               parse_error: kunde inte läsas in på grund av syntax-fel.
+        medium:
+          medium_not_added: Media kunde inte läggas till.
 
   date:
     formats:

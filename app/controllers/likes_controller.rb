@@ -1,7 +1,7 @@
 class LikesController < ApplicationController
   def create
     @recipe = Recipe.find(params[:id])
-    raise ActiveRecord::RecordNotFound unless can_show?(@recipe)
+    raise AuthorizationException unless can_show?(@recipe)
     @recipe.liked_by current_user
 
     respond_to do |format|
@@ -16,8 +16,8 @@ class LikesController < ApplicationController
 
   def destroy
     @recipe = Recipe.find(params[:id])
-    raise ActiveRecord::RecordNotFound unless can_show?(@recipe)
-    raise ActiveRecord::RecordNotFound unless @recipe.owned_by?(current_user)
+    raise AuthorizationException unless can_show?(@recipe)
+    raise AuthorizationException unless @recipe.owned_by?(current_user)
     @recipe.unliked_by current_user
 
     respond_to do |format|

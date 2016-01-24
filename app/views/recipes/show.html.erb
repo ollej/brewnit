@@ -25,7 +25,10 @@ set_meta_tags title: @recipe.name,
 <% end %>
 
       <div class="page-content-header pure-g">
-        <div class="pure-u-3-5 recipe-header">
+        <div class="pure-u-1-5 recipe-image">
+          <%= image_tag @recipe.media_main.file.url(:small), class: 'user-avatar', alt: @recipe.name, width: 160, height: 120 %>
+        </div>
+        <div class="pure-u-2-5 recipe-header">
           <h1 class="recipe-content-title"><%= title @recipe.name %></h1>
           <p class="recipe-content-details">
             <span class="recipe-style"><%= @recipe.style_name %></span><br>

@@ -5,7 +5,7 @@ class MediaTools
   init: ->
     @$slider.on("mouseenter", @thumbnail, @hoverOver)
     @$slider.on("mouseleave", @thumbnail, @hoverOut)
-    @$slider.on("ajax:success", @btnsel, @removeMedium)
+    @$slider.on("ajax:success", ".media-destroy-button", @removeMedium)
     $(".fancybox").fancybox({
       openEffect: "elastic",
       closeEffect: "fade",
@@ -13,14 +13,14 @@ class MediaTools
     })
 
   removeMedium: (ev) =>
-    #console.log(ev.target, $(ev.target).parent(@thumbnail))
-    $(ev.target).parent(@thumbnail).remove()
+    #console.log(ev.target, $(ev.target).parents(@thumbnail))
+    $(ev.target).parents(@thumbnail).remove()
     @$slider.trigger("media:update")
 
   hoverOver: (ev) =>
-    #console.log('hoverOver')
     $medium = $(ev.currentTarget)
     $btn = @button($medium)
+    #console.log('hoverOver', $medium, $btn)
     $btn.show().position({
       my: "right top",
       at: "right-4 top+4",

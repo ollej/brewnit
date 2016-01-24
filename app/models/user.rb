@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   before_validation :cleanup_fields
   has_many :recipes, dependent: :destroy
   has_many :media, as: :parent, dependent: :destroy
+  belongs_to :media_avatar, class_name: "Medium"
+  belongs_to :media_brewery, class_name: "Medium"
   accepts_nested_attributes_for :media, :reject_if => lambda { |r| r['media'].nil? }
 
   after_create :notify_pushover
@@ -34,7 +36,9 @@ class User < ActiveRecord::Base
   end
 
   def avatar_image
-    if avatar.present?
+    if media_avatar.present?
+      media_avatar.file.url(:medium_thumbnail)
+    elsif avatar.present?
       avatar
     elsif email.present?
       hash = Digest::MD5.hexdigest(email)
@@ -45,6 +49,7 @@ class User < ActiveRecord::Base
   end
 
   def can_modify?(resource)
+    return false if resource.nil?
     return true if self == resource
     return true if resource.owned_by?(self)
     return true if admin?

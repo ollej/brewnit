@@ -11,6 +11,7 @@ class Recipe < ActiveRecord::Base
   end
 
   belongs_to :user
+  belongs_to :media_main, class_name: "Medium"
   has_many :media, as: :parent, dependent: :destroy
   accepts_nested_attributes_for :media, :reject_if => lambda { |r| r['media'].nil? }
 
@@ -54,6 +55,18 @@ class Recipe < ActiveRecord::Base
       description
     else
       style_name
+    end
+  end
+
+  def main_image
+    if media_main.present?
+      media_main.file.url(:medium_thumbnail)
+    elsif user.present?
+      if user.media_brewery.present?
+        user.media_brewery.file.url(:medium_thumbnail)
+      else
+        user.avatar_image
+      end
     end
   end
 

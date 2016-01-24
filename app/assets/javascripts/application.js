@@ -84,6 +84,6 @@ $( document ).ready(function() {
   uploader.init();
 
   // Media Tools
-  var mediaTools = new MediaTools("li.media-thumbnail", ".media-destroy-button", "#slider");
+  var mediaTools = new MediaTools("li.media-thumbnail", ".media-buttons", "#slider");
   mediaTools.init();
 });
