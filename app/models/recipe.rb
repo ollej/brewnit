@@ -58,14 +58,14 @@ class Recipe < ActiveRecord::Base
     end
   end
 
-  def main_image
+  def main_image(size = :medium_thumbnail)
     if media_main.present?
-      media_main.file.url(:medium_thumbnail)
+      media_main.file.url(size)
     elsif user.present?
       if user.media_brewery.present?
-        user.media_brewery.file.url(:medium_thumbnail)
+        user.media_brewery.file.url(size)
       else
-        user.avatar_image
+        user.avatar_image(size)
       end
     end
   end

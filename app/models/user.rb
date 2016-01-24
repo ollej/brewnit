@@ -35,9 +35,9 @@ class User < ActiveRecord::Base
     self == user
   end
 
-  def avatar_image
+  def avatar_image(size = :medium_thumbnail)
     if media_avatar.present?
-      media_avatar.file.url(:medium_thumbnail)
+      media_avatar.file.url(size)
     elsif avatar.present?
       avatar
     elsif email.present?

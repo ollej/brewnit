@@ -8,6 +8,10 @@ module RecipesHelper
     end
   end
 
+  def media_main_tag(recipe)
+    image_tag recipe.main_image(:small), class: 'user-avatar', alt: recipe.name, width: 160, height: 120
+  end
+
   def item_classes_for(recipe, current_user=nil, current_recipe=nil)
     cls = []
     if recipe.public?
