@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include MediaParentConcern
+
   ALLOWED_TAGS = %w(b i strong em br p small del strike s ins u sub sup mark hr q)
   before_validation :cleanup_fields
   has_many :recipes, dependent: :destroy

@@ -1,4 +1,6 @@
 class Medium < ActiveRecord::Base
+  before_destroy :remove_references
+
   belongs_to :parent, polymorphic: true
   has_attached_file :file,
     styles: {
@@ -16,4 +18,9 @@ class Medium < ActiveRecord::Base
   validates_attachment :file, presence: true,
     content_type: { content_type: %w(image/jpeg image/gif image/png) }, #/\Aimage\/.*\Z/,
     size: { in: 0..2.megabytes }
+
+  def remove_references
+    parent.remove_media_references(self)
+  end
+
 end

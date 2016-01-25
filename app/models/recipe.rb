@@ -1,4 +1,5 @@
 class Recipe < ActiveRecord::Base
+  include MediaParentConcern
   include SearchCop
 
   search_scope :search do
