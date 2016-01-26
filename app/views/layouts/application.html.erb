@@ -12,6 +12,9 @@
   <link rel="search" type="application/opensearchdescription+xml"
         href="<%= open_search_show_url(format: :xml) %>" title="Recipe search" />
   <%= stylesheet_link_tag    'application', media: 'all' %>
+  <script type="text/javascript">
+    window.I18n = <%= I18n.t(:'javascript').to_json.html_safe %>;
+  </script>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
   <%= render 'favicon' %>
@@ -24,12 +27,7 @@
 <%= render 'shared/recipes' %>
   <div id="main" class="pure-u-1">
     <div class="recipe-content">
-<% if flash[:notice] %>
-<div class="pure-alert pure-alert-success"><%= flash[:notice] %></div>
-<% end %>
-<% if flash[:alert] %>
-<div class="pure-alert pure-alert-error"><%= flash[:alert] %></div>
-<% end %>
+      <%= render 'shared/flasher' %>
 
 <%= yield %>
     </div>

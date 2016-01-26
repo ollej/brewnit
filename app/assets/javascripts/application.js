@@ -16,6 +16,9 @@
 //= require fancybox
 //= require commontator/application
 //= require thirdparty/d3
+//= require thirdparty/jquery.fileupload
+//= require thirdparty/jquery.fileupload-process
+//= require thirdparty/jquery.fileupload-validate
 //= require_tree .
 
 $( document ).ready(function() {
@@ -86,4 +89,7 @@ $( document ).ready(function() {
   // Media Tools
   var mediaTools = new MediaTools("li.media-thumbnail", ".media-buttons", "#slider");
   mediaTools.init();
+
+  // Initialize flasher
+  var flasher = new Flasher("#flasher");
 });

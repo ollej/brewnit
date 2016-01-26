@@ -1,5 +1,10 @@
 ---
 sv:
+  javascript:
+    fileupload:
+      errors:
+        max_file_size_exceeded: Du kan inte ladda upp bilder större än 2 MB.
+        backend_error: "Kunde inte ladda up filen på grund av:"
   common:
     are_you_sure: Är du säker?
     public: Offentlig
