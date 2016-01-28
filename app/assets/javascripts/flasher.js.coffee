@@ -4,15 +4,7 @@ class Flasher
     $("body").on("flasher:show", @handler)
       .on("flasher:clear", @clear)
 
-  div: ->
-    return @$div if @$div?
-    @$div = $(@sel)
-
-  flash: (msg, level = "error") ->
-    console.log('Flasher.flash', msg, level)
-    @div().append("<div class='pure-alert pure-alert-#{level}'>#{msg}</div>")
-    @scroll()
-
+  div: -> @$div ?= $(@sel)
   warning: (msg) -> @flash(msg, 'error')
   error: (msg) -> @flash(msg, 'error')
   info: (msg) -> @flash(msg, 'success')
@@ -23,5 +15,10 @@ class Flasher
   scroll: ->
     $("html, body").animate({ scrollTop: 0 }, 500)
     @div().children().effect("highlight", {}, 750)
+
+  flash: (msg, level = "error") ->
+    @div().append("<div class='pure-alert pure-alert-#{level}'>#{msg}</div>")
+    @scroll()
+
 
 (exports ? this).Flasher = Flasher
