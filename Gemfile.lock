@@ -58,6 +58,7 @@ GEM
       sys-proctable
     builder (3.2.2)
     byebug (8.2.1)
+    chronic (0.10.2)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.8)
@@ -275,6 +276,7 @@ DEPENDENCIES
   acts_as_votable (~> 0.10.0)
   beer_recipe
   byebug
+  chronic (~> 0.10.2)
   coffee-rails (~> 4.1.0)
   commontator (~> 4.11.0)
   devise (~> 3.5.3)

@@ -6,15 +6,12 @@ class RecipePresenter
   end
 
   def date
-    date = if @beerxml.date.blank?
-      @recipe.created_at
-    else
-      if @beerxml.date.kind_of? Date
-        @beerxml.date
-      else
-        Date.parse(@beerxml.date)
-      end
-    end
+    date = @beerxml.date
+    date = Chronic.parse(date) unless date.kind_of? Date
+    date ||= @recipe.created_at
+  end
+
+  def long_date
     I18n.l(date, format: :long)
   end
 
