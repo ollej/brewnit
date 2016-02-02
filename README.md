@@ -30,8 +30,11 @@ $ brew install ansible
 
 #### Other systems
 
-Follow instructions in Vagrant documenation:
+Follow instructions in Vagrant documentation:
 https://docs.vagrantup.com/v2/installation/index.html
+
+Also install ansible:
+https://docs.ansible.com/ansible/intro_installation.html
 
 ### Step 2 - Start VM
 
@@ -39,6 +42,11 @@ https://docs.vagrantup.com/v2/installation/index.html
 $ cd railsbox/development
 $ vagrant up
 ```
+
+#### Postgres installation issues
+
+If you encounter a postgres configuration error, try the solution in this
+issue: https://github.com/andreychernih/railsbox/issues/29
 
 ### Step 3 - Create config
 
