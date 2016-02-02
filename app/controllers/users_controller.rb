@@ -19,17 +19,4 @@ class UsersController < ApplicationController
       format.json { render layout: false }
     end
   end
-
-  def media_avatar
-    @user = User.find(params[:id])
-    raise ActiveRecord::RecordNotFound unless current_user.can_modify?(@user)
-    @medium = @user.media.find(params[:medium])
-    @user.media_avatar = @medium
-    @user.save
-
-    respond_to do |format|
-      format.html { redirect_to @user }
-      format.json { head :no_content }
-    end
-  end
 end
