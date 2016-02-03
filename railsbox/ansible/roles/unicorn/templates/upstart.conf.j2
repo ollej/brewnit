@@ -16,6 +16,7 @@ setgid {{ group_name }}
 chdir {{ app_path }}
 
 script
+  mkdir -p {{ app_temp_path }}
   /bin/bash -l -c 'bundle exec unicorn -c {{ unicorn_config_path }}'
   sleep 5
 end script
