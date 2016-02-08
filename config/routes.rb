@@ -22,5 +22,8 @@ Rails.application.routes.draw do
     resources :media, only: [:create, :destroy]
     resource :add_medium, only: [:create], controller: :add_medium
   end
-  root to: 'users#index'
+
+  resources :latest_items, only: [:index]
+
+  root to: 'latest_items#index'
 end

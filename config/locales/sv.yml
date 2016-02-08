@@ -45,6 +45,11 @@ sv:
     spammer_detected: Kunde inte skapa kontot då du verkar vara en spammare.
     media:
       upload: Ladda upp bild
+  latest_items:
+    index: Nytt på Brygglogg.se
+    recipe: Recept
+    user: Användare
+    comment: Kommentar
   recipes:
     name: Namn
     description: Beskrivning

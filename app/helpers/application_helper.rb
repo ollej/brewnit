@@ -12,4 +12,9 @@ module ApplicationHelper
     meth = "#{medium.parent.class.name.underscore}_add_medium_path"
     send(meth, medium.parent, medium, format: :json, medium_id: medium.id, media_type: type)
   end
+
+  def render_item(item)
+    Rails.logger.debug { "rendering item: #{item.inspect}" }
+    render partial: "shared/#{item.class.name.demodulize.underscore}_item", locals: { item: item }
+  end
 end

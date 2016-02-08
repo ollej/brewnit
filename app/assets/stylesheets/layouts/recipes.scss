@@ -126,6 +126,27 @@ a {
 }
 
 /* recipe Item Styles */
+.list-item {
+  padding: 0.9em 1em;
+  cursor: pointer;
+
+  .item-subtitle,
+  .item-title {
+    margin: 0;
+  }
+  .item-title {
+    font-size: 120%;
+    a {
+      color: #333;
+    }
+  }
+  .item-subtitle {
+    text-transform: uppercase;
+    a {
+      color: #999;
+    }
+  }
+}
 .recipe-item {
   padding: 0.9em 1em;
   border-bottom: 1px solid #ddd;

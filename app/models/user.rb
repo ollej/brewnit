@@ -72,21 +72,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.from_omniauth(access_token)
-    data = access_token.info
-
-    user = User.find_or_create_by(email: data[:email]) do |u|
-      u.name = data[:name]
-      u.password = Devise.friendly_token[0,20]
-      u.avatar = data[:image]
-    end
-    if data[:image].present? && user.avatar.blank?
-      user.avatar = data[:image]
-      user.save
-    end
-    user
-  end
-
   def pushover_values(type = :create)
     translation_values = {
       name: name.blank? ? email : name,
@@ -106,6 +91,25 @@ class User < ActiveRecord::Base
         sound: 'siren',
       })
     end
+  end
+
+  def self.from_omniauth(access_token)
+    data = access_token.info
+
+    user = User.find_or_create_by(email: data[:email]) do |u|
+      u.name = data[:name]
+      u.password = Devise.friendly_token[0,20]
+      u.avatar = data[:image]
+    end
+    if data[:image].present? && user.avatar.blank?
+      user.avatar = data[:image]
+      user.save
+    end
+    user
+  end
+
+  def self.latest
+    self.limit(10).order('created_at desc')
   end
 
 end

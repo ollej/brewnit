@@ -190,4 +190,9 @@ class Recipe < ActiveRecord::Base
   def self.styles
     self.uniq.pluck(:style_name).map(&:capitalize).uniq.sort
   end
+
+  def self.latest
+    self.limit(10).order('created_at desc')
+  end
+
 end

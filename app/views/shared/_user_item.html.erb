@@ -1,0 +1,14 @@
+  <div class="list-item user-item linked-item pure-g">
+    <div class="pure-u">
+      <%= image_tag item.avatar_image, class: 'user-avatar', alt: item.name, height: 64, width: 64 %>
+    </div>
+
+    <div class="pure-u-5-8 user-item-information">
+      <h5 class="item-subtitle user-brewery"><%= t(:'latest_items.user') %></h5>
+      <h4 class="item-title user-name"><%= link_to item.name, item, class: 'user-link item-link' %></h4>
+      <p class="item-desc user-desc">
+        <%= item.brewery %>
+      </p>
+    </div>
+  </div>
+

@@ -1,0 +1,19 @@
+<%
+  user = item.creator
+  recipe = item.thread.commontable
+%>
+  <div class="list-item comment-item linked-item pure-g">
+    <div class="pure-u">
+      <%= image_tag user.avatar_image, class: 'user-avatar', alt: user.name, height: 64, width: 64 %>
+    </div>
+
+    <div class="pure-u-5-8 comment-item-information">
+      <h5 class="item-subtitle comment-recipe"><%= t(:'latest_items.comment') %></h5>
+      <h4 class="item-title comment-name"><%= link_to recipe.name, recipe, class: 'comment-link item-link' %></h4>
+      <p class="item-desc comment-item-details">
+        <%= truncate(item.body, length: 50, omission: '…') %>
+      </p>
+    </div>
+  </div>
+
+
