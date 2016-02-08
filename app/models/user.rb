@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   include MediaParentConcern
   include SanitizerConcern
+  include PushoverConcern
 
   before_validation :cleanup_fields
   has_many :recipes, dependent: :destroy
@@ -8,8 +9,6 @@ class User < ActiveRecord::Base
   belongs_to :media_avatar, class_name: "Medium"
   belongs_to :media_brewery, class_name: "Medium"
   accepts_nested_attributes_for :media, :reject_if => lambda { |r| r['media'].nil? }
-
-  after_create :notify_pushover
 
   validates :name, presence: true
   validates_format_of :avatar,
@@ -88,18 +87,25 @@ class User < ActiveRecord::Base
     user
   end
 
-  def notify_pushover
-    return if Rails.env.development?
-    values = {
+  def pushover_values(type = :create)
+    translation_values = {
       name: name.blank? ? email : name,
       email: email,
-      sound: 'bugle',
     }
-    Pushover.notification(
-      title: I18n.t(:'common.notification.user.created.title', values),
-      message: I18n.t(:'common.notification.user.created.message', values),
-      url: Rails.application.routes.url_helpers.user_url(self)
-    )
+    if type == :create
+      super.merge({
+        title: I18n.t(:'common.notification.user.created.title', translation_values),
+        message: I18n.t(:'common.notification.user.created.message', translation_values),
+        sound: 'bugle',
+        url: Rails.application.routes.url_helpers.user_url(self)
+      })
+    else
+      super.merge({
+        title: I18n.t(:'common.notification.user.destroyed.title', translation_values),
+        message: I18n.t(:'common.notification.user.destroyed.message', translation_values),
+        sound: 'siren',
+      })
+    end
   end
 
 end

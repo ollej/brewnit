@@ -2,6 +2,7 @@ class Recipe < ActiveRecord::Base
   include MediaParentConcern
   include SearchCop
   include SanitizerConcern
+  include PushoverConcern
 
   search_scope :search do
     attributes primary: [:name, :description, :style_name, :brewer]
@@ -16,8 +17,6 @@ class Recipe < ActiveRecord::Base
   belongs_to :media_main, class_name: "Medium"
   has_many :media, as: :parent, dependent: :destroy
   accepts_nested_attributes_for :media, :reject_if => lambda { |r| r['media'].nil? }
-
-  after_create :notify_pushover
 
   before_save :extract_details, if: Proc.new { |r| r.errors.empty? }
   validates :beerxml, presence: true, beerxml: true
@@ -159,25 +158,33 @@ class Recipe < ActiveRecord::Base
     }
   end
 
-  def notify_pushover
-    return if Rails.env.development?
-    values = {
+  def pushover_values(type = :create)
+    translation_values = {
       recipe_name: name,
       brewer_name: brewer_name,
       style_name: style_name
     }
-    user = if public?
+    if type == :create
+      super.merge({
+        title: I18n.t(:'common.notification.recipe.created.title', translation_values),
+        message: I18n.t(:'common.notification.recipe.created.message', translation_values),
+        url: Rails.application.routes.url_helpers.recipe_url(self)
+      })
+    else
+      super.merge({
+        title: I18n.t(:'common.notification.recipe.destroyed.title', translation_values),
+        message: I18n.t(:'common.notification.recipe.destroyed.message', translation_values),
+        sound: 'falling'
+      })
+    end
+  end
+
+  def pushover_user
+    if public?
       Rails.application.secrets.pushover_group_recipe
     else
-      Rails.application.secrets.pushover_user
+      super
     end
-    Pushover.notification(
-      user: user,
-      title: I18n.t(:'common.notification.recipe.created.title', values),
-      message: I18n.t(:'common.notification.recipe.created.message', values),
-      sound: 'incoming',
-      url: Rails.application.routes.url_helpers.recipe_url(self)
-    )
   end
 
   def self.styles

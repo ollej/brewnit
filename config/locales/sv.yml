@@ -21,15 +21,22 @@ sv:
         title: Google+
         description: Dela receptet på Google+
     notification:
+      default_title: Brygglogg.se notifikation
       subscribe_button: Prenumerera
       recipe:
         created:
           title: "Nytt recept: %{recipe_name}"
           message: "%{brewer_name} har lagt upp en %{style_name} som heter '%{recipe_name}'."
+        destroyed:
+          title: "Recept borttaget: %{recipe_name}"
+          message: "Receptet %{recipe_name} togs bort av %{brewer_name}."
       user:
         created:
           title: "Ny bryggare: %{name}"
           message: "%{name} med e-post %{email} har registrerat sig på Brygglogg.se"
+        destroyed:
+          title: "Bryggare borttagen: %{name}"
+          message: "Användaren %{name} med e-post %{email} har stängt sitt konto."
     search:
       advanced: Utökad sökning
       open_advanced: Fler sökmöjligheter
