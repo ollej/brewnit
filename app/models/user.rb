@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   include MediaParentConcern
+  include SanitizerConcern
 
-  ALLOWED_TAGS = %w(b i strong em br p small del strike s ins u sub sup mark hr q)
   before_validation :cleanup_fields
   has_many :recipes, dependent: :destroy
   has_many :media, as: :parent, dependent: :destroy
@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
 
   acts_as_commontator
   acts_as_voter
+
+  sanitized_fields :presentation
 
   # Unused: :recoverable, :confirmable, :lockable
   devise :database_authenticatable, :rememberable, :trackable, :validatable,
@@ -68,9 +70,6 @@ class User < ActiveRecord::Base
     end
     if !twitter.blank? && !twitter.start_with?('@')
       self.twitter = "@#{twitter.strip}"
-    end
-    if !presentation.blank? && presentation_changed?
-      self.presentation = Rails::Html::WhiteListSanitizer.new.sanitize(presentation, tags: ALLOWED_TAGS)
     end
   end
 

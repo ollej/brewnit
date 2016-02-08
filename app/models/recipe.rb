@@ -1,6 +1,7 @@
 class Recipe < ActiveRecord::Base
   include MediaParentConcern
   include SearchCop
+  include SanitizerConcern
 
   search_scope :search do
     attributes primary: [:name, :description, :style_name, :brewer]
@@ -23,6 +24,8 @@ class Recipe < ActiveRecord::Base
 
   acts_as_commontable
   acts_as_votable
+
+  sanitized_fields :description
 
   default_scope { where(public: true) }
   scope :for_user, -> (user) { unscoped.where('user_id = ? OR public = true', user.id) }

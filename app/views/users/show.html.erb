@@ -46,7 +46,7 @@
         <% if @user.presentation.present? %>
         <div class="user-field">
           <h3><%= I18n.t(:'activerecord.attributes.user.presentation') %></h3>
-          <p><%= @user.presentation.html_safe %></p>
+          <p><%= simple_format(@user.presentation, {}, sanitize: false) %></p>
         </div>
         <% end %>
 

@@ -72,7 +72,7 @@ set_meta_tags title: @recipe.name,
 
         <div class="pure-u-1">
           <p class="recipe-content-subtitle">
-            <%= @recipe.description %>
+            <%= simple_format(@recipe.description, {}, sanitize: false) %>
           </p>
         </div>
 
