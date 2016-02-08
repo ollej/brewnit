@@ -93,4 +93,16 @@ module RecipesHelper
       number_with_precision(misc.amount * 1000, precision: precision)
     end
   end
+
+  def format_text(text)
+    if text.present? && text.kind_of?(String)
+      simple_format(text)
+    end
+  end
+
+  def format_html(html)
+    if html.present? && html.kind_of?(String)
+      simple_format(html, {}, sanitize: false)
+    end
+  end
 end
