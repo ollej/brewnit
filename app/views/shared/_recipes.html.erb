@@ -1,5 +1,16 @@
 <% unless @recipes.nil? %>
 <div id="list" class="pure-u-1 linked-list">
+  <div class="recipe-quicksearch pure-g">
+      <div class="field pure-control-group pure-u-1">
+        <%= form_tag(recipes_path, method: 'get', class: 'pure-form', id: 'quicksearch-form') do %>
+          <%= search_field_tag :q, @search[:q], autocomplete: 'off',
+            class: 'pure-input-1 pure-input-rounded',
+            placeholder: t(:'common.search.quicksearch'),
+            results: 5, autosave: 'brygglogg-search' %>
+        <% end %>
+      </div>
+  </div>
+
 <% @recipes.each do |recipe| %>
   <div class="recipe-item linked-item pure-g <%= item_classes_for(recipe, current_user, @recipe) %>">
     <div class="pure-u">

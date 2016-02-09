@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_user!
   before_action :clear_search
+  before_action :populate_search
   before_action :load_recipes
   before_action :filter_recipes
 
@@ -35,6 +36,10 @@ class ApplicationController < ActionController::Base
 
   def limit_items
     params.fetch(:limit, 50).to_i
+  end
+
+  def populate_search
+    @search = search_hash
   end
 
   def query_hash
