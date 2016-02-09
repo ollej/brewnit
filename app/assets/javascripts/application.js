@@ -92,4 +92,9 @@ $( document ).ready(function() {
 
   // Initialize flasher
   var flasher = new Flasher("#flasher");
+
+  // Auto submit quicksearch
+  $("#sort_order").on('change', function() {
+    this.form.submit();
+  });
 });

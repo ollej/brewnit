@@ -148,10 +148,14 @@ a {
   }
 }
 .recipe-quicksearch {
-  padding: 0.8em 1em 0 1em;
+  padding: 0.8em 0 0 1em;
   border-bottom: 1px solid #ddd;
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
+
+  select {
+    margin-left: 0.5em !important;
+  }
 }
 .recipe-item {
   padding: 0.9em 1em;

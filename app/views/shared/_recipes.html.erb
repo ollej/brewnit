@@ -1,14 +1,19 @@
 <% unless @recipes.nil? %>
 <div id="list" class="pure-u-1 linked-list">
   <div class="recipe-quicksearch pure-g">
-      <div class="field pure-control-group pure-u-1">
-        <%= form_tag(recipes_path, method: 'get', class: 'pure-form', id: 'quicksearch-form') do %>
-          <%= search_field_tag :q, @search[:q], autocomplete: 'off',
+    <%= form_tag(recipes_path, method: 'get', class: 'pure-form', id: 'quicksearch-form') do %>
+      <div class="field pure-control-group pure-u-2-3">
+        <%= search_field_tag :q, @search[:q], autocomplete: 'off',
             class: 'pure-input-1 pure-input-rounded',
             placeholder: t(:'common.search.quicksearch'),
             results: 5, autosave: 'brygglogg-search' %>
-        <% end %>
       </div>
+      <div class="field pure-control-group pure-u-1-3">
+        <%= select_tag :sort_order, options_for_select(@sort_fields, @search[:sort_order]),
+            class: 'pure-input-1',
+            include_blank: t(:'common.search.sort_order') %>
+      </div>
+    <% end %>
   </div>
 
 <% @recipes.each do |recipe| %>

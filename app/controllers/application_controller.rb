@@ -30,8 +30,7 @@ class ApplicationController < ActionController::Base
   end
 
   def filter_recipes
-    @recipes = FilterRecipes.new(@recipes, query_hash).resolve
-      .limit(limit_items).ordered
+    @recipes = FilterRecipes.new(@recipes, query_hash).resolve.limit(limit_items)
   end
 
   def limit_items
@@ -40,6 +39,7 @@ class ApplicationController < ActionController::Base
 
   def populate_search
     @search = search_hash
+    @sort_fields = FilterRecipes::SORT_FIELDS
   end
 
   def query_hash
@@ -61,7 +61,7 @@ class ApplicationController < ActionController::Base
 
   def search_params
     params.permit(:q, :style, :ogfrom, :ogto, :fgfrom, :fgto, :ibufrom, :ibuto,
-                  :colorfrom, :colorto, :abvfrom, :abvto)
+                  :colorfrom, :colorto, :abvfrom, :abvto, :sort_order)
   end
 
   def honeypot

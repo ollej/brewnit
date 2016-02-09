@@ -41,6 +41,16 @@ sv:
       advanced: Utökad sökning
       open_advanced: Fler sökmöjligheter
       quicksearch: Snabbsökning
+      sort_order: Sortering
+      order:
+        name: Recept
+        date: Datum
+        comments: Kommentarer
+        likes: Gillningar
+        downloads: Nedladdningar
+        abv: ABV
+        ibu: IBU
+        style: Stiltyp
     "yes": Ja
     "no": Nej
     spammer_detected: Kunde inte skapa kontot då du verkar vara en spammare.

@@ -213,7 +213,8 @@ CREATE TABLE recipes (
     color numeric,
     brewer character varying,
     downloads integer DEFAULT 0 NOT NULL,
-    media_main_id integer
+    media_main_id integer,
+    cached_votes_up integer DEFAULT 0
 );
 
 
@@ -544,6 +545,13 @@ CREATE INDEX index_recipes_on_brewer ON recipes USING btree (brewer);
 
 
 --
+-- Name: index_recipes_on_cached_votes_up; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_recipes_on_cached_votes_up ON recipes USING btree (cached_votes_up);
+
+
+--
 -- Name: index_recipes_on_color; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -753,4 +761,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160119214911');
 INSERT INTO schema_migrations (version) VALUES ('20160124162437');
 
 INSERT INTO schema_migrations (version) VALUES ('20160124174400');
+
+INSERT INTO schema_migrations (version) VALUES ('20160209201838');
 
