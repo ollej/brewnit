@@ -9,6 +9,7 @@ sv:
     are_you_sure: Är du säker?
     public: Offentlig
     private: Privat
+    unknown_name: N.N.
     share:
       single_title: Dela recept!
       facebook:

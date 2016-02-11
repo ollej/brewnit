@@ -30,6 +30,10 @@ class User < ActiveRecord::Base
   }
   scope :ordered, -> { order("name = '', name ASC, brewery ASC") }
 
+  def display_name
+    name || I18n.t(:'common.unknown_name')
+  end
+
   def admin?
     admin
   end
