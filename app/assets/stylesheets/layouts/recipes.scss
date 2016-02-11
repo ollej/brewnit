@@ -346,3 +346,26 @@ a {
 .recipe-content-subtitle {
   margin: 0.5em 0;
 }
+
+/*
+ * Mobile
+ */
+@media (max-width: 40em) {
+  #list {
+    display: none;
+  }
+  .page-recipes-index #list {
+    display: block;
+  }
+  #nav {
+    #logo {
+      display: none;
+    }
+    &.active {
+      #logo {
+        display: inline-block;
+      }
+    }
+  }
+}
+
