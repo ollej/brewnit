@@ -10,4 +10,14 @@ class AuthenticationFailure < Devise::FailureApp
       redirect
     end
   end
+
+  def redirect
+    store_location!
+    message = warden.message || warden_options[:message]
+    if message == :timeout
+      redirect_to attempted_path
+    else
+      super
+    end
+  end
 end

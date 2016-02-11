@@ -280,4 +280,6 @@ Devise.setup do |config|
   config.warden do |manager|
     manager.failure_app = AuthenticationFailure
   end
+
+  config.timeout_in = 2.hours
 end
