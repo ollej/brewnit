@@ -44,6 +44,7 @@ gem 'paperclip', '~> 4.3.2'
 gem 'jquery-ui-rails', '~> 5.0.5'
 gem 'fancybox2-rails', '~> 0.2.8'
 gem 'chronic', '~> 0.10.2'
+gem 'actionview-encoded_mail_to', '~> 1.0.7'
 
 group :production do
   gem 'rails_12factor', '~> 0.0.3'
