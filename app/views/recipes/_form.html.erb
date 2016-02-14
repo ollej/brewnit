@@ -27,10 +27,6 @@
       <%= f.label :description %>
       <%= f.text_area :description, placeholder: I18n.t(:'activerecord.attributes.recipe.description') %>
     </div>
-    <div class="field pure-control-group">
-      <%= f.label :media %>
-      <%= file_field_tag 'media[]', type: :file, multiple: true %>
-    </div>
     <div class="actions pure-controls">
       <%= f.label :public, class: 'pure-checkbox' do %>
         <%= f.check_box :public %> <%= I18n.t(:'activerecord.attributes.recipe.public') %>
