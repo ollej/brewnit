@@ -1,0 +1,26 @@
+<div id="brew-timer" class="modal fade" role="dialog"
+  aria-labelledby="#brew-timer-title" tabindex='-1'>
+  <div class="modal-dialog modal-lg" role="document">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <%= button_tag class: 'close ', data: { dismiss: 'modal' } do %>
+          <i class="fa fa-times"></i>
+        <% end %>
+        <h3 class="modal-title" id="brew-timer-title"><%= t(:'brewtimer.title') %></h3>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <%= link_to '#start-timer', class: 'brew-timer-start pure-button' do %>
+          <i class="fa fa-play-circle"></i> <%= t(:'brewtimer.start') %>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+

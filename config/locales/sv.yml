@@ -114,6 +114,10 @@ sv:
     downloads_count:
       one: 1 nedladdning
       other: '%{count} nedladdningar'
+    timer: Timer
+  brewtimer:
+    title: Bryggklocka
+    start: Påbörja bryggning
   users:
     index: Bryggare
     profile: Profil

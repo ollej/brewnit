@@ -73,9 +73,9 @@ $( document ).ready(function() {
     return false;
   });
 
-  // Close modals
+  // Close inline-modals
   $("body").on("click", function() {
-    $(".modal").hide();
+    $(".inline-modal").hide();
   });
 
   // Setup range sliders
@@ -97,4 +97,7 @@ $( document ).ready(function() {
   $("#sort_order").on('change', function() {
     this.form.submit();
   });
+
+  var brewTimer = new BrewTimer(".brew-timer", ".brew-timer-start");
+  brewTimer.init();
 });
