@@ -14,7 +14,7 @@ module PushoverConcern
   end
 
   def pushover_disabled?
-    false #Rails.env.development? || pushover_user.blank?
+    Rails.env.development? || pushover_user.blank?
   end
 
   def pushover_values(type = :create)

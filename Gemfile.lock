@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/ollej/beerxml.git
-  revision: 9429db32bc7f6bfcabff9188206f8e7e8263b580
-  ref: 9429db32bc7f6bfcabff9188206f8e7e8263b580
+  revision: 1f4dc01f949c69b9d64fab5b26b01f5045ae0ad8
+  ref: 1f4dc01f949c69b9d64fab5b26b01f5045ae0ad8
   specs:
-    nrb-beerxml (0.1.3)
+    nrb-beerxml (0.1.4)
       activemodel
       nokogiri
 
