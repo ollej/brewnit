@@ -13,8 +13,8 @@ module PushoverConcern
     Rails.application.secrets.pushover_user
   end
 
-  def pushover_disabled?
-    Rails.env.development? || pushover_user.blank?
+  def pushover_enabled?
+    pushover_user.present? && !Rails.env.development?
   end
 
   def pushover_values(type = :create)
@@ -26,7 +26,8 @@ module PushoverConcern
   end
 
   def notify_pushover(type = :create)
-    return if pushover_disabled?
+    Rails.logger.debug { "notify_pushover type: #{type} user: #{pushover_user} enabled? #{pushover_enabled?} development? #{Rails.env.development?}" }
+    return unless pushover_enabled?
     Pushover.notification(pushover_values(type))
   end
 
