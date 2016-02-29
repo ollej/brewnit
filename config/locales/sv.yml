@@ -5,6 +5,9 @@ sv:
       errors:
         max_file_size_exceeded: Du kan inte ladda upp bilder större än 2 MB.
         backend_error: "Kunde inte ladda up filen på grund av:"
+  admin:
+    root: Admin
+    public_link: Publik site
   common:
     are_you_sure: Är du säker?
     public: Offentlig

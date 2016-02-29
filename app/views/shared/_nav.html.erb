@@ -15,7 +15,7 @@
             recipes_path(clear_search: true), class: 'pure-menu-link' %>
         </li>
         <li class="pure-menu-item">
-          <i class="fa fa-user"></i><%= link_to t(:'users.index'),
+          <i class="fa fa-users"></i><%= link_to t(:'users.index'),
             users_path, class: 'pure-menu-link' %>
         </li>
       <% if user_signed_in? %>
@@ -27,6 +27,12 @@
           <i class="fa fa-sign-out"></i><%= link_to t(:'users.sign_out'),
             destroy_user_session_path, class: 'pure-menu-link' %>
         </li>
+        <% if current_user.admin? %>
+        <li class="pure-menu-item">
+          <i class="fa fa-user-secret"></i><%= link_to t(:'admin.root'),
+            admin_root_path, class: 'pure-menu-link' %>
+        </li>
+        <% end %>
       <% else %>
         <li class="pure-menu-item">
           <i class="fa fa-sign-in"></i><%= link_to t(:'users.sign_in'),
