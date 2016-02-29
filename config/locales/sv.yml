@@ -54,6 +54,8 @@ sv:
         style: Stiltyp
     "yes": Ja
     "no": Nej
+    "true": Ja
+    "false": Nej
     spammer_detected: Kunde inte skapa kontot då du verkar vara en spammare.
     media:
       upload: Ladda upp bild

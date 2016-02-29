@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    resources :users
+    resources :media
+    resources :recipes
+
+    root to: "users#index"
+  end
+
   get 'add_media/create'
 
   get 'open_search/show'

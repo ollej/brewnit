@@ -1,5 +1,17 @@
 ---
 en:
+  javascript:
+    fileupload:
+      errors:
+        max_file_size_exceeded: Max file size exceeded.
+        backend_error: "The file could not be uploaded because of:"
+  common:
+    are_you_sure: Are you sure?
+    public: Public
+    private: Private
+    unknown_name: N/A
+    "true": Yes
+    "false": No
   beerxml:
     information: Information
     style: Style
