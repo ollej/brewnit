@@ -101,9 +101,9 @@ class Recipe < ActiveRecord::Base
     self.color = beerxml_details.color_ebc
     self.brewer = beerxml_details.brewer
     if beerxml_details.equipment.present?
-      self.equipment = beerxml_details.equipment.try(:name)
+      self.equipment = beerxml_details.equipment.try(:name) || ''
     else
-      self.equipment = user.equipment
+      self.equipment = user.equipment || ''
     end
   end
 
@@ -197,7 +197,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def self.equipments
-    self.uniq.pluck(:equipment).map(&:capitalize).uniq.reject { |r| r.empty? }.sort
+    self.uniq.pluck(:equipment).reject { |r| r.empty? }.map(&:capitalize).uniq.sort
   end
 
   def self.latest
