@@ -6,7 +6,6 @@ class RecipesController < ApplicationController
   # GET /recipes
   # GET /recipes.json
   def index
-    @styles = Recipe.styles
     @search = search_hash
     respond_to do |format|
       format.html { render :index }

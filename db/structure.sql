@@ -195,8 +195,8 @@ ALTER SEQUENCE media_id_seq OWNED BY media.id;
 
 CREATE TABLE recipes (
     id integer NOT NULL,
-    name character varying,
-    description text,
+    name character varying DEFAULT ''::character varying,
+    description text DEFAULT ''::text,
     beerxml text,
     public boolean,
     created_at timestamp without time zone NOT NULL,
@@ -208,13 +208,14 @@ CREATE TABLE recipes (
     fg numeric,
     style_code character varying,
     style_guide character varying,
-    style_name character varying,
+    style_name character varying DEFAULT ''::character varying,
     batch_size numeric,
     color numeric,
-    brewer character varying,
+    brewer character varying DEFAULT ''::character varying,
     downloads integer DEFAULT 0 NOT NULL,
     media_main_id integer,
-    cached_votes_up integer DEFAULT 0
+    cached_votes_up integer DEFAULT 0,
+    equipment character varying DEFAULT ''::character varying
 );
 
 
@@ -274,12 +275,12 @@ CREATE TABLE users (
     updated_at timestamp without time zone NOT NULL,
     admin boolean,
     avatar character varying,
-    presentation text,
+    presentation text DEFAULT ''::text,
     location character varying,
-    brewery character varying,
-    twitter character varying,
+    brewery character varying DEFAULT ''::character varying,
+    twitter character varying DEFAULT ''::character varying,
     url character varying,
-    equipment character varying,
+    equipment character varying DEFAULT ''::character varying,
     media_avatar_id integer,
     media_brewery_id integer
 );
@@ -447,10 +448,17 @@ ALTER TABLE ONLY votes
 
 
 --
+-- Name: fulltext_index_recipes_on_equipment; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX fulltext_index_recipes_on_equipment ON recipes USING gin (to_tsvector('simple'::regconfig, (COALESCE(equipment, ''::character varying))::text));
+
+
+--
 -- Name: fulltext_index_recipes_on_primary; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX fulltext_index_recipes_on_primary ON recipes USING gin (to_tsvector('simple'::regconfig, (((((((name)::text || ' '::text) || description) || ' '::text) || (style_name)::text) || ' '::text) || (brewer)::text)));
+CREATE INDEX fulltext_index_recipes_on_primary ON recipes USING gin (to_tsvector('simple'::regconfig, (((((((((COALESCE(name, ''::character varying))::text || ' '::text) || COALESCE(description, ''::text)) || ' '::text) || (COALESCE(style_name, ''::character varying))::text) || ' '::text) || (COALESCE(equipment, ''::character varying))::text) || ' '::text) || (COALESCE(brewer, ''::character varying))::text)));
 
 
 --
@@ -461,10 +469,31 @@ CREATE INDEX fulltext_index_recipes_on_style_name ON recipes USING gin (to_tsvec
 
 
 --
+-- Name: fulltext_index_users_on_brewery; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX fulltext_index_users_on_brewery ON users USING gin (to_tsvector('simple'::regconfig, (COALESCE(brewery, ''::character varying))::text));
+
+
+--
+-- Name: fulltext_index_users_on_equipment; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX fulltext_index_users_on_equipment ON users USING gin (to_tsvector('simple'::regconfig, (COALESCE(equipment, ''::character varying))::text));
+
+
+--
 -- Name: fulltext_index_users_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX fulltext_index_users_on_name ON users USING gin (to_tsvector('simple'::regconfig, (name)::text));
+
+
+--
+-- Name: fulltext_index_users_on_primary; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX fulltext_index_users_on_primary ON users USING gin (to_tsvector('simple'::regconfig, (((((((((COALESCE(name, ''::character varying))::text || ' '::text) || COALESCE(presentation, ''::text)) || ' '::text) || (COALESCE(equipment, ''::character varying))::text) || ' '::text) || (COALESCE(brewery, ''::character varying))::text) || ' '::text) || (COALESCE(twitter, ''::character varying))::text)));
 
 
 --
@@ -763,4 +792,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160124162437');
 INSERT INTO schema_migrations (version) VALUES ('20160124174400');
 
 INSERT INTO schema_migrations (version) VALUES ('20160209201838');
+
+INSERT INTO schema_migrations (version) VALUES ('20160307193952');
 

@@ -93,6 +93,7 @@ class FilterRecipes
       query = []
       query << { query: @hash[:q] } if @hash[:q].present?
       query << { style_name: @hash[:style] } if @hash[:style].present?
+      query << { equipment: @hash[:equipment] } if @hash[:equipment].present?
       add_filters(query)
       query
     end

@@ -84,6 +84,7 @@ sv:
       freetext: Fritext
       style: Stiltyp
       clear: Nollställ sökning
+      equipment: Bryggverk
     download: Ladda ner
     print: Skriv ut
     private: Privat
@@ -152,7 +153,7 @@ sv:
     kilograms: kg
     hops: Humle
     grams: gr
-    equipment: Utrustning
+    equipment: Bryggverk
     brew_date: Bryggdatum
     brewer: Bryggare
     assisted_by: med hjälp av %{assistant}
@@ -492,7 +493,7 @@ sv:
         url: Hemsida
         brewery: Bryggeri
         twitter: Twitter
-        equipment: Utrustning
+        equipment: Bryggverk
         name: Namn
         avatar: Avatar
         medium_avatar: Avatarbild

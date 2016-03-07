@@ -1,7 +1,16 @@
 class User < ActiveRecord::Base
   include MediaParentConcern
+  include SearchCop
   include SanitizerConcern
   include PushoverConcern
+
+  search_scope :search do
+    attributes primary: [:name, :presentation, :equipment, :brewery, :twitter]
+    attributes :brewer, :equipment
+    options :primary, type: :fulltext, default: true
+    options :brewery, type: :fulltext, default: false
+    options :equipment, type: :fulltext, default: false
+  end
 
   before_validation :cleanup_fields
   has_many :recipes, dependent: :destroy
@@ -68,10 +77,10 @@ class User < ActiveRecord::Base
   end
 
   def cleanup_fields
-    if !url.blank? && !url.start_with?('http')
+    if url.present? && !url.start_with?('http')
       self.url = "http://#{url.strip}"
     end
-    if !twitter.blank? && !twitter.start_with?('@')
+    if twitter.present? && !twitter.start_with?('@')
       self.twitter = "@#{twitter.strip}"
     end
   end

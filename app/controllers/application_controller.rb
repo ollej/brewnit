@@ -61,7 +61,7 @@ class ApplicationController < ActionController::Base
 
   def search_params
     params.permit(:q, :style, :ogfrom, :ogto, :fgfrom, :fgto, :ibufrom, :ibuto,
-                  :colorfrom, :colorto, :abvfrom, :abvto, :sort_order)
+                  :colorfrom, :colorto, :abvfrom, :abvto, :sort_order, :equipment)
   end
 
   def honeypot

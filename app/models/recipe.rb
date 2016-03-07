@@ -5,8 +5,8 @@ class Recipe < ActiveRecord::Base
   include PushoverConcern
 
   search_scope :search do
-    attributes primary: [:name, :description, :style_name, :brewer]
-    attributes :abv, :ibu, :og, :fg, :color, :batch_size, :style_code, :style_guide, :style_name, :created_at, :brewer
+    attributes primary: [:name, :description, :style_name, :brewer, :equipment]
+    attributes :abv, :ibu, :og, :fg, :color, :batch_size, :style_code, :style_guide, :style_name, :created_at, :brewer, :equipment
     attributes owner: 'user.name'
     options :primary, type: :fulltext, default: true
     options :owner, type: :fulltext, default: true
@@ -100,6 +100,11 @@ class Recipe < ActiveRecord::Base
     self.batch_size = beerxml_details.batch_size
     self.color = beerxml_details.color_ebc
     self.brewer = beerxml_details.brewer
+    if beerxml_details.equipment.present?
+      self.equipment = beerxml_details.equipment.try(:name)
+    else
+      self.equipment = user.equipment
+    end
   end
 
   def malt_data
@@ -189,6 +194,10 @@ class Recipe < ActiveRecord::Base
 
   def self.styles
     self.uniq.pluck(:style_name).map(&:capitalize).uniq.sort
+  end
+
+  def self.equipments
+    self.uniq.pluck(:equipment).map(&:capitalize).uniq.reject { |r| r.empty? }.sort
   end
 
   def self.latest
