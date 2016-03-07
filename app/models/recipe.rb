@@ -95,11 +95,11 @@ class Recipe < ActiveRecord::Base
     self.og = beerxml_details.og
     self.fg = beerxml_details.fg
     self.style_code = beerxml_details.style_code
-    self.style_guide = beerxml_details.style.style_guide
-    self.style_name = beerxml_details.style.name
+    self.style_guide = beerxml_details.style.try(:style_guide) || ''
+    self.style_name = beerxml_details.style.try(:name) || ''
     self.batch_size = beerxml_details.batch_size
     self.color = beerxml_details.color_ebc
-    self.brewer = beerxml_details.brewer
+    self.brewer = beerxml_details.brewer || ''
     if beerxml_details.equipment.present?
       self.equipment = beerxml_details.equipment.try(:name) || ''
     else
