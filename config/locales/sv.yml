@@ -40,7 +40,7 @@ sv:
           message: "%{name} med e-post %{email} har registrerat sig på Brygglogg.se"
         destroyed:
           title: "Bryggare borttagen: %{name}"
-          message: "Användaren %{name} med e-post %{email} har stängt sitt konto."
+          message: "Användaren %{name} med e-post %{email} har tagits bort."
     search:
       advanced: Utökad sökning
       open_advanced: Fler sökmöjligheter
