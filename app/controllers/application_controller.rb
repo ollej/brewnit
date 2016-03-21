@@ -69,11 +69,11 @@ class ApplicationController < ActionController::Base
   end
 
   def spammer?
-    honeypot.suspicious?
+    !honeypot.safe?
   end
 
   def redirect_spammers!
-    Rails.logger.debug { "Spammer detected! #{request.remote_ip}" }
+    Rails.logger.debug { "Spammer detected! IP: #{honeypot.ip_address} Score: #{honeypot.score} Offenses: #{honeypot.offenses} Last activity: #{honeypot.last_activity}" }
     flash[:alert] = I18n.t(:'common.spammer_detected')
     redirect_to root_path
   end
