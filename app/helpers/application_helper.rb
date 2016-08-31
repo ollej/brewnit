@@ -17,4 +17,19 @@ module ApplicationHelper
     Rails.logger.debug { "rendering item: #{item.inspect}" }
     render partial: "shared/#{item.class.name.demodulize.underscore}_item", locals: { item: item }
   end
+
+  def full_url?(url)
+    uri = URI.parse(url)
+    uri.hostname.present? && uri.scheme.present?
+  rescue URI::Error
+    false
+  end
+
+  def full_url_for(url)
+    unless full_url?(url)
+      asset_url(url)
+    else
+      url
+    end
+  end
 end
