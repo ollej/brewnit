@@ -14,7 +14,7 @@ set_meta_tags title: @recipe.name,
   },
   twitter: {
     card: 'summary',
-    site: @recipe.user.try(:twitter) || '@ollej',
+    site: @recipe.user.try(:twitter) || '@ExaltedBeer',
     title: :title,
     description: :description,
     image: full_url_for(@recipe.main_image(:large)),
