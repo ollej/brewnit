@@ -122,7 +122,7 @@ class Recipe < ActiveRecord::Base
         I18n.t(:'beerxml.addition_aroma')
       end
     else
-      I18n.t("beerxml.hopuse.#{hop.use}")
+      I18n.t("beerxml.hop_use.#{hop.use}")
     end
   end
 
@@ -170,41 +170,91 @@ class Recipe < ActiveRecord::Base
     hops_sorted.select { |hop| hop.use == 'Boil' }
   end
 
-  def boil_step_list
-    total_time = beerxml_details.boil_time
+  def whirlpool_hops
+    hops_sorted.select { |hop| hop.use == 'Aroma' }
+  end
 
-    # Calculate step times and descriptions
-    # Prepend step if total_time > highest step_time
-    step_time = nil
-    steps = boil_hops.reverse.map do |hop|
-      last_time = step_time
-      step_time = total_time - hop.time
-      if last_time.nil? && total_time > step_time
-        # add extra step
-      end
-      if last_time != step_time
-        total_time -= step_time
-      end
-
+  def hop_steps
+    boil_hops.map do |step|
       {
-        name: hop.name,
-        description: hop_info(hop),
-        time: step_time,
-        addition: hop_addition_name(hop)
+        name: hop_addition_name(step),
+        description: hop_info(step),
+        addition_time: step.time.to_i,
       }
     end
+  end
 
-    # Merge steps into hop additions
+  def misc_info(misc)
+    "#{misc.formatted_amount} #{I18n.t("beerxml.#{misc.unit}", default: 'grams')} #{misc.name} @ #{misc.formatted_time} #{I18n.t("beerxml.#{misc.time_unit}", default: misc.time_unit)}"
+  end
+
+  def miscs_sorted
+    beerxml_details.miscs.sort_by { |misc| misc.time }
+  end
+
+  def boil_miscs
+    miscs_sorted.select { |misc| misc.use == 'Boil' }
+  end
+
+  def misc_steps
+    boil_miscs.map do |step|
+      {
+        name: step.type,
+        description: misc_info(step),
+        addition_time: step.time.to_i,
+      }
+    end
+  end
+
+  def calculate_step_times(steps)
+    step_times = 0
+    steps.map do |step|
+      step_time = step[:addition_time] - step_times
+      step_times += step_time
+      step[:time] = step_time * 60
+      step
+    end
+
+    steps
+  end
+
+  def add_boil_step(steps)
+    highest_step_time = steps.map { |step| step[:addition_time] }.max
+    boil_time = beerxml_details.boil_time - highest_step_time
+    #Rails.logger.debug { "highest_step_time: #{highest_step_time} boil_time: #{boil_time} total_boil_time: #{beerxml_details.boil_time}" }
+    if highest_step_time < beerxml_details.boil_time
+      steps << {
+        name: I18n.t(:'beerxml.Boil'),
+        description: I18n.t(:'beerxml.boil_time', boil_time: boil_time),
+        addition_time: beerxml_details.boil_time.to_i
+      }
+    end
+    steps
+  end
+
+  def merge_steps(steps)
     additions = {}
+    steps.sort_by! { |step| step[:addition_time] }
     steps.each do |step|
-      if additions[step[:time]]
-        description = [step[:description], additions[step[:time]][:description]].join("\n")
-        additions[step[:time]][:description] = description
+      if additions[step[:addition_time]]
+        description = [step[:description], additions[step[:addition_time]][:description]].join("\n")
+        additions[step[:addition_time]][:description] = description
       else
-        additions[step[:time]] = step
+        additions[step[:addition_time]] = step
       end
     end
     additions.values
+  end
+
+  def boil_step_list
+    steps = hop_steps + misc_steps
+    steps = merge_steps(steps)
+    steps = add_boil_step(steps)
+    steps = calculate_step_times(steps)
+
+    # TODO: Add whirlpool additions
+
+    steps.reverse
   end
 
   def mash_step_list

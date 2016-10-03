@@ -303,8 +303,9 @@ sv:
       Dry Hop: Torrhumling
       First Wort: Vörthumling
       Boil: Kok
-      Aroma: Arom
+      Aroma: Whirlpool
       Mash: Mäskhumling
+    boil_time: Koka i %{boil_time} minuter.
   devise:
     confirmations:
       confirmed: "Ditt konto har bekräftats. Du är nu inloggad."
