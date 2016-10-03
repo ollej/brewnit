@@ -48,8 +48,8 @@ module Brewnit
     config.action_mailer.logger = Rails.logger
     config.action_mailer.default_options = {
       charset: 'UTF-8',
-      from: 'brewmaster@brygglog.se',
-      reply_to: 'brewmaster@brygglog.se',
+      from: 'brewmaster@brygglogg.se',
+      reply_to: 'brewmaster@brygglogg.se',
     }
     config.action_mailer.smtp_settings = {
       address:              'mail.gandi.net',

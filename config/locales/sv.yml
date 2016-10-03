@@ -538,6 +538,7 @@ sv:
             email:
               blank: får inte vara tomt.
               invalid: kunde inte valideras.
+              not_found: kunde inte hittas.
             password:
               blank: får inte vara tomt.
               too_short: är för kort.
