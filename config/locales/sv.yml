@@ -194,6 +194,7 @@ sv:
     days: dgr
     min: min
     Dry Hop: Torrhumling
+    First Wort: Vörthumling
     Boil: Kok
     Aroma: Arom
     yeasts: Jäst
@@ -298,6 +299,12 @@ sv:
     max_reuse: Max antal generationer
     add_to_secondary: Använd till sekundärjäsning
     use_for: Används till
+    hop_use:
+      Dry Hop: Torrhumling
+      First Wort: Vörthumling
+      Boil: Kok
+      Aroma: Arom
+      Mash: Mäskhumling
   devise:
     confirmations:
       confirmed: "Ditt konto har bekräftats. Du är nu inloggad."

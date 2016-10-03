@@ -25,5 +25,7 @@ Rails.application.routes.draw do
 
   resources :latest_items, only: [:index]
 
+  resources :recipe_steps, only: [:show]
+
   root to: 'latest_items#index'
 end

@@ -122,7 +122,7 @@ class Recipe < ActiveRecord::Base
         I18n.t(:'beerxml.addition_aroma')
       end
     else
-      I18n.t("beerxml.#{hop.use}")
+      I18n.t("beerxml.hopuse.#{hop.use}")
     end
   end
 
@@ -135,13 +135,17 @@ class Recipe < ActiveRecord::Base
       aau: hop.aau,
       mgl_alpha: hop.mgl_added_alpha_acids,
       grams_per_liter: hop.amount / batch_size,
-      tooltip: "#{hop.formatted_amount} #{I18n.t(:'beerxml.grams')} #{hop.name} @ #{hop.formatted_time} #{I18n.t("beerxml.#{hop.time_unit}", default: hop.time_unit)}"
+      tooltip: hop_info(hop)
     }
+  end
+
+  def hop_info(hop)
+    "#{hop.formatted_amount} #{I18n.t(:'beerxml.grams')} #{hop.name} @ #{hop.formatted_time} #{I18n.t("beerxml.#{hop.time_unit}", default: hop.time_unit)}"
   end
 
   def hop_additions
     hops = {}
-    beerxml_details.hops.map do |h|
+    hops_sorted.map do |h|
       if hops[h.time]
         hops[h.time][:children] << hop_data(h)
       else
@@ -156,6 +160,68 @@ class Recipe < ActiveRecord::Base
       name: I18n.t(:'beerxml.hops'),
       children: hop_additions.values
     }
+  end
+
+  def hops_sorted
+    beerxml_details.hops.sort_by { |hop| hop.time }
+  end
+
+  def boil_hops
+    hops_sorted.select { |hop| hop.use == 'Boil' }
+  end
+
+  def boil_step_list
+    total_time = beerxml_details.boil_time
+
+    # Calculate step times and descriptions
+    # Prepend step if total_time > highest step_time
+    step_time = nil
+    steps = boil_hops.reverse.map do |hop|
+      last_time = step_time
+      step_time = total_time - hop.time
+      if last_time.nil? && total_time > step_time
+        # add extra step
+      end
+      if last_time != step_time
+        total_time -= step_time
+      end
+
+      {
+        name: hop.name,
+        description: hop_info(hop),
+        time: step_time,
+        addition: hop_addition_name(hop)
+      }
+    end
+
+    # Merge steps into hop additions
+    additions = {}
+    steps.each do |step|
+      if additions[step[:time]]
+        description = [step[:description], additions[step[:time]][:description]].join("\n")
+        additions[step[:time]][:description] = description
+      else
+        additions[step[:time]] = step
+      end
+    end
+    additions.values
+  end
+
+  def mash_step_list
+    steps = []
+    beerxml_details.mash.steps.each do |step|
+      steps.push({
+        name: step.name,
+        description: "Raise to #{step.step_temp}°C",
+        time: step.ramp_time * 60,
+      })
+      steps.push({
+        name: step.name,
+        description: "Hold at #{step.step_temp}°C for #{step.step_time} min",
+        time: step.step_time * 60,
+      })
+    end
+    steps
   end
 
   def pushover_values(type = :create)

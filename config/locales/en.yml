@@ -52,6 +52,7 @@ en:
     days: days
     min: min
     Dry Hop: Dry Hop
+    First Wort: First Wort
     Boil: Boil
     Aroma: Aroma
     yeasts: Yeasts
@@ -101,3 +102,9 @@ en:
     items: items
     Primary: Primary
     Bottling: Bottling
+    hop_use:
+      Dry Hop: Dry Hop
+      First Wort: First Wort
+      Boil: Boil
+      Aroma: Aroma
+      Mash: Mash Hopping
