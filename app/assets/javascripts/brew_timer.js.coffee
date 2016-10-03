@@ -1,29 +1,62 @@
 class BrewTimer
-  constructor: (@el, @link) ->
+  interval_time: 250
+  increment: 1000
 
-  init: ->
-    console.log('modal-content', $('#brew-timer'))
-    $("#brew-timer")
-      .on('shown.bs.modal', @setupEvents)
-      .on('hidden.bs.modal', @cancelEvents)
+  constructor: (@el, @steps) ->
+    @reset()
+    @render()
 
-  setupEvents: =>
-    console.log('setup events')
-    $(@link).on("click", @toggleTimer)
-    # TODO: Only when modal is active
-    $(window).on("keypress", @keyPressed)
-    
-  keyPressed: (ev) =>
-    @toggleTimer() if (ev.keyCode == 0 || ev.keyCode == 32)
-    return false
+  start: ->
+    console.log('start')
+    if @start_time?
+      @start_time = Date.now() - @timer
+    else
+      @start_time = Date.now()
+    @running = true
+    @setInterval()
 
-  cancelEvents: =>
-    console.log('cancel events')
-    $(@link).off("click", @toggleTimer)
-    $(window).off("keypress", @keyPressed)
+  stop: ->
+    console.log('stop')
+    @timer = Date.now() - @start_time
+    @running = false
+    @clearTimeout()
 
-  toggleTimer: =>
-    console.log('toggleTimer')
-    # TODO: Switch button between play/pause
+  reset: ->
+    console.log('reset')
+    @start_time = null
+    @timer = 0
+    @running = false
+    @clearTimeout()
+
+  toggle: ->
+    console.log('toggle', @running)
+    if @running
+      @stop()
+    else
+      @start()
+
+  render: ->
+    #console.log('render')
+    time = @calculateTime()
+    @el.html("#{time} s")
+
+  calculateTime: ->
+    return 0 unless @start_time?
+    Math.round((Date.now() - @start_time) / 1000)
+
+  setInterval: ->
+    @interval = window.setTimeout(@onInterval, @interval_time)
+
+  clearTimeout: ->
+    console.log('clearTimeout')
+    if @interval?
+      window.clearTimeout(@interval)
+      @interval = null
+
+  onInterval: =>
+    # TODO: Render list, update timer, add current class on step, remove current class on other steps
+    #console.log('onInterval')
+    @render()
+    @setInterval()
   
 (exports ? this).BrewTimer = BrewTimer

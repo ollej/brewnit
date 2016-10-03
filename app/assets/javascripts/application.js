@@ -98,6 +98,6 @@ $( document ).ready(function() {
     this.form.submit();
   });
 
-  var brewTimer = new BrewTimer(".brew-timer", ".brew-timer-start");
+  var brewTimer = new BrewTimerDialog("#brew-timer", ".brew-timer-start");
   brewTimer.init();
 });
