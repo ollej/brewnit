@@ -27,8 +27,8 @@ class UserDashboard < Administrate::BaseDashboard
     sign_in_count: Field::Number,
     current_sign_in_at: Field::DateTime,
     last_sign_in_at: Field::DateTime,
-    current_sign_in_ip: Field::String.with_options(searchable: false),
-    last_sign_in_ip: Field::String.with_options(searchable: false),
+    current_sign_in_ip: IpField.with_options(searchable: false),
+    last_sign_in_ip: IpField.with_options(searchable: false),
     confirmation_token: Field::String,
     confirmed_at: Field::DateTime,
     confirmation_sent_at: Field::DateTime,
@@ -60,6 +60,7 @@ class UserDashboard < Administrate::BaseDashboard
     :name,
     :brewery,
     :location,
+    :last_sign_in_ip,
     :recipes,
   ]
 
