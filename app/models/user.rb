@@ -30,8 +30,8 @@ class User < ActiveRecord::Base
 
   sanitized_fields :presentation
 
-  # Unused: :recoverable, :confirmable, :lockable
-  devise :database_authenticatable, :rememberable, :trackable, :validatable,
+  # Unused: ::confirmable, :lockable
+  devise :database_authenticatable, :rememberable, :trackable, :validatable, :recoverable,
          :registerable, :timeoutable, :omniauthable, omniauth_providers: [:google]
 
   scope :by_query, lambda { |query, col = :name|

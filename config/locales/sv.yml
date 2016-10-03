@@ -319,7 +319,7 @@ sv:
       confirmation_instructions:
         subject: "Instruktioner för att bekräfta konto"
       reset_password_instructions:
-        subject: "Instrukionter för att återställa lösenord"
+        subject: "Instruktioner för att återställa lösenord"
       unlock_instructions:
         subject: "Instruktioner för att låsa up konto"
     omniauth_callbacks:
@@ -331,6 +331,13 @@ sv:
       send_paranoid_instructions: "Om din email är i vår databas, kommer du att få en lösenordslänk till din mail."
       updated: "Ditt lösenord har uppdaterats. Du är nu inloggad."
       updated_not_active: "Ditt lösenord har uppdaterats."
+      recover_password: Återställ lösenord
+      reset_password: Skicka instruktioner för att återställa lösenord
+      change_your_password: Ändra ditt lösenord
+      change_my_password: Ändra mitt lösenord
+      new_password: Nytt lösenord
+      confirm_new_password: Bekräfta lösenord
+      forgot_your_password: Glömt ditt lösenord?
     registrations:
       destroyed: "Ditt konto är nu avregistrerat. Vi hoppas få se dig snart igen."
       signed_up: "Välkommen till Brygglogg.se! Fyll gärna i uppgifterna nedan."

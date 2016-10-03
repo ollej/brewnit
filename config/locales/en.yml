@@ -113,3 +113,13 @@ en:
     items: items
     Primary: Primary
     Bottling: Bottling
+  devise:
+    passwords:
+      recover_password: Forgot password?
+      reset_password: Send password reset instructions
+      change_your_password: Change your password
+      change_my_password: Change my password
+      new_password: New password
+      confirm_new_password: Confirm new password
+      forgot_your_password: Forgot your password?
+
