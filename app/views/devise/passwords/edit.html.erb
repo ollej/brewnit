@@ -14,10 +14,10 @@
   <fieldset>
     <div class="field pure-control-group">
       <%= f.label :password, I18n.t(:'devise.passwords.new_password') %>
+      <%= f.password_field :password, autofocus: true, autocomplete: 'off', required: true %>
       <% if @minimum_password_length %>
         <em>(<%= I18n.t(:'users.min_pwd_length', min_length: @minimum_password_length) %>)</em>
       <% end %>
-      <%= f.password_field :password, autofocus: true, autocomplete: 'off', required: true %>
     </div>
 
     <div class="field pure-control-group">
