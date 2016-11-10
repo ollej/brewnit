@@ -1,6 +1,11 @@
 class BrewTimer
   interval_time: 250
   increment: 1000
+  # TODO: Configuration
+  # TODO: Listen to start/stop events
+  # TODO: Send start/stop/interval events
+  # TODO: Render step list
+  # TODO: Find current step in list
 
   constructor: (@el, @steps) ->
     @reset()
@@ -17,9 +22,12 @@ class BrewTimer
 
   stop: ->
     console.log('stop')
-    @timer = Date.now() - @start_time
+    @updateTimer()
     @running = false
     @clearTimeout()
+
+  updateTimer: ->
+    @timer = Date.now() - @start_time
 
   reset: ->
     console.log('reset')

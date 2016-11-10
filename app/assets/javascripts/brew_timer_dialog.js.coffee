@@ -14,7 +14,6 @@ class BrewTimerDialog
   storeSteps: (data) =>
     @steps = data
     @timer = new BrewTimer($('.timer-steps', $(@el)), @steps)
-    # TODO: Render step list
     console.log @steps
 
   setupEvents: =>
