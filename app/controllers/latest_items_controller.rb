@@ -12,6 +12,8 @@ class LatestItemsController < ApplicationController
   end
 
   def latest_comments
-    Commontator::Comment.limit(10).order('created_at desc')
+    Commontator::Comment.where(deleted_at: nil).limit(10).order('created_at desc').reject do |comment|
+      comment.thread.commontable.nil? || !comment.thread.can_be_read_by?(current_user)
+    end
   end
 end
