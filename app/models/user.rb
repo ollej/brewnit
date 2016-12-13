@@ -40,7 +40,13 @@ class User < ActiveRecord::Base
   scope :ordered, -> { order("name = '', name ASC, brewery ASC") }
 
   def display_name
-    name || I18n.t(:'common.unknown_name')
+    if name.present?
+      name
+    elsif brewery.present?
+      brewery
+    else
+      I18n.t(:'common.unknown_name')
+    end
   end
 
   def admin?

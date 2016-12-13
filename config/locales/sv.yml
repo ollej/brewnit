@@ -229,7 +229,7 @@ sv:
     misc_type: Typ
     misc_amount: Mängd
     misc_use: Användning
-    misc_use_for: Användningsområde
+    misc_use_for: Används till
     misc_time: Tid
     Fining: Klarning
     Herb: Ört
@@ -300,6 +300,76 @@ sv:
     max_reuse: Max antal generationer
     add_to_secondary: Använd till sekundärjäsning
     use_for: Används till
+    hop_uses:
+      Mash: Mäskning
+      First Wort: First wort
+      Boil: Kok
+      Aroma: Whirlpool
+      Dry Hop: Torrhumling
+    hop_forms:
+      Pellet: Pellets
+      Leaf: Kottar
+      Plug: Puck
+    time_unit:
+      days: dgr
+      min: min
+    yeast_types:
+      Wheat: Vete
+      Wine: Vin
+      Ale: Ale
+      Lager: Lager
+      Champagne: Champagne
+    yeast_forms:
+      Dry: Torr
+      Liquid: Flytande
+      Culture: Kultur
+      Slant: Slant
+    misc_uses:
+      Mash: Mäskning
+      Boil: Kok
+      Primary: Primärjäsning
+      Secondary: Sekundärjäsning
+      Bottling: Buteljering
+    misc_used_for:
+      Clearing: Klarning
+      Fermentation: Jäsning
+      Water Agent: Vattenjustering
+      Mash pH: Mäsk pH
+      Flavoring: Smaksättning
+      Spiced Beer: Kryddöl
+    misc_names:
+      Ginger Root: Ingefära
+      Coffee: Kaffe
+      Seeds of Paradise: Paradisfrön
+    misc_types:
+      Spice: Krydda
+      Fining: Klarning
+      Water Agent: Vattenjustering
+      Herb: Ört
+      Flavor: Smak
+      Other: Övrigt
+    mash_step_name:
+      Dough In: Dough In
+      Conversion: Conversion
+      Mash In: Inmäskning
+      Protein Rest: Proteinrast
+      Saccharification: Försockringsrast
+      Low Saccharification: Låg försockring
+      High Saccharification: Hög försockring
+      Mash Out: Utmäskning
+      Mash: Mäskning
+      Sparge: Lakning
+      Step 1: Steg 1
+      Step: Steg
+    mash_step_type:
+      Temperature: Temperatur
+      Infusion: Infusion
+      Decoction: Dekoktion
+    fermentable_types:
+      Grain: Malt
+      Dry Extract: Extrakt
+      Sugar: Socker
+      Adjunct: Adjunkt
   devise:
     confirmations:
       confirmed: "Ditt konto har bekräftats. Du är nu inloggad."

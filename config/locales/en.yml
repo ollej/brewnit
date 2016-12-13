@@ -113,6 +113,140 @@ en:
     items: items
     Primary: Primary
     Bottling: Bottling
+    addition_bitter: Bitter
+    addition_flavour: Smakgiva
+    addition_aroma: Aroma
+    addition_dry_hop: Dry Hop
+    style_guide: Style Guide
+    style_type: Type
+    style_examples: Examples
+    style_ingredients: Ingredients
+    style_notes: Notes
+    style_profile: Profile
+    Bittering: Bitter
+    Culture: Culture
+    Slant: Slant
+    Mash: Mash
+    Step: Step
+    mg_per_liter_aa: mg/L AA
+    aau: AAU
+    grams_per_liter: gr/L
+    beta: Beta
+    caryophyllene: Caryophyllene
+    cohumulone: Cohumulone
+    hsi: HSI
+    myrcene: Myrcene
+    origin: Origin
+    unknown: ""
+    supplier: Supplier
+    substitutes: Substitues
+    coarse_fine_difference: Coarse fine difference
+    moisture: Moisture
+    yield: Yield
+    diastatic_power: Diastatic power
+    max_in_batch: Max in batch
+    ibu_gal_per_lb: IBU gallon/liter
+    protein: Protein
+    recommend_mash: Recommend mash
+    add_after_boil: Add after boil
+    SWE: Sweden
+    Sweden: Sweden
+    United Kingdom: United Kingdom
+    Wheat: Wheat
+    Wine: Wine
+    Ale: Ale
+    Lager: Lager
+    Champagne: Champagne
+    flocculation: Flocculation
+    Low: Low
+    Medium: Medium
+    High: High
+    Very High: Very high
+    best_for: Best for
+    times_cultured: Times cultured
+    max_reuse: Max reuse
+    add_to_secondary: Add to secondary
+    use_for: Use for
+    hop_uses:
+      Mash: Mash
+      First Wort: First wort
+      Boil: Boil
+      Aroma: Whirlpool
+      Dry Hop: Torrhumling
+    hop_forms:
+      Pellet: Pellet
+      Leaf: Leaf
+      Plug: Plug
+    mash_step_name:
+      Dough In: Dough In
+      Conversion: Conversion
+      Mash In: Inmäskning
+      Protein Rest: Proteinrast
+      Saccharification: Försockringsrast
+      Low Saccharification: Låg försockring
+      High Saccharification: Hög försockring
+      Mash Out: Utmäskning
+    time_unit:
+      days: days
+      min: min
+    yeast_types:
+      Wheat: Wheat
+      Wine: Wine
+      Ale: Ale
+      Lager: Lager
+      Champagne: Champagne
+    yeast_forms:
+      Dry: Dry
+      Liquid: Liquid
+      Culture: Culture
+      Slant: Slant
+    misc_names:
+      Ginger Root: Ingefära
+      Coffee: Kaffe
+      Seeds of Paradise: Paradisfrön
+    misc_uses:
+      Mash: Mash
+      Boil: Boil
+      Primary: Primary
+      Secondary: Secondary
+      Bottling: Bottling
+    misc_used_for:
+      Clearing: Clearing
+      Fermentation: Fermentation
+      Water Agent: Water Agent
+      Mash pH: Mash pH
+      Flavoring: Flavoring
+      Spiced Beer: Spiced Beer
+    misc_types:
+      Spice: Spice
+      Fining: Fining
+      Water Agent: Water agent
+      Herb: Herb
+      Flavor: Flavor
+      Other: Other
+    mash_step_name:
+      Dough In: Dough In
+      Conversion: Conversion
+      Mash In: Mash In
+      Protein Rest: Protein Rest
+      Saccharification: Saccharification
+      Low Saccharification: Low Saccharification
+      High Saccharification: High Saccharification
+      Mash Out: Mash Out
+      Mash: Mash
+      Sparge: Sparge
+      Step 1: Step 1
+      Step: Step
+    mash_step_type:
+      Temperature: Temperature
+      Infusion: Infusion
+      Decoction: Decoction
+    fermentable_types:
+      Grain: Grain
+      Dry Extract: Dry Extract
+      Sugar: Sugar
+      Adjunct: Adjunct
+
   devise:
     passwords:
       recover_password: Forgot password?

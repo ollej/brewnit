@@ -67,7 +67,7 @@
               <td class="fermentable_name"><%= f.name %></td>
               <td class="fermentable_amount format_number"><%= number_with_precision(f.amount, precision: 2) %> <%= t(:'beerxml.kilograms') %></td>
               <td class="fermentable_percent format_number"><%= number_to_percentage(f.amount_percent, precision: 1) %></td>
-              <td class="fermentable_type"><%= trans(f.type, 'Grain') %></td>
+              <td class="fermentable_type"><%= t(f.type, default: :Grain, scope: :'beerxml.fermentable_types') %></td>
               <td class="fermentable_color format_number">
                 <%= number_with_precision(f.color_ebc, precision: 0) %> <%= t(:'beerxml.ebc') %>
                 <div class="colorbox" style="background-color: <%= f.color_hex %>">&nbsp;</div>
@@ -129,7 +129,7 @@
         <h2><%= t(:'beerxml.hops') %></h2>
         <% @beerxml.hops.each do |hop| %>
           <meta itemprop="recipeIngredient"
-            content="<%= number_with_precision(hop.amount, precision: 0) %> <%= t(:'beerxml.grams') %> <%= hop.name %> (<%= trans(hop.use, 'Boil') %> <%= hop.formatted_time %> <%= trans(hop.time_unit, 'min') %>)">
+            content="<%= number_with_precision(hop.amount, precision: 0) %> <%= t(:'beerxml.grams') %> <%= hop.name %> (<%= t(hop.use, default: :Boil, scope: :'beerxml.hop_uses') %> <%= hop.formatted_time %> <%= trans(hop.time_unit, default: 'min') %>)">
         <% end %>
         <table class="recipe-table zebra-expanded">
           <thead>
@@ -152,9 +152,9 @@
             <tr class="details-row">
               <td class="hops_name"><%= hop.name %></td>
               <td class="hops_amount format_number"><%= number_with_precision(hop.amount, precision: 0) %> <%= t(:'beerxml.grams') %></td>
-              <td class="hops_time format_number"><%= hop.formatted_time %> <%= trans(hop.time_unit, 'min') %></td>
-              <td class="hops_use"><%= trans(hop.use, 'Boil') %></td>
-              <td class="hops_form"><%= trans(hop.form, 'Leaf') %></td>
+              <td class="hops_time format_number"><%= hop.formatted_time %> <%= trans(hop.time_unit, default: 'min') %></td>
+              <td class="hops_use"><%= t(hop.use, default: :Boil, scope: 'beerxml.hop_uses') %></td>
+              <td class="hops_form"><%= t(hop.form, default: :Leaf, scope: 'beerxml.hop_forms') %></td>
               <td class="hops_alpha format_number"><%= number_to_percentage(hop.alpha, precision: 2) %></td>
               <td class="hops_ibu format_number"><%= number_with_precision(hop.ibu, precision: 1) %></td>
               <td class="hops_grpl format_number"><%= number_with_precision(@presenter.hop_grams_per_liter(hop), precision: 1) %></td>
@@ -202,7 +202,7 @@
         <h2><%= t(:'beerxml.miscs') %></h2>
         <% @beerxml.miscs.each do |m| %>
           <meta itemprop="recipeIngredient"
-            content="<%= number_with_precision(m.amount, precision: 0) %> <%= trans(m.unit, 'gr') %> <%= m.name %>">
+            content="<%= number_with_precision(m.amount, precision: 0) %> <%= trans(m.unit, default: 'gr') %> <%= m.name %>">
         <% end %>
         <table class="recipe-table zebra-expanded">
           <thead>
@@ -217,24 +217,24 @@
           <tbody>
             <% @beerxml.miscs.each do |misc| %>
             <tr class="details-row">
-              <td class="misc_name"><%= trans(misc.name, 'Other') %></td>
+              <td class="misc_name"><%= trans(misc.name, scope: :'beerxml.misc_names') %></td>
               <td class="misc_amount format_number">
                 <%= misc_amount(misc) %>
-                <%= trans(misc.unit, 'gr') %>
+                <%= trans(misc.unit, default: 'gr') %>
               </td>
-              <td class="misc_type"><%= trans(misc.type, 'Other') %></td>
-              <td class="misc_use"><%= trans(misc.use) %></td>
+              <td class="misc_type"><%= t(misc.type, default: :Other, scope: :'beerxml.misc_types') %></td>
+              <td class="misc_use"><%= trans(misc.use, scope: :'beerxml.misc_uses') %></td>
               <td class="misc_time">
                 <% if misc.time.present? %>
-                  <%= misc.formatted_time %> <%= trans(misc.time_unit, 'min') %>
+                  <%= misc.formatted_time %> <%= t(misc.time_unit, default: 'min', scope: :'beerxml.time_unit') %>
                 <% end %>
               </td>
             </tr>
             <tr class="info-row">
-              <td class="yeasts-info" colspan="6">
+              <td class="miscs-info" colspan="6">
                 <p>
                   <% if misc.use_for.present? %>
-                    <span class="misc-info"><%= t(:'beerxml.use_for') %>: <%= trans(misc.use_for) %></span><br>
+                    <span class="misc-info"><%= t(:'beerxml.misc_use_for') %>: <%= trans(misc.use_for, scope: :'beerxml.misc_used_for') %></span><br>
                   <% end %>
                 </p>
                 <% if misc.notes.present? %>
@@ -271,7 +271,7 @@
               <td class="yeast_name"><%= yeast.name %></td>
               <td class="yeast_product_id"><%= yeast.product_id %></td>
               <td class="yeast_laboratory"><%= yeast.laboratory %></td>
-              <td class="yeast_form"><%= trans(yeast.form) %></td>
+              <td class="yeast_form"><%= trans(yeast.form, scope: :'beerxml.yeast_forms') %></td>
               <td class="yeast_attenuation format_number"><%= number_to_percentage(yeast.attenuation, precision: 0) %></td>
               <td class="yeast_temperatures format_number"><%= yeast.formatted_temperatures %></td>
             </tr>
@@ -279,10 +279,10 @@
               <td class="yeasts-info" colspan="6">
                 <p>
                   <% if yeast.type.present? %>
-                    <span class="yeast-info"><%= t(:'beerxml.yeast_type') %>: <%= trans(yeast.type) %></span><br>
+                    <span class="yeast-info"><%= t(:'beerxml.yeast_type') %>: <%= trans(yeast.type, scope: :'beerxml.yeast_types') %></span><br>
                   <% end %>
                   <% if yeast.flocculation.present? %>
-                    <span class="yeast-info"><%= t(:'beerxml.flocculation') %>: <%= trans(yeast.flocculation) %></span><br>
+                    <span class="yeast-info"><%= t(:'beerxml.flocculation') %>: <%= trans(yeast.flocculation, default: 'unknown') %></span><br>
                   <% end %>
                   <% if yeast.best_for.present? %>
                     <span class="yeast-info"><%= t(:'beerxml.best_for') %>: <%= yeast.best_for %></span><br>
@@ -314,7 +314,11 @@
         itemscope itemtype="https://schema.org/ItemList">
         <h2><%= t(:'beerxml.mash') %></h2>
         <% @beerxml.mash.steps.each do |step| %>
-          <meta itemprop="name" content="<%= trans(step.name) %> (<%= trans(step.type) %>) <%= number_with_precision(step.step_temp, precision: 0) %><%= t(:'beerxml.degrees') %> @ <%= number_with_precision(step.step_time, precision: 0) %> <%= t(:'beerxml.minutes') %>">
+          <meta itemprop="name" content="<%= trans(step.name, scope: :'beerxml.mash_step_name') %>
+            (<%= trans(step.type, scope: :'beerxml.mash_step_type') %>)
+            <%= number_with_precision(step.step_temp, precision: 0) %><%= t(:'beerxml.degrees') %>
+            @ <%= number_with_precision(step.step_time, precision: 0) %>
+            <%= t(:'beerxml.minutes') %>">
         <% end %>
         <table class="recipe-table zebra">
           <thead>
@@ -330,8 +334,8 @@
           <tbody>
             <% @beerxml.mash.steps.each do |step| %>
               <tr>
-                <td class="mash_name"><%= trans(step.name) %></td>
-                <td class="mash_type"><%= trans(step.type) %></td>
+                <td class="mash_name"><%= trans(step.name, scope: :'beerxml.mash_step_name') %></td>
+                <td class="mash_type"><%= trans(step.type, scope: :'beerxml.mash_step_type') %></td>
                 <td class="mash_infuse_amount format_number"><%= number_with_precision(step.infuse_amount, precision: 2) %> <%= t(:'beerxml.liter_abbr') %></td>
                 <td class="mash_step_temp format_number"><%= number_with_precision(step.step_temp, precision: 0) %><%= t(:'beerxml.degrees') %></td>
                 <td class="mash_ramp_time format_number"><%= number_with_precision(step.ramp_time, precision: 0) %> <%= t(:'beerxml.minutes') %></td>

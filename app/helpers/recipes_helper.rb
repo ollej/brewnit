@@ -75,9 +75,10 @@ module RecipesHelper
     number_to_percentage(abv, precision: precision)
   end
 
-  def trans(field, default='unknown')
-    key = field.present? ? "beerxml.#{field}" : "beerxml.#{default}"
-    I18n.t(key, default: field)
+  def trans(field, options={})
+    options[:default] ||= [field, '']
+    options[:scope] ||= :beerxml
+    I18n.t(field, options)
   end
 
   def format_sg(value)
