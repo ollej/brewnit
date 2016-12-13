@@ -18,6 +18,10 @@
           <i class="fa fa-users"></i><%= link_to t(:'users.index'),
             users_path, class: 'pure-menu-link' %>
         </li>
+        <li class="pure-menu-item">
+          <i class="fa fa-calendar-o"></i><%= link_to t(:'events.index'),
+            events_path, class: 'pure-menu-link' %>
+        </li>
       <% if user_signed_in? %>
         <li class="pure-menu-item">
           <i class="fa fa-user"></i><%= link_to t(:'users.profile'),

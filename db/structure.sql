@@ -151,6 +151,44 @@ ALTER SEQUENCE commontator_threads_id_seq OWNED BY commontator_threads.id;
 
 
 --
+-- Name: events; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE events (
+    id integer NOT NULL,
+    name character varying,
+    description character varying,
+    organizer character varying,
+    location character varying,
+    held_at date,
+    event_type character varying,
+    url character varying,
+    user_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: events_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE events_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: events_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE events_id_seq OWNED BY events.id;
+
+
+--
 -- Name: media; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -367,6 +405,13 @@ ALTER TABLE ONLY commontator_threads ALTER COLUMN id SET DEFAULT nextval('common
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY events ALTER COLUMN id SET DEFAULT nextval('events_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY media ALTER COLUMN id SET DEFAULT nextval('media_id_seq'::regclass);
 
 
@@ -413,6 +458,14 @@ ALTER TABLE ONLY commontator_subscriptions
 
 ALTER TABLE ONLY commontator_threads
     ADD CONSTRAINT commontator_threads_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: events_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY events
+    ADD CONSTRAINT events_pkey PRIMARY KEY (id);
 
 
 --
@@ -543,6 +596,13 @@ CREATE INDEX index_commontator_subscriptions_on_thread_id ON commontator_subscri
 --
 
 CREATE UNIQUE INDEX index_commontator_threads_on_c_id_and_c_type ON commontator_threads USING btree (commontable_id, commontable_type);
+
+
+--
+-- Name: index_events_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_events_on_user_id ON events USING btree (user_id);
 
 
 --
@@ -794,4 +854,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160124174400');
 INSERT INTO schema_migrations (version) VALUES ('20160209201838');
 
 INSERT INTO schema_migrations (version) VALUES ('20160307193952');
+
+INSERT INTO schema_migrations (version) VALUES ('20161213184727');
 

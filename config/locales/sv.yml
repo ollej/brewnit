@@ -145,6 +145,18 @@ sv:
     recipe_count: Antal recept
     media:
       title: Bilder
+  events:
+    index: Evenemang
+    new: Skapa evenemang
+    edit: Ändra
+    save: Spara
+    create:
+      successful: Evenemanget har skapats.
+    update:
+      successful: Evenemanget har uppdaterats.
+    destroy:
+      link: Ta bort
+      successful: Evenemanget har tagits bort.
   beerxml:
     information: Information
     style: Ölstil
@@ -557,6 +569,7 @@ sv:
     models:
       user: Användare
       recipe: Recept
+      event: Evenemang
     attributes:
       user:
         sign_in: Logga in
@@ -590,6 +603,14 @@ sv:
         confirm_avatar: Sätt denna bild som din avatar-bild?
         confirm_brewery: Sätt denna bild som logga for ditt bryggeri?
         confirm_main: Sätt denna bild som huvudbild för detta recept?
+      event:
+        name: Namn
+        event_type: Typ
+        organizer: Arrangör
+        location: Plats
+        held_at: Datum
+        url: Hemsida
+        description: Beskrivning
     errors:
       template:
         header:
@@ -631,7 +652,10 @@ sv:
               parse_error: kunde inte läsas in på grund av syntax-fel.
         medium:
           medium_not_added: Media kunde inte läggas till.
-
+        event:
+          header:
+            one: "Ett fel förhindrade detta evenemang från att sparas"
+            other: "%{count} fel förhindrade detta evenemang från att sparas"
   date:
     formats:
       default: "%Y-%m-%d"

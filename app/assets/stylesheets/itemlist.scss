@@ -1,0 +1,57 @@
+.item-index {
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .list-item {
+    padding: 0.9em 1em;
+    border-bottom: 1px solid #ddd;
+    border-left: 6px solid transparent;
+    height: 5em;
+    cursor: pointer;
+
+    .item-header-main,
+    .item-header-small {
+      margin: 0;
+    }
+    .item-header-main {
+      font-size: 120%;
+      a {
+        color: #333;
+      }
+    }
+    .item-header-small {
+      text-transform: uppercase;
+      a {
+        color: #999;
+      }
+    }
+    .list-item-details {
+    }
+    .item-image {
+      border-radius: 3px;
+      margin-right: 1em;
+    }
+  }
+}
+
+.item-show {
+  .item-field {
+    margin-bottom: 1em;
+
+    span.item-field-heading {
+      min-width: 7em;
+      font-weight: bold;
+      font-size: 1.17em;
+      display: inline-block;
+      &::after {
+        content: ":";
+      }
+    }
+    .item-field-value {
+      display: inline;
+    }
+  }
+}

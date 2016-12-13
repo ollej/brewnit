@@ -1,52 +1,65 @@
+<%
+set_meta_tags title: @user.display_name,
+  description: @user.presentation,
+  og: {
+    title: :title,
+    description: :description,
+    site_name: 'Brygglogg.se',
+    url: user_url(@user),
+    type: 'profile',
+    locale: 'sv_SE',
+    image: full_url_for(@user.avatar_image(:large)),
+  }
+%>
       <div class="page-content-header pure-g">
         <div class="pure-u">
           <%= image_tag @user.avatar_image, class: 'user-avatar', alt: @user.name, height: 64, width: 64 %>
         </div>
         <div class="pure-u">
-          <h1 class="user-content-title"><%= title @user.name %></h1>
-          <p><%= @user.brewery %></p>
+          <h1 class="user-content-title item-content-title"><%= title @user.name %></h1>
+          <p class="item-content-info"><%= @user.brewery %></p>
         </div>
         <%= render partial: 'shared/image_slider', locals: { media: @user.media } %>
       </div>
 
-      <div class="page-content-body user-show">
-        <div class="user-field">
-          <span class="user-field-heading"><%= I18n.t(:'users.recipe_count') %></span>
-          <p class="user-field-value"><%= I18n.t(:'users.recipes', count: @user.recipes.size) %></p>
+      <div class="page-content-body user-show item-show">
+        <div class="item-field">
+          <span class="item-field-heading"><%= I18n.t(:'users.recipe_count') %></span>
+          <p class="item-field-value"><%= I18n.t(:'users.recipes', count: @user.recipes.size) %></p>
         </div>
 
         <% if @user.equipment.present? %>
-        <div class="user-field">
-          <span class="user-field-heading"><%= I18n.t(:'activerecord.attributes.user.equipment') %></span>
-          <p class="user-field-value"><%= @user.equipment %></p>
+        <div class="item-field">
+          <span class="item-field-heading"><%= I18n.t(:'activerecord.attributes.user.equipment') %></span>
+          <p class="item-field-value"><%= @user.equipment %></p>
         </div>
         <% end %>
 
         <% if @user.location.present? %>
-        <div class="user-field">
-          <span class="user-field-heading"><%= I18n.t(:'activerecord.attributes.user.location') %></span>
-          <p class="user-field-value"><%= @user.location %></p>
+        <div class="item-field">
+          <span class="item-field-heading"><%= I18n.t(:'activerecord.attributes.user.location') %></span>
+          <p class="item-field-value"><%= @user.location %></p>
         </div>
         <% end %>
 
         <% if @user.url.present? %>
-        <div class="user-field">
-          <span class="user-field-heading"><%= I18n.t(:'activerecord.attributes.user.url') %></span>
-          <p class="user-field-value"><%= link_to @user.url, @user.url, target: '_blank' %></p>
+        <div class="item-field">
+          <span class="item-field-heading"><%= I18n.t(:'activerecord.attributes.user.url') %></span>
+          <p class="item-field-value"><%= link_to @user.url, @user.url, target: '_blank' %></p>
         </div>
         <% end %>
 
         <% if @user.twitter.present? %>
-        <div class="user-field">
-          <span class="user-field-heading"><%= I18n.t(:'activerecord.attributes.user.twitter') %></span>
-          <p class="user-field-value"><%= link_to @user.twitter, twitter_url(@user.twitter), target: '_blank' %></p>
+        <div class="item-field">
+          <span class="item-field-heading"><%= I18n.t(:'activerecord.attributes.user.twitter') %></span>
+          <p class="item-field-value"><%= link_to @user.twitter, twitter_url(@user.twitter), target: '_blank' %></p>
         </div>
         <% end %>
 
         <% if @user.presentation.present? %>
-        <div class="user-field">
-          <h3><%= I18n.t(:'activerecord.attributes.user.presentation') %></h3>
-          <p><%= format_html(@user.presentation) %></p>
+        <div class="item-field">
+          <h3 class="item-field-heading"><%= I18n.t(:'activerecord.attributes.user.presentation') %></h3>
+          <p class="item-field-text"><%= format_html(@user.presentation) %></p>
         </div>
         <% end %>
 

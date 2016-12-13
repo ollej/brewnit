@@ -71,6 +71,7 @@ class RecipesController < ApplicationController
   def update
     @recipe = find_recipe
     raise AuthorizationException unless current_user.can_modify?(@recipe)
+
     respond_to do |format|
       if @recipe.update(recipe_params)
         format.html { redirect_to @recipe, notice: I18n.t(:'recipes.update.successful') }
@@ -88,6 +89,7 @@ class RecipesController < ApplicationController
     @recipe = find_recipe
     raise AuthorizationException unless current_user.can_modify?(@recipe)
     @recipe.destroy
+
     respond_to do |format|
       format.html { redirect_to recipes_url, notice: I18n.t(:'recipes.destroy.successful') }
       format.json { head :no_content }

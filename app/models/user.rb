@@ -15,11 +15,12 @@ class User < ActiveRecord::Base
   before_validation :cleanup_fields
   has_many :recipes, dependent: :destroy
   has_many :media, as: :parent, dependent: :destroy
-  belongs_to :media_avatar, class_name: "Medium"
-  belongs_to :media_brewery, class_name: "Medium"
+  belongs_to :media_avatar, class_name: 'Medium'
+  belongs_to :media_brewery, class_name: 'Medium'
   accepts_nested_attributes_for :media, :reject_if => lambda { |r| r['media'].nil? }
 
   validates :name, presence: true
+  validates :url, url: true, allow_nil: true
   validates_format_of :avatar,
     with: %r{\Ahttps?://.+/.+\.(gif|jpe?g|png)\z}i,
     message: I18n.t(:'activerecord.errors.models.user.attributes.avatar.format'),

@@ -1,0 +1,70 @@
+<%
+set_meta_tags title: @event.name,
+  description: @event.description,
+  og: {
+    title: :title,
+    description: :description,
+    site_name: 'Brygglogg.se',
+    url: event_url(@event),
+    type: 'event',
+    locale: 'sv_SE',
+  }
+%>
+      <div class="page-content-header pure-g">
+        <div class="pure-u-4-5">
+          <h1 class="event-content-title item-content-title"><%= title @event.name %></h1>
+          <p class="item-content-info"><%= @event.organizer %> - <%= @event.event_type %></p>
+        </div>
+        <div class="page-content-controls pure-u-1-5">
+          <% if user_signed_in? %>
+          <div class="controls-signed-in">
+            <% if current_user.can_modify?(@event) %>
+              <%= link_to edit_event_path(@event), class: 'pure-button secondary-button' do %>
+                <i class="fa fa-pencil-square-o"></i> <%= t(:'events.edit') %>
+              <% end %>
+            <% end %>
+            <% if current_user.admin? %>
+              <%= link_to @event, method: :delete, data: { confirm: t(:'common.are_you_sure') }, class: 'pure-button secondary-button' do %>
+                <i class="fa fa-trash"></i> <%= t(:'events.destroy.link') %>
+              <% end %>
+            <% end %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="page-content-body event-show item-show">
+        <!--
+        <div class="event-field">
+          <span class="event-field-heading"><%#= I18n.t(:'events.recipe_count') %></span>
+          <p class="event-field-value"><%#= I18n.t(:'events.recipes', count: @event.recipes.size) %></p>
+        </div>
+        -->
+
+        <div class="item-field">
+          <span class="item-field-heading"><%= I18n.t(:'activerecord.attributes.event.held_at') %></span>
+          <p class="item-field-value"><%= I18n.l(@event.held_at) %></p>
+        </div>
+
+        <% if @event.location.present? %>
+        <div class="item-field">
+          <span class="item-field-heading"><%= I18n.t(:'activerecord.attributes.event.location') %></span>
+          <p class="item-field-value"><%= @event.location %></p>
+        </div>
+        <% end %>
+
+        <% if @event.url.present? %>
+        <div class="item-field">
+          <span class="item-field-heading"><%= I18n.t(:'activerecord.attributes.event.url') %></span>
+          <p class="item-field-value"><%= link_to @event.url, @event.url, target: '_blank' %></p>
+        </div>
+        <% end %>
+
+        <% if @event.description.present? %>
+        <div class="item-field">
+          <h3 class="item-field-heading"><%= I18n.t(:'activerecord.attributes.event.description') %></h3>
+          <p class="item-field-text"><%= format_html(@event.description) %></p>
+        </div>
+        <% end %>
+
+      </div>
