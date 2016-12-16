@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :media, :reject_if => lambda { |r| r['media'].nil? }
 
   validates :name, presence: true
-  validates :url, url: true, allow_nil: true
+  validates :url, url: true, allow_blank: true
   validates_format_of :avatar,
     with: %r{\Ahttps?://.+/.+\.(gif|jpe?g|png)\z}i,
     message: I18n.t(:'activerecord.errors.models.user.attributes.avatar.format'),
