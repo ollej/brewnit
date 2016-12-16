@@ -3,13 +3,11 @@
           <h1 class="event-content-title"><%= title I18n.t(:'events.index') %></h1>
         </div>
         <div class="page-content-controls pure-u-1-5">
-          <% if user_signed_in? %>
           <div class="controls-signed-in">
             <%= link_to new_event_path(@event), class: 'pure-button secondary-button' do %>
               <i class="fa fa-calendar-o"></i> <%= t(:'events.new') %>
             <% end %>
           </div>
-          <% end %>
         </div>
       </div>
 
