@@ -1,4 +1,8 @@
 class EventsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :show]
+  before_action :deny_spammers!, only: [:create, :update, :destroy]
+  invisible_captcha only: [:create, :update], on_spam: :redirect_spammers!
+
   def index
     @events = Event.all.ordered
 
