@@ -619,6 +619,7 @@ sv:
         body: "Det var problem med följande fält:"
       messages:
         taken: "är upptaget"
+        invalid_url: "måste vara en giltig URL"
         record_invalid: "Validering misslyckades: %{errors}"
         <<: *errors_messages
       full_messages:

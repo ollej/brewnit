@@ -257,3 +257,7 @@ en:
       confirm_new_password: Confirm new password
       forgot_your_password: Forgot your password?
 
+  activerecord:
+    errors:
+      messages:
+        invalid_url: must be a valid URL
