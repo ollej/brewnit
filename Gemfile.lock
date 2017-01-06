@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/ollej/beerxml.git
-  revision: 1f4dc01f949c69b9d64fab5b26b01f5045ae0ad8
-  ref: 1f4dc01f949c69b9d64fab5b26b01f5045ae0ad8
+  revision: 3c3a9c6d7b138a1160e481f276bb2d0923c83911
+  ref: 3c3a9c6d7b138a1160e481f276bb2d0923c83911
   specs:
-    nrb-beerxml (0.1.4)
+    nrb-beerxml (0.1.6)
       activemodel
       nokogiri
 
@@ -64,7 +64,7 @@ GEM
     autoprefixer-rails (6.3.3.1)
       execjs
     bcrypt (3.1.10)
-    beer_recipe (0.4.9)
+    beer_recipe (0.4.10)
       docopt (~> 0.5)
       nrb-beerxml (~> 0.1)
     binding_of_caller (0.7.2)
@@ -149,8 +149,8 @@ GEM
       actionpack (>= 3.0.0)
     mime-types (2.99)
     mimemagic (0.3.0)
-    mini_portile2 (2.0.0)
-    minitest (5.8.4)
+    mini_portile2 (2.1.0)
+    minitest (5.10.1)
     momentjs-rails (2.11.0)
       railties (>= 3.1)
     multi_json (1.11.2)
@@ -161,8 +161,8 @@ GEM
       sass (>= 3.3)
     net-dns (0.7.1)
     netrc (0.11.0)
-    nokogiri (1.6.7.2)
-      mini_portile2 (~> 2.0.0.rc2)
+    nokogiri (1.6.8.1)
+      mini_portile2 (~> 2.1.0)
     normalize-rails (3.0.3)
     oauth2 (1.0.0)
       faraday (>= 0.8, < 0.10)

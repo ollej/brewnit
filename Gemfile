@@ -31,7 +31,7 @@ gem 'devise', '~> 3.5.3'
 gem 'omniauth-google-oauth2', '~> 0.2.10'
 gem 'unicorn-rails', '~> 2.2.0'
 
-gem 'nrb-beerxml', git: 'https://github.com/ollej/beerxml.git', ref: '1f4dc01f949c69b9d64fab5b26b01f5045ae0ad8'
+gem 'nrb-beerxml', git: 'https://github.com/ollej/beerxml.git', ref: '3c3a9c6d7b138a1160e481f276bb2d0923c83911'
 gem 'beer_recipe' #, path: './vendor/beer_recipe/'
 gem 'commontator', '~> 4.11.0'
 gem 'acts_as_votable', '~> 0.10.0'

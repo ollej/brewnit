@@ -1,5 +1,5 @@
 <%
-set_meta_tags title: @recipe.name,
+set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
   description: @recipe.display_desc,
   keywords: [@recipe.style_name, @beerxml.style.type, @beerxml.style_code, @beerxml.style.style_guide],
   reverse: true,
