@@ -92,7 +92,7 @@ class RecipeDashboard < Administrate::BaseDashboard
     :description,
     :public,
     :user,
-    :media_main,
+    #:media_main,
     :media,
     :beerxml,
     #:thread,
