@@ -18,7 +18,17 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
     title: :title,
     description: :description,
     image: full_url_for(@recipe.main_image(:large)),
-  }
+    label1: I18n.t(:'recipes.recipe_style'),
+    data1: @recipe.style_name,
+    label2: I18n.t(:'recipes.owner'),
+    data2: @recipe.brewer_name,
+    label3: I18n.t(:'beerxml.abv'),
+    data3: format_abv(@beerxml.abv),
+    label4: I18n.t(:'beerxml.ibu'),
+    data4: number_with_precision(@beerxml.ibu, precision: 0),
+    label5: I18n.t(:'beerxml.batch_size'),
+    data5: "#{number_with_precision(@beerxml.batch_size, precision: 1)} #{t(:'beerxml.liter_abbr')}",
+}
 %>
 <% content_for :head do %>
   <meta name="author" content="<%= @recipe.brewer_name %>">
