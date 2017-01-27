@@ -30,6 +30,7 @@ class Recipe < ActiveRecord::Base
   scope :for_user, -> (user) { unscoped.where('user_id = ? OR public = true', user.id) }
   scope :by_user, -> (user) { where(user: user) }
   scope :ordered, -> { order(created_at: :desc) }
+  scope :latest, -> { limit(10).ordered }
 
   def owned_by?(u)
     self.user == u
@@ -198,10 +199,6 @@ class Recipe < ActiveRecord::Base
 
   def self.equipments
     self.uniq.pluck(:equipment).reject { |r| r.empty? }.map(&:capitalize).uniq.sort
-  end
-
-  def self.latest
-    self.limit(10).order('created_at desc')
   end
 
 end

@@ -64,5 +64,7 @@ module Brewnit
     config.after_initialize do
       Rails.application.routes.default_url_options = config.action_mailer.default_url_options
     end
+
+    config.middleware.use Rack::Attack
   end
 end

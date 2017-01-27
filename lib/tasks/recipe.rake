@@ -6,4 +6,9 @@ namespace :recipe do
       recipe.save!
     end
   end
+
+  desc "Delete unconfirmed users"
+  task :delete_unconfirmed_users => :environment do
+    User.unconfirmed.destroy_all
+  end
 end

@@ -46,6 +46,8 @@ gem 'fancybox2-rails', '~> 0.2.8'
 gem 'chronic', '~> 0.10.2'
 gem 'actionview-encoded_mail_to', '~> 1.0.7'
 
+gem 'rack-attack'
+
 # Admin interface
 gem 'administrate'
 

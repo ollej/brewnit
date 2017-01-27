@@ -18,7 +18,8 @@
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
   <%= render 'favicon' %>
-  <%= auto_discovery_link_tag(:rss, recipes_url(format: :rss)) %>
+  <%= auto_discovery_link_tag(:rss, recipes_url(format: :rss), { title: 'Recept' }) %>
+  <%= auto_discovery_link_tag(:rss, events_url(format: :rss), { title: 'Evenemang' }) %>
 </head>
 <body class="page-<%= controller_name %>-<%= action_name %>">
 
