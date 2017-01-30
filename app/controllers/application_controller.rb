@@ -85,7 +85,7 @@ class ApplicationController < ActionController::Base
   end
 
   def error_500
-    render body: nil, status: :internal_server_error
+    render file: 'public/500.html', status: :internal_server_error
   end
 
 end

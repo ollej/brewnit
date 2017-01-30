@@ -37,5 +37,8 @@ Rails.application.routes.draw do
 
   root to: 'latest_items#index'
 
+  get '/404.html', to: redirect('/404.html')
+  get '/500.html', to: redirect('/500.html')
+
   match '*path', via: :all, to: 'pages#error_404'
 end
