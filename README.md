@@ -50,16 +50,42 @@ issue: https://github.com/andreychernih/railsbox/issues/29
 
 ### Step 3 - Create config
 
+The file `config/secrets.yml` needs to be created from
+`config/secrets.yml.sample` and keys added for external services.
+
 #### Development mode
 
 Run `bundle exec rake secret` twice and add them to the `config/secrets.yml`
 where it says 'changeme' (`secret_key_base` and `devise_pepper`).
 
+##### Google authentication
+
 For the Google signin support, you need to create credentials on the Google
-Developers console and add client_id and client_secret to the
-config/secrets.yml
+Developers console and add `client_id` and `client_secret` to the
+`config/secrets.yml`
 
 https://console.developers.google.com
+
+##### reCAPTCHA
+
+The reCAPTCHA supports needs a `site_key` and `secret_key`:
+https://www.google.com/recaptcha/admin
+
+##### Pushover
+
+The Pushover integration needs keys from https://pushover.net/
+
+##### Project Honeypot
+
+Project Honeypot is used for spam protection. A key can be obtained from:
+https://www.projecthoneypot.org/
+
+##### SMTP password
+
+For mailers to work, an SMTP password needs to be configured in
+`smtp_password`.
+
+The SMTP server and user_name is hardcoded in `config/application.rb`
 
 #### For production mode
 
@@ -76,6 +102,14 @@ RACK_ENV=production
 RAILS_ENV=production
 SECRET_KEY_BASE=changeme
 WEB_CONCURRENCY=3
+PUSHOVER_USER=changeme
+PUSHOVER_TOKEN=changeme
+PUSHOVER_GROUP_RECIPE=changeme
+PROJECT_HONEYPOT_KEY
+SMTP_PASSWORD=changeme
+RECAPTCHA_SITE_KEY=changeme
+RECAPTCHA_SECRET_KEY=changeme
+SPAM_IP=space separated list of IP addresses to block
 ```
 
 ### Step 4 - Start application

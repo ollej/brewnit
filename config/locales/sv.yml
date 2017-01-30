@@ -580,7 +580,7 @@ sv:
         password: Lösenord
         current_password: Nuvarande lösenord
         remember_me: Kom ihåg mig
-        password_confirmation: Lösenordsverifiering
+        password_confirmation: Upprepa lösenord
         presentation: Presentation
         location: Hemort
         url: Hemsida
@@ -727,3 +727,7 @@ sv:
       last_word_connector: " och "
     select:
       prompt: "Välj"
+  recaptcha:
+    errors:
+      verification_failed: Verifieringen med reCAPTCHA misslyckades.
+      recaptcha_unreachable: Kunde inte nå reCAPTCHA-verifieringen.

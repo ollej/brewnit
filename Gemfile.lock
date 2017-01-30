@@ -239,6 +239,8 @@ GEM
     raindrops (0.15.0)
     rake (10.5.0)
     rdoc (4.2.1)
+    recaptcha (4.0.1)
+      json
     ref (2.0.0)
     responders (2.1.1)
       railties (>= 4.2.0, < 5.1)
@@ -332,6 +334,7 @@ DEPENDENCIES
   rails (= 4.2.5)
   rails_12factor (~> 0.0.3)
   rails_real_favicon
+  recaptcha
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   search_cop (~> 1.0.5)
@@ -341,5 +344,8 @@ DEPENDENCIES
   unicorn-rails (~> 2.2.0)
   web-console (~> 2.0)
 
+RUBY VERSION
+   ruby 2.3.0p0
+
 BUNDLED WITH
-   1.11.2
+   1.14.3

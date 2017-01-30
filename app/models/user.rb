@@ -116,19 +116,31 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.from_omniauth(access_token)
-    data = access_token.info
+  def self.from_omniauth(auth_hash, honeypot)
+    data = auth_hash.info
 
     user = User.find_or_create_by(email: data[:email]) do |u|
       u.name = data[:name]
       u.password = Devise.friendly_token[0,20]
       u.avatar = data[:image]
+      u.registration_data = self.registration_data_hash(auth_hash.provider, data[:email], honeypot)
     end
     if data[:image].present? && user.avatar.blank?
       user.avatar = data[:image]
       user.save
     end
     user
+  end
+
+  def self.registration_data_hash(provider, email, honeypot)
+    {
+      provider: provider,
+      email: email,
+      ip_address: honeypot.ip_address,
+      score: honeypot.score,
+      safe: honeypot.safe?,
+      offences: honeypot.offenses,
+    }
   end
 
 end

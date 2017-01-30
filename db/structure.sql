@@ -2,12 +2,17 @@
 -- PostgreSQL database dump
 --
 
+-- Dumped from database version 9.6.1
+-- Dumped by pg_dump version 9.6.1
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
+SET row_security = off;
 
 --
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
@@ -44,7 +49,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: commontator_comments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: commontator_comments; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE commontator_comments (
@@ -83,7 +88,7 @@ ALTER SEQUENCE commontator_comments_id_seq OWNED BY commontator_comments.id;
 
 
 --
--- Name: commontator_subscriptions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: commontator_subscriptions; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE commontator_subscriptions (
@@ -116,7 +121,7 @@ ALTER SEQUENCE commontator_subscriptions_id_seq OWNED BY commontator_subscriptio
 
 
 --
--- Name: commontator_threads; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: commontator_threads; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE commontator_threads (
@@ -151,7 +156,7 @@ ALTER SEQUENCE commontator_threads_id_seq OWNED BY commontator_threads.id;
 
 
 --
--- Name: events; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: events; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE events (
@@ -189,7 +194,7 @@ ALTER SEQUENCE events_id_seq OWNED BY events.id;
 
 
 --
--- Name: media; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: media; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE media (
@@ -228,7 +233,7 @@ ALTER SEQUENCE media_id_seq OWNED BY media.id;
 
 
 --
--- Name: recipes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: recipes; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE recipes (
@@ -277,7 +282,7 @@ ALTER SEQUENCE recipes_id_seq OWNED BY recipes.id;
 
 
 --
--- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE schema_migrations (
@@ -286,7 +291,7 @@ CREATE TABLE schema_migrations (
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE users (
@@ -320,7 +325,8 @@ CREATE TABLE users (
     url character varying,
     equipment character varying DEFAULT ''::character varying,
     media_avatar_id integer,
-    media_brewery_id integer
+    media_brewery_id integer,
+    registration_data jsonb
 );
 
 
@@ -344,7 +350,7 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 
 
 --
--- Name: votes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: votes; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE votes (
@@ -381,63 +387,63 @@ ALTER SEQUENCE votes_id_seq OWNED BY votes.id;
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: commontator_comments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY commontator_comments ALTER COLUMN id SET DEFAULT nextval('commontator_comments_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: commontator_subscriptions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY commontator_subscriptions ALTER COLUMN id SET DEFAULT nextval('commontator_subscriptions_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: commontator_threads id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY commontator_threads ALTER COLUMN id SET DEFAULT nextval('commontator_threads_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: events id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY events ALTER COLUMN id SET DEFAULT nextval('events_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: media id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY media ALTER COLUMN id SET DEFAULT nextval('media_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: recipes id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY recipes ALTER COLUMN id SET DEFAULT nextval('recipes_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: votes id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY votes ALTER COLUMN id SET DEFAULT nextval('votes_id_seq'::regclass);
 
 
 --
--- Name: commontator_comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: commontator_comments commontator_comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY commontator_comments
@@ -445,7 +451,7 @@ ALTER TABLE ONLY commontator_comments
 
 
 --
--- Name: commontator_subscriptions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: commontator_subscriptions commontator_subscriptions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY commontator_subscriptions
@@ -453,7 +459,7 @@ ALTER TABLE ONLY commontator_subscriptions
 
 
 --
--- Name: commontator_threads_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: commontator_threads commontator_threads_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY commontator_threads
@@ -461,7 +467,7 @@ ALTER TABLE ONLY commontator_threads
 
 
 --
--- Name: events_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: events events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY events
@@ -469,7 +475,7 @@ ALTER TABLE ONLY events
 
 
 --
--- Name: media_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: media media_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY media
@@ -477,7 +483,7 @@ ALTER TABLE ONLY media
 
 
 --
--- Name: recipes_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: recipes recipes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY recipes
@@ -485,7 +491,7 @@ ALTER TABLE ONLY recipes
 
 
 --
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users
@@ -493,7 +499,7 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: votes_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: votes votes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY votes
@@ -501,294 +507,294 @@ ALTER TABLE ONLY votes
 
 
 --
--- Name: fulltext_index_recipes_on_equipment; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: fulltext_index_recipes_on_equipment; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX fulltext_index_recipes_on_equipment ON recipes USING gin (to_tsvector('simple'::regconfig, (COALESCE(equipment, ''::character varying))::text));
 
 
 --
--- Name: fulltext_index_recipes_on_primary; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: fulltext_index_recipes_on_primary; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX fulltext_index_recipes_on_primary ON recipes USING gin (to_tsvector('simple'::regconfig, (((((((((COALESCE(name, ''::character varying))::text || ' '::text) || COALESCE(description, ''::text)) || ' '::text) || (COALESCE(style_name, ''::character varying))::text) || ' '::text) || (COALESCE(equipment, ''::character varying))::text) || ' '::text) || (COALESCE(brewer, ''::character varying))::text)));
 
 
 --
--- Name: fulltext_index_recipes_on_style_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: fulltext_index_recipes_on_style_name; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX fulltext_index_recipes_on_style_name ON recipes USING gin (to_tsvector('simple'::regconfig, (style_name)::text));
 
 
 --
--- Name: fulltext_index_users_on_brewery; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: fulltext_index_users_on_brewery; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX fulltext_index_users_on_brewery ON users USING gin (to_tsvector('simple'::regconfig, (COALESCE(brewery, ''::character varying))::text));
 
 
 --
--- Name: fulltext_index_users_on_equipment; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: fulltext_index_users_on_equipment; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX fulltext_index_users_on_equipment ON users USING gin (to_tsvector('simple'::regconfig, (COALESCE(equipment, ''::character varying))::text));
 
 
 --
--- Name: fulltext_index_users_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: fulltext_index_users_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX fulltext_index_users_on_name ON users USING gin (to_tsvector('simple'::regconfig, (name)::text));
 
 
 --
--- Name: fulltext_index_users_on_primary; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: fulltext_index_users_on_primary; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX fulltext_index_users_on_primary ON users USING gin (to_tsvector('simple'::regconfig, (((((((((COALESCE(name, ''::character varying))::text || ' '::text) || COALESCE(presentation, ''::text)) || ' '::text) || (COALESCE(equipment, ''::character varying))::text) || ' '::text) || (COALESCE(brewery, ''::character varying))::text) || ' '::text) || (COALESCE(twitter, ''::character varying))::text)));
 
 
 --
--- Name: index_commontator_comments_on_c_id_and_c_type_and_t_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_commontator_comments_on_c_id_and_c_type_and_t_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_commontator_comments_on_c_id_and_c_type_and_t_id ON commontator_comments USING btree (creator_id, creator_type, thread_id);
 
 
 --
--- Name: index_commontator_comments_on_cached_votes_down; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_commontator_comments_on_cached_votes_down; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_commontator_comments_on_cached_votes_down ON commontator_comments USING btree (cached_votes_down);
 
 
 --
--- Name: index_commontator_comments_on_cached_votes_up; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_commontator_comments_on_cached_votes_up; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_commontator_comments_on_cached_votes_up ON commontator_comments USING btree (cached_votes_up);
 
 
 --
--- Name: index_commontator_comments_on_thread_id_and_created_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_commontator_comments_on_thread_id_and_created_at; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_commontator_comments_on_thread_id_and_created_at ON commontator_comments USING btree (thread_id, created_at);
 
 
 --
--- Name: index_commontator_subscriptions_on_s_id_and_s_type_and_t_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_commontator_subscriptions_on_s_id_and_s_type_and_t_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_commontator_subscriptions_on_s_id_and_s_type_and_t_id ON commontator_subscriptions USING btree (subscriber_id, subscriber_type, thread_id);
 
 
 --
--- Name: index_commontator_subscriptions_on_thread_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_commontator_subscriptions_on_thread_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_commontator_subscriptions_on_thread_id ON commontator_subscriptions USING btree (thread_id);
 
 
 --
--- Name: index_commontator_threads_on_c_id_and_c_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_commontator_threads_on_c_id_and_c_type; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_commontator_threads_on_c_id_and_c_type ON commontator_threads USING btree (commontable_id, commontable_type);
 
 
 --
--- Name: index_events_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_events_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_events_on_user_id ON events USING btree (user_id);
 
 
 --
--- Name: index_media_on_parent_type_and_parent_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_media_on_parent_type_and_parent_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_media_on_parent_type_and_parent_id ON media USING btree (parent_type, parent_id);
 
 
 --
--- Name: index_recipes_on_abv; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_recipes_on_abv; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_recipes_on_abv ON recipes USING btree (abv);
 
 
 --
--- Name: index_recipes_on_batch_size; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_recipes_on_batch_size; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_recipes_on_batch_size ON recipes USING btree (batch_size);
 
 
 --
--- Name: index_recipes_on_brewer; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_recipes_on_brewer; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_recipes_on_brewer ON recipes USING btree (brewer);
 
 
 --
--- Name: index_recipes_on_cached_votes_up; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_recipes_on_cached_votes_up; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_recipes_on_cached_votes_up ON recipes USING btree (cached_votes_up);
 
 
 --
--- Name: index_recipes_on_color; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_recipes_on_color; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_recipes_on_color ON recipes USING btree (color);
 
 
 --
--- Name: index_recipes_on_created_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_recipes_on_created_at; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_recipes_on_created_at ON recipes USING btree (created_at);
 
 
 --
--- Name: index_recipes_on_fg; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_recipes_on_fg; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_recipes_on_fg ON recipes USING btree (fg);
 
 
 --
--- Name: index_recipes_on_ibu; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_recipes_on_ibu; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_recipes_on_ibu ON recipes USING btree (ibu);
 
 
 --
--- Name: index_recipes_on_media_main_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_recipes_on_media_main_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_recipes_on_media_main_id ON recipes USING btree (media_main_id);
 
 
 --
--- Name: index_recipes_on_og; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_recipes_on_og; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_recipes_on_og ON recipes USING btree (og);
 
 
 --
--- Name: index_recipes_on_public; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_recipes_on_public; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_recipes_on_public ON recipes USING btree (public);
 
 
 --
--- Name: index_recipes_on_style_code; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_recipes_on_style_code; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_recipes_on_style_code ON recipes USING btree (style_code);
 
 
 --
--- Name: index_recipes_on_style_guide; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_recipes_on_style_guide; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_recipes_on_style_guide ON recipes USING btree (style_guide);
 
 
 --
--- Name: index_recipes_on_style_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_recipes_on_style_name; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_recipes_on_style_name ON recipes USING btree (style_name);
 
 
 --
--- Name: index_recipes_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_recipes_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_recipes_on_user_id ON recipes USING btree (user_id);
 
 
 --
--- Name: index_users_on_confirmation_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_confirmation_token; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_users_on_confirmation_token ON users USING btree (confirmation_token);
 
 
 --
--- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
 
 
 --
--- Name: index_users_on_media_avatar_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_media_avatar_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_users_on_media_avatar_id ON users USING btree (media_avatar_id);
 
 
 --
--- Name: index_users_on_media_brewery_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_media_brewery_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_users_on_media_brewery_id ON users USING btree (media_brewery_id);
 
 
 --
--- Name: index_users_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_users_on_name ON users USING btree (name);
 
 
 --
--- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (reset_password_token);
 
 
 --
--- Name: index_users_on_unlock_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_unlock_token; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_users_on_unlock_token ON users USING btree (unlock_token);
 
 
 --
--- Name: index_votes_on_votable_id_and_votable_type_and_vote_scope; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_votes_on_votable_id_and_votable_type_and_vote_scope; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_votes_on_votable_id_and_votable_type_and_vote_scope ON votes USING btree (votable_id, votable_type, vote_scope);
 
 
 --
--- Name: index_votes_on_voter_id_and_voter_type_and_vote_scope; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_votes_on_voter_id_and_voter_type_and_vote_scope; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_votes_on_voter_id_and_voter_type_and_vote_scope ON votes USING btree (voter_id, voter_type, vote_scope);
 
 
 --
--- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
 
 
 --
--- Name: fk_rails_0fd2ed4eeb; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: recipes fk_rails_0fd2ed4eeb; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY recipes
@@ -796,7 +802,7 @@ ALTER TABLE ONLY recipes
 
 
 --
--- Name: fk_rails_793a220a68; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: users fk_rails_793a220a68; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users
@@ -804,7 +810,7 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: fk_rails_9c9dd5b0b7; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: users fk_rails_9c9dd5b0b7; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users
@@ -815,7 +821,7 @@ ALTER TABLE ONLY users
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO "$user",public;
+SET search_path TO "$user", public;
 
 INSERT INTO schema_migrations (version) VALUES ('20151214195013');
 
@@ -858,4 +864,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160307193952');
 INSERT INTO schema_migrations (version) VALUES ('20161213184727');
 
 INSERT INTO schema_migrations (version) VALUES ('20170127111423');
+
+INSERT INTO schema_migrations (version) VALUES ('20170130190351');
 

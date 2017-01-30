@@ -38,15 +38,17 @@ gem 'acts_as_votable', '~> 0.10.0'
 gem 'search_cop', '~> 1.0.5'
 gem 'meta-tags', '~> 2.1.0'
 gem 'pushover', '~> 1.0.4'
-gem 'project_honeypot', '~> 0.3.1'
-gem 'invisible_captcha', '~> 0.8.0'
 gem 'paperclip', '~> 4.3.2'
 gem 'jquery-ui-rails', '~> 5.0.5'
 gem 'fancybox2-rails', '~> 0.2.8'
 gem 'chronic', '~> 0.10.2'
 gem 'actionview-encoded_mail_to', '~> 1.0.7'
 
+# spam protection
+gem 'invisible_captcha', '~> 0.8.0'
+gem 'project_honeypot', '~> 0.3.1'
 gem 'rack-attack'
+gem 'recaptcha', require: 'recaptcha/rails'
 
 # Admin interface
 gem 'administrate'

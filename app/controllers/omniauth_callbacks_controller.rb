@@ -3,7 +3,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   before_filter :deny_spammers!
 
   def google
-    @user = User.from_omniauth(request.env['omniauth.auth'])
+    @user = User.from_omniauth(request.env['omniauth.auth'], honeypot)
 
     if @user.persisted?
       flash[:notice] = I18n.t :'devise.omniauth_callbacks.success', :kind => 'Google'
