@@ -29,38 +29,38 @@
   command: 'gpg --keyserver {{ rvm1_gpg_key_server }} --recv-keys {{ rvm1_gpg_keys }}'
   changed_when: False
   when: rvm1_gpg_keys != ''
-  sudo_user: '{{ rvm1_user }}'
+  become_user: '{{ rvm1_user }}'
 
 - name: Install rvm
   command: >
     {{ rvm1_temp_download_path }}/rvm-installer.sh {{ rvm1_rvm_version }}
     --path {{ rvm1_install_path }} {{ rvm1_install_flags }}
   when: not rvm_binary.stat.exists
-  sudo_user: '{{ rvm1_user }}'
+  become_user: '{{ rvm1_user }}'
 
 - name: Update rvm
   shell: '{{ rvm1_rvm }} get {{ rvm1_rvm_version }} && {{ rvm1_rvm }} reload'
   changed_when: False
   when: rvm_binary.stat.exists and rvm1_rvm_check_for_updates
-  sudo_user: '{{ rvm1_user }}'
+  become_user: '{{ rvm1_user }}'
 
 - name: Configure rvm
   command: '{{ rvm1_rvm }} autolibs 3'
   when: not rvm_binary.stat.exists
-  sudo_user: '{{ rvm1_user }}'
+  become_user: '{{ rvm1_user }}'
 
 - name: Detect if rubies are installed
   command: '{{ rvm1_rvm }} {{ item }} do true'
   changed_when: False
   failed_when: False
   register: detect_rubies
-  with_items: rvm1_rubies
+  with_items: '{{ rvm1_rubies }}'
 
 - name: Install rubies
   command: '{{ rvm1_rvm }} install {{ item.item }} --binary'
   when: item.rc != 0
-  with_items: detect_rubies.results
-  sudo_user: '{{ rvm1_user }}'
+  with_items: '{{ detect_rubies.results }}'
+  become_user: '{{ rvm1_user }}'
   register: install_rubies
   ignore_errors: yes
 
@@ -69,8 +69,8 @@
 - name: Install rubies (non-binary)
   command: '{{ rvm1_rvm }} install {{ item.item }}'
   when: item.rc != 0 and install_rubies.results[0].rc != 0
-  with_items: detect_rubies.results
-  sudo_user: '{{ rvm1_user }}'
+  with_items: '{{ detect_rubies.results }}'
+  become_user: '{{ rvm1_user }}'
 
 - name: Detect default ruby version
   command: '{{ rvm1_rvm }} alias list default'
@@ -91,7 +91,7 @@
     group: 'root'
     force: yes
   when: not '--user-install' in rvm1_install_flags
-  with_items: rvm1_symlink_binaries
+  with_items: '{{ rvm1_symlink_binaries }}'
 
 - name: Create rvm.sh
   template: src=rvm.sh.j2 dest={{ profile_d_path }}/rvm.sh owner={{ user_name }} group={{ group_name }}

@@ -26,7 +26,7 @@
 
 - name: Install additional packages
   apt: name={{ item }}
-  with_items: packages
+  with_items: '{{ packages }}'
   when: packages
 
 - name: Create application group
@@ -42,7 +42,7 @@
 
 - name: Create temp directory
   file: path={{ app_temp_path }} state=directory
-  sudo: no
+  become: no
 
 - name: Create profile.d directory
   file: path={{ profile_d_path }} state=directory owner={{ user_name }} group={{ group_name }}

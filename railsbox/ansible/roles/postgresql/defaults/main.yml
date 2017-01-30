@@ -1,5 +1,14 @@
 ---
-postgresql_version: 9.3
+# Changing postgres requires manual cluster upgrade:
+# make backup first
+# $ vagrant provision # should hopefully install new postgres version + configs
+# Within vagrant:
+# $ sudo -iu postgres
+# $ pg_dropcluster 9.7 main # 9.7 = new version
+# $ pg_upgradecluster 9.6 main # 9.6 = old version
+# $ pg_dropcluster 9.6 main # first make sure new db is working
+# https://blog.chaps.io/2016/02/08/upgrading-postgresql-from-9-4-to-9-5-on-ubuntu-15-10.html
+postgresql_version: 9.6
 postgresql_ext_postgis_version: 2.1
 postgresql_extensions: []
 postgresql_admin_user: postgres
