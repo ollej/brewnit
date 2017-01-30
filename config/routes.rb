@@ -36,4 +36,6 @@ Rails.application.routes.draw do
   resources :latest_items, only: [:index]
 
   root to: 'latest_items#index'
+
+  match '*path', via: :all, to: 'pages#error_404'
 end
