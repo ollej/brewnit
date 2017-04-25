@@ -16,7 +16,7 @@
   <fieldset>
     <div class="field pure-control-group">
       <%= f.label :beerxml %>
-      <%= f.file_field :beerxml, accept: 'application/xml', required: @recipe.new_record? %>
+      <%= f.file_field :beerxml, accept: 'application/xml,.xml', required: @recipe.new_record? %>
     </div>
     <div class="field pure-control-group">
       <%= f.label :name %>
