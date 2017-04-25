@@ -5,8 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :clear_search
   before_action :populate_search
-  before_action :load_recipes
-  before_action :filter_recipes
+  before_action :load_filtered_recipes
 
   rescue_from Exception, with: :error_500
 
@@ -23,8 +22,8 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def load_recipes
-    @recipes = if user_signed_in?
+  def scoped_recipes
+    if user_signed_in?
       Recipe.for_user(current_user)
     else
       Recipe.all
@@ -32,11 +31,15 @@ class ApplicationController < ActionController::Base
   end
 
   def filter_recipes
-    @recipes = FilterRecipes.new(@recipes, query_hash).resolve.limit(limit_items)
+    @filter_recipes ||= FilterRecipes.new(scoped_recipes, query_hash)
+  end
+
+  def load_filtered_recipes
+    @recipes = filter_recipes.resolved.limit(limit_items)
   end
 
   def limit_items
-    params.fetch(:limit, 50).to_i
+    params.fetch(:limit, FilterRecipes::PAGE_LIMIT).to_i
   end
 
   def populate_search
@@ -48,9 +51,10 @@ class ApplicationController < ActionController::Base
     session[:search] = search_hash
   end
 
+  helper_method :search_hash
   def search_hash
     Rails.logger.debug { "search_params #{search_params}" }
-    session.fetch(:search, {}).merge(search_params).deep_symbolize_keys
+    @search_hash ||= session.fetch(:search, {}).merge(search_params).deep_symbolize_keys
   end
 
   def clear_search

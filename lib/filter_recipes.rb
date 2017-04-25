@@ -21,6 +21,8 @@ class FilterRecipes
     likes: 'recipes.cached_votes_up desc'
   }
 
+  PAGE_LIMIT = 50
+
   OGMIN = '1.020'
   OGMAX = '1.150'
   FGMIN = '1.000'
@@ -60,6 +62,14 @@ class FilterRecipes
 
   def query?
     !query.empty?
+  end
+
+  def total_count
+    @total_count ||= resolved.limit(nil).count
+  end
+
+  def resolved
+    @resolved ||= resolve
   end
 
   def resolve

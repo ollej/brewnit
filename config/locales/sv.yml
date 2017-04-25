@@ -117,6 +117,7 @@ sv:
     name_not_needed: Namn hämtas från BeerXML-filen om det inte fylls i.
     no_style_information: Det finns ingen stiltypsinformation för detta recept.
     show_all: Visa alla %{count} recept
+    show_more: Visa fler
     downloads_count:
       one: 1 nedladdning
       other: '%{count} nedladdningar'

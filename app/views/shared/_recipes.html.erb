@@ -43,10 +43,17 @@
   </div>
 <% end %>
 <% if @recipes.size < Recipe.count %>
-  <div class="pure-u-1 list-details">
+  <div class="pure-u list-details">
       <p><%= link_to t(:'recipes.show_all', count: Recipe.count),
         recipes_path(limit: Recipe.count, clear_search: true),
         class: 'recipe-all' %></p>
+  </div>
+<% end %>
+<% if @filter_recipes.query? && @recipes.size < @filter_recipes.total_count %>
+  <div class="pure-u list-details">
+      <p><%= link_to t(:'recipes.show_more', count: @filter_recipes.total_count),
+        recipes_path(search_hash.merge(limit: @filter_recipes.total_count)),
+        class: 'recipe-more' %></p>
   </div>
 <% end %>
 </div>
