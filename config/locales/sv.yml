@@ -158,6 +158,8 @@ sv:
     destroy:
       link: Ta bort
       successful: Evenemanget har tagits bort.
+    past_events: Tidigare evenemang
+    upcoming_events: Kommande evenemang
   beerxml:
     information: Information
     style: Ölstil

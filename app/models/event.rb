@@ -14,6 +14,9 @@ class Event < ActiveRecord::Base
 
   scope :ordered, -> { order(held_at: :desc) }
 
+  scope :upcoming, -> { where('held_at > ?', Date.today) }
+  scope :past, -> { where('held_at <= ?', Date.today) }
+
   sanitized_fields :description
 
   def owned_by?(u)

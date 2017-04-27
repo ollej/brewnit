@@ -4,7 +4,8 @@ class EventsController < ApplicationController
   invisible_captcha only: [:create, :update], on_spam: :redirect_spammers!
 
   def index
-    @events = Event.all.ordered
+    @upcoming_events = Event.upcoming.ordered
+    @past_events = Event.past.ordered
 
     respond_to do |format|
       format.html { render :index }
