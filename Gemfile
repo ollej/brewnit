@@ -53,6 +53,10 @@ gem 'recaptcha', require: 'recaptcha/rails'
 # Admin interface
 gem 'administrate'
 
+# Bundler fix
+gem 'sys-proctable'
+gem 'ffi'
+
 group :production do
   #gem 'rails_12factor', '~> 0.0.3'
 end
