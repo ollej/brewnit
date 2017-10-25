@@ -55,6 +55,10 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_params)
     @recipe.user = current_user
 
+    if params[:event].present?
+      @recipe.events << Event.find(params[:event])
+    end
+
     respond_to do |format|
       if @recipe.save
         format.html { redirect_to @recipe, notice: I18n.t(:'recipes.create.successful') }

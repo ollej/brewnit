@@ -62,6 +62,8 @@ sv:
     spammer_detected: Kunde inte skapa kontot då du verkar vara en spammare.
     media:
       upload: Ladda upp bild
+    no_event: Inget evenemang
+    exhibited_at_event: Deltar på evenemang
   latest_items:
     index: Nytt på Brygglogg.se
     recipe: Recept

@@ -30,4 +30,9 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def self.event_options
+    # TODO: Add held at
+    self.all.order(:name).collect {|event| [event.name, event.id]}
+  end
+
 end
