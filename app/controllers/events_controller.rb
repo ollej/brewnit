@@ -16,6 +16,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    @recipes = @recipes.by_event(@event) if @recipes.present?
 
     respond_to do |format|
       format.html { render :show }

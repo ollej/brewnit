@@ -4,6 +4,7 @@ class Event < ActiveRecord::Base
   include SanitizerConcern
 
   belongs_to :user
+  has_and_belongs_to_many :recipes
 
   before_validation :cleanup_fields
   validates :name, presence: true

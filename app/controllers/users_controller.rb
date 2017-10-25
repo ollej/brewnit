@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @recipes = @recipes.by_user(@user)
+    @recipes = @recipes.by_user(@user) if @recipes.present?
 
     respond_to do |format|
       format.html { render :show }
