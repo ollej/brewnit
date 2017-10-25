@@ -7,8 +7,6 @@ class ApplicationController < ActionController::Base
   before_action :populate_search
   before_action :load_filtered_recipes
 
-  rescue_from Exception, with: :error_500
-
   def after_sign_in_path_for(resource)
     after_sign_in_path = stored_location_for(resource) || root_path
     Rails.logger.debug { "stored_location_for resource: #{stored_location_for(resource)}" }
@@ -86,10 +84,6 @@ class ApplicationController < ActionController::Base
 
   def deny_spammers!
     redirect_spammers! if spammer?
-  end
-
-  def error_500
-    render file: 'public/500.html', status: :internal_server_error
   end
 
 end
