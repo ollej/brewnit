@@ -604,6 +604,7 @@ sv:
         beerxml: Beer XML
         public: Offentlig?
         medium_main: Huvudbild
+        events: Deltagit i evenemang
       medium:
         created: Mediat har sparats.
         destroyed: Mediat har tagits bort.

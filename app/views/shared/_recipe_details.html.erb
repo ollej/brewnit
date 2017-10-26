@@ -395,6 +395,21 @@
             </p>
           </div>
           <% end %>
+
+          <% if @recipe.events.present? %>
+          <div class="recipe_events pure-menu">
+            <h3><%= t(:'activerecord.attributes.recipe.events') %></h3>
+            <ul class="pure-menu-list">
+              <% @recipe.events.each do |event| %>
+                <li class="pure-menu-item">
+                  <i class="fa fa-calendar-o"></i>
+                  <%= link_to event.name, event_path(event), class: 'pure-menu-link' %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+          <% end %>
+
         </aside>
       </div>
 
