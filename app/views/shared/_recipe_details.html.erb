@@ -404,6 +404,14 @@
                 <li class="pure-menu-item">
                   <i class="fa fa-calendar-o"></i>
                   <%= link_to event.name, event_path(event), class: 'pure-menu-link' %>
+
+                  <% if current_user.can_modify?(@recipe) %>
+                    <%= link_to recipe_event_path(@recipe, event), method: :delete,
+                      data: { confirm: t(:'common.are_you_sure') },
+                      class: 'inline-button destroy-button' do %>
+                      <i class="fa fa-trash"></i>
+                    <% end %>
+                  <% end %>
                 </li>
               <% end %>
             </ul>

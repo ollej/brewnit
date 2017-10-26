@@ -206,21 +206,28 @@ screen and (min-device-pixel-ratio: 1.5) {
     position: absolute;
     z-index: 1000;
     opacity: 0.9;
+
+    .inline-button {
+      padding-right: 0;
+    }
   }
-  .media-add-button {
+}
+
+.inline-button {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding-left: 4px;
+  padding-bottom: 2px;
+  padding-right: 4px;
+  margin-left: 4px;
+  @include hover-gradient;
+
+  &.add-button {
     color: black;
   }
-  .media-destroy-button {
+  &.destroy-button {
     color: red;
-  }
-  .media-button {
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    padding-left: 4px;
-    padding-bottom: 2px;
-    margin-left: 4px;
-    @include hover-gradient;
   }
 }
 

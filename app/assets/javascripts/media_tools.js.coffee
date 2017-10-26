@@ -5,7 +5,7 @@ class MediaTools
   init: ->
     @$slider.on("mouseenter", @thumbnail, @hoverOver)
     @$slider.on("mouseleave", @thumbnail, @hoverOut)
-    @$slider.on("ajax:success", ".media-destroy-button", @removeMedium)
+    @$slider.on("ajax:success", ".destroy-button", @removeMedium)
     $(".fancybox").fancybox({
       openEffect: "elastic",
       closeEffect: "fade",

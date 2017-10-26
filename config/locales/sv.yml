@@ -162,6 +162,11 @@ sv:
       successful: Evenemanget har tagits bort.
     past_events: Tidigare evenemang
     upcoming_events: Kommande evenemang
+  recipe_events:
+    delete:
+      successful: Receptet har tagits bort från evenemanget.
+      failed: Kunde inte ta bort receptet från evenemanget.
+
   beerxml:
     information: Information
     style: Ölstil

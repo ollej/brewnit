@@ -10,14 +10,14 @@
                 alt: t(:'activerecord.attributes.user.medium_avatar'),
                 title: t(:'activerecord.attributes.user.medium_avatar'),
                 data: { confirm: I18n.t(:'activerecord.attributes.medium.confirm_avatar') },
-                class: 'media-button media-add-button' do %>
+                class: 'inline-button add-button' do %>
                 <i class="fa fa-user"></i>
               <% end %>
               <%= link_to add_medium_path(medium, 'brewery'), remote: true, method: :post,
                 alt: t(:'activerecord.attributes.user.medium_brewery'),
                 title: t(:'activerecord.attributes.user.medium_brewery'),
                 data: { confirm: I18n.t(:'activerecord.attributes.medium.confirm_brewery') },
-                class: 'media-button media-add-button' do %>
+                class: 'inline-button add-button' do %>
                 <i class="fa fa-industry"></i>
               <% end %>
             <% end %>
@@ -26,7 +26,7 @@
                 alt: t(:'activerecord.attributes.recipe.medium_main'),
                 title: t(:'activerecord.attributes.recipe.medium_main'),
                 data: { confirm: I18n.t(:'activerecord.attributes.medium.confirm_main') },
-                class: 'media-button media-add-button' do %>
+                class: 'inline-button add-button' do %>
                 <i class="fa fa-photo"></i>
               <% end %>
             <% end %>
@@ -34,7 +34,7 @@
               alt: t(:'activerecord.attributes.user.destroy.media'),
               title: t(:'activerecord.attributes.user.destroy.media'),
               data: { confirm: I18n.t(:'activerecord.attributes.medium.confirm_destroy') },
-              class: 'media-button media-destroy-button' do %>
+              class: 'inline-button destroy-button' do %>
               <i class="fa fa-trash"></i>&nbsp;
             <% end %>
           </div>
