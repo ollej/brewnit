@@ -1,7 +1,8 @@
 module SanitizerConcern
   extend ActiveSupport::Concern
 
-  ALLOWED_TAGS = %w(b i strong em br p small del strike s ins u sub sup mark hr q)
+  ALLOWED_TAGS = %w(h1 h2 h3 b i strong em br p small del strike s ins u sub sup mark hr q blockquote pre ul ol li span)
+  ALLOWED_ATTRIBUTES = %w(spellcheck)
 
   included do
     before_validation :sanitize_fields
@@ -31,6 +32,6 @@ module SanitizerConcern
   end
 
   def sanitize_string(string)
-    Rails::Html::WhiteListSanitizer.new.sanitize(string, tags: ALLOWED_TAGS)
+    Rails::Html::WhiteListSanitizer.new.sanitize(string, tags: ALLOWED_TAGS, attributes: ALLOWED_ATTRIBUTES)
   end
 end

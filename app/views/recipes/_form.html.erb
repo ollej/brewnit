@@ -24,8 +24,10 @@
       <em>(<%= I18n.t(:'recipes.name_not_needed') %>)</em>
     </div>
     <div class="field pure-control-group">
-      <%= f.label :description %>
-      <%= f.text_area :description, placeholder: I18n.t(:'activerecord.attributes.recipe.description') %>
+      <%= f.label :description, class: 'large-group' %>
+      <div class="quill-wrapper">
+        <%= f.text_area :description, placeholder: I18n.t(:'activerecord.attributes.recipe.description'), class: 'quill_container' %>
+      </div>
     </div>
     <% unless @recipe.persisted? %>
     <div class="field pure-control-group">

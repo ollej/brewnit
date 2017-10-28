@@ -43,6 +43,7 @@ gem 'jquery-ui-rails', '~> 5.0.5'
 gem 'fancybox2-rails', '~> 0.2.8'
 gem 'chronic', '~> 0.10.2'
 gem 'actionview-encoded_mail_to', '~> 1.0.7'
+gem 'quilljs-rails'
 
 # spam protection
 gem 'invisible_captcha', '~> 0.8.0'

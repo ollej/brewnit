@@ -62,8 +62,10 @@
     </div>
 
     <div class="field pure-control-group">
-      <%= f.label :presentation %>
-      <%= f.text_area :presentation, placeholder: t(:'activerecord.attributes.user.presentation') %>
+      <%= f.label :presentation, class: 'large-group' %>
+      <div class="quill-wrapper">
+        <%= f.text_area :presentation, placeholder: t(:'activerecord.attributes.user.presentation'), class: 'quill_container' %>
+      </div>
     </div>
 
     <div class="field pure-control-group">

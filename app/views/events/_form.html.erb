@@ -38,8 +38,10 @@
       <%= f.text_field :held_at, placeholder: I18n.t(:'activerecord.attributes.event.held_at') %>
     </div>
     <div class="field pure-control-group">
-      <%= f.label :description %>
-      <%= f.text_area :description, placeholder: I18n.t(:'activerecord.attributes.event.description') %>
+      <%= f.label :description, class: 'large-group' %>
+      <div class="quill-wrapper">
+        <%= f.text_area :description, placeholder: I18n.t(:'activerecord.attributes.event.description'), class: 'quill_container' %>
+      </div>
     </div>
     <div class="actions pure-controls">
       <%= f.submit I18n.t(:'events.save'), class: 'pure-button pure-button-primary' %>
