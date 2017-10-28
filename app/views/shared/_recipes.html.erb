@@ -45,7 +45,7 @@
 <% if @recipes.size < Recipe.count %>
   <div class="pure-u list-details">
       <p><%= link_to t(:'recipes.show_all', count: Recipe.count),
-        recipes_path(limit: Recipe.count, clear_search: true),
+        recipes_path(limit: Recipe.count, clear_search: true, sort_order: @search[:sort_order]),
         class: 'recipe-all' %></p>
   </div>
 <% end %>
