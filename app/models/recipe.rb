@@ -8,9 +8,13 @@ class Recipe < ActiveRecord::Base
     attributes primary: [:name, :description, :style_name, :brewer, :equipment]
     attributes :abv, :ibu, :og, :fg, :color, :batch_size, :style_code, :style_guide, :style_name, :created_at, :brewer, :equipment
     attributes owner: 'user.name'
+    attributes event: 'events.name'
+    attributes event_id: 'events.id'
     options :primary, type: :fulltext, default: true
-    options :owner, type: :fulltext, default: true
-    options :style_name, type: :fulltext, default: false
+    options :name, type: :fulltext
+    options :owner, type: :fulltext
+    options :style_name, type: :fulltext
+    options :event, type: :fulltext
   end
 
   belongs_to :user

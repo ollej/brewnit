@@ -161,12 +161,12 @@ ALTER SEQUENCE commontator_threads_id_seq OWNED BY commontator_threads.id;
 
 CREATE TABLE events (
     id integer NOT NULL,
-    name character varying,
-    description character varying,
-    organizer character varying,
-    location character varying,
+    name character varying DEFAULT ''::character varying,
+    description character varying DEFAULT ''::character varying,
+    organizer character varying DEFAULT ''::character varying,
+    location character varying DEFAULT ''::character varying,
     held_at date,
-    event_type character varying,
+    event_type character varying DEFAULT ''::character varying,
     url character varying,
     user_id integer,
     created_at timestamp without time zone NOT NULL,
@@ -514,6 +514,20 @@ ALTER TABLE ONLY users
 
 ALTER TABLE ONLY votes
     ADD CONSTRAINT votes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: fulltext_index_events_on_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX fulltext_index_events_on_name ON events USING gin (to_tsvector('simple'::regconfig, (COALESCE(name, ''::character varying))::text));
+
+
+--
+-- Name: fulltext_index_events_on_primary; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX fulltext_index_events_on_primary ON events USING gin (to_tsvector('simple'::regconfig, (((((((((COALESCE(name, ''::character varying))::text || ' '::text) || (COALESCE(organizer, ''::character varying))::text) || ' '::text) || (COALESCE(location, ''::character varying))::text) || ' '::text) || (COALESCE(event_type, ''::character varying))::text) || ' '::text) || (COALESCE(description, ''::character varying))::text)));
 
 
 --
@@ -894,4 +908,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170130190351');
 INSERT INTO schema_migrations (version) VALUES ('20171025204911');
 
 INSERT INTO schema_migrations (version) VALUES ('20171027223202');
+
+INSERT INTO schema_migrations (version) VALUES ('20171028120552');
 

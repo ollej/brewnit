@@ -1,7 +1,14 @@
 class Event < ActiveRecord::Base
   EVENT_TYPES = ['Tävling', 'Utmaning', 'Träff']
 
+  include SearchCop
   include SanitizerConcern
+
+  search_scope :search do
+    attributes primary: [:name, :organizer, :location, :event_type, :description]
+    options :primary, type: :fulltext, default: true
+    options :name, type: :fulltext
+  end
 
   belongs_to :user
   has_and_belongs_to_many :recipes

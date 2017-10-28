@@ -87,6 +87,7 @@ sv:
       style: Stiltyp
       clear: Nollställ sökning
       equipment: Bryggverk
+      event: Evenemang
     download: Ladda ner
     print: Skriv ut
     private: Privat
@@ -153,6 +154,9 @@ sv:
     new: Skapa evenemang
     edit: Ändra
     save: Spara
+    search: Sök evenemang
+    searched_term: "Sökresultat för: %{search_term}"
+    clear_search: Rensa sökning
     create:
       successful: Evenemanget har skapats.
     update:

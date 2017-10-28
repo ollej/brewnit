@@ -54,7 +54,7 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
           <%= link_to "javascript:window.print()", class: 'pure-button secondary-button' do %>
             <i class="fa fa-print"></i> <%= t(:'recipes.print') %>
           <% end %>
-        </div>
+          </div>
           <% if user_signed_in? %>
             <div class="controls-signed-in">
             <%= like_tag(@recipe, current_user) %>

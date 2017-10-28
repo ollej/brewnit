@@ -53,6 +53,7 @@ class FilterRecipes
   # X TODO: Clear search
   # X TODO: Search all fields by default
   # TODO: Search comments
+  # TODO: Namespace search query params to avoid collisions
 
   def initialize(scope, hash)
     @scope = scope
@@ -104,6 +105,8 @@ class FilterRecipes
       query << { query: @hash[:q] } if @hash[:q].present?
       query << { style_name: @hash[:style] } if @hash[:style].present?
       query << { equipment: @hash[:equipment] } if @hash[:equipment].present?
+      query << { event: @hash[:event] } if @hash[:event].present?
+      query << { event_id: @hash[:event_id] } if @hash[:event_id].present?
       add_filters(query)
       query
     end
