@@ -11,13 +11,16 @@ set_meta_tags title: @event.name,
   }
 %>
       <div class="page-content-header pure-g">
-        <div class="pure-u-4-5">
+        <div class="pure-u-3-5">
           <h1 class="event-content-title item-content-title"><%= title @event.name %></h1>
           <p class="item-content-info"><%= @event.organizer %> - <%= @event.event_type %></p>
         </div>
-        <div class="page-content-controls pure-u-1-5">
+        <div class="page-content-controls pure-u-2-5">
           <% if user_signed_in? %>
           <div class="controls-signed-in">
+            <%= link_to new_recipe_path(event_id: @event.id), class: 'pure-button primary-button' do %>
+              <i class="fa fa-beer"></i> <%= t(:'events.register_recipe') %>
+            <% end %>
             <% if current_user.can_modify?(@event) %>
               <%= link_to edit_event_path(@event), class: 'pure-button secondary-button' do %>
                 <i class="fa fa-pencil-square-o"></i> <%= t(:'events.edit') %>

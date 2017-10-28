@@ -41,6 +41,7 @@ class RecipesController < ApplicationController
   # GET /recipes/new
   def new
     @recipe = Recipe.new
+    @event = params[:event_id]
   end
 
   # GET /recipes/1/edit

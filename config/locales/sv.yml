@@ -157,6 +157,7 @@ sv:
     search: Sök evenemang
     searched_term: "Sökresultat för: %{search_term}"
     clear_search: Rensa sökning
+    register_recipe: Anmäl recept
     create:
       successful: Evenemanget har skapats.
     update:
