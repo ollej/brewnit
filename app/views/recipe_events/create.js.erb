@@ -1,0 +1,8 @@
+<% if @success %>
+  <% recipe_event = escape_javascript(render partial: 'shared/recipe_event',
+                                      locals: { event: @event, recipe: @recipe, current_user: current_user }) %>
+  $("<%= recipe_event %>").appendTo("#recipe-events")
+  $("#event_id option[value='<%= @event.id %>']").remove();
+<% else %>
+  $('body').trigger('flasher:show', { message: '<%= escape_javascript(I18n.t(:'recipe_events.create.failed')) %>', level: 'error' })
+<% end %>

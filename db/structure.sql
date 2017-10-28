@@ -625,14 +625,14 @@ CREATE INDEX index_events_on_user_id ON events USING btree (user_id);
 -- Name: index_events_recipes_on_event_id_and_recipe_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_events_recipes_on_event_id_and_recipe_id ON events_recipes USING btree (event_id, recipe_id);
+CREATE UNIQUE INDEX index_events_recipes_on_event_id_and_recipe_id ON events_recipes USING btree (event_id, recipe_id);
 
 
 --
 -- Name: index_events_recipes_on_recipe_id_and_event_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_events_recipes_on_recipe_id_and_event_id ON events_recipes USING btree (recipe_id, event_id);
+CREATE UNIQUE INDEX index_events_recipes_on_recipe_id_and_event_id ON events_recipes USING btree (recipe_id, event_id);
 
 
 --
@@ -892,4 +892,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170127111423');
 INSERT INTO schema_migrations (version) VALUES ('20170130190351');
 
 INSERT INTO schema_migrations (version) VALUES ('20171025204911');
+
+INSERT INTO schema_migrations (version) VALUES ('20171027223202');
 

@@ -163,6 +163,11 @@ sv:
     past_events: Tidigare evenemang
     upcoming_events: Kommande evenemang
   recipe_events:
+    add: Lägg till
+    choose: Välj evenemang
+    create:
+      successful: Evenemanget har lagts till på receptet.
+      failed: Kunde inte lägga till evenemanget till receptet.
     delete:
       successful: Receptet har tagits bort från evenemanget.
       failed: Kunde inte ta bort receptet från evenemanget.

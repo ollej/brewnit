@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   resources :recipes do
     resources :media, only: [:create, :destroy]
     resource :add_medium, only: [:create], controller: :add_medium
-    resources :events, only: [:destroy], controller: :recipe_events
+    resources :events, only: [:create, :destroy], controller: :recipe_events
     member do
       post :like, controller: :likes, action: :create
       delete :like, controller: :likes, action: :destroy, as: :unlike

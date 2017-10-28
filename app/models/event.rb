@@ -30,9 +30,9 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def self.event_options
+  def self.event_options(remove_events = nil)
     # TODO: Add held at
-    self.all.order(:name).collect {|event| [event.name, event.id]}
+    self.select(:id, :name).where.not(id: remove_events).order(:name).collect {|event| [event.name, event.id]}
   end
 
 end

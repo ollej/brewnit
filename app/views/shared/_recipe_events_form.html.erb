@@ -1,0 +1,19 @@
+<%= render partial: 'shared/recipe_events', locals: { current_user: current_user, recipe: @recipe } %>
+
+<%= form_tag(recipe_events_path(@recipe), method: :post, remote: true,
+             class: 'pure-form pure-form-aligned') do |f| %>
+  <%= hidden_field_tag :recipe_id, @recipe.id %>
+  <fieldset>
+    <div class="field pure-control-group">
+      <%= label_tag :event_id, t(:'recipe_events.choose') %>
+      <%= select_tag :event_id, options_for_select(Event.event_options(@recipe.events), ''),
+            class: 'pure-input-1-4' %>
+    </div>
+    <div class="actions pure-controls">
+      <%= button_tag name: I18n.t(:'recipe_events.add'), type: :submit, class: 'pure-button pure-button-secondary' do %>
+        <i class="fa fa-plus-circle"></i> <%= t('recipe_events.add') %>
+      <% end %>
+    </div>
+  </fieldset>
+<% end %>
+
