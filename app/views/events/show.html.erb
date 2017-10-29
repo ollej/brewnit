@@ -16,6 +16,14 @@ set_meta_tags title: @event.name,
           <p class="item-content-info"><%= @event.organizer %> - <%= @event.event_type %></p>
         </div>
         <div class="page-content-controls pure-u-2-5">
+          <div class="controls-public">
+            <%= form_tag(events_path, method: 'get', class: 'pure-form', id: 'eventsearch-form') do %>
+              <%= search_field_tag :event_search, @event_search, autocomplete: 'off',
+                  class: 'pure-input-2-5 pure-input-rounded',
+                  placeholder: t(:'events.search'),
+                  results: 5, autosave: 'brygglogg-search-events' %>
+            <% end %>
+          </div>
           <% if user_signed_in? %>
           <div class="controls-signed-in">
             <%= link_to new_recipe_path(event_id: @event.id), class: 'pure-button primary-button' do %>
