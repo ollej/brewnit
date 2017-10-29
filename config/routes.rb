@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :events
+  resources :events do
+    resources :media, only: [:create, :destroy]
+    resource :add_medium, only: [:create], controller: :add_medium
+  end
 
   namespace :admin do
     resources :users

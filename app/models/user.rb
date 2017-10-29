@@ -68,7 +68,7 @@ class User < ActiveRecord::Base
       avatar
     elsif email.present?
       hash = Digest::MD5.hexdigest(email)
-      "https://secure.gravatar.com/avatar/#{hash}?s=100&d=retro"
+      "https://api.adorable.io/avatars/64/#{hash}"
     else
       nil
     end

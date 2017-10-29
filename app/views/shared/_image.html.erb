@@ -30,6 +30,15 @@
                 <i class="fa fa-photo"></i>
               <% end %>
             <% end %>
+            <% if medium.parent.class.name == 'Event' %>
+              <%= link_to add_medium_path(medium, 'main'), remote: true, method: :post,
+                alt: t(:'activerecord.attributes.event.medium_main'),
+                title: t(:'activerecord.attributes.event.medium_main'),
+                data: { confirm: I18n.t(:'activerecord.attributes.medium.confirm_main') },
+                class: 'inline-button add-button' do %>
+                <i class="fa fa-photo"></i>
+              <% end %>
+            <% end %>
             <%= link_to destroy_medium_path(medium), remote: true, method: :delete,
               alt: t(:'activerecord.attributes.user.destroy.media'),
               title: t(:'activerecord.attributes.user.destroy.media'),

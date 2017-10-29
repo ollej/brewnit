@@ -4,7 +4,7 @@ class LatestItems
   end
 
   def all
-    (User.latest + Recipe.latest + latest_comments).sort_by(&:created_at).reverse
+    (User.latest + Recipe.latest + Event.latest + latest_comments).sort_by(&:created_at).reverse
   end
 
   def latest_comments

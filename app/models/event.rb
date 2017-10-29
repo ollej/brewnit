@@ -3,6 +3,7 @@ class Event < ActiveRecord::Base
 
   include SearchCop
   include SanitizerConcern
+  include MediaParentConcern
 
   search_scope :search do
     attributes primary: [:name, :organizer, :location, :event_type, :description]
@@ -12,6 +13,8 @@ class Event < ActiveRecord::Base
 
   belongs_to :user
   has_and_belongs_to_many :recipes
+  belongs_to :media_main, class_name: "Medium"
+  has_many :media, as: :parent, dependent: :destroy
 
   before_validation :cleanup_fields
   validates :name, presence: true
@@ -24,6 +27,7 @@ class Event < ActiveRecord::Base
 
   scope :upcoming, -> { where('held_at > ?', Date.today) }
   scope :past, -> { where('held_at <= ?', Date.today) }
+  scope :latest, -> { limit(10).ordered }
 
   sanitized_fields :description
 
@@ -34,6 +38,15 @@ class Event < ActiveRecord::Base
   def cleanup_fields
     if url.present? && !url.start_with?('http')
       self.url = "http://#{url.strip}"
+    end
+  end
+
+  def main_image(size = :medium_thumbnail)
+    if media_main.present?
+      media_main.file.url(size)
+    else
+      hash = Digest::MD5.hexdigest(organizer)
+      "https://secure.gravatar.com/avatar/#{hash}?s=100&d=retro"
     end
   end
 

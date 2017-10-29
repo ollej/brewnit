@@ -191,21 +191,21 @@ a {
     font-size: 85%;
     text-align: right;
   }
-  .recipe-item-selected {
+  &.recipe-item-selected {
     background: #eee;
   }
-  .recipe-item-unread {
+  &.recipe-item-unread {
     border-left: 6px solid #1b98f8;
   }
-  .recipe-item-own {
+  &.recipe-item-own {
     border-left: 6px solid #40c365;
   }
-  .recipe-item-private {
+  &.recipe-item-private {
     border-left: 6px solid #41ccb4;
   }
-  .recipe-item-public {
+  &.recipe-item-public {
   }
-  .recipe-item-winner {
+  &.recipe-item-winner {
     border-left: 6px solid #ffc94c;
   }
 }

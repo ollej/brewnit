@@ -1,0 +1,17 @@
+  <div class="list-item linked-item pure-g">
+    <div class="pure-u">
+      <%= image_tag item.main_image, class: 'event-avatar item-image',
+        alt: item.name, height: 64, width: 64 %>
+    </div>
+
+    <div class="pure-u-5-8 event-item-description">
+      <h5 class="item-subtitle event-name"><%= t(:'latest_items.event') %></h5>
+      <h4 class="item-title event-name">
+        <%= link_to item.name, item, class: 'event-link item-link' %>
+      </h4>
+      <p class="item-desc event-organizer">
+        <%= item.organizer %>
+      </p>
+    </div>
+  </div>
+

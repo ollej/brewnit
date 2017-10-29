@@ -32,4 +32,8 @@ module ApplicationHelper
       url
     end
   end
+
+  def strip_truncate(text, len = 50)
+    truncate(strip_tags(text), length: len, omission: '…')
+  end
 end

@@ -42,6 +42,20 @@ CREATE EXTENSION IF NOT EXISTS hstore WITH SCHEMA public;
 COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs';
 
 
+--
+-- Name: pg_trgm; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pg_trgm WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION pg_trgm; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pg_trgm IS 'text similarity measurement and index searching based on trigrams';
+
+
 SET search_path = public, pg_catalog;
 
 --
@@ -314,7 +328,8 @@ CREATE TABLE events (
     url character varying,
     user_id integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    media_main_id integer
 );
 
 
@@ -541,6 +556,15 @@ ALTER SEQUENCE votes_id_seq OWNED BY votes.id;
 
 
 --
+-- Name: words; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE words (
+    word text
+);
+
+
+--
 -- Name: commontator_comments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -724,6 +748,13 @@ CREATE INDEX fulltext_index_users_on_primary ON users USING gin (to_tsvector('sw
 
 
 --
+-- Name: idx_recipes_on_description_trigram; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_recipes_on_description_trigram ON recipes USING gin (description gin_trgm_ops);
+
+
+--
 -- Name: index_commontator_comments_on_c_id_and_c_type_and_t_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -770,6 +801,13 @@ CREATE INDEX index_commontator_subscriptions_on_thread_id ON commontator_subscri
 --
 
 CREATE UNIQUE INDEX index_commontator_threads_on_c_id_and_c_type ON commontator_threads USING btree (commontable_id, commontable_type);
+
+
+--
+-- Name: index_events_on_media_main_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_events_on_media_main_id ON events USING btree (media_main_id);
 
 
 --
@@ -976,6 +1014,13 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 
 
 --
+-- Name: words_idx; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX words_idx ON words USING gin (word gin_trgm_ops);
+
+
+--
 -- Name: recipes fk_rails_0fd2ed4eeb; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -997,6 +1042,14 @@ ALTER TABLE ONLY users
 
 ALTER TABLE ONLY users
     ADD CONSTRAINT fk_rails_9c9dd5b0b7 FOREIGN KEY (media_brewery_id) REFERENCES media(id);
+
+
+--
+-- Name: events fk_rails_eddd50df5b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY events
+    ADD CONSTRAINT fk_rails_eddd50df5b FOREIGN KEY (media_main_id) REFERENCES media(id);
 
 
 --
@@ -1056,4 +1109,6 @@ INSERT INTO schema_migrations (version) VALUES ('20171027223202');
 INSERT INTO schema_migrations (version) VALUES ('20171028120552');
 
 INSERT INTO schema_migrations (version) VALUES ('20171028145021');
+
+INSERT INTO schema_migrations (version) VALUES ('20171029201125');
 

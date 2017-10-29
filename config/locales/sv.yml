@@ -71,6 +71,7 @@ sv:
     recipe: Recept
     user: Användare
     comment: Kommentar
+    event: Evenemang
   recipes:
     name: Namn
     description: Beskrivning
@@ -638,6 +639,7 @@ sv:
         held_at: Datum
         url: Hemsida
         description: Beskrivning
+        medium_main: Huvudbild
     errors:
       template:
         header:
