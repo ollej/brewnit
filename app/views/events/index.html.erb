@@ -21,9 +21,9 @@
 
       <div class="page-content-body event-index item-index">
         <% if @event_search.present? %>
-          <h2><%= I18n.t(:'events.searched_term', search_term: @event_search) %></h2>
+          <h2><%= I18n.t(:'common.searched_term', search_term: @event_search) %></h2>
           <%= link_to events_path do %>
-            <%= t(:'events.clear_search') %>
+            <%= t(:'common.clear_search') %>
           <% end %>
         <% end %>
         <h2><%= I18n.t(:'events.upcoming_events') %></h2>

@@ -64,6 +64,8 @@ sv:
       upload: Ladda upp bild
     no_event: Inget evenemang
     exhibited_at_event: Deltar på evenemang
+    searched_term: "Sökresultat för: %{search_term}"
+    clear_search: Rensa sökning
   latest_items:
     index: Nytt på Brygglogg.se
     recipe: Recept
@@ -149,6 +151,7 @@ sv:
     recipe_count: Antal recept
     media:
       title: Bilder
+    search: Sök användare
   events:
     index: Evenemang
     new: Skapa evenemang

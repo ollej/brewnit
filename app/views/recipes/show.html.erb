@@ -48,12 +48,12 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
 
         <div class="page-content-controls pure-u-1 pure-u-sm-2-5">
           <div class="controls-public">
-          <%= link_to recipe_path(@recipe, format: :xml), rel: nofollow, method: :get, class: 'pure-button secondary-button' do %>
-            <i class="fa fa-download"></i> <%= t(:'recipes.download') %>
-          <% end %>
-          <%= link_to "javascript:window.print()", class: 'pure-button secondary-button' do %>
-            <i class="fa fa-print"></i> <%= t(:'recipes.print') %>
-          <% end %>
+            <%= link_to recipe_path(@recipe, format: :xml), rel: nofollow, method: :get, class: 'pure-button secondary-button' do %>
+              <i class="fa fa-download"></i> <%= t(:'recipes.download') %>
+            <% end %>
+            <%= link_to "javascript:window.print()", class: 'pure-button secondary-button' do %>
+              <i class="fa fa-print"></i> <%= t(:'recipes.print') %>
+            <% end %>
           </div>
           <% if user_signed_in? %>
             <div class="controls-signed-in">
