@@ -6,8 +6,8 @@ class Event < ActiveRecord::Base
 
   search_scope :search do
     attributes primary: [:name, :organizer, :location, :event_type, :description]
-    options :primary, type: :fulltext, default: true
-    options :name, type: :fulltext
+    options :primary, type: :fulltext, default: true, dictionary: 'swedish_snowball'
+    options :name, type: :fulltext, dictionary: 'swedish_snowball'
   end
 
   belongs_to :user

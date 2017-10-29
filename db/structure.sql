@@ -44,6 +44,150 @@ COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs
 
 SET search_path = public, pg_catalog;
 
+--
+-- Name: swedish; Type: TEXT SEARCH DICTIONARY; Schema: public; Owner: -
+--
+
+CREATE TEXT SEARCH DICTIONARY swedish (
+    TEMPLATE = pg_catalog.ispell,
+    dictfile = 'sv_se', afffile = 'sv_se', stopwords = 'swedish' );
+
+
+--
+-- Name: swedish_snowball_dict; Type: TEXT SEARCH DICTIONARY; Schema: public; Owner: -
+--
+
+CREATE TEXT SEARCH DICTIONARY swedish_snowball_dict (
+    TEMPLATE = pg_catalog.snowball,
+    language = 'swedish', stopwords = 'swedish' );
+
+
+--
+-- Name: swedish_stem; Type: TEXT SEARCH DICTIONARY; Schema: public; Owner: -
+--
+
+CREATE TEXT SEARCH DICTIONARY swedish_stem (
+    TEMPLATE = pg_catalog.snowball,
+    language = 'swedish', stopwords = 'swedish' );
+
+
+--
+-- Name: brewnit_swedish; Type: TEXT SEARCH CONFIGURATION; Schema: public; Owner: -
+--
+
+CREATE TEXT SEARCH CONFIGURATION brewnit_swedish (
+    PARSER = pg_catalog."default" );
+
+ALTER TEXT SEARCH CONFIGURATION brewnit_swedish
+    ADD MAPPING FOR asciiword WITH swedish_stem;
+
+ALTER TEXT SEARCH CONFIGURATION brewnit_swedish
+    ADD MAPPING FOR word WITH swedish_stem;
+
+ALTER TEXT SEARCH CONFIGURATION brewnit_swedish
+    ADD MAPPING FOR hword_part WITH swedish_stem;
+
+ALTER TEXT SEARCH CONFIGURATION brewnit_swedish
+    ADD MAPPING FOR hword_asciipart WITH swedish_stem;
+
+ALTER TEXT SEARCH CONFIGURATION brewnit_swedish
+    ADD MAPPING FOR asciihword WITH swedish_stem;
+
+ALTER TEXT SEARCH CONFIGURATION brewnit_swedish
+    ADD MAPPING FOR hword WITH swedish_stem;
+
+
+--
+-- Name: swedish; Type: TEXT SEARCH CONFIGURATION; Schema: public; Owner: -
+--
+
+CREATE TEXT SEARCH CONFIGURATION swedish (
+    PARSER = pg_catalog."default" );
+
+ALTER TEXT SEARCH CONFIGURATION swedish
+    ADD MAPPING FOR asciiword WITH swedish_stem;
+
+ALTER TEXT SEARCH CONFIGURATION swedish
+    ADD MAPPING FOR word WITH swedish_stem;
+
+ALTER TEXT SEARCH CONFIGURATION swedish
+    ADD MAPPING FOR numword WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION swedish
+    ADD MAPPING FOR email WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION swedish
+    ADD MAPPING FOR url WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION swedish
+    ADD MAPPING FOR host WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION swedish
+    ADD MAPPING FOR sfloat WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION swedish
+    ADD MAPPING FOR version WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION swedish
+    ADD MAPPING FOR hword_numpart WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION swedish
+    ADD MAPPING FOR hword_part WITH swedish_stem;
+
+ALTER TEXT SEARCH CONFIGURATION swedish
+    ADD MAPPING FOR hword_asciipart WITH swedish_stem;
+
+ALTER TEXT SEARCH CONFIGURATION swedish
+    ADD MAPPING FOR numhword WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION swedish
+    ADD MAPPING FOR asciihword WITH swedish_stem;
+
+ALTER TEXT SEARCH CONFIGURATION swedish
+    ADD MAPPING FOR hword WITH swedish_stem;
+
+ALTER TEXT SEARCH CONFIGURATION swedish
+    ADD MAPPING FOR url_path WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION swedish
+    ADD MAPPING FOR file WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION swedish
+    ADD MAPPING FOR "float" WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION swedish
+    ADD MAPPING FOR "int" WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION swedish
+    ADD MAPPING FOR uint WITH simple;
+
+
+--
+-- Name: swedish_snowball; Type: TEXT SEARCH CONFIGURATION; Schema: public; Owner: -
+--
+
+CREATE TEXT SEARCH CONFIGURATION swedish_snowball (
+    PARSER = pg_catalog."default" );
+
+ALTER TEXT SEARCH CONFIGURATION swedish_snowball
+    ADD MAPPING FOR asciiword WITH swedish, swedish_snowball_dict;
+
+ALTER TEXT SEARCH CONFIGURATION swedish_snowball
+    ADD MAPPING FOR word WITH swedish, swedish_snowball_dict;
+
+ALTER TEXT SEARCH CONFIGURATION swedish_snowball
+    ADD MAPPING FOR hword_part WITH swedish, swedish_snowball_dict;
+
+ALTER TEXT SEARCH CONFIGURATION swedish_snowball
+    ADD MAPPING FOR hword_asciipart WITH swedish, swedish_snowball_dict;
+
+ALTER TEXT SEARCH CONFIGURATION swedish_snowball
+    ADD MAPPING FOR asciihword WITH swedish, swedish_snowball_dict;
+
+ALTER TEXT SEARCH CONFIGURATION swedish_snowball
+    ADD MAPPING FOR hword WITH swedish, swedish_snowball_dict;
+
+
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -520,28 +664,28 @@ ALTER TABLE ONLY votes
 -- Name: fulltext_index_events_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX fulltext_index_events_on_name ON events USING gin (to_tsvector('simple'::regconfig, (COALESCE(name, ''::character varying))::text));
+CREATE INDEX fulltext_index_events_on_name ON events USING gin (to_tsvector('swedish_snowball'::regconfig, (COALESCE(name, ''::character varying))::text));
 
 
 --
 -- Name: fulltext_index_events_on_primary; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX fulltext_index_events_on_primary ON events USING gin (to_tsvector('simple'::regconfig, (((((((((COALESCE(name, ''::character varying))::text || ' '::text) || (COALESCE(organizer, ''::character varying))::text) || ' '::text) || (COALESCE(location, ''::character varying))::text) || ' '::text) || (COALESCE(event_type, ''::character varying))::text) || ' '::text) || (COALESCE(description, ''::character varying))::text)));
+CREATE INDEX fulltext_index_events_on_primary ON events USING gin (to_tsvector('swedish_snowball'::regconfig, (((((((((COALESCE(name, ''::character varying))::text || ' '::text) || (COALESCE(organizer, ''::character varying))::text) || ' '::text) || (COALESCE(location, ''::character varying))::text) || ' '::text) || (COALESCE(event_type, ''::character varying))::text) || ' '::text) || (COALESCE(description, ''::character varying))::text)));
 
 
 --
 -- Name: fulltext_index_recipes_on_equipment; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX fulltext_index_recipes_on_equipment ON recipes USING gin (to_tsvector('simple'::regconfig, (COALESCE(equipment, ''::character varying))::text));
+CREATE INDEX fulltext_index_recipes_on_equipment ON recipes USING gin (to_tsvector('swedish_snowball'::regconfig, (COALESCE(equipment, ''::character varying))::text));
 
 
 --
 -- Name: fulltext_index_recipes_on_primary; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX fulltext_index_recipes_on_primary ON recipes USING gin (to_tsvector('simple'::regconfig, (((((((((COALESCE(name, ''::character varying))::text || ' '::text) || COALESCE(description, ''::text)) || ' '::text) || (COALESCE(style_name, ''::character varying))::text) || ' '::text) || (COALESCE(equipment, ''::character varying))::text) || ' '::text) || (COALESCE(brewer, ''::character varying))::text)));
+CREATE INDEX fulltext_index_recipes_on_primary ON recipes USING gin (to_tsvector('swedish_snowball'::regconfig, (((((((((COALESCE(name, ''::character varying))::text || ' '::text) || COALESCE(description, ''::text)) || ' '::text) || (COALESCE(style_name, ''::character varying))::text) || ' '::text) || (COALESCE(equipment, ''::character varying))::text) || ' '::text) || (COALESCE(brewer, ''::character varying))::text)));
 
 
 --
@@ -555,14 +699,14 @@ CREATE INDEX fulltext_index_recipes_on_style_name ON recipes USING gin (to_tsvec
 -- Name: fulltext_index_users_on_brewery; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX fulltext_index_users_on_brewery ON users USING gin (to_tsvector('simple'::regconfig, (COALESCE(brewery, ''::character varying))::text));
+CREATE INDEX fulltext_index_users_on_brewery ON users USING gin (to_tsvector('swedish_snowball'::regconfig, (COALESCE(brewery, ''::character varying))::text));
 
 
 --
 -- Name: fulltext_index_users_on_equipment; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX fulltext_index_users_on_equipment ON users USING gin (to_tsvector('simple'::regconfig, (COALESCE(equipment, ''::character varying))::text));
+CREATE INDEX fulltext_index_users_on_equipment ON users USING gin (to_tsvector('swedish_snowball'::regconfig, (COALESCE(equipment, ''::character varying))::text));
 
 
 --
@@ -576,7 +720,7 @@ CREATE INDEX fulltext_index_users_on_name ON users USING gin (to_tsvector('simpl
 -- Name: fulltext_index_users_on_primary; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX fulltext_index_users_on_primary ON users USING gin (to_tsvector('simple'::regconfig, (((((((((COALESCE(name, ''::character varying))::text || ' '::text) || COALESCE(presentation, ''::text)) || ' '::text) || (COALESCE(equipment, ''::character varying))::text) || ' '::text) || (COALESCE(brewery, ''::character varying))::text) || ' '::text) || (COALESCE(twitter, ''::character varying))::text)));
+CREATE INDEX fulltext_index_users_on_primary ON users USING gin (to_tsvector('swedish_snowball'::regconfig, (((((((((COALESCE(name, ''::character varying))::text || ' '::text) || COALESCE(presentation, ''::text)) || ' '::text) || (COALESCE(equipment, ''::character varying))::text) || ' '::text) || (COALESCE(brewery, ''::character varying))::text) || ' '::text) || (COALESCE(twitter, ''::character varying))::text)));
 
 
 --
@@ -910,4 +1054,6 @@ INSERT INTO schema_migrations (version) VALUES ('20171025204911');
 INSERT INTO schema_migrations (version) VALUES ('20171027223202');
 
 INSERT INTO schema_migrations (version) VALUES ('20171028120552');
+
+INSERT INTO schema_migrations (version) VALUES ('20171028145021');
 

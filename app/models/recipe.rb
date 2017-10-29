@@ -10,11 +10,11 @@ class Recipe < ActiveRecord::Base
     attributes owner: 'user.name'
     attributes event: 'events.name'
     attributes event_id: 'events.id'
-    options :primary, type: :fulltext, default: true
-    options :name, type: :fulltext
-    options :owner, type: :fulltext
-    options :style_name, type: :fulltext
-    options :event, type: :fulltext
+    options :primary, type: :fulltext, default: true, dictionary: 'swedish_snowball'
+    options :name, type: :fulltext, dictionary: 'swedish_snowball'
+    options :owner, type: :fulltext, dictionary: 'swedish_snowball'
+    options :style_name, type: :fulltext, dictionary: 'swedish_snowball'
+    options :event, type: :fulltext, dictionary: 'swedish_snowball'
   end
 
   belongs_to :user

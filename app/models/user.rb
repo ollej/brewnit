@@ -7,9 +7,9 @@ class User < ActiveRecord::Base
   search_scope :search do
     attributes primary: [:name, :presentation, :equipment, :brewery, :twitter]
     attributes :brewer, :equipment
-    options :primary, type: :fulltext, default: true
-    options :brewery, type: :fulltext, default: false
-    options :equipment, type: :fulltext, default: false
+    options :primary, type: :fulltext, default: true, dictionary: 'swedish_snowball'
+    options :brewery, type: :fulltext, default: false, dictionary: 'swedish_snowball'
+    options :equipment, type: :fulltext, default: false, dictionary: 'swedish_snowball'
   end
 
   before_validation :cleanup_fields
