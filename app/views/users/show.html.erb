@@ -28,20 +28,6 @@ set_meta_tags title: @user.display_name,
                   results: 5, autosave: 'brygglogg-search-users' %>
             <% end %>
           </div>
-          <% if user_signed_in? %>
-            <div class="controls-signed-in">
-              <%= form_tag event_media_path(@event), method: :post, id: 'mediaUploadForm',
-                remote: true, html: { multipart: true } do %>
-                <%= link_to '#', class: 'pure-button secondary-button upload-button' do %>
-                  <i class="fa fa-upload"></i> <%= t(:'common.media.upload') %>
-                <% end %>
-                <%= file_field_tag 'media[]', type: :file, multiple: true,
-                  accept: 'image/png,image/gif,image/jpeg,image/jpg',
-                  id: 'uploadMediaField' %>
-                <div id="progressbar"></div>
-              <% end %>
-            </div>
-          <% end %>
         </div>
         <%= render partial: 'shared/image_slider', locals: { media: @user.media } %>
       </div>
