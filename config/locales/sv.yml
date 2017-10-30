@@ -171,6 +171,8 @@ sv:
       successful: Evenemanget har tagits bort.
     past_events: Tidigare evenemang
     upcoming_events: Kommande evenemang
+    recipes_excel: Excel
+    recipes_csv: CSV
   recipe_events:
     add: Lägg till
     choose: Välj evenemang
