@@ -63,6 +63,13 @@ GEM
     arel (6.0.4)
     autoprefixer-rails (6.7.7.2)
       execjs
+    axlsx (2.0.1)
+      htmlentities (~> 4.3.1)
+      nokogiri (>= 1.4.1)
+      rubyzip (~> 1.0.0)
+    axlsx_rails (0.1.5)
+      axlsx
+      rails (>= 3.1)
     bcrypt (3.1.11)
     beer_recipe (0.4.14)
       docopt (~> 0.5)
@@ -113,6 +120,7 @@ GEM
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     hashie (3.5.5)
+    htmlentities (4.3.4)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     httparty (0.11.0)
@@ -257,7 +265,7 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
-    rubyzip (1.2.1)
+    rubyzip (1.0.0)
     sass (3.4.24)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
@@ -321,6 +329,8 @@ DEPENDENCIES
   actionview-encoded_mail_to (~> 1.0.7)
   acts_as_votable (~> 0.10.0)
   administrate
+  axlsx (~> 2.0.0)
+  axlsx_rails (~> 0.1.5)
   beer_recipe
   byebug
   chronic (~> 0.10.2)

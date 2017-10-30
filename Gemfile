@@ -45,6 +45,8 @@ gem 'chronic', '~> 0.10.2'
 gem 'actionview-encoded_mail_to', '~> 1.0.7'
 gem 'quilljs-rails'
 gem 'csv_shaper', '~> 1.3.0'
+gem 'axlsx', '~> 2.0.0'
+gem 'axlsx_rails', '~> 0.1.5'
 
 # spam protection
 gem 'invisible_captcha', '~> 0.8.0'
