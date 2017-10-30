@@ -182,6 +182,7 @@ sv:
       failed: Kunde inte ta bort receptet från evenemanget.
 
   beerxml:
+    name: Ölnamn
     information: Information
     style: Ölstil
     type: Typ
@@ -286,7 +287,9 @@ sv:
     addition_flavour: Smakgiva
     addition_aroma: Aromgiva
     addition_dry_hop: Torrhumling
+    style_name: Stilyp
     style_guide: Stilguide
+    style_code: Typkod
     style_type: Typ
     style_examples: Förebild
     style_ingredients: Ingredienser

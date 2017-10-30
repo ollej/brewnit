@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :events do
     resources :media, only: [:create, :destroy]
     resource :add_medium, only: [:create], controller: :add_medium
+    resources :recipes, only: [:index], controller: :event_recipes
   end
 
   namespace :admin do

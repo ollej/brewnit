@@ -19,7 +19,7 @@ xml.rss version: '2.0',
     for recipe in @recipes
       xml.item do
         image = full_url_for(recipe.main_image(:large))
-        desc = render partial: 'recipe_description', formats: :html, locals: { recipe: recipe }
+        desc = render partial: 'shared/recipe_description', formats: :html, locals: { recipe: recipe }
         xml.title recipe.name
         xml.category recipe.style_name
         xml.description { xml.cdata! desc }

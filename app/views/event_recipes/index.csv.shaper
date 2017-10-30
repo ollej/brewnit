@@ -1,0 +1,22 @@
+csv.headers do |header|
+  header.columns :id, :name, :style_name, :style_code, :style_guide, :brewer, :og,
+    :fg, :ibu, :color, :abv, :url, :beerxml
+  header.mappings name: t(:'beerxml.name'), style_name: t(:'beerxml.style_name'),
+    style_code: t(:'beerxml.style_code'), style_guide: t(:'beerxml.style_guide'),
+    brewer: t(:'beerxml.brewer'), og: t(:'beerxml.og'), fg: t(:'beerxml.fg'),
+    ibu: t(:'beerxml.ibu'), color: 'EBC', abv: t(:'beerxml.abv'),
+    url: 'URL', beerxml: 'BeerXML'
+end
+
+csv.rows @recipes do |row, recipe|
+  row.cells :id, :name, :style_name, :style_code, :style_guide
+
+  row.cell :brewer, recipe.owner_name
+  row.cell :og, format_sg(recipe.og)
+  row.cell :fg, format_sg(recipe.fg)
+  row.cell :ibu, number_with_precision(recipe.ibu, precision: 0)
+  row.cell :color, number_with_precision(recipe.color, precision: 0)
+  row.cell :abv, format_abv(recipe.abv)
+  row.cell :url, recipe_url(recipe)
+  row.cell :beerxml, recipe_url(recipe, format: :xml)
+end

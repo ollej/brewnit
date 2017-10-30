@@ -33,7 +33,9 @@ class Recipe < ActiveRecord::Base
   sanitized_fields :description
 
   default_scope { where(public: true) }
-  scope :for_user, -> (user) { unscoped.where('recipes.user_id = ? OR recipes.public = true', user.id) }
+  scope :for_user, -> (user) {
+    unscoped.where('recipes.user_id = ? OR recipes.public = true', user.id)
+  }
   scope :by_user, -> (user) { where(user: user) }
   scope :by_event, -> (event) { joins(:events).where(events: { id: event.id }) }
   scope :ordered, -> { order(created_at: :desc) }
