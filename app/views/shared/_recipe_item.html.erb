@@ -4,13 +4,13 @@
         alt: item.owner_name, height: 64, width: 64 %>
     </div>
 
-    <div class="pure-u-5-8 recipe-item-description">
+    <div class="pure-u-5-8 item-information recipe-item-description">
       <h5 class="item-subtitle recipe-name"><%= t(:'latest_items.recipe') %></h5>
       <h4 class="item-title recipe-subject">
-        <%= link_to item.name, item, class: 'recipe-link item-link' %>
+        <%= link_to shorten(item.name), item, class: 'recipe-link item-link' %>
       </h4>
       <p class="item-desc recipe-desc">
-        <%= item.style_name %>
+        <%= shorten(item.style_name, 30) %>
       </p>
     </div>
   </div>

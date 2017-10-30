@@ -4,13 +4,13 @@
         alt: item.name, height: 64, width: 64 %>
     </div>
 
-    <div class="pure-u-5-8 event-item-description">
+    <div class="pure-u-5-8 item-information event-item-information">
       <h5 class="item-subtitle event-name"><%= t(:'latest_items.event') %></h5>
       <h4 class="item-title event-name">
-        <%= link_to item.name, item, class: 'event-link item-link' %>
+        <%= link_to shorten(item.name), item, class: 'event-link item-link' %>
       </h4>
       <p class="item-desc event-organizer">
-        <%= item.organizer %>
+        <%= shorten(item.organizer, 30) %>
       </p>
     </div>
   </div>

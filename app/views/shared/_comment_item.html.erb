@@ -8,13 +8,13 @@
         alt: user.name, height: 64, width: 64 %>
     </div>
 
-    <div class="pure-u-5-8 comment-item-information">
+    <div class="pure-u-5-8 item-information comment-item-information">
       <h5 class="item-subtitle comment-recipe"><%= t(:'latest_items.comment') %></h5>
       <h4 class="item-title comment-name">
-        <%= link_to recipe.name, recipe, class: 'comment-link item-link' %>
+        <%= link_to truncate(recipe.name, length: 45, omission: '…'), recipe, class: 'comment-link item-link' %>
       </h4>
       <p class="item-desc comment-item-details">
-        <%= truncate(item.body, length: 50, omission: '…') %>
+        <%= shorten(item.body, 30) %>
       </p>
     </div>
   </div>

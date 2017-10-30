@@ -29,13 +29,13 @@
                 <%= image_tag user.avatar_image, class: 'item-image user-avatar', alt: user.name, height: 64, width: 64 %>
               </div>
 
-              <div class="pure-u-5-8 user-item-information">
-                <h5 class="item-header-small user-brewery"><%= user.brewery %></h5>
-                <h4 class="item-header-main user-name"><%= link_to user.name, user, class: 'user-link item-link' %></h4>
-                <p class="item-item-details">
+              <div class="pure-u-5-8 item-information user-item-information">
+                <h5 class="item-header-small user-brewery"><%= shorten(user.brewery, 30) %></h5>
+                <h4 class="item-header-main user-name"><%= link_to shorten(user.name), user, class: 'user-link item-link' %></h4>
+                <p class="item-desc item-item-details">
                   <span class="user-recipes"><%= I18n.t(:'users.recipes', count: user.recipes.size) %></span>
                   <% unless user.location.blank? %>
-                    <span class="user-location">| <%= user.location %></span>
+                    <span class="user-location">| <%= shorten(user.location, 20) %></span>
                   <% end %>
                 </p>
               </div>

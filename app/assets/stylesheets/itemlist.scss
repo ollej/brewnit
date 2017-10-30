@@ -34,6 +34,13 @@
       border-radius: 3px;
       margin-right: 1em;
     }
+    .item-information {
+      position: relative;
+    }
+    .item-desc {
+      position: absolute;
+      top: 40px;
+    }
   }
 }
 
