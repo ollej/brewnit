@@ -37,7 +37,7 @@ module ApplicationHelper
     truncate(text, length: len, omission: '…')
   end
 
-  def strip_truncate(text, len = 50)
+  def shorten_strip(text, len = 50)
     truncate(strip_tags(text), length: len, omission: '…')
   end
 end

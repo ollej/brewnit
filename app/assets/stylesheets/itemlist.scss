@@ -10,7 +10,6 @@
     border-bottom: 1px solid #ddd;
     border-left: 6px solid transparent;
     height: 5em;
-    cursor: pointer;
 
     .item-header-main,
     .item-header-small {
@@ -61,4 +60,8 @@
       display: inline;
     }
   }
+}
+
+.linked-item {
+  cursor: pointer;
 }

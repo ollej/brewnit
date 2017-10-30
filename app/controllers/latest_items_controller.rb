@@ -3,5 +3,6 @@ class LatestItemsController < ApplicationController
 
   def index
     @latest = LatestItems.new(current_user).all
+    @event = Event.upcoming.ordered.last
   end
 end
