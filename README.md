@@ -3,13 +3,36 @@ Brewnit
 
 A site to upload and view beerxml recipes.
 
+Related resources
+-----------------
+
+### Recipe sites
+
+ * <olrecept.se>
+ * <malt.io>
+ * <beercalc.org>
+ * <beerrecipes.org>
+ * <brewgr.com>
+ * <brewtoad.com>
+ * <brewersfriend.com>
+
+### Recipe applications
+
+ * [Beersmith](http://beersmith.com/)
+ * [QBrew](http://freecode.com/projects/qbrew)
+ * [Brewtarget](http://www.brewtarget.org/)
+ * [Brew Pal (iOS)](http://www.djpsoftware.com/brewpal/)
+ * [BrewR (Android)](https://play.google.com/store/apps/details?id=com.weekendcoders.brewr&hl=en)
+ * [Wort (Android)](https://play.google.com/store/apps/details?id=info.dynamicdesigns.wort&hl=en)
+ * [Brewer's Friend (iOS, Android)](https://www.brewersfriend.com/)
+
 Requirements
 ------------
 
 This application needs the following:
 
- * Ruby v2.2.3
- * Postgres
+ * Ruby v2.3.3
+ * Postgres v9.6
 
 Vagrant
 -------
