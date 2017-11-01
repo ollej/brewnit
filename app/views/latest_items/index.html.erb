@@ -6,27 +6,7 @@
 
       <div class="page-content-body latest_items-index item-index">
         <% if @event.present? %>
-          <div class="linked-list">
-            <div class="pure-g next-event info-plate linked-item">
-              <div class="pure-u">
-                <%= image_tag @event.main_image(:medium), class: 'event-image',
-                  alt: @event.name %>
-              </div>
-              <div class="pure-u-5-8">
-                <h2 class="item-title event-name item-content-title">
-                  <%= link_to @event.name, @event, class: 'item-link event-link' %>
-                </h2>
-                <h3 class="item-subtitle event-type">
-                  <%= @event.event_type %> |
-                  <%= @event.held_at %> |
-                  <%= @event.organizer %>
-                </h5>
-                <p class="item-desc event-description">
-                  <%= shorten_strip(@event.description, 200) %>
-                </p>
-              </div>
-            </div>
-          </div>
+          <%= render partial: 'shared/event_plate', locals: { event: @event } %>
         <% end %>
 
         <ul class="linked-list pure-g">
