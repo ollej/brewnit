@@ -8,13 +8,13 @@ Related resources
 
 ### Recipe sites
 
- * <olrecept.se>
- * <malt.io>
- * <beercalc.org>
- * <beerrecipes.org>
- * <brewgr.com>
- * <brewtoad.com>
- * <brewersfriend.com>
+ * http://olrecept.se
+ * http://malt.io
+ * http://beercalc.org
+ * http://beerrecipes.org
+ * http://brewgr.com
+ * http://brewtoad.com
+ * http://brewersfriend.com
 
 ### Recipe applications
 
