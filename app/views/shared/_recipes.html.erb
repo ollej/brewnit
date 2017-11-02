@@ -19,11 +19,11 @@
 <% @recipes.each do |recipe| %>
   <div class="recipe-item linked-item pure-g <%= item_classes_for(recipe, current_user, @recipe) %>">
     <div class="pure-u">
-      <%= image_tag avatar_for(recipe), class: 'recipe-avatar',
+      <%= image_tag recipe.main_image, class: 'recipe-avatar',
         alt: recipe.owner_name, height: 64, width: 64 %>
     </div>
 
-    <div class="pure-u-5-8 recipe-item-description">
+    <div class="pure-u-13-24 recipe-item-description">
       <h5 class="recipe-name">
         <%= link_to recipe.brewer_name, recipe.user, class: 'user-link' %>
       </h5>
@@ -35,7 +35,7 @@
       </p>
     </div>
 
-    <div class="pure-u-1-5 recipe-item-details">
+    <div class="pure-u-5-24 recipe-item-details">
       <%= '%.0f' % recipe.batch_size %> <%= I18n.t(:'beerxml.liter_abbr') %><br>
       <%= I18n.t(:'beerxml.abv') %>: <%= format_abv(recipe.abv) %><br>
       <%= I18n.t(:'beerxml.ibu') %>: <%= number_with_precision(recipe.ibu, precision: 0) %>

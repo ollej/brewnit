@@ -147,6 +147,7 @@ a {
     }
   }
 }
+
 .recipe-quicksearch {
   padding: 0.8em 0 0 1em;
   border-bottom: 1px solid #ddd;
@@ -157,15 +158,18 @@ a {
     margin-left: 0.5em !important;
   }
 }
+
 .recipe-item {
-  padding: 0.9em 1em;
+  padding: 0.8em 0.8em;
   border-bottom: 1px solid #ddd;
   border-left: 6px solid transparent;
   cursor: pointer;
 
   .recipe-avatar {
     border-radius: 3px;
-    margin-right: 0.5em;
+    margin-right: 0.8em;
+    width: 64px;
+    height: 64px;
   }
   .recipe-name,
   .recipe-subject {
@@ -251,10 +255,6 @@ a {
 }
 .page-content-controls .secondary-button {
   margin-bottom: 0.3em;
-}
-.recipe-avatar {
-  width: 40px;
-  height: 40px;
 }
 
 /*
