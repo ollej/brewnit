@@ -1,3 +1,11 @@
 .pure-form-aligned .pure-control-group {
   margin-bottom: 1.5em;
 }
+
+.badge {
+  /* blue and yellow: Sweden */
+  .ribbon.blue-yellow, .ribbon.sweden {
+    background: linear-gradient(to right, blue, blue, blue, blue, blue, blue, blue, blue, blue, blue, blue, yellow, yellow, yellow, yellow, yellow, yellow, yellow, yellow, yellow, yellow, yellow);
+  }
+}
+

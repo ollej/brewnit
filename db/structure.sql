@@ -59,6 +59,17 @@ COMMENT ON EXTENSION pg_trgm IS 'text similarity measurement and index searching
 SET search_path = public, pg_catalog;
 
 --
+-- Name: medal; Type: TYPE; Schema: public; Owner: -
+--
+
+CREATE TYPE medal AS ENUM (
+    'gold',
+    'silver',
+    'bronze'
+);
+
+
+--
 -- Name: swedish; Type: TEXT SEARCH DICTIONARY; Schema: public; Owner: -
 --
 
@@ -402,6 +413,42 @@ ALTER SEQUENCE media_id_seq OWNED BY media.id;
 
 
 --
+-- Name: placements; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE placements (
+    id integer NOT NULL,
+    medal medal,
+    category character varying DEFAULT ''::character varying,
+    locked boolean DEFAULT false,
+    recipe_id integer,
+    event_id integer,
+    user_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: placements_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE placements_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: placements_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE placements_id_seq OWNED BY placements.id;
+
+
+--
 -- Name: recipes; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -600,6 +647,13 @@ ALTER TABLE ONLY media ALTER COLUMN id SET DEFAULT nextval('media_id_seq'::regcl
 
 
 --
+-- Name: placements id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY placements ALTER COLUMN id SET DEFAULT nextval('placements_id_seq'::regclass);
+
+
+--
 -- Name: recipes id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -658,6 +712,14 @@ ALTER TABLE ONLY events
 
 ALTER TABLE ONLY media
     ADD CONSTRAINT media_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: placements placements_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY placements
+    ADD CONSTRAINT placements_pkey PRIMARY KEY (id);
 
 
 --
@@ -836,6 +898,34 @@ CREATE UNIQUE INDEX index_events_recipes_on_recipe_id_and_event_id ON events_rec
 --
 
 CREATE INDEX index_media_on_parent_type_and_parent_id ON media USING btree (parent_type, parent_id);
+
+
+--
+-- Name: index_placements_on_event_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_placements_on_event_id ON placements USING btree (event_id);
+
+
+--
+-- Name: index_placements_on_medal; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_placements_on_medal ON placements USING btree (medal);
+
+
+--
+-- Name: index_placements_on_recipe_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_placements_on_recipe_id ON placements USING btree (recipe_id);
+
+
+--
+-- Name: index_placements_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_placements_on_user_id ON placements USING btree (user_id);
 
 
 --
@@ -1029,11 +1119,27 @@ ALTER TABLE ONLY recipes
 
 
 --
+-- Name: placements fk_rails_344f224d46; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY placements
+    ADD CONSTRAINT fk_rails_344f224d46 FOREIGN KEY (recipe_id) REFERENCES recipes(id);
+
+
+--
 -- Name: users fk_rails_793a220a68; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users
     ADD CONSTRAINT fk_rails_793a220a68 FOREIGN KEY (media_avatar_id) REFERENCES media(id);
+
+
+--
+-- Name: placements fk_rails_7f5b80573c; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY placements
+    ADD CONSTRAINT fk_rails_7f5b80573c FOREIGN KEY (event_id) REFERENCES events(id);
 
 
 --
@@ -1050,6 +1156,14 @@ ALTER TABLE ONLY users
 
 ALTER TABLE ONLY events
     ADD CONSTRAINT fk_rails_eddd50df5b FOREIGN KEY (media_main_id) REFERENCES media(id);
+
+
+--
+-- Name: placements fk_rails_fe81c39da1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY placements
+    ADD CONSTRAINT fk_rails_fe81c39da1 FOREIGN KEY (user_id) REFERENCES users(id);
 
 
 --
@@ -1111,4 +1225,6 @@ INSERT INTO schema_migrations (version) VALUES ('20171028120552');
 INSERT INTO schema_migrations (version) VALUES ('20171028145021');
 
 INSERT INTO schema_migrations (version) VALUES ('20171029201125');
+
+INSERT INTO schema_migrations (version) VALUES ('20171102202524');
 

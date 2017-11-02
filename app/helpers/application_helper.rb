@@ -40,4 +40,17 @@ module ApplicationHelper
   def shorten_strip(text, len = 50)
     truncate(strip_tags(text), length: len, omission: '…')
   end
+
+  def medal_tag(placement, size=:small)
+    return unless placement.present?
+    %Q{<div class="badge #{size}">
+      <div class="lanyard">
+        <div class="ribbon left sweden"></div>
+        <div class="ribbon right sweden"></div>
+      </div>
+      <div class="circle #{placement.medal} border">
+        #{placement.medal_position}
+      </div>
+    </div>}.html_safe
+  end
 end

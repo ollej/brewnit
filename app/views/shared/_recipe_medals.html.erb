@@ -1,0 +1,13 @@
+<div class="recipe-medals pure-menu">
+  <h3><%= t(:'activerecord.attributes.recipe.medals') %></h3>
+  <ul id="recipe-medals" class="pure-menu-list">
+    <% @recipe.placements.ordered.each do |placement| %>
+      <li class="pure-menu-item">
+        <%= link_to placement.event, class: 'pure-menu-link' do %>
+          <%= medal_tag(placement, :tiny) %>
+          <span class="medal-category"><%= placement.category %></span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>

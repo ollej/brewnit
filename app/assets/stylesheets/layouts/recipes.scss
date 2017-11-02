@@ -165,6 +165,15 @@ a {
   border-left: 6px solid transparent;
   cursor: pointer;
 
+  .recipe-image {
+    position: relative;
+
+    .badge {
+      position: absolute;
+      top: 2px;
+      left: 4px;
+    }
+  }
   .recipe-avatar {
     border-radius: 3px;
     margin-right: 0.8em;
@@ -211,6 +220,20 @@ a {
   }
   &.recipe-item-winner {
     border-left: 6px solid #ffc94c;
+  }
+}
+
+.recipe-medals {
+  .badge.tiny {
+    display: inline-block;
+
+    .circle {
+      line-height: 8px;
+      vertical-align: top;
+    }
+  }
+  .medal-category {
+    vertical-align: top;
   }
 }
 

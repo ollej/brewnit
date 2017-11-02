@@ -400,6 +400,10 @@
             <%= render partial: 'shared/recipe_events', locals: { current_user: current_user, recipe: @recipe } %>
           <% end %>
 
+          <% if @recipe.placements.present? %>
+            <%= render 'shared/recipe_medals' %>
+          <% end %>
+
         </aside>
       </div>
 

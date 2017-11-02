@@ -18,9 +18,10 @@ class Recipe < ActiveRecord::Base
   end
 
   belongs_to :user
-  belongs_to :media_main, class_name: "Medium"
+  belongs_to :media_main, class_name: 'Medium'
   has_many :media, as: :parent, dependent: :destroy
   has_and_belongs_to_many :events
+  has_many :placements, dependent: :destroy
 
   accepts_nested_attributes_for :media, :reject_if => lambda { |r| r['media'].nil? }
 
@@ -81,6 +82,10 @@ class Recipe < ActiveRecord::Base
         user.avatar_image(size)
       end
     end
+  end
+
+  def placement
+    placements.ordered.first
   end
 
   def comments

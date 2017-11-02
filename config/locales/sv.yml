@@ -629,6 +629,7 @@ sv:
         public: Offentlig?
         medium_main: Huvudbild
         events: Deltagit i evenemang
+        medals: Medaljer
       medium:
         created: Mediat har sparats.
         destroyed: Mediat har tagits bort.

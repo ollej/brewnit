@@ -19,8 +19,11 @@
 <% @recipes.each do |recipe| %>
   <div class="recipe-item linked-item pure-g <%= item_classes_for(recipe, current_user, @recipe) %>">
     <div class="pure-u">
+      <div class="recipe-image">
       <%= image_tag recipe.main_image, class: 'recipe-avatar',
         alt: recipe.owner_name, height: 64, width: 64 %>
+        <%= medal_tag(recipe.placement) %>
+      </div>
     </div>
 
     <div class="pure-u-13-24 recipe-item-description">
