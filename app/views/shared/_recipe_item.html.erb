@@ -7,7 +7,6 @@
     <div class="pure-u-5-8 item-information recipe-item-description">
       <h5 class="item-subtitle recipe-name"><%= t(:'latest_items.recipe') %></h5>
       <h4 class="item-title recipe-subject">
-        <%= medal_tag(Random.rand(1...3)) %>
         <%= link_to shorten(item.name), item, class: 'recipe-link item-link' %>
       </h4>
       <p class="item-desc recipe-desc">
