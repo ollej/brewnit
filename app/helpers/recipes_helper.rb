@@ -106,4 +106,13 @@ module RecipesHelper
       simple_format(html, {}, sanitize: false)
     end
   end
+
+  def medal_options
+    [
+      [t(:'recipe_events.medals.none'), ''],
+      [t(:'recipe_events.medals.gold'), 'gold'],
+      [t(:'recipe_events.medals.silver'), 'silver'],
+      [t(:'recipe_events.medals.bronze'), 'bronze'],
+    ]
+  end
 end

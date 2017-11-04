@@ -207,6 +207,26 @@ class Recipe < ActiveRecord::Base
     end
   end
 
+  def add_event(event_id:, user:, recipe:, placement: {})
+    event = Event.find(event_id)
+    recipe.events << event unless recipe.events.include?(event)
+    if placement[:medal].present?
+      Placement.create(event: event, user: user, recipe: recipe, medal: placement[:medal], category: placement[:category])
+    end
+    return event
+  end
+
+  def remove_event(event)
+    transaction do
+      events.delete(event)
+      placements.where(event: event).destroy_all
+    end
+  end
+
+  def event_placements
+    events.joins(:placements).includes(:placements)
+  end
+
   def self.styles
     self.uniq.pluck(:style_name).map(&:capitalize).uniq.sort
   end

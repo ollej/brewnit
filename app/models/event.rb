@@ -13,8 +13,9 @@ class Event < ActiveRecord::Base
 
   belongs_to :user
   has_and_belongs_to_many :recipes
-  belongs_to :media_main, class_name: "Medium"
+  belongs_to :media_main, class_name: 'Medium'
   has_many :media, as: :parent, dependent: :destroy
+  has_many :placements, dependent: :destroy
 
   before_validation :cleanup_fields
   validates :name, presence: true
@@ -50,9 +51,9 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def self.event_options(remove_events = nil)
+  def self.event_options
     # TODO: Add held at
-    self.select(:id, :name).where.not(id: remove_events).order(:name).collect {|event| [event.name, event.id]}
+    self.select(:id, :name).order(:name).collect {|event| [event.name, event.id]}
   end
 
 end

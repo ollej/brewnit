@@ -98,4 +98,9 @@ $( document ).ready(function() {
   $("#sort_order").on('change', function() {
     this.form.submit();
   });
+
+  $("#recipe-events-form [name=medal]").on("change", function() {
+    var $cat = $("#recipe-events-form [name=category]");
+    $cat.prop('disabled', ($(this).val() == ''));
+  });
 });

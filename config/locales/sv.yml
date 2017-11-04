@@ -174,14 +174,22 @@ sv:
     recipes_excel: Excel
     recipes_csv: CSV
   recipe_events:
+    add_event: Lägg till evenemang
     add: Lägg till
     choose: Välj evenemang
     create:
       successful: Evenemanget har lagts till på receptet.
       failed: Kunde inte lägga till evenemanget till receptet.
-    delete:
+    destroy:
       successful: Receptet har tagits bort från evenemanget.
       failed: Kunde inte ta bort receptet från evenemanget.
+    medal: Medaljplats
+    category: Kategori
+    medals:
+      gold: 🥇 Guld
+      silver: 🥈 Silver
+      bronze: 🥉 Brons
+      none: Ingen medalj
 
   beerxml:
     name: Ölnamn

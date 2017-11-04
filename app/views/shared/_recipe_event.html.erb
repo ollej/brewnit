@@ -10,6 +10,17 @@
                       <i class="fa fa-trash"></i>
                     <% end %>
                   <% end %>
+
+                  <ul class="pure-menu-list recipe-medals">
+                    <% event.placements.ordered.each do |placement| %>
+                      <li class="pure-menu-item">
+                        <%= link_to placement.event, class: 'pure-menu-link' do %>
+                          <%= medal_tag(placement, :tiny) %>
+                          <span class="medal-category"><%= placement.category %></span>
+                        <% end %>
+                      </li>
+                    <% end %>
+                  </ul>
                 </li>
 
 

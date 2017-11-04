@@ -28,4 +28,5 @@ class Placement < ActiveRecord::Base
   def medal_position
     MEDALS[medal.to_sym]
   end
+
 end

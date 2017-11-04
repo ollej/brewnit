@@ -237,6 +237,43 @@ a {
   }
 }
 
+.recipe_information {
+  #recipe-events {
+    >.pure-menu-item {
+      position: relative;
+    }
+    .destroy-button {
+      position: absolute;
+      top: 7px;
+      right: 0;
+    }
+  }
+}
+
+#recipe-events {
+  padding-top: 0.5em;
+  >.pure-menu-item {
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    position: relative;
+  }
+  .pure-menu-link {
+    display: inline;
+    white-space: normal;
+  }
+  .pure-menu-link:hover {
+    background: none;
+  }
+  .recipe-medals {
+    padding-top: 0.5em;
+    .pure-menu-item {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+}
+
 .list-details {
   padding: 0.9em 1em;
   border-left: 6px solid transparent;

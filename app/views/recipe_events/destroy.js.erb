@@ -1,2 +1,8 @@
-$("#recipe-events").find('li[data-recipe-event-id="<%= @event.id %>"]').remove();
-$("#event_id").append( $('<option></option>').val(<%= @event.id %>).html("<%= escape_javascript(@event.name) %>") );
+<% if @success %>
+  $("#recipe-events").find('li[data-recipe-event-id="<%= @event.id %>"]').remove();
+<% else %>
+  $('body').trigger('flasher:show', {
+    message: '<%= escape_javascript(@error_message) %>',
+    level: 'error'
+  })
+<% end %>
