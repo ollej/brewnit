@@ -19,6 +19,8 @@ class Placement < ActiveRecord::Base
   belongs_to :recipe
   belongs_to :event
 
+  scope :by_recipe, -> (recipe) { where(recipe: recipe) }
+  scope :by_event, -> (event) { where(event: event) }
   scope :ordered, -> { order(medal: :asc, created_at: :desc) }
 
   def owned_by?(u)

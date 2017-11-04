@@ -12,7 +12,7 @@
                   <% end %>
 
                   <ul class="pure-menu-list recipe-medals">
-                    <% event.placements.ordered.each do |placement| %>
+                    <% event.placements.by_recipe(recipe).ordered.each do |placement| %>
                       <li class="pure-menu-item">
                         <%= link_to placement.event, class: 'pure-menu-link' do %>
                           <%= medal_tag(placement, :tiny) %>

@@ -223,10 +223,6 @@ class Recipe < ActiveRecord::Base
     end
   end
 
-  def event_placements
-    events.joins(:placements).includes(:placements)
-  end
-
   def self.styles
     self.uniq.pluck(:style_name).map(&:capitalize).uniq.sort
   end
