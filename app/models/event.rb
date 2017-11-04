@@ -25,7 +25,6 @@ class Event < ActiveRecord::Base
   validates :url, url: true, allow_blank: true
 
   scope :ordered, -> { order(held_at: :desc) }
-
   scope :upcoming, -> { where('held_at > ?', Date.today) }
   scope :past, -> { where('held_at <= ?', Date.today) }
   scope :latest, -> { limit(10).ordered }

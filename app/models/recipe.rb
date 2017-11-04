@@ -85,7 +85,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def placement
-    placements.ordered.first
+    placements.sort_by { |p| p.medal }.last
   end
 
   def comments

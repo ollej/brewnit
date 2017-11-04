@@ -33,7 +33,11 @@ class ApplicationController < ActionController::Base
   end
 
   def load_filtered_recipes
-    @recipes = filter_recipes.resolved.limit(limit_items)
+    @recipes = filter_recipes.resolved
+      .joins(:user).includes(:user)
+      .includes(:media)
+      .includes(:placements)
+      .limit(limit_items)
   end
 
   def limit_items
