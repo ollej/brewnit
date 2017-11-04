@@ -55,6 +55,7 @@ sv:
         abv: ABV
         ibu: IBU
         style: Stiltyp
+        medal: Medalj
     "yes": Ja
     "no": Nej
     "true": Ja

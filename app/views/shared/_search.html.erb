@@ -24,6 +24,10 @@
             include_blank: t(:'recipes.search.event') %>
     </div>
     <div class="field pure-control-group">
+      <%= select_tag :medal, options_for_select(medal_options, @search[:medal]),
+            class: 'pure-input-1-3' %>
+    </div>
+    <div class="field pure-control-group">
       <h3><%= t(:'beerxml.abv') %></h3>
       <%= hidden_field_tag :abvfrom, @search[:abvfrom] || FilterRecipes::ABVMIN, class: 'slider-abv-from' %>
       <%= hidden_field_tag :abvto, @search[:abvto] || FilterRecipes::ABVMAX, class: 'slider-abv-to' %>

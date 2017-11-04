@@ -9,16 +9,18 @@ class FilterRecipes
     I18n.t(:'common.search.order.ibu') => 'ibu',
     I18n.t(:'common.search.order.style') => 'style',
     I18n.t(:'common.search.order.likes') => 'likes',
+    I18n.t(:'common.search.order.medal') => 'medal',
   }
 
   SORT_ORDER = {
-    created_at: 'recipes.created_at desc',
-    name: 'recipes.name asc',
-    downloads: 'recipes.downloads desc',
-    abv: 'recipes.abv desc',
-    ibu: 'recipes.ibu desc',
-    style: 'recipes.style_name asc',
-    likes: 'recipes.cached_votes_up desc'
+    created_at: 'recipes.created_at DESC',
+    name: 'recipes.name ASC',
+    downloads: 'recipes.downloads DESC',
+    abv: 'recipes.abv DESC',
+    ibu: 'recipes.ibu DESC',
+    style: 'recipes.style_name ASC',
+    likes: 'recipes.cached_votes_up DESC',
+    medal: 'placements.medal ASC'
   }
 
   PAGE_LIMIT = 50
@@ -107,6 +109,7 @@ class FilterRecipes
       query << { equipment: @hash[:equipment] } if @hash[:equipment].present?
       query << { event: @hash[:event] } if @hash[:event].present?
       query << { event_id: @hash[:event_id] } if @hash[:event_id].present?
+      query << { medal: @hash[:medal] } if @hash[:medal].present?
       add_filters(query)
       query
     end

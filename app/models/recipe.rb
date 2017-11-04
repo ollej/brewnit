@@ -10,6 +10,7 @@ class Recipe < ActiveRecord::Base
     attributes owner: 'user.name'
     attributes event: 'events.name'
     attributes event_id: 'events.id'
+    attributes medal: 'placements.medal'
     options :primary, type: :fulltext, default: true, dictionary: 'swedish_snowball'
     options :name, type: :fulltext, dictionary: 'swedish_snowball'
     options :owner, type: :fulltext, dictionary: 'swedish_snowball'
