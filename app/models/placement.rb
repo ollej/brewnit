@@ -14,6 +14,7 @@ class Placement < ActiveRecord::Base
   validates :user, presence: true
   validates :recipe, presence: true
   validates :event, presence: true
+  validate :official_event_registration
 
   belongs_to :user
   belongs_to :recipe
@@ -31,4 +32,9 @@ class Placement < ActiveRecord::Base
     MEDALS[medal.to_sym]
   end
 
+  def official_event_registration
+    if event.official? && !user.can_modify?(event)
+      errors.add(:base, I18n.t(:'activerecord.errors.models.placement.no_placement_on_official_event'))
+    end
+  end
 end

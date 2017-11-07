@@ -48,20 +48,26 @@ set_meta_tags title: @event.name,
               <% end %>
             <% end %>
             <div style="display: inline-block">
-            <%= form_tag event_media_path(@event), method: :post, id: 'mediaUploadForm',
-                  remote: true, html: { multipart: true } do %>
-              <%= link_to '#', class: 'pure-button secondary-button upload-button' do %>
-                <i class="fa fa-upload"></i> <%= t(:'common.media.upload') %>
+              <%= form_tag event_media_path(@event), method: :post, id: 'mediaUploadForm',
+                    remote: true, html: { multipart: true } do %>
+                <%= link_to '#', class: 'pure-button secondary-button upload-button' do %>
+                  <i class="fa fa-upload"></i> <%= t(:'common.media.upload') %>
+                <% end %>
+                <%= file_field_tag 'media[]', type: :file, multiple: true,
+                  accept: 'image/png,image/gif,image/jpeg,image/jpg',
+                  id: 'uploadMediaField' %>
+                <div id="progressbar"></div>
               <% end %>
-              <%= file_field_tag 'media[]', type: :file, multiple: true,
-                accept: 'image/png,image/gif,image/jpeg,image/jpg',
-                id: 'uploadMediaField' %>
-              <div id="progressbar"></div>
-            <% end %>
             </div>
             <%= link_to new_recipe_path(event_id: @event.id),
+              disabled: @event.registration_closed?,
               class: 'pure-button primary-button' do %>
-              <i class="fa fa-beer"></i> <%= t(:'events.register_recipe') %>
+              <i class="fa fa-beer"></i>
+              <% if @event.official? %>
+                <%= t(:'events.register_recipe') %>
+              <% else %>
+                <%= t(:'events.add_recipe') %>
+              <% end %>
             <% end %>
           </div>
           <% end %>

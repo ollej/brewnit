@@ -340,7 +340,10 @@ CREATE TABLE events (
     user_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    media_main_id integer
+    media_main_id integer,
+    last_registration timestamp without time zone,
+    locked boolean DEFAULT false,
+    official boolean DEFAULT false
 );
 
 
@@ -1227,4 +1230,6 @@ INSERT INTO schema_migrations (version) VALUES ('20171028145021');
 INSERT INTO schema_migrations (version) VALUES ('20171029201125');
 
 INSERT INTO schema_migrations (version) VALUES ('20171102202524');
+
+INSERT INTO schema_migrations (version) VALUES ('20171107191308');
 

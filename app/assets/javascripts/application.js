@@ -103,4 +103,8 @@ $( document ).ready(function() {
     var $cat = $("#recipe-events-form [name=category]");
     $cat.prop('disabled', ($(this).val() == ''));
   });
+
+  $("body").on("click", "a[disabled]", function(ev) {
+    ev.preventDefault();
+  });
 });

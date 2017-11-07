@@ -41,7 +41,12 @@ class RecipesController < ApplicationController
   # GET /recipes/new
   def new
     @recipe = Recipe.new
-    @event = params[:event_id]
+    @event = Event.find(params[:event_id]) if params[:event_id].present?
+
+    if @event.try(:registration_closed?)
+      flash.alert = t(:'activerecord.errors.models.recipe.event_registration_closed')
+      @event = nil
+    end
   end
 
   # GET /recipes/1/edit
@@ -56,12 +61,10 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_params)
     @recipe.user = current_user
 
-    if params[:event].present?
-      @recipe.events << Event.find(params[:event])
-    end
-
     respond_to do |format|
       if @recipe.save
+        @recipe.add_event(event_id: params[:event]) if params[:event].present?
+
         format.html { redirect_to @recipe, notice: I18n.t(:'recipes.create.successful') }
         format.json { render :show, status: :created, location: @recipe }
       else

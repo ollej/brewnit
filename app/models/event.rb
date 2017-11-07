@@ -28,11 +28,18 @@ class Event < ActiveRecord::Base
   scope :upcoming, -> { where('held_at > ?', Date.today) }
   scope :past, -> { where('held_at <= ?', Date.today) }
   scope :latest, -> { limit(10).ordered }
+  scope :registration_open, -> {
+    where('locked = false AND (last_registration IS NULL OR last_registration > ?)', DateTime.now)
+  }
 
   sanitized_fields :description
 
   def owned_by?(u)
     self.user == u
+  end
+
+  def registration_closed?
+    locked? || (last_registration.present? && last_registration < DateTime.now)
   end
 
   def cleanup_fields
@@ -50,9 +57,21 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def option_values
+    ["#{name} (#{I18n.l(held_at)})", id]
+  end
+
   def self.event_options
-    # TODO: Add held at
-    self.select(:id, :name).order(:name).collect {|event| [event.name, event.id]}
+    {
+      I18n.t(:'events.upcoming_events') =>
+      self.registration_open.upcoming.order(:name).collect {|event|
+        event.option_values
+      },
+      I18n.t(:'events.past_events') =>
+      self.registration_open.past.order(:name).collect {|event|
+        event.option_values
+      }
+    }
   end
 
 end

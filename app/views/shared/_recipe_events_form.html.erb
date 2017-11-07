@@ -7,7 +7,7 @@
   <fieldset>
     <div class="field pure-control-group">
       <%= label_tag :event_id, t(:'recipe_events.choose') %>
-      <%= select_tag :event_id, options_for_select(Event.event_options, ''),
+      <%= select_tag :event_id, grouped_options_for_select(Event.event_options, ''),
             class: 'pure-input-1-4' %>
     </div>
     <div class="field pure-control-group">

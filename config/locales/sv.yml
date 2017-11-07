@@ -162,7 +162,9 @@ sv:
     search: Sök evenemang
     searched_term: "Sökresultat för: %{search_term}"
     clear_search: Rensa sökning
-    register_recipe: Lägg till recept
+    register_recipe: Anmäl recept
+    add_recipe: Lägg till recept
+    registrations_closed: Anmälan stängd
     create:
       successful: Evenemanget har skapats.
     update:
@@ -695,12 +697,15 @@ sv:
               blank: måste skickas med.
               invalid: är inte en giltig BeerXML-fil.
               parse_error: kunde inte läsas in på grund av syntax-fel.
+          event_registration_closed: Anmälan har stängts på detta evenemang.
         medium:
           medium_not_added: Media kunde inte läggas till.
         event:
           header:
             one: "Ett fel förhindrade detta evenemang från att sparas"
             other: "%{count} fel förhindrade detta evenemang från att sparas"
+        placement:
+          no_placement_on_official_event: Du får inte sätta medalj på officiella evenemang.
   date:
     formats:
       default: "%Y-%m-%d"

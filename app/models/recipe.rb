@@ -208,11 +208,14 @@ class Recipe < ActiveRecord::Base
     end
   end
 
-  def add_event(event_id:, user:, recipe:, placement: {})
+  def add_event(event_id:, user: nil, placement: {})
     event = Event.find(event_id)
-    recipe.events << event unless recipe.events.include?(event)
-    if placement[:medal].present?
-      Placement.create(event: event, user: user, recipe: recipe, medal: placement[:medal], category: placement[:category])
+    raise RegistrationsClosed if event.registration_closed?
+    transaction do
+      events << event unless events.include?(event)
+      if placement[:medal].present? && user.present?
+        Placement.create!(event: event, user: user, recipe: self, medal: placement[:medal], category: placement[:category])
+      end
     end
     return event
   end

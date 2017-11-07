@@ -9,7 +9,6 @@ class RecipeEventsController < ApplicationController
       @recipe.add_event(
         event_id: event_params[:event_id],
         user: current_user,
-        recipe: @recipe,
         placement: placement_params
       )
     rescue StandardError => e

@@ -32,7 +32,7 @@
     <% unless @recipe.persisted? %>
     <div class="field pure-control-group">
       <%= label_tag :event, t(:'common.exhibited_at_event') %>
-      <%= select_tag :event, options_for_select(Event.event_options, @event),
+      <%= select_tag :event, grouped_options_for_select(Event.event_options, @event.try(:id)),
             class: 'pure-input-1-4',
             include_blank: t(:'common.no_event') %>
     </div>
