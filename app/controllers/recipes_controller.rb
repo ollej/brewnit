@@ -43,7 +43,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new
     @event = Event.find(params[:event_id]) if params[:event_id].present?
 
-    if @event.try(:registration_closed?)
+    if @event&.registration_closed?
       flash.alert = t(:'activerecord.errors.models.recipe.event_registration_closed')
       @event = nil
     end

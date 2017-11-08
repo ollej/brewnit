@@ -4,13 +4,16 @@
   -moz-border-radius: 4px;
   border-radius: 4px;
   background-color: #eaeaea;
-  padding: 8px;
+  padding: 1em;
   margin-bottom: 1em;
 
-  img {
+  .plate-image {
     margin-right: 1em;
   }
-  a {
+  .item-title {
+    margin-top: 0;
+  }
+  .item-link {
     color: #303030;
   }
 }

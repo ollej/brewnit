@@ -13,6 +13,10 @@
     </div>
   <% end %>
 
+  <% if @event&.official? %>
+    <%= render 'shared/event_plate' %>
+  <% end %>
+
   <fieldset>
     <div class="field pure-control-group">
       <%= f.label :beerxml %>
@@ -30,12 +34,16 @@
       </div>
     </div>
     <% unless @recipe.persisted? %>
-    <div class="field pure-control-group">
-      <%= label_tag :event, t(:'common.exhibited_at_event') %>
-      <%= select_tag :event, grouped_options_for_select(Event.event_options, @event.try(:id)),
-            class: 'pure-input-1-4',
-            include_blank: t(:'common.no_event') %>
-    </div>
+      <% if @event&.official? %>
+        <%= hidden_field_tag :event, @event.id %>
+      <% else %>
+        <div class="field pure-control-group">
+            <%= label_tag :event, t(:'common.exhibited_at_event') %>
+            <%= select_tag :event, grouped_options_for_select(Event.event_options, @event&.id),
+                  class: 'pure-input-1-4',
+                  include_blank: t(:'common.no_event') %>
+        </div>
+      <% end %>
     <% end %>
     <div class="actions pure-controls">
       <%= f.label :public, class: 'pure-checkbox' do %>

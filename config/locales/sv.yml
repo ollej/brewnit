@@ -165,6 +165,7 @@ sv:
     register_recipe: Anmäl recept
     add_recipe: Lägg till recept
     registrations_closed: Anmälan stängd
+    official_event_info: Anmäl recept till detta evenemang.
     create:
       successful: Evenemanget har skapats.
     update:
