@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-ruby '2.3.3'
+ruby '2.4.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5'
+gem 'rails', '4.2.8'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
 # Use SCSS for stylesheets
@@ -35,9 +35,9 @@ gem 'nrb-beerxml', git: 'https://github.com/ollej/beerxml.git', ref: '3c3a9c6d7b
 gem 'beer_recipe' #, path: './vendor/beer_recipe/'
 gem 'commontator', '~> 4.11.0'
 gem 'acts_as_votable', '~> 0.10.0'
-gem 'search_cop', '~> 1.0.5'
+gem 'search_cop', git: 'https://github.com/mrkamel/search_cop.git', ref: '1082a2f7862321cf8f1c4560a2b6602a0c256e59'
 gem 'meta-tags', '~> 2.1.0'
-gem 'pushover', '~> 1.0.4'
+gem 'pushover', git: 'https://github.com/vito-lbs/pushover.git', ref: '3bbb7ea026b3d30c043ba033d596dab6fec2a031'
 gem 'paperclip', '~> 4.3.2'
 gem 'jquery-ui-rails', '~> 5.0.5'
 gem 'fancybox2-rails', '~> 0.2.8'
