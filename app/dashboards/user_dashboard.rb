@@ -46,7 +46,7 @@ class UserDashboard < Administrate::BaseDashboard
     equipment: Field::String,
     media_avatar_id: Field::Number,
     media_brewery_id: Field::Number,
-  }
+  }.freeze
 
   # COLLECTION_ATTRIBUTES
   # an array of attributes that will be displayed on the model's index page.
@@ -60,7 +60,7 @@ class UserDashboard < Administrate::BaseDashboard
     :location,
     :last_sign_in_ip,
     :recipes,
-  ]
+  ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
@@ -103,7 +103,7 @@ class UserDashboard < Administrate::BaseDashboard
     #:media_brewery_id,
     :recipes,
     :media,
-  ]
+  ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
@@ -144,7 +144,7 @@ class UserDashboard < Administrate::BaseDashboard
     #:locked_at,
     #:media_avatar_id,
     #:media_brewery_id,
-  ]
+  ].freeze
 
   # Overwrite this method to customize how users are displayed
   # across all pages of the admin dashboard.
