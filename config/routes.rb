@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :users
     resources :media
     resources :recipes
+    resources :events
 
     root to: "users#index"
   end

@@ -33,7 +33,7 @@ class RecipeDashboard < Administrate::BaseDashboard
     downloads: Field::Number,
     media_main_id: Field::Number,
     cached_votes_up: Field::Number,
-  }
+  }.freeze
 
   # COLLECTION_ATTRIBUTES
   # an array of attributes that will be displayed on the model's index page.
@@ -51,7 +51,7 @@ class RecipeDashboard < Administrate::BaseDashboard
     #:media_main,
     #:media,
     #:thread,
-  ]
+  ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
@@ -81,7 +81,7 @@ class RecipeDashboard < Administrate::BaseDashboard
     :media_main,
     :media,
     :beerxml,
-  ]
+  ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
@@ -109,7 +109,7 @@ class RecipeDashboard < Administrate::BaseDashboard
     #:downloads,
     #:media_main_id,
     #:cached_votes_up,
-  ]
+  ].freeze
 
   # Overwrite this method to customize how recipes are displayed
   # across all pages of the admin dashboard.
