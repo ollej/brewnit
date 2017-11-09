@@ -17,7 +17,8 @@ gem 'execjs'
 gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails', '~> 4.0.5'
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 #gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -39,7 +40,6 @@ gem 'search_cop', git: 'https://github.com/mrkamel/search_cop.git', ref: '1082a2
 gem 'meta-tags', '~> 2.1.0'
 gem 'pushover', git: 'https://github.com/vito-lbs/pushover.git', ref: '3bbb7ea026b3d30c043ba033d596dab6fec2a031'
 gem 'paperclip', '~> 4.3.2'
-gem 'jquery-ui-rails', '~> 5.0.5'
 gem 'fancybox2-rails', '~> 0.2.8'
 gem 'chronic', '~> 0.10.2'
 gem 'actionview-encoded_mail_to', '~> 1.0.7'
