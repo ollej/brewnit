@@ -82,9 +82,9 @@ GEM
       htmlentities (~> 4.3.1)
       nokogiri (>= 1.4.1)
       rubyzip (~> 1.0.0)
-    axlsx_rails (0.1.5)
-      axlsx
-      rails (>= 3.1)
+    axlsx_rails (0.5.1)
+      actionpack (>= 3.1)
+      axlsx (>= 2.0.1)
     bcrypt (3.1.11)
     beer_recipe (0.4.14)
       docopt (~> 0.5)
@@ -312,7 +312,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sys-proctable (1.1.5-universal-aix5)
     sys-proctable (1.1.5-universal-darwin)
       ffi
     therubyracer (0.12.3)
@@ -353,8 +352,8 @@ DEPENDENCIES
   actionview-encoded_mail_to (~> 1.0.7)
   acts_as_votable
   administrate
-  axlsx (~> 2.0.0)
-  axlsx_rails (~> 0.1.5)
+  axlsx
+  axlsx_rails
   beer_recipe
   byebug
   chronic (~> 0.10.2)
