@@ -63,7 +63,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    acts_as_votable (0.10.0)
+    acts_as_votable (0.11.1)
     administrate (0.8.1)
       actionpack (>= 4.2, < 5.2)
       actionview (>= 4.2, < 5.2)
@@ -312,6 +312,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    sys-proctable (1.1.5-universal-aix5)
     sys-proctable (1.1.5-universal-darwin)
       ffi
     therubyracer (0.12.3)
@@ -350,7 +351,7 @@ PLATFORMS
 
 DEPENDENCIES
   actionview-encoded_mail_to (~> 1.0.7)
-  acts_as_votable (~> 0.10.0)
+  acts_as_votable
   administrate
   axlsx (~> 2.0.0)
   axlsx_rails (~> 0.1.5)
