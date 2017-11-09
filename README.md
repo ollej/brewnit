@@ -31,7 +31,7 @@ Requirements
 
 This application needs the following:
 
- * Ruby v2.3.3
+ * Ruby v2.4.2
  * Postgres v9.6
 
 Vagrant
@@ -75,11 +75,27 @@ issue: https://github.com/andreychernih/railsbox/issues/29
 
 The file `config/secrets.yml` needs to be created from
 `config/secrets.yml.sample` and keys added for external services.
+Then add the following to a file called `.env.development`.
+
+```
+DEVISE_PEPPER=changeme
+GOOGLE_CLIENT_ID=changeme
+GOOGLE_CLIENT_SECRET=changeme
+SECRET_KEY_BASE=changeme
+WEB_CONCURRENCY=3
+PUSHOVER_USER=changeme
+PUSHOVER_TOKEN=changeme
+PUSHOVER_GROUP_RECIPE=changeme
+PROJECT_HONEYPOT_KEY=changeme
+SMTP_PASSWORD=changeme
+RECAPTCHA_SITE_KEY=changeme
+RECAPTCHA_SECRET_KEY=changeme
+```
 
 #### Development mode
 
 Run `bundle exec rake secret` twice and add them to the `config/secrets.yml`
-where it says 'changeme' (`secret_key_base` and `devise_pepper`).
+where it says 'changeme' (`SECRET_KEY_BASE` and `DEVISE_PEPPER`).
 
 ##### Google authentication
 
@@ -119,8 +135,8 @@ environments below.
 
 ```
 DEVISE_PEPPER=changeme
-GOOGLE_CLIENT_ID=
-GOOGLE_CLIENT_SECRET=
+GOOGLE_CLIENT_ID=changeme
+GOOGLE_CLIENT_SECRET=changeme
 RACK_ENV=production
 RAILS_ENV=production
 SECRET_KEY_BASE=changeme
@@ -128,7 +144,7 @@ WEB_CONCURRENCY=3
 PUSHOVER_USER=changeme
 PUSHOVER_TOKEN=changeme
 PUSHOVER_GROUP_RECIPE=changeme
-PROJECT_HONEYPOT_KEY
+PROJECT_HONEYPOT_KEY=changeme
 SMTP_PASSWORD=changeme
 RECAPTCHA_SITE_KEY=changeme
 RECAPTCHA_SECRET_KEY=changeme
@@ -155,10 +171,10 @@ If you don't have Ruby, here is a short primer:
    ```bash
    $ git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
    ```
- * Install Ruby v2.2.3
+ * Install Ruby v2.4.2
 
    ```bash
-   $ rbenv install 2.2.3
+   $ rbenv install 2.4.2
    ```
  * Install bundler
 

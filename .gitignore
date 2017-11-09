@@ -29,5 +29,8 @@
 /config/unicorn.development.rb
 /.envrc
 
+.env.development
+.env.test
+
 /todo.txt
 /public/uploads
