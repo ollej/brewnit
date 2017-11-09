@@ -19,6 +19,8 @@ class Medium < ActiveRecord::Base
     content_type: { content_type: %w(image/jpeg image/gif image/png) }, #/\Aimage\/.*\Z/,
     size: { in: 0..2.megabytes }
 
+  delegate :url, to: :file
+
   def remove_references
     parent.remove_media_references(self)
   end
