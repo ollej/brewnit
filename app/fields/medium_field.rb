@@ -10,7 +10,7 @@ class MediumField < Administrate::Field::BelongsTo
     if data.respond_to? :file
       data.file.url(type)
     else
-      data.url(type)
+      data&.url(type)
     end
   end
 
