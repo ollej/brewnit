@@ -1,6 +1,10 @@
 require "administrate/field/base"
 
-class MediumField < Administrate::Field::Base
+class MediumField < Administrate::Field::BelongsTo
+  def associated_class_name
+    'Medium'
+  end
+
   def url(type)
     return if data.nil?
     if data.respond_to? :file

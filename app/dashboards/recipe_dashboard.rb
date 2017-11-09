@@ -9,7 +9,6 @@ class RecipeDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     user: Field::BelongsTo,
-    #media_main: Field::BelongsTo.with_options(class_name: "Medium"),
     media_main: MediumField,
     media: Field::HasMany,
     #thread: Field::HasOne,
