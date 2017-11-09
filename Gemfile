@@ -50,7 +50,7 @@ gem 'axlsx_rails'
 gem 'dotenv-rails'
 
 # spam protection
-gem 'invisible_captcha', '~> 0.8.0'
+gem 'invisible_captcha'
 gem 'project_honeypot', '~> 0.3.1'
 gem 'rack-attack'
 gem 'recaptcha', require: 'recaptcha/rails'
