@@ -98,9 +98,9 @@ GEM
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.2)
-    coffee-rails (4.1.1)
+    coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
-      railties (>= 4.0.0, < 5.1.x)
+      railties (>= 4.0.0)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
@@ -358,8 +358,8 @@ DEPENDENCIES
   beer_recipe
   byebug
   chronic (~> 0.10.2)
-  coffee-rails (~> 4.1.0)
   commontator (~> 4.11.0)
+  coffee-rails
   csv_shaper (~> 1.3.0)
   devise (~> 3.5.3)
   dotenv-rails
