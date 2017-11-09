@@ -92,7 +92,7 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.3)
-    byebug (9.0.6)
+    byebug (9.1.0)
     chronic (0.10.2)
     climate_control (0.2.0)
     cocaine (0.5.8)
@@ -312,6 +312,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    sys-proctable (1.1.5-universal-aix5)
     sys-proctable (1.1.5-universal-darwin)
       ffi
     therubyracer (0.12.3)
