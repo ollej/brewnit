@@ -27,7 +27,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'pg'
 gem 'libxml-xmlrpc', '~> 0.1.5'
-gem 'devise', '~> 3.5.3'
+gem 'devise'
 gem 'omniauth-google-oauth2', '~> 0.3.1'
 gem 'unicorn-rails', '~> 2.2.0'
 

@@ -115,12 +115,11 @@ GEM
     datetime_picker_rails (0.0.7)
       momentjs-rails (>= 2.8.1)
     debug_inspector (0.0.3)
-    devise (3.5.10)
+    devise (4.3.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
-      railties (>= 3.2.6, < 5)
+      railties (>= 4.1.0, < 5.2)
       responders
-      thread_safe (~> 0.1)
       warden (~> 1.2.3)
     docopt (0.6.0)
     domain_name (0.5.20170404)
@@ -312,7 +311,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sys-proctable (1.1.5-universal-aix5)
     sys-proctable (1.1.5-universal-darwin)
       ffi
     therubyracer (0.12.3)
@@ -358,10 +356,10 @@ DEPENDENCIES
   beer_recipe
   byebug
   chronic (~> 0.10.2)
-  commontator (~> 4.11.0)
   coffee-rails
+  commontator (~> 4.11.0)
   csv_shaper (~> 1.3.0)
-  devise (~> 3.5.3)
+  devise
   dotenv-rails
   execjs
   fancybox2-rails (~> 0.2.8)
