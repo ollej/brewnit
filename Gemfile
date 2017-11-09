@@ -30,7 +30,7 @@ gem 'pg'
 gem 'libxml-xmlrpc', '~> 0.1.5'
 gem 'devise'
 gem 'omniauth-google-oauth2'
-gem 'unicorn-rails', '~> 2.2.0'
+gem 'unicorn-rails'
 
 gem 'nrb-beerxml', git: 'https://github.com/ollej/beerxml.git', ref: '3c3a9c6d7b138a1160e481f276bb2d0923c83911'
 gem 'beer_recipe' #, path: './vendor/beer_recipe/'
