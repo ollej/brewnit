@@ -363,7 +363,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   execjs
-  fancybox2-rails (~> 0.2.8)
+  fancybox2-rails
   ffi
   invisible_captcha
   jbuilder (~> 2.0)

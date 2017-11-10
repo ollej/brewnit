@@ -40,7 +40,7 @@ gem 'search_cop', git: 'https://github.com/mrkamel/search_cop.git', ref: '1082a2
 gem 'meta-tags'
 gem 'pushover', git: 'https://github.com/vito-lbs/pushover.git', ref: '3bbb7ea026b3d30c043ba033d596dab6fec2a031'
 gem 'paperclip'
-gem 'fancybox2-rails', '~> 0.2.8'
+gem 'fancybox2-rails'
 gem 'chronic', '~> 0.10.2'
 gem 'actionview-encoded_mail_to'
 gem 'quilljs-rails'
