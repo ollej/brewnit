@@ -42,7 +42,7 @@ gem 'pushover', git: 'https://github.com/vito-lbs/pushover.git', ref: '3bbb7ea02
 gem 'paperclip'
 gem 'fancybox2-rails', '~> 0.2.8'
 gem 'chronic', '~> 0.10.2'
-gem 'actionview-encoded_mail_to', '~> 1.0.7'
+gem 'actionview-encoded_mail_to'
 gem 'quilljs-rails'
 gem 'csv_shaper', '~> 1.3.0'
 gem 'axlsx'

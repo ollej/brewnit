@@ -349,7 +349,7 @@ PLATFORMS
   x86_64-darwin-16
 
 DEPENDENCIES
-  actionview-encoded_mail_to (~> 1.0.7)
+  actionview-encoded_mail_to
   acts_as_votable
   administrate
   axlsx
