@@ -27,7 +27,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'pg'
-gem 'libxml-xmlrpc', '~> 0.1.5'
+gem 'libxml-xmlrpc'
 gem 'devise'
 gem 'omniauth-google-oauth2'
 gem 'unicorn-rails'
