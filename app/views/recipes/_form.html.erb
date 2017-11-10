@@ -13,7 +13,7 @@
     </div>
   <% end %>
 
-  <% if @event&.official? %>
+  <% if @event&.present? %>
     <%= render 'shared/event_plate' %>
   <% end %>
 
@@ -34,7 +34,7 @@
       </div>
     </div>
     <% unless @recipe.persisted? %>
-      <% if @event&.official? %>
+      <% if @event&.present? %>
         <%= hidden_field_tag :event, @event.id %>
       <% else %>
         <div class="field pure-control-group">
