@@ -58,7 +58,7 @@ module Brewnit
       enable_starttls_auto: true
     }
 
-    ActiveSupport.halt_callback_chains_on_return_false = false
+    ActiveSupport.halt_callback_chains_on_return_false = true
 
     config.after_initialize do
       Rails.application.routes.default_url_options = config.action_mailer.default_url_options
