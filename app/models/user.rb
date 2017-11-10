@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   include MediaParentConcern
   include SearchCop
   include SanitizerConcern
@@ -15,8 +15,8 @@ class User < ActiveRecord::Base
   before_validation :cleanup_fields
   has_many :recipes, dependent: :destroy
   has_many :media, as: :parent, dependent: :destroy
-  belongs_to :media_avatar, class_name: 'Medium'
-  belongs_to :media_brewery, class_name: 'Medium'
+  belongs_to :media_avatar, class_name: 'Medium', optional: true
+  belongs_to :media_brewery, class_name: 'Medium', optional: true
   accepts_nested_attributes_for :media, :reject_if => lambda { |r| r['media'].nil? }
 
   validates :name, presence: true

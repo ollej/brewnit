@@ -7,7 +7,7 @@ class MediumField < Administrate::Field::BelongsTo
   end
 
   def associated_class_name
-    'Medium'
+    Medium.name
   end
 
   def associated_resource_image_options
@@ -21,7 +21,8 @@ class MediumField < Administrate::Field::BelongsTo
   end
 
   def url(type)
-    data&.url(type)
+    return '' if data.nil?
+    data.url(type)
   end
 
   def to_s

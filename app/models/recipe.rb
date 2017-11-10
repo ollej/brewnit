@@ -1,4 +1,4 @@
-class Recipe < ActiveRecord::Base
+class Recipe < ApplicationRecord
   include MediaParentConcern
   include SearchCop
   include SanitizerConcern
@@ -19,7 +19,7 @@ class Recipe < ActiveRecord::Base
   end
 
   belongs_to :user
-  belongs_to :media_main, class_name: 'Medium'
+  belongs_to :media_main, class_name: 'Medium', optional: true
   has_many :media, as: :parent, dependent: :destroy
   has_and_belongs_to_many :events
   has_many :placements, dependent: :destroy
@@ -228,11 +228,11 @@ class Recipe < ActiveRecord::Base
   end
 
   def self.styles
-    self.uniq.pluck(:style_name).map(&:capitalize).uniq.sort
+    self.distinct.pluck(:style_name).map(&:capitalize).uniq.sort
   end
 
   def self.equipments
-    self.uniq.pluck(:equipment).reject { |r| r.empty? }.map(&:capitalize).uniq.sort
+    self.distinct.pluck(:equipment).reject { |r| r.empty? }.map(&:capitalize).uniq.sort
   end
 
 end

@@ -67,10 +67,14 @@ class ApplicationController < ActionController::Base
     resource.public? || user_signed_in? && current_user.can_show?(resource)
   end
 
+  def search_keys
+    %i(q style ogfrom ogto fgfrom fgto ibufrom ibuto
+      colorfrom colorto abvfrom abvto sort_order equipment
+      event_id event medal)
+  end
+
   def search_params
-    params.permit(:q, :style, :ogfrom, :ogto, :fgfrom, :fgto, :ibufrom, :ibuto,
-                  :colorfrom, :colorto, :abvfrom, :abvto, :sort_order, :equipment,
-                  :event_id, :event, :medal)
+    params.permit(*search_keys)
   end
 
   def honeypot

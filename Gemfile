@@ -3,13 +3,13 @@ source 'https://rubygems.org'
 ruby '2.4.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.8'
+gem 'rails', '5.1.4'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails'
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails'
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -22,41 +22,42 @@ gem 'jquery-ui-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 #gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder'
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'sdoc', group: :doc
 
 gem 'pg'
-gem 'libxml-xmlrpc', '~> 0.1.5'
+gem 'libxml-xmlrpc'
 gem 'devise'
 gem 'omniauth-google-oauth2'
 gem 'unicorn-rails'
 
 gem 'nrb-beerxml', git: 'https://github.com/ollej/beerxml.git', ref: '3c3a9c6d7b138a1160e481f276bb2d0923c83911'
 gem 'beer_recipe' #, path: './vendor/beer_recipe/'
-gem 'commontator', '~> 4.11.0'
+gem 'commontator'
 gem 'acts_as_votable'
-gem 'search_cop', git: 'https://github.com/mrkamel/search_cop.git', ref: '1082a2f7862321cf8f1c4560a2b6602a0c256e59'
+gem 'search_cop', git: 'https://github.com/mrkamel/search_cop.git', ref: '1082a2f7862321cf8f1c4560a2b6602a0c256e59' # Use Ruby v2.4 compatible fork
 gem 'meta-tags'
-gem 'pushover', git: 'https://github.com/vito-lbs/pushover.git', ref: '3bbb7ea026b3d30c043ba033d596dab6fec2a031'
+gem 'pushover', git: 'https://github.com/vito-lbs/pushover.git', ref: '3bbb7ea026b3d30c043ba033d596dab6fec2a031' # Use Ruby v2.4 compatible fork
 gem 'paperclip'
-gem 'fancybox2-rails', '~> 0.2.8'
-gem 'chronic', '~> 0.10.2'
-gem 'actionview-encoded_mail_to', '~> 1.0.7'
+gem 'fancybox2-rails', git: 'https://github.com/ChallahuAkbar/fancybox2-rails', ref: '34a70fa57148bc74bedc896df8e37fb56d136e5b' # Use rails5 compatible fork
+gem 'chronic', require: true
+gem 'actionview-encoded_mail_to'
 gem 'quilljs-rails'
-gem 'csv_shaper', '~> 1.3.0'
+gem 'csv_shaper'
 gem 'axlsx'
 gem 'axlsx_rails'
 gem 'dotenv-rails'
 
 # spam protection
 gem 'invisible_captcha'
-gem 'project_honeypot', '~> 0.3.1'
+gem 'project_honeypot'
 gem 'rack-attack'
 gem 'recaptcha', require: 'recaptcha/rails'
 
 # Admin interface
 gem 'administrate'
+gem 'administrate-field-image'
 
 # Bundler fix
 gem 'sys-proctable'
@@ -83,11 +84,12 @@ end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+  gem 'web-console'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 
   gem 'rails_real_favicon'
+  gem 'listen'
 end
 

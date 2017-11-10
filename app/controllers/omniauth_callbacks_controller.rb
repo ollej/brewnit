@@ -1,6 +1,6 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  skip_before_filter :verify_authenticity_token
-  before_filter :deny_spammers!
+  skip_before_action :verify_authenticity_token
+  before_action :deny_spammers!
 
   def google
     @user = User.from_omniauth(request.env['omniauth.auth'], honeypot)

@@ -1,7 +1,6 @@
-require File.expand_path('../boot', __FILE__)
+require_relative 'boot'
 
 require 'rails/all'
-require 'chronic'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -9,6 +8,9 @@ Bundler.require(*Rails.groups)
 
 module Brewnit
   class Application < Rails::Application
+    # Initialize configuration defaults for originally generated Rails version.
+    config.load_defaults 5.1
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -23,9 +25,6 @@ module Brewnit
     # config.i18n.default_locale = :de
     config.i18n.default_locale = :sv
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
-
-    # Do not swallow errors in after_commit/after_rollback callbacks.
-    config.active_record.raise_in_transactional_callbacks = true
 
     config.autoload_paths << Rails.root.join('lib')
     config.autoload_paths << Rails.root.join('lib/errors')
@@ -60,6 +59,8 @@ module Brewnit
       authentication:       :login,
       enable_starttls_auto: true
     }
+
+    ActiveSupport.halt_callback_chains_on_return_false = false
 
     config.after_initialize do
       Rails.application.routes.default_url_options = config.action_mailer.default_url_options

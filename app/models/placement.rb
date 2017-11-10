@@ -1,4 +1,4 @@
-class Placement < ActiveRecord::Base
+class Placement < ApplicationRecord
   MEDALS = {
     gold: 1,
     silver: 2,
@@ -11,9 +11,6 @@ class Placement < ActiveRecord::Base
     bronze: 'bronze'
   }
 
-  validates :user, presence: true
-  validates :recipe, presence: true
-  validates :event, presence: true
   validate :official_event_registration
 
   belongs_to :user
