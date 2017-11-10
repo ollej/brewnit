@@ -51,7 +51,7 @@ gem 'dotenv-rails'
 
 # spam protection
 gem 'invisible_captcha'
-gem 'project_honeypot', '~> 0.3.1'
+gem 'project_honeypot'
 gem 'rack-attack'
 gem 'recaptcha', require: 'recaptcha/rails'
 
