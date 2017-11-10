@@ -20,6 +20,10 @@ class MediumField < Administrate::Field::BelongsTo
     end
   end
 
+  def candidate_resources
+    @resource.media
+  end
+
   def url(type)
     return '' if data.nil?
     data.url(type)
