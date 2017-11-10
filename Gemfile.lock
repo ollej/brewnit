@@ -390,7 +390,7 @@ DEPENDENCIES
   spring
   sys-proctable
   therubyracer
-  uglifier (>= 1.3.0)
+  uglifier
   unicorn-rails
   web-console (~> 2.0)
 
