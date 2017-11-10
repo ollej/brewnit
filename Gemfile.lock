@@ -355,7 +355,7 @@ DEPENDENCIES
   byebug
   chronic
   coffee-rails
-  commontator (~> 4.11.0)
+  commontator
   csv_shaper
   devise
   dotenv-rails

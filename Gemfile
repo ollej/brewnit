@@ -34,7 +34,7 @@ gem 'unicorn-rails'
 
 gem 'nrb-beerxml', git: 'https://github.com/ollej/beerxml.git', ref: '3c3a9c6d7b138a1160e481f276bb2d0923c83911'
 gem 'beer_recipe' #, path: './vendor/beer_recipe/'
-gem 'commontator', '~> 4.11.0'
+gem 'commontator'
 gem 'acts_as_votable'
 gem 'search_cop', git: 'https://github.com/mrkamel/search_cop.git', ref: '1082a2f7862321cf8f1c4560a2b6602a0c256e59'
 gem 'meta-tags'
