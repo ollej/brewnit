@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.4.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.8'
+gem 'rails', '5.0.6'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
 # Use SCSS for stylesheets
@@ -36,12 +36,12 @@ gem 'nrb-beerxml', git: 'https://github.com/ollej/beerxml.git', ref: '3c3a9c6d7b
 gem 'beer_recipe' #, path: './vendor/beer_recipe/'
 gem 'commontator'
 gem 'acts_as_votable'
-gem 'search_cop', git: 'https://github.com/mrkamel/search_cop.git', ref: '1082a2f7862321cf8f1c4560a2b6602a0c256e59'
+gem 'search_cop', git: 'https://github.com/mrkamel/search_cop.git', ref: '1082a2f7862321cf8f1c4560a2b6602a0c256e59' # Use Ruby v2.4 compatible fork
 gem 'meta-tags'
-gem 'pushover', git: 'https://github.com/vito-lbs/pushover.git', ref: '3bbb7ea026b3d30c043ba033d596dab6fec2a031'
+gem 'pushover', git: 'https://github.com/vito-lbs/pushover.git', ref: '3bbb7ea026b3d30c043ba033d596dab6fec2a031' # Use Ruby v2.4 compatible fork
 gem 'paperclip'
-gem 'fancybox2-rails'
-gem 'chronic'
+gem 'fancybox2-rails', git: 'https://github.com/ChallahuAkbar/fancybox2-rails', ref: '34a70fa57148bc74bedc896df8e37fb56d136e5b' # Use rails5 compatible fork
+gem 'chronic', require: true
 gem 'actionview-encoded_mail_to'
 gem 'quilljs-rails'
 gem 'csv_shaper'

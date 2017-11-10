@@ -1,4 +1,4 @@
-class Recipe < ActiveRecord::Base
+class Recipe < ApplicationRecord
   include MediaParentConcern
   include SearchCop
   include SanitizerConcern

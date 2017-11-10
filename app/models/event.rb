@@ -1,4 +1,4 @@
-class Event < ActiveRecord::Base
+class Event < ApplicationRecord
   EVENT_TYPES = ['Tävling', 'Utmaning', 'Träff']
 
   include SearchCop

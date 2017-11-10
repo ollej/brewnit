@@ -1,4 +1,4 @@
-class Placement < ActiveRecord::Base
+class Placement < ApplicationRecord
   MEDALS = {
     gold: 1,
     silver: 2,

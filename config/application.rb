@@ -1,7 +1,6 @@
-require File.expand_path('../boot', __FILE__)
+require_relative 'boot'
 
 require 'rails/all'
-require 'chronic'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -60,6 +59,8 @@ module Brewnit
       authentication:       :login,
       enable_starttls_auto: true
     }
+
+    ActiveSupport.halt_callback_chains_on_return_false = false
 
     config.after_initialize do
       Rails.application.routes.default_url_options = config.action_mailer.default_url_options
