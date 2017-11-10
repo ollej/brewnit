@@ -10,7 +10,7 @@ class MediumDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     parent: Field::Polymorphic,
     id: Field::Number,
-    file: MediumField, #Field::String,
+    file: Administrate::Field::Image,
     caption: Field::String,
     sorting: Field::Number,
     created_at: Field::DateTime,

@@ -19,7 +19,7 @@ class Recipe < ApplicationRecord
   end
 
   belongs_to :user
-  belongs_to :media_main, class_name: 'Medium'
+  belongs_to :media_main, class_name: 'Medium', optional: true
   has_many :media, as: :parent, dependent: :destroy
   has_and_belongs_to_many :events
   has_many :placements, dependent: :destroy
@@ -228,11 +228,11 @@ class Recipe < ApplicationRecord
   end
 
   def self.styles
-    self.uniq.pluck(:style_name).map(&:capitalize).uniq.sort
+    self.distinct.pluck(:style_name).map(&:capitalize).uniq.sort
   end
 
   def self.equipments
-    self.uniq.pluck(:equipment).reject { |r| r.empty? }.map(&:capitalize).uniq.sort
+    self.distinct.pluck(:equipment).reject { |r| r.empty? }.map(&:capitalize).uniq.sort
   end
 
 end

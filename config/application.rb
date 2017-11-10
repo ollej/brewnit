@@ -8,6 +8,9 @@ Bundler.require(*Rails.groups)
 
 module Brewnit
   class Application < Rails::Application
+    # Initialize configuration defaults for originally generated Rails version.
+    config.load_defaults 5.1
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -22,9 +25,6 @@ module Brewnit
     # config.i18n.default_locale = :de
     config.i18n.default_locale = :sv
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
-
-    # Do not swallow errors in after_commit/after_rollback callbacks.
-    config.active_record.raise_in_transactional_callbacks = true
 
     config.autoload_paths << Rails.root.join('lib')
     config.autoload_paths << Rails.root.join('lib/errors')

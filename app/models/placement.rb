@@ -11,9 +11,6 @@ class Placement < ApplicationRecord
     bronze: 'bronze'
   }
 
-  validates :user, presence: true
-  validates :recipe, presence: true
-  validates :event, presence: true
   validate :official_event_registration
 
   belongs_to :user

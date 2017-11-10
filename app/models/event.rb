@@ -13,7 +13,7 @@ class Event < ApplicationRecord
 
   belongs_to :user
   has_and_belongs_to_many :recipes
-  belongs_to :media_main, class_name: 'Medium'
+  belongs_to :media_main, class_name: 'Medium', optional: true
   has_many :media, as: :parent, dependent: :destroy
   has_many :placements, dependent: :destroy
 

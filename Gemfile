@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.4.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.0.6'
+gem 'rails', '5.1.4'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
 # Use SCSS for stylesheets
@@ -57,6 +57,7 @@ gem 'recaptcha', require: 'recaptcha/rails'
 
 # Admin interface
 gem 'administrate'
+gem 'administrate-field-image'
 
 # Bundler fix
 gem 'sys-proctable'
@@ -89,5 +90,6 @@ group :development do
   gem 'spring'
 
   gem 'rails_real_favicon'
+  gem 'listen'
 end
 
