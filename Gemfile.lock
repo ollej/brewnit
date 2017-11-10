@@ -382,7 +382,7 @@ DEPENDENCIES
   rails_real_favicon
   recaptcha
   sass-rails
-  sdoc (~> 0.4.0)
+  sdoc
   search_cop!
   spring
   sys-proctable
