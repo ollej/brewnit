@@ -1,12 +1,12 @@
 <% if @success %>
-  <% recipe_event = escape_javascript(render partial: 'shared/recipe_event',
-                                      locals: { event: @event, recipe: @recipe, current_user: current_user }) %>
+  <% recipe_event = j(render partial: 'shared/recipe_event',
+       locals: { event: @event, recipe: @recipe, current_user: current_user }) %>
   $("#recipe-events").find('li[data-recipe-event-id="<%= @event.id %>"]').remove();
   $("<%= recipe_event %>").appendTo("#recipe-events")
   $("#recipe-events-form").trigger('reset');
 <% else %>
   $('body').trigger('flasher:show', {
-    message: '<%= escape_javascript(@error_message) %>',
+    message: '<%= j(@error_message) %>',
     level: 'error'
   })
 <% end %>

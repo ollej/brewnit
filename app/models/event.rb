@@ -61,6 +61,10 @@ class Event < ApplicationRecord
     ["#{name} (#{I18n.l(held_at)})", id]
   end
 
+  def recipe_options
+    recipes.map { |recipe| [recipe.name, recipe.id] }
+  end
+
   def self.event_options
     {
       I18n.t(:'events.upcoming_events') =>

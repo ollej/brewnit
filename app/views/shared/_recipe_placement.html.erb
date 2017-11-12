@@ -1,0 +1,14 @@
+                      <li class="pure-menu-item" data-placement-id="<%= placement.id %>">
+                        <%= medal_tag(placement, :tiny) %>
+                        <span class="medal-category"><%= placement.category %></span>
+
+                        <% if user_signed_in? && current_user.can_modify?(event) %>
+                          <%= link_to recipe_placement_path(recipe, placement), method: :delete,
+                            remote: true,
+                            data: { confirm: t(:'common.are_you_sure') },
+                            class: 'inline-button destroy-button' do %>
+                            <i class="fa fa-trash"></i>
+                          <% end %>
+                        <% end %>
+                      </li>
+

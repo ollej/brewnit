@@ -197,6 +197,17 @@ sv:
       silver: 🥈 Silver
       bronze: 🥉 Brons
       none: Ingen medalj
+  event_recipes:
+    add_placement: Lägg till placering
+    choose_recipe: Välj recept
+    create:
+      successful: Sparade placeringen på receptet.
+      failed: Kunde inte spara placeringen på receptet.
+  recipe_placements:
+    destroy:
+      successful: Placeringen har tagits bort från receptet.
+      failed: Kunde inte ta bort placeringen från receptet.
+
 
   beerxml:
     name: Ölnamn
@@ -662,6 +673,7 @@ sv:
         description: Beskrivning
         medium_main: Huvudbild
         last_registration: Sista anmälan
+        recipes: Placeringar
     errors:
       template:
         header:

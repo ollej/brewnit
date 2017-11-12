@@ -1,0 +1,28 @@
+<div class="recipe-item linked-item pure-g <%= item_classes_for(recipe, current_user, selected_recipe) %>"
+  data-recipe-id="<%= recipe.id %>">
+    <div class="pure-u">
+      <div class="recipe-image">
+      <%= image_tag recipe.main_image, class: 'recipe-avatar',
+        alt: recipe.owner_name, height: 64, width: 64 %>
+        <%= medal_tag(recipe.placement) %>
+      </div>
+    </div>
+
+    <div class="pure-u-13-24 recipe-item-description">
+      <h5 class="recipe-name">
+        <%= link_to recipe.brewer_name, recipe.user, class: 'user-link' %>
+      </h5>
+      <h4 class="recipe-subject">
+        <%= link_to recipe.name, recipe, class: 'recipe-link item-link' %>
+      </h4>
+      <p class="recipe-desc">
+        <%= recipe.style_name %>
+      </p>
+    </div>
+
+    <div class="pure-u-5-24 recipe-item-details">
+      <%= '%.0f' % recipe.batch_size %> <%= I18n.t(:'beerxml.liter_abbr') %><br>
+      <%= I18n.t(:'beerxml.abv') %>: <%= format_abv(recipe.abv) %><br>
+      <%= I18n.t(:'beerxml.ibu') %>: <%= number_with_precision(recipe.ibu, precision: 0) %>
+    </div>
+  </div>

@@ -208,8 +208,8 @@ class Recipe < ApplicationRecord
     end
   end
 
-  def add_event(event_id:, user: nil, placement: {})
-    event = Event.find(event_id)
+  def add_event(event:, user: nil, placement: {})
+    event = Event.find(event) unless event.kind_of? Event
     raise RegistrationsClosed if event.registration_closed?
     transaction do
       events << event unless events.include?(event)

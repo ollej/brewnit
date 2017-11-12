@@ -63,7 +63,7 @@ class RecipesController < ApplicationController
 
     respond_to do |format|
       if @recipe.save
-        @recipe.add_event(event_id: params[:event]) if params[:event].present?
+        @recipe.add_event(event: params[:event]) if params[:event].present?
 
         format.html { redirect_to @recipe, notice: I18n.t(:'recipes.create.successful') }
         format.json { render :show, status: :created, location: @recipe }

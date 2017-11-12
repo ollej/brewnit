@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :events do
     resources :media, only: [:create, :destroy]
     resource :add_medium, only: [:create], controller: :add_medium
-    resources :recipes, only: [:index], controller: :event_recipes
+    resources :recipes, only: [:index, :create], controller: :event_recipes
   end
 
   namespace :admin do
@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       post :like, controller: :likes, action: :create
       delete :like, controller: :likes, action: :destroy, as: :unlike
     end
+    resources :placements, only: [:destroy], controller: :recipe_placements
   end
 
   devise_for :users, controllers: {

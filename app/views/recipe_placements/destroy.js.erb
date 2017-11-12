@@ -1,0 +1,11 @@
+<% if @success %>
+  $("#event-recipes").find('li[data-placement-id="<%= @placement.id %>"]')
+    .effect("highlight", {}, 500, function() {
+      this.remove();
+    });
+<% else %>
+  $('body').trigger('flasher:show', {
+    message: '<%= j(@error_message) %>',
+    level: 'error'
+  })
+<% end %>

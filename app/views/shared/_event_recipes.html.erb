@@ -1,0 +1,9 @@
+          <div class="pure-menu">
+            <h3><%= t(:'activerecord.attributes.event.recipes') %></h3>
+            <ul id="event-recipes" class="pure-menu-list">
+              <% @event.recipes.each do |recipe| %>
+                <%= render partial: 'shared/event_recipe', locals: { event: @event, recipe: recipe, current_user: current_user } %>
+              <% end %>
+            </ul>
+          </div>
+

@@ -1,0 +1,29 @@
+<% if @success %>
+  let recipe = "<%= j(render partial: 'shared/recipe', locals: { recipe: @recipe, selected_recipe: nil }) %>";
+  let recipe_selector = 'div[data-recipe-id="<%= @recipe.id %>"]';
+  $("#list")
+    .find(recipe_selector)
+    .replaceWith(recipe);
+  $("#list")
+    .find(recipe_selector)
+    .effect("highlight", {}, 1000);
+
+  let event = "<%= j(render partial: 'shared/event_recipe', locals: {
+    event: @event,
+    recipe: @recipe,
+    current_user: current_user }) %>";
+  let event_selector = "li[data-event-recipe-id='<%= @recipe.id %>']";
+  $("#event-recipes")
+    .find(event_selector)
+    .replaceWith(event);
+  $("#event-recipes")
+    .find(event_selector)
+    .effect("highlight", {}, 1000);
+
+  $("#event-recipes-form").trigger('reset');
+<% else %>
+  $('body').trigger('flasher:show', {
+    message: '<%= j(@error_message) %>',
+    level: 'error'
+  })
+<% end %>

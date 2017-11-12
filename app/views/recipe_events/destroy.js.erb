@@ -2,7 +2,7 @@
   $("#recipe-events").find('li[data-recipe-event-id="<%= @event.id %>"]').remove();
 <% else %>
   $('body').trigger('flasher:show', {
-    message: '<%= escape_javascript(@error_message) %>',
+    message: '<%= j(@error_message) %>',
     level: 'error'
   })
 <% end %>

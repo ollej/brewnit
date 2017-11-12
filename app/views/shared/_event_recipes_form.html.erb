@@ -1,11 +1,10 @@
-<h4><%= t(:'recipe_events.add_event') %></h4>
-<%= form_tag(recipe_events_path(@recipe), method: :post, remote: true, id: 'recipe-events-form',
+<h4><%= t(:'event_recipes.add_placement') %></h4>
+<%= form_tag(event_recipes_path(@event), method: :post, remote: true, id: 'event-recipes-form',
              class: 'pure-form pure-form-aligned medal-placement') do |f| %>
-  <%= hidden_field_tag :recipe_id, @recipe.id %>
   <fieldset>
     <div class="field pure-control-group">
-      <%= label_tag :event_id, t(:'recipe_events.choose') %>
-      <%= select_tag :event_id, grouped_options_for_select(Event.event_options, ''),
+      <%= label_tag :recipe_id, t(:'event_recipes.choose_recipe') %>
+      <%= select_tag :recipe_id, options_for_select(@event.recipe_options, ''),
             class: 'pure-input-1-4' %>
     </div>
     <div class="field pure-control-group">
