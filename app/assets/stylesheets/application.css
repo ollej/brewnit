@@ -15,5 +15,6 @@
  *= require jquery-ui/autocomplete
  *= require commontator/application
  *= require fancybox
+ *= require balloon-css/balloon
  *= require_self
  */

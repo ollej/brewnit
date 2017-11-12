@@ -16,6 +16,12 @@ set_meta_tags title: @event.name,
         <div class="pure-u-1 pure-u-sm-2-5 recipe-header">
           <h1 class="event-content-title item-content-title"><%= title @event.name %></h1>
           <p class="item-content-info"><%= @event.organizer %> - <%= @event.event_type %></p>
+
+          <div class="event-badge-list">
+            <%= official_badge(@event) if @event.official? %>
+            <%= recipes_badge(@event) %>
+          </div>
+
         </div>
         <div class="page-content-controls pure-u-1 pure-u-sm-2-5">
           <div class="controls-public">
@@ -72,16 +78,18 @@ set_meta_tags title: @event.name,
           </div>
           <% end %>
         </div>
+
         <%= render partial: 'shared/image_slider', locals: { media: @event.media } %>
       </div>
 
       <div class="page-content-body event-show item-show">
-        <!--
-        <div class="event-field">
-          <span class="event-field-heading"><%#= I18n.t(:'events.recipe_count') %></span>
-          <p class="event-field-value"><%#= I18n.t(:'events.recipes', count: @event.recipes.size) %></p>
+
+        <% if @event.official? && @event.last_registration.present? %>
+        <div class="item-field">
+          <span class="item-field-heading"><%= I18n.t(:'activerecord.attributes.event.last_registration') %></span>
+          <p class="item-field-value"><%= I18n.l(@event.last_registration) %></p>
         </div>
-        -->
+        <% end %>
 
         <div class="item-field">
           <span class="item-field-heading"><%= I18n.t(:'activerecord.attributes.event.held_at') %></span>

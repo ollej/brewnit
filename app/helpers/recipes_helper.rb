@@ -28,16 +28,6 @@ module RecipesHelper
     cls.join(' ')
   end
 
-  def icon(type=nil)
-    %{<i class="fa fa-#{type}"></i>} if type
-  end
-
-  def badge(content, opts={})
-    opts[:class] ||= ''
-    opts[:class] += opts[:type].nil? ? ' pure-badge' : " pure-badge-#{opts[:type]}"
-    %Q{<span class="#{opts[:class]}">#{icon(opts[:icon])}#{content}</span>}.html_safe
-  end
-
   def visibility_badge(recipe)
     if recipe.public?
       badge(I18n.t(:'common.public'), type: 'public', icon: 'unlock')
@@ -51,7 +41,13 @@ module RecipesHelper
   end
 
   def likes_badge(recipe)
-    badge(I18n.t(:'recipes.votes_count', count: recipe.get_likes.size), type: 'likes', icon: 'thumbs-up', class: 'badge-link')
+    badge(
+      I18n.t(:'recipes.votes_count', count: recipe.get_likes.size),
+      type: 'likes',
+      icon: 'thumbs-up',
+      class: 'badge-link',
+      tooltip: recipe.likes_list
+    )
   end
 
   def downloads_badge(recipe)

@@ -62,4 +62,24 @@ module ApplicationHelper
       [t(:'recipe_events.medals.bronze'), 'bronze'],
     ]
   end
+
+  def icon(type=nil)
+    content_tag(:i, '', class: "fa fa-#{type}") if type.present?
+  end
+
+  def badge(content, opts={})
+    opts[:class] = Array(opts[:class])
+    opts[:class] << 'pure-badge'
+    opts[:class] << "pure-badge-#{opts[:type]}" if opts[:type].present?
+    data = {}
+    if opts[:tooltip].present?
+      data[:balloon] = opts[:tooltip]
+      data[:'balloon-pos'] = 'down'
+    end
+    content_tag(:span, class: opts[:class], data: data) do
+      concat icon(opts[:icon])
+      concat content
+    end
+  end
+
 end

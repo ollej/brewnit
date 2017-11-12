@@ -227,6 +227,10 @@ class Recipe < ApplicationRecord
     end
   end
 
+  def likes_list
+    get_likes.map(&:voter).map(&:display_name).to_sentence
+  end
+
   def self.styles
     self.distinct.pluck(:style_name).map(&:capitalize).uniq.sort
   end

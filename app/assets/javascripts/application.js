@@ -59,21 +59,6 @@ $( document ).ready(function() {
     $(this).replaceWith(xhr.responseText);
   });
 
-  // Show liked by list
-  $(".recipe-content").on("click", ".pure-badge-likes", function(e, data, status, xhr) {
-    var $likes = $("#likes-list");
-    if ($likes.is(':empty')) {
-      return false;
-    }
-    var $el = $(this);
-    $likes.css({
-      'position': 'absolute',
-      'left': $el.offset().left,
-      'top': $el.offset().top + $el.height() + 10
-    }).toggle();
-    return false;
-  });
-
   // Close modals
   $("body").on("click", function() {
     $(".modal").hide();
