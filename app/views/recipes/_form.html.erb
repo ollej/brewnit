@@ -13,8 +13,12 @@
     </div>
   <% end %>
 
-  <% if @event&.present? %>
+  <% if @event.present? %>
     <%= render 'shared/event_plate' %>
+  <% end %>
+
+  <% if @event&.official? %>
+    <%= render 'shared/official_event_plate' %>
   <% end %>
 
   <fieldset>

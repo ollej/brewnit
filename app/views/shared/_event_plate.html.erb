@@ -13,9 +13,6 @@
                   <%= @event.held_at %> |
                   <%= @event.organizer %>
                 </h3>
-                <% if @event.official? %>
-                  <h4><%= t(:'events.official_event_info') %></h4>
-                <% end %>
                 <p class="item-desc event-description">
                   <%= shorten_strip(@event.description, 200) %>
                 </p>

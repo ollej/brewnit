@@ -44,6 +44,10 @@ class Event < ApplicationRecord
     locked? || (last_registration.present? && last_registration < DateTime.now)
   end
 
+  def map_position
+    coordinates.presence || address.presence
+  end
+
   def cleanup_fields
     if url.present? && !url.start_with?('http')
       self.url = "http://#{url.strip}"

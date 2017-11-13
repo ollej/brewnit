@@ -172,6 +172,7 @@ sv:
     register_recipe: Anmäl recept
     add_recipe: Lägg till recept
     registrations_closed: Anmälan stängd
+    last_registration_header: Sista anmälningsdatum
     official_event_info: Anmäl recept till detta evenemang.
     create:
       successful: Evenemanget har skapats.
@@ -192,6 +193,11 @@ sv:
     location_description: I vilken lokal hålls detta evenemang?
     url_description: Webbadress till arrangemangets hemsida.
     held_at_description: Vilket datum hålls detta arrangemang?
+    address_description: Address till arrangemangets lokal.
+    coordinates_description: Fyll i GPS-koordinater för att visa karta till evenemanget.
+    contact_email_description: E-postadress till arrangören av evenemanget.
+    last_registration_description: Senaste datum och tid som det går att anmäla sig till detta arrangemang.
+    registration_information_description: Information som visas vid anmälan av recept till evenemanget.
   recipe_events:
     add_event: Lägg till evenemang
     add: Lägg till
@@ -690,6 +696,11 @@ sv:
         medium_main: Huvudbild
         last_registration: Sista anmälan
         recipes: Placeringar
+        address: Adress
+        contact_email: E-post
+        coordinates: Kartkoordinater
+        last_registration: Sista anmälan
+        registration_information: Anmälingsinfo
     errors:
       template:
         header:

@@ -55,14 +55,17 @@ set_meta_tags title: @user.display_name,
         <% if @user.url.present? %>
         <div class="item-field">
           <span class="item-field-heading"><%= I18n.t(:'activerecord.attributes.user.url') %></span>
-          <p class="item-field-value"><%= link_to @user.url, @user.url, target: '_blank' %></p>
+          <p class="item-field-value">
+            <%= link_to @user.url, @user.url, target: '_blank', rel: 'noopener noreferrer' %>
+          </p>
         </div>
         <% end %>
 
         <% if @user.twitter.present? %>
         <div class="item-field">
           <span class="item-field-heading"><%= I18n.t(:'activerecord.attributes.user.twitter') %></span>
-          <p class="item-field-value"><%= link_to @user.twitter, twitter_url(@user.twitter), target: '_blank' %></p>
+          <p class="item-field-value"><%= link_to @user.twitter, twitter_url(@user.twitter),
+            target: '_blank', rel: 'noopener noreferrer' %></p>
         </div>
         <% end %>
 

@@ -15,7 +15,11 @@ module EventsHelper
         type: 'event-recipes',
         icon: 'beer'
     )
+  end
 
+  def google_map(center)
+    key = Rails.application.secrets.google_maps_api_key
+    "https://maps.googleapis.com/maps/api/staticmap?center=#{center}&size=300x300&zoom=17&language=sv&key=#{key}"
   end
 
 end
