@@ -187,6 +187,11 @@ sv:
     official_badge_title: Officiell
     official_badge_description: Detta är ett officiellt evenemang där du kan anmäla ditt recept för att delta på evenemanget.
     recipe_count: "%{count} recept"
+    event_type_description: Är detta evenemang en Tävling, en Utmaning eller en Träff.
+    organizer_description: Vem eller vilka arrangerar detta evenemang?
+    location_description: I vilken lokal hålls detta evenemang?
+    url_description: Webbadress till arrangemangets hemsida.
+    held_at_description: Vilket datum hålls detta arrangemang?
   recipe_events:
     add_event: Lägg till evenemang
     add: Lägg till
