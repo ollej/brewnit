@@ -7,15 +7,18 @@
       <%= label_tag :event_id, t(:'recipe_events.choose') %>
       <%= select_tag :event_id, grouped_options_for_select(Event.event_options, ''),
             class: 'pure-input-1-4' %>
+      <%= form_info_icon(I18n.t(:'recipe_events.exhibited_at_event_description')) %>
     </div>
     <div class="field pure-control-group">
       <%= label_tag :medal, t(:'recipe_events.medal') %>
       <%= select_tag :medal, options_for_select(medal_options, ''), class: 'pure-input-1-4' %>
+      <%= form_info_icon(I18n.t(:'recipe_events.medal_description')) %>
     </div>
     <div class="field pure-control-group">
       <%= label_tag :category, t(:'recipe_events.category') %>
       <%= text_field_tag :category, '', placeholder: I18n.t(:'recipe_events.category'),
-            disabled: true, required: true %>
+            disabled: true, required: true, class: 'pure-input-1-4' %>
+      <%= form_info_icon(I18n.t(:'recipe_events.categeory_description')) %>
     </div>
     <div class="actions pure-controls">
       <%= button_tag name: I18n.t(:'recipe_events.add'), type: :submit, class: 'pure-button pure-button-secondary' do %>

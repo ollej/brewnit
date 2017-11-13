@@ -213,11 +213,16 @@ class Recipe < ApplicationRecord
     raise RegistrationsClosed if event.registration_closed?
     transaction do
       events << event unless events.include?(event)
-      if placement[:medal].present? && user.present?
-        Placement.create!(event: event, user: user, recipe: self, medal: placement[:medal], category: placement[:category])
-      end
+      add_placement(event: event, user: user, placement: placement) if placement[:medal].present?
     end
     return event
+  end
+
+  def add_placement(event:, user:, placement:)
+    Rails.logger.debug { "add_placement #{event.inspect} #{user.inspect} #{placement.inspect}" }
+    if user.present? && (!event.official? || user.can_modify?(event))
+      Placement.create!(event: event, user: user, recipe: self, medal: placement[:medal], category: placement[:category])
+    end
   end
 
   def remove_event(event)

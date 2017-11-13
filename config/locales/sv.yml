@@ -64,7 +64,6 @@ sv:
     media:
       upload: Ladda upp bild
     no_event: Inget evenemang
-    exhibited_at_event: Deltar på evenemang
     searched_term: "Sökresultat för: %{search_term}"
     clear_search: Rensa sökning
   latest_items:
@@ -128,6 +127,13 @@ sv:
     downloads_count:
       one: 1 nedladdning
       other: '%{count} nedladdningar'
+    public_description: |
+      Lämna denna kryssruta tom om du inte vill
+      att andra ska kunna se ditt recept.
+    beerxml_description: |
+      Exportera recept i BeerXML från ett
+      receptprogram som Beersmith 2, Brewpal
+      eller Wort.
   users:
     index: Bryggare
     profile: Profil
@@ -137,8 +143,9 @@ sv:
     sign_out: Logga ut
     sign_in_with_provider: Logga in med %{provider}
     min_pwd_length: Minst %{min_length} tecken
-    leave_pwd_blank: lämna blankt om du inte vill ändra lösenord
-    pwd_needed_to_confirm: behövs bara för att ändra lösenord
+    leave_pwd_blank: Lämna blankt om du inte vill ändra lösenord.
+    pwd_needed_to_confirm: Behövs bara för att ändra lösenord.
+    password_confirmation_description: Upprepa nya lösenordet för att garantera att det blir rätt.
     save: Spara ändringar
     cancel_account: Avsluta konto
     cancel_my_account: Avsluta mitt konto
@@ -190,8 +197,12 @@ sv:
     destroy:
       successful: Receptet har tagits bort från evenemanget.
       failed: Kunde inte ta bort receptet från evenemanget.
+    exhibited_at_event: Deltog på evenemang
+    exhibited_at_event_description: Om du deltagit i en tävling med denna öl.
     medal: Medaljplats
-    category: Kategori
+    medal_description: Välj medaljplats om receptet vann pris på tävlingen.
+    category: Tävlingsgrupp
+    categeory_description: Vilken tävlingsgrupp vann receptet medalj i?
     medals:
       gold: 🥇 Guld
       silver: 🥈 Silver
@@ -632,10 +643,10 @@ sv:
       user:
         sign_in: Logga in
         email: E-post
-        password: Lösenord
+        password: Nytt lösenord
         current_password: Nuvarande lösenord
-        remember_me: Kom ihåg mig
         password_confirmation: Upprepa lösenord
+        remember_me: Kom ihåg mig
         presentation: Presentation
         location: Hemort
         url: Hemsida

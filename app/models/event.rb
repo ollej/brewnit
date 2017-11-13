@@ -27,6 +27,8 @@ class Event < ApplicationRecord
   scope :ordered, -> { order(held_at: :desc) }
   scope :upcoming, -> { where('held_at > ?', Date.today) }
   scope :past, -> { where('held_at <= ?', Date.today) }
+  scope :official, -> { where(official: true) }
+  scope :unofficial, -> { where(official: false) }
   scope :latest, -> { limit(10).ordered }
   scope :registration_open, -> {
     where('locked = false AND (last_registration IS NULL OR last_registration > ?)', DateTime.now)
@@ -68,11 +70,11 @@ class Event < ApplicationRecord
   def self.event_options
     {
       I18n.t(:'events.upcoming_events') =>
-      self.registration_open.upcoming.order(:name).collect {|event|
+      self.registration_open.upcoming.unofficial.order(:name).collect {|event|
         event.option_values
       },
       I18n.t(:'events.past_events') =>
-      self.registration_open.past.order(:name).collect {|event|
+      self.registration_open.past.unofficial.order(:name).collect {|event|
         event.option_values
       }
     }

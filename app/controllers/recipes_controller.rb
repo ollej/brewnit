@@ -63,7 +63,13 @@ class RecipesController < ApplicationController
 
     respond_to do |format|
       if @recipe.save
-        @recipe.add_event(event: params[:event]) if params[:event].present?
+        if params[:event].present?
+          @recipe.add_event(
+            event: params[:event],
+            user: current_user,
+            placement: placement_params
+          )
+        end
 
         format.html { redirect_to @recipe, notice: I18n.t(:'recipes.create.successful') }
         format.json { render :show, status: :created, location: @recipe }
@@ -113,5 +119,9 @@ class RecipesController < ApplicationController
       recipe = params.require(:recipe).permit(:name, :description, :beerxml, :public)
       recipe[:beerxml] = recipe[:beerxml].read if recipe[:beerxml].present?
       recipe
+    end
+
+    def placement_params
+      params.permit(:medal, :category)
     end
 end

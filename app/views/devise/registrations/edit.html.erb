@@ -16,7 +16,7 @@
   <fieldset>
     <div class="field pure-control-group">
       <%= f.label :email %>
-      <%= f.email_field :email, disabled: true, autofocus: true %>
+      <%= f.email_field :email, disabled: true, autofocus: true, class: 'pure-input-1-4' %>
     </div>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -25,12 +25,14 @@
 
     <div class="field pure-control-group">
       <%= f.label :name %>
-      <%= f.text_field :name, placeholder: t(:'activerecord.attributes.user.name') %>
+      <%= f.text_field :name, class: 'pure-input-1-4',
+        placeholder: t(:'activerecord.attributes.user.name') %>
     </div>
 
     <div class="field pure-control-group">
       <%= f.label :avatar %>
-      <%= f.text_field :avatar, placeholder: t(:'activerecord.attributes.user.avatar') %>
+      <%= f.text_field :avatar, class: 'pure-input-1-4',
+        placeholder: t(:'activerecord.attributes.user.avatar') %>
       <% if resource.avatar.present? %>
         <%= image_tag resource.avatar, class: 'recipe-avatar' %>
       <% end %>
@@ -38,27 +40,32 @@
 
     <div class="field pure-control-group">
       <%= f.label :brewery %>
-      <%= f.text_field :brewery, placeholder: t(:'activerecord.attributes.user.brewery') %>
+      <%= f.text_field :brewery, class: 'pure-input-1-4',
+        placeholder: t(:'activerecord.attributes.user.brewery') %>
     </div>
 
     <div class="field pure-control-group">
       <%= f.label :equipment %>
-      <%= f.text_field :equipment, placeholder: t(:'activerecord.attributes.user.equipment') %>
+      <%= f.text_field :equipment, class: 'pure-input-1-4',
+        placeholder: t(:'activerecord.attributes.user.equipment') %>
     </div>
 
     <div class="field pure-control-group">
       <%= f.label :location %>
-      <%= f.text_field :location, placeholder: t(:'activerecord.attributes.user.location') %>
+      <%= f.text_field :location, class: 'pure-input-1-4',
+        placeholder: t(:'activerecord.attributes.user.location') %>
     </div>
 
     <div class="field pure-control-group">
       <%= f.label :url %>
-      <%= f.text_field :url, placeholder: t(:'activerecord.attributes.user.url') %>
+      <%= f.text_field :url, class: 'pure-input-1-4',
+        placeholder: t(:'activerecord.attributes.user.url') %>
     </div>
 
     <div class="field pure-control-group">
       <%= f.label :twitter %>
-      <%= f.text_field :twitter, placeholder: t(:'activerecord.attributes.user.twitter') %>
+      <%= f.text_field :twitter, class: 'pure-input-1-4',
+        placeholder: t(:'activerecord.attributes.user.twitter') %>
     </div>
 
     <div class="field pure-control-group">
@@ -70,19 +77,23 @@
 
     <div class="field pure-control-group">
       <%= f.label :password %>
-      <%= f.password_field :password, autocomplete: 'off', placeholder: t(:'activerecord.attributes.user.password') %>
-      <em>(<%= t(:'users.leave_pwd_blank') %>)</em>
+      <%= f.password_field :password, class: 'pure-input-1-4', autocomplete: 'off',
+        placeholder: t(:'activerecord.attributes.user.password') %>
+      <%= form_info_icon(t(:'users.leave_pwd_blank')) %>
     </div>
 
     <div class="field pure-control-group">
       <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation, autocomplete: 'off', placeholder: t(:'activerecord.attributes.user.password_confirmation') %>
+      <%= f.password_field :password_confirmation, class: 'pure-input-1-4', autocomplete: 'off',
+        placeholder: t(:'activerecord.attributes.user.password_confirmation') %>
+      <%= form_info_icon(t(:'users.password_confirmation_description')) %>
     </div>
 
     <div class="field pure-control-group">
       <%= f.label :current_password %>
-      <%= f.password_field :current_password, autocomplete: 'off', placeholder: t(:'activerecord.attributes.user.current_password')  %>
-      <em>(<%= t(:'users.pwd_needed_to_confirm') %>)</em>
+      <%= f.password_field :current_password, class: 'pure-input-1-4', autocomplete: 'off',
+        placeholder: t(:'activerecord.attributes.user.current_password')  %>
+      <%= form_info_icon(t(:'users.pwd_needed_to_confirm')) %>
     </div>
 
     <div class="actions pure-controls">
