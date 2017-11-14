@@ -43,22 +43,24 @@
     </div>
     <% unless @recipe.persisted? %>
       <% if @event&.present? %>
-        <%= hidden_field_tag :event, @event.id %>
+        <%= hidden_field :event, :id, value: @event.id %>
       <% else %>
         <div class="field pure-control-group">
-          <%= label_tag :event, t(:'recipe_events.exhibited_at_event') %>
-          <%= select_tag :event, grouped_options_for_select(Event.event_options, @event&.id),
+          <%= label :event, :id, t(:'recipe_events.exhibited_at_event') %>
+          <%= select_tag 'event[id]', grouped_options_for_select(Event.event_options, @event&.id),
                 class: 'pure-input-1-4', include_blank: t(:'common.no_event') %>
           <%= form_info_icon(I18n.t(:'recipe_events.exhibited_at_event_description')) %>
         </div>
         <div class="field pure-control-group">
-          <%= label_tag :medal, t(:'recipe_events.medal') %>
-          <%= select_tag :medal, options_for_select(medal_options, ''), class: 'pure-input-1-4' %>
+          <%= label :event, :medal, t(:'recipe_events.medal') %>
+          <%= select_tag 'event[medal]', options_for_select(medal_options, ''),
+            class: 'pure-input-1-4' %>
           <%= form_info_icon(I18n.t(:'recipe_events.medal_description')) %>
         </div>
         <div class="field pure-control-group">
-          <%= label_tag :category, t(:'recipe_events.category') %>
-          <%= text_field_tag :category, '', placeholder: I18n.t(:'recipe_events.category'),
+          <%= label :event, :category, t(:'recipe_events.category') %>
+          <%= text_field_tag 'event[category]', '',
+            placeholder: I18n.t(:'recipe_events.category'),
             disabled: true, required: true, class: 'pure-input-1-4' %>
           <%= form_info_icon(I18n.t(:'recipe_events.categeory_description')) %>
         </div>

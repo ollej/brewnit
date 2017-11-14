@@ -7,9 +7,9 @@ class RecipeEventsController < ApplicationController
     @error = nil
     @event = begin
       @recipe.add_event(
-        event: event_params[:event_id],
+        event: event_params[:id],
         user: current_user,
-        placement: placement_params
+        placement: event_params
       )
     rescue StandardError => e
       Rails.logger.debug { "Exception: #{e.inspect}" }
@@ -35,7 +35,7 @@ class RecipeEventsController < ApplicationController
   end
 
   def destroy
-    @recipe = Recipe.find(event_params[:recipe_id])
+    @recipe = Recipe.find(params[:recipe_id])
     raise AuthorizationException unless current_user.can_modify?(@recipe)
     @success = true
     begin
@@ -62,10 +62,6 @@ class RecipeEventsController < ApplicationController
 
   private
     def event_params
-      params.permit(:recipe_id, :event_id)
-    end
-
-    def placement_params
-      params.permit(:medal, :category)
+      params.require(:event).permit(:recipe_id, :id, :medal, :category)
     end
 end

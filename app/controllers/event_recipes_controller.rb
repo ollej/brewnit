@@ -22,9 +22,9 @@ class EventRecipesController < ApplicationController
   end
 
   def create
-    @event = Event.find(params[:event_id])
+    @event = Event.find(placement_params[:id])
     raise AuthorizationException unless @event.official? && current_user.can_modify?(@event)
-    @recipe = Recipe.find(params[:recipe_id])
+    @recipe = Recipe.find(placement_params[:recipe_id])
 
     @success = true
     begin
@@ -54,6 +54,6 @@ class EventRecipesController < ApplicationController
 
   private
     def placement_params
-      params.permit(:medal, :category)
+      params.require(:event).permit(:recipe_id, :id, :medal, :category)
     end
 end
