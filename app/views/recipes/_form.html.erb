@@ -51,6 +51,8 @@
                 class: 'pure-input-1-4', include_blank: t(:'common.no_event') %>
           <%= form_info_icon(I18n.t(:'recipe_events.exhibited_at_event_description')) %>
         </div>
+      <% end %>
+      <% if @event.nil? || !@event.official? %>
         <div class="field pure-control-group">
           <%= label :event, :medal, t(:'recipe_events.medal') %>
           <%= select_tag 'event[medal]', options_for_select(medal_options, ''),
