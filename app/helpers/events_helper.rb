@@ -13,7 +13,8 @@ module EventsHelper
     badge(
         I18n.t(:'events.recipe_count', count: event.recipes.size),
         type: 'event-recipes',
-        icon: 'beer'
+        icon: 'beer',
+        tooltip: I18n.t(:'events.recipes_count_info')
     )
   end
 
