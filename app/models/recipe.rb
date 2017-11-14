@@ -23,6 +23,7 @@ class Recipe < ApplicationRecord
   has_many :media, as: :parent, dependent: :destroy
   has_and_belongs_to_many :events
   has_many :placements, dependent: :destroy
+  has_many :event_registrations, dependent: :destroy
 
   accepts_nested_attributes_for :media, :reject_if => lambda { |r| r['media'].nil? }
 
@@ -91,6 +92,10 @@ class Recipe < ApplicationRecord
 
   def comments
     thread.comments.size
+  end
+
+  def registration_message_for(event_id)
+    event_registrations.where(event_id: event_id).first&.message
   end
 
   def beerxml_details
@@ -208,19 +213,24 @@ class Recipe < ApplicationRecord
     end
   end
 
-  def add_event(event:, user: nil, placement: {})
+  def add_event(event:, user: nil, placement: {}, registration: {})
     event = Event.find(event) unless event.kind_of? Event
     raise RegistrationsClosed if event.registration_closed?
     transaction do
       events << event unless events.include?(event)
       add_placement(event: event, user: user, placement: placement) if placement[:medal].present?
+      add_event_registration(event, user, registration) if event.official?
     end
     return event
   end
 
+  def add_event_registration(event, user, params)
+    EventRegistration.create(recipe: self, event: event, user: user, message: params[:message])
+  end
+
   def add_placement(event:, user:, placement:)
     Rails.logger.debug { "add_placement #{event.inspect} #{user.inspect} #{placement.inspect}" }
-    if user.present? && (!event.official? || user.can_modify?(event))
+    if !event.official? || user.can_modify?(event)
       Placement.create!(event: event, user: user, recipe: self, medal: placement[:medal], category: placement[:category])
     end
   end

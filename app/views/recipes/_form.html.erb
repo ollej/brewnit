@@ -67,6 +67,14 @@
           <%= form_info_icon(I18n.t(:'recipe_events.categeory_description')) %>
         </div>
       <% end %>
+      <% if @event&.official? %>
+        <div class="field pure-control-group">
+          <%= label :event, :message, class: 'large-group' %>
+          <%= text_area_tag 'event[message]', '', class: 'pure-input-1-4',
+            placeholder: I18n.t(:'recipe_events.registration_message') %>
+          <%= form_info_icon(I18n.t(:'recipe_events.registration_message_description')) %>
+        </div>
+      <% end %>
     <% end %>
     <div class="actions pure-controls">
       <%= f.label :public, class: 'pure-checkbox' do %>

@@ -7,7 +7,7 @@ wb.add_worksheet(name: t(:'recipes.index')) do |sheet|
     t(:'beerxml.style_code'), t(:'beerxml.style_guide'),
     t(:'beerxml.brewer'), t(:'beerxml.og'), t(:'beerxml.fg'),
     t(:'beerxml.ibu'), 'EBC', t(:'beerxml.abv'),
-    'URL', 'BeerXML']
+    'URL', 'BeerXML', t(:'recipe_events.registration_message')]
   sheet.row_style 0, header
 
   @recipes.each do |recipe|
@@ -15,7 +15,7 @@ wb.add_worksheet(name: t(:'recipes.index')) do |sheet|
       recipe.style_guide, recipe.owner_name, format_sg(recipe.og), format_sg(recipe.fg),
       number_with_precision(recipe.ibu, precision: 0),
       number_with_precision(recipe.color, precision: 0), format_abv(recipe.abv),
-      recipe_url(recipe), recipe_url(recipe, format: :xml)],
+      recipe_url(recipe), recipe_url(recipe, format: :xml), registration_message(recipe)],
       types: [:integer, :string, :string, :string, :string, :string, :string, :string,
              :integer, :integer, :string, :string, :string]
     sheet.add_hyperlink location: recipe_url(recipe), ref: sheet.rows.last.cells[11]

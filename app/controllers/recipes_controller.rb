@@ -63,11 +63,12 @@ class RecipesController < ApplicationController
 
     respond_to do |format|
       if @recipe.save
-        if placement_params[:id].present?
+        if event_params[:id].present?
           @recipe.add_event(
-            event: placement_params[:id],
+            event: event_params[:id],
             user: current_user,
-            placement: placement_params
+            placement: event_params.slice(:medal, :category),
+            registration: event_params.slice(:message)
           )
         end
 
@@ -121,7 +122,7 @@ class RecipesController < ApplicationController
       recipe
     end
 
-    def placement_params
-      params.require(:event).permit(:id, :medal, :category)
+    def event_params
+      params.require(:event).permit(:id, :medal, :category, :message)
     end
 end

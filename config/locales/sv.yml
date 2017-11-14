@@ -215,6 +215,8 @@ sv:
     medal_description: Välj medaljplats om receptet vann pris på tävlingen.
     category: Tävlingsgrupp
     categeory_description: Vilken tävlingsgrupp vann receptet medalj i?
+    registration_message: Meddelande
+    registration_message_description: Skriv ett meddelande till arrangörerna.
     medals:
       gold: 🥇 Guld
       silver: 🥈 Silver

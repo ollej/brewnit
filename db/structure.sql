@@ -330,6 +330,40 @@ ALTER SEQUENCE commontator_threads_id_seq OWNED BY commontator_threads.id;
 
 
 --
+-- Name: event_registrations; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE event_registrations (
+    id bigint NOT NULL,
+    message text DEFAULT ''::text NOT NULL,
+    event_id bigint,
+    recipe_id bigint,
+    user_id bigint,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: event_registrations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE event_registrations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: event_registrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE event_registrations_id_seq OWNED BY event_registrations.id;
+
+
+--
 -- Name: events; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -645,6 +679,13 @@ ALTER TABLE ONLY commontator_threads ALTER COLUMN id SET DEFAULT nextval('common
 
 
 --
+-- Name: event_registrations id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY event_registrations ALTER COLUMN id SET DEFAULT nextval('event_registrations_id_seq'::regclass);
+
+
+--
 -- Name: events id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -716,6 +757,14 @@ ALTER TABLE ONLY commontator_subscriptions
 
 ALTER TABLE ONLY commontator_threads
     ADD CONSTRAINT commontator_threads_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: event_registrations event_registrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY event_registrations
+    ADD CONSTRAINT event_registrations_pkey PRIMARY KEY (id);
 
 
 --
@@ -883,6 +932,27 @@ CREATE INDEX index_commontator_subscriptions_on_thread_id ON commontator_subscri
 --
 
 CREATE UNIQUE INDEX index_commontator_threads_on_c_id_and_c_type ON commontator_threads USING btree (commontable_id, commontable_type);
+
+
+--
+-- Name: index_event_registrations_on_event_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_event_registrations_on_event_id ON event_registrations USING btree (event_id);
+
+
+--
+-- Name: index_event_registrations_on_recipe_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_event_registrations_on_recipe_id ON event_registrations USING btree (recipe_id);
+
+
+--
+-- Name: index_event_registrations_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_event_registrations_on_user_id ON event_registrations USING btree (user_id);
 
 
 --
@@ -1139,6 +1209,14 @@ ALTER TABLE ONLY recipes
 
 
 --
+-- Name: event_registrations fk_rails_23148f43c2; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY event_registrations
+    ADD CONSTRAINT fk_rails_23148f43c2 FOREIGN KEY (event_id) REFERENCES events(id);
+
+
+--
 -- Name: placements fk_rails_344f224d46; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1163,11 +1241,27 @@ ALTER TABLE ONLY placements
 
 
 --
+-- Name: event_registrations fk_rails_8a0b1c0506; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY event_registrations
+    ADD CONSTRAINT fk_rails_8a0b1c0506 FOREIGN KEY (recipe_id) REFERENCES recipes(id);
+
+
+--
 -- Name: users fk_rails_9c9dd5b0b7; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users
     ADD CONSTRAINT fk_rails_9c9dd5b0b7 FOREIGN KEY (media_brewery_id) REFERENCES media(id);
+
+
+--
+-- Name: event_registrations fk_rails_9d37217e35; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY event_registrations
+    ADD CONSTRAINT fk_rails_9d37217e35 FOREIGN KEY (user_id) REFERENCES users(id);
 
 
 --
@@ -1222,6 +1316,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20171029201125'),
 ('20171102202524'),
 ('20171107191308'),
-('20171113205317');
+('20171113205317'),
+('20171114204510');
 
 
