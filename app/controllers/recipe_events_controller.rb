@@ -4,25 +4,29 @@ class RecipeEventsController < ApplicationController
   def create
     @recipe = Recipe.find(event_params[:recipe_id])
     raise AuthorizationException unless current_user.can_modify?(@recipe)
-    @success = true
+    @error = nil
     @event = begin
       @recipe.add_event(
-        event_id: event_params[:event_id],
+        event: event_params[:event_id],
         user: current_user,
         placement: placement_params
       )
     rescue StandardError => e
       Rails.logger.debug { "Exception: #{e.inspect}" }
-      @success = false
+      if e.respond_to? :record
+        @error = e.record.errors
+      else
+        @error = e.name
+      end
     end
 
     respond_to do |format|
-      if @success
+      if @error.nil?
         format.js
         format.html { redirect_to edit_recipe_path(@recipe), notice: I18n.t(:'recipe_events.create.successful') }
         format.json { head :created, location: @recipe }
       else
-        @error_message = I18n.t(:'recipe_events.create.failed')
+        @error_message = I18n.t(:'recipe_events.create.failed', error: @error)
         format.js
         format.html { redirect_to edit_recipe_path(@recipe), flash: { error: @error_message } }
         format.json { render json: { error: @error_message }, status: :unprocessable_entity }

@@ -204,7 +204,7 @@ sv:
     choose: Välj evenemang
     create:
       successful: Evenemanget har lagts till på receptet.
-      failed: Kunde inte lägga till evenemanget till receptet.
+      failed: "Kunde inte lägga till evenemanget till receptet: %{error}"
     destroy:
       successful: Receptet har tagits bort från evenemanget.
       failed: Kunde inte ta bort receptet från evenemanget.

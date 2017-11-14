@@ -1,4 +1,4 @@
-<% if @success %>
+<% if @error.nil? %>
   <% recipe_event = j(render partial: 'shared/recipe_event',
        locals: { event: @event, recipe: @recipe, current_user: current_user }) %>
   $("#recipe-events").find('li[data-recipe-event-id="<%= @event.id %>"]').remove();
