@@ -5,5 +5,10 @@
       </div>
 
       <div class="page-content-body">
-<%= render 'form' %>
+        <%= render 'form' %>
+
+        <% if @event.official? && user_signed_in? && current_user.can_modify?(@event) %>
+          <%= render 'shared/event_recipes_form' %>
+          <%= render 'shared/event_recipes' %>
+        <% end %>
       </div>

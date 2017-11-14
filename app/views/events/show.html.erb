@@ -147,9 +147,4 @@ set_meta_tags title: @event.name,
             </div>
           </div>
         <% end %>
-
-        <% if @event.official? && user_signed_in? && current_user.can_modify?(@event) %>
-          <%= render 'shared/event_recipes_form' %>
-          <%= render 'shared/event_recipes' %>
-        <% end %>
       </div>
