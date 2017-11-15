@@ -1,5 +1,10 @@
 @import 'mixins';
 
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
 html, body, button, input, select, textarea, p, ol, ul, td,
 .pure-g [class *= "pure-u"] {
   font-family: Montserrat,FreeSans,Arimo,"Droid Sans",verdana,arial,helvetica,sans-serif;
@@ -10,6 +15,8 @@ body {
   font-size: 13px;
   font-weight: 300;
   line-height: 18px;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 p, ol, ul, td {
