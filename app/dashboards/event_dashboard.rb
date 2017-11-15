@@ -19,7 +19,7 @@ class EventDashboard < Administrate::BaseDashboard
     organizer: Field::String,
     location: Field::String,
     held_at: Field::DateTime,
-    event_type: Field::String,
+    event_type: Field::Select.with_options(collection: Event::EVENT_TYPES),
     url: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
