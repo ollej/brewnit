@@ -1,7 +1,9 @@
     <article class="box post beer_recipe pure-g" itemscope
         itemtype="http://schema.org/Recipe">
+      <meta itemprop="image" content="<%= full_url_for(@recipe.main_image(:large)) %>">
       <meta itemprop="name" content="<%= @beerxml.name %>">
       <meta itemprop="author" content="<%= @beerxml.brewer %>">
+      <meta itemprop="description" content="<%= @recipe.display_desc %>">
       <meta itemprop="recipeCategory" content="beverage">
       <meta itemprop="totalTime" content="<%= @beerxml.total_time_period %>">
       <meta itemprop="cookTime" content="<%= @beerxml.boil_time_period %>">
@@ -202,7 +204,7 @@
         <h2><%= t(:'beerxml.miscs') %></h2>
         <% @beerxml.miscs.each do |m| %>
           <meta itemprop="recipeIngredient"
-            content="<%= number_with_precision(m.amount, precision: 0) %> <%= trans(m.unit, default: 'gr') %> <%= m.name %>">
+            content="<%= misc_amount(m) %> <%= trans(m.unit, default: 'gr') %> <%= m.name %>">
         <% end %>
         <table class="recipe-table zebra-expanded">
           <thead>

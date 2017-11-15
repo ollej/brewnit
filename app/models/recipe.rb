@@ -57,7 +57,11 @@ class Recipe < ApplicationRecord
   end
 
   def display_desc
-    description.presence || style_name
+    if description.present?
+      Rails::Html::FullSanitizer.new.sanitize(description)
+    else
+      style_name
+    end
   end
 
   def main_image(size = :medium_thumbnail)

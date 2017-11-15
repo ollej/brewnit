@@ -13,7 +13,7 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
     image: full_url_for(@recipe.main_image(:large)),
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     site: @recipe.user.try(:twitter) || '@ExaltedBeer',
     title: :title,
     description: :description,
