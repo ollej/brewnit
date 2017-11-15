@@ -41,6 +41,7 @@ class EventDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :media_main,
     :name,
+    :held_at,
     :event_type,
     :organizer,
   ].freeze
