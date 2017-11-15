@@ -68,9 +68,10 @@
         </div>
       <% end %>
       <% if @event&.official? %>
+        <%= hidden_field :registration, :register, value: 'yes' %>
         <div class="field pure-control-group">
-          <%= label :event, :message, class: 'large-group' %>
-          <%= text_area_tag 'event[message]', '', class: 'pure-input-1-4',
+          <%= label :registration, :message, class: 'large-group' %>
+          <%= text_area :registration, :message, class: 'pure-input-1-4',
             placeholder: I18n.t(:'recipe_events.registration_message') %>
           <%= form_info_icon(I18n.t(:'recipe_events.registration_message_description')) %>
         </div>

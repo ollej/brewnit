@@ -8,7 +8,7 @@ class EventRecipesController < ApplicationController
   # GET /event/:event_id/recipes.xlsx
   def index
     @event = Event.find(params[:event_id])
-    @recipes = @event.recipes.order(name: :asc)
+    @recipes = @event.registered_recipes
     basename = "recipes-event-#{params[:event_id]}-#{Date.today}"
     @filename = "#{basename}.csv"
 

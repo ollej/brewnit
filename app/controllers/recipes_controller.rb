@@ -64,12 +64,15 @@ class RecipesController < ApplicationController
     respond_to do |format|
       if @recipe.save
         if event_params[:id].present?
-          @recipe.add_event(
+          event = @recipe.add_event(
             event: event_params[:id],
             user: current_user,
-            placement: event_params.slice(:medal, :category),
-            registration: event_params.slice(:message)
+            placement: event_params
           )
+          if registration_params[:register] == 'yes' &&
+              event&.official? && !event.registration_closed?
+            event.register_recipe(@recipe, current_user, registration_params)
+          end
         end
 
         format.html { redirect_to @recipe, notice: I18n.t(:'recipes.create.successful') }
@@ -123,6 +126,10 @@ class RecipesController < ApplicationController
     end
 
     def event_params
-      params.require(:event).permit(:id, :medal, :category, :message)
+      params.require(:event).permit(:id, :medal, :category)
+    end
+
+    def registration_params
+      params.require(:registration).permit(:register, :message)
     end
 end

@@ -16,6 +16,7 @@ class Event < ApplicationRecord
   belongs_to :media_main, class_name: 'Medium', optional: true
   has_many :media, as: :parent, dependent: :destroy
   has_many :placements, dependent: :destroy
+  has_many :registrations, dependent: :destroy, class_name: 'EventRegistration'
 
   before_validation :cleanup_fields
   validates :name, presence: true
@@ -44,6 +45,10 @@ class Event < ApplicationRecord
     locked? || (last_registration.present? && last_registration < DateTime.now)
   end
 
+  def register_recipe(recipe, user, params)
+    registrations.create(recipe: recipe, user: user, message: params[:message])
+  end
+
   def map_position
     coordinates.presence || address.presence
   end
@@ -69,6 +74,15 @@ class Event < ApplicationRecord
 
   def recipe_options
     recipes.map { |recipe| [recipe.name, recipe.id] }
+  end
+
+  def registered_recipes
+    if official?
+      registrations.joins(:recipe).includes(:recipe)
+        .order('recipes.name ASC').collect { |registration| registration.recipe }
+    else
+      recipes
+    end
   end
 
   def self.event_options

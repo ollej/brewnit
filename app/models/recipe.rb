@@ -23,7 +23,7 @@ class Recipe < ApplicationRecord
   has_many :media, as: :parent, dependent: :destroy
   has_and_belongs_to_many :events
   has_many :placements, dependent: :destroy
-  has_many :event_registrations, dependent: :destroy
+  has_many :registrations, dependent: :destroy, class_name: 'EventRegistration'
 
   accepts_nested_attributes_for :media, :reject_if => lambda { |r| r['media'].nil? }
 
@@ -49,29 +49,15 @@ class Recipe < ApplicationRecord
   end
 
   def owner_name
-    if user.present?
-      user.name
-    else
-      '[N/A]'
-    end
+    user&.name.presence || '[N/A]'
   end
 
   def brewer_name
-    if user.present? && user.brewery.present?
-      user.brewery
-    elsif brewer.present?
-      brewer
-    else
-      owner_name
-    end
+    user&.brewery.presence || brewer.presence || owner_name
   end
 
   def display_desc
-    if description.present?
-      description
-    else
-      style_name
-    end
+    description.presence || style_name
   end
 
   def main_image(size = :medium_thumbnail)
@@ -94,8 +80,8 @@ class Recipe < ApplicationRecord
     thread.comments.size
   end
 
-  def registration_message_for(event_id)
-    event_registrations.where(event_id: event_id).first&.message
+  def registration_message_for(event)
+    registrations.by_event(event).first&.message
   end
 
   def beerxml_details
@@ -219,13 +205,8 @@ class Recipe < ApplicationRecord
     transaction do
       events << event unless events.include?(event)
       add_placement(event: event, user: user, placement: placement) if placement[:medal].present?
-      add_event_registration(event, user, registration) if event.official?
     end
     return event
-  end
-
-  def add_event_registration(event, user, params)
-    EventRegistration.create(recipe: self, event: event, user: user, message: params[:message])
   end
 
   def add_placement(event:, user:, placement:)
@@ -238,7 +219,8 @@ class Recipe < ApplicationRecord
   def remove_event(event)
     transaction do
       events.delete(event)
-      placements.where(event: event).destroy_all
+      placements.by_event(event).destroy_all
+      registrations.by_event(event).destroy_all
     end
   end
 
