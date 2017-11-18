@@ -232,6 +232,11 @@ sv:
     destroy:
       successful: Placeringen har tagits bort från receptet.
       failed: Kunde inte ta bort placeringen från receptet.
+  recipe_detail:
+    edit: Bygg recept
+    save: Spara
+    add: Lägg till
+    fermentables: Malt
 
 
   beerxml:
@@ -704,6 +709,20 @@ sv:
         coordinates: Kartkoordinater
         last_registration: Sista anmälan
         registration_information: Anmälingsinfo
+      recipe_detail:
+        batch_size: Mängd
+        boil_size: Kokmängd
+        boil_time: Koktid
+        grain_temp: Malttemperatur
+        sparge_temp: Lakningstemperatur
+        efficiency: Utbyte
+      fermentable:
+        name: Namn
+        amount: Mängd
+        type: Typ
+        ebc: EBC
+      hop:
+        name: namn
     errors:
       template:
         header:

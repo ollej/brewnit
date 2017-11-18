@@ -1,0 +1,2 @@
+class Misc < ApplicationRecord
+end

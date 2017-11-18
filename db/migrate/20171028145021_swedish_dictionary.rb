@@ -1,4 +1,4 @@
-class SwedishDictionary < ActiveRecord::Migration
+class SwedishDictionary < ActiveRecord::Migration[4.2]
   def up
     puts '-- Adding Swedish snowball dictionary'
     ActiveRecord::Base.connection.execute "

@@ -1,4 +1,4 @@
-class AddIndicesToRecipe < ActiveRecord::Migration
+class AddIndicesToRecipe < ActiveRecord::Migration[4.2]
   def up
     ActiveRecord::Base.connection.execute "CREATE INDEX fulltext_index_recipes_on_all ON recipes USING GIN(to_tsvector('simple', name || ' ' || description || ' ' || style_name))"
     ActiveRecord::Base.connection.execute "CREATE INDEX fulltext_index_recipes_on_style_name ON recipes USING GIN(to_tsvector('simple', style_name))"

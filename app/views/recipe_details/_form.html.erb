@@ -1,0 +1,86 @@
+<%= form_for(@details, url: recipe_details_path(@recipe), html: { class: 'pure-form pure-form-aligned' }) do |f| %>
+  <%= invisible_captcha %>
+  <% if @details.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= I18n.t(:'activerecord.errors.models.recipe_detail.header', count: @recipe_details.errors.count) %></h2>
+
+      <ul>
+      <% @recipe_details.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+    <div class="field pure-control-group">
+      <%= f.label :batch_size %>
+      <%= f.text_field :batch_size, class: 'pure-input-1-4',
+        placeholder: I18n.t(:'activerecord.attributes.recipe_detail.batch_size') %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :boil_size %>
+      <%= f.text_field :boil_size, class: 'pure-input-1-4',
+        placeholder: I18n.t(:'activerecord.attributes.recipe_detail.boil_size') %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :boil_time %>
+      <%= f.text_field :boil_time, class: 'pure-input-1-4',
+        placeholder: I18n.t(:'activerecord.attributes.recipe_detail.boil_time') %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :grain_temp %>
+      <%= f.text_field :grain_temp, class: 'pure-input-1-4',
+        placeholder: I18n.t(:'activerecord.attributes.recipe_detail.grain_temp') %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :sparge_temp %>
+      <%= f.text_field :sparge_temp, class: 'pure-input-1-4',
+        placeholder: I18n.t(:'activerecord.attributes.recipe_detail.sparge_temp') %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :efficiency %>
+      <%= f.text_field :efficiency, class: 'pure-input-1-4',
+        placeholder: I18n.t(:'activerecord.attributes.recipe_detail.efficiency') %>
+    </div>
+    <div class="actions pure-controls">
+      <%= f.submit I18n.t(:'recipe_detail.save'), class: 'pure-button pure-button-primary' %>
+    </div>
+  </fieldset>
+<% end %>
+
+<%= form_tag(recipe_ingredients_path(@recipe), html: { class: 'pure-form pure-form-stacked' }) do |f| %>
+  <fieldset>
+    <legend><%= I18n.t(:'recipe_detail.fermentables') %></legend>
+
+    <div class="pure-g">
+      <div class="pure-u-1 pure-u-md-1-4">
+        <%= label_tag :name %>
+        <%= text_field_tag :name, nil, class: 'pure-u-23-24',
+          placeholder: I18n.t(:'activerecord.attributes.fermentable.name') %>
+      </div>
+      <div class="pure-u-1 pure-u-md-1-4">
+        <%= label_tag :amount %>
+        <%= text_field_tag :amount, nil, class: 'pure-u-23-24',
+          placeholder: I18n.t(:'activerecord.attributes.fermentable.amount') %>
+      </div>
+      <div class="pure-u-1 pure-u-md-1-4">
+        <% # change to select %>
+        <%= label_tag :type %>
+        <%= text_field_tag :type, nil, class: 'pure-u-23-24',
+          placeholder: I18n.t(:'activerecord.attributes.fermentable.type') %>
+      </div>
+      <div class="pure-u-1 pure-u-md-1-4">
+        <%= label_tag :ebc %>
+        <%= text_field_tag :ebc, nil, class: 'pure-u-23-24',
+          placeholder: I18n.t(:'activerecord.attributes.fermentable.ebc') %>
+      </div>
+    </div>
+
+    <div class="actions pure-controls">
+      <%= submit_tag I18n.t(:'recipe_detail.add'), class: 'pure-button pure-button-secondary' %>
+    </div>
+  </fieldset>
+  <ul id="fermentables">
+  </ul>
+<% end %>
