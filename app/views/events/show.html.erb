@@ -45,10 +45,7 @@ set_meta_tags title: @event.name,
           <% if user_signed_in? %>
           <div class="controls-signed-in">
             <% if current_user.admin? %>
-              <%= link_to @event, method: :delete, data: { confirm: t(:'common.are_you_sure') },
-                class: 'pure-button secondary-button' do %>
-                <i class="fa fa-trash"></i> <%= t(:'events.destroy.link') %>
-              <% end %>
+              <%= trash_button(@event, t(:'events.destroy.link')) %>
             <% end %>
             <% if current_user.can_modify?(@event) %>
               <%= link_to edit_event_path(@event), class: 'pure-button secondary-button' do %>

@@ -1,0 +1,9 @@
+    <tr data-yeast-id="<%= yeast.id %>">
+      <td class="ingredient name"><%= yeast.name %></td>
+      <td class="ingredient amount format-number"><%= number_with_precision(yeast.amount, precision: 2) %></td>
+      <td class="ingredient weight"><%= weight_selection(yeast) %></td>
+      <td class="ingredient form"><%= I18n.t("recipe_detail.yeast_form.#{yeast.form}") %></td>
+      <td class="ingredient yeast_type"><%= I18n.t("recipe_detail.yeast_type.#{yeast.yeast_type}") %></td>
+      <td><%= trash_icon(recipe_yeast_path(@recipe, yeast)) %></td>
+    </tr>
+

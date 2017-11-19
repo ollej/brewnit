@@ -1,4 +1,4 @@
-class CreatePlacements < ActiveRecord::Migration
+class CreatePlacements < ActiveRecord::Migration[4.2]
   def up
     execute <<-SQL
       CREATE TYPE medal AS ENUM ('gold', 'silver', 'bronze');

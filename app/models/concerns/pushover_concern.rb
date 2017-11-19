@@ -14,7 +14,7 @@ module PushoverConcern
   end
 
   def pushover_enabled?
-    pushover_user.present? && !Rails.env.development?
+    pushover_user.present? && Rails.env.production?
   end
 
   def pushover_values(type = :create)

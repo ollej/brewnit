@@ -1,0 +1,9 @@
+    <tr data-misc-id="<%= misc.id %>">
+      <td class="ingredient name"><%= misc.name %></td>
+      <td class="ingredient amount format-number"><%= number_with_precision(misc.amount, precision: 2) %></td>
+      <td class="ingredient weight"><%= weight_selection(misc) %></td>
+      <td class="ingredient use"><%= I18n.t("recipe_detail.misc_use.#{misc.use}") %></td>
+      <td class="ingredient use_time format-number"><%= misc.use_time %></td>
+      <td class="ingredient misc_type"><%= I18n.t("recipe_detail.misc_type.#{misc.misc_type}") %></td>
+      <td><%= trash_icon(recipe_misc_path(@recipe, misc)) %></td>
+    </tr>

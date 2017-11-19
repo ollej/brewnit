@@ -1,4 +1,4 @@
-class AddFieldsToRecipes < ActiveRecord::Migration
+class AddFieldsToRecipes < ActiveRecord::Migration[4.2]
   def change
     add_column :recipes, :abv, :decimal
     add_column :recipes, :ibu, :decimal

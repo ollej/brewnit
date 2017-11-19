@@ -1,4 +1,4 @@
-class AddIndexToRecipeEvents < ActiveRecord::Migration
+class AddIndexToRecipeEvents < ActiveRecord::Migration[4.2]
   def up
     remove_index :events_recipes, [:recipe_id, :event_id]
     remove_index :events_recipes, [:event_id, :recipe_id]

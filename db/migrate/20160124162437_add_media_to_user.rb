@@ -1,4 +1,4 @@
-class AddMediaToUser < ActiveRecord::Migration
+class AddMediaToUser < ActiveRecord::Migration[4.2]
   def change
     add_reference :users, :media_avatar, references: :media, index: true
     add_foreign_key :users, :media, column: :media_avatar_id

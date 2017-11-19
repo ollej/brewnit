@@ -1,0 +1,11 @@
+<% if @error.nil? %>
+  $("#fermentables").find("tr[data-fermentable-id=<%= @fermentable.id %>]")
+    .effect("highlight", {}, 500, function() {
+      this.remove();
+    });
+<% else %>
+  $('body').trigger('flasher:show', {
+    message: '<%= j(@error) %>',
+    level: 'error'
+  })
+<% end %>

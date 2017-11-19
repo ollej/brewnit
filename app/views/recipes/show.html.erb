@@ -62,9 +62,7 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
               <%= link_to edit_recipe_path(@recipe), class: 'pure-button secondary-button' do %>
                 <i class="fa fa-pencil-square-o"></i> <%= t(:'recipes.edit') %>
               <% end %>
-              <%= link_to @recipe, method: :delete, data: { confirm: t(:'common.are_you_sure') }, class: 'pure-button secondary-button' do %>
-                <i class="fa fa-trash"></i> <%= t(:'recipes.destroy.link') %>
-              <% end %>
+              <%= trash_button(@recipe, t(:'recipes.destroy.link')) %>
               <%= form_tag recipe_media_path(@recipe), method: :post, id: 'mediaUploadForm', remote: true, html: { multipart: true } do %>
                 <%= link_to '#', class: 'pure-button secondary-button upload-button' do %>
                   <i class="fa fa-upload"></i> <%= t(:'common.media.upload') %>

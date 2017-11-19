@@ -56,11 +56,53 @@ module ApplicationHelper
 
   def medal_options
     [
-      [t(:'recipe_events.medals.none'), ''],
-      [t(:'recipe_events.medals.gold'), 'gold'],
-      [t(:'recipe_events.medals.silver'), 'silver'],
-      [t(:'recipe_events.medals.bronze'), 'bronze'],
+      [I18n.t(:'recipe_events.medals.none'), ''],
+      [I18n.t(:'recipe_events.medals.gold'), 'gold'],
+      [I18n.t(:'recipe_events.medals.silver'), 'silver'],
+      [I18n.t(:'recipe_events.medals.bronze'), 'bronze'],
     ]
+  end
+
+  def fermentable_type_options
+    Fermentable.grain_types.map { |k, v|
+      [I18n.t("recipe_detail.fermentable_type.#{k}"), v]
+    }
+  end
+
+  def hop_use_options
+    Hop.uses.map { |k, v|
+      [I18n.t("recipe_detail.hop_use.#{k}"), v]
+    }
+  end
+
+  def hop_form_options
+    Hop.forms.map { |k, v|
+      [I18n.t("recipe_detail.hop_form.#{k}"), v]
+    }
+  end
+
+  def misc_use_options
+    Misc.uses.map { |k, v|
+      [I18n.t("recipe_detail.misc_use.#{k}"), v]
+    }
+  end
+
+  def misc_type_options
+    Misc.misc_types.map { |k, v|
+      [I18n.t("recipe_detail.misc_type.#{k}"), v]
+    }
+  end
+
+  def yeast_form_options
+    Yeast.forms.map { |k, v|
+      [I18n.t("recipe_detail.yeast_form.#{k}"), v]
+    }
+  end
+
+  def yeast_type_options
+    Yeast.yeast_types.map { |k, v|
+      [I18n.t("recipe_detail.yeast_type.#{k}"), v]
+    }
   end
 
   def icon(type=nil)
@@ -89,4 +131,19 @@ module ApplicationHelper
     end
   end
 
+  def trash_icon(url, cls: nil, remote: true)
+    cls ||= 'inline-button destroy-button'
+    link_to url, method: :delete, remote: remote, class: cls,
+      data: { confirm: t(:'common.are_you_sure') } do
+        concat icon('trash')
+    end
+  end
+
+  def trash_button(url, text)
+    link_to url, method: :delete, data: { confirm: I18n.t(:'common.are_you_sure') },
+      class: 'pure-button secondary-button' do
+      concat icon('trash')
+      concat text
+    end
+  end
 end
