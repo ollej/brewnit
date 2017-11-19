@@ -250,7 +250,16 @@ sv:
       dry_extract: Torrextrakt
       sugar: Socker
       adjunct: Adjunkt
-
+    hop_use:
+      boil: Kok
+      dry_hop: Torrhumling
+      mash: Mäskhumling
+      first_wort: Vörthumling
+      aroma: Whirlpool
+    hop_form:
+      pellet: Pellets
+      plug: Puck
+      leaf: Kottar
 
   beerxml:
     name: Ölnamn
@@ -298,7 +307,7 @@ sv:
     hops_form: Form
     hops_alpha: Alfa
     hops_ibu: IBU
-    Pellet: Pellet
+    Pellet: Pellets
     Leaf: Kottar
     Plug: Puck
     days: dgr
@@ -411,8 +420,8 @@ sv:
     add_to_secondary: Använd till sekundärjäsning
     use_for: Används till
     hop_uses:
-      Mash: Mäskning
-      First Wort: First wort
+      Mash: Mäskhumling
+      First Wort: Vörthumling
       Boil: Kok
       Aroma: Whirlpool
       Dry Hop: Torrhumling

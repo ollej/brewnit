@@ -65,6 +65,30 @@ CREATE TYPE fermentable_type AS ENUM (
 
 
 --
+-- Name: hop_form; Type: TYPE; Schema: public; Owner: -
+--
+
+CREATE TYPE hop_form AS ENUM (
+    'Pellet',
+    'Plug',
+    'Leaf'
+);
+
+
+--
+-- Name: hop_use; Type: TYPE; Schema: public; Owner: -
+--
+
+CREATE TYPE hop_use AS ENUM (
+    'Boil',
+    'Dry Hop',
+    'Mash',
+    'First Wort',
+    'Aroma'
+);
+
+
+--
 -- Name: medal; Type: TYPE; Schema: public; Owner: -
 --
 
@@ -477,15 +501,15 @@ ALTER SEQUENCE fermentables_id_seq OWNED BY fermentables.id;
 
 CREATE TABLE hops (
     id bigint NOT NULL,
-    name character varying,
-    amount numeric,
-    alpha_acid numeric,
-    form character varying,
-    use character varying,
-    use_time numeric,
+    name character varying DEFAULT ''::character varying NOT NULL,
+    amount numeric DEFAULT 0 NOT NULL,
+    alpha_acid numeric DEFAULT 0 NOT NULL,
+    use_time numeric DEFAULT 0 NOT NULL,
     recipe_detail_id bigint,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    use hop_use DEFAULT 'Boil'::hop_use NOT NULL,
+    form hop_form DEFAULT 'Leaf'::hop_form NOT NULL
 );
 
 
@@ -1672,6 +1696,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20171115221112'),
 ('20171115221353'),
 ('20171115221645'),
-('20171119161104');
+('20171119161104'),
+('20171119165458');
 
 

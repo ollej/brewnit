@@ -69,6 +69,18 @@ module ApplicationHelper
     }
   end
 
+  def hop_use_options
+    Hop.uses.map { |k, v|
+      [I18n.t("recipe_detail.hop_use.#{k}"), v]
+    }
+  end
+
+  def hop_form_options
+    Hop.forms.map { |k, v|
+      [I18n.t("recipe_detail.hop_form.#{k}"), v]
+    }
+  end
+
   def icon(type=nil)
     content_tag(:i, '', class: "fa fa-#{type}") if type.present?
   end
