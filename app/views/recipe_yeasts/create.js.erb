@@ -2,7 +2,7 @@
   <% html = j(render partial: 'shared/yeast_item', locals: { yeast: @yeast }) %>
   $("<%= html %>").appendTo("#yeasts")
   $("#new_yeast").trigger('reset');
-  $("#yeasts li[data-yeast-id=<%= @yeast.id %>]").effect("highlight", {}, 500);
+  $("#yeasts tr[data-yeast-id=<%= @yeast.id %>]").effect("highlight", {}, 500);
 <% else %>
   $('body').trigger('flasher:show', {
     message: 'js <%= j(@error) %>',

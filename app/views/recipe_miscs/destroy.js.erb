@@ -1,5 +1,5 @@
 <% if @error.nil? %>
-  $("#miscs").find("li[data-misc-id=<%= @misc.id %>]")
+  $("#miscs").find("tr[data-misc-id=<%= @misc.id %>]")
     .effect("highlight", {}, 500, function() {
       this.remove();
     });

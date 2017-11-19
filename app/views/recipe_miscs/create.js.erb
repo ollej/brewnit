@@ -2,7 +2,7 @@
   <% html = j(render partial: 'shared/misc_item', locals: { misc: @misc }) %>
   $("<%= html %>").appendTo("#miscs")
   $("#new_misc").trigger('reset');
-  $("#miscs li[data-misc-id=<%= @misc.id %>]").effect("highlight", {}, 500);
+  $("#miscs tr[data-misc-id=<%= @misc.id %>]").effect("highlight", {}, 500);
 <% else %>
   $('body').trigger('flasher:show', {
     message: 'js <%= j(@error) %>',

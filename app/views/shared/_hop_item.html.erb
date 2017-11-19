@@ -1,10 +1,9 @@
-    <li data-hop-id="<%= hop.id %>">
-      <span class="ingredient name"><%= hop.name %></span>
-      <span class="ingredient amount"><%= number_with_precision(hop.amount, precision: 2) %></span>
-      <span class="ingredient alpha_acid"><%= hop.alpha_acid %></span>
-      <span class="ingredient form"><%= I18n.t("recipe_detail.hop_form.#{hop.form}") %></span>
-      <span class="ingredient use"><%= I18n.t("recipe_detail.hop_use.#{hop.use}") %></span>
-      <span class="ingredient use_time"><%= hop.use_time %></span>
-      <%= trash_icon(recipe_hop_path(@recipe, hop)) %>
-    </li>
-
+    <tr data-hop-id="<%= hop.id %>">
+      <td class="ingredient name"><%= hop.name %></td>
+      <td class="ingredient amount format-number"><%= number_with_precision(hop.amount, precision: 2) %></td>
+      <td class="ingredient alpha_acid format-number"><%= hop.alpha_acid %></td>
+      <td class="ingredient form"><%= I18n.t("recipe_detail.hop_form.#{hop.form}") %></td>
+      <td class="ingredient use"><%= I18n.t("recipe_detail.hop_use.#{hop.use}") %></td>
+      <td class="ingredient use_time format-number"><%= hop.use_time %></td>
+      <td><%= trash_icon(recipe_hop_path(@recipe, hop)) %></td>
+    </tr>

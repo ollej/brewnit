@@ -1,5 +1,17 @@
-<ul id="yeasts">
+<table id="yeasts" class="pure-table pure-table-striped">
+  <thead>
+    <tr>
+      <th><%= I18n.t(:'activerecord.attributes.yeast.name') %></th>
+      <th><%= I18n.t(:'activerecord.attributes.yeast.amount') %></th>
+      <th><%= I18n.t(:'activerecord.attributes.yeast.weight') %></th>
+      <th><%= I18n.t(:'activerecord.attributes.yeast.form') %></th>
+      <th><%= I18n.t(:'activerecord.attributes.yeast.yeast_type') %></th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
   <% @yeasts.each do |yeast| %>
     <%= render partial: 'shared/yeast_item', locals: { yeast: yeast } %>
   <% end %>
-</ul>
+  </tbody>
+</table>

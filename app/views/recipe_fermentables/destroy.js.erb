@@ -1,5 +1,5 @@
 <% if @error.nil? %>
-  $("#fermentables").find("li[data-fermentable-id=<%= @fermentable.id %>]")
+  $("#fermentables").find("tr[data-fermentable-id=<%= @fermentable.id %>]")
     .effect("highlight", {}, 500, function() {
       this.remove();
     });

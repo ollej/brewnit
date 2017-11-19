@@ -3,7 +3,7 @@
               locals: { fermentable: @fermentable }) %>
   $("<%= html %>").appendTo("#fermentables")
   $("#new_fermentable").trigger('reset');
-  $("#fermentables li[data-fermentable-id=<%= @fermentable.id %>]")
+  $("#fermentables tr[data-fermentable-id=<%= @fermentable.id %>]")
     .effect("highlight", {}, 500);
 <% else %>
   $('body').trigger('flasher:show', {

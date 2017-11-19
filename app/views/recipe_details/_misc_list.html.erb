@@ -1,5 +1,18 @@
-<ul id="miscs">
+<table id="miscs" class="pure-table pure-table-striped">
+  <thead>
+    <tr>
+      <th><%= I18n.t(:'activerecord.attributes.misc.name') %></th>
+      <th><%= I18n.t(:'activerecord.attributes.misc.amount') %></th>
+      <th><%= I18n.t(:'activerecord.attributes.misc.weight') %></th>
+      <th><%= I18n.t(:'activerecord.attributes.misc.use') %></th>
+      <th><%= I18n.t(:'activerecord.attributes.misc.use_time') %></th>
+      <th><%= I18n.t(:'activerecord.attributes.misc.misc_type') %></th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
   <% @miscs.each do |misc| %>
     <%= render partial: 'shared/misc_item', locals: { misc: misc } %>
   <% end %>
-</ul>
+  </tbody>
+</table>

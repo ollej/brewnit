@@ -9,3 +9,10 @@
   }
 }
 
+/* Set bg color on body row for pure-table to allow jquery ui highlight. */
+.pure-table-striped tbody tr:nth-child(2n-1) {
+  background-color: #f2f2f2;
+}
+.pure-table-striped tr:nth-child(2n-1) td {
+  background-color: transparent;
+}
