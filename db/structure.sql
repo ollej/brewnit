@@ -100,6 +100,33 @@ CREATE TYPE medal AS ENUM (
 
 
 --
+-- Name: misc_type; Type: TYPE; Schema: public; Owner: -
+--
+
+CREATE TYPE misc_type AS ENUM (
+    'Spice',
+    'Fining',
+    'Water Agent',
+    'Herb',
+    'Flavor',
+    'Other'
+);
+
+
+--
+-- Name: misc_use; Type: TYPE; Schema: public; Owner: -
+--
+
+CREATE TYPE misc_use AS ENUM (
+    'Mash',
+    'Boil',
+    'Primary',
+    'Secondary',
+    'Bottling'
+);
+
+
+--
 -- Name: swedish; Type: TEXT SEARCH DICTIONARY; Schema: public; Owner: -
 --
 
@@ -577,15 +604,15 @@ ALTER SEQUENCE media_id_seq OWNED BY media.id;
 
 CREATE TABLE miscs (
     id bigint NOT NULL,
-    name character varying,
-    weight boolean,
-    amount numeric,
-    misc_type character varying,
-    use character varying,
-    use_time numeric,
+    name character varying DEFAULT ''::character varying NOT NULL,
+    weight boolean DEFAULT true NOT NULL,
+    amount numeric DEFAULT 0 NOT NULL,
+    use_time numeric DEFAULT 0 NOT NULL,
     recipe_detail_id bigint,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    use misc_use DEFAULT 'Boil'::misc_use NOT NULL,
+    misc_type misc_type DEFAULT 'Other'::misc_type NOT NULL
 );
 
 
@@ -1697,6 +1724,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20171115221353'),
 ('20171115221645'),
 ('20171119161104'),
-('20171119165458');
+('20171119165458'),
+('20171119182201');
 
 

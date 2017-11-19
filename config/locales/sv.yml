@@ -260,6 +260,19 @@ sv:
       pellet: Pellets
       plug: Puck
       leaf: Kottar
+    misc_type:
+      spice: Krydda
+      fining: Klarning
+      water_agent: Vattenjustering
+      herb: Ört
+      flavor: Smak
+      other: Övrigt
+    misc_use:
+      mash: Mäskning
+      boil: Kok
+      primary: Primärjäsning
+      secondary: Sekundärjäsning
+      bottling: Buteljering
 
   beerxml:
     name: Ölnamn
@@ -443,6 +456,13 @@ sv:
       Liquid: Flytande
       Culture: Kultur
       Slant: Slant
+    misc_types:
+      Spice: Krydda
+      Fining: Klarning
+      Water Agent: Vattenjustering
+      Herb: Ört
+      Flavor: Smak
+      Other: Övrigt
     misc_uses:
       Mash: Mäskning
       Boil: Kok
@@ -460,13 +480,6 @@ sv:
       Ginger Root: Ingefära
       Coffee: Kaffe
       Seeds of Paradise: Paradisfrön
-    misc_types:
-      Spice: Krydda
-      Fining: Klarning
-      Water Agent: Vattenjustering
-      Herb: Ört
-      Flavor: Smak
-      Other: Övrigt
     mash_step_name:
       Dough In: Dough In
       Conversion: Conversion

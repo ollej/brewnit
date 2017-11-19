@@ -2,9 +2,9 @@
       <span class="ingredient name"><%= misc.name %></span>
       <span class="ingredient amount"><%= number_with_precision(misc.amount, precision: 2) %></span>
       <span class="ingredient weight"><%= weight_selection(misc) %></span>
-      <span class="ingredient use"><%= misc.use %></span>
+      <span class="ingredient use"><%= I18n.t("recipe_detail.misc_use.#{misc.use}") %></span>
       <span class="ingredient use_time"><%= misc.use_time %></span>
-      <span class="ingredient misc_type"><%= misc.misc_type %></span>
+      <span class="ingredient misc_type"><%= I18n.t("recipe_detail.misc_type.#{misc.misc_type}") %></span>
       <%= trash_icon(recipe_misc_path(@recipe, misc)) %>
     </li>
 

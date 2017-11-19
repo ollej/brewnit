@@ -81,6 +81,18 @@ module ApplicationHelper
     }
   end
 
+  def misc_use_options
+    Misc.uses.map { |k, v|
+      [I18n.t("recipe_detail.misc_use.#{k}"), v]
+    }
+  end
+
+  def misc_type_options
+    Misc.misc_types.map { |k, v|
+      [I18n.t("recipe_detail.misc_type.#{k}"), v]
+    }
+  end
+
   def icon(type=nil)
     content_tag(:i, '', class: "fa fa-#{type}") if type.present?
   end
