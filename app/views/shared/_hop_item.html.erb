@@ -1,0 +1,10 @@
+    <li data-hop-id="<%= hop.id %>">
+      <span class="ingredient name"><%= hop.name %></span>
+      <span class="ingredient amount"><%= number_with_precision(hop.amount, precision: 2) %></span>
+      <span class="ingredient alpha_acid"><%= hop.alpha_acid %></span>
+      <span class="ingredient form"><%= hop.form %></span>
+      <span class="ingredient use"><%= hop.use %></span>
+      <span class="ingredient use_time"><%= hop.use_time %></span>
+      <%= trash_icon(recipe_hop_path(@recipe, hop)) %>
+    </li>
+

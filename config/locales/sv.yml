@@ -238,6 +238,9 @@ sv:
     save: Spara
     add: Lägg till
     fermentables: Malt
+    hops: Humle
+    miscs: Övrigt
+    yeasts: Jäst
 
   beerxml:
     name: Ölnamn
@@ -722,7 +725,12 @@ sv:
         grain_type: Typ
         ebc: EBC
       hop:
-        name: namn
+        name: Namn
+        amount: Mängd (kg)
+        alpha_acid: Alfasyra (%)
+        form: Typ
+        use: Användning
+        use_time: Tid
     errors:
       template:
         header:

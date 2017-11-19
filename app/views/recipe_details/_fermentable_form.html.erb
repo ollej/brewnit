@@ -6,12 +6,12 @@
     <div class="pure-g">
       <div class="pure-u-1 pure-u-md-1-4">
         <%= f.label :name, I18n.t(:'activerecord.attributes.fermentable.name') %>
-        <%= f.text_field :name, class: 'pure-u-23-24',
+        <%= f.text_field :name, class: 'pure-u-23-24', required: true,
           placeholder: I18n.t(:'activerecord.attributes.fermentable.name') %>
       </div>
       <div class="pure-u-1 pure-u-md-1-4">
         <%= f.label :amount, I18n.t(:'activerecord.attributes.fermentable.amount') %>
-        <%= f.number_field :amount, class: 'pure-u-23-24',
+        <%= f.number_field :amount, class: 'pure-u-23-24', required: true,
           placeholder: I18n.t(:'activerecord.attributes.fermentable.amount') %>
       </div>
       <div class="pure-u-1 pure-u-md-1-4">
@@ -30,5 +30,7 @@
     <div class="actions pure-controls">
       <%= f.submit I18n.t(:'recipe_detail.add'), class: 'pure-button pure-button-secondary' %>
     </div>
+
+    <%= render 'fermentable_list' %>
   </fieldset>
 <% end %>

@@ -1,0 +1,5 @@
+<ul id="hops">
+  <% @hops.each do |hop| %>
+    <%= render partial: 'shared/hop_item', locals: { hop: hop } %>
+  <% end %>
+</ul>
