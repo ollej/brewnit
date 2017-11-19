@@ -3,12 +3,22 @@ class RecipeDetailsController < ApplicationController
   before_action :deny_spammers!, only: [:update]
   invisible_captcha only: [:create, :update], on_spam: :redirect_spammers!
 
-  def edit
+  def show
     @details = RecipeDetail.find_or_create_by!(recipe_id: @recipe.id)
     @hops = @details.hops
     @fermentables = @details.fermentables
     @miscs = @details.miscs
     @yeasts = @details.yeasts
+
+    respond_to do |format|
+      format.html
+      format.xml {
+        send_data render_to_string(:show),
+            filename: 'recipe.xml',
+            type: 'application/xml',
+            disposition: 'attachment'
+      }
+    end
   end
 
   def update
