@@ -56,11 +56,17 @@ module ApplicationHelper
 
   def medal_options
     [
-      [t(:'recipe_events.medals.none'), ''],
-      [t(:'recipe_events.medals.gold'), 'gold'],
-      [t(:'recipe_events.medals.silver'), 'silver'],
-      [t(:'recipe_events.medals.bronze'), 'bronze'],
+      [I18n.t(:'recipe_events.medals.none'), ''],
+      [I18n.t(:'recipe_events.medals.gold'), 'gold'],
+      [I18n.t(:'recipe_events.medals.silver'), 'silver'],
+      [I18n.t(:'recipe_events.medals.bronze'), 'bronze'],
     ]
+  end
+
+  def fermentable_type_options
+    Fermentable.grain_types.map { |k, v|
+      [I18n.t("recipe_detail.fermentable_type.#{k}"), v]
+    }
   end
 
   def icon(type=nil)

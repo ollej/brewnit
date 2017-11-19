@@ -244,6 +244,13 @@ sv:
     weight_option:
       weight: Vikt
       volume: Volym
+    fermentable_type:
+      grain: Malt
+      extract: Sirap
+      dry_extract: Torrextrakt
+      sugar: Socker
+      adjunct: Adjunkt
+
 
   beerxml:
     name: Ölnamn
@@ -470,7 +477,8 @@ sv:
       Decoction: Dekoktion
     fermentable_types:
       Grain: Malt
-      Dry Extract: Extrakt
+      Extract: Sirap
+      "Dry Extract": Torrextrakt
       Sugar: Socker
       Adjunct: Adjunkt
   devise:

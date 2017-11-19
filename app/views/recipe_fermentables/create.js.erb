@@ -7,7 +7,7 @@
     .effect("highlight", {}, 500);
 <% else %>
   $('body').trigger('flasher:show', {
-    message: 'js <%= j(@error) %>',
+    message: '<%= j(@error) %>',
     level: 'error'
   })
 <% end %>

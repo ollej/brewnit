@@ -1,7 +1,7 @@
     <li data-fermentable-id="<%= fermentable.id %>">
       <span class="ingredient name"><%= fermentable.name %></span>
       <span class="ingredient amount"><%= number_with_precision(fermentable.amount, precision: 2) %></span>
-      <span class="ingredient grain_type"><%= fermentable.grain_type %></span>
+      <span class="ingredient grain_type"><%= I18n.t("recipe_detail.fermentable_type.#{fermentable.grain_type}") %></span>
       <span class="ingredient ebc">
         <%= number_with_precision(fermentable.ebc, precision: 0) %>
         <%= t(:'activerecord.attributes.fermentable.ebc') %>

@@ -52,6 +52,19 @@ COMMENT ON EXTENSION pg_trgm IS 'text similarity measurement and index searching
 SET search_path = public, pg_catalog;
 
 --
+-- Name: fermentable_type; Type: TYPE; Schema: public; Owner: -
+--
+
+CREATE TYPE fermentable_type AS ENUM (
+    'Grain',
+    'Sugar',
+    'Extract',
+    'Dry Extract',
+    'Adjunct'
+);
+
+
+--
 -- Name: medal; Type: TYPE; Schema: public; Owner: -
 --
 
@@ -425,17 +438,17 @@ CREATE TABLE events_recipes (
 
 CREATE TABLE fermentables (
     id bigint NOT NULL,
-    name character varying,
-    amount numeric,
-    yield numeric,
-    potential numeric,
-    ebc numeric,
-    after_boil boolean,
-    fermentable boolean,
-    grain_type character varying,
+    name character varying DEFAULT ''::character varying NOT NULL,
+    amount numeric DEFAULT 0 NOT NULL,
+    yield numeric DEFAULT 0 NOT NULL,
+    potential numeric DEFAULT 0 NOT NULL,
+    ebc numeric DEFAULT 0 NOT NULL,
+    after_boil boolean DEFAULT false NOT NULL,
+    fermentable boolean DEFAULT true NOT NULL,
     recipe_detail_id bigint,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    grain_type fermentable_type DEFAULT 'Grain'::fermentable_type NOT NULL
 );
 
 
@@ -1658,6 +1671,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20171115220627'),
 ('20171115221112'),
 ('20171115221353'),
-('20171115221645');
+('20171115221645'),
+('20171119161104');
 
 
