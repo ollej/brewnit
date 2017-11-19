@@ -24,6 +24,7 @@ class Recipe < ApplicationRecord
   has_and_belongs_to_many :events
   has_many :placements, dependent: :destroy
   has_many :registrations, dependent: :destroy, class_name: 'EventRegistration'
+  has_one :detail, dependent: :destroy, class_name: 'RecipeDetail'
 
   accepts_nested_attributes_for :media, :reject_if => lambda { |r| r['media'].nil? }
 

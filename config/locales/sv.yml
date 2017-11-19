@@ -232,7 +232,58 @@ sv:
     destroy:
       successful: Placeringen har tagits bort från receptet.
       failed: Kunde inte ta bort placeringen från receptet.
-
+  recipe_detail:
+    edit: Bygg recept
+    main_details: Huvuduppgifter
+    save: Spara
+    add: Lägg till
+    fermentables: Malt
+    hops: Humle
+    miscs: Övrigt
+    yeasts: Jäst
+    weight_option:
+      weight: Vikt
+      volume: Volym
+    fermentable_type:
+      grain: Malt
+      extract: Sirap
+      dry_extract: Torrextrakt
+      sugar: Socker
+      adjunct: Adjunkt
+    hop_use:
+      boil: Kok
+      dry_hop: Torrhumling
+      mash: Mäskhumling
+      first_wort: Vörthumling
+      aroma: Whirlpool
+    hop_form:
+      pellet: Pellets
+      plug: Puck
+      leaf: Kottar
+    misc_type:
+      spice: Krydda
+      fining: Klarning
+      water_agent: Vattenjustering
+      herb: Ört
+      flavor: Smak
+      other: Övrigt
+    misc_use:
+      mash: Mäskning
+      boil: Kok
+      primary: Primärjäsning
+      secondary: Sekundärjäsning
+      bottling: Buteljering
+    yeast_type:
+      wheat: Vete
+      wine: Vin
+      ale: Ale
+      lager: Lager
+      champagne: Champagne
+    yeast_form:
+      dry: Torr
+      liquid: Flytande
+      culture: Kultur
+      slant: Slant
 
   beerxml:
     name: Ölnamn
@@ -280,7 +331,7 @@ sv:
     hops_form: Form
     hops_alpha: Alfa
     hops_ibu: IBU
-    Pellet: Pellet
+    Pellet: Pellets
     Leaf: Kottar
     Plug: Puck
     days: dgr
@@ -393,8 +444,8 @@ sv:
     add_to_secondary: Använd till sekundärjäsning
     use_for: Används till
     hop_uses:
-      Mash: Mäskning
-      First Wort: First wort
+      Mash: Mäskhumling
+      First Wort: Vörthumling
       Boil: Kok
       Aroma: Whirlpool
       Dry Hop: Torrhumling
@@ -416,6 +467,13 @@ sv:
       Liquid: Flytande
       Culture: Kultur
       Slant: Slant
+    misc_types:
+      Spice: Krydda
+      Fining: Klarning
+      Water Agent: Vattenjustering
+      Herb: Ört
+      Flavor: Smak
+      Other: Övrigt
     misc_uses:
       Mash: Mäskning
       Boil: Kok
@@ -433,13 +491,6 @@ sv:
       Ginger Root: Ingefära
       Coffee: Kaffe
       Seeds of Paradise: Paradisfrön
-    misc_types:
-      Spice: Krydda
-      Fining: Klarning
-      Water Agent: Vattenjustering
-      Herb: Ört
-      Flavor: Smak
-      Other: Övrigt
     mash_step_name:
       Dough In: Dough In
       Conversion: Conversion
@@ -459,7 +510,8 @@ sv:
       Decoction: Dekoktion
     fermentable_types:
       Grain: Malt
-      Dry Extract: Extrakt
+      Extract: Sirap
+      "Dry Extract": Torrextrakt
       Sugar: Socker
       Adjunct: Adjunkt
   devise:
@@ -704,6 +756,39 @@ sv:
         coordinates: Kartkoordinater
         last_registration: Sista anmälan
         registration_information: Anmälingsinfo
+      recipe_detail:
+        batch_size: Mängd (L)
+        boil_size: Kokmängd (L)
+        boil_time: Koktid (min)
+        grain_temp: Malttemperatur (°C)
+        sparge_temp: Lakningstemperatur (°C)
+        efficiency: Utbyte (%)
+      fermentable:
+        name: Namn
+        amount: Mängd (kg)
+        grain_type: Typ
+        ebc: EBC
+      hop:
+        name: Namn
+        amount: Mängd (kg)
+        alpha_acid: Alfasyra (%)
+        form: Typ
+        use: Användning
+        use_time: Tid
+      misc:
+        name: Namn
+        amount: Mängd
+        weight: Vikt/Volym
+        use: Användning
+        use_time: Tid
+        misc_type: Typ
+      yeast:
+        name: Namn
+        amount: Mängd
+        weight: Vikt/Volym
+        yeast_type: Jästsort
+        form: Form
+
     errors:
       template:
         header:

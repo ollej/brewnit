@@ -1,4 +1,4 @@
-class UpdateRecipeSearchIndex < ActiveRecord::Migration
+class UpdateRecipeSearchIndex < ActiveRecord::Migration[4.2]
   def up
     # Add column
     add_column :recipes, :equipment, :string, default: ''

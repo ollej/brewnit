@@ -1,0 +1,18 @@
+<table id="hops" class="pure-table pure-table-striped">
+  <thead>
+    <tr>
+      <th><%= I18n.t(:'activerecord.attributes.hop.name') %></th>
+      <th><%= I18n.t(:'activerecord.attributes.hop.amount') %></th>
+      <th><%= I18n.t(:'activerecord.attributes.hop.alpha_acid') %></th>
+      <th><%= I18n.t(:'activerecord.attributes.hop.form') %></th>
+      <th><%= I18n.t(:'activerecord.attributes.hop.use') %></th>
+      <th><%= I18n.t(:'activerecord.attributes.hop.use_time') %></th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @hops.each do |hop| %>
+    <%= render partial: 'shared/hop_item', locals: { hop: hop } %>
+  <% end %>
+  </tbody>
+</table>

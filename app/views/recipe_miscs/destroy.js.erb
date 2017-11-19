@@ -1,0 +1,11 @@
+<% if @error.nil? %>
+  $("#miscs").find("tr[data-misc-id=<%= @misc.id %>]")
+    .effect("highlight", {}, 500, function() {
+      this.remove();
+    });
+<% else %>
+  $('body').trigger('flasher:show', {
+    message: '<%= j(@error) %>',
+    level: 'error'
+  })
+<% end %>

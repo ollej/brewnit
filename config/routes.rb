@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :recipes
     resources :events
 
-    root to: "users#index"
+    root to: 'users#index'
   end
 
   get 'add_media/create'
@@ -29,6 +29,11 @@ Rails.application.routes.draw do
       delete :like, controller: :likes, action: :destroy, as: :unlike
     end
     resources :placements, only: [:destroy], controller: :recipe_placements
+    resource :details, on: :member, only: [:show, :update], controller: :recipe_details
+    resources :fermentables, only: [:index, :create, :destroy], controller: :recipe_fermentables
+    resources :hops, only: [:index, :create, :destroy], controller: :recipe_hops
+    resources :miscs, only: [:index, :create, :destroy], controller: :recipe_miscs
+    resources :yeasts, only: [:index, :create, :destroy], controller: :recipe_yeasts
   end
 
   devise_for :users, controllers: {

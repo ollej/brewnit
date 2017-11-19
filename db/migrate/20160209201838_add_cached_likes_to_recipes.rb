@@ -1,4 +1,4 @@
-class AddCachedLikesToRecipes < ActiveRecord::Migration
+class AddCachedLikesToRecipes < ActiveRecord::Migration[4.2]
   def up
     add_column :recipes, :cached_votes_up, :integer, default: 0
     add_index  :recipes, :cached_votes_up
