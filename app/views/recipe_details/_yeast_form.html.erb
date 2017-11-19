@@ -11,7 +11,7 @@
       </div>
       <div class="pure-u-1 pure-u-md-1-8">
         <%= f.label :amount, I18n.t(:'activerecord.attributes.yeast.amount') %>
-        <%= f.number_field :amount, class: 'pure-u-22-24', required: true,
+        <%= f.number_field :amount, class: 'pure-u-22-24', required: true, step: :any,
           placeholder: I18n.t(:'activerecord.attributes.yeast.amount') %>
       </div>
       <div class="pure-u-1 pure-u-md-1-8">
@@ -21,13 +21,11 @@
       </div>
       <div class="pure-u-1 pure-u-md-1-8">
         <%= f.label :form, I18n.t(:'activerecord.attributes.yeast.form') %>
-        <%= f.text_field :form, class: 'pure-u-22-24',
-          placeholder: I18n.t(:'activerecord.attributes.yeast.form') %>
+        <%= f.select :form, options_for_select(yeast_form_options), {}, class: 'pure-u-22-24' %>
       </div>
-      <div class="pure-u-1 pure-u-md-1-4">
+      <div class="pure-u-1 pure-u-md-1-8">
         <%= f.label :yeast_type, I18n.t(:'activerecord.attributes.yeast.yeast_type') %>
-        <%= f.text_field :yeast_type, class: 'pure-u-23-24',
-          placeholder: I18n.t(:'activerecord.attributes.yeast.yeast_type') %>
+        <%= f.select :yeast_type, options_for_select(yeast_type_options), {}, class: 'pure-u-22-24' %>
       </div>
     </div>
 

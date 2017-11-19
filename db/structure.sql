@@ -127,6 +127,31 @@ CREATE TYPE misc_use AS ENUM (
 
 
 --
+-- Name: yeast_form; Type: TYPE; Schema: public; Owner: -
+--
+
+CREATE TYPE yeast_form AS ENUM (
+    'Liquid',
+    'Dry',
+    'Slant',
+    'Culture'
+);
+
+
+--
+-- Name: yeast_type; Type: TYPE; Schema: public; Owner: -
+--
+
+CREATE TYPE yeast_type AS ENUM (
+    'Ale',
+    'Lager',
+    'Wheat',
+    'Wine',
+    'Champagne'
+);
+
+
+--
 -- Name: swedish; Type: TEXT SEARCH DICTIONARY; Schema: public; Owner: -
 --
 
@@ -877,14 +902,14 @@ CREATE TABLE words (
 
 CREATE TABLE yeasts (
     id bigint NOT NULL,
-    name character varying,
-    weight boolean,
-    amount numeric,
-    yeast_type character varying,
-    form character varying,
+    name character varying DEFAULT ''::character varying NOT NULL,
+    weight boolean DEFAULT true NOT NULL,
+    amount numeric DEFAULT 0 NOT NULL,
     recipe_detail_id bigint,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    form yeast_form DEFAULT 'Dry'::yeast_form NOT NULL,
+    yeast_type yeast_type DEFAULT 'Ale'::yeast_type NOT NULL
 );
 
 
@@ -1725,6 +1750,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20171115221645'),
 ('20171119161104'),
 ('20171119165458'),
-('20171119182201');
+('20171119182201'),
+('20171119190427');
 
 

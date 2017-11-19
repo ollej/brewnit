@@ -93,6 +93,18 @@ module ApplicationHelper
     }
   end
 
+  def yeast_form_options
+    Yeast.forms.map { |k, v|
+      [I18n.t("recipe_detail.yeast_form.#{k}"), v]
+    }
+  end
+
+  def yeast_type_options
+    Yeast.yeast_types.map { |k, v|
+      [I18n.t("recipe_detail.yeast_type.#{k}"), v]
+    }
+  end
+
   def icon(type=nil)
     content_tag(:i, '', class: "fa fa-#{type}") if type.present?
   end

@@ -273,6 +273,17 @@ sv:
       primary: Primärjäsning
       secondary: Sekundärjäsning
       bottling: Buteljering
+    yeast_type:
+      wheat: Vete
+      wine: Vin
+      ale: Ale
+      lager: Lager
+      champagne: Champagne
+    yeast_form:
+      dry: Torr
+      liquid: Flytande
+      culture: Kultur
+      slant: Slant
 
   beerxml:
     name: Ölnamn
