@@ -16,44 +16,34 @@ class RecipeMiscsController < ApplicationController
       if @misc.save
         @recipe_detail.miscs << @misc
         format.html { redirect_to recipe_details_path }
-        format.json { render layout: false, status: :ok, location: recipe_details_path }
+        format.json { render json: @misc, status: :ok, location: recipe_details_path }
         format.js { render layout: false, status: :ok, location: recipe_details_path }
       else
-        flash[:error] = @misc.errors.full_messages.to_sentence
-        format.html { redirect_to recipe_details_path }
-        format.json { render layout: false, status: :unprocessable_entity, location: recipe_details_path }
+        @error = @misc.errors.full_messages.to_sentence
+        format.html {
+          flash[:error] = @error
+          redirect_to recipe_details_path
+        }
+        format.json { render json: { error: @error }, status: :unprocessable_entity, location: recipe_details_path }
         format.js { render layout: false, status: :unprocessable_entity, location: recipe_details_path }
       end
     end
   end
 
   def destroy
-    @misc = @recipe_detail.misc.find(params[:id])
+    @misc = @recipe_detail.miscs.find(params[:id])
     respond_to do |format|
       if @misc.destroy
         format.html { redirect_to recipe_details_path }
         format.json { render layout: false, status: :ok, location: recipe_details_path }
         format.js { render layout: false, status: :ok, location: recipe_details_path }
       else
-        flash[:error] = @misc.errors.full_messages.to_sentence
-        format.html { redirect_to recipe_details_path }
-        format.json { render layout: false, status: :unprocessable_entity, location: recipe_details_path }
-        format.js { render layout: false, status: :unprocessable_entity, location: recipe_details_path }
-      end
-    end
-  end
-
-  def update
-    @misc = @recipe_detail.misc.find(params[:id])
-    respond_to do |format|
-      if @misc.update(misc_params)
-        format.html { redirect_to recipe_details_path }
-        format.json { render layout: false, status: :ok, location: recipe_details_path }
-        format.js { render layout: false, status: :ok, location: recipe_details_path }
-      else
-        flash[:error] = @misc.errors.full_messages.to_sentence
-        format.html { redirect_to recipe_details_path }
-        format.json { render layout: false, status: :unprocessable_entity, location: recipe_details_path }
+        @error = @misc.errors.full_messages.to_sentence
+        format.html {
+          flash[:error] = @error
+          redirect_to recipe_details_path
+        }
+        format.json { render json: { error: @error }, status: :unprocessable_entity, location: recipe_details_path }
         format.js { render layout: false, status: :unprocessable_entity, location: recipe_details_path }
       end
     end
@@ -62,7 +52,7 @@ class RecipeMiscsController < ApplicationController
   private
 
   def misc_params
-    params.require(:misc).permit(:name, :amount, :weight, :form)
+    params.require(:misc).permit(:name, :amount, :weight, :use, :use_time, :misc_type)
   end
 
   def load_and_authorize_recipe

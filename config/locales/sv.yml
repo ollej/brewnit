@@ -241,6 +241,9 @@ sv:
     hops: Humle
     miscs: Övrigt
     yeasts: Jäst
+    weight_option:
+      weight: Vikt
+      volume: Volym
 
   beerxml:
     name: Ölnamn
@@ -731,6 +734,13 @@ sv:
         form: Typ
         use: Användning
         use_time: Tid
+      misc:
+        name: Namn
+        amount: Mängd
+        weight: Vikt/Volym
+        use: Användning
+        use_time: Tid
+        misc_type: Typ
     errors:
       template:
         header:

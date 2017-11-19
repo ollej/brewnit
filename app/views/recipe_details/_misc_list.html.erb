@@ -1,0 +1,5 @@
+<ul id="miscs">
+  <% @miscs.each do |misc| %>
+    <%= render partial: 'shared/misc_item', locals: { misc: misc } %>
+  <% end %>
+</ul>
