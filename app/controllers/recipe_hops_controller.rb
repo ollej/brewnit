@@ -3,6 +3,11 @@ class RecipeHopsController < ApplicationController
   before_action :load_and_authorize_recipe
 
   def index
+    @hops = @recipe_detail.hops
+
+    respond_to do |format|
+      format.json { render json: @hops, status: :ok }
+    end
   end
 
   def create

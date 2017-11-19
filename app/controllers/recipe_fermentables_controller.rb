@@ -3,6 +3,11 @@ class RecipeFermentablesController < ApplicationController
   before_action :load_and_authorize_recipe
 
   def index
+    @fermentables = @recipe_detail.fermentables
+
+    respond_to do |format|
+      format.json { render json: @fermentables, status: :ok }
+    end
   end
 
   def create

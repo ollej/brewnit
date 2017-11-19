@@ -3,6 +3,11 @@ class RecipeMiscsController < ApplicationController
   before_action :load_and_authorize_recipe
 
   def index
+    @miscs = @recipe_detail.miscs
+
+    respond_to do |format|
+      format.json { render json: @miscs, status: :ok }
+    end
   end
 
   def create
