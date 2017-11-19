@@ -741,6 +741,13 @@ sv:
         use: Användning
         use_time: Tid
         misc_type: Typ
+      yeast:
+        name: Namn
+        amount: Mängd
+        weight: Vikt/Volym
+        yeast_type: Jästsort
+        form: Form
+
     errors:
       template:
         header:

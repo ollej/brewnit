@@ -1,0 +1,5 @@
+<ul id="yeasts">
+  <% @yeasts.each do |yeast| %>
+    <%= render partial: 'shared/yeast_item', locals: { yeast: yeast } %>
+  <% end %>
+</ul>

@@ -1,0 +1,9 @@
+    <li data-yeast-id="<%= yeast.id %>">
+      <span class="ingredient name"><%= yeast.name %></span>
+      <span class="ingredient amount"><%= number_with_precision(yeast.amount, precision: 2) %></span>
+      <span class="ingredient weight"><%= weight_selection(yeast) %></span>
+      <span class="ingredient form"><%= yeast.form %></span>
+      <span class="ingredient yeast_type"><%= yeast.yeast_type %></span>
+      <%= trash_icon(recipe_yeast_path(@recipe, yeast)) %>
+    </li>
+
