@@ -31,7 +31,10 @@ Rails.application.routes.draw do
     resources :placements, only: [:destroy], controller: :recipe_placements
     resource :details, on: :member, only: [:update], controller: :recipe_details
     get :details, controller: :recipe_details, action: :edit
-    resources :ingredients, only: [:index, :create, :destroy, :update], controller: :recipe_ingredients
+    resources :fermentables, only: [:index, :create, :destroy], controller: :recipe_fermentables
+    resources :hops, only: [:index, :create, :destroy], controller: :recipe_hops
+    resources :miscs, only: [:index, :create, :destroy], controller: :recipe_miscs
+    resources :yeasts, only: [:index, :create, :destroy], controller: :recipe_yeasts
   end
 
   devise_for :users, controllers: {

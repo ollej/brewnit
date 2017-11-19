@@ -1,0 +1,5 @@
+<ul id="fermentables">
+  <% @fermentables.each do |fermentable| %>
+    <%= render partial: 'shared/fermentable_item', locals: { fermentable: fermentable } %>
+  <% end %>
+</ul>

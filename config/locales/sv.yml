@@ -234,10 +234,10 @@ sv:
       failed: Kunde inte ta bort placeringen från receptet.
   recipe_detail:
     edit: Bygg recept
+    main_details: Huvuduppgifter
     save: Spara
     add: Lägg till
     fermentables: Malt
-
 
   beerxml:
     name: Ölnamn
@@ -710,16 +710,16 @@ sv:
         last_registration: Sista anmälan
         registration_information: Anmälingsinfo
       recipe_detail:
-        batch_size: Mängd
-        boil_size: Kokmängd
-        boil_time: Koktid
-        grain_temp: Malttemperatur
-        sparge_temp: Lakningstemperatur
-        efficiency: Utbyte
+        batch_size: Mängd (L)
+        boil_size: Kokmängd (L)
+        boil_time: Koktid (min)
+        grain_temp: Malttemperatur (°C)
+        sparge_temp: Lakningstemperatur (°C)
+        efficiency: Utbyte (%)
       fermentable:
         name: Namn
-        amount: Mängd
-        type: Typ
+        amount: Mängd (kg)
+        grain_type: Typ
         ebc: EBC
       hop:
         name: namn

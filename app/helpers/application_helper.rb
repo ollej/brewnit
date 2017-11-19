@@ -89,4 +89,19 @@ module ApplicationHelper
     end
   end
 
+  def trash_icon(url, cls: nil, remote: true)
+    cls ||= 'inline-button destroy-button'
+    link_to url, method: :delete, remote: remote, class: cls,
+      data: { confirm: t(:'common.are_you_sure') } do
+        concat icon('trash')
+    end
+  end
+
+  def trash_button(url, text)
+    link_to url, method: :delete, data: { confirm: I18n.t(:'common.are_you_sure') },
+      class: 'pure-button secondary-button' do
+      concat icon('trash')
+      concat text
+    end
+  end
 end

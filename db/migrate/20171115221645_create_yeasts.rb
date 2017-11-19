@@ -4,7 +4,7 @@ class CreateYeasts < ActiveRecord::Migration[5.1]
       t.string :name
       t.boolean :weight
       t.decimal :amount
-      t.string :type
+      t.string :yeast_type
       t.string :form
       t.references :recipe_detail, foreign_key: true
 

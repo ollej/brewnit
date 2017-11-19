@@ -8,7 +8,7 @@ class CreateFermentables < ActiveRecord::Migration[5.1]
       t.decimal :ebc
       t.boolean :after_boil
       t.boolean :fermentable
-      t.string :type
+      t.string :grain_type
       t.references :recipe_detail, foreign_key: true
 
       t.timestamps

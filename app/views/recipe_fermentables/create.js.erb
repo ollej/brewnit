@@ -1,0 +1,13 @@
+<% if @error.nil? %>
+  <% html = j(render partial: 'shared/fermentable_item',
+              locals: { fermentable: @fermentable }) %>
+  $("<%= html %>").appendTo("#fermentables")
+  $("#new_fermentable").trigger('reset');
+  $("#fermentables li[data-fermentable-id=<%= @fermentable.id %>]")
+    .effect("highlight", {}, 500);
+<% else %>
+  $('body').trigger('flasher:show', {
+    message: 'js <%= j(@error) %>',
+    level: 'error'
+  })
+<% end %>
