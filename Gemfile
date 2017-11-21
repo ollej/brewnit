@@ -40,12 +40,12 @@ gem 'search_cop', git: 'https://github.com/mrkamel/search_cop.git', ref: '1082a2
 gem 'meta-tags'
 gem 'pushover', git: 'https://github.com/vito-lbs/pushover.git', ref: '3bbb7ea026b3d30c043ba033d596dab6fec2a031' # Use Ruby v2.4 compatible fork
 gem 'paperclip'
-gem 'fancybox2-rails', git: 'https://github.com/ChallahuAkbar/fancybox2-rails', ref: '34a70fa57148bc74bedc896df8e37fb56d136e5b' # Use rails5 compatible fork
+gem 'fancybox2-rails', git: 'https://github.com/ChallahuAkbar/fancybox2-rails.git', ref: '34a70fa57148bc74bedc896df8e37fb56d136e5b' # Use rails5 compatible fork
 gem 'chronic', require: true
 gem 'actionview-encoded_mail_to'
 gem 'quilljs-rails'
 gem 'csv_shaper'
-gem 'axlsx'
+gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844572b25fda358cc01d2104720c4c42f450'
 gem 'axlsx_rails'
 gem 'dotenv-rails'
 

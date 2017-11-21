@@ -1,5 +1,5 @@
 GIT
-  remote: https://github.com/ChallahuAkbar/fancybox2-rails
+  remote: https://github.com/ChallahuAkbar/fancybox2-rails.git
   revision: 34a70fa57148bc74bedc896df8e37fb56d136e5b
   ref: 34a70fa57148bc74bedc896df8e37fb56d136e5b
   specs:
@@ -22,6 +22,17 @@ GIT
     nrb-beerxml (0.1.6)
       activemodel
       nokogiri
+
+GIT
+  remote: https://github.com/randym/axlsx.git
+  revision: c8ac844572b25fda358cc01d2104720c4c42f450
+  ref: c8ac844572b25fda358cc01d2104720c4c42f450
+  specs:
+    axlsx (2.1.0.pre)
+      htmlentities (~> 4.3.4)
+      mimemagic (~> 0.3)
+      nokogiri (>= 1.6.6)
+      rubyzip (>= 1.2.1)
 
 GIT
   remote: https://github.com/vito-lbs/pushover.git
@@ -91,10 +102,6 @@ GEM
     arel (8.0.0)
     autoprefixer-rails (7.1.6)
       execjs
-    axlsx (2.0.1)
-      htmlentities (~> 4.3.1)
-      nokogiri (>= 1.4.1)
-      rubyzip (~> 1.0.0)
     axlsx_rails (0.5.1)
       actionpack (>= 3.1)
       axlsx (>= 2.0.1)
@@ -324,7 +331,7 @@ GEM
       rspec-support (~> 3.7.0)
     rspec-support (3.7.0)
     ruby_dep (1.5.0)
-    rubyzip (1.0.0)
+    rubyzip (1.2.1)
     sass (3.5.3)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -393,7 +400,7 @@ DEPENDENCIES
   acts_as_votable
   administrate
   administrate-field-image
-  axlsx
+  axlsx!
   axlsx_rails
   beer_recipe
   byebug
