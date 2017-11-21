@@ -29,7 +29,7 @@ Rails.application.routes.draw do
       delete :like, controller: :likes, action: :destroy, as: :unlike
     end
     resources :placements, only: [:destroy], controller: :recipe_placements
-    resource :details, on: :member, only: [:show, :update], controller: :recipe_details
+    resource :details, only: [:show, :update], controller: :recipe_details
     resources :fermentables, only: [:index, :create, :destroy], controller: :recipe_fermentables
     resources :hops, only: [:index, :create, :destroy], controller: :recipe_hops
     resources :miscs, only: [:index, :create, :destroy], controller: :recipe_miscs

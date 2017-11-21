@@ -19,20 +19,20 @@ RSpec.describe RecipeDetailsController, type: :controller do
 
   let(:valid_session) { {} }
 
-  describe 'GET #edit' do
-    subject(:get_edit) do
-      get :edit, params: { recipe_id: recipe.id, id: recipe_detail.to_param }, session: valid_session
+  describe 'GET #show' do
+    subject(:get_show) do
+      get :show, params: { recipe_id: recipe.id }, session: valid_session
     end
 
     login_user
 
     it 'returns a success response' do
-      get_edit
+      get_show
       expect(response).to be_success
     end
 
     it 'assigns recipe ingredients' do
-      get_edit
+      get_show
       expect(assigns(:details)).to eq recipe_detail
       expect(assigns(:hops)).to eq recipe_detail.hops
       expect(assigns(:fermentables)).to eq recipe_detail.fermentables
