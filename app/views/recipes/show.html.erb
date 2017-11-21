@@ -48,7 +48,8 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
 
         <div class="page-content-controls pure-u-1 pure-u-sm-2-5">
           <div class="controls-public">
-            <%= link_to recipe_path(@recipe, format: :xml), rel: nofollow, method: :get, class: 'pure-button secondary-button' do %>
+            <%= link_to recipe_path(@recipe, format: :xml), rel: nofollow,
+              method: :get, class: 'pure-button secondary-button' do %>
               <i class="fa fa-download"></i> <%= t(:'recipes.download') %>
             <% end %>
             <%= link_to "javascript:window.print()", class: 'pure-button secondary-button' do %>
@@ -60,7 +61,7 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
             <%= like_tag(@recipe, current_user) %>
             <% if current_user.can_modify?(@recipe) %>
               <%= link_to edit_recipe_path(@recipe), class: 'pure-button secondary-button' do %>
-                <i class="fa fa-pencil-square-o"></i> <%= t(:'recipes.edit') %>
+                <%= icon('pencil-square-o') %> <%= t(:'recipes.edit') %>
               <% end %>
               <%= trash_button(@recipe, t(:'recipes.destroy.link')) %>
               <%= form_tag recipe_media_path(@recipe), method: :post, id: 'mediaUploadForm', remote: true, html: { multipart: true } do %>

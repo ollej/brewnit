@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get 'likes/update'
 
   mount Commontator::Engine => '/commontator'
+
   resources :recipes do
     resources :media, only: [:create, :destroy]
     resource :add_medium, only: [:create], controller: :add_medium
@@ -34,6 +35,7 @@ Rails.application.routes.draw do
     resources :hops, only: [:index, :create, :destroy], controller: :recipe_hops
     resources :miscs, only: [:index, :create, :destroy], controller: :recipe_miscs
     resources :yeasts, only: [:index, :create, :destroy], controller: :recipe_yeasts
+    resource :complete, only: [:update], controller: :recipe_complete
   end
 
   devise_for :users, controllers: {

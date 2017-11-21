@@ -23,12 +23,6 @@
 
   <fieldset>
     <div class="field pure-control-group">
-      <%= f.label :beerxml %>
-      <%= f.file_field :beerxml, class: 'pure-input-1-4',
-        accept: 'application/xml,.xml', required: @recipe.new_record? %>
-      <%= form_info_icon(I18n.t(:'recipes.beerxml_description')) %>
-    </div>
-    <div class="field pure-control-group">
       <%= f.label :name %>
       <%= f.text_field :name, class: 'pure-input-1-4',
         placeholder: I18n.t(:'activerecord.attributes.recipe.name') %>
@@ -76,6 +70,21 @@
           <%= form_info_icon(I18n.t(:'recipe_events.registration_message_description')) %>
         </div>
       <% end %>
+    <% end %>
+    <div class="field pure-control-group">
+      <%= f.label :beerxml %>
+      <%= f.file_field :beerxml, class: 'pure-input-1-4',
+        accept: 'application/xml,.xml' %>
+      <%= form_info_icon(I18n.t(:'recipes.beerxml_description')) %>
+    </div>
+    <% if @recipe.persisted? %>
+      <div class="field pure-control-group">
+        <%= label_tag :build_recipe, I18n.t(:'recipes.or_build') %>
+        <%= link_to recipe_details_path(@recipe), class: 'pure-button secondary-button' do %>
+          <%= I18n.t(:'recipes.build_recipe') %>
+        <% end %>
+        <%= form_info_icon(I18n.t(:'recipes.build_recipe_description')) %>
+      </div>
     <% end %>
     <div class="actions pure-controls">
       <%= f.label :public, class: 'pure-checkbox' do %>

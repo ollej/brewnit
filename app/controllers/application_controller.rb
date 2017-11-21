@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
     if user_signed_in?
       Recipe.for_user(current_user)
     else
-      Recipe.all
+      Recipe.completed
     end
   end
 

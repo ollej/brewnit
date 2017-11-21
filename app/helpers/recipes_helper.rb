@@ -26,6 +26,12 @@ module RecipesHelper
     if current_recipe.present? && current_recipe == recipe
       cls << 'recipe-item-selected'
     end
+    if recipe.placement.present?
+      cls << 'recipe-item-winner'
+    end
+    if !recipe.complete?
+      cls << 'recipe-item-incomplete'
+    end
     cls.join(' ')
   end
 

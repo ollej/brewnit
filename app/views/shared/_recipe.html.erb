@@ -13,7 +13,11 @@
         <%= link_to recipe.brewer_name, recipe.user, class: 'user-link' %>
       </h5>
       <h4 class="recipe-subject">
-        <%= link_to recipe.name, recipe, class: 'recipe-link item-link' %>
+        <% if recipe.complete? %>
+          <%= link_to recipe.name, recipe, class: 'recipe-link item-link' %>
+        <% else %>
+          <%= link_to recipe.name, edit_recipe_path(recipe), class: 'recipe-link item-link' %>
+        <% end %>
       </h4>
       <p class="recipe-desc">
         <%= recipe.style_name %>
@@ -21,8 +25,10 @@
     </div>
 
     <div class="pure-u-5-24 recipe-item-details">
-      <%= '%.0f' % recipe.batch_size %> <%= I18n.t(:'beerxml.liter_abbr') %><br>
-      <%= I18n.t(:'beerxml.abv') %>: <%= format_abv(recipe.abv) %><br>
-      <%= I18n.t(:'beerxml.ibu') %>: <%= number_with_precision(recipe.ibu, precision: 0) %>
+      <% if recipe.complete? %>
+        <%= '%.0f' % recipe.batch_size %> <%= I18n.t(:'beerxml.liter_abbr') %><br>
+        <%= I18n.t(:'beerxml.abv') %>: <%= format_abv(recipe.abv) %><br>
+        <%= I18n.t(:'beerxml.ibu') %>: <%= number_with_precision(recipe.ibu, precision: 0) %>
+      <% end %>
     </div>
   </div>

@@ -12,10 +12,27 @@ xml.RECIPES do
     xml.DATE I18n.l(@recipe.created_at)
     #xml.OG ...
     #xml.FG ...
-    #xml.STYLE do
-    #end
+    xml.STYLE do
+      xml.VERSION 1
+      xml.NAME 'IPA'
+      xml.CATEGORY 'Kraftig ale'
+      xml.CATEGORY_NUMBER '5'
+      xml.STYLE_LETTER 'C'
+      xml.STYLE_GUIDE 'SHBF 2017'
+      xml.TYPE 'Ale'
+      xml.OG_MIN '1.056'
+      xml.OG_MAX '1.070'
+      xml.FG_MIN '1.010'
+      xml.FG_MAX '1.016'
+      xml.IBU_MIN '50'
+      xml.IBU_MAX '75'
+      xml.COLOR_MIN '7.62'
+      xml.COLOR_MAX '12.7'
+      xml.ABV_MIN '5.9'
+      xml.ABV_MAX '7.5'
+    end
     xml.FERMENTABLES do
-      @fermentables.each do |fermentable|
+      @fermentables&.each do |fermentable|
         xml.FERMENTABLE do
           xml.VERSION 1
           xml.NAME fermentable.name
@@ -30,7 +47,7 @@ xml.RECIPES do
       end
     end
     xml.HOPS do
-      @hops.each do |hop|
+      @hops&.each do |hop|
         xml.HOP do
           xml.VERSION 1
           xml.NAME hop.name
@@ -43,7 +60,7 @@ xml.RECIPES do
       end
     end
     xml.MISCS do
-      @miscs.each do |misc|
+      @miscs&.each do |misc|
         xml.MISC do
           xml.VERSION 1
           xml.NAME misc.name
@@ -56,7 +73,7 @@ xml.RECIPES do
       end
     end
     xml.YEASTS do
-      @yeasts.each do |yeast|
+      @yeasts&.each do |yeast|
         xml.YEAST do
           xml.VERSION 1
           xml.NAME yeast.name

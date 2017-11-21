@@ -83,6 +83,9 @@ sv:
     edit: Ändra recept
     show: Visa recept
     save: Spara recept
+    build_recipe: Bygg recept
+    or_build: ...eller skapa
+    build_recipe_description: Om du inte har en BeerXML-fil att importera kan du bygga receptet här.
     search:
       button: Sök recept
       description: Sök recept
@@ -96,6 +99,8 @@ sv:
     private: Privat
     own: Egna recept
     winner: Medaljör
+    incomplete: Ofärdig
+    incomplete_description: Detta recept är inte färdigbyggt än, importera BeerXML eller bygg.
     labels: Etiketter
     recipe_details: Recept
     recipe_analytics: Analys
@@ -241,6 +246,9 @@ sv:
     hops: Humle
     miscs: Övrigt
     yeasts: Jäst
+    complete: Spara
+    download: Download
+    edit_recipe: Ändra recept
     weight_option:
       weight: Vikt
       volume: Volym
@@ -728,7 +736,7 @@ sv:
       recipe:
         name: Namn
         description: Beskrivning
-        beerxml: Beer XML
+        beerxml: Importera BeerXML
         public: Offentlig?
         medium_main: Huvudbild
         events: Deltagit i evenemang

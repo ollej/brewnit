@@ -19,6 +19,7 @@ class RecipesController < ApplicationController
   def show
     @recipe = find_recipe
     raise AuthorizationException unless can_show?(@recipe)
+    raise RecipeNotComplete unless @recipe.complete?
     @beerxml = @recipe.beerxml_details
     @presenter = RecipePresenter.new(@recipe)
     Recipe.unscoped do
@@ -75,7 +76,7 @@ class RecipesController < ApplicationController
           end
         end
 
-        format.html { redirect_to @recipe, notice: I18n.t(:'recipes.create.successful') }
+        format.html { redirect_to redirect_path, notice: I18n.t(:'recipes.create.successful') }
         format.json { render :show, status: :created, location: @recipe }
       else
         format.html { render :new }
@@ -92,7 +93,7 @@ class RecipesController < ApplicationController
 
     respond_to do |format|
       if @recipe.update(recipe_params)
-        format.html { redirect_to @recipe, notice: I18n.t(:'recipes.update.successful') }
+        format.html { redirect_to redirect_path, notice: I18n.t(:'recipes.update.successful') }
         format.json { render :show, status: :ok, location: @recipe }
       else
         format.html { render :edit }
@@ -131,5 +132,13 @@ class RecipesController < ApplicationController
 
     def registration_params
       params.require(:registration).permit(:register, :message)
+    end
+
+    def redirect_path
+      if @recipe.beerxml.present?
+        @recipe
+      else
+        edit_recipe_path(@recipe)
+      end
     end
 end

@@ -759,7 +759,8 @@ CREATE TABLE recipes (
     downloads integer DEFAULT 0 NOT NULL,
     media_main_id integer,
     cached_votes_up integer DEFAULT 0,
-    equipment character varying DEFAULT ''::character varying
+    equipment character varying DEFAULT ''::character varying,
+    complete boolean DEFAULT false NOT NULL
 );
 
 
@@ -1751,6 +1752,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20171119161104'),
 ('20171119165458'),
 ('20171119182201'),
-('20171119190427');
+('20171119190427'),
+('20171121184814');
 
 

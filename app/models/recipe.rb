@@ -26,10 +26,12 @@ class Recipe < ApplicationRecord
   has_many :registrations, dependent: :destroy, class_name: 'EventRegistration'
   has_one :detail, dependent: :destroy, class_name: 'RecipeDetail'
 
-  accepts_nested_attributes_for :media, :reject_if => lambda { |r| r['media'].nil? }
+  accepts_nested_attributes_for :media, reject_if: lambda { |r| r['media'].nil? }
 
-  before_save :extract_details, if: Proc.new { |r| r.errors.empty? }
-  validates :beerxml, presence: true, beerxml: true
+  before_save :extract_beerxml_details, if: Proc.new { |r|
+    r.errors.empty? && beerxml.present?
+  }
+  validates :beerxml, beerxml: true, allow_blank: true
 
   acts_as_commontable
   acts_as_votable
@@ -37,6 +39,7 @@ class Recipe < ApplicationRecord
   sanitized_fields :description
 
   default_scope { where(public: true) }
+  scope :completed, -> { where(complete: true) }
   scope :for_user, -> (user) {
     unscoped.where('recipes.user_id = ? OR recipes.public = true', user.id)
   }
@@ -100,7 +103,8 @@ class Recipe < ApplicationRecord
     BeerRecipe::RecipeWrapper.new(recipe.records.first)
   end
 
-  def extract_details
+  def extract_beerxml_details
+    return unless beerxml.present?
     self.name = beerxml_details.name unless self.name.present?
     self.abv = beerxml_details.abv
     self.ibu = beerxml_details.ibu
@@ -117,6 +121,7 @@ class Recipe < ApplicationRecord
     else
       self.equipment = user.equipment || ''
     end
+    self.complete = true
   end
 
   def malt_data

@@ -1,12 +1,19 @@
       <div class="page-content-header pure-g">
-        <div class="pure-u-1 pure-u-sm-4-5">
+        <div class="pure-u-1 pure-u-sm-3-5">
           <h1 class="recipe-details-content-title"><%= title I18n.t(:'recipe_detail.edit') %></h1>
         </div>
-        <div class="page-content-controls pure-u-1 pure-u-sm-1-5">
+        <div class="page-content-controls pure-u-1 pure-u-sm-2-5">
           <div class="controls-signed-in">
+            <%= button_to recipe_complete_path(@recipe), method: :put,
+              class: 'pure-button primary-button' do %>
+              <%= icon('flag-checkered') %> <%= t(:'recipe_detail.complete') %>
+            <% end %>
+            <%= link_to edit_recipe_path(@recipe), class: 'pure-button secondary-button' do %>
+              <%= icon('pencil-square-o') %> <%= t(:'recipe_detail.edit_recipe') %>
+            <% end %>
             <%= link_to recipe_details_path(@recipe, format: :xml), rel: nofollow,
-              method: :get, class: 'pure-button secondary-button' do %>
-              <i class="fa fa-download"></i> <%= t(:'recipes.download') %>
+              class: 'pure-button secondary-button' do %>
+              <%= icon('download') %> <%= t(:'recipe_detail.download') %>
             <% end %>
           </div>
         </div>
