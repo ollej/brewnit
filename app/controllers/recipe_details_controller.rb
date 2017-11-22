@@ -44,7 +44,10 @@ class RecipeDetailsController < ApplicationController
   private
 
   def details_params
-    params.require(:recipe_detail).permit(:batch_size, :boil_size, :boil_time, :grain_temp, :sparge_temp, :efficiency)
+    params.require(:recipe_detail).permit(
+      :batch_size, :boil_size, :boil_time, :grain_temp, :sparge_temp, :efficiency,
+      :og, :fg, :brewed_at, :carbonation
+    )
   end
 
   def load_and_authorize_recipe

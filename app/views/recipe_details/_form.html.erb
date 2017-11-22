@@ -18,6 +18,11 @@
 
     <div class="pure-g">
       <div class="pure-u-1 pure-u-md-1-6">
+        <%= f.label :brewed_at %>
+        <%= f.date_field :brewed_at, class: 'pure-input-23-24',
+          placeholder: I18n.t(:'activerecord.attributes.recipe_detail.brewed_at') %>
+      </div>
+      <div class="pure-u-1 pure-u-md-1-6">
         <%= f.label :batch_size %>
         <%= f.number_field :batch_size, class: 'pure-input-23-24', step: :any, required: true,
           placeholder: I18n.t(:'activerecord.attributes.recipe_detail.batch_size') %>
@@ -37,6 +42,18 @@
         <%= f.number_field :boil_size, class: 'pure-input-23-24', step: :any,
           placeholder: I18n.t(:'activerecord.attributes.recipe_detail.boil_size') %>
       </div>
+    </div>
+    <div class="pure-g">
+      <div class="pure-u-1 pure-u-md-1-6">
+        <%= f.label :og %>
+        <%= f.number_field :og, class: 'pure-input-23-24', step: :any,
+          placeholder: I18n.t(:'activerecord.attributes.recipe_detail.og') %>
+      </div>
+      <div class="pure-u-1 pure-u-md-1-6">
+        <%= f.label :fg %>
+        <%= f.number_field :fg, class: 'pure-input-23-24', step: :any,
+          placeholder: I18n.t(:'activerecord.attributes.recipe_detail.fg') %>
+      </div>
       <div class="pure-u-1 pure-u-md-1-6">
         <%= f.label :sparge_temp %>
         <%= f.number_field :sparge_temp, class: 'pure-input-23-24', step: :any,
@@ -46,6 +63,11 @@
         <%= f.label :grain_temp %>
         <%= f.number_field :grain_temp, class: 'pure-input-23-24', step: :any,
           placeholder: I18n.t(:'activerecord.attributes.recipe_detail.grain_temp') %>
+      </div>
+      <div class="pure-u-1 pure-u-md-1-6">
+        <%= f.label :carbonation %>
+        <%= f.number_field :carbonation, class: 'pure-input-23-24', step: :any,
+          placeholder: I18n.t(:'activerecord.attributes.recipe_detail.carbonation') %>
       </div>
     </div>
   </fieldset>

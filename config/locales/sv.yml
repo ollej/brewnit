@@ -771,6 +771,10 @@ sv:
         grain_temp: Malttemperatur (°C)
         sparge_temp: Lakningstemperatur (°C)
         efficiency: Utbyte (%)
+        og: OG
+        fg: FG
+        carbonation: Kolsyrevolym
+        brewed_at: Bryggdatum
       fermentable:
         name: Namn
         amount: Mängd (kg)
@@ -778,14 +782,14 @@ sv:
         ebc: EBC
       hop:
         name: Namn
-        amount: Mängd (kg)
+        amount: Mängd (gr)
         alpha_acid: Alfasyra (%)
         form: Typ
         use: Användning
         use_time: Tid
       misc:
         name: Namn
-        amount: Mängd
+        amount: Mängd (L / gr)
         weight: Vikt/Volym
         use: Användning
         use_time: Tid

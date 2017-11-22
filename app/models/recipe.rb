@@ -60,6 +60,10 @@ class Recipe < ApplicationRecord
     user&.brewery.presence || brewer.presence || owner_name
   end
 
+  def equipment
+    user&.equipment
+  end
+
   def display_desc
     if description.present?
       Rails::Html::FullSanitizer.new.sanitize(description)

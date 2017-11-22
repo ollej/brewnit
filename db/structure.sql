@@ -710,7 +710,11 @@ CREATE TABLE recipe_details (
     efficiency numeric,
     recipe_id bigint,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    og numeric DEFAULT 0 NOT NULL,
+    fg numeric DEFAULT 0 NOT NULL,
+    brewed_at date,
+    carbonation numeric DEFAULT 0 NOT NULL
 );
 
 
@@ -1753,6 +1757,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20171119165458'),
 ('20171119182201'),
 ('20171119190427'),
-('20171121184814');
+('20171121184814'),
+('20171122201201');
 
 

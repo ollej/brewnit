@@ -9,9 +9,15 @@ xml.RECIPES do
     xml.BOIL_SIZE @details.boil_size
     xml.BOIL_TIME @details.boil_time
     xml.EFFICIENCY @details.efficiency
-    xml.DATE I18n.l(@recipe.created_at)
-    #xml.OG ...
-    #xml.FG ...
+    xml.DATE brewed_at(@details)
+    xml.NOTES @recipe.description
+    xml.OG format_sg(@details.og)
+    xml.FG format_sg(@details.fg)
+    xml.CARBONATION @details.carbonation
+    xml.EQUIPMENT do
+      xml.VERSION 1
+      xml.NAME @recipe.equipment
+    end
     xml.STYLE do
       xml.VERSION 1
       xml.NAME 'IPA'
@@ -51,7 +57,7 @@ xml.RECIPES do
         xml.HOP do
           xml.VERSION 1
           xml.NAME hop.name
-          xml.AMOUNT hop.amount
+          xml.AMOUNT (hop.amount / 1000) # Hops are stored in kilograms in beerxml v1
           xml.USE Hop.uses[hop.use]
           xml.ALPHA hop.alpha_acid
           xml.TIME hop.use_time
@@ -65,7 +71,7 @@ xml.RECIPES do
           xml.VERSION 1
           xml.NAME misc.name
           xml.AMOUNT_IS_WEIGHT misc.weight.to_s.upcase
-          xml.AMOUNT misc.amount
+          xml.AMOUNT normalize_amount(misc.amount, misc.weight)
           xml.TIME misc.use_time
           xml.USE Misc.uses[misc.use]
           xml.TYPE Misc.misc_types[misc.misc_type]
@@ -78,7 +84,8 @@ xml.RECIPES do
           xml.VERSION 1
           xml.NAME yeast.name
           xml.AMOUNT_IS_WEIGHT yeast.weight.to_s.upcase
-          xml.AMOUNT yeast.amount
+          xml.AMOUNT normalize_amount(yeast.amount, yeast.weight)
+          # Support yeast packages?
           xml.FORM Yeast.forms[yeast.form]
           xml.TYPE Yeast.yeast_types[yeast.yeast_type]
         end
