@@ -38,6 +38,9 @@ Rails.application.routes.draw do
     resource :complete, only: [:update], controller: :recipe_complete
   end
 
+  get :register_recipe, controller: :register_recipe, action: :new
+  post :register_recipe, controller: :register_recipe, action: :create
+
   devise_for :users, controllers: {
     omniauth_callbacks: 'omniauth_callbacks',
     registrations: 'users/registrations'

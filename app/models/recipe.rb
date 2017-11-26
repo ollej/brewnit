@@ -242,6 +242,10 @@ class Recipe < ApplicationRecord
     get_likes.map(&:voter).map(&:display_name).to_sentence
   end
 
+  def self.recipe_options(scope)
+    scope.map { |recipe| [recipe.name, recipe.id] }
+  end
+
   def self.styles
     self.distinct.pluck(:style_name).map(&:capitalize).uniq.sort
   end

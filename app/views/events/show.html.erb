@@ -25,14 +25,17 @@ set_meta_tags title: @event.name,
         </div>
         <div class="page-content-controls pure-u-1 pure-u-sm-2-5">
           <div class="controls-public">
-            <%= link_to new_recipe_path(event_id: @event.id),
-              disabled: @event.registration_closed?,
-              class: 'pure-button primary-button' do %>
-              <i class="fa fa-beer"></i>
-              <% if @event.official? %>
-                <%= t(:'events.register_recipe') %>
-              <% else %>
-                <%= t(:'events.add_recipe') %>
+            <% if @event.official? %>
+              <%= link_to register_recipe_path(event_id: @event.id),
+                disabled: @event.registration_closed?,
+                class: 'pure-button primary-button' do %>
+                <i class="fa fa-beer"></i> <%= t(:'events.register_recipe') %>
+              <% end %>
+            <% else %>
+              <%= link_to new_recipe_path(event_id: @event.id),
+                disabled: @event.registration_closed?,
+                class: 'pure-button primary-button' do %>
+                <i class="fa fa-beer"></i> <%= t(:'events.add_recipe') %>
               <% end %>
             <% end %>
             <%= form_tag(events_path, method: 'get', class: 'pure-form quicksearch', id: 'eventsearch-form') do %>

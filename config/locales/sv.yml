@@ -292,6 +292,17 @@ sv:
       liquid: Flytande
       culture: Kultur
       slant: Slant
+  register_recipe:
+    new: Anmäl recept
+    save: Anmäl
+    choose_event: Välj evenamang
+    choose_event_description: Välj ett evenemang att anmäla receptet till.
+    no_recipes: Du har inga färdiga recept.
+    recipe: Recept
+    recipe_description: Välj ett av dina färdiga recept att anmäla till evenemanget.
+    message: Meddelande
+    message_description: Skriv ett meddelande till arrangörerna.
+    recipe_registered: Tack för att du anmälde ditt recept "%{recipe}" till evenemanget "%{event}".
 
   beerxml:
     name: Ölnamn

@@ -10,7 +10,6 @@ class RecipeCompleteController < ApplicationController
     @miscs = @details.miscs
     @yeasts = @details.yeasts
     @recipe.beerxml = render_to_string(template: 'recipe_details/show.xml.builder')
-    Rails.backtrace_cleaner.remove_silencers!
     @recipe.save!
 
     respond_to do |format|
