@@ -714,7 +714,8 @@ CREATE TABLE recipe_details (
     og numeric DEFAULT 0 NOT NULL,
     fg numeric DEFAULT 0 NOT NULL,
     brewed_at date,
-    carbonation numeric DEFAULT 0 NOT NULL
+    carbonation numeric DEFAULT 0 NOT NULL,
+    style_id bigint
 );
 
 
@@ -794,6 +795,58 @@ ALTER SEQUENCE recipes_id_seq OWNED BY recipes.id;
 CREATE TABLE schema_migrations (
     version character varying NOT NULL
 );
+
+
+--
+-- Name: styles; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE styles (
+    id bigint NOT NULL,
+    name character varying DEFAULT ''::character varying NOT NULL,
+    description text DEFAULT ''::text NOT NULL,
+    category character varying DEFAULT ''::character varying NOT NULL,
+    number integer NOT NULL,
+    letter character varying NOT NULL,
+    aroma text DEFAULT ''::text NOT NULL,
+    appearance text DEFAULT ''::text NOT NULL,
+    flavor text DEFAULT ''::text NOT NULL,
+    texture text DEFAULT ''::text NOT NULL,
+    examples text DEFAULT ''::text NOT NULL,
+    summary text DEFAULT ''::text NOT NULL,
+    og_min numeric DEFAULT 0 NOT NULL,
+    og_max numeric DEFAULT 0 NOT NULL,
+    fg_min numeric DEFAULT 0 NOT NULL,
+    fg_max numeric DEFAULT 0 NOT NULL,
+    ebc_min numeric DEFAULT 0 NOT NULL,
+    ebc_max numeric DEFAULT 0 NOT NULL,
+    ibu_min numeric DEFAULT 0 NOT NULL,
+    ibu_max numeric DEFAULT 0 NOT NULL,
+    abv_min numeric DEFAULT 0 NOT NULL,
+    abv_max numeric DEFAULT 0 NOT NULL,
+    style_guide character varying DEFAULT ''::character varying NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: styles_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE styles_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: styles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE styles_id_seq OWNED BY styles.id;
 
 
 --
@@ -1022,6 +1075,13 @@ ALTER TABLE ONLY recipes ALTER COLUMN id SET DEFAULT nextval('recipes_id_seq'::r
 
 
 --
+-- Name: styles id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY styles ALTER COLUMN id SET DEFAULT nextval('styles_id_seq'::regclass);
+
+
+--
 -- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -1144,6 +1204,14 @@ ALTER TABLE ONLY recipe_details
 
 ALTER TABLE ONLY recipes
     ADD CONSTRAINT recipes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: styles styles_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY styles
+    ADD CONSTRAINT styles_pkey PRIMARY KEY (id);
 
 
 --
@@ -1402,6 +1470,13 @@ CREATE INDEX index_recipe_details_on_recipe_id ON recipe_details USING btree (re
 
 
 --
+-- Name: index_recipe_details_on_style_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_recipe_details_on_style_id ON recipe_details USING btree (style_id);
+
+
+--
 -- Name: index_recipes_on_abv; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1504,6 +1579,13 @@ CREATE INDEX index_recipes_on_style_name ON recipes USING btree (style_name);
 --
 
 CREATE INDEX index_recipes_on_user_id ON recipes USING btree (user_id);
+
+
+--
+-- Name: index_styles_on_style_guide; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_styles_on_style_guide ON styles USING btree (style_guide);
 
 
 --
@@ -1612,6 +1694,14 @@ ALTER TABLE ONLY event_registrations
 
 ALTER TABLE ONLY placements
     ADD CONSTRAINT fk_rails_344f224d46 FOREIGN KEY (recipe_id) REFERENCES recipes(id);
+
+
+--
+-- Name: recipe_details fk_rails_426b7d6920; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY recipe_details
+    ADD CONSTRAINT fk_rails_426b7d6920 FOREIGN KEY (style_id) REFERENCES styles(id);
 
 
 --
@@ -1758,6 +1848,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20171119182201'),
 ('20171119190427'),
 ('20171121184814'),
-('20171122201201');
+('20171122201201'),
+('20171126121130'),
+('20171126161659');
 
 

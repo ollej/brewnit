@@ -9,6 +9,7 @@ class RecipeCompleteController < ApplicationController
     @fermentables = @details.fermentables
     @miscs = @details.miscs
     @yeasts = @details.yeasts
+    @style = @details.style
     @recipe.beerxml = render_to_string(template: 'recipe_details/show.xml.builder')
     @recipe.save!
 
@@ -21,7 +22,7 @@ class RecipeCompleteController < ApplicationController
   private
 
   def load_and_authorize_recipe
-    @recipe = Recipe.includes(detail: [:fermentables, :hops, :miscs, :yeasts]).find(params[:recipe_id])
+    @recipe = Recipe.includes(detail: [:fermentables, :hops, :miscs, :yeasts, :style]).find(params[:recipe_id])
     raise AuthorizationException unless current_user.can_modify?(@recipe)
   end
 end

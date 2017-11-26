@@ -786,6 +786,7 @@ sv:
         fg: FG
         carbonation: Kolsyrevolym
         brewed_at: Bryggdatum
+        style: Stiltyp
       fermentable:
         name: Namn
         amount: Mängd (kg)

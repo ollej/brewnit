@@ -18,24 +18,26 @@ xml.RECIPES do
       xml.VERSION 1
       xml.NAME @recipe.equipment
     end
-    xml.STYLE do
-      xml.VERSION 1
-      xml.NAME 'IPA'
-      xml.CATEGORY 'Kraftig ale'
-      xml.CATEGORY_NUMBER '5'
-      xml.STYLE_LETTER 'C'
-      xml.STYLE_GUIDE 'SHBF 2017'
-      xml.TYPE 'Ale'
-      xml.OG_MIN '1.056'
-      xml.OG_MAX '1.070'
-      xml.FG_MIN '1.010'
-      xml.FG_MAX '1.016'
-      xml.IBU_MIN '50'
-      xml.IBU_MAX '75'
-      xml.COLOR_MIN '7.62'
-      xml.COLOR_MAX '12.7'
-      xml.ABV_MIN '5.9'
-      xml.ABV_MAX '7.5'
+    if @style.present?
+      xml.STYLE do
+        xml.VERSION 1
+        xml.NAME @style.name
+        xml.CATEGORY @style.category
+        xml.CATEGORY_NUMBER @style.number
+        xml.STYLE_LETTER @style.letter
+        xml.STYLE_GUIDE @style.style_guide
+        #xml.TYPE 'Ale'
+        xml.OG_MIN @style.og_min
+        xml.OG_MAX @style.og_max
+        xml.FG_MIN @style.fg_min
+        xml.FG_MAX @style.fg_max
+        xml.IBU_MIN @style.ibu_min
+        xml.IBU_MAX @style.ibu_max
+        xml.COLOR_MIN BeerRecipe::Formula.new.ebc_to_srm(@style.ebc_min)
+        xml.COLOR_MAX BeerRecipe::Formula.new.ebc_to_srm(@style.ebc_max)
+        xml.ABV_MIN @style.abv_min
+        xml.ABV_MAX @style.abv_max
+      end
     end
     xml.FERMENTABLES do
       @fermentables&.each do |fermentable|
