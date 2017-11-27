@@ -1,6 +1,7 @@
 <%= form_for(@details, url: recipe_details_path(@recipe), remote: true,
              html: { class: 'pure-form pure-form-stacked js-auto-submit' }) do |f| %>
   <%= invisible_captcha %>
+
   <% if @details.errors.any? %>
     <div id="error_explanation">
       <h2><%= I18n.t(:'activerecord.errors.models.recipe_detail.header', count: @recipe_details.errors.count) %></h2>

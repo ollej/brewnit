@@ -95,9 +95,14 @@ class RecipesController < ApplicationController
       if @recipe.update(recipe_params)
         format.html { redirect_to redirect_path, notice: I18n.t(:'recipes.update.successful') }
         format.json { render :show, status: :ok, location: @recipe }
+        format.js { head :ok, location: @recipe }
       else
-        format.html { render :edit }
+        format.html {
+          flash[:error] = @recipe.errors.full_messages.to_sentence
+          render :edit
+        }
         format.json { render json: @recipe.errors, status: :unprocessable_entity }
+        format.js { render layout: false, status: :unprocessable_entity, location: @recipe }
       end
     end
   end

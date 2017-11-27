@@ -125,6 +125,7 @@ sv:
       unlike: Sluta gilla
       successful: Tack för att du gillade receptet!
       successful_unlike: Du gillar inte längre receptet.
+    name_description: Namnet på receptet visas i alla listningar.
     name_not_needed: Namn hämtas från BeerXML-filen om det inte fylls i.
     no_style_information: Det finns ingen stiltypsinformation för detta recept.
     show_all: Visa alla %{count} recept
@@ -246,8 +247,12 @@ sv:
     hops: Humle
     miscs: Övrigt
     yeasts: Jäst
-    complete: Spara
-    download: Download
+    complete: Publicera
+    complete_description: Publicera receptet för att ändringar ska visas på sidan.
+    download: Ladda ner
+    download_description: Ladda ner en BeerXML-fil som kan importeras i receptprogram.
+    show_recipe: Visa recept
+    show_recipe_description: Visa receptsidan för detta recept.
     edit_recipe: Ändra recept
     weight_option:
       weight: Vikt
