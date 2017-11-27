@@ -211,3 +211,9 @@ Start the web server with the following command.
 $ bundle exec rails s
 ```
 
+How to Contribute?
+------------------
+
+It's easy, just follow the [contribution guidelines][contribution].
+
+[contribution]: https://github.com/ollej/brewnit/blob/master/CONTRIBUTING.md
