@@ -41,7 +41,7 @@ class Recipe < ApplicationRecord
   default_scope { where(public: true) }
   scope :completed, -> { where(complete: true) }
   scope :for_user, -> (user) {
-    unscoped.where('recipes.user_id = ? OR recipes.public = true', user.id)
+    unscoped.where('recipes.user_id = ? OR (recipes.public = true AND recipes.complete = true)', user.id)
   }
   scope :by_user, -> (user) { where(user: user) }
   scope :by_event, -> (event) { joins(:events).where(events: { id: event.id }) }

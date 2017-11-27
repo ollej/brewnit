@@ -16,7 +16,7 @@
         <% if recipe.complete? %>
           <%= link_to recipe.name, recipe, class: 'recipe-link item-link' %>
         <% else %>
-          <%= link_to recipe.name, edit_recipe_path(recipe), class: 'recipe-link item-link' %>
+          <%= link_to recipe.name, recipe_details_path(recipe), class: 'recipe-link item-link' %>
         <% end %>
       </h4>
       <p class="recipe-desc">
