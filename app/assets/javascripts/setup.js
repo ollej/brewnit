@@ -83,5 +83,14 @@ $( document ).ready(function() {
       })
     }
   });
+
+  $(".file-button").on("click", function(ev) {
+    const $field = $(this.dataset.fileField);
+    const $form = $field.closest("form");
+    $field.one("change", function(ev) {
+      $form.submit();
+    });
+    $field.trigger("click");
+  });
 });
 

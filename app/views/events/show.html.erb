@@ -52,26 +52,26 @@ set_meta_tags title: @event.name,
             <% end %>
             <% if current_user.can_modify?(@event) %>
               <%= link_to edit_event_path(@event), class: 'pure-button secondary-button' do %>
-                <i class="fa fa-pencil-square-o"></i> <%= t(:'events.edit') %>
+                <%= icon('pencil-square-o') %> <%= t(:'events.edit') %>
               <% end %>
               <%= link_to event_recipes_path(@event, format: :xlsx), rel: nofollow,
                 method: :get, class: 'pure-button secondary-button' do %>
-                <i class="fa fa-file-excel-o"></i> <%= t(:'events.recipes_excel') %>
+                <%= icon('file-excel-o') %> <%= t(:'events.recipes_excel') %>
               <% end %>
               <%= link_to event_recipes_path(@event, format: :csv), rel: nofollow,
                 method: :get, class: 'pure-button secondary-button' do %>
-                <i class="fa fa-table"></i> <%= t(:'events.recipes_csv') %>
+                <%= icon('table') %> <%= t(:'events.recipes_csv') %>
               <% end %>
             <% end %>
             <div style="display: inline-block">
               <%= form_tag event_media_path(@event), method: :post, id: 'mediaUploadForm',
                     remote: true, html: { multipart: true } do %>
                 <%= link_to '#', class: 'pure-button secondary-button upload-button' do %>
-                  <i class="fa fa-upload"></i> <%= t(:'common.media.upload') %>
+                  <%= icon('upload') %> <%= t(:'common.media.upload') %>
                 <% end %>
                 <%= file_field_tag 'media[]', type: :file, multiple: true,
                   accept: 'image/png,image/gif,image/jpeg,image/jpg',
-                  id: 'uploadMediaField' %>
+                  id: 'uploadMediaField', class: 'hidden-file-field' %>
                 <div id="progressbar"></div>
               <% end %>
             </div>

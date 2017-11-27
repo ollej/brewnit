@@ -89,6 +89,7 @@ sv:
     upload_description: Ladda upp bilder som visas på receptsidan.
     print_description: Skriv ut receptet.
     download_description: Ladda ner en BeerXML-fil som kan importeras i receptprogram.
+    import: Importera
     search:
       button: Sök recept
       description: Sök recept
@@ -143,9 +144,9 @@ sv:
       Lämna denna kryssruta tom om du inte vill
       att andra ska kunna se ditt recept.
     beerxml_description: |
-      Exportera recept i BeerXML från ett
-      receptprogram som Beersmith 2, Brewpal
-      eller Wort.
+      Ladda upp recept som exporterats till
+      BeerXML i ett receptprogram som
+      Beersmith 2, Brewpal eller Wort.
   users:
     index: Bryggare
     profile: Profil

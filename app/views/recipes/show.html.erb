@@ -66,18 +66,33 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
                   data: tooltip_data(I18n.t(:'recipes.build_recipe_description')) do %>
                 <%= icon('pencil-square-o') %> <%= I18n.t(:'recipes.build_recipe') %>
               <% end %>
+
+              <%= form_for @recipe, method: :patch, id: 'beerxml-import-form',
+                multipart: true, html: { class: 'form-button file-form' } do |f| %>
+                <%= link_to '#', class: 'pure-button secondary-button file-button',
+                  data: tooltip_data(I18n.t(:'recipes.beerxml_description'))
+                    .merge(:'file-field' => '#import-beerxml') do %>
+                  <%= icon('upload') %> <%= I18n.t(:'recipes.import') %>
+                <% end %>
+                <%= f.file_field :beerxml, type: :file, class: 'hidden-file-field',
+                  accept: 'application/xml,.xml', id: 'import-beerxml' %>
+              <% end %>
+
               <%= trash_button(@recipe, t(:'recipes.destroy.link'),
                               tooltip: t(:'recipes.destroy.link_description')) %>
-              <%= form_tag recipe_media_path(@recipe), method: :post, id: 'mediaUploadForm', remote: true, html: { multipart: true } do %>
+
+              <%= form_tag recipe_media_path(@recipe), method: :post, id: 'mediaUploadForm',
+                remote: true, html: { multipart: true } do %>
                 <%= link_to '#', class: 'pure-button secondary-button upload-button',
                   data: tooltip_data(I18n.t(:'recipes.upload_description')) do %>
-                  <%= icon('upload') %> <%= t(:'common.media.upload') %>
+                  <%= icon('upload') %> <%= I18n.t(:'common.media.upload') %>
                 <% end %>
                 <%= file_field_tag 'media[]', type: :file, multiple: true,
                   accept: 'image/png,image/gif,image/jpeg,image/jpg',
-                  id: 'uploadMediaField' %>
+                  id: 'uploadMediaField', class: 'hidden-file-field' %>
                 <div id="progressbar"></div>
               <% end %>
+
               <%#= link_to t(:'recipes.clone'), clone_recipe_path(@recipe), class: 'pure-button secondary-button' %>
             <% end %>
             </div>
