@@ -63,12 +63,18 @@ module RecipesHelper
 
   def like_tag(recipe, user)
     if user.liked? recipe
-      link_to unlike_recipe_path(recipe), method: :delete, remote: true, class: 'thumb-like like-link pure-button secondary-button' do
-        (content_tag(:i, '', class: 'fa fa-thumbs-up') + ' ' + I18n.t(:'recipes.likes.unlike')).html_safe
+      link_to unlike_recipe_path(recipe), method: :delete, remote: true,
+        class: 'thumb-like like-link pure-button secondary-button',
+        data: tooltip_data(I18n.t(:'recipes.likes.unlike_description')) do
+        concat icon('thumbs-up')
+        concat ' ' + I18n.t(:'recipes.likes.unlike')
       end
     else
-      link_to like_recipe_path(recipe), method: :post, remote: true, class: 'thumb-unlike like-link pure-button secondary-button' do
-        (content_tag(:i, '', class: 'fa fa-thumbs-o-up') + ' ' + I18n.t(:'recipes.likes.like')).html_safe
+      link_to like_recipe_path(recipe), method: :post, remote: true,
+        class: 'thumb-unlike like-link pure-button secondary-button',
+        data: tooltip_data(I18n.t(:'recipes.likes.like_description')) do
+        concat icon('thumbs-o-up')
+        concat ' ' + I18n.t(:'recipes.likes.like')
       end
     end
   end

@@ -85,7 +85,10 @@ sv:
     save: Spara recept
     build_recipe: Bygg recept
     or_build: ...eller skapa
-    build_recipe_description: Om du inte har en BeerXML-fil att importera kan du bygga receptet här.
+    build_recipe_description: Ändra namn, beskrivning och ingredienser på receptet.
+    upload_description: Ladda upp bilder som visas på receptsidan.
+    print_description: Skriv ut receptet.
+    download_description: Ladda ner en BeerXML-fil som kan importeras i receptprogram.
     search:
       button: Sök recept
       description: Sök recept
@@ -112,6 +115,7 @@ sv:
       successful: Receptet har skapats.
     destroy:
       link: Ta bort
+      link_description: Ta bort hela receptet från sidan, kan inte ångras.
       successful: Receptet har tagits bort.
     new: Lägg till recept
     comments_count:
@@ -122,7 +126,9 @@ sv:
       other: '%{count} gillade'
     likes:
       like: Gilla!
+      like_description: Visa om du gillar detta recept.
       unlike: Sluta gilla
+      unlike_description: Du har gillat detta recept, klicka för att sluta gilla receptet.
       successful: Tack för att du gillade receptet!
       successful_unlike: Du gillar inte längre receptet.
     name_description: Namnet på receptet visas i alla listningar.
@@ -240,7 +246,7 @@ sv:
       failed: Kunde inte ta bort placeringen från receptet.
   recipe_detail:
     edit: Bygg recept
-    main_details: Huvuduppgifter
+    main_details: Receptuppgifter
     save: Spara
     add: Lägg till
     fermentables: Malt

@@ -5,29 +5,19 @@
         <div class="page-content-controls pure-u-1 pure-u-sm-2-5">
           <div class="controls-signed-in">
             <%= link_to @recipe, class: 'pure-button secondary-button',
-              data: {
-                balloon: I18n.t(:'recipe_detail.show_recipe_description'),
-                'balloon-pos': 'down',
-                'balloon-length': 'small'
-              } do %>
+              data: tooltip_data(I18n.t(:'recipe_detail.show_recipe_description'),
+                                 length: 'small') do %>
               <%= icon('beer') %> <%= t(:'recipe_detail.show_recipe') %>
             <% end %>
             <%= link_to recipe_details_path(@recipe, format: :xml), rel: nofollow,
               class: 'pure-button secondary-button',
-              data: {
-                balloon: I18n.t(:'recipe_detail.download_description'),
-                'balloon-pos': 'down',
-                'balloon-length': 'medium'
-              } do %>
+              data: tooltip_data(I18n.t(:'recipe_detail.download_description')) do %>
               <%= icon('download') %> <%= t(:'recipe_detail.download') %>
             <% end %>
             <%= button_to recipe_complete_path(@recipe), method: :put,
               class: 'pure-button primary-button',
-              data: {
-                balloon: I18n.t(:'recipe_detail.complete_description'),
-                'balloon-pos': 'down',
-                'balloon-length': 'small'
-              } do %>
+              data: tooltip_data(I18n.t(:'recipe_detail.complete_description'),
+                                length: 'small') do %>
               <%= icon('flag-checkered') %> <%= t(:'recipe_detail.complete') %>
             <% end %>
           </div>
