@@ -143,7 +143,7 @@ class RecipesController < ApplicationController
       if @recipe.beerxml.present?
         @recipe
       else
-        edit_recipe_path(@recipe)
+        recipe_details_path(@recipe)
       end
     end
 end
