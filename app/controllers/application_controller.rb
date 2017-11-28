@@ -94,5 +94,4 @@ class ApplicationController < ActionController::Base
   def deny_spammers!
     redirect_spammers! if spammer?
   end
-
 end

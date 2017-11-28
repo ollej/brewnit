@@ -4,6 +4,9 @@ class RecipeDetailsController < ApplicationController
   invisible_captcha only: [:create, :update], on_spam: :redirect_spammers!
 
   def show
+    # Never cache this page to ensure browser reloads
+    expires_now
+
     @details = RecipeDetail.find_or_create_by!(recipe_id: @recipe.id)
     @hops = @details.hops
     @fermentables = @details.fermentables

@@ -85,10 +85,18 @@ sv:
     save: Spara recept
     build_recipe: Bygg recept
     or_build: ...eller skapa
+    build_new_recipe_description: Bygg ditt recept genom att lägga till ingredienser.
     build_recipe_description: Ändra namn, beskrivning och ingredienser på receptet.
     upload_description: Ladda upp bilder som visas på receptsidan.
     print_description: Skriv ut receptet.
     download_description: Ladda ner en BeerXML-fil som kan importeras i receptprogram.
+    recipe_create_information: |
+        <p>Fyll i namn och eventuell beskrivning av receptet.</p>
+        <p>Om du redan har gjort ett recept i ett receptprogram som BeerSmith kan du
+        importera det genom att klicka på knappen <em>"Importera"</em>.</p>
+        <p>Annars klickar du på knappen <em>"Bygg recept"</em> för att öppna
+        receptbyggaren där du kan fylla i alla ingredienser och övriga uppgifter
+        om receptet.</p>
     import: Importera
     search:
       button: Sök recept

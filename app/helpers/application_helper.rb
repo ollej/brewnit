@@ -120,9 +120,9 @@ module ApplicationHelper
     end
   end
 
-  def form_info_icon(text)
+  def form_info_icon(text, position: 'down', length: 'medium')
     content_tag(:span, class: 'form-info-icon',
-                data: { balloon: text, :'balloon-pos' => 'down', :'balloon-length' => 'medium' }) do
+                data: tooltip_data(text, position: position, length: length)) do
       concat icon('info-circle')
     end
   end

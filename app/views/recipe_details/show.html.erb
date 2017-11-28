@@ -4,10 +4,12 @@
         </div>
         <div class="page-content-controls pure-u-1 pure-u-sm-2-5">
           <div class="controls-signed-in">
-            <%= link_to @recipe, class: 'pure-button secondary-button',
-              data: tooltip_data(I18n.t(:'recipe_detail.show_recipe_description'),
-                                 length: 'small') do %>
-              <%= icon('beer') %> <%= t(:'recipe_detail.show_recipe') %>
+            <% if @recipe.complete? %>
+              <%= link_to @recipe, class: 'pure-button secondary-button',
+                data: tooltip_data(I18n.t(:'recipe_detail.show_recipe_description'),
+                                  length: 'small') do %>
+                <%= icon('beer') %> <%= t(:'recipe_detail.show_recipe') %>
+              <% end %>
             <% end %>
             <%= link_to recipe_details_path(@recipe, format: :xml), rel: nofollow,
               class: 'pure-button secondary-button',
