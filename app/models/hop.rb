@@ -18,4 +18,16 @@ class Hop < ApplicationRecord
   validates :alpha_acid, presence: true, numericality: true
   validates :use, presence: true, inclusion: { in: Hop.uses.keys }
   validates :form, presence: true, inclusion: { in: Hop.forms.keys }
+
+  def amount_in_kilos
+    amount / 1000
+  end
+
+  def use_time_in_seconds
+    if dry_hop?
+      use_time * 24 * 60
+    else
+      use_time
+    end
+  end
 end

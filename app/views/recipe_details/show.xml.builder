@@ -59,10 +59,10 @@ xml.RECIPES do
         xml.HOP do
           xml.VERSION 1
           xml.NAME hop.name
-          xml.AMOUNT (hop.amount / 1000) # Hops are stored in kilograms in beerxml v1
+          xml.AMOUNT hop.amount_in_kilos
           xml.USE Hop.uses[hop.use]
           xml.ALPHA hop.alpha_acid
-          xml.TIME hop.use_time
+          xml.TIME hop.use_time_in_seconds
           xml.FORM Hop.forms[hop.form]
         end
       end

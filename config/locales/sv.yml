@@ -822,7 +822,7 @@ sv:
         alpha_acid: Alfasyra (%)
         form: Typ
         use: Användning
-        use_time: Tid
+        use_time: Tid (min/dgr)
       misc:
         name: Namn
         amount: Mängd (L / gr)
