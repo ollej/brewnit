@@ -97,6 +97,8 @@ sv:
         <p>Annars klickar du på knappen <em>"Bygg recept"</em> för att öppna
         receptbyggaren där du kan fylla i alla ingredienser och övriga uppgifter
         om receptet.</p>
+    event_recipes: Evenemang
+    event_recipes_description: Ändra vilka evenemang detta recept har deltagit i.
     import: Importera
     search:
       button: Sök recept
@@ -221,6 +223,8 @@ sv:
     last_registration_description: Senaste datum och tid som det går att anmäla sig till detta arrangemang.
     registration_information_description: Information som visas vid anmälan av recept till evenemanget.
   recipe_events:
+    events_for_recipe: Evenemang för %{recipe_name}
+    recipe_must_be_completed: Du måste bygga färdigt och publicera receptet, och markera det publikt, för att kunna lägga till evenemang.
     add_event: Lägg till evenemang
     add: Lägg till
     choose: Välj evenemang
