@@ -837,7 +837,7 @@ sv:
         misc_type: Typ
       yeast:
         name: Namn
-        amount: Mängd
+        amount: Mängd (L / gr)
         weight: Vikt/Volym
         yeast_type: Jästsort
         form: Form

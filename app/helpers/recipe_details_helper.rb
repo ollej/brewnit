@@ -31,4 +31,11 @@ module RecipeDetailsHelper
       amount
     end
   end
+
+  def display_amount(ingredient)
+    amount = normalize_amount(ingredient.amount, ingredient.weight)
+    precision = ingredient.weight? ? 3 : 2
+    unit = ingredient.weight? ? t(:'beerxml.kilograms') : t(:'beerxml.liter_abbr')
+    "#{number_with_precision(amount, precision: precision, separator: '.')} #{unit}"
+  end
 end

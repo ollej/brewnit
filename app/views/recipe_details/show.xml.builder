@@ -45,8 +45,9 @@ xml.RECIPES do
           xml.VERSION 1
           xml.NAME fermentable.name
           xml.AMOUNT fermentable.amount
-          xml.YIELD fermentable.yield
-          xml.POTENTIAL fermentable.potential
+          xml.DISPLAY_AMOUNT "#{number_with_precision(fermentable.amount, precision: 2, separator: '.')} #{t(:'beerxml.kilograms')}"
+          xml.YIELD fermentable.yield if fermentable.yield > 0
+          xml.POTENTIAL fermentable.potential if fermentable.potential > 0
           xml.COLOR BeerRecipe::Formula.new.ebc_to_srm(fermentable.ebc)
           xml.TYPE Fermentable.grain_types[fermentable.grain_type]
           xml.ADD_AFTER_BOIL fermentable.after_boil.to_s.upcase
@@ -60,6 +61,7 @@ xml.RECIPES do
           xml.VERSION 1
           xml.NAME hop.name
           xml.AMOUNT hop.amount_in_kilos
+          xml.DISPLAY_AMOUNT "#{number_with_precision(hop.amount_in_kilos, precision: 3, separator: '.')} #{t(:'beerxml.kilograms')}"
           xml.USE Hop.uses[hop.use]
           xml.ALPHA hop.alpha_acid
           xml.TIME hop.use_time_in_seconds
@@ -73,7 +75,8 @@ xml.RECIPES do
           xml.VERSION 1
           xml.NAME misc.name
           xml.AMOUNT_IS_WEIGHT misc.weight.to_s.upcase
-          xml.AMOUNT normalize_amount(misc.amount, misc.weight)
+          xml.AMOUNT normalize_amount(misc.amount, misc.weight?)
+          xml.DISPLAY_AMOUNT display_amount(misc)
           xml.TIME misc.use_time
           xml.USE Misc.uses[misc.use]
           xml.TYPE Misc.misc_types[misc.misc_type]
@@ -87,6 +90,7 @@ xml.RECIPES do
           xml.NAME yeast.name
           xml.AMOUNT_IS_WEIGHT yeast.weight.to_s.upcase
           xml.AMOUNT normalize_amount(yeast.amount, yeast.weight)
+          xml.DISPLAY_AMOUNT display_amount(yeast)
           # Support yeast packages?
           xml.FORM Yeast.forms[yeast.form]
           xml.TYPE Yeast.yeast_types[yeast.yeast_type]
