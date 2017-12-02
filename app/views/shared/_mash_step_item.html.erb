@@ -1,0 +1,21 @@
+    <tr data-mash_step-id="<%= mash_step.id %>">
+      <td class="ingredient name"><%= mash_step.name %></td>
+      <td class="ingredient amount format-number">
+        <%= number_with_precision(mash_step.step_temperature, precision: 1) %>
+      </td>
+      <td class="ingredient amount format-number">
+        <%= number_with_precision(mash_step.step_time, precision: 1) %>
+      </td>
+      <td class="ingredient amount format-number">
+        <%= number_with_precision(mash_step.ramp_time, precision: 1) %>
+      </td>
+      <td class="ingredient amount format-number">
+        <%= number_with_precision(mash_step.infuse_amount, precision: 1) %>
+      </td>
+      <td class="ingredient grain_type">
+        <%= I18n.t("recipe_detail.mash_type.#{mash_step.mash_type}") %>
+      </td>
+      <td>
+        <%= trash_icon(recipe_mash_step_path(@recipe, mash_step)) %>
+      </td>
+    </tr>

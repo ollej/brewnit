@@ -21,4 +21,6 @@ class Misc < ApplicationRecord
   validates :use_time, presence: true, numericality: true
   validates :use, presence: true, inclusion: { in: Misc.uses.keys }
   validates :misc_type, presence: true, inclusion: { in: Misc.misc_types.keys }
+
+  default_scope { order(created_at: :asc) }
 end

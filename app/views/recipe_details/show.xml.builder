@@ -93,5 +93,27 @@ xml.RECIPES do
         end
       end
     end
+    xml.MASH do
+      xml.VERSION 1
+      xml.NAME I18n.t(:'recipe_detail.mash_steps')
+      xml.GRAIN_TEMP @details.grain_temp
+      xml.SPARGE_TEMP @details.sparge_temp
+      xml.MASH_STEPS do
+        @mash_steps.each do |mash_step|
+          xml.MASH_STEP do
+            xml.VERSION 1
+            xml.NAME mash_step.name
+            xml.TYPE MashStep.mash_types[mash_step.mash_type]
+            xml.STEP_TEMP mash_step.step_temperature
+            xml.STEP_TIME mash_step.step_time
+            xml.RAMP_TIME mash_step.ramp_time if mash_step.ramp_time.present?
+            xml.END_TEMP mash_step.end_temperature if mash_step.end_temperature.present?
+            xml.WATER_GRAiN_RATIO mash_step.water_grain_ratio if mash_step.water_grain_ratio.present?
+            xml.INFUSE_AMOUNT mash_step.infuse_amount if mash_step.infuse_amount.present?
+            xml.INFUSE_TEMPERATURE mash_step.infuse_temperature if mash_step.infuse_temperature.present?
+          end
+        end
+      end
+    end
   end
 end

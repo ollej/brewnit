@@ -19,6 +19,8 @@ class Hop < ApplicationRecord
   validates :use, presence: true, inclusion: { in: Hop.uses.keys }
   validates :form, presence: true, inclusion: { in: Hop.forms.keys }
 
+  default_scope { order(use_time: :desc) }
+
   def amount_in_kilos
     amount / 1000
   end

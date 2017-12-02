@@ -106,7 +106,7 @@ GEM
       actionpack (>= 3.1)
       axlsx (>= 2.0.1)
     bcrypt (3.1.11)
-    beer_recipe (0.4.18)
+    beer_recipe (0.4.22)
       docopt (~> 0.5)
       nrb-beerxml (~> 0.1)
     binding_of_caller (0.7.3)

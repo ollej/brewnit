@@ -4,6 +4,7 @@ class RecipeDetail < ApplicationRecord
   has_many :hops, dependent: :destroy
   has_many :miscs, dependent: :destroy
   has_many :yeasts, dependent: :destroy
+  has_many :mash_steps, dependent: :destroy
   belongs_to :style, optional: true
 
   validates :batch_size, numericality: true, allow_blank: true

@@ -273,6 +273,7 @@ sv:
     show_recipe: Visa recept
     show_recipe_description: Visa receptsidan för detta recept.
     edit_recipe: Ändra recept
+    mash_steps: Mäskning
     weight_option:
       weight: Vikt
       volume: Volym
@@ -316,6 +317,10 @@ sv:
       liquid: Flytande
       culture: Kultur
       slant: Slant
+    mash_type:
+      infusion: Infusion
+      temperature: Temperatur
+      decoction: Dekoktion
   register_recipe:
     new: Anmäl recept
     save: Anmäl
@@ -836,6 +841,13 @@ sv:
         weight: Vikt/Volym
         yeast_type: Jästsort
         form: Form
+      mash_step:
+        name: Namn
+        step_temperature: Temperatur (°C)
+        step_time: Tid (min)
+        ramp_time: Höjningstid
+        infuse_amount: Vatten (L)
+        mash_type: Mäskningstyp
 
     errors:
       template:

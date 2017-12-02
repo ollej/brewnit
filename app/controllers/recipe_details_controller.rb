@@ -12,6 +12,7 @@ class RecipeDetailsController < ApplicationController
     @fermentables = @details.fermentables
     @miscs = @details.miscs
     @yeasts = @details.yeasts
+    @mash_steps = @details.mash_steps
     @styles = Style.style_options
     @style = @details.style
 

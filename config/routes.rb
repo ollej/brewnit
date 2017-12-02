@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     resources :hops, only: [:index, :create, :destroy], controller: :recipe_hops
     resources :miscs, only: [:index, :create, :destroy], controller: :recipe_miscs
     resources :yeasts, only: [:index, :create, :destroy], controller: :recipe_yeasts
+    resources :mash_steps, only: [:index, :create, :destroy], controller: :recipe_mash_steps
     resource :complete, only: [:update], controller: :recipe_complete
   end
 

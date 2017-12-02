@@ -105,6 +105,12 @@ module ApplicationHelper
     }
   end
 
+  def mash_type_options
+    MashStep.mash_types.map { |k, v|
+      [I18n.t("recipe_detail.mash_type.#{k}"), v]
+    }
+  end
+
   def icon(type=nil)
     content_tag(:i, '', class: "fa fa-#{type}") if type.present?
   end

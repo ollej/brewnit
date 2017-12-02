@@ -9,6 +9,7 @@ class RecipeCompleteController < ApplicationController
     @fermentables = @details.fermentables
     @miscs = @details.miscs
     @yeasts = @details.yeasts
+    @mash_steps = @details.mash_steps
     @style = @details.style
     @recipe.beerxml = render_to_string(template: 'recipe_details/show.xml.builder')
     @recipe.save!

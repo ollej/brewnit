@@ -11,4 +11,6 @@ class Fermentable < ApplicationRecord
   validates :amount, presence: true, numericality: true
   validates :ebc, presence: true, numericality: true
   validates :grain_type, presence: true, inclusion: { in: Fermentable.grain_types.keys }
+
+  default_scope { order(amount: :desc) }
 end

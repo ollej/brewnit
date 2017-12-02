@@ -1,0 +1,13 @@
+<% if @error.nil? %>
+  <% html = j(render partial: 'shared/mash_step_item',
+              locals: { mash_step: @mash_step }) %>
+  $("<%= html %>").appendTo("#mash_steps")
+  $("#new_mash_step").trigger('reset');
+  $("#mash_steps tr[data-mash_step-id=<%= @mash_step.id %>]")
+    .effect("highlight", {}, 500);
+<% else %>
+  $('body').trigger('flasher:show', {
+    message: '<%= j(@error) %>',
+    level: 'error'
+  })
+<% end %>

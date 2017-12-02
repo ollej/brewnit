@@ -35,20 +35,6 @@ CREATE EXTENSION IF NOT EXISTS hstore WITH SCHEMA public;
 COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs';
 
 
---
--- Name: pg_trgm; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS pg_trgm WITH SCHEMA public;
-
-
---
--- Name: EXTENSION pg_trgm; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION pg_trgm IS 'text similarity measurement and index searching based on trigrams';
-
-
 SET search_path = public, pg_catalog;
 
 --
@@ -85,6 +71,17 @@ CREATE TYPE hop_use AS ENUM (
     'Mash',
     'First Wort',
     'Aroma'
+);
+
+
+--
+-- Name: mash_type; Type: TYPE; Schema: public; Owner: -
+--
+
+CREATE TYPE mash_type AS ENUM (
+    'Infusion',
+    'Temperature',
+    'Decoction'
 );
 
 
@@ -167,106 +164,6 @@ CREATE TEXT SEARCH DICTIONARY swedish (
 CREATE TEXT SEARCH DICTIONARY swedish_snowball_dict (
     TEMPLATE = pg_catalog.snowball,
     language = 'swedish', stopwords = 'swedish' );
-
-
---
--- Name: swedish_stem; Type: TEXT SEARCH DICTIONARY; Schema: public; Owner: -
---
-
-CREATE TEXT SEARCH DICTIONARY swedish_stem (
-    TEMPLATE = pg_catalog.snowball,
-    language = 'swedish', stopwords = 'swedish' );
-
-
---
--- Name: brewnit_swedish; Type: TEXT SEARCH CONFIGURATION; Schema: public; Owner: -
---
-
-CREATE TEXT SEARCH CONFIGURATION brewnit_swedish (
-    PARSER = pg_catalog."default" );
-
-ALTER TEXT SEARCH CONFIGURATION brewnit_swedish
-    ADD MAPPING FOR asciiword WITH swedish_stem;
-
-ALTER TEXT SEARCH CONFIGURATION brewnit_swedish
-    ADD MAPPING FOR word WITH swedish_stem;
-
-ALTER TEXT SEARCH CONFIGURATION brewnit_swedish
-    ADD MAPPING FOR hword_part WITH swedish_stem;
-
-ALTER TEXT SEARCH CONFIGURATION brewnit_swedish
-    ADD MAPPING FOR hword_asciipart WITH swedish_stem;
-
-ALTER TEXT SEARCH CONFIGURATION brewnit_swedish
-    ADD MAPPING FOR asciihword WITH swedish_stem;
-
-ALTER TEXT SEARCH CONFIGURATION brewnit_swedish
-    ADD MAPPING FOR hword WITH swedish_stem;
-
-
---
--- Name: swedish; Type: TEXT SEARCH CONFIGURATION; Schema: public; Owner: -
---
-
-CREATE TEXT SEARCH CONFIGURATION swedish (
-    PARSER = pg_catalog."default" );
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR asciiword WITH swedish_stem;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR word WITH swedish_stem;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR numword WITH simple;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR email WITH simple;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR url WITH simple;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR host WITH simple;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR sfloat WITH simple;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR version WITH simple;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR hword_numpart WITH simple;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR hword_part WITH swedish_stem;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR hword_asciipart WITH swedish_stem;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR numhword WITH simple;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR asciihword WITH swedish_stem;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR hword WITH swedish_stem;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR url_path WITH simple;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR file WITH simple;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR "float" WITH simple;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR "int" WITH simple;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR uint WITH simple;
 
 
 --
@@ -503,8 +400,8 @@ ALTER SEQUENCE events_id_seq OWNED BY events.id;
 --
 
 CREATE TABLE events_recipes (
-    event_id integer NOT NULL,
-    recipe_id integer NOT NULL
+    event_id bigint NOT NULL,
+    recipe_id bigint NOT NULL
 );
 
 
@@ -582,6 +479,48 @@ CREATE SEQUENCE hops_id_seq
 --
 
 ALTER SEQUENCE hops_id_seq OWNED BY hops.id;
+
+
+--
+-- Name: mash_steps; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE mash_steps (
+    id bigint NOT NULL,
+    name character varying DEFAULT ''::character varying NOT NULL,
+    mash_type mash_type NOT NULL,
+    step_temperature numeric NOT NULL,
+    step_time numeric NOT NULL,
+    water_grain_ratio numeric,
+    infuse_amount numeric,
+    infuse_temperature numeric,
+    ramp_time numeric,
+    end_temperature numeric,
+    decoction_amount numeric,
+    description text DEFAULT ''::text NOT NULL,
+    recipe_detail_id bigint,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: mash_steps_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE mash_steps_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: mash_steps_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE mash_steps_id_seq OWNED BY mash_steps.id;
 
 
 --
@@ -946,15 +885,6 @@ ALTER SEQUENCE votes_id_seq OWNED BY votes.id;
 
 
 --
--- Name: words; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE words (
-    word text
-);
-
-
---
 -- Name: yeasts; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1037,6 +967,13 @@ ALTER TABLE ONLY fermentables ALTER COLUMN id SET DEFAULT nextval('fermentables_
 --
 
 ALTER TABLE ONLY hops ALTER COLUMN id SET DEFAULT nextval('hops_id_seq'::regclass);
+
+
+--
+-- Name: mash_steps id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY mash_steps ALTER COLUMN id SET DEFAULT nextval('mash_steps_id_seq'::regclass);
 
 
 --
@@ -1164,6 +1101,14 @@ ALTER TABLE ONLY fermentables
 
 ALTER TABLE ONLY hops
     ADD CONSTRAINT hops_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: mash_steps mash_steps_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY mash_steps
+    ADD CONSTRAINT mash_steps_pkey PRIMARY KEY (id);
 
 
 --
@@ -1302,13 +1247,6 @@ CREATE INDEX fulltext_index_users_on_primary ON users USING gin (to_tsvector('sw
 
 
 --
--- Name: idx_recipes_on_description_trigram; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX idx_recipes_on_description_trigram ON recipes USING gin (description gin_trgm_ops);
-
-
---
 -- Name: index_commontator_comments_on_c_id_and_c_type_and_t_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1418,6 +1356,13 @@ CREATE INDEX index_fermentables_on_recipe_detail_id ON fermentables USING btree 
 --
 
 CREATE INDEX index_hops_on_recipe_detail_id ON hops USING btree (recipe_detail_id);
+
+
+--
+-- Name: index_mash_steps_on_recipe_detail_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_mash_steps_on_recipe_detail_id ON mash_steps USING btree (recipe_detail_id);
 
 
 --
@@ -1666,10 +1611,11 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 
 
 --
--- Name: words_idx; Type: INDEX; Schema: public; Owner: -
+-- Name: mash_steps fk_rails_0f11dbd377; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-CREATE INDEX words_idx ON words USING gin (word gin_trgm_ops);
+ALTER TABLE ONLY mash_steps
+    ADD CONSTRAINT fk_rails_0f11dbd377 FOREIGN KEY (recipe_detail_id) REFERENCES recipe_details(id);
 
 
 --
@@ -1850,6 +1796,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20171121184814'),
 ('20171122201201'),
 ('20171126121130'),
-('20171126161659');
+('20171126161659'),
+('20171202132847');
 
 

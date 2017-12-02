@@ -1,26 +1,26 @@
-class RecipeFermentablesController < ApplicationController
+class RecipeMashStepsController < ApplicationController
   before_action :deny_spammers!
   before_action :load_and_authorize_recipe
 
   def index
-    @fermentables = @recipe_detail.fermentables
+    @mash_steps = @recipe_detail.mash_steps
 
     respond_to do |format|
-      format.json { render json: @fermentables, status: :ok }
+      format.json { render json: @mash_steps, status: :ok }
     end
   end
 
   def create
-    @fermentable = Fermentable.new(fermentable_params)
+    @mash_step = MashStep.new(mash_step_params)
 
     respond_to do |format|
-      if @fermentable.save
-        @recipe_detail.fermentables << @fermentable
+      if @mash_step.save
+        @recipe_detail.mash_steps << @mash_step
         format.html { redirect_to recipe_details_path }
-        format.json { render json: @fermentable, status: :ok, location: recipe_details_path }
+        format.json { render json: @mash_step, status: :ok, location: recipe_details_path }
         format.js { render layout: false, status: :ok, location: recipe_details_path }
       else
-        @error = @fermentable.errors.full_messages.to_sentence
+        @error = @mash_step.errors.full_messages.to_sentence
         format.html {
           flash[:error] = @error
           redirect_to recipe_details_path
@@ -32,15 +32,15 @@ class RecipeFermentablesController < ApplicationController
   end
 
   def destroy
-    @fermentable = @recipe_detail.fermentables.find(params[:id])
+    @mash_step = @recipe_detail.mash_steps.find(params[:id])
 
     respond_to do |format|
-      if @fermentable.destroy
+      if @mash_step.destroy
         format.html { redirect_to recipe_details_path }
         format.json { render layout: false, status: :ok, location: recipe_details_path }
         format.js { render layout: false, status: :ok, location: recipe_details_path }
       else
-        @error = @fermentable.errors.full_messages.to_sentence
+        @error = @mash_step.errors.full_messages.to_sentence
         format.html {
           flash[:error] = @error
           redirect_to recipe_details_path
@@ -53,14 +53,16 @@ class RecipeFermentablesController < ApplicationController
 
   private
 
-  def fermentable_params
-    params.require(:fermentable).permit(:name, :amount, :yield, :potential, :ebc, :after_boil, :fermentable, :grain_type)
+  def mash_step_params
+    params.require(:mash_step).permit(
+      :name, :step_temperature, :step_time, :water_grain_ratio, :infuse_amount,
+      :infuse_temperature, :ramp_time, :end_temperature, :mash_type
+    )
   end
 
   def load_and_authorize_recipe
-    @recipe = Recipe.includes(:detail).find(params[:recipe_id])
+    @recipe = Recipe.includes(detail: [:mash_steps]).find(params[:recipe_id])
     @recipe_detail = @recipe.detail
     raise AuthorizationException unless current_user.can_modify?(@recipe)
   end
-
 end
