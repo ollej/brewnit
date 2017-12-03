@@ -20,8 +20,8 @@ class RecipesController < ApplicationController
     @recipe = find_recipe
     raise AuthorizationException unless can_show?(@recipe)
     raise RecipeNotComplete unless @recipe.complete?
-    @beerxml = @recipe.beerxml_details
-    @presenter = RecipePresenter.new(@recipe)
+    @beerxml = BeerxmlImport.new(@recipe, @recipe.beerxml).parse
+    @presenter = RecipePresenter.new(@recipe, @beerxml)
     Recipe.unscoped do
       commontator_thread_show(@recipe)
     end
@@ -64,6 +64,7 @@ class RecipesController < ApplicationController
 
     respond_to do |format|
       if @recipe.save
+        import_beerxml
         format.html { redirect_to redirect_path, notice: I18n.t(:'recipes.create.successful') }
         format.json { render :show, status: :created, location: @recipe }
       else
@@ -114,9 +115,7 @@ class RecipesController < ApplicationController
     end
 
     def recipe_params
-      recipe = params.require(:recipe).permit(:name, :description, :beerxml, :public)
-      recipe[:beerxml] = recipe[:beerxml].read if recipe[:beerxml].present?
-      recipe
+      params.require(:recipe).permit(:name, :description, :public)
     end
 
     def event_params
@@ -132,6 +131,17 @@ class RecipesController < ApplicationController
         @recipe
       else
         recipe_details_path(@recipe)
+      end
+    end
+
+    def import_beerxml
+      if params.dig(:recipe, :beerxml).present?
+        @recipe.beerxml = params.dig(:recipe, :beerxml).read
+        BeerxmlImport.new(@recipe, @recipe.beerxml).run
+        Rails.logger.debug { @recipe.detail.hops.inspect }
+        Rails.logger.debug { @recipe.detail.yeasts.inspect }
+        @recipe.detail.save!
+        @recipe.save!
       end
     end
 end

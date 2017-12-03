@@ -66,11 +66,11 @@ CREATE TYPE hop_form AS ENUM (
 --
 
 CREATE TYPE hop_use AS ENUM (
-    'Boil',
-    'Dry Hop',
     'Mash',
     'First Wort',
-    'Aroma'
+    'Boil',
+    'Aroma',
+    'Dry Hop'
 );
 
 
@@ -1797,6 +1797,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20171122201201'),
 ('20171126121130'),
 ('20171126161659'),
-('20171202132847');
+('20171202132847'),
+('20171203174307');
 
 

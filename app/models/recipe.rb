@@ -28,9 +28,6 @@ class Recipe < ApplicationRecord
 
   accepts_nested_attributes_for :media, reject_if: lambda { |r| r['media'].nil? }
 
-  before_save :extract_beerxml_details, if: Proc.new { |r|
-    r.errors.empty? && beerxml.present?
-  }
   validates :beerxml, beerxml: true, allow_blank: true
 
   acts_as_commontable
@@ -94,94 +91,6 @@ class Recipe < ApplicationRecord
 
   def registration_message_for(event)
     registrations.by_event(event).first&.message
-  end
-
-  def beerxml_details
-    @beerxml_details ||= parse_beerxml(self.beerxml)
-  end
-
-  def parse_beerxml(beerxml)
-    parser = NRB::BeerXML::Parser.new(perform_validations: false)
-    xml = StringIO.new(beerxml)
-    recipe = parser.parse(xml)
-    BeerRecipe::RecipeWrapper.new(recipe.records.first)
-  end
-
-  def extract_beerxml_details
-    return unless beerxml.present?
-    self.name = beerxml_details.name unless self.name.present?
-    self.abv = beerxml_details.abv
-    self.ibu = beerxml_details.ibu
-    self.og = beerxml_details.og
-    self.fg = beerxml_details.fg
-    self.style_code = beerxml_details.style_code
-    self.style_guide = beerxml_details.style.try(:style_guide) || ''
-    self.style_name = beerxml_details.style.try(:name) || ''
-    self.batch_size = beerxml_details.batch_size
-    self.color = beerxml_details.color_ebc
-    self.brewer = beerxml_details.brewer || ''
-    if beerxml_details.equipment.present?
-      self.equipment = beerxml_details.equipment.try(:name) || ''
-    else
-      self.equipment = user.equipment || ''
-    end
-    self.complete = true
-  end
-
-  def malt_data
-    beerxml_details.fermentables.map do |f|
-      {
-        label: f.name,
-        value: f.formatted_amount.to_f,
-        color: f.color_hex,
-      }
-    end
-  end
-
-  def hop_addition_name(hop)
-    if hop.use == 'Boil'
-      if hop.time >= 30
-        I18n.t(:'beerxml.addition_bitter')
-      elsif hop.time >= 10
-        I18n.t(:'beerxml.addition_flavour')
-      else
-        I18n.t(:'beerxml.addition_aroma')
-      end
-    else
-      I18n.t("beerxml.#{hop.use}")
-    end
-  end
-
-  def hop_data(hop)
-    {
-      name: hop.name,
-      size: hop.amount,
-      time: hop.time,
-      ibu: hop.ibu,
-      aau: hop.aau,
-      mgl_alpha: hop.mgl_added_alpha_acids,
-      grams_per_liter: hop.amount / batch_size,
-      tooltip: "#{hop.formatted_amount} #{I18n.t(:'beerxml.grams')} #{hop.name} @ #{hop.formatted_time} #{I18n.t("beerxml.#{hop.time_unit}", default: hop.time_unit)}"
-    }
-  end
-
-  def hop_additions
-    hops = {}
-    beerxml_details.hops.map do |h|
-      if hops[h.time]
-        hops[h.time][:children] << hop_data(h)
-      else
-        hops[h.time] = { name: hop_addition_name(h), children: [hop_data(h)] }
-      end
-    end
-    hops
-  end
-
-  def hops_data
-    {
-      name: I18n.t(:'beerxml.hops'),
-      children: hop_additions.values
-    }
   end
 
   def pushover_values(type = :create)

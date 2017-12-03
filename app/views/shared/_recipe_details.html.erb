@@ -356,10 +356,10 @@
 
           <div class="recipe_style">
             <h3><%= t(:'beerxml.style') %></h3>
-            <p><%= @beerxml.style.name %> <%= @presenter.style_type %></p>
+            <p><%= @beerxml.style&.name %> <%= @presenter.style_type %></p>
           </div>
 
-          <% if @beerxml.style.type.present? %>
+          <% if @beerxml.style&.type.present? %>
           <div class="recipe_type">
             <h3><%= t(:'beerxml.type') %></h3>
             <p><%= @beerxml.style.type %></p>

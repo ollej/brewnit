@@ -14,6 +14,10 @@ class Style < ApplicationRecord
   validates :abv_min, numericality: true
   validates :abv_max, numericality: true
 
+  scope :by_code, -> (number, letter) {
+    where(number: number, letter: letter)
+  }
+
   def self.style_options
     order(number: :asc, letter: :asc).map do |style|
       ["#{style.number}#{style.letter}. #{style.name}", style.id]

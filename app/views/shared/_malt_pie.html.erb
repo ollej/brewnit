@@ -2,6 +2,6 @@
 <div id="pie-chart-malt"></div>
 
 <script>
-var pieMalt = new BeerPie("pie-chart-malt", "tab2", <%= @recipe.malt_data.to_json.html_safe %>);
+var pieMalt = new BeerPie("pie-chart-malt", "tab2", <%= @presenter.malt_data.to_json.html_safe %>);
 </script>
 

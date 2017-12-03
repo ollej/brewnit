@@ -64,7 +64,7 @@ xml.RECIPES do
           xml.DISPLAY_AMOUNT "#{number_with_precision(hop.amount_in_kilos, precision: 3, separator: '.')} #{t(:'beerxml.kilograms')}"
           xml.USE Hop.uses[hop.use]
           xml.ALPHA hop.alpha_acid
-          xml.TIME hop.use_time_in_seconds
+          xml.TIME hop.use_time_in_minutes
           xml.FORM Hop.forms[hop.form]
         end
       end
