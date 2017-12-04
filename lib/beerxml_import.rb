@@ -90,7 +90,6 @@ class BeerxmlImport
         use_time: misc.time,
         use: find_misc_use(misc.use),
         misc_type: find_misc_type(misc.type),
-        form: find_misc_form(misc.form)
       )
     end
   end
@@ -128,9 +127,11 @@ class BeerxmlImport
     @details.boil_size = beerxml_data.boil_size
     @details.og = beerxml_data.og
     @details.fg = beerxml_data.fg
-    @details.sparge_temp = beerxml_data.mash&.sparge_temp
-    @details.grain_temp = beerxml_data.mash&.grain_temp
-    @details.carbonation = beerxml_data.carbonation
+    unless beerxml_data.mash.nil?
+      @details.sparge_temp = beerxml_data.mash.sparge_temp
+      @details.grain_temp = beerxml_data.mash.grain_temp
+    end
+    @details.carbonation = beerxml_data.carbonation || 0
     @details.style = find_style(beerxml_data.style)
   end
 
@@ -165,11 +166,11 @@ class BeerxmlImport
   end
 
   def find_yeast_type(type)
-    Yeast.yeast_types.key(type) || 'Dry'
+    Yeast.yeast_types.key(type) || 'Ale'
   end
 
   def find_yeast_form(form)
-    Yeast.forms.key(form) || 'Ale'
+    Yeast.forms.key(form) || 'Dry'
   end
 
   def find_mash_type(type)

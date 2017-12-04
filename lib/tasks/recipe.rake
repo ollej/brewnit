@@ -3,8 +3,10 @@ namespace :recipe do
   task :update => :environment do
     Recipe.unscoped.all.each do |recipe|
       puts "Extracting recipe details for Recipe##{recipe.id}"
-      recipe.extract_beerxml_details
-      recipe.save!
+      if recipe.beerxml.present?
+        BeerxmlImport.new(recipe, recipe.beerxml).run
+        recipe.save!
+      end
     end
   end
 
