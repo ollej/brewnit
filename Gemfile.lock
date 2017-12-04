@@ -106,7 +106,7 @@ GEM
       actionpack (>= 3.1)
       axlsx (>= 2.0.1)
     bcrypt (3.1.11)
-    beer_recipe (0.4.14)
+    beer_recipe (0.4.23)
       docopt (~> 0.5)
       nrb-beerxml (~> 0.1)
     binding_of_caller (0.7.3)
@@ -413,6 +413,7 @@ DEPENDENCIES
   execjs
   fancybox2-rails!
   ffi
+  httparty
   invisible_captcha
   jbuilder
   jquery-rails

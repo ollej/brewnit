@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :exception
+  protect_from_forgery with: :exception, unless: -> { request.format.json? }
   before_action :authenticate_user!
   before_action :clear_search
   before_action :populate_search
@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
     if user_signed_in?
       Recipe.for_user(current_user)
     else
-      Recipe.all
+      Recipe.completed
     end
   end
 
@@ -94,5 +94,4 @@ class ApplicationController < ActionController::Base
   def deny_spammers!
     redirect_spammers! if spammer?
   end
-
 end

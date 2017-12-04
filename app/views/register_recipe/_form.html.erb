@@ -1,0 +1,44 @@
+<%= form_for(:registration, url: register_recipe_path,
+             html: { class: 'pure-form pure-form-aligned medal-placement' }) do |f| %>
+  <%= invisible_captcha %>
+
+  <% if @event.present? %>
+    <%= render 'shared/event_plate' %>
+
+    <% if @event.official? %>
+      <%= render 'shared/official_event_plate' %>
+    <% end %>
+  <% end %>
+
+  <fieldset>
+    <% if @event.present? %>
+      <%= f.hidden_field :event, value: @event.id %>
+    <% else %>
+      <div class="field pure-control-group">
+        <%= f.label :event, t(:'register_recipe.choose_event') %>
+        <%= f.select :event, options_for_select(Event.register_event_options), {},
+              class: 'pure-input-1-4', include_blank: t(:'common.no_event') %>
+        <%= form_info_icon(I18n.t(:'register_recipe.choose_event_description')) %>
+      </div>
+    <% end %>
+    <div class="field pure-control-group">
+      <% if @recipe.present? %>
+        <%= f.hidden_field :recipe, value: @recipe.id %>
+      <% else %>
+        <%= f.label :recipe, I18n.t(:'register_recipe.recipe') %>
+        <%= f.select :recipe, options_for_select(@recipe_options), {},
+              class: 'pure-input-1-4', include_blank: t(:'register_recipe.no_recipes') %>
+        <%= form_info_icon(I18n.t(:'register_recipe.recipe_description')) %>
+      <% end %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :message, I18n.t(:'register_recipe.message'), class: 'large-group' %>
+      <%= f.text_area :message, class: 'pure-input-1-4',
+        placeholder: I18n.t(:'register_recipe.message') %>
+      <%= form_info_icon(I18n.t(:'register_recipe.message_description')) %>
+    </div>
+    <div class="actions pure-controls">
+      <%= f.submit I18n.t(:'register_recipe.save'), class: 'pure-button pure-button-primary' %>
+    </div>
+  </fieldset>
+<% end %>

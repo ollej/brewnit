@@ -18,4 +18,6 @@ class Yeast < ApplicationRecord
   validates :weight, inclusion: { in: [true, false] }
   validates :form, presence: true, inclusion: { in: Yeast.forms.keys }
   validates :yeast_type, presence: true, inclusion: { in: Yeast.yeast_types.keys }
+
+  default_scope { order(created_at: :asc) }
 end

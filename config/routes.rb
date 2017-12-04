@@ -20,10 +20,11 @@ Rails.application.routes.draw do
   get 'likes/update'
 
   mount Commontator::Engine => '/commontator'
+
   resources :recipes do
     resources :media, only: [:create, :destroy]
     resource :add_medium, only: [:create], controller: :add_medium
-    resources :events, only: [:create, :destroy], controller: :recipe_events
+    resources :events, only: [:index, :create, :destroy], controller: :recipe_events
     member do
       post :like, controller: :likes, action: :create
       delete :like, controller: :likes, action: :destroy, as: :unlike
@@ -34,7 +35,12 @@ Rails.application.routes.draw do
     resources :hops, only: [:index, :create, :destroy], controller: :recipe_hops
     resources :miscs, only: [:index, :create, :destroy], controller: :recipe_miscs
     resources :yeasts, only: [:index, :create, :destroy], controller: :recipe_yeasts
+    resources :mash_steps, only: [:index, :create, :destroy], controller: :recipe_mash_steps
+    resource :complete, only: [:update], controller: :recipe_complete
   end
+
+  get :register_recipe, controller: :register_recipe, action: :new
+  post :register_recipe, controller: :register_recipe, action: :create
 
   devise_for :users, controllers: {
     omniauth_callbacks: 'omniauth_callbacks',

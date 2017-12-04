@@ -1,6 +1,16 @@
 class RecipeEventsController < ApplicationController
   before_action :deny_spammers!
 
+  def index
+    @recipe = Recipe.find(params[:recipe_id])
+    raise AuthorizationException unless current_user.can_modify?(@recipe)
+
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @recipe.events }
+    end
+  end
+
   def create
     @recipe = Recipe.find(event_params[:recipe_id])
     raise AuthorizationException unless current_user.can_modify?(@recipe)

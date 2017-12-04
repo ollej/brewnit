@@ -16,3 +16,8 @@
 .pure-table-striped tr:nth-child(2n-1) td {
   background-color: transparent;
 }
+
+/* Button form takes up too much space. */
+.button_to {
+  display: inline-block;
+}

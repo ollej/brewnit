@@ -25,14 +25,17 @@ set_meta_tags title: @event.name,
         </div>
         <div class="page-content-controls pure-u-1 pure-u-sm-2-5">
           <div class="controls-public">
-            <%= link_to new_recipe_path(event_id: @event.id),
-              disabled: @event.registration_closed?,
-              class: 'pure-button primary-button' do %>
-              <i class="fa fa-beer"></i>
-              <% if @event.official? %>
-                <%= t(:'events.register_recipe') %>
-              <% else %>
-                <%= t(:'events.add_recipe') %>
+            <% if @event.official? %>
+              <%= link_to register_recipe_path(event_id: @event.id),
+                disabled: @event.registration_closed?,
+                class: 'pure-button primary-button' do %>
+                <i class="fa fa-beer"></i> <%= t(:'events.register_recipe') %>
+              <% end %>
+            <% else %>
+              <%= link_to new_recipe_path(event_id: @event.id),
+                disabled: @event.registration_closed?,
+                class: 'pure-button primary-button' do %>
+                <i class="fa fa-beer"></i> <%= t(:'events.add_recipe') %>
               <% end %>
             <% end %>
             <%= form_tag(events_path, method: 'get', class: 'pure-form quicksearch', id: 'eventsearch-form') do %>
@@ -49,26 +52,26 @@ set_meta_tags title: @event.name,
             <% end %>
             <% if current_user.can_modify?(@event) %>
               <%= link_to edit_event_path(@event), class: 'pure-button secondary-button' do %>
-                <i class="fa fa-pencil-square-o"></i> <%= t(:'events.edit') %>
+                <%= icon('pencil-square-o') %> <%= t(:'events.edit') %>
               <% end %>
               <%= link_to event_recipes_path(@event, format: :xlsx), rel: nofollow,
                 method: :get, class: 'pure-button secondary-button' do %>
-                <i class="fa fa-file-excel-o"></i> <%= t(:'events.recipes_excel') %>
+                <%= icon('file-excel-o') %> <%= t(:'events.recipes_excel') %>
               <% end %>
               <%= link_to event_recipes_path(@event, format: :csv), rel: nofollow,
                 method: :get, class: 'pure-button secondary-button' do %>
-                <i class="fa fa-table"></i> <%= t(:'events.recipes_csv') %>
+                <%= icon('table') %> <%= t(:'events.recipes_csv') %>
               <% end %>
             <% end %>
             <div style="display: inline-block">
               <%= form_tag event_media_path(@event), method: :post, id: 'mediaUploadForm',
                     remote: true, html: { multipart: true } do %>
                 <%= link_to '#', class: 'pure-button secondary-button upload-button' do %>
-                  <i class="fa fa-upload"></i> <%= t(:'common.media.upload') %>
+                  <%= icon('upload') %> <%= t(:'common.media.upload') %>
                 <% end %>
                 <%= file_field_tag 'media[]', type: :file, multiple: true,
                   accept: 'image/png,image/gif,image/jpeg,image/jpg',
-                  id: 'uploadMediaField' %>
+                  id: 'uploadMediaField', class: 'hidden-file-field' %>
                 <div id="progressbar"></div>
               <% end %>
             </div>

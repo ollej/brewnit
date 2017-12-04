@@ -98,4 +98,10 @@ class Event < ApplicationRecord
     }
   end
 
+  def self.register_event_options
+    self.registration_open.upcoming.official.order(:name).collect {|event|
+      event.option_values
+    }
+  end
+
 end

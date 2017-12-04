@@ -52,10 +52,15 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   # Filter lines from Rails gems in backtraces.
-  config.filter_rails_from_backtrace!
+  #config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
   config.include Devise::Test::ControllerHelpers, :type => :controller
   config.extend ControllerMacros, :type => :controller
+
+  # Disable timestamp for invisible_captcha
+  InvisibleCaptcha.timestamp_enabled = false
+
+  Rails.application.routes.default_url_options = { host: 'test.host:3000' }
 end

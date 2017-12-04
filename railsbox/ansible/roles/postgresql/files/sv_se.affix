@@ -1,0 +1,746 @@
+# Vi tillåter sammansättningar
+#compoundwords on
+compoundwords controlled S
+compoundmin 3
+
+
+# Följande rad anger vilka tecken som ska uppfattas som bokstäver:
+wordchars [a-zåäöéàüèæøç] [A-ZÅÄÖÉÀÜÈÆØÇ]
+# skall '-' vara med?  Är hans-och-hennes ett ord eller tre?  Får man skriva ihop 
+# ord på det sättet?  /MH
+
+# Nej, bindestreck är inge bra som ordbildare.
+#wordchars [\-]
+suffixes
+
+#*******************************************#
+#*******************************************#
+#*******************************************#
+#                Substantiv                 #
+#*******************************************#
+#*******************************************#
+#*******************************************#
+#--------------------------------------------
+# Genitiv.
+#--------------------------------------------
+flag *A:
+# Som Göran: Görans
+	.	>	S
+
+#--------------------------------------------
+# Bestämd form, neutrum.
+#--------------------------------------------
+flag *B:
+# Som rep: repet, repets
+	[^A]	>	ET
+	[^A]	>	ETS
+# Substantivformer av verb:
+# Som lida: lidandet, lidandets 
+#	A		>	NDE
+	A		>	NDET
+	A		>	NDETS
+
+flag *C:
+# Som täcke: täcket, täckets
+# Även: öra, alibi, foto
+	[AEIOUYÅÄÖÉ]	>	T
+	[AEIOUYÅÄÖÉ]	>	TS
+# Som kakel: kaklet, kaklets
+	[^M] E L	>	-EL,LET
+	[^M] E L	>	-EL,LETS
+# Som vimmel: vimlet, vimlets
+	M E L		>	-MEL,LET
+	M E L		>	-MEL,LETS
+# Som socker: sockret, sockrets
+	[^M] E R	>	-ER,RET
+	[^M] E R	>	-ER,RETS
+# Som nummer: numret, numrets
+	M E R		>	-MER,RET
+	M E R		>	-MER,RETS
+# Som rum: rummet, rummets
+	M		>	MET
+	M		>	METS
+# Som tecken: tecknet, tecknets
+	E N		>	-EN, NET
+	E N		>	-EN, NETS
+# Som ton: tonnet, tonnets
+	[^E] N		>	NET
+	[^E] N		>	NETS
+
+#--------------------------------------------
+# Bestämd form, reale.
+#--------------------------------------------
+flag *D:
+# Som katt: katten, kattens
+	[^A]	>	EN
+	[^A]	>	ENS
+#--------------------------------------------
+# Substantivformer av verb (och presens particip):
+#--------------------------------------------
+# Som söka: sökande
+	A		>	NDE
+
+#--------------------------------------------
+# Bestämd form, reale samt
+# obestämd form pluralis, neutrum.
+#--------------------------------------------
+flag E:
+# Som cykel: cykeln, cykelns
+# Som frö: frön, fröns
+	[^M]	>	N
+	[^M]	>	NS
+#--------------------------------------------
+# En speciell pluralisform.
+#--------------------------------------------
+# Som faktum: fakta
+	U M	>	-UM,A
+
+#--------------------------------------------
+# Neutrum, bestämd form pluralis samt
+# reale, bestämd form singularis.
+#--------------------------------------------
+flag *F:
+# Som fönster, fader
+	[^M] E R	>	-ER,REN
+	[^M] E R	>	-ER,RENS
+# Som nummer
+	M E R		>	-MER,REN
+	M E R		>	-MER,RENS
+# Som exempel
+	[^M] E L	>	-EL,LEN
+	[^M] E L	>	-EL,LENS
+# Som vimmel, himmel
+	M E L		>	-MEL,LEN
+	M E L		>	-MEL,LENS
+# Som tecken: tecknen, tecknens
+# Som socken: socknen, socknens
+	E N		>	-EN,NEN
+	E N		>	-EN,NENS
+# Som hem, rem
+	M		>	MEN
+	M		>	MENS
+# Som ton, man
+	[^E] N		>	NEN
+	[^E] N		>	NENS
+# Som täcke, bi, kilo, knä
+	[EIOÄ]		>	NA
+	[EIOÄ]		>	NAS
+# Substantivformer av verb:
+# Som avslöja: avslöjandena, avslöjandenas
+	A		>	NDENA
+	A		>	NDENAS
+
+
+#--------------------------------------------
+# Pluralis, reale.
+#--------------------------------------------
+flag *G:
+# Som stol: stolar, stolarna, stolarnas, stolars
+# Även: del
+	[^AE]		>	AR
+	[^AE]		>	ARNA
+	[^AE]		>	ARNAS
+	[^AE]		>	ARS
+# Som timme: timmar, timmarna, timmarnas, timmars
+	E		>	-E,AR
+	E		>	-E,ARNA
+	E		>	-E,ARNAS
+	E		>	-E,ARS
+# Som fara: faror, farorna, farornas, farors
+	A		>	-A,OR
+	A		>	-A,ORNA
+	A		>	-A,ORNAS
+	A		>	-A,ORS
+
+flag *H:
+# Som katt: katter, katterna, katternas, katters
+	[^A]	>	ER
+	[^A]	>	ERS
+	[^A]	>	ERNA
+	[^A]	>	ERNAS
+# Som historia: historier, historierna, historiernas, historiers 
+	A	>	-A,ER
+	A	>	-A,ERNA
+	A	>	-A,ERNAS
+	A	>	-A,ERS
+	
+flag *I:
+# Som tå
+	[^LMNR]		>	R
+	[^LMNR]		>	RNA
+	[^LMNR]		>	RNAS
+	[^LMNR]		>	RS
+# Som fröken: fröknar, fröknarna, fröknarnas, fröknars
+# Även: socken, öken
+	E N		>	-EN,NAR
+	E N		>	-EN,NARNA
+	E N		>	-EN,NARNAS
+	E N		>	-EN,NARS
+# Som afton
+	O N		>	-ON,NAR
+	O N		>	-ON,NARNA
+	O N		>	-ON,NARNAS
+	O N		>	-ON,NARS
+# Som dröm: drömmar, drömmarna, drömmarnas, drömmars
+	M		>	MAR
+	M		>	MARNA
+	M		>	MARNAS
+	M		>	MARS
+# Som tistel
+	[^M] E L	>	-EL,LAR
+	[^M] E L	>	-EL,LARNA
+	[^M] E L	>	-EL,LARNAS
+	[^M] E L	>	-EL,LARS
+# Som lymmel
+	M E L		>	-MEL,LAR
+	M E L		>	-MEL,LARNA
+	M E L		>	-MEL,LARNAS
+	M E L		>	-MEL,LARS
+# Som tiger: tigrar, tigrarna, tigrarnas, tigrars
+	[^M] E R	>	-ER,RAR
+	[^M] E R	>	-ER,RARNA
+	[^M] E R	>	-ER,RARNAS
+	[^M] E R	>	-ER,RARS
+# Som klammer: klamrar, klamrarna, klamrarnas, klamrars
+	M E R		>	-MER,RAR
+	M E R		>	-MER,RARNA
+	M E R		>	-MER,RARNAS
+	M E R		>	-MER,RARS
+# Som sommar: somrar, somrarna, somrarnas, somrars 
+	M A R		>	-MAR,RAR
+	M A R		>	-MAR,RARNA
+	M A R		>	-MAR,RARNAS
+	M A R		>	-MAR,RARS
+
+flag *J:
+# Som formel
+# Även neutrum: sekel, mirakel
+	E L	>	-EL,LER
+	E L	>	-EL,LERNA
+	E L	>	-EL,LERNAS
+	E L	>	-EL,LERS
+# Som fot: fötter, fötterna, fötternas, fötters
+	O T	>	-OT,ÖTTER
+	O T	>	-OT,ÖTTERNA
+	O T	>	-OT,ÖTTERNAS
+	O T	>	-OT,ÖTTERS
+# Som get: getter, getterna, getternas, getters
+	[^O] T	>	TER
+	[^O] T	>	TERNA
+	[^O] T	>	TERNAS
+	[^O] T	>	TERS
+# Som tand: tänder, tänderna, tändernas, tänders
+	A N D	>	-AND,ÄNDER
+	A N D	>	-AND,ÄNDERNA
+	A N D	>	-AND,ÄNDERNAS
+	A N D	>	-AND,ÄNDERS
+# Som musiker: musikerna, musikernas
+	R		>	NA
+	R		>	NAS
+# Som ägare: ägarna, ägarnas
+	R E		>	-E,NA
+	R E		>	-E,NAS
+#--------------------------------------------
+# Ett specialfall.
+#--------------------------------------------
+# Som museum: museet, museets, museer, museerna, museernas, museers
+	U M		>	-UM,ET
+	U M		>	-UM,ETS
+	U M		>	-UM,ER
+	U M		>	-UM,ERNA
+	U M		>	-UM,ERNAS
+	U M		>	-UM,ERS
+#*******************************************#
+#*******************************************#
+#*******************************************#
+#                   Verb                    #
+#*******************************************#
+#*******************************************#
+#*******************************************#
+#--------------------------------------------
+# Andra konjugationen; imperativ.
+#--------------------------------------------
+	[^M] [^M] A		>	-A,-
+	M [^M] A		>	-A,-
+	[^M] M A		>	-A,-
+	M M A			>	-MA,-
+
+#--------------------------------------------
+# Andra konjugationen.
+#--------------------------------------------
+flag *K:
+#***********************
+# presens:
+#***********************
+# Som köpa: köper
+# Som köra: kör
+	[^R] A			>	-A,ER
+#***********************
+# imperfekt:
+#***********************
+# Som köpa
+	[KS] A			>	-A,TE
+# Som köra
+	[GJR] A			>	-A,DE
+# Som tömma
+	[^IO] M M A		>	-MA,DE
+# Som förnimma
+	I M M A			>	-IMMA,AM
+# Som komma
+	O M M A			>	-MA,-
+# Som värma, döma
+	[^M] M A		>	-A,DE
+# Som nämna
+	M N A			>	-A,DE
+# Som kunna
+	N N A			>	-NA,DE
+# Som vina
+	I N A			>	-INA,EN
+# Som bryna, kröna
+	[YÖ] N A		>	-A,TE
+# Som ?????
+#	[^IMNYÖ] N A		>	-A,DE
+# Som kyla
+	[^L] L A		>	-A,DE
+# Som fylla
+	[^AÅ] L L A		>	-A,DE
+# Som falla
+	A L L A			>	-ALLA,ÖLL
+# Som hålla
+	Å L L A			>	-ÅLLA,ÖLL
+# Som hända
+	[^AEIOUYÅÄÖ] D A	>	-A,E
+# Som lyda
+	[EYÅÄÖ] D A		>	-A,DE
+# Som lida
+	I D A			>	-IDA,ED
+# Som sjuda
+	U D A			>	-UDA,ÖD
+# Som nöta
+	[EÄÖ] T A		>	-A,TE
+# Som smälta
+	[^EIUYÅÄÖ] T A		>	-A,E
+# Som bita
+	I T A			>	-ITA,ET
+# Som ryta
+	Y T A			>	-YTA,ÖT
+# Som sluta
+	[^J] U T A		>	-UTA,ÖT
+# Som gjuta
+	[GK] J U T A		>	-JUTA,ÖT
+# Som njuta
+	[^GK] J U T A		>	-UTA,ÖT
+# Som gråta
+	Å T A			>	-ÅTA,ÄT
+# Som köpa
+	[^IUY] P A		>	-A,TE
+# Som gripa
+	I P A			>	-IPA,EP
+# Som supa
+	U P A			>	-UPA,ÖP
+# Som nypa
+	Y P A			>	-YPA,ÖP
+# Som riva
+	I V A			>	-IVA,EV
+# Som gräva
+	[^IO] V A		>	-A,DE
+#***********************
+# perfekt:
+#***********************
+# Som höra
+	[^LMNDPTV] A		>	-A,T
+# Som döma
+	[^IMN] [MN] A		>	-A,T
+# Som glömma
+	[^IO] M M A		>	-MA,T
+# Som förnimma
+	I M M A			>	-IMMA,UMMIT
+# Som komma
+	O M M A			>	-A,IT
+# Som ränna
+	N N A			>	-NA,T
+# Som nämna
+	M N A			>	-A,T
+# Som anmäla
+	[^L] L A		>	-A,T
+# Som fylla
+	[^AÅ] L L A		>	-A,T
+# Som falla
+	A L L A			>	-A,IT
+# Som hålla
+	Å L L A			>	-A,IT
+# Som tända
+	[^AEIOUYÅÄÖ] D A	>	-DA,T
+# Som föda
+	[AEYÅÄÖ] D A		>	-DA,TT
+# Som sköta
+	[ÄÖ] T A		>	-A,T
+# Som låta
+	Å T A			>	-A,IT
+# Som köpa
+	[^IOUY] P A		>	-A,T
+# Som väva
+	[^IOUY] V A		>	-A,T
+# Som rida,njuta
+	[IOU] [DNPTV] A		>	-A,IT
+# Som krypa
+	Y P A			>	-YPA,UPIT
+# Som flyta
+	Y T A			>	-YTA,UTIT
+# Som veta
+	E T A			>	T
+#--------------------------------------------
+# Perfekt particip (adjektiv).
+#--------------------------------------------
+	[^ALMNR]		>	DD
+	[^ALMNR]		>	DDA
+	[^ALMNR]		>	TT
+	E L			>	-EL,LE
+#--------------------------------------------
+# Maskulinumformer av adjektiv.
+#--------------------------------------------
+# Som dum: dumme
+	M			>	ME
+# Som förmäten: förmätne
+	E N			>	-EN,NE
+# Som fager: fagre
+	E R			>	-ER,RE
+
+#--------------------------------------------
+# Andra konjugationen; passiv form.
+#--------------------------------------------
+flag *L:
+#***********************
+# presens:
+#***********************
+# Som köpa: köps
+	[^M] [^MS] A		>	-A,S
+	M [^MS] A		>	-A,S
+	[^M] M A		>	-A,S
+	M M A			>	-MA,S
+#***********************
+# imperfekt:
+#***********************
+# Som köpa
+	[KS] A			>	-A,TES
+# Som köra
+	[GJR] A			>	-A,DES
+# Som tömma
+	M M A			>	-MA,DES
+# Som värma, döma
+	[^M] M A		>	-A,DES
+# Som nämna
+	M N A			>	-A,DES
+# Som bränna
+	N N A			>	-NA,DES
+# Som ???
+#	I N A			>	-INA,ENS
+# Som bryna, kröna
+	[YÖ] N A		>	-A,TES
+# Som ?????
+#	[^IMNYÖ] N A		>	-A,DE
+# Som mala
+	[^L] L A		>	-A,DES
+# Som fylla
+	[^AÅ] L L A		>	-A,DES
+# Som överfalla
+	A L L A			>	-ALLA,ÖLLS
+# Som hålla
+	Å L L A			>	-ÅLLA,ÖLLS
+# Som tända
+	[^AEIOUYÅÄÖ] D A	>	-A,ES
+# Som lyda
+	[EYÅÄÖ] D A		>	-A,DES
+# Som gnida
+	I D A			>	-IDA,EDS
+# Som bjuda
+	U D A			>	-UDA,ÖDS
+# Som nöta
+	[EÄÖ] T A		>	-A,TES
+# Som smälta
+	[^EIUYÅÄÖ] T A		>	-A,ES
+# Som bita
+	I T A			>	-ITA,ETS
+# Som bryta
+	Y T A			>	-YTA,ÖTS
+# Som sluta
+	[^J] U T A		>	-UTA,ÖTS
+# Som gjuta
+	[GK] J U T A		>	-JUTA,ÖTS
+# Som ljuta
+	[^GK] J U T A		>	-UTA,ÖTS
+# Som tillåta
+	Å T A			>	-ÅTA,ÄTS
+# Som köpa
+	[^IUY] P A		>	-A,TES
+# Som gripa
+	I P A			>	-IPA,EPS
+# Som supa
+	U P A			>	-UPA,ÖPS
+# Som nypa
+	Y P A			>	-YPA,ÖPS
+# Som riva
+	I V A			>	-IVA,EVS
+# Som kräva
+	[^IO] V A		>	-A,DES
+#***********************
+# perfekt:
+#***********************
+# Som höra
+	[^LMNDPTV] A		>	-A,TS
+# Som döma
+	[^MN] [MN] A		>	-A,TS
+# Som glömma
+	M M A			>	-MA,TS
+# Som ränna
+	N N A			>	-NA,TS
+# Som nämna
+	M N A			>	-A,TS
+# Som mala
+	[^L] L A		>	-A,TS
+# Som fylla
+	[^AÅ] L L A		>	-A,TS
+# Som överfalla
+	A L L A			>	-A,ITS
+# Som hålla
+	Å L L A			>	-A,ITS
+# Som tända
+	[^AEIOUYÅÄÖ] D A	>	-DA,TS
+# Som föda
+	[AEYÅÄÖ] D A		>	-DA,TTS
+# Som sköta
+	[ÄÖ] T A		>	-A,TS
+# Som låta
+	Å T A			>	-A,ITS
+# Som köpa
+	[^IOUY] P A		>	-A,TS
+# Som väva
+	[^IOUY] V A		>	-A,TS
+# Som rida,njuta,sova
+	[IOU] [DPTV] A		>	-A,ITS
+# Som nypa
+	Y P A			>	-YPA,UPITS
+# Som bryta
+	Y T A			>	-YTA,UTITS
+#--------------------------------------------
+# Presens particip, tredje konjugationen.
+#--------------------------------------------
+	[EIOUYÅÄÖ]		>	ENDE
+#--------------------------------------------
+# OK, några adjektiv.
+#--------------------------------------------
+	E L		>	-EL,LARE
+	E L		>	-EL,LAST
+	E L		>	-EL,LASTE
+	E N		>	-EN,NARE
+	E N		>	-EN,NAST
+	E N		>	-EN,NASTE
+	E R		>	-ER,RARE
+	E R		>	-ER,RAST
+	E R		>	-ER,RASTE
+	M		>	MARE
+	M		>	MAST
+	M		>	MASTE
+
+
+#--------------------------------------------
+# Första och tredje konjugationerna.
+#--------------------------------------------
+flag *M:
+# Som fiska
+	A		>	DE
+	A		>	T
+	A		>	R
+# Som bo: bodde, bott, bor
+	[OYÄ]		>	DDE
+	[EOYÄÖ]		>	TT
+	[EIOYÅÄÖ]	>	R
+	B E		>	-E,AD
+	G E		>	-E,AV
+	L E		>	-E,OG
+	S E		>	-E,ÅG
+	[^BGLS] E	>	DDE
+	I		>	-I,EV
+# Som gå: gick
+	[FG] Å		>	-Å,ICK
+# Som flå
+	[^S] L Å	>	DDE
+# Som slå
+	S L Å		>	-Å,OG
+# Som stå
+	T Å		>	-Å,OD
+	[^FGLT] Å	>	DDE
+# Som strö
+	[^D] Ö		>	DDE
+	D Ö		>	-Ö,OG
+	I		>	VIT
+	[^L] Å		>	TT
+	[^S] L Å	>	TT
+	S L Å		>	-Å,AGIT
+#--------------------------------------------
+# OK, några adjektiv.
+#--------------------------------------------
+# Som enkel: enkelt, enkla
+	[LR]		>	T
+	E L		>	-EL,LA
+# Som vacker: vackert, vackra
+	E R		>	-ER,RA
+# Som luden: ludet, ludna
+	E N		>	-N,T
+	[^MN] E N	>	-EN,NA
+# Som funnen: funnet, funna
+	N E N		>	-EN,A
+# Som välkommen: välkommet, välkomna
+	M M E N		>	-MEN,NA
+# Som dum: dumt, dumma
+	M		>	MA
+
+#--------------------------------------------
+# Första och tredje konjugationerna; passiv form.
+#--------------------------------------------
+flag *N:
+# Som locka
+	A		>	DES
+# Som tro: troddes, trotts
+# Även: sy, klä, strö
+	[OYÄÖ]		>	DDES
+	B E		>	-E,ADS
+	G E		>	-E,AVS
+	L E		>	-E,OGS
+	S E		>	-E,ÅGS
+# Som återfå: återficks
+	[FG] Å		>	-Å,ICKS
+	[^S] L Å	>	DDES
+# Som slå
+	S L Å		>	-Å,OGS
+# Som påstå
+	T Å		>	-Å,ODS
+	[^FGLT] Å	>	DDES
+	A		>	TS
+	[OYÄÖ]		>	TTS
+# Som se
+	E		>	TTS
+	[^L] Å		>	TTS
+	[^S] L Å	>	TTS
+	S L Å		>	-Å,AGITS
+# Som vistas
+	S		>	-S,DES
+	S		>	-S,TS
+	M		>	MAS
+	M		>	MES
+	E L		>	-EL,LAS
+	E L		>	-EL,LES
+	E N		>	-EN,NAS
+	E N		>	-EN,NES
+	E R		>	-ER,RAS
+	E R		>	-ER,RES
+
+flag *O:
+	[^MN] [^MND] A	>	-A,D
+	[^MN] [^MND] A	>	-A,DA
+	[^MN] [MN] A	>	-A,D
+	[^MN] [MN] A	>	-A,DA
+	[MN] [^MND] A	>	-A,D
+	[MN] [^MND] A	>	-A,DA
+	M M A		>	-MA,D
+	M M A		>	-MA,DA
+	N N A		>	-NA,D
+	N N A		>	-NA,DA
+	M N A		>	-A,D
+	M N A		>	-A,DA
+	[^DTNEIYÅÖA]	>	T
+	[^EA]		>	A
+	[^ADEIOUYÅÄÖ] D	>	-D,T
+	[AEIOUYÅÄÖ] D	>	-D,TT
+	D D		>	-DD,TT
+	[EIYÅÄÖ] T	>	T
+	[^N] N		>	T
+	N N		>	-N,T
+	[IYÅÖ]		>	TT
+	D E		>	-DE,T
+	D E		>	-E,-
+
+flag *P:
+	[^A]		>	ARE
+	[^A]		>	AST
+	[^A]		>	ASTE
+#--------------------------------------------
+# Perfekt particip (adjektiv):
+#--------------------------------------------
+	A		>	D
+	A		>	DE
+	A		>	T
+
+flag *Q:
+	[^A]		>	E
+#--------------------------------------------
+# Perfekt particip (adjektiv):
+#--------------------------------------------
+	A		>	-A,TA
+
+flag *R:
+	A		>	-A,ES
+	[^A]		>	AS
+	[^A]		>	ES
+flag ~Z:
+# Som myra: myr- (stack)
+	A	>	-A,-
+# Som förare: förar- (platsen)
+	E	>	-E,-
+# Som avgud: avguda- (dyrkan)
+	[^AE]	>	A
+
+flag ~Y:
+# Som ränta: ränte- (höjning)
+	A	>	-A,E
+# Som tjänst: tjänste- (man)
+	[^A]	>	E
+
+flag ~X:
+# Som vecka: vecko- (dag)
+	A	>	-A,O
+# Som psyke: psyko- (analys)
+	E	>	-E,O
+# Som land: lant- (brukare)
+	D	>	-D,T
+
+flag ~W:
+# Som vara: varu- (hus)
+	A	>	-A,U
+# Som maximum: maximi- (gräns)
+	U M	>	-UM,I
+
+flag ~V:
+# Som pepparkaka: pepparkaks- (hus)
+	A	>	-A,S
+# Som ansikte: ansikts- (uttryck)
+	E	>	-E,S
+# Som förhand: förhands- (granskning)
+	[^AE]	>	S
+
+flag ~U:
+# Som hyra: hyres- (gäst)
+	A	>	-A,ES
+# Som säd: sädes- (fält)
+	[^AE]	>	ES
+# Som yrke: yrkes- (man)
+	E	>	S
+
+flag ~T:
+# Som tavla: tavel- (försäljare)
+	L A	>	-LA,EL
+# Som stämma: stäm- (gaffel)
+	M M A	>	-MA,-
+# Som timme: tim- (lön)
+	M M E	>	-ME,-
+# Som siffra: siffer- (kombination)
+	R A	>	-RA,ER
+# Som förälder: föräldra- (möte)
+	E R	>	-ER,RA
+# Som äpple: äppel- (must)
+	L E	>	-LE,EL
+# Som gymnasium: gymnasie- (elev)
+	U M	>	-UM,E
+# Som ängel: ängla- (vakt)
+	E L	>	-EL,LA
+

@@ -35,20 +35,6 @@ CREATE EXTENSION IF NOT EXISTS hstore WITH SCHEMA public;
 COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs';
 
 
---
--- Name: pg_trgm; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS pg_trgm WITH SCHEMA public;
-
-
---
--- Name: EXTENSION pg_trgm; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION pg_trgm IS 'text similarity measurement and index searching based on trigrams';
-
-
 SET search_path = public, pg_catalog;
 
 --
@@ -80,11 +66,22 @@ CREATE TYPE hop_form AS ENUM (
 --
 
 CREATE TYPE hop_use AS ENUM (
-    'Boil',
-    'Dry Hop',
     'Mash',
     'First Wort',
-    'Aroma'
+    'Boil',
+    'Aroma',
+    'Dry Hop'
+);
+
+
+--
+-- Name: mash_type; Type: TYPE; Schema: public; Owner: -
+--
+
+CREATE TYPE mash_type AS ENUM (
+    'Infusion',
+    'Temperature',
+    'Decoction'
 );
 
 
@@ -167,106 +164,6 @@ CREATE TEXT SEARCH DICTIONARY swedish (
 CREATE TEXT SEARCH DICTIONARY swedish_snowball_dict (
     TEMPLATE = pg_catalog.snowball,
     language = 'swedish', stopwords = 'swedish' );
-
-
---
--- Name: swedish_stem; Type: TEXT SEARCH DICTIONARY; Schema: public; Owner: -
---
-
-CREATE TEXT SEARCH DICTIONARY swedish_stem (
-    TEMPLATE = pg_catalog.snowball,
-    language = 'swedish', stopwords = 'swedish' );
-
-
---
--- Name: brewnit_swedish; Type: TEXT SEARCH CONFIGURATION; Schema: public; Owner: -
---
-
-CREATE TEXT SEARCH CONFIGURATION brewnit_swedish (
-    PARSER = pg_catalog."default" );
-
-ALTER TEXT SEARCH CONFIGURATION brewnit_swedish
-    ADD MAPPING FOR asciiword WITH swedish_stem;
-
-ALTER TEXT SEARCH CONFIGURATION brewnit_swedish
-    ADD MAPPING FOR word WITH swedish_stem;
-
-ALTER TEXT SEARCH CONFIGURATION brewnit_swedish
-    ADD MAPPING FOR hword_part WITH swedish_stem;
-
-ALTER TEXT SEARCH CONFIGURATION brewnit_swedish
-    ADD MAPPING FOR hword_asciipart WITH swedish_stem;
-
-ALTER TEXT SEARCH CONFIGURATION brewnit_swedish
-    ADD MAPPING FOR asciihword WITH swedish_stem;
-
-ALTER TEXT SEARCH CONFIGURATION brewnit_swedish
-    ADD MAPPING FOR hword WITH swedish_stem;
-
-
---
--- Name: swedish; Type: TEXT SEARCH CONFIGURATION; Schema: public; Owner: -
---
-
-CREATE TEXT SEARCH CONFIGURATION swedish (
-    PARSER = pg_catalog."default" );
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR asciiword WITH swedish_stem;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR word WITH swedish_stem;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR numword WITH simple;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR email WITH simple;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR url WITH simple;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR host WITH simple;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR sfloat WITH simple;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR version WITH simple;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR hword_numpart WITH simple;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR hword_part WITH swedish_stem;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR hword_asciipart WITH swedish_stem;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR numhword WITH simple;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR asciihword WITH swedish_stem;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR hword WITH swedish_stem;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR url_path WITH simple;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR file WITH simple;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR "float" WITH simple;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR "int" WITH simple;
-
-ALTER TEXT SEARCH CONFIGURATION swedish
-    ADD MAPPING FOR uint WITH simple;
 
 
 --
@@ -503,8 +400,8 @@ ALTER SEQUENCE events_id_seq OWNED BY events.id;
 --
 
 CREATE TABLE events_recipes (
-    event_id integer NOT NULL,
-    recipe_id integer NOT NULL
+    event_id bigint NOT NULL,
+    recipe_id bigint NOT NULL
 );
 
 
@@ -582,6 +479,48 @@ CREATE SEQUENCE hops_id_seq
 --
 
 ALTER SEQUENCE hops_id_seq OWNED BY hops.id;
+
+
+--
+-- Name: mash_steps; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE mash_steps (
+    id bigint NOT NULL,
+    name character varying DEFAULT ''::character varying NOT NULL,
+    mash_type mash_type NOT NULL,
+    step_temperature numeric NOT NULL,
+    step_time numeric NOT NULL,
+    water_grain_ratio numeric,
+    infuse_amount numeric,
+    infuse_temperature numeric,
+    ramp_time numeric,
+    end_temperature numeric,
+    decoction_amount numeric,
+    description text DEFAULT ''::text NOT NULL,
+    recipe_detail_id bigint,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: mash_steps_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE mash_steps_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: mash_steps_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE mash_steps_id_seq OWNED BY mash_steps.id;
 
 
 --
@@ -710,7 +649,12 @@ CREATE TABLE recipe_details (
     efficiency numeric,
     recipe_id bigint,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    og numeric DEFAULT 0 NOT NULL,
+    fg numeric DEFAULT 0 NOT NULL,
+    brewed_at date,
+    carbonation numeric DEFAULT 0 NOT NULL,
+    style_id bigint
 );
 
 
@@ -759,7 +703,8 @@ CREATE TABLE recipes (
     downloads integer DEFAULT 0 NOT NULL,
     media_main_id integer,
     cached_votes_up integer DEFAULT 0,
-    equipment character varying DEFAULT ''::character varying
+    equipment character varying DEFAULT ''::character varying,
+    complete boolean DEFAULT false NOT NULL
 );
 
 
@@ -789,6 +734,58 @@ ALTER SEQUENCE recipes_id_seq OWNED BY recipes.id;
 CREATE TABLE schema_migrations (
     version character varying NOT NULL
 );
+
+
+--
+-- Name: styles; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE styles (
+    id bigint NOT NULL,
+    name character varying DEFAULT ''::character varying NOT NULL,
+    description text DEFAULT ''::text NOT NULL,
+    category character varying DEFAULT ''::character varying NOT NULL,
+    number integer NOT NULL,
+    letter character varying NOT NULL,
+    aroma text DEFAULT ''::text NOT NULL,
+    appearance text DEFAULT ''::text NOT NULL,
+    flavor text DEFAULT ''::text NOT NULL,
+    texture text DEFAULT ''::text NOT NULL,
+    examples text DEFAULT ''::text NOT NULL,
+    summary text DEFAULT ''::text NOT NULL,
+    og_min numeric DEFAULT 0 NOT NULL,
+    og_max numeric DEFAULT 0 NOT NULL,
+    fg_min numeric DEFAULT 0 NOT NULL,
+    fg_max numeric DEFAULT 0 NOT NULL,
+    ebc_min numeric DEFAULT 0 NOT NULL,
+    ebc_max numeric DEFAULT 0 NOT NULL,
+    ibu_min numeric DEFAULT 0 NOT NULL,
+    ibu_max numeric DEFAULT 0 NOT NULL,
+    abv_min numeric DEFAULT 0 NOT NULL,
+    abv_max numeric DEFAULT 0 NOT NULL,
+    style_guide character varying DEFAULT ''::character varying NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: styles_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE styles_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: styles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE styles_id_seq OWNED BY styles.id;
 
 
 --
@@ -888,15 +885,6 @@ ALTER SEQUENCE votes_id_seq OWNED BY votes.id;
 
 
 --
--- Name: words; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE words (
-    word text
-);
-
-
---
 -- Name: yeasts; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -982,6 +970,13 @@ ALTER TABLE ONLY hops ALTER COLUMN id SET DEFAULT nextval('hops_id_seq'::regclas
 
 
 --
+-- Name: mash_steps id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY mash_steps ALTER COLUMN id SET DEFAULT nextval('mash_steps_id_seq'::regclass);
+
+
+--
 -- Name: media id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -1014,6 +1009,13 @@ ALTER TABLE ONLY recipe_details ALTER COLUMN id SET DEFAULT nextval('recipe_deta
 --
 
 ALTER TABLE ONLY recipes ALTER COLUMN id SET DEFAULT nextval('recipes_id_seq'::regclass);
+
+
+--
+-- Name: styles id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY styles ALTER COLUMN id SET DEFAULT nextval('styles_id_seq'::regclass);
 
 
 --
@@ -1102,6 +1104,14 @@ ALTER TABLE ONLY hops
 
 
 --
+-- Name: mash_steps mash_steps_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY mash_steps
+    ADD CONSTRAINT mash_steps_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: media media_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1139,6 +1149,14 @@ ALTER TABLE ONLY recipe_details
 
 ALTER TABLE ONLY recipes
     ADD CONSTRAINT recipes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: styles styles_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY styles
+    ADD CONSTRAINT styles_pkey PRIMARY KEY (id);
 
 
 --
@@ -1226,13 +1244,6 @@ CREATE INDEX fulltext_index_users_on_name ON users USING gin (to_tsvector('simpl
 --
 
 CREATE INDEX fulltext_index_users_on_primary ON users USING gin (to_tsvector('swedish_snowball'::regconfig, (((((((((COALESCE(name, ''::character varying))::text || ' '::text) || COALESCE(presentation, ''::text)) || ' '::text) || (COALESCE(equipment, ''::character varying))::text) || ' '::text) || (COALESCE(brewery, ''::character varying))::text) || ' '::text) || (COALESCE(twitter, ''::character varying))::text)));
-
-
---
--- Name: idx_recipes_on_description_trigram; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX idx_recipes_on_description_trigram ON recipes USING gin (description gin_trgm_ops);
 
 
 --
@@ -1348,6 +1359,13 @@ CREATE INDEX index_hops_on_recipe_detail_id ON hops USING btree (recipe_detail_i
 
 
 --
+-- Name: index_mash_steps_on_recipe_detail_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_mash_steps_on_recipe_detail_id ON mash_steps USING btree (recipe_detail_id);
+
+
+--
 -- Name: index_media_on_parent_type_and_parent_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1394,6 +1412,13 @@ CREATE INDEX index_placements_on_user_id ON placements USING btree (user_id);
 --
 
 CREATE INDEX index_recipe_details_on_recipe_id ON recipe_details USING btree (recipe_id);
+
+
+--
+-- Name: index_recipe_details_on_style_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_recipe_details_on_style_id ON recipe_details USING btree (style_id);
 
 
 --
@@ -1502,6 +1527,13 @@ CREATE INDEX index_recipes_on_user_id ON recipes USING btree (user_id);
 
 
 --
+-- Name: index_styles_on_style_guide; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_styles_on_style_guide ON styles USING btree (style_guide);
+
+
+--
 -- Name: index_users_on_confirmation_token; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1579,10 +1611,11 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 
 
 --
--- Name: words_idx; Type: INDEX; Schema: public; Owner: -
+-- Name: mash_steps fk_rails_0f11dbd377; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-CREATE INDEX words_idx ON words USING gin (word gin_trgm_ops);
+ALTER TABLE ONLY mash_steps
+    ADD CONSTRAINT fk_rails_0f11dbd377 FOREIGN KEY (recipe_detail_id) REFERENCES recipe_details(id);
 
 
 --
@@ -1607,6 +1640,14 @@ ALTER TABLE ONLY event_registrations
 
 ALTER TABLE ONLY placements
     ADD CONSTRAINT fk_rails_344f224d46 FOREIGN KEY (recipe_id) REFERENCES recipes(id);
+
+
+--
+-- Name: recipe_details fk_rails_426b7d6920; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY recipe_details
+    ADD CONSTRAINT fk_rails_426b7d6920 FOREIGN KEY (style_id) REFERENCES styles(id);
 
 
 --
@@ -1751,6 +1792,12 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20171119161104'),
 ('20171119165458'),
 ('20171119182201'),
-('20171119190427');
+('20171119190427'),
+('20171121184814'),
+('20171122201201'),
+('20171126121130'),
+('20171126161659'),
+('20171202132847'),
+('20171203174307');
 
 

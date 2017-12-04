@@ -105,6 +105,12 @@ module ApplicationHelper
     }
   end
 
+  def mash_type_options
+    MashStep.mash_types.map { |k, v|
+      [I18n.t("recipe_detail.mash_type.#{k}"), v]
+    }
+  end
+
   def icon(type=nil)
     content_tag(:i, '', class: "fa fa-#{type}") if type.present?
   end
@@ -113,20 +119,16 @@ module ApplicationHelper
     opts[:class] = Array(opts[:class])
     opts[:class] << 'pure-badge'
     opts[:class] << "pure-badge-#{opts[:type]}" if opts[:type].present?
-    data = {}
-    if opts[:tooltip].present?
-      data[:balloon] = opts[:tooltip]
-      data[:'balloon-pos'] = 'down'
-    end
+    data = tooltip_data(opts[:tooltip])
     content_tag(:span, class: opts[:class], data: data) do
       concat icon(opts[:icon])
       concat content
     end
   end
 
-  def form_info_icon(text)
+  def form_info_icon(text, position: 'down', length: 'medium')
     content_tag(:span, class: 'form-info-icon',
-                data: { balloon: text, :'balloon-pos' => 'down', :'balloon-length' => 'medium' }) do
+                data: tooltip_data(text, position: position, length: length)) do
       concat icon('info-circle')
     end
   end
@@ -139,11 +141,22 @@ module ApplicationHelper
     end
   end
 
-  def trash_button(url, text)
-    link_to url, method: :delete, data: { confirm: I18n.t(:'common.are_you_sure') },
+  def trash_button(url, text, tooltip: nil)
+    data = tooltip_data(tooltip, length: 'small')
+    data[:confirm] = I18n.t(:'common.are_you_sure')
+    link_to url, method: :delete, data: data,
       class: 'pure-button secondary-button' do
       concat icon('trash')
-      concat text
+      concat ' ' + text
     end
+  end
+
+  def tooltip_data(tooltip, position: 'down', length: 'medium')
+    return {} unless tooltip.present?
+    {
+      :'balloon' => tooltip,
+      :'balloon-pos' => position,
+      :'balloon-length' => length
+    }
   end
 end

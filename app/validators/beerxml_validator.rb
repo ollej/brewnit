@@ -4,7 +4,7 @@ class BeerxmlValidator < ActiveModel::EachValidator
       doc = Nokogiri::XML(record.beerxml)
       doc.encoding = 'UTF-8'
       record.beerxml = doc.to_s
-      record.parse_beerxml(record.beerxml)
+      BeerxmlImport.new(record, record.beerxml).parse
     rescue Nokogiri::XML::SyntaxError => e
       Rails.logger.error { "BeerXML syntax error: #{e.message}" }
       record.errors[attribute] << (options[:message] || I18n.t(:'activerecord.errors.models.recipe.attributes.beerxml.parse_error'))

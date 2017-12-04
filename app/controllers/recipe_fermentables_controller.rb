@@ -12,6 +12,7 @@ class RecipeFermentablesController < ApplicationController
 
   def create
     @fermentable = Fermentable.new(fermentable_params)
+
     respond_to do |format|
       if @fermentable.save
         @recipe_detail.fermentables << @fermentable
@@ -32,6 +33,7 @@ class RecipeFermentablesController < ApplicationController
 
   def destroy
     @fermentable = @recipe_detail.fermentables.find(params[:id])
+
     respond_to do |format|
       if @fermentable.destroy
         format.html { redirect_to recipe_details_path }

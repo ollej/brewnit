@@ -1,0 +1,38 @@
+<%= form_for(@recipe, remote: true,
+             html: { class: 'pure-form pure-form-aligned js-auto-submit' }) do |f| %>
+  <%= invisible_captcha %>
+
+  <% if @recipe.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= I18n.t(:'activerecord.errors.models.recipe.header', count: @recipe.errors.count) %></h2>
+
+      <ul>
+      <% @recipe.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+    <div class="field pure-control-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'pure-input-1-4',
+        placeholder: I18n.t(:'activerecord.attributes.recipe.name') %>
+      <%= form_info_icon(I18n.t(:'recipes.name_description')) %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :description, class: 'large-group' %>
+      <div class="quill-wrapper">
+        <%= f.text_area :description, class: 'quill_container',
+          placeholder: I18n.t(:'activerecord.attributes.recipe.description') %>
+      </div>
+    </div>
+    <div class="actions pure-controls">
+      <%= f.label :public, class: 'pure-checkbox' do %>
+        <%= f.check_box :public %> <%= I18n.t(:'activerecord.attributes.recipe.public') %>
+        <%= form_info_icon(I18n.t(:'recipes.public_description')) %>
+      <% end %>
+    </div>
+  </fieldset>
+<% end %>

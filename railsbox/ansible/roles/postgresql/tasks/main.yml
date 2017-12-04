@@ -71,3 +71,21 @@
   when: postgresql_extensions
   become: yes
   become_user: '{{ postgresql_db_user }}'
+
+- name: Add swedish dictionary
+  copy:
+    src: "{{ item }}"
+    dest: /usr/share/postgresql/{{ postgresql_version }}/tsearch_data/
+  with_fileglob:
+    - files/sv_se.*
+
+- name: Upload sql script for Swedish dictionary
+  template: src="files/swedish_dictionary.sql" dest="/tmp/swedish_dictionary.sql"
+
+- name: Execute sql script
+  shell: "psql --file /tmp/swedish_dictionary.sql {{ postgresql_db_name }}"
+  become: yes
+  become_user: '{{ postgresql_db_user }}'
+
+- name: Delete sql script
+  file: path="/tmp/swedish_dictionary.sql" state=absent

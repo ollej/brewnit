@@ -83,6 +83,23 @@ sv:
     edit: Ändra recept
     show: Visa recept
     save: Spara recept
+    build_recipe: Bygg recept
+    or_build: ...eller skapa
+    build_new_recipe_description: Bygg ditt recept genom att lägga till ingredienser.
+    build_recipe_description: Ändra namn, beskrivning och ingredienser på receptet.
+    upload_description: Ladda upp bilder som visas på receptsidan.
+    print_description: Skriv ut receptet.
+    download_description: Ladda ner en BeerXML-fil som kan importeras i receptprogram.
+    recipe_create_information: |
+        <p>Fyll i namn och eventuell beskrivning av receptet.</p>
+        <p>Om du redan har gjort ett recept i ett receptprogram som BeerSmith kan du
+        importera det genom att klicka på knappen <em>"Importera"</em>.</p>
+        <p>Annars klickar du på knappen <em>"Bygg recept"</em> för att öppna
+        receptbyggaren där du kan fylla i alla ingredienser och övriga uppgifter
+        om receptet.</p>
+    event_recipes: Evenemang
+    event_recipes_description: Ändra vilka evenemang detta recept har deltagit i.
+    import: Importera
     search:
       button: Sök recept
       description: Sök recept
@@ -96,6 +113,8 @@ sv:
     private: Privat
     own: Egna recept
     winner: Medaljör
+    incomplete: Ofärdig
+    incomplete_description: Detta recept är inte färdigbyggt än, importera BeerXML eller bygg.
     labels: Etiketter
     recipe_details: Recept
     recipe_analytics: Analys
@@ -107,6 +126,7 @@ sv:
       successful: Receptet har skapats.
     destroy:
       link: Ta bort
+      link_description: Ta bort hela receptet från sidan, kan inte ångras.
       successful: Receptet har tagits bort.
     new: Lägg till recept
     comments_count:
@@ -117,9 +137,12 @@ sv:
       other: '%{count} gillade'
     likes:
       like: Gilla!
+      like_description: Visa om du gillar detta recept.
       unlike: Sluta gilla
+      unlike_description: Du har gillat detta recept, klicka för att sluta gilla receptet.
       successful: Tack för att du gillade receptet!
       successful_unlike: Du gillar inte längre receptet.
+    name_description: Namnet på receptet visas i alla listningar.
     name_not_needed: Namn hämtas från BeerXML-filen om det inte fylls i.
     no_style_information: Det finns ingen stiltypsinformation för detta recept.
     show_all: Visa alla %{count} recept
@@ -131,9 +154,9 @@ sv:
       Lämna denna kryssruta tom om du inte vill
       att andra ska kunna se ditt recept.
     beerxml_description: |
-      Exportera recept i BeerXML från ett
-      receptprogram som Beersmith 2, Brewpal
-      eller Wort.
+      Ladda upp recept som exporterats till
+      BeerXML i ett receptprogram som
+      Beersmith 2, Brewpal eller Wort.
   users:
     index: Bryggare
     profile: Profil
@@ -200,6 +223,8 @@ sv:
     last_registration_description: Senaste datum och tid som det går att anmäla sig till detta arrangemang.
     registration_information_description: Information som visas vid anmälan av recept till evenemanget.
   recipe_events:
+    events_for_recipe: Evenemang för %{recipe_name}
+    recipe_must_be_completed: Du måste bygga färdigt och publicera receptet, och markera det publikt, för att kunna lägga till evenemang.
     add_event: Lägg till evenemang
     add: Lägg till
     choose: Välj evenemang
@@ -234,13 +259,21 @@ sv:
       failed: Kunde inte ta bort placeringen från receptet.
   recipe_detail:
     edit: Bygg recept
-    main_details: Huvuduppgifter
+    main_details: Receptuppgifter
     save: Spara
     add: Lägg till
     fermentables: Malt
     hops: Humle
     miscs: Övrigt
     yeasts: Jäst
+    complete: Publicera
+    complete_description: Publicera receptet för att ändringar ska visas på sidan.
+    download: Ladda ner
+    download_description: Ladda ner en BeerXML-fil som kan importeras i receptprogram.
+    show_recipe: Visa recept
+    show_recipe_description: Visa receptsidan för detta recept.
+    edit_recipe: Ändra recept
+    mash_steps: Mäskning
     weight_option:
       weight: Vikt
       volume: Volym
@@ -284,6 +317,21 @@ sv:
       liquid: Flytande
       culture: Kultur
       slant: Slant
+    mash_type:
+      infusion: Infusion
+      temperature: Temperatur
+      decoction: Dekoktion
+  register_recipe:
+    new: Anmäl recept
+    save: Anmäl
+    choose_event: Välj evenamang
+    choose_event_description: Välj ett evenemang att anmäla receptet till.
+    no_recipes: Du har inga färdiga recept.
+    recipe: Recept
+    recipe_description: Välj ett av dina färdiga recept att anmäla till evenemanget.
+    message: Meddelande
+    message_description: Skriv ett meddelande till arrangörerna.
+    recipe_registered: Tack för att du anmälde ditt recept "%{recipe}" till evenemanget "%{event}".
 
   beerxml:
     name: Ölnamn
@@ -728,7 +776,7 @@ sv:
       recipe:
         name: Namn
         description: Beskrivning
-        beerxml: Beer XML
+        beerxml: Importera BeerXML
         public: Offentlig?
         medium_main: Huvudbild
         events: Deltagit i evenemang
@@ -763,6 +811,11 @@ sv:
         grain_temp: Malttemperatur (°C)
         sparge_temp: Lakningstemperatur (°C)
         efficiency: Utbyte (%)
+        og: OG
+        fg: FG
+        carbonation: Kolsyrevolym
+        brewed_at: Bryggdatum
+        style: Stiltyp
       fermentable:
         name: Namn
         amount: Mängd (kg)
@@ -770,24 +823,31 @@ sv:
         ebc: EBC
       hop:
         name: Namn
-        amount: Mängd (kg)
+        amount: Mängd (gr)
         alpha_acid: Alfasyra (%)
         form: Typ
         use: Användning
-        use_time: Tid
+        use_time: Tid (min/dgr)
       misc:
         name: Namn
-        amount: Mängd
+        amount: Mängd (L / gr)
         weight: Vikt/Volym
         use: Användning
         use_time: Tid
         misc_type: Typ
       yeast:
         name: Namn
-        amount: Mängd
+        amount: Mängd (L / gr)
         weight: Vikt/Volym
         yeast_type: Jästsort
         form: Form
+      mash_step:
+        name: Namn
+        step_temperature: Temperatur (°C)
+        step_time: Tid (min)
+        ramp_time: Höjningstid
+        infuse_amount: Vatten (L)
+        mash_type: Mäskningstyp
 
     errors:
       template:

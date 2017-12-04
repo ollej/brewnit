@@ -19,8 +19,9 @@ class RecipesController < ApplicationController
   def show
     @recipe = find_recipe
     raise AuthorizationException unless can_show?(@recipe)
-    @beerxml = @recipe.beerxml_details
-    @presenter = RecipePresenter.new(@recipe)
+    raise RecipeNotComplete unless @recipe.complete?
+    @beerxml = BeerxmlImport.new(@recipe, @recipe.beerxml).parse
+    @presenter = RecipePresenter.new(@recipe, @beerxml)
     Recipe.unscoped do
       commontator_thread_show(@recipe)
     end
@@ -63,19 +64,8 @@ class RecipesController < ApplicationController
 
     respond_to do |format|
       if @recipe.save
-        if event_params[:id].present?
-          event = @recipe.add_event(
-            event: event_params[:id],
-            user: current_user,
-            placement: event_params
-          )
-          if registration_params[:register] == 'yes' &&
-              event&.official? && !event.registration_closed?
-            event.register_recipe(@recipe, current_user, registration_params)
-          end
-        end
-
-        format.html { redirect_to @recipe, notice: I18n.t(:'recipes.create.successful') }
+        import_beerxml
+        format.html { redirect_to redirect_path, notice: I18n.t(:'recipes.create.successful') }
         format.json { render :show, status: :created, location: @recipe }
       else
         format.html { render :new }
@@ -92,11 +82,16 @@ class RecipesController < ApplicationController
 
     respond_to do |format|
       if @recipe.update(recipe_params)
-        format.html { redirect_to @recipe, notice: I18n.t(:'recipes.update.successful') }
+        format.html { redirect_to redirect_path, notice: I18n.t(:'recipes.update.successful') }
         format.json { render :show, status: :ok, location: @recipe }
+        format.js { head :ok, location: @recipe }
       else
-        format.html { render :edit }
+        format.html {
+          flash[:error] = @recipe.errors.full_messages.to_sentence
+          render :edit
+        }
         format.json { render json: @recipe.errors, status: :unprocessable_entity }
+        format.js { render layout: false, status: :unprocessable_entity, location: @recipe }
       end
     end
   end
@@ -120,9 +115,7 @@ class RecipesController < ApplicationController
     end
 
     def recipe_params
-      recipe = params.require(:recipe).permit(:name, :description, :beerxml, :public)
-      recipe[:beerxml] = recipe[:beerxml].read if recipe[:beerxml].present?
-      recipe
+      params.require(:recipe).permit(:name, :description, :public)
     end
 
     def event_params
@@ -131,5 +124,24 @@ class RecipesController < ApplicationController
 
     def registration_params
       params.require(:registration).permit(:register, :message)
+    end
+
+    def redirect_path
+      if @recipe.beerxml.present?
+        @recipe
+      else
+        recipe_details_path(@recipe)
+      end
+    end
+
+    def import_beerxml
+      if params.dig(:recipe, :beerxml).present?
+        @recipe.beerxml = params.dig(:recipe, :beerxml).read
+        BeerxmlImport.new(@recipe, @recipe.beerxml).run
+        Rails.logger.debug { @recipe.detail.hops.inspect }
+        Rails.logger.debug { @recipe.detail.yeasts.inspect }
+        @recipe.detail.save!
+        @recipe.save!
+      end
     end
 end

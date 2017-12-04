@@ -1,0 +1,18 @@
+<table id="mash_steps" class="pure-table pure-table-striped">
+  <thead>
+    <tr>
+      <th><%= I18n.t(:'activerecord.attributes.mash_step.name') %></th>
+      <th><%= I18n.t(:'activerecord.attributes.mash_step.step_temperature') %></th>
+      <th><%= I18n.t(:'activerecord.attributes.mash_step.step_time') %></th>
+      <th><%= I18n.t(:'activerecord.attributes.mash_step.ramp_time') %></th>
+      <th><%= I18n.t(:'activerecord.attributes.mash_step.infuse_amount') %></th>
+      <th><%= I18n.t(:'activerecord.attributes.mash_step.mash_type') %></th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @mash_steps.each do |mash_step| %>
+    <%= render partial: 'shared/mash_step_item', locals: { mash_step: mash_step } %>
+  <% end %>
+  </tbody>
+</table>

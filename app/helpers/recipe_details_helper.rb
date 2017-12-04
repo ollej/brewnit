@@ -19,4 +19,23 @@ module RecipeDetailsHelper
       I18n.t(:'recipe_detail.weight_option.volume')
     end
   end
+
+  def brewed_at(details)
+    I18n.l((details.brewed_at || details.recipe.created_at || Time.now).to_date)
+  end
+
+  def normalize_amount(amount, is_weight)
+    if is_weight
+      amount / 1000
+    else
+      amount
+    end
+  end
+
+  def display_amount(ingredient)
+    amount = normalize_amount(ingredient.amount, ingredient.weight)
+    precision = ingredient.weight? ? 3 : 2
+    unit = ingredient.weight? ? t(:'beerxml.kilograms') : t(:'beerxml.liter_abbr')
+    "#{number_with_precision(amount, precision: precision, separator: '.')} #{unit}"
+  end
 end
