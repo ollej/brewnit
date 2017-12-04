@@ -27,6 +27,14 @@
       </div>
 
       <div class="page-content-body">
+        <div class="info-plate">
+          <p><strong><em>N.B.:</em></strong> Funktionen att bygga recepet är en beta-version och under aktiv utveckling.</p>
+          <p>Om du hittar några fel eller konstigheter får du gärna rapportera dom på
+          <a href="https://github.com/ollej/brewnit/issues">GitHub</a>, eller skicka
+          e-post till <%= mail_to 'brewmaster@brygglogg.se', 'Olle Johansson',
+            encode: 'javascript', class: 'email' %></p>
+        </div>
+
 <%= render 'recipe_form' %>
 <%= render 'form' %>
       </div>
