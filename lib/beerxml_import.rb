@@ -121,6 +121,7 @@ class BeerxmlImport
   end
 
   def extract_details
+    @details.brewed_at = Date.parse(beerxml_data.date)
     @details.batch_size = beerxml_data.batch_size
     @details.boil_time = beerxml_data.boil_time
     @details.efficiency = beerxml_data.efficiency
