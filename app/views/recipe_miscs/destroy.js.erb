@@ -1,6 +1,6 @@
 <% if @error.nil? %>
   $("#miscs").find("tr[data-misc-id=<%= @misc.id %>]")
-    .effect("highlight", {}, 500, function() {
+    .effect("fade", {}, 500, function() {
       this.remove();
     });
 <% else %>

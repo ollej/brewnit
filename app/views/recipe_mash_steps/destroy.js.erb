@@ -1,6 +1,6 @@
 <% if @error.nil? %>
   $("#mash_steps").find("tr[data-mash_step-id=<%= @mash_step.id %>]")
-    .effect("highlight", {}, 500, function() {
+    .effect("fade", {}, 500, function() {
       this.remove();
     });
 <% else %>
