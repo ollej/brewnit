@@ -82,6 +82,7 @@ class RecipesController < ApplicationController
 
     respond_to do |format|
       if @recipe.update(recipe_params)
+        import_beerxml
         format.html { redirect_to redirect_path, notice: I18n.t(:'recipes.update.successful') }
         format.json { render :show, status: :ok, location: @recipe }
         format.js { head :ok, location: @recipe }
@@ -138,8 +139,6 @@ class RecipesController < ApplicationController
       if params.dig(:recipe, :beerxml).present?
         @recipe.beerxml = params.dig(:recipe, :beerxml).read
         BeerxmlImport.new(@recipe, @recipe.beerxml).run
-        Rails.logger.debug { @recipe.detail.hops.inspect }
-        Rails.logger.debug { @recipe.detail.yeasts.inspect }
         @recipe.detail.save!
         @recipe.save!
       end

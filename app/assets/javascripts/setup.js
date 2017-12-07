@@ -88,6 +88,7 @@ $( document ).ready(function() {
     const $field = $(this.dataset.fileField);
     const $form = $field.closest("form");
     $field.one("change", function(ev) {
+      $form.find("#recipe_name").attr('required', false);
       $form.submit();
     });
     $field.trigger("click");
