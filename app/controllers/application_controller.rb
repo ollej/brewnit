@@ -94,4 +94,15 @@ class ApplicationController < ActionController::Base
   def deny_spammers!
     redirect_spammers! if spammer?
   end
+
+  def load_and_authorize_recipe(ingredient = nil)
+    scope = if ingredient.nil?
+      Recipe.unscoped.with_all_details
+    else
+      Recipe.unscoped.with_details(ingredient)
+    end
+    @recipe = scope.where(id: params[:recipe_id]).first!
+    raise AuthorizationException unless current_user.can_modify?(@recipe)
+    @details = @recipe.detail
+  end
 end

@@ -1,9 +1,9 @@
 class RecipeMashStepsController < ApplicationController
   before_action :deny_spammers!
-  before_action :load_and_authorize_recipe
+  before_action -> { load_and_authorize_recipe(:mash_steps) }
 
   def index
-    @mash_steps = @recipe_detail.mash_steps
+    @mash_steps = @details.mash_steps
 
     respond_to do |format|
       format.json { render json: @mash_steps, status: :ok }
@@ -15,7 +15,7 @@ class RecipeMashStepsController < ApplicationController
 
     respond_to do |format|
       if @mash_step.save
-        @recipe_detail.mash_steps << @mash_step
+        @details.mash_steps << @mash_step
         format.html { redirect_to recipe_details_path }
         format.json { render json: @mash_step, status: :ok, location: recipe_details_path }
         format.js { render layout: false, status: :ok, location: recipe_details_path }
@@ -32,7 +32,7 @@ class RecipeMashStepsController < ApplicationController
   end
 
   def destroy
-    @mash_step = @recipe_detail.mash_steps.find(params[:id])
+    @mash_step = @details.mash_steps.find(params[:id])
 
     respond_to do |format|
       if @mash_step.destroy
@@ -58,11 +58,5 @@ class RecipeMashStepsController < ApplicationController
       :name, :step_temperature, :step_time, :water_grain_ratio, :infuse_amount,
       :infuse_temperature, :ramp_time, :end_temperature, :mash_type
     )
-  end
-
-  def load_and_authorize_recipe
-    @recipe = Recipe.includes(detail: [:mash_steps]).find(params[:recipe_id])
-    @recipe_detail = @recipe.detail
-    raise AuthorizationException unless current_user.can_modify?(@recipe)
   end
 end

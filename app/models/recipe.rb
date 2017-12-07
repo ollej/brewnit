@@ -44,6 +44,10 @@ class Recipe < ApplicationRecord
   scope :by_event, -> (event) { joins(:events).where(events: { id: event.id }) }
   scope :ordered, -> { order(created_at: :desc) }
   scope :latest, -> { completed.limit(10).ordered }
+  scope :with_details, -> (ingredient) { includes(detail: [ingredient]) }
+  scope :with_all_details, -> {
+    includes(detail: [:fermentables, :hops, :miscs, :yeasts, :style, :mash_steps])
+  }
 
   def owned_by?(u)
     self.user == u

@@ -1,13 +1,13 @@
 class RecipeDetailsController < ApplicationController
-  before_action :load_and_authorize_recipe
   before_action :deny_spammers!, only: [:update]
+  before_action :load_and_authorize_recipe
   invisible_captcha only: [:create, :update], on_spam: :redirect_spammers!
 
   def show
     # Never cache this page to ensure browser reloads
     expires_now
 
-    @details = RecipeDetail.find_or_create_by!(recipe_id: @recipe.id)
+    @details ||= RecipeDetail.create!(recipe_id: @recipe.id)
     @hops = @details.hops
     @fermentables = @details.fermentables
     @miscs = @details.miscs
@@ -28,8 +28,6 @@ class RecipeDetailsController < ApplicationController
   end
 
   def update
-    @details = @recipe.detail
-
     respond_to do |format|
       if @details.update(details_params)
         format.html { redirect_to recipe_details_path }
@@ -56,10 +54,5 @@ class RecipeDetailsController < ApplicationController
     )
     details[:style] = Style.find(details[:style]) if details[:style].present?
     details
-  end
-
-  def load_and_authorize_recipe
-    @recipe = Recipe.includes(detail: [:fermentables, :hops, :miscs, :yeasts, :style]).find(params[:recipe_id])
-    raise AuthorizationException unless current_user.can_modify?(@recipe)
   end
 end

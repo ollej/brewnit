@@ -1,9 +1,9 @@
 class RecipeHopsController < ApplicationController
   before_action :deny_spammers!
-  before_action :load_and_authorize_recipe
+  before_action -> { load_and_authorize_recipe(:hops) }
 
   def index
-    @hops = @recipe_detail.hops
+    @hops = @details.hops
 
     respond_to do |format|
       format.json { render json: @hops, status: :ok }
@@ -14,7 +14,7 @@ class RecipeHopsController < ApplicationController
     @hop = Hop.new(hop_params)
     respond_to do |format|
       if @hop.save
-        @recipe_detail.hops << @hop
+        @details.hops << @hop
         format.html { redirect_to recipe_details_path }
         format.json { render json: @hop, status: :ok, location: recipe_details_path }
         format.js { render layout: false, status: :ok, location: recipe_details_path }
@@ -31,7 +31,7 @@ class RecipeHopsController < ApplicationController
   end
 
   def destroy
-    @hop = @recipe_detail.hops.find(params[:id])
+    @hop = @details.hops.find(params[:id])
     respond_to do |format|
       if @hop.destroy
         format.html { redirect_to recipe_details_path }
@@ -53,11 +53,5 @@ class RecipeHopsController < ApplicationController
 
   def hop_params
     params.require(:hop).permit(:name, :amount, :alpha_acid, :form, :use, :use_time)
-  end
-
-  def load_and_authorize_recipe
-    @recipe = Recipe.includes(:detail).find(params[:recipe_id])
-    @recipe_detail = @recipe.detail
-    raise AuthorizationException unless current_user.can_modify?(@recipe)
   end
 end
