@@ -124,6 +124,7 @@ sv:
       successful: Receptet har uppdaterats.
     create:
       successful: Receptet har skapats.
+      failed: Kunde inte skapa receptet.
     destroy:
       link: Ta bort
       link_description: Ta bort hela receptet från sidan, kan inte ångras.

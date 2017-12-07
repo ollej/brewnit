@@ -98,7 +98,7 @@ class BeerxmlImport
     beerxml_data.yeasts&.each do |yeast|
       @details.yeasts.build(
         name: yeast.name,
-        amount: normalize_amount(yeast.amount, yeast.amount_is_weight),
+        amount: normalize_amount(yeast.amount || 1, yeast.amount_is_weight),
         weight: yeast.amount_is_weight || true,
         yeast_type: find_yeast_type(yeast.type),
         form: find_yeast_form(yeast.form)
@@ -121,7 +121,7 @@ class BeerxmlImport
   end
 
   def extract_details
-    @details.brewed_at = Date.parse(beerxml_data.date)
+    @details.brewed_at = Date.parse(beerxml_data.date) if beerxml_data.date
     @details.batch_size = beerxml_data.batch_size
     @details.boil_time = beerxml_data.boil_time
     @details.efficiency = beerxml_data.efficiency

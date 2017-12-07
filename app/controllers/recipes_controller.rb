@@ -59,16 +59,21 @@ class RecipesController < ApplicationController
   # POST /recipes
   # POST /recipes.json
   def create
-    @recipe = Recipe.new(recipe_params)
-    @recipe.user = current_user
+    @recipe = create_recipes!.last
 
     respond_to do |format|
-      if @recipe.save
-        import_beerxml
+      if @recipe.present? && @recipe.persisted?
         format.html { redirect_to redirect_path, notice: I18n.t(:'recipes.create.successful') }
         format.json { render :show, status: :created, location: @recipe }
       else
-        format.html { render :new }
+        format.html {
+          if @recipe.present?
+            flash[:error] = @recipe.errors.full_messages.to_sentence
+          else
+            flash[:error] = I18n.t(:'recipes.create.failed')
+          end
+          redirect_to new_recipe_path
+        }
         format.json { render json: @recipe.errors, status: :unprocessable_entity }
       end
     end
@@ -82,7 +87,7 @@ class RecipesController < ApplicationController
 
     respond_to do |format|
       if @recipe.update(recipe_params)
-        import_beerxml
+        import_beerxml(@recipe, params.dig(:recipe, :beerxml))
         format.html { redirect_to redirect_path, notice: I18n.t(:'recipes.update.successful') }
         format.json { render :show, status: :ok, location: @recipe }
         format.js { head :ok, location: @recipe }
@@ -128,19 +133,42 @@ class RecipesController < ApplicationController
     end
 
     def redirect_path
-      if @recipe.beerxml.present?
+      if @recipe&.beerxml.present?
         @recipe
       else
         recipe_details_path(@recipe)
       end
     end
 
-    def import_beerxml
-      if params.dig(:recipe, :beerxml).present?
-        @recipe.beerxml = params.dig(:recipe, :beerxml).read
-        BeerxmlImport.new(@recipe, @recipe.beerxml).run
-        @recipe.detail.save!
-        @recipe.save!
+    def import_beerxml(recipe, beerxml)
+      if beerxml.present?
+        recipe.beerxml = beerxml.read
+        BeerxmlImport.new(recipe, recipe.beerxml).run
+        recipe.detail.save!
+      end
+      recipe.save!
+      recipe
+    end
+
+    def new_recipe
+      Recipe.new(recipe_params) do |recipe|
+        recipe.user = current_user
+      end
+    end
+
+    def beerxml_files
+      params.dig(:recipe, :beerxml).presence || [nil]
+    end
+
+    def create_recipes!
+      beerxml_files.each_with_object([]) do |beerxml, recipes|
+        ActiveRecord::Base.transaction do
+          begin
+            recipes << import_beerxml(new_recipe, beerxml)
+          rescue ActiveRecord::RecordInvalid => e
+            Rails.logger.error { "Failed creating recipe: #{e.record.errors.full_messages}" }
+          end
+        end
       end
     end
 end

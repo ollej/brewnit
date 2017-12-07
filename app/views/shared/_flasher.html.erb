@@ -2,10 +2,11 @@
   <% if flash[:notice] %>
   <div id="flash-notice" class="pure-alert pure-alert-success"><%= flash[:notice] %></div>
   <% end %>
-  <% if flash[:alert] || flash[:recaptcha_error] %>
+  <% if flash[:alert] || flash[:recaptcha_error] || flash[:error] %>
     <div id="flash-alert" class="pure-alert pure-alert-error">
       <%= flash[:alert] %>
       <%= flash[:recaptcha_error] %>
+      <%= flash[:error] %>
     </div>
   <% end %>
 </div>
