@@ -4,6 +4,14 @@
   display: inline-block;
   height: 200px;
   width: 600px;
+
+  .ql-toolbar {
+    height: 42px;
+  }
+
+  .ql-container {
+    height: 158px;
+  }
 }
 .pure-form label.large-group {
   vertical-align: top;
