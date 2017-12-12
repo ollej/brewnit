@@ -2,7 +2,12 @@ class UsersController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
-    @users = User.confirmed.search(params[:user_search]).ordered
+    @brewers, @users = User.confirmed
+      .has_recipes
+      .search(params[:user_search])
+      .ordered
+      .partition { |user| user.recipes_count > 0 }
+
     @user_search = params[:user_search]
 
     respond_to do |format|

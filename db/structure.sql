@@ -824,7 +824,8 @@ CREATE TABLE users (
     equipment character varying DEFAULT ''::character varying,
     media_avatar_id integer,
     media_brewery_id integer,
-    registration_data jsonb
+    registration_data jsonb,
+    recipes_count integer DEFAULT 0
 );
 
 
@@ -1798,6 +1799,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20171126121130'),
 ('20171126161659'),
 ('20171202132847'),
-('20171203174307');
+('20171203174307'),
+('20171212222842');
 
 

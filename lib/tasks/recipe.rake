@@ -19,4 +19,9 @@ namespace :recipe do
   task :import_shbf => :environment do
     ShbfClient.new(2017).import
   end
+
+  desc 'Update recipes_count on users'
+  task :update_recipes_count => :environment do
+    User.find_each { |user| User.reset_counters(user.id, :recipes) }
+  end
 end

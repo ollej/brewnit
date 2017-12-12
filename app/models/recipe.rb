@@ -18,7 +18,7 @@ class Recipe < ApplicationRecord
     options :event, type: :fulltext, dictionary: 'swedish_snowball'
   end
 
-  belongs_to :user
+  belongs_to :user, counter_cache: true
   belongs_to :media_main, class_name: 'Medium', optional: true
   has_many :media, as: :parent, dependent: :destroy
   has_and_belongs_to_many :events

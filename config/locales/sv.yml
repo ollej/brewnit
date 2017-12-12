@@ -160,6 +160,7 @@ sv:
       Beersmith 2, Brewpal eller Wort.
   users:
     index: Bryggare
+    other_users: Användare utan recept
     profile: Profil
     edit: Ändra profil
     sign_up: Registrera
