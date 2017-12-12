@@ -92,8 +92,8 @@ sv:
     download_description: Ladda ner en BeerXML-fil som kan importeras i receptprogram.
     recipe_create_information: |
         <p>Fyll i namn och eventuell beskrivning av receptet.</p>
-        <p>Om du redan har gjort ett recept i ett receptprogram som BeerSmith kan du
-        importera det genom att klicka på knappen <em>"Importera"</em>.</p>
+        <p>Klicka på knappen <em>"Importera"</em> för att importera ett eller flera
+        recept exporterade som BeerXML från ett receptprogram (t.ex. BeerSmith).</p>
         <p>Annars klickar du på knappen <em>"Bygg recept"</em> för att öppna
         receptbyggaren där du kan fylla i alla ingredienser och övriga uppgifter
         om receptet.</p>

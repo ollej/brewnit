@@ -28,7 +28,7 @@ sv:
       actions:
         cancel: Avbryt
         confirm_delete: "Är du verkligen säker på att du vill ta bort denna kommentar?"
-        create: Skriv kommentar
+        create: Posta kommentar
         delete: Ta bort
         edit: Ändra
         new: Ny kommentar
@@ -50,7 +50,7 @@ sv:
         subject: "%{creator_name} skrev en kommentar till %{commontable_name}"
       thread_link_html: "Visa <a href=\"%{comment_url}\">alla kommentarer</a> till %{commontable_name}."
       undisclosed_recipients: "Mottagare konfidentiella"
-    require_login: "Du måste logga in för att skriva kommentarer"
+    require_login: "Du måste logga in för att posta kommentarer"
     subscription:
       actions:
         confirm_unsubscribe: "Är du säker på att du vill avsluta din prenumeration på denna diskussion?"
@@ -72,7 +72,7 @@ sv:
         already_closed: Den här diskussionen har redan avslutats.
         not_closed: Den här diskussionen är inte avslutad.
       status:
-        cannot_post: Det går inte att skriva nya kommentarer för tillfället.
+        cannot_post: Det går inte att posta nya kommentarer för tillfället.
         closed: "Kommentarer (Avslutats av %{closer_name})"
         open: Kommentarer
   time:
