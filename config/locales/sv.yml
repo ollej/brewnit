@@ -97,6 +97,13 @@ sv:
         <p>Annars klickar du på knappen <em>"Bygg recept"</em> för att öppna
         receptbyggaren där du kan fylla i alla ingredienser och övriga uppgifter
         om receptet.</p>
+    beersmith_export: Exportera från BeerSmith 2
+    beersmith_export_description: |
+      <ol>
+        <li>Högerklicka på receptet</li>
+        <li>Välj "Export selected"</li>
+        <li>Välj "BeerXML File" vid "Save as type"</li>
+      </ol>
     event_recipes: Evenemang
     event_recipes_description: Ändra vilka evenemang detta recept har deltagit i.
     import: Importera
