@@ -28,7 +28,7 @@ gem 'sdoc', group: :doc
 
 gem 'pg'
 gem 'libxml-xmlrpc'
-gem 'devise'
+gem 'devise', git: 'https://github.com/plataformatec/devise', ref: '135d898' # Use bleeding edge to support Ruby v2.5.0
 gem 'omniauth-google-oauth2'
 gem 'unicorn-rails'
 
