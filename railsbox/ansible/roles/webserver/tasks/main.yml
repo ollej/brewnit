@@ -3,7 +3,7 @@
   when: target == 'server'
 
 - name: Create and migrate DB
-  command: /bin/bash -l -c 'rake db:migrate' chdir={{ app_path }}
+  command: /bin/bash -l -c 'bundle exec rake db:migrate' chdir={{ app_path }}
   become_user: '{{ user_name }}'
   ignore_errors: yes
   tags:
