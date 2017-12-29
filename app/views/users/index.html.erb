@@ -27,8 +27,8 @@
           <% end %>
         </ul>
 
-        <h2><%= I18n.t(:'users.other_users') %></h2>
-        <ul class="user-list linked-list pure-g">
+        <h2><a href="#other-users"><%= I18n.t(:'users.other_users') %></a></h2>
+        <ul id="other-users" class="user-list linked-list pure-g expand-div">
           <% @users.each do |user| %>
             <%= render partial: 'user', locals: { user: user } %>
           <% end %>
