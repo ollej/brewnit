@@ -110,6 +110,9 @@ class FilterRecipes
       query << { event: @hash[:event] } if @hash[:event].present?
       query << { event_id: @hash[:event_id] } if @hash[:event_id].present?
       query << { medal: @hash[:medal] } if @hash[:medal].present?
+      query << { complete: false } if @hash[:incomplete].present?
+      query << { public: false } if @hash[:private].present?
+      query << { or: [{ medal: 'gold' }, { medal: 'silver' }, { medal: 'bronze' }] } if @hash[:has_medal].present?
       add_filters(query)
       query
     end

@@ -70,7 +70,7 @@ class ApplicationController < ActionController::Base
   def search_keys
     %i(q style ogfrom ogto fgfrom fgto ibufrom ibuto
       colorfrom colorto abvfrom abvto sort_order equipment
-      event_id medal)
+      event_id medal incomplete private has_medal)
   end
 
   def search_params

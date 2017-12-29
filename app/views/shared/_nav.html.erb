@@ -49,17 +49,26 @@
       <% end %>
       <% if user_signed_in? %>
         <li class="pure-menu-heading"><%= t(:'recipes.labels') %></li>
-        <li class="pure-menu-item"><a href="#" class="pure-menu-link"><span class="recipe-label-private"></span><%= t(:'recipes.private') %></a></li>
         <li class="pure-menu-item">
-          <%= link_to user_path(current_user), class: 'pure-menu-link' do %>
+          <%= link_to recipes_path(private: true), class: 'pure-menu-link' do %>
+            <span class="recipe-label-private"></span><%= t(:'recipes.private') %></a></li>
+          <% end %>
+        <li class="pure-menu-item">
+          <%= link_to user_path(current_user, clear_search: true), class: 'pure-menu-link' do %>
             <span class="recipe-label-own"></span><%= t(:'recipes.own') %>
           <% end %>
         </li>
         <li class="pure-menu-item">
-          <a href="#" class="pure-menu-link"><span class="recipe-label-incomplete"></span><%= t(:'recipes.incomplete') %></a>
+          <%= link_to recipes_path(incomplete: true), class: 'pure-menu-link' do %>
+            <span class="recipe-label-incomplete"></span><%= t(:'recipes.incomplete') %>
+          <% end %>
         </li>
       <% end %>
-        <li class="pure-menu-item"><a href="#" class="pure-menu-link"><span class="recipe-label-winner"></span><%= t(:'recipes.winner') %></a></li>
+        <li class="pure-menu-item">
+          <%= link_to recipes_path(has_medal: true), class: 'pure-menu-link' do %>
+            <span class="recipe-label-winner"></span><%= t(:'recipes.winner') %>
+          <% end %>
+        </li>
       </ul>
     </div>
 

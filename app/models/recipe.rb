@@ -6,7 +6,7 @@ class Recipe < ApplicationRecord
 
   search_scope :search do
     attributes primary: [:name, :description, :style_name, :brewer, :equipment]
-    attributes :abv, :ibu, :og, :fg, :color, :batch_size, :style_code, :style_guide, :style_name, :created_at, :brewer, :equipment
+    attributes :abv, :ibu, :og, :fg, :color, :batch_size, :style_code, :style_guide, :style_name, :created_at, :brewer, :equipment, :complete, :public
     attributes owner: 'user.name'
     attributes event: 'events.name'
     attributes event_id: 'events.id'

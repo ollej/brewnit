@@ -1458,6 +1458,13 @@ CREATE INDEX index_recipes_on_color ON recipes USING btree (color);
 
 
 --
+-- Name: index_recipes_on_complete; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_recipes_on_complete ON recipes USING btree (complete);
+
+
+--
 -- Name: index_recipes_on_created_at; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1800,6 +1807,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20171126161659'),
 ('20171202132847'),
 ('20171203174307'),
-('20171212222842');
+('20171212222842'),
+('20171228154504');
 
 
