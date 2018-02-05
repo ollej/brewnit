@@ -193,6 +193,7 @@ sv:
     media:
       title: Bilder
     search: Sök användare
+    add_avatar_image: Ladda gärna upp en avatarbild!
   events:
     index: Evenemang
     new: Skapa evenemang
@@ -775,6 +776,7 @@ sv:
         url: Hemsida
         brewery: Bryggeri
         twitter: Twitter
+        instagram: Instagram
         equipment: Bryggverk
         name: Namn
         avatar: Avatar

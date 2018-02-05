@@ -14,7 +14,8 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
   },
   twitter: {
     card: 'summary_large_image',
-    site: @recipe.user.try(:twitter) || '@ExaltedBeer',
+    site: '@ollej',
+    creator: @recipe.user&.twitter,
     title: :title,
     description: :description,
     image: full_url_for(@recipe.main_image(:large)),
@@ -86,6 +87,7 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
                 <%= file_field_tag 'media[]', type: :file, multiple: true,
                   accept: 'image/png,image/gif,image/jpeg,image/jpg',
                   id: 'uploadMediaField', class: 'hidden-file-field' %>
+                <%= hidden_field_tag :media_type, 'main' %>
                 <div id="progressbar"></div>
               <% end %>
 

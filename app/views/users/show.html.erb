@@ -9,6 +9,14 @@ set_meta_tags title: @user.display_name,
     type: 'profile',
     locale: 'sv_SE',
     image: full_url_for(@user.avatar_image(:large)),
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@ollej',
+    creator: @user.twitter,
+    title: :title,
+    description: :description,
+    image: full_url_for(@user.avatar_image(:large)),
   }
 %>
       <div class="page-content-header pure-g">
@@ -65,6 +73,14 @@ set_meta_tags title: @user.display_name,
         <div class="item-field">
           <span class="item-field-heading"><%= I18n.t(:'activerecord.attributes.user.twitter') %></span>
           <p class="item-field-value"><%= link_to @user.twitter, twitter_url(@user.twitter),
+            target: '_blank', rel: 'noopener noreferrer' %></p>
+        </div>
+        <% end %>
+
+        <% if @user.instagram.present? %>
+        <div class="item-field">
+          <span class="item-field-heading"><%= I18n.t(:'activerecord.attributes.user.instagram') %></span>
+          <p class="item-field-value"><%= link_to @user.instagram, instagram_url(@user.instagram),
             target: '_blank', rel: 'noopener noreferrer' %></p>
         </div>
         <% end %>

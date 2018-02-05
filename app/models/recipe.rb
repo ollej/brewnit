@@ -4,6 +4,8 @@ class Recipe < ApplicationRecord
   include SanitizerConcern
   include PushoverConcern
 
+  media_attribute :media_main
+
   search_scope :search do
     attributes primary: [:name, :description, :style_name, :brewer, :equipment]
     attributes :abv, :ibu, :og, :fg, :color, :batch_size, :style_code, :style_guide, :style_name, :created_at, :brewer, :equipment, :complete, :public

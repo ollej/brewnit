@@ -1,3 +1,0 @@
-class MediaAssociationError < StandardError
-end
-

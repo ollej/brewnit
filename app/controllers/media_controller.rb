@@ -8,7 +8,7 @@ class MediaController < ApplicationController
     @media = []
     if params[:media]
       params[:media].each do |file|
-        @media << @parent.media.create(file: file)
+        @media << @parent.create_medium(file, params[:media_type], !!params[:force])
       end
     end
     respond_to do |format|

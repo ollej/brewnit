@@ -4,6 +4,8 @@ class User < ApplicationRecord
   include SanitizerConcern
   include PushoverConcern
 
+  media_attribute :media_avatar, :media_brewery
+
   search_scope :search do
     attributes primary: [:name, :presentation, :equipment, :brewery, :twitter]
     attributes :brewer, :equipment
@@ -21,10 +23,6 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :url, url: true, allow_blank: true
-  validates_format_of :avatar,
-    with: %r{\Ahttps?://.+/.+\.(gif|jpe?g|png)\z}i,
-    message: I18n.t(:'activerecord.errors.models.user.attributes.avatar.format'),
-    allow_blank: true
 
   acts_as_commontator
   acts_as_voter
@@ -59,11 +57,13 @@ class User < ApplicationRecord
     self == user
   end
 
+  def has_avatar?
+    media_avatar.present?
+  end
+
   def avatar_image(size = :medium_thumbnail)
     if media_avatar.present?
       media_avatar.file.url(size)
-    elsif avatar.present?
-      avatar
     elsif email.present?
       default_avatar
     else
@@ -125,13 +125,9 @@ class User < ApplicationRecord
     user = User.find_or_create_by(email: data[:email]) do |u|
       u.name = data[:name]
       u.password = Devise.friendly_token[0,20]
-      u.avatar = data[:image]
       u.registration_data = self.registration_data_hash(auth_hash.provider, data[:email], honeypot)
     end
-    if data[:image].present? && user.avatar.blank?
-      user.avatar = data[:image]
-      user.save
-    end
+    user.create_medium(data[:image], :avatar) if data[:image].present?
     user
   end
 
@@ -145,5 +141,4 @@ class User < ApplicationRecord
       offences: honeypot.offenses,
     }
   end
-
 end

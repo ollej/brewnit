@@ -2,10 +2,12 @@
   <h2 class="item-title event-name item-content-title">
     <%= t(:'events.official_event_info') %>
   </h2>
-  <h3 class="item-subtitle event-type">
-    <%= I18n.t(:'events.last_registration_header') %>:
-    <%= @event.last_registration %>
-  </h3>
+  <% if @event.last_registration.present? %>
+    <h3 class="item-subtitle event-type">
+      <%= I18n.t(:'events.last_registration_header') %>:
+      <%= @event.last_registration %>
+    </h3>
+  <% end %>
   <p class="item-desc event-description">
   <%= @event.registration_information %>
   </p>

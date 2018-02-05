@@ -5,6 +5,8 @@ class Event < ApplicationRecord
   include SanitizerConcern
   include MediaParentConcern
 
+  media_attribute :media_main
+
   search_scope :search do
     attributes primary: [:name, :organizer, :location, :event_type, :description]
     options :primary, type: :fulltext, default: true, dictionary: 'swedish_snowball'
@@ -88,13 +90,13 @@ class Event < ApplicationRecord
   def self.event_options
     {
       I18n.t(:'events.upcoming_events') =>
-      self.registration_open.upcoming.unofficial.order(:name).collect {|event|
-        event.option_values
-      },
+        self.registration_open.upcoming.unofficial.order(:name).collect {|event|
+          event.option_values
+        },
       I18n.t(:'events.past_events') =>
-      self.registration_open.past.unofficial.order(:name).collect {|event|
-        event.option_values
-      }
+        self.registration_open.past.unofficial.order(:name).collect {|event|
+          event.option_values
+        }
     }
   end
 
@@ -103,5 +105,4 @@ class Event < ApplicationRecord
       event.option_values
     }
   end
-
 end

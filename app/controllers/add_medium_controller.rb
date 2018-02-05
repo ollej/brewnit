@@ -19,6 +19,4 @@ class AddMediumController < ApplicationController
       end
     end
   end
-
 end
-

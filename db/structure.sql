@@ -815,7 +815,6 @@ CREATE TABLE users (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     admin boolean,
-    avatar character varying,
     presentation text DEFAULT ''::text,
     location character varying,
     brewery character varying DEFAULT ''::character varying,
@@ -825,7 +824,8 @@ CREATE TABLE users (
     media_avatar_id integer,
     media_brewery_id integer,
     registration_data jsonb,
-    recipes_count integer DEFAULT 0
+    recipes_count integer DEFAULT 0,
+    instagram text
 );
 
 
@@ -1808,6 +1808,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20171202132847'),
 ('20171203174307'),
 ('20171212222842'),
-('20171228154504');
+('20171228154504'),
+('20180205191232'),
+('20180205201540'),
+('20180205203125');
 
 

@@ -1,25 +1,19 @@
 module MediaParentConcern
   extend ActiveSupport::Concern
 
-  module ClassMethods
-    def media_associations
-      self.reflect_on_all_associations(:belongs_to).map(&:name).select { |a| a.to_s.start_with? 'media_' }
-    end
+  included do
+    class_attribute :_media_attributes, instance_accessor: false
+    self._media_attributes = []
+  end
 
-    def has_association(type)
-      Rails.logger.debug { self.media_associations }
-      meth = self.media_method(type)
-      self.media_associations.include?(meth)
+  class_methods do
+    def media_attribute(*attributes)
+      self._media_attributes = attributes
     end
-
-    def media_method(type)
-      "media_#{type.underscore}".to_sym
-    end
-
   end
 
   def remove_media_references(medium)
-    self.class.media_associations.each do |meth|
+    media_attributes.each do |meth|
       if send(meth) == medium
         Rails.logger.debug { "Removing media assocation: #{meth}" }
         send("#{meth}=", nil)
@@ -28,10 +22,40 @@ module MediaParentConcern
     save if changed?
   end
 
-  def add_medium(medium, type)
-    raise MediaAssociationError.new "Media association type not available: #{type}" unless self.class.has_association(type)
-    self.send("#{self.class.media_method(type)}=", medium)
-    self.save!
+  def has_medium?(type)
+    raise MediaAttributeError.new "Media association type not available: #{type}" unless has_media_attribute?(type)
+    send(media_method(type)).present?
   end
 
+  def create_medium(file, type=nil, force=false)
+    if file.kind_of? String
+      file = Downloader.new(file).get
+    end
+    medium = media.create(file: file)
+    if type.present? && (force || !has_medium?(type))
+      add_medium(medium, type)
+    end
+    medium
+  end
+
+  def add_medium(medium, type)
+    raise MediaAttributeError.new "Media association type not available: #{type}" unless has_media_attribute?(type)
+    send("#{media_method(type)}=", medium)
+    save!
+  end
+
+  private
+
+  def media_method(type)
+    "media_#{type.to_s.underscore}".to_sym
+  end
+
+  def has_media_attribute?(type)
+    meth = media_method(type)
+    media_attributes.include?(meth)
+  end
+
+  def media_attributes
+    self.class._media_attributes
+  end
 end

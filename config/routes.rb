@@ -44,7 +44,8 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: {
     omniauth_callbacks: 'omniauth_callbacks',
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
+    sessions: 'users/sessions'
   }
   resources :users, only: [:index, :show] do
     resources :media, only: [:create, :destroy]
