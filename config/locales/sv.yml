@@ -13,6 +13,7 @@ sv:
     public: Offentlig
     private: Privat
     unknown_name: N.N.
+    beer: öl
     share:
       single_title: Dela recept!
       facebook:

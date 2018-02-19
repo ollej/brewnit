@@ -103,7 +103,7 @@ class Recipe < ApplicationRecord
     translation_values = {
       recipe_name: name,
       brewer_name: brewer_name,
-      style_name: style_name
+      style_name: style_name.presence || I18n.t(:'common.beer')
     }
     if type == :create
       super.merge({
