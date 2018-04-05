@@ -4,14 +4,9 @@ class RecipeCompleteController < ApplicationController
   invisible_captcha only: [:update], on_spam: :redirect_spammers!
 
   def update
-    @hops = @details.hops
-    @fermentables = @details.fermentables
-    @miscs = @details.miscs
-    @yeasts = @details.yeasts
-    @mash_steps = @details.mash_steps
-    @style = @details.style
-    @recipe.beerxml = render_to_string(template: 'recipe_details/show.xml.builder')
-    BeerxmlImport.new(@recipe, @recipe.beerxml).extract_recipe
+    @recipe.beerxml = BeerxmlExport.new(@recipe).render
+    beer_recipe = BeerxmlParser.new(@recipe.beerxml).recipes.first
+    BeerxmlImport.new(@recipe, beer_recipe).extract_recipe
     @recipe.save!
 
     respond_to do |format|

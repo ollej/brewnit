@@ -1,7 +1,9 @@
 class BeerxmlImport
-  def initialize(recipe, beerxml)
+  attr_reader :beer_recipe
+
+  def initialize(recipe, beer_recipe)
     @recipe = recipe
-    @beerxml = beerxml
+    @beer_recipe = beer_recipe
   end
 
   def run
@@ -16,27 +18,20 @@ class BeerxmlImport
     extract_recipe
   end
 
-  def parse
-    parser = NRB::BeerXML::Parser.new(perform_validations: false)
-    xml = StringIO.new(@beerxml)
-    recipe = parser.parse(xml)
-    BeerRecipe::RecipeWrapper.new(recipe.records.first)
-  end
-
   def extract_recipe
-    @recipe.name = beerxml_data.name unless @recipe.name.present?
-    @recipe.abv = beerxml_data.abv
-    @recipe.ibu = beerxml_data.ibu
-    @recipe.og = beerxml_data.og
-    @recipe.fg = beerxml_data.fg
-    @recipe.style_code = beerxml_data.style_code
-    @recipe.style_guide = beerxml_data.style&.style_guide || ''
-    @recipe.style_name = beerxml_data.style&.name || ''
-    @recipe.batch_size = beerxml_data.batch_size
-    @recipe.color = beerxml_data.color_ebc
-    @recipe.brewer = beerxml_data.brewer || ''
-    if beerxml_data.equipment.present?
-      @recipe.equipment = beerxml_data.equipment&.name || ''
+    @recipe.name = beer_recipe.name unless @recipe.name.present?
+    @recipe.abv = beer_recipe.abv
+    @recipe.ibu = beer_recipe.ibu
+    @recipe.og = beer_recipe.og
+    @recipe.fg = beer_recipe.fg
+    @recipe.style_code = beer_recipe.style_code
+    @recipe.style_guide = beer_recipe.style&.style_guide || ''
+    @recipe.style_name = beer_recipe.style&.name || ''
+    @recipe.batch_size = beer_recipe.batch_size
+    @recipe.color = beer_recipe.color_ebc
+    @recipe.brewer = beer_recipe.brewer || ''
+    if beer_recipe.equipment.present?
+      @recipe.equipment = beer_recipe.equipment&.name || ''
     else
       @recipe.equipment = @recipe.user.equipment || ''
     end
@@ -55,7 +50,7 @@ class BeerxmlImport
   end
 
   def extract_fermentables
-    beerxml_data.fermentables&.each do |fermentable|
+    beer_recipe.fermentables&.each do |fermentable|
       @details.fermentables.build(
         name: fermentable.name,
         amount: fermentable.amount,
@@ -69,7 +64,7 @@ class BeerxmlImport
   end
 
   def extract_hops
-    beerxml_data.hops&.each do |hop|
+    beer_recipe.hops&.each do |hop|
       @details.hops.build(
         name: hop.name,
         amount: hop.amount.to_f,
@@ -82,7 +77,7 @@ class BeerxmlImport
   end
 
   def extract_miscs
-    beerxml_data.miscs&.each do |misc|
+    beer_recipe.miscs&.each do |misc|
       @details.miscs.build(
         name: misc.name,
         amount: normalize_amount(misc.amount, misc.amount_is_weight),
@@ -95,7 +90,7 @@ class BeerxmlImport
   end
 
   def extract_yeasts
-    beerxml_data.yeasts&.each do |yeast|
+    beer_recipe.yeasts&.each do |yeast|
       @details.yeasts.build(
         name: yeast.name,
         amount: normalize_amount(yeast.amount || 1, yeast.amount_is_weight),
@@ -107,7 +102,7 @@ class BeerxmlImport
   end
 
   def extract_mash_steps
-    beerxml_data.mash&.steps&.each do |step|
+    beer_recipe.mash&.steps&.each do |step|
       @details.mash_steps.build(
         name: step.name,
         step_temperature: step.step_temp,
@@ -121,23 +116,19 @@ class BeerxmlImport
   end
 
   def extract_details
-    @details.brewed_at = Date.parse(beerxml_data.date) if beerxml_data.date
-    @details.batch_size = beerxml_data.batch_size
-    @details.boil_time = beerxml_data.boil_time
-    @details.efficiency = beerxml_data.efficiency
-    @details.boil_size = beerxml_data.boil_size
-    @details.og = beerxml_data.og
-    @details.fg = beerxml_data.fg
-    unless beerxml_data.mash.nil?
-      @details.sparge_temp = beerxml_data.mash.sparge_temp
-      @details.grain_temp = beerxml_data.mash.grain_temp
+    @details.brewed_at = Date.parse(beer_recipe.date) if beer_recipe.date
+    @details.batch_size = beer_recipe.batch_size
+    @details.boil_time = beer_recipe.boil_time
+    @details.efficiency = beer_recipe.efficiency
+    @details.boil_size = beer_recipe.boil_size
+    @details.og = beer_recipe.og
+    @details.fg = beer_recipe.fg
+    unless beer_recipe.mash.nil?
+      @details.sparge_temp = beer_recipe.mash.sparge_temp
+      @details.grain_temp = beer_recipe.mash.grain_temp
     end
-    @details.carbonation = beerxml_data.carbonation || 0
-    @details.style = find_style(beerxml_data.style)
-  end
-
-  def beerxml_data
-    @beerxml_data ||= parse
+    @details.carbonation = beer_recipe.carbonation || 0
+    @details.style = find_style(beer_recipe.style)
   end
 
   def find_style(style)

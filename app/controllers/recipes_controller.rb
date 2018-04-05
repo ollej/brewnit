@@ -20,7 +20,7 @@ class RecipesController < ApplicationController
     @recipe = find_recipe
     raise AuthorizationException unless can_show?(@recipe)
     raise RecipeNotComplete unless @recipe.complete?
-    @beerxml = BeerxmlImport.new(@recipe, @recipe.beerxml).parse
+    @beerxml = BeerxmlParser.new(@recipe.beerxml).recipe
     @presenter = RecipePresenter.new(@recipe, @beerxml)
     Recipe.unscoped do
       commontator_thread_show(@recipe)
@@ -140,12 +140,11 @@ class RecipesController < ApplicationController
       end
     end
 
-    def import_beerxml(recipe, beerxml)
-      if beerxml.present?
-        recipe.beerxml = beerxml.read
-        BeerxmlImport.new(recipe, recipe.beerxml).run
-        recipe.detail.save!
-      end
+    def import_recipe(beer_recipe, beerxml = nil)
+      recipe = new_recipe
+      BeerxmlImport.new(recipe, beer_recipe).run
+      recipe.beerxml = beerxml || BeerxmlExport.new(recipe).render
+      recipe.detail.save! # TODO: Needed?
       recipe.save!
       recipe
     end
@@ -164,7 +163,16 @@ class RecipesController < ApplicationController
       beerxml_files.each_with_object([]) do |beerxml, recipes|
         ActiveRecord::Base.transaction do
           begin
-            recipes << import_beerxml(new_recipe, beerxml)
+            parser = BeerxmlParser.new(beerxml.read)
+            if parser.many?
+              Rails.logger.debug { "RecipesController#create importing multiple recipes in one beerxml file" }
+              parser.recipes.each do |beer_recipe|
+                recipes << import_recipe(beer_recipe)
+              end
+            else
+              Rails.logger.debug { "RecipesController#create importing one recipe in a beerxml file" }
+              recipes << import_recipe(parser.recipe, parser.beerxml)
+            end
           rescue ActiveRecord::RecordInvalid => e
             Rails.logger.error { "Failed creating recipe: #{e.record.errors.full_messages}" }
           end
