@@ -9,8 +9,8 @@ class Event < ApplicationRecord
 
   search_scope :search do
     attributes primary: [:name, :organizer, :location, :event_type, :description]
+    attributes :name
     options :primary, type: :fulltext, default: true, dictionary: 'swedish_snowball'
-    options :name, type: :fulltext, dictionary: 'swedish_snowball'
   end
 
   belongs_to :user
@@ -98,6 +98,14 @@ class Event < ApplicationRecord
           event.option_values
         }
     }
+  end
+
+  def self.search_name(query)
+    if query.present?
+      self.search(or: [{ query: query }, { name: query }])
+    else
+      all
+    end
   end
 
   def self.register_event_options

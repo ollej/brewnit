@@ -1199,6 +1199,13 @@ ALTER TABLE ONLY yeasts
 
 
 --
+-- Name: events_name_trigram_idx; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX events_name_trigram_idx ON events USING gin (name gin_trgm_ops);
+
+
+--
 -- Name: fulltext_index_events_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1841,6 +1848,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180205201540'),
 ('20180205203125'),
 ('20180501134640'),
-('20180501150416');
+('20180501150416'),
+('20180501151104');
 
 
