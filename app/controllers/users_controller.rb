@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   def index
     @brewers, @users = User.confirmed
       .has_recipes
-      .search(params[:user_search])
+      .search_name(params[:user_search])
       .ordered
       .partition { |user| user.recipes_count > 0 }
 

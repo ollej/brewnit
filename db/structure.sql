@@ -1640,6 +1640,13 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 
 
 --
+-- Name: user_name_trigram_idx; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX user_name_trigram_idx ON users USING gin (name gin_trgm_ops);
+
+
+--
 -- Name: mash_steps fk_rails_0f11dbd377; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1833,6 +1840,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180205191232'),
 ('20180205201540'),
 ('20180205203125'),
-('20180501134640');
+('20180501134640'),
+('20180501150416');
 
 

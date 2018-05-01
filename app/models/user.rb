@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   search_scope :search do
     attributes primary: [:name, :presentation, :equipment, :brewery, :twitter]
-    attributes :brewer, :equipment
+    attributes :name, :brewer, :equipment
     options :primary, type: :fulltext, default: true, dictionary: 'swedish_snowball'
     options :brewery, type: :fulltext, default: false, dictionary: 'swedish_snowball'
     options :equipment, type: :fulltext, default: false, dictionary: 'swedish_snowball'
@@ -129,6 +129,14 @@ class User < ApplicationRecord
     end
     user.create_medium(data[:image], :avatar) if data[:image].present?
     user
+  end
+
+  def self.search_name(query)
+    if query.present?
+      self.search(or: [{ query: query }, { name: query }])
+    else
+      all
+    end
   end
 
   def self.registration_data_hash(provider, email, honeypot)
