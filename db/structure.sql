@@ -35,6 +35,20 @@ CREATE EXTENSION IF NOT EXISTS hstore WITH SCHEMA public;
 COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs';
 
 
+--
+-- Name: pg_trgm; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pg_trgm WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION pg_trgm; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pg_trgm IS 'text similarity measurement and index searching based on trigrams';
+
+
 SET search_path = public, pg_catalog;
 
 --
@@ -1612,6 +1626,13 @@ CREATE INDEX index_yeasts_on_recipe_detail_id ON yeasts USING btree (recipe_deta
 
 
 --
+-- Name: recipe_names_trigram_idx; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX recipe_names_trigram_idx ON recipes USING gin (name gin_trgm_ops);
+
+
+--
 -- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1811,6 +1832,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20171228154504'),
 ('20180205191232'),
 ('20180205201540'),
-('20180205203125');
+('20180205203125'),
+('20180501134640');
 
 

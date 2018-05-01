@@ -104,7 +104,9 @@ class FilterRecipes
   def query
     @query ||= begin
       query = []
-      query << { query: @hash[:q] } if @hash[:q].present?
+      if @hash[:q].present?
+        query << { or: [{ query: @hash[:q] }, { name: @hash[:q] }] }
+      end
       query << { style_name: @hash[:style] } if @hash[:style].present?
       query << { equipment: @hash[:equipment] } if @hash[:equipment].present?
       query << { event: @hash[:event] } if @hash[:event].present?
