@@ -160,8 +160,8 @@ sv:
       one: 1 nedladdning
       other: '%{count} nedladdningar'
     public_description: |
-      Lämna denna kryssruta tom om du inte vill
-      att andra ska kunna se ditt recept.
+      Kryssa för denna ruta om du vill att
+      andra ska kunna se ditt recept.
     beerxml_description: |
       Ladda upp recept som exporterats till
       BeerXML i ett receptprogram som

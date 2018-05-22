@@ -87,7 +87,11 @@ class RecipesController < ApplicationController
 
     respond_to do |format|
       if @recipe.update(recipe_params)
-        import_beerxml(@recipe, params.dig(:recipe, :beerxml))
+        if beerxml_file.present?
+          Rails.logger.debug { "RecipesController#update updating recipe with a beerxml file" }
+          update_beerxml(recipe: @recipe, beerxml: beerxml_file.read)
+          # TODO: Handle errors gracefully
+        end
         format.html { redirect_to redirect_path, notice: I18n.t(:'recipes.update.successful') }
         format.json { render :show, status: :ok, location: @recipe }
         format.js { head :ok, location: @recipe }
@@ -140,8 +144,8 @@ class RecipesController < ApplicationController
       end
     end
 
-    def import_recipe(beer_recipe, beerxml = nil)
-      recipe = new_recipe
+    def import_recipe(recipe: nil, beer_recipe: nil, beerxml: nil)
+      recipe ||= new_recipe
       BeerxmlImport.new(recipe, beer_recipe).run
       recipe.beerxml = beerxml || BeerxmlExport.new(recipe).render
       recipe.detail.save! # TODO: Needed?
@@ -153,6 +157,10 @@ class RecipesController < ApplicationController
       Recipe.new(recipe_params) do |recipe|
         recipe.user = current_user
       end
+    end
+
+    def beerxml_file
+      params.dig(:recipe, :beerxml).presence
     end
 
     def beerxml_files
@@ -167,16 +175,25 @@ class RecipesController < ApplicationController
             if parser.many?
               Rails.logger.debug { "RecipesController#create importing multiple recipes in one beerxml file" }
               parser.recipes.each do |beer_recipe|
-                recipes << import_recipe(beer_recipe)
+                recipes << import_recipe(beer_recipe: beer_recipe)
               end
             else
               Rails.logger.debug { "RecipesController#create importing one recipe in a beerxml file" }
-              recipes << import_recipe(parser.recipe, parser.beerxml)
+              recipes << import_recipe(beer_recipe: parser.recipe, beerxml: parser.beerxml)
             end
           rescue ActiveRecord::RecordInvalid => e
             Rails.logger.error { "Failed creating recipe: #{e.record.errors.full_messages}" }
           end
         end
+      end
+    end
+
+    def update_beerxml(recipe:, beerxml:)
+      parser = BeerxmlParser.new(beerxml)
+      if parser.many?
+        import_recipe(recipe: recipe, beer_recipe: parser.recipes.first)
+      else
+        import_recipe(recipe: recipe, beer_recipe: parser.recipe, beerxml: beerxml)
       end
     end
 end
