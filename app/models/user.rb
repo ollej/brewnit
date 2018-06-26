@@ -62,7 +62,7 @@ class User < ApplicationRecord
   end
 
   def avatar_image(size = :medium_thumbnail)
-    if media_avatar.present?
+    if has_avatar?
       media_avatar.file.url(size)
     elsif email.present?
       default_avatar
@@ -127,7 +127,9 @@ class User < ApplicationRecord
       u.password = Devise.friendly_token[0,20]
       u.registration_data = self.registration_data_hash(auth_hash.provider, data[:email], honeypot)
     end
-    user.create_medium(data[:image], :avatar) if data[:image].present?
+    if data[:image].present? && !user.has_avatar?
+      user.create_medium(data[:image], :avatar)
+    end
     user
   end
 
