@@ -5,6 +5,6 @@
       .merge(:'file-field' => '#import-beerxml') do %>
     <%= icon('upload') %> <%= I18n.t(:'recipes.import') %>
   <% end %>
-  <%= f.file_field :beerxml, class: 'hidden-file-field',
+  <%= f.file_field :beerxml, class: 'hidden-file-field', multiple: false,
     accept: 'application/xml,.xml', id: 'import-beerxml' %>
 <% end %>
