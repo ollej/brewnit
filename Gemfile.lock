@@ -362,7 +362,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sys-proctable (1.1.5-universal-aix5)
     sys-proctable (1.1.5-universal-darwin)
       ffi
     therubyracer (0.12.3)
@@ -401,6 +400,7 @@ GEM
 PLATFORMS
   ruby
   x86_64-darwin-16
+  x86_64-darwin-17
 
 DEPENDENCIES
   actionview-encoded_mail_to
@@ -454,7 +454,7 @@ DEPENDENCIES
   web-console
 
 RUBY VERSION
-   ruby 2.5.0p0
+   ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.1
+   1.16.2
