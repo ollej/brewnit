@@ -26,7 +26,7 @@ gem 'jbuilder'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', group: :doc
 
-gem 'pg'
+gem 'pg', '0.21.0'
 gem 'libxml-xmlrpc'
 gem 'devise', git: 'https://github.com/plataformatec/devise', ref: '135d898' # Use bleeding edge to support Ruby v2.5.0
 gem 'omniauth-google-oauth2'
