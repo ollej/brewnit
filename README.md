@@ -1,7 +1,7 @@
 Brewnit
 =======
 
-A site to upload and view beerxml recipes.
+A site to upload, view, and edit beerxml recipes.
 
 Related resources
 -----------------
@@ -31,7 +31,7 @@ Requirements
 
 This application needs the following:
 
- * Ruby v2.4.2
+ * Ruby v2.5.3
  * Postgres v9.6
 
 Vagrant
@@ -171,10 +171,10 @@ If you don't have Ruby, here is a short primer:
    ```bash
    $ git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
    ```
- * Install Ruby v2.4.2
+ * Install Ruby v2.5.3
 
    ```bash
-   $ rbenv install 2.4.2
+   $ rbenv install 2.5.3
    ```
  * Install bundler
 
