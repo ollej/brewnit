@@ -25,4 +25,6 @@
     - { role: ruby, tags: ruby }
     - vim
     - webserver
+    - nodejs
+    - yarn
 
