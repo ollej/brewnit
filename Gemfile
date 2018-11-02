@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.5.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.1.4'
+gem 'rails', '5.1.6'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
 # Use SCSS for stylesheets
@@ -26,7 +26,7 @@ gem 'jbuilder'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', group: :doc
 
-gem 'pg', '0.21.0'
+gem 'pg'
 gem 'libxml-xmlrpc'
 gem 'devise', git: 'https://github.com/plataformatec/devise', ref: '135d898' # Use bleeding edge to support Ruby v2.5.0
 gem 'omniauth-google-oauth2'
