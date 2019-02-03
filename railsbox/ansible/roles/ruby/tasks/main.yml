@@ -9,7 +9,7 @@
   when: ruby_install == 'rbenv'
 
 - name: Install bundler
-  command: /bin/bash -l -c 'gem install bundler --no-ri --no-rdoc'
+  command: /bin/bash -l -c 'gem install bundler --no-document'
   become_user: '{{ ruby_user_name }}'
 
 - name: bundle install

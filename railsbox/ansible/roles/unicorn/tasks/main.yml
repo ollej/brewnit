@@ -3,7 +3,7 @@
   template: src=unicorn.rb.j2 dest={{ unicorn_config_path }}
 
 - name: Install unicorn
-  command: /bin/bash -l -c 'gem install unicorn --no-ri --no-rdoc' chdir={{ app_path }}
+  command: /bin/bash -l -c 'gem install unicorn --no-document' chdir={{ app_path }}
   become: no
 
 - name: Create upstart config

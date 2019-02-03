@@ -3,7 +3,7 @@
   template: src=puma.rb.j2 dest={{ puma_config_path }}
 
 - name: Install puma
-  command: /bin/bash -l -c 'gem install puma --no-ri --no-rdoc' chdir={{ app_path }}
+  command: /bin/bash -l -c 'gem install puma --no-document' chdir={{ app_path }}
   become: no
 
 - name: Create directories for sockets and pids
