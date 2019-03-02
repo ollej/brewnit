@@ -3,6 +3,7 @@ SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
@@ -49,13 +50,11 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm WITH SCHEMA public;
 COMMENT ON EXTENSION pg_trgm IS 'text similarity measurement and index searching based on trigrams';
 
 
-SET search_path = public, pg_catalog;
-
 --
 -- Name: fermentable_type; Type: TYPE; Schema: public; Owner: -
 --
 
-CREATE TYPE fermentable_type AS ENUM (
+CREATE TYPE public.fermentable_type AS ENUM (
     'Grain',
     'Sugar',
     'Extract',
@@ -68,7 +67,7 @@ CREATE TYPE fermentable_type AS ENUM (
 -- Name: hop_form; Type: TYPE; Schema: public; Owner: -
 --
 
-CREATE TYPE hop_form AS ENUM (
+CREATE TYPE public.hop_form AS ENUM (
     'Pellet',
     'Plug',
     'Leaf'
@@ -79,7 +78,7 @@ CREATE TYPE hop_form AS ENUM (
 -- Name: hop_use; Type: TYPE; Schema: public; Owner: -
 --
 
-CREATE TYPE hop_use AS ENUM (
+CREATE TYPE public.hop_use AS ENUM (
     'Mash',
     'First Wort',
     'Boil',
@@ -92,7 +91,7 @@ CREATE TYPE hop_use AS ENUM (
 -- Name: mash_type; Type: TYPE; Schema: public; Owner: -
 --
 
-CREATE TYPE mash_type AS ENUM (
+CREATE TYPE public.mash_type AS ENUM (
     'Infusion',
     'Temperature',
     'Decoction'
@@ -103,7 +102,7 @@ CREATE TYPE mash_type AS ENUM (
 -- Name: medal; Type: TYPE; Schema: public; Owner: -
 --
 
-CREATE TYPE medal AS ENUM (
+CREATE TYPE public.medal AS ENUM (
     'gold',
     'silver',
     'bronze'
@@ -114,7 +113,7 @@ CREATE TYPE medal AS ENUM (
 -- Name: misc_type; Type: TYPE; Schema: public; Owner: -
 --
 
-CREATE TYPE misc_type AS ENUM (
+CREATE TYPE public.misc_type AS ENUM (
     'Spice',
     'Fining',
     'Water Agent',
@@ -128,7 +127,7 @@ CREATE TYPE misc_type AS ENUM (
 -- Name: misc_use; Type: TYPE; Schema: public; Owner: -
 --
 
-CREATE TYPE misc_use AS ENUM (
+CREATE TYPE public.misc_use AS ENUM (
     'Mash',
     'Boil',
     'Primary',
@@ -141,7 +140,7 @@ CREATE TYPE misc_use AS ENUM (
 -- Name: yeast_form; Type: TYPE; Schema: public; Owner: -
 --
 
-CREATE TYPE yeast_form AS ENUM (
+CREATE TYPE public.yeast_form AS ENUM (
     'Liquid',
     'Dry',
     'Slant',
@@ -153,7 +152,7 @@ CREATE TYPE yeast_form AS ENUM (
 -- Name: yeast_type; Type: TYPE; Schema: public; Owner: -
 --
 
-CREATE TYPE yeast_type AS ENUM (
+CREATE TYPE public.yeast_type AS ENUM (
     'Ale',
     'Lager',
     'Wheat',
@@ -166,7 +165,7 @@ CREATE TYPE yeast_type AS ENUM (
 -- Name: swedish; Type: TEXT SEARCH DICTIONARY; Schema: public; Owner: -
 --
 
-CREATE TEXT SEARCH DICTIONARY swedish (
+CREATE TEXT SEARCH DICTIONARY public.swedish (
     TEMPLATE = pg_catalog.ispell,
     dictfile = 'sv_se', afffile = 'sv_se', stopwords = 'swedish' );
 
@@ -175,7 +174,7 @@ CREATE TEXT SEARCH DICTIONARY swedish (
 -- Name: swedish_snowball_dict; Type: TEXT SEARCH DICTIONARY; Schema: public; Owner: -
 --
 
-CREATE TEXT SEARCH DICTIONARY swedish_snowball_dict (
+CREATE TEXT SEARCH DICTIONARY public.swedish_snowball_dict (
     TEMPLATE = pg_catalog.snowball,
     language = 'swedish', stopwords = 'swedish' );
 
@@ -184,26 +183,26 @@ CREATE TEXT SEARCH DICTIONARY swedish_snowball_dict (
 -- Name: swedish_snowball; Type: TEXT SEARCH CONFIGURATION; Schema: public; Owner: -
 --
 
-CREATE TEXT SEARCH CONFIGURATION swedish_snowball (
+CREATE TEXT SEARCH CONFIGURATION public.swedish_snowball (
     PARSER = pg_catalog."default" );
 
-ALTER TEXT SEARCH CONFIGURATION swedish_snowball
-    ADD MAPPING FOR asciiword WITH swedish, swedish_snowball_dict;
+ALTER TEXT SEARCH CONFIGURATION public.swedish_snowball
+    ADD MAPPING FOR asciiword WITH public.swedish, public.swedish_snowball_dict;
 
-ALTER TEXT SEARCH CONFIGURATION swedish_snowball
-    ADD MAPPING FOR word WITH swedish, swedish_snowball_dict;
+ALTER TEXT SEARCH CONFIGURATION public.swedish_snowball
+    ADD MAPPING FOR word WITH public.swedish, public.swedish_snowball_dict;
 
-ALTER TEXT SEARCH CONFIGURATION swedish_snowball
-    ADD MAPPING FOR hword_part WITH swedish, swedish_snowball_dict;
+ALTER TEXT SEARCH CONFIGURATION public.swedish_snowball
+    ADD MAPPING FOR hword_part WITH public.swedish, public.swedish_snowball_dict;
 
-ALTER TEXT SEARCH CONFIGURATION swedish_snowball
-    ADD MAPPING FOR hword_asciipart WITH swedish, swedish_snowball_dict;
+ALTER TEXT SEARCH CONFIGURATION public.swedish_snowball
+    ADD MAPPING FOR hword_asciipart WITH public.swedish, public.swedish_snowball_dict;
 
-ALTER TEXT SEARCH CONFIGURATION swedish_snowball
-    ADD MAPPING FOR asciihword WITH swedish, swedish_snowball_dict;
+ALTER TEXT SEARCH CONFIGURATION public.swedish_snowball
+    ADD MAPPING FOR asciihword WITH public.swedish, public.swedish_snowball_dict;
 
-ALTER TEXT SEARCH CONFIGURATION swedish_snowball
-    ADD MAPPING FOR hword WITH swedish, swedish_snowball_dict;
+ALTER TEXT SEARCH CONFIGURATION public.swedish_snowball
+    ADD MAPPING FOR hword WITH public.swedish, public.swedish_snowball_dict;
 
 
 SET default_tablespace = '';
@@ -214,7 +213,7 @@ SET default_with_oids = false;
 -- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE ar_internal_metadata (
+CREATE TABLE public.ar_internal_metadata (
     key character varying NOT NULL,
     value character varying,
     created_at timestamp without time zone NOT NULL,
@@ -226,7 +225,7 @@ CREATE TABLE ar_internal_metadata (
 -- Name: commontator_comments; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE commontator_comments (
+CREATE TABLE public.commontator_comments (
     id integer NOT NULL,
     creator_type character varying,
     creator_id integer,
@@ -246,7 +245,7 @@ CREATE TABLE commontator_comments (
 -- Name: commontator_comments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE commontator_comments_id_seq
+CREATE SEQUENCE public.commontator_comments_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -258,14 +257,14 @@ CREATE SEQUENCE commontator_comments_id_seq
 -- Name: commontator_comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE commontator_comments_id_seq OWNED BY commontator_comments.id;
+ALTER SEQUENCE public.commontator_comments_id_seq OWNED BY public.commontator_comments.id;
 
 
 --
 -- Name: commontator_subscriptions; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE commontator_subscriptions (
+CREATE TABLE public.commontator_subscriptions (
     id integer NOT NULL,
     subscriber_type character varying NOT NULL,
     subscriber_id integer NOT NULL,
@@ -279,7 +278,7 @@ CREATE TABLE commontator_subscriptions (
 -- Name: commontator_subscriptions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE commontator_subscriptions_id_seq
+CREATE SEQUENCE public.commontator_subscriptions_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -291,14 +290,14 @@ CREATE SEQUENCE commontator_subscriptions_id_seq
 -- Name: commontator_subscriptions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE commontator_subscriptions_id_seq OWNED BY commontator_subscriptions.id;
+ALTER SEQUENCE public.commontator_subscriptions_id_seq OWNED BY public.commontator_subscriptions.id;
 
 
 --
 -- Name: commontator_threads; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE commontator_threads (
+CREATE TABLE public.commontator_threads (
     id integer NOT NULL,
     commontable_type character varying,
     commontable_id integer,
@@ -314,7 +313,7 @@ CREATE TABLE commontator_threads (
 -- Name: commontator_threads_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE commontator_threads_id_seq
+CREATE SEQUENCE public.commontator_threads_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -326,14 +325,14 @@ CREATE SEQUENCE commontator_threads_id_seq
 -- Name: commontator_threads_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE commontator_threads_id_seq OWNED BY commontator_threads.id;
+ALTER SEQUENCE public.commontator_threads_id_seq OWNED BY public.commontator_threads.id;
 
 
 --
 -- Name: event_registrations; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE event_registrations (
+CREATE TABLE public.event_registrations (
     id bigint NOT NULL,
     message text DEFAULT ''::text NOT NULL,
     event_id bigint,
@@ -348,7 +347,7 @@ CREATE TABLE event_registrations (
 -- Name: event_registrations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE event_registrations_id_seq
+CREATE SEQUENCE public.event_registrations_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -360,14 +359,14 @@ CREATE SEQUENCE event_registrations_id_seq
 -- Name: event_registrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE event_registrations_id_seq OWNED BY event_registrations.id;
+ALTER SEQUENCE public.event_registrations_id_seq OWNED BY public.event_registrations.id;
 
 
 --
 -- Name: events; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE events (
+CREATE TABLE public.events (
     id integer NOT NULL,
     name character varying DEFAULT ''::character varying,
     description character varying DEFAULT ''::character varying,
@@ -394,7 +393,7 @@ CREATE TABLE events (
 -- Name: events_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE events_id_seq
+CREATE SEQUENCE public.events_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -406,14 +405,14 @@ CREATE SEQUENCE events_id_seq
 -- Name: events_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE events_id_seq OWNED BY events.id;
+ALTER SEQUENCE public.events_id_seq OWNED BY public.events.id;
 
 
 --
 -- Name: events_recipes; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE events_recipes (
+CREATE TABLE public.events_recipes (
     event_id bigint NOT NULL,
     recipe_id bigint NOT NULL
 );
@@ -423,7 +422,7 @@ CREATE TABLE events_recipes (
 -- Name: fermentables; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE fermentables (
+CREATE TABLE public.fermentables (
     id bigint NOT NULL,
     name character varying DEFAULT ''::character varying NOT NULL,
     amount numeric DEFAULT 0 NOT NULL,
@@ -435,7 +434,7 @@ CREATE TABLE fermentables (
     recipe_detail_id bigint,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    grain_type fermentable_type DEFAULT 'Grain'::fermentable_type NOT NULL
+    grain_type public.fermentable_type DEFAULT 'Grain'::public.fermentable_type NOT NULL
 );
 
 
@@ -443,7 +442,7 @@ CREATE TABLE fermentables (
 -- Name: fermentables_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE fermentables_id_seq
+CREATE SEQUENCE public.fermentables_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -455,14 +454,14 @@ CREATE SEQUENCE fermentables_id_seq
 -- Name: fermentables_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE fermentables_id_seq OWNED BY fermentables.id;
+ALTER SEQUENCE public.fermentables_id_seq OWNED BY public.fermentables.id;
 
 
 --
 -- Name: hops; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE hops (
+CREATE TABLE public.hops (
     id bigint NOT NULL,
     name character varying DEFAULT ''::character varying NOT NULL,
     amount numeric DEFAULT 0 NOT NULL,
@@ -471,8 +470,8 @@ CREATE TABLE hops (
     recipe_detail_id bigint,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    use hop_use DEFAULT 'Boil'::hop_use NOT NULL,
-    form hop_form DEFAULT 'Leaf'::hop_form NOT NULL
+    use public.hop_use DEFAULT 'Boil'::public.hop_use NOT NULL,
+    form public.hop_form DEFAULT 'Leaf'::public.hop_form NOT NULL
 );
 
 
@@ -480,7 +479,7 @@ CREATE TABLE hops (
 -- Name: hops_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE hops_id_seq
+CREATE SEQUENCE public.hops_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -492,17 +491,17 @@ CREATE SEQUENCE hops_id_seq
 -- Name: hops_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE hops_id_seq OWNED BY hops.id;
+ALTER SEQUENCE public.hops_id_seq OWNED BY public.hops.id;
 
 
 --
 -- Name: mash_steps; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE mash_steps (
+CREATE TABLE public.mash_steps (
     id bigint NOT NULL,
     name character varying DEFAULT ''::character varying NOT NULL,
-    mash_type mash_type NOT NULL,
+    mash_type public.mash_type NOT NULL,
     step_temperature numeric NOT NULL,
     step_time numeric NOT NULL,
     water_grain_ratio numeric,
@@ -522,7 +521,7 @@ CREATE TABLE mash_steps (
 -- Name: mash_steps_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE mash_steps_id_seq
+CREATE SEQUENCE public.mash_steps_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -534,14 +533,14 @@ CREATE SEQUENCE mash_steps_id_seq
 -- Name: mash_steps_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE mash_steps_id_seq OWNED BY mash_steps.id;
+ALTER SEQUENCE public.mash_steps_id_seq OWNED BY public.mash_steps.id;
 
 
 --
 -- Name: media; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE media (
+CREATE TABLE public.media (
     id integer NOT NULL,
     file character varying,
     caption character varying,
@@ -561,7 +560,7 @@ CREATE TABLE media (
 -- Name: media_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE media_id_seq
+CREATE SEQUENCE public.media_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -573,14 +572,14 @@ CREATE SEQUENCE media_id_seq
 -- Name: media_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE media_id_seq OWNED BY media.id;
+ALTER SEQUENCE public.media_id_seq OWNED BY public.media.id;
 
 
 --
 -- Name: miscs; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE miscs (
+CREATE TABLE public.miscs (
     id bigint NOT NULL,
     name character varying DEFAULT ''::character varying NOT NULL,
     weight boolean DEFAULT true NOT NULL,
@@ -589,8 +588,8 @@ CREATE TABLE miscs (
     recipe_detail_id bigint,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    use misc_use DEFAULT 'Boil'::misc_use NOT NULL,
-    misc_type misc_type DEFAULT 'Other'::misc_type NOT NULL
+    use public.misc_use DEFAULT 'Boil'::public.misc_use NOT NULL,
+    misc_type public.misc_type DEFAULT 'Other'::public.misc_type NOT NULL
 );
 
 
@@ -598,7 +597,7 @@ CREATE TABLE miscs (
 -- Name: miscs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE miscs_id_seq
+CREATE SEQUENCE public.miscs_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -610,16 +609,16 @@ CREATE SEQUENCE miscs_id_seq
 -- Name: miscs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE miscs_id_seq OWNED BY miscs.id;
+ALTER SEQUENCE public.miscs_id_seq OWNED BY public.miscs.id;
 
 
 --
 -- Name: placements; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE placements (
+CREATE TABLE public.placements (
     id integer NOT NULL,
-    medal medal,
+    medal public.medal,
     category character varying DEFAULT ''::character varying,
     locked boolean DEFAULT false,
     recipe_id integer,
@@ -634,7 +633,7 @@ CREATE TABLE placements (
 -- Name: placements_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE placements_id_seq
+CREATE SEQUENCE public.placements_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -646,14 +645,14 @@ CREATE SEQUENCE placements_id_seq
 -- Name: placements_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE placements_id_seq OWNED BY placements.id;
+ALTER SEQUENCE public.placements_id_seq OWNED BY public.placements.id;
 
 
 --
 -- Name: recipe_details; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE recipe_details (
+CREATE TABLE public.recipe_details (
     id bigint NOT NULL,
     batch_size numeric,
     boil_size numeric,
@@ -676,7 +675,7 @@ CREATE TABLE recipe_details (
 -- Name: recipe_details_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE recipe_details_id_seq
+CREATE SEQUENCE public.recipe_details_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -688,14 +687,14 @@ CREATE SEQUENCE recipe_details_id_seq
 -- Name: recipe_details_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE recipe_details_id_seq OWNED BY recipe_details.id;
+ALTER SEQUENCE public.recipe_details_id_seq OWNED BY public.recipe_details.id;
 
 
 --
 -- Name: recipes; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE recipes (
+CREATE TABLE public.recipes (
     id integer NOT NULL,
     name character varying DEFAULT ''::character varying,
     description text DEFAULT ''::text,
@@ -726,7 +725,7 @@ CREATE TABLE recipes (
 -- Name: recipes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE recipes_id_seq
+CREATE SEQUENCE public.recipes_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -738,14 +737,14 @@ CREATE SEQUENCE recipes_id_seq
 -- Name: recipes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE recipes_id_seq OWNED BY recipes.id;
+ALTER SEQUENCE public.recipes_id_seq OWNED BY public.recipes.id;
 
 
 --
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE schema_migrations (
+CREATE TABLE public.schema_migrations (
     version character varying NOT NULL
 );
 
@@ -754,7 +753,7 @@ CREATE TABLE schema_migrations (
 -- Name: styles; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE styles (
+CREATE TABLE public.styles (
     id bigint NOT NULL,
     name character varying DEFAULT ''::character varying NOT NULL,
     description text DEFAULT ''::text NOT NULL,
@@ -787,7 +786,7 @@ CREATE TABLE styles (
 -- Name: styles_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE styles_id_seq
+CREATE SEQUENCE public.styles_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -799,14 +798,14 @@ CREATE SEQUENCE styles_id_seq
 -- Name: styles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE styles_id_seq OWNED BY styles.id;
+ALTER SEQUENCE public.styles_id_seq OWNED BY public.styles.id;
 
 
 --
 -- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE users (
+CREATE TABLE public.users (
     id integer NOT NULL,
     name character varying DEFAULT ''::character varying NOT NULL,
     email character varying DEFAULT ''::character varying NOT NULL,
@@ -847,7 +846,7 @@ CREATE TABLE users (
 -- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE users_id_seq
+CREATE SEQUENCE public.users_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -859,14 +858,14 @@ CREATE SEQUENCE users_id_seq
 -- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE users_id_seq OWNED BY users.id;
+ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
 -- Name: votes; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE votes (
+CREATE TABLE public.votes (
     id integer NOT NULL,
     votable_id integer,
     votable_type character varying,
@@ -884,7 +883,7 @@ CREATE TABLE votes (
 -- Name: votes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE votes_id_seq
+CREATE SEQUENCE public.votes_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -896,14 +895,14 @@ CREATE SEQUENCE votes_id_seq
 -- Name: votes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE votes_id_seq OWNED BY votes.id;
+ALTER SEQUENCE public.votes_id_seq OWNED BY public.votes.id;
 
 
 --
 -- Name: yeasts; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE yeasts (
+CREATE TABLE public.yeasts (
     id bigint NOT NULL,
     name character varying DEFAULT ''::character varying NOT NULL,
     weight boolean DEFAULT true NOT NULL,
@@ -911,8 +910,8 @@ CREATE TABLE yeasts (
     recipe_detail_id bigint,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    form yeast_form DEFAULT 'Dry'::yeast_form NOT NULL,
-    yeast_type yeast_type DEFAULT 'Ale'::yeast_type NOT NULL
+    form public.yeast_form DEFAULT 'Dry'::public.yeast_form NOT NULL,
+    yeast_type public.yeast_type DEFAULT 'Ale'::public.yeast_type NOT NULL
 );
 
 
@@ -920,7 +919,7 @@ CREATE TABLE yeasts (
 -- Name: yeasts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE yeasts_id_seq
+CREATE SEQUENCE public.yeasts_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -932,133 +931,133 @@ CREATE SEQUENCE yeasts_id_seq
 -- Name: yeasts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE yeasts_id_seq OWNED BY yeasts.id;
+ALTER SEQUENCE public.yeasts_id_seq OWNED BY public.yeasts.id;
 
 
 --
 -- Name: commontator_comments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY commontator_comments ALTER COLUMN id SET DEFAULT nextval('commontator_comments_id_seq'::regclass);
+ALTER TABLE ONLY public.commontator_comments ALTER COLUMN id SET DEFAULT nextval('public.commontator_comments_id_seq'::regclass);
 
 
 --
 -- Name: commontator_subscriptions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY commontator_subscriptions ALTER COLUMN id SET DEFAULT nextval('commontator_subscriptions_id_seq'::regclass);
+ALTER TABLE ONLY public.commontator_subscriptions ALTER COLUMN id SET DEFAULT nextval('public.commontator_subscriptions_id_seq'::regclass);
 
 
 --
 -- Name: commontator_threads id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY commontator_threads ALTER COLUMN id SET DEFAULT nextval('commontator_threads_id_seq'::regclass);
+ALTER TABLE ONLY public.commontator_threads ALTER COLUMN id SET DEFAULT nextval('public.commontator_threads_id_seq'::regclass);
 
 
 --
 -- Name: event_registrations id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY event_registrations ALTER COLUMN id SET DEFAULT nextval('event_registrations_id_seq'::regclass);
+ALTER TABLE ONLY public.event_registrations ALTER COLUMN id SET DEFAULT nextval('public.event_registrations_id_seq'::regclass);
 
 
 --
 -- Name: events id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY events ALTER COLUMN id SET DEFAULT nextval('events_id_seq'::regclass);
+ALTER TABLE ONLY public.events ALTER COLUMN id SET DEFAULT nextval('public.events_id_seq'::regclass);
 
 
 --
 -- Name: fermentables id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY fermentables ALTER COLUMN id SET DEFAULT nextval('fermentables_id_seq'::regclass);
+ALTER TABLE ONLY public.fermentables ALTER COLUMN id SET DEFAULT nextval('public.fermentables_id_seq'::regclass);
 
 
 --
 -- Name: hops id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY hops ALTER COLUMN id SET DEFAULT nextval('hops_id_seq'::regclass);
+ALTER TABLE ONLY public.hops ALTER COLUMN id SET DEFAULT nextval('public.hops_id_seq'::regclass);
 
 
 --
 -- Name: mash_steps id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY mash_steps ALTER COLUMN id SET DEFAULT nextval('mash_steps_id_seq'::regclass);
+ALTER TABLE ONLY public.mash_steps ALTER COLUMN id SET DEFAULT nextval('public.mash_steps_id_seq'::regclass);
 
 
 --
 -- Name: media id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY media ALTER COLUMN id SET DEFAULT nextval('media_id_seq'::regclass);
+ALTER TABLE ONLY public.media ALTER COLUMN id SET DEFAULT nextval('public.media_id_seq'::regclass);
 
 
 --
 -- Name: miscs id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY miscs ALTER COLUMN id SET DEFAULT nextval('miscs_id_seq'::regclass);
+ALTER TABLE ONLY public.miscs ALTER COLUMN id SET DEFAULT nextval('public.miscs_id_seq'::regclass);
 
 
 --
 -- Name: placements id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY placements ALTER COLUMN id SET DEFAULT nextval('placements_id_seq'::regclass);
+ALTER TABLE ONLY public.placements ALTER COLUMN id SET DEFAULT nextval('public.placements_id_seq'::regclass);
 
 
 --
 -- Name: recipe_details id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY recipe_details ALTER COLUMN id SET DEFAULT nextval('recipe_details_id_seq'::regclass);
+ALTER TABLE ONLY public.recipe_details ALTER COLUMN id SET DEFAULT nextval('public.recipe_details_id_seq'::regclass);
 
 
 --
 -- Name: recipes id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY recipes ALTER COLUMN id SET DEFAULT nextval('recipes_id_seq'::regclass);
+ALTER TABLE ONLY public.recipes ALTER COLUMN id SET DEFAULT nextval('public.recipes_id_seq'::regclass);
 
 
 --
 -- Name: styles id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY styles ALTER COLUMN id SET DEFAULT nextval('styles_id_seq'::regclass);
+ALTER TABLE ONLY public.styles ALTER COLUMN id SET DEFAULT nextval('public.styles_id_seq'::regclass);
 
 
 --
 -- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
 
 
 --
 -- Name: votes id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY votes ALTER COLUMN id SET DEFAULT nextval('votes_id_seq'::regclass);
+ALTER TABLE ONLY public.votes ALTER COLUMN id SET DEFAULT nextval('public.votes_id_seq'::regclass);
 
 
 --
 -- Name: yeasts id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY yeasts ALTER COLUMN id SET DEFAULT nextval('yeasts_id_seq'::regclass);
+ALTER TABLE ONLY public.yeasts ALTER COLUMN id SET DEFAULT nextval('public.yeasts_id_seq'::regclass);
 
 
 --
 -- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY ar_internal_metadata
+ALTER TABLE ONLY public.ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
 
 
@@ -1066,7 +1065,7 @@ ALTER TABLE ONLY ar_internal_metadata
 -- Name: commontator_comments commontator_comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY commontator_comments
+ALTER TABLE ONLY public.commontator_comments
     ADD CONSTRAINT commontator_comments_pkey PRIMARY KEY (id);
 
 
@@ -1074,7 +1073,7 @@ ALTER TABLE ONLY commontator_comments
 -- Name: commontator_subscriptions commontator_subscriptions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY commontator_subscriptions
+ALTER TABLE ONLY public.commontator_subscriptions
     ADD CONSTRAINT commontator_subscriptions_pkey PRIMARY KEY (id);
 
 
@@ -1082,7 +1081,7 @@ ALTER TABLE ONLY commontator_subscriptions
 -- Name: commontator_threads commontator_threads_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY commontator_threads
+ALTER TABLE ONLY public.commontator_threads
     ADD CONSTRAINT commontator_threads_pkey PRIMARY KEY (id);
 
 
@@ -1090,7 +1089,7 @@ ALTER TABLE ONLY commontator_threads
 -- Name: event_registrations event_registrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY event_registrations
+ALTER TABLE ONLY public.event_registrations
     ADD CONSTRAINT event_registrations_pkey PRIMARY KEY (id);
 
 
@@ -1098,7 +1097,7 @@ ALTER TABLE ONLY event_registrations
 -- Name: events events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY events
+ALTER TABLE ONLY public.events
     ADD CONSTRAINT events_pkey PRIMARY KEY (id);
 
 
@@ -1106,7 +1105,7 @@ ALTER TABLE ONLY events
 -- Name: fermentables fermentables_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY fermentables
+ALTER TABLE ONLY public.fermentables
     ADD CONSTRAINT fermentables_pkey PRIMARY KEY (id);
 
 
@@ -1114,7 +1113,7 @@ ALTER TABLE ONLY fermentables
 -- Name: hops hops_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY hops
+ALTER TABLE ONLY public.hops
     ADD CONSTRAINT hops_pkey PRIMARY KEY (id);
 
 
@@ -1122,7 +1121,7 @@ ALTER TABLE ONLY hops
 -- Name: mash_steps mash_steps_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY mash_steps
+ALTER TABLE ONLY public.mash_steps
     ADD CONSTRAINT mash_steps_pkey PRIMARY KEY (id);
 
 
@@ -1130,7 +1129,7 @@ ALTER TABLE ONLY mash_steps
 -- Name: media media_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY media
+ALTER TABLE ONLY public.media
     ADD CONSTRAINT media_pkey PRIMARY KEY (id);
 
 
@@ -1138,7 +1137,7 @@ ALTER TABLE ONLY media
 -- Name: miscs miscs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY miscs
+ALTER TABLE ONLY public.miscs
     ADD CONSTRAINT miscs_pkey PRIMARY KEY (id);
 
 
@@ -1146,7 +1145,7 @@ ALTER TABLE ONLY miscs
 -- Name: placements placements_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY placements
+ALTER TABLE ONLY public.placements
     ADD CONSTRAINT placements_pkey PRIMARY KEY (id);
 
 
@@ -1154,7 +1153,7 @@ ALTER TABLE ONLY placements
 -- Name: recipe_details recipe_details_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY recipe_details
+ALTER TABLE ONLY public.recipe_details
     ADD CONSTRAINT recipe_details_pkey PRIMARY KEY (id);
 
 
@@ -1162,7 +1161,7 @@ ALTER TABLE ONLY recipe_details
 -- Name: recipes recipes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY recipes
+ALTER TABLE ONLY public.recipes
     ADD CONSTRAINT recipes_pkey PRIMARY KEY (id);
 
 
@@ -1170,7 +1169,7 @@ ALTER TABLE ONLY recipes
 -- Name: styles styles_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY styles
+ALTER TABLE ONLY public.styles
     ADD CONSTRAINT styles_pkey PRIMARY KEY (id);
 
 
@@ -1178,7 +1177,7 @@ ALTER TABLE ONLY styles
 -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY users
+ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
 
 
@@ -1186,7 +1185,7 @@ ALTER TABLE ONLY users
 -- Name: votes votes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY votes
+ALTER TABLE ONLY public.votes
     ADD CONSTRAINT votes_pkey PRIMARY KEY (id);
 
 
@@ -1194,7 +1193,7 @@ ALTER TABLE ONLY votes
 -- Name: yeasts yeasts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY yeasts
+ALTER TABLE ONLY public.yeasts
     ADD CONSTRAINT yeasts_pkey PRIMARY KEY (id);
 
 
@@ -1202,591 +1201,591 @@ ALTER TABLE ONLY yeasts
 -- Name: events_name_trigram_idx; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX events_name_trigram_idx ON events USING gin (name gin_trgm_ops);
+CREATE INDEX events_name_trigram_idx ON public.events USING gin (name public.gin_trgm_ops);
 
 
 --
 -- Name: fulltext_index_events_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX fulltext_index_events_on_name ON events USING gin (to_tsvector('swedish_snowball'::regconfig, (COALESCE(name, ''::character varying))::text));
+CREATE INDEX fulltext_index_events_on_name ON public.events USING gin (to_tsvector('public.swedish_snowball'::regconfig, (COALESCE(name, ''::character varying))::text));
 
 
 --
 -- Name: fulltext_index_events_on_primary; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX fulltext_index_events_on_primary ON events USING gin (to_tsvector('swedish_snowball'::regconfig, (((((((((COALESCE(name, ''::character varying))::text || ' '::text) || (COALESCE(organizer, ''::character varying))::text) || ' '::text) || (COALESCE(location, ''::character varying))::text) || ' '::text) || (COALESCE(event_type, ''::character varying))::text) || ' '::text) || (COALESCE(description, ''::character varying))::text)));
+CREATE INDEX fulltext_index_events_on_primary ON public.events USING gin (to_tsvector('public.swedish_snowball'::regconfig, (((((((((COALESCE(name, ''::character varying))::text || ' '::text) || (COALESCE(organizer, ''::character varying))::text) || ' '::text) || (COALESCE(location, ''::character varying))::text) || ' '::text) || (COALESCE(event_type, ''::character varying))::text) || ' '::text) || (COALESCE(description, ''::character varying))::text)));
 
 
 --
 -- Name: fulltext_index_recipes_on_equipment; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX fulltext_index_recipes_on_equipment ON recipes USING gin (to_tsvector('swedish_snowball'::regconfig, (COALESCE(equipment, ''::character varying))::text));
+CREATE INDEX fulltext_index_recipes_on_equipment ON public.recipes USING gin (to_tsvector('public.swedish_snowball'::regconfig, (COALESCE(equipment, ''::character varying))::text));
 
 
 --
 -- Name: fulltext_index_recipes_on_primary; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX fulltext_index_recipes_on_primary ON recipes USING gin (to_tsvector('swedish_snowball'::regconfig, (((((((((COALESCE(name, ''::character varying))::text || ' '::text) || COALESCE(description, ''::text)) || ' '::text) || (COALESCE(style_name, ''::character varying))::text) || ' '::text) || (COALESCE(equipment, ''::character varying))::text) || ' '::text) || (COALESCE(brewer, ''::character varying))::text)));
+CREATE INDEX fulltext_index_recipes_on_primary ON public.recipes USING gin (to_tsvector('public.swedish_snowball'::regconfig, (((((((((COALESCE(name, ''::character varying))::text || ' '::text) || COALESCE(description, ''::text)) || ' '::text) || (COALESCE(style_name, ''::character varying))::text) || ' '::text) || (COALESCE(equipment, ''::character varying))::text) || ' '::text) || (COALESCE(brewer, ''::character varying))::text)));
 
 
 --
 -- Name: fulltext_index_recipes_on_style_name; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX fulltext_index_recipes_on_style_name ON recipes USING gin (to_tsvector('simple'::regconfig, (style_name)::text));
+CREATE INDEX fulltext_index_recipes_on_style_name ON public.recipes USING gin (to_tsvector('simple'::regconfig, (style_name)::text));
 
 
 --
 -- Name: fulltext_index_users_on_brewery; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX fulltext_index_users_on_brewery ON users USING gin (to_tsvector('swedish_snowball'::regconfig, (COALESCE(brewery, ''::character varying))::text));
+CREATE INDEX fulltext_index_users_on_brewery ON public.users USING gin (to_tsvector('public.swedish_snowball'::regconfig, (COALESCE(brewery, ''::character varying))::text));
 
 
 --
 -- Name: fulltext_index_users_on_equipment; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX fulltext_index_users_on_equipment ON users USING gin (to_tsvector('swedish_snowball'::regconfig, (COALESCE(equipment, ''::character varying))::text));
+CREATE INDEX fulltext_index_users_on_equipment ON public.users USING gin (to_tsvector('public.swedish_snowball'::regconfig, (COALESCE(equipment, ''::character varying))::text));
 
 
 --
 -- Name: fulltext_index_users_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX fulltext_index_users_on_name ON users USING gin (to_tsvector('simple'::regconfig, (name)::text));
+CREATE INDEX fulltext_index_users_on_name ON public.users USING gin (to_tsvector('simple'::regconfig, (name)::text));
 
 
 --
 -- Name: fulltext_index_users_on_primary; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX fulltext_index_users_on_primary ON users USING gin (to_tsvector('swedish_snowball'::regconfig, (((((((((COALESCE(name, ''::character varying))::text || ' '::text) || COALESCE(presentation, ''::text)) || ' '::text) || (COALESCE(equipment, ''::character varying))::text) || ' '::text) || (COALESCE(brewery, ''::character varying))::text) || ' '::text) || (COALESCE(twitter, ''::character varying))::text)));
+CREATE INDEX fulltext_index_users_on_primary ON public.users USING gin (to_tsvector('public.swedish_snowball'::regconfig, (((((((((COALESCE(name, ''::character varying))::text || ' '::text) || COALESCE(presentation, ''::text)) || ' '::text) || (COALESCE(equipment, ''::character varying))::text) || ' '::text) || (COALESCE(brewery, ''::character varying))::text) || ' '::text) || (COALESCE(twitter, ''::character varying))::text)));
 
 
 --
 -- Name: index_commontator_comments_on_c_id_and_c_type_and_t_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_commontator_comments_on_c_id_and_c_type_and_t_id ON commontator_comments USING btree (creator_id, creator_type, thread_id);
+CREATE INDEX index_commontator_comments_on_c_id_and_c_type_and_t_id ON public.commontator_comments USING btree (creator_id, creator_type, thread_id);
 
 
 --
 -- Name: index_commontator_comments_on_cached_votes_down; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_commontator_comments_on_cached_votes_down ON commontator_comments USING btree (cached_votes_down);
+CREATE INDEX index_commontator_comments_on_cached_votes_down ON public.commontator_comments USING btree (cached_votes_down);
 
 
 --
 -- Name: index_commontator_comments_on_cached_votes_up; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_commontator_comments_on_cached_votes_up ON commontator_comments USING btree (cached_votes_up);
+CREATE INDEX index_commontator_comments_on_cached_votes_up ON public.commontator_comments USING btree (cached_votes_up);
 
 
 --
 -- Name: index_commontator_comments_on_thread_id_and_created_at; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_commontator_comments_on_thread_id_and_created_at ON commontator_comments USING btree (thread_id, created_at);
+CREATE INDEX index_commontator_comments_on_thread_id_and_created_at ON public.commontator_comments USING btree (thread_id, created_at);
 
 
 --
 -- Name: index_commontator_subscriptions_on_s_id_and_s_type_and_t_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_commontator_subscriptions_on_s_id_and_s_type_and_t_id ON commontator_subscriptions USING btree (subscriber_id, subscriber_type, thread_id);
+CREATE UNIQUE INDEX index_commontator_subscriptions_on_s_id_and_s_type_and_t_id ON public.commontator_subscriptions USING btree (subscriber_id, subscriber_type, thread_id);
 
 
 --
 -- Name: index_commontator_subscriptions_on_thread_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_commontator_subscriptions_on_thread_id ON commontator_subscriptions USING btree (thread_id);
+CREATE INDEX index_commontator_subscriptions_on_thread_id ON public.commontator_subscriptions USING btree (thread_id);
 
 
 --
 -- Name: index_commontator_threads_on_c_id_and_c_type; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_commontator_threads_on_c_id_and_c_type ON commontator_threads USING btree (commontable_id, commontable_type);
+CREATE UNIQUE INDEX index_commontator_threads_on_c_id_and_c_type ON public.commontator_threads USING btree (commontable_id, commontable_type);
 
 
 --
 -- Name: index_event_registrations_on_event_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_event_registrations_on_event_id ON event_registrations USING btree (event_id);
+CREATE INDEX index_event_registrations_on_event_id ON public.event_registrations USING btree (event_id);
 
 
 --
 -- Name: index_event_registrations_on_recipe_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_event_registrations_on_recipe_id ON event_registrations USING btree (recipe_id);
+CREATE INDEX index_event_registrations_on_recipe_id ON public.event_registrations USING btree (recipe_id);
 
 
 --
 -- Name: index_event_registrations_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_event_registrations_on_user_id ON event_registrations USING btree (user_id);
+CREATE INDEX index_event_registrations_on_user_id ON public.event_registrations USING btree (user_id);
 
 
 --
 -- Name: index_events_on_media_main_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_events_on_media_main_id ON events USING btree (media_main_id);
+CREATE INDEX index_events_on_media_main_id ON public.events USING btree (media_main_id);
 
 
 --
 -- Name: index_events_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_events_on_user_id ON events USING btree (user_id);
+CREATE INDEX index_events_on_user_id ON public.events USING btree (user_id);
 
 
 --
 -- Name: index_events_recipes_on_event_id_and_recipe_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_events_recipes_on_event_id_and_recipe_id ON events_recipes USING btree (event_id, recipe_id);
+CREATE UNIQUE INDEX index_events_recipes_on_event_id_and_recipe_id ON public.events_recipes USING btree (event_id, recipe_id);
 
 
 --
 -- Name: index_events_recipes_on_recipe_id_and_event_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_events_recipes_on_recipe_id_and_event_id ON events_recipes USING btree (recipe_id, event_id);
+CREATE UNIQUE INDEX index_events_recipes_on_recipe_id_and_event_id ON public.events_recipes USING btree (recipe_id, event_id);
 
 
 --
 -- Name: index_fermentables_on_recipe_detail_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_fermentables_on_recipe_detail_id ON fermentables USING btree (recipe_detail_id);
+CREATE INDEX index_fermentables_on_recipe_detail_id ON public.fermentables USING btree (recipe_detail_id);
 
 
 --
 -- Name: index_hops_on_recipe_detail_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_hops_on_recipe_detail_id ON hops USING btree (recipe_detail_id);
+CREATE INDEX index_hops_on_recipe_detail_id ON public.hops USING btree (recipe_detail_id);
 
 
 --
 -- Name: index_mash_steps_on_recipe_detail_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_mash_steps_on_recipe_detail_id ON mash_steps USING btree (recipe_detail_id);
+CREATE INDEX index_mash_steps_on_recipe_detail_id ON public.mash_steps USING btree (recipe_detail_id);
 
 
 --
 -- Name: index_media_on_parent_type_and_parent_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_media_on_parent_type_and_parent_id ON media USING btree (parent_type, parent_id);
+CREATE INDEX index_media_on_parent_type_and_parent_id ON public.media USING btree (parent_type, parent_id);
 
 
 --
 -- Name: index_miscs_on_recipe_detail_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_miscs_on_recipe_detail_id ON miscs USING btree (recipe_detail_id);
+CREATE INDEX index_miscs_on_recipe_detail_id ON public.miscs USING btree (recipe_detail_id);
 
 
 --
 -- Name: index_placements_on_event_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_placements_on_event_id ON placements USING btree (event_id);
+CREATE INDEX index_placements_on_event_id ON public.placements USING btree (event_id);
 
 
 --
 -- Name: index_placements_on_medal; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_placements_on_medal ON placements USING btree (medal);
+CREATE INDEX index_placements_on_medal ON public.placements USING btree (medal);
 
 
 --
 -- Name: index_placements_on_recipe_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_placements_on_recipe_id ON placements USING btree (recipe_id);
+CREATE INDEX index_placements_on_recipe_id ON public.placements USING btree (recipe_id);
 
 
 --
 -- Name: index_placements_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_placements_on_user_id ON placements USING btree (user_id);
+CREATE INDEX index_placements_on_user_id ON public.placements USING btree (user_id);
 
 
 --
 -- Name: index_recipe_details_on_recipe_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_recipe_details_on_recipe_id ON recipe_details USING btree (recipe_id);
+CREATE INDEX index_recipe_details_on_recipe_id ON public.recipe_details USING btree (recipe_id);
 
 
 --
 -- Name: index_recipe_details_on_style_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_recipe_details_on_style_id ON recipe_details USING btree (style_id);
+CREATE INDEX index_recipe_details_on_style_id ON public.recipe_details USING btree (style_id);
 
 
 --
 -- Name: index_recipes_on_abv; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_recipes_on_abv ON recipes USING btree (abv);
+CREATE INDEX index_recipes_on_abv ON public.recipes USING btree (abv);
 
 
 --
 -- Name: index_recipes_on_batch_size; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_recipes_on_batch_size ON recipes USING btree (batch_size);
+CREATE INDEX index_recipes_on_batch_size ON public.recipes USING btree (batch_size);
 
 
 --
 -- Name: index_recipes_on_brewer; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_recipes_on_brewer ON recipes USING btree (brewer);
+CREATE INDEX index_recipes_on_brewer ON public.recipes USING btree (brewer);
 
 
 --
 -- Name: index_recipes_on_cached_votes_up; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_recipes_on_cached_votes_up ON recipes USING btree (cached_votes_up);
+CREATE INDEX index_recipes_on_cached_votes_up ON public.recipes USING btree (cached_votes_up);
 
 
 --
 -- Name: index_recipes_on_color; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_recipes_on_color ON recipes USING btree (color);
+CREATE INDEX index_recipes_on_color ON public.recipes USING btree (color);
 
 
 --
 -- Name: index_recipes_on_complete; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_recipes_on_complete ON recipes USING btree (complete);
+CREATE INDEX index_recipes_on_complete ON public.recipes USING btree (complete);
 
 
 --
 -- Name: index_recipes_on_created_at; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_recipes_on_created_at ON recipes USING btree (created_at);
+CREATE INDEX index_recipes_on_created_at ON public.recipes USING btree (created_at);
 
 
 --
 -- Name: index_recipes_on_fg; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_recipes_on_fg ON recipes USING btree (fg);
+CREATE INDEX index_recipes_on_fg ON public.recipes USING btree (fg);
 
 
 --
 -- Name: index_recipes_on_ibu; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_recipes_on_ibu ON recipes USING btree (ibu);
+CREATE INDEX index_recipes_on_ibu ON public.recipes USING btree (ibu);
 
 
 --
 -- Name: index_recipes_on_media_main_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_recipes_on_media_main_id ON recipes USING btree (media_main_id);
+CREATE INDEX index_recipes_on_media_main_id ON public.recipes USING btree (media_main_id);
 
 
 --
 -- Name: index_recipes_on_og; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_recipes_on_og ON recipes USING btree (og);
+CREATE INDEX index_recipes_on_og ON public.recipes USING btree (og);
 
 
 --
 -- Name: index_recipes_on_public; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_recipes_on_public ON recipes USING btree (public);
+CREATE INDEX index_recipes_on_public ON public.recipes USING btree (public);
 
 
 --
 -- Name: index_recipes_on_style_code; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_recipes_on_style_code ON recipes USING btree (style_code);
+CREATE INDEX index_recipes_on_style_code ON public.recipes USING btree (style_code);
 
 
 --
 -- Name: index_recipes_on_style_guide; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_recipes_on_style_guide ON recipes USING btree (style_guide);
+CREATE INDEX index_recipes_on_style_guide ON public.recipes USING btree (style_guide);
 
 
 --
 -- Name: index_recipes_on_style_name; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_recipes_on_style_name ON recipes USING btree (style_name);
+CREATE INDEX index_recipes_on_style_name ON public.recipes USING btree (style_name);
 
 
 --
 -- Name: index_recipes_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_recipes_on_user_id ON recipes USING btree (user_id);
+CREATE INDEX index_recipes_on_user_id ON public.recipes USING btree (user_id);
 
 
 --
 -- Name: index_styles_on_style_guide; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_styles_on_style_guide ON styles USING btree (style_guide);
+CREATE INDEX index_styles_on_style_guide ON public.styles USING btree (style_guide);
 
 
 --
 -- Name: index_users_on_confirmation_token; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_users_on_confirmation_token ON users USING btree (confirmation_token);
+CREATE UNIQUE INDEX index_users_on_confirmation_token ON public.users USING btree (confirmation_token);
 
 
 --
 -- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
+CREATE UNIQUE INDEX index_users_on_email ON public.users USING btree (email);
 
 
 --
 -- Name: index_users_on_media_avatar_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_users_on_media_avatar_id ON users USING btree (media_avatar_id);
+CREATE INDEX index_users_on_media_avatar_id ON public.users USING btree (media_avatar_id);
 
 
 --
 -- Name: index_users_on_media_brewery_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_users_on_media_brewery_id ON users USING btree (media_brewery_id);
+CREATE INDEX index_users_on_media_brewery_id ON public.users USING btree (media_brewery_id);
 
 
 --
 -- Name: index_users_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_users_on_name ON users USING btree (name);
+CREATE INDEX index_users_on_name ON public.users USING btree (name);
 
 
 --
 -- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (reset_password_token);
+CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING btree (reset_password_token);
 
 
 --
 -- Name: index_users_on_unlock_token; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_users_on_unlock_token ON users USING btree (unlock_token);
+CREATE UNIQUE INDEX index_users_on_unlock_token ON public.users USING btree (unlock_token);
 
 
 --
 -- Name: index_votes_on_votable_id_and_votable_type_and_vote_scope; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_votes_on_votable_id_and_votable_type_and_vote_scope ON votes USING btree (votable_id, votable_type, vote_scope);
+CREATE INDEX index_votes_on_votable_id_and_votable_type_and_vote_scope ON public.votes USING btree (votable_id, votable_type, vote_scope);
 
 
 --
 -- Name: index_votes_on_voter_id_and_voter_type_and_vote_scope; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_votes_on_voter_id_and_voter_type_and_vote_scope ON votes USING btree (voter_id, voter_type, vote_scope);
+CREATE INDEX index_votes_on_voter_id_and_voter_type_and_vote_scope ON public.votes USING btree (voter_id, voter_type, vote_scope);
 
 
 --
 -- Name: index_yeasts_on_recipe_detail_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_yeasts_on_recipe_detail_id ON yeasts USING btree (recipe_detail_id);
+CREATE INDEX index_yeasts_on_recipe_detail_id ON public.yeasts USING btree (recipe_detail_id);
 
 
 --
 -- Name: recipe_names_trigram_idx; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX recipe_names_trigram_idx ON recipes USING gin (name gin_trgm_ops);
+CREATE INDEX recipe_names_trigram_idx ON public.recipes USING gin (name public.gin_trgm_ops);
 
 
 --
 -- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+CREATE UNIQUE INDEX unique_schema_migrations ON public.schema_migrations USING btree (version);
 
 
 --
 -- Name: user_name_trigram_idx; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX user_name_trigram_idx ON users USING gin (name gin_trgm_ops);
+CREATE INDEX user_name_trigram_idx ON public.users USING gin (name public.gin_trgm_ops);
 
 
 --
 -- Name: mash_steps fk_rails_0f11dbd377; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY mash_steps
-    ADD CONSTRAINT fk_rails_0f11dbd377 FOREIGN KEY (recipe_detail_id) REFERENCES recipe_details(id);
+ALTER TABLE ONLY public.mash_steps
+    ADD CONSTRAINT fk_rails_0f11dbd377 FOREIGN KEY (recipe_detail_id) REFERENCES public.recipe_details(id);
 
 
 --
 -- Name: recipes fk_rails_0fd2ed4eeb; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY recipes
-    ADD CONSTRAINT fk_rails_0fd2ed4eeb FOREIGN KEY (media_main_id) REFERENCES media(id);
+ALTER TABLE ONLY public.recipes
+    ADD CONSTRAINT fk_rails_0fd2ed4eeb FOREIGN KEY (media_main_id) REFERENCES public.media(id);
 
 
 --
 -- Name: event_registrations fk_rails_23148f43c2; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY event_registrations
-    ADD CONSTRAINT fk_rails_23148f43c2 FOREIGN KEY (event_id) REFERENCES events(id);
+ALTER TABLE ONLY public.event_registrations
+    ADD CONSTRAINT fk_rails_23148f43c2 FOREIGN KEY (event_id) REFERENCES public.events(id);
 
 
 --
 -- Name: placements fk_rails_344f224d46; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY placements
-    ADD CONSTRAINT fk_rails_344f224d46 FOREIGN KEY (recipe_id) REFERENCES recipes(id);
+ALTER TABLE ONLY public.placements
+    ADD CONSTRAINT fk_rails_344f224d46 FOREIGN KEY (recipe_id) REFERENCES public.recipes(id);
 
 
 --
 -- Name: recipe_details fk_rails_426b7d6920; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY recipe_details
-    ADD CONSTRAINT fk_rails_426b7d6920 FOREIGN KEY (style_id) REFERENCES styles(id);
+ALTER TABLE ONLY public.recipe_details
+    ADD CONSTRAINT fk_rails_426b7d6920 FOREIGN KEY (style_id) REFERENCES public.styles(id);
 
 
 --
 -- Name: miscs fk_rails_4aca03e5cb; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY miscs
-    ADD CONSTRAINT fk_rails_4aca03e5cb FOREIGN KEY (recipe_detail_id) REFERENCES recipe_details(id);
+ALTER TABLE ONLY public.miscs
+    ADD CONSTRAINT fk_rails_4aca03e5cb FOREIGN KEY (recipe_detail_id) REFERENCES public.recipe_details(id);
 
 
 --
 -- Name: hops fk_rails_58ff15d669; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY hops
-    ADD CONSTRAINT fk_rails_58ff15d669 FOREIGN KEY (recipe_detail_id) REFERENCES recipe_details(id);
+ALTER TABLE ONLY public.hops
+    ADD CONSTRAINT fk_rails_58ff15d669 FOREIGN KEY (recipe_detail_id) REFERENCES public.recipe_details(id);
 
 
 --
 -- Name: users fk_rails_793a220a68; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY users
-    ADD CONSTRAINT fk_rails_793a220a68 FOREIGN KEY (media_avatar_id) REFERENCES media(id);
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT fk_rails_793a220a68 FOREIGN KEY (media_avatar_id) REFERENCES public.media(id);
 
 
 --
 -- Name: placements fk_rails_7f5b80573c; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY placements
-    ADD CONSTRAINT fk_rails_7f5b80573c FOREIGN KEY (event_id) REFERENCES events(id);
+ALTER TABLE ONLY public.placements
+    ADD CONSTRAINT fk_rails_7f5b80573c FOREIGN KEY (event_id) REFERENCES public.events(id);
 
 
 --
 -- Name: event_registrations fk_rails_8a0b1c0506; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY event_registrations
-    ADD CONSTRAINT fk_rails_8a0b1c0506 FOREIGN KEY (recipe_id) REFERENCES recipes(id);
+ALTER TABLE ONLY public.event_registrations
+    ADD CONSTRAINT fk_rails_8a0b1c0506 FOREIGN KEY (recipe_id) REFERENCES public.recipes(id);
 
 
 --
 -- Name: recipe_details fk_rails_9509a5b996; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY recipe_details
-    ADD CONSTRAINT fk_rails_9509a5b996 FOREIGN KEY (recipe_id) REFERENCES recipes(id);
+ALTER TABLE ONLY public.recipe_details
+    ADD CONSTRAINT fk_rails_9509a5b996 FOREIGN KEY (recipe_id) REFERENCES public.recipes(id);
 
 
 --
 -- Name: users fk_rails_9c9dd5b0b7; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY users
-    ADD CONSTRAINT fk_rails_9c9dd5b0b7 FOREIGN KEY (media_brewery_id) REFERENCES media(id);
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT fk_rails_9c9dd5b0b7 FOREIGN KEY (media_brewery_id) REFERENCES public.media(id);
 
 
 --
 -- Name: event_registrations fk_rails_9d37217e35; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY event_registrations
-    ADD CONSTRAINT fk_rails_9d37217e35 FOREIGN KEY (user_id) REFERENCES users(id);
+ALTER TABLE ONLY public.event_registrations
+    ADD CONSTRAINT fk_rails_9d37217e35 FOREIGN KEY (user_id) REFERENCES public.users(id);
 
 
 --
 -- Name: yeasts fk_rails_e5e114c272; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY yeasts
-    ADD CONSTRAINT fk_rails_e5e114c272 FOREIGN KEY (recipe_detail_id) REFERENCES recipe_details(id);
+ALTER TABLE ONLY public.yeasts
+    ADD CONSTRAINT fk_rails_e5e114c272 FOREIGN KEY (recipe_detail_id) REFERENCES public.recipe_details(id);
 
 
 --
 -- Name: events fk_rails_eddd50df5b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY events
-    ADD CONSTRAINT fk_rails_eddd50df5b FOREIGN KEY (media_main_id) REFERENCES media(id);
+ALTER TABLE ONLY public.events
+    ADD CONSTRAINT fk_rails_eddd50df5b FOREIGN KEY (media_main_id) REFERENCES public.media(id);
 
 
 --
 -- Name: fermentables fk_rails_fa5fd15b19; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY fermentables
-    ADD CONSTRAINT fk_rails_fa5fd15b19 FOREIGN KEY (recipe_detail_id) REFERENCES recipe_details(id);
+ALTER TABLE ONLY public.fermentables
+    ADD CONSTRAINT fk_rails_fa5fd15b19 FOREIGN KEY (recipe_detail_id) REFERENCES public.recipe_details(id);
 
 
 --
 -- Name: placements fk_rails_fe81c39da1; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY placements
-    ADD CONSTRAINT fk_rails_fe81c39da1 FOREIGN KEY (user_id) REFERENCES users(id);
+ALTER TABLE ONLY public.placements
+    ADD CONSTRAINT fk_rails_fe81c39da1 FOREIGN KEY (user_id) REFERENCES public.users(id);
 
 
 --

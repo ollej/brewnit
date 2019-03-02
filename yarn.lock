@@ -5,3 +5,4 @@
 balloon-css@^0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/balloon-css/-/balloon-css-0.5.0.tgz#6a3c065efab9ea5f509a95d4315df00aae114fa3"
+  integrity sha1-ajwGXvq56l9QmpXUMV3wCq4RT6M=

@@ -3,7 +3,8 @@ source 'https://rubygems.org'
 ruby '2.6.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.1.6'
+gem 'rails', '5.2.2'
+gem 'bootsnap'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
 # Use SCSS for stylesheets
@@ -28,7 +29,7 @@ gem 'sdoc', group: :doc
 
 gem 'pg'
 gem 'libxml-xmlrpc'
-gem 'devise', git: 'https://github.com/plataformatec/devise', ref: '135d898' # Use bleeding edge to support Ruby v2.5.0
+gem 'devise'
 gem 'omniauth-google-oauth2'
 gem 'unicorn-rails'
 
