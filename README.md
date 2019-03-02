@@ -211,6 +211,14 @@ Start the web server with the following command.
 $ bundle exec rails s
 ```
 
+### Useful commands
+
+#### Regenerate favicon files
+
+```
+rails generate favicon
+```
+
 How to Contribute?
 ------------------
 
