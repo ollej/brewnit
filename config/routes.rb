@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'pages/:page' => 'pages#show', as: :pages
+
   resources :events do
     resources :media, only: [:create, :destroy]
     resource :add_medium, only: [:create], controller: :add_medium

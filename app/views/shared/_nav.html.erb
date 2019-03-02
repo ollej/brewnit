@@ -11,39 +11,44 @@
     <div class="pure-menu">
       <ul class="pure-menu-list">
         <li class="pure-menu-item">
-          <i class="fa fa-beer"></i><%= link_to t(:'recipes.index'),
+          <i class="fas fa-beer"></i><%= link_to t(:'recipes.index'),
             recipes_path(clear_search: true), class: 'pure-menu-link' %>
         </li>
         <li class="pure-menu-item">
-          <i class="fa fa-users"></i><%= link_to t(:'users.index'),
+          <i class="fas fa-users"></i><%= link_to t(:'users.index'),
             users_path(clear_search: true), class: 'pure-menu-link' %>
         </li>
         <li class="pure-menu-item">
-          <i class="fa fa-calendar-o"></i><%= link_to t(:'events.index'),
+          <i class="far fa-calendar-alt"></i><%= link_to t(:'events.index'),
             events_path(clear_search: true), class: 'pure-menu-link' %>
+        </li>
+        <li class="pure-menu-item">
+          <i class="fas fa-tools"></i><%= link_to t(:'pages.tools'),
+            pages_path(clear_search: true, page: 'verktyg'),
+            class: 'pure-menu-link' %>
         </li>
       <% if user_signed_in? %>
         <li class="pure-menu-item">
-          <i class="fa fa-user"></i><%= link_to t(:'users.profile'),
+          <i class="fas fa-user"></i><%= link_to t(:'users.profile'),
             edit_user_registration_path, class: 'pure-menu-link' %>
         </li>
         <li class="pure-menu-item">
-          <i class="fa fa-sign-out"></i><%= link_to t(:'users.sign_out'),
+          <i class="fas fa-sign-out-alt"></i><%= link_to t(:'users.sign_out'),
             destroy_user_session_path, class: 'pure-menu-link' %>
         </li>
         <% if current_user.admin? %>
         <li class="pure-menu-item">
-          <i class="fa fa-user-secret"></i><%= link_to t(:'admin.root'),
+          <i class="fas fa-user-secret"></i><%= link_to t(:'admin.root'),
             admin_root_path, class: 'pure-menu-link' %>
         </li>
         <% end %>
       <% else %>
         <li class="pure-menu-item">
-          <i class="fa fa-sign-in"></i><%= link_to t(:'users.sign_in'),
+          <i class="fas fa-sign-in-alt"></i><%= link_to t(:'users.sign_in'),
             new_user_session_path, class: 'pure-menu-link' %>
         </li>
         <li class="pure-menu-item">
-          <i class="fa fa-user-plus"></i><%= link_to t(:'users.sign_up'),
+          <i class="fas fa-user-plus"></i><%= link_to t(:'users.sign_up'),
             new_user_registration_path, class: 'pure-menu-link' %>
         </li>
       <% end %>

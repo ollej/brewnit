@@ -343,6 +343,8 @@ sv:
     message: Meddelande
     message_description: Skriv ett meddelande till arrangörerna.
     recipe_registered: Tack för att du anmälde ditt recept "%{recipe}" till evenemanget "%{event}".
+  pages:
+    tools: Verktyg
 
   beerxml:
     name: Ölnamn
