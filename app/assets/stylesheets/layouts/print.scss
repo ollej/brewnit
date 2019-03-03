@@ -1,0 +1,44 @@
+.print-content {
+  @page {
+    size: A4;
+  }
+
+  h1, p {
+    color: #666;
+    font-weight: 300;
+    font-family: Montserrat,FreeSans,Arimo,"Droid Sans",verdana,arial,helvetica,sans-serif;
+  }
+}
+
+.page-qr-show {
+  .print-content {
+    h1 {
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, 0);
+      font-size: 48pt;
+      text-align: center;
+    }
+    .qr-code svg {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .qr-footer {
+      font-size: 10pt;
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, 0);
+
+      .qr-logo {
+        padding-right: 10pt;
+        float: left;
+      }
+    }
+  }
+}

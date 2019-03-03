@@ -57,11 +57,18 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
               data: tooltip_data(I18n.t(:'recipes.print_description')) do %>
               <%= icon('print') %> <%= t(:'recipes.print') %>
             <% end %>
+            <%= link_to qr_recipe_path(@recipe), class: 'pure-button secondary-button',
+              data: tooltip_data(I18n.t(:'recipes.qrcode_description')),
+              target: '_blank' do %>
+              <%= icon('qrcode') %> <%= t(:'recipes.qrcode') %>
+            <% end %>
           </div>
           <% if user_signed_in? %>
             <div class="controls-signed-in">
             <%= like_tag(@recipe, current_user) %>
-            <%= link_to clone_recipe_path(id: @recipe), class: 'pure-button secondary-button' do %>
+            <%= link_to clone_recipe_path(id: @recipe),
+              class: 'pure-button secondary-button',
+              data: tooltip_data(I18n.t(:'recipes.clone_description')) do %>
               <%= icon('clone') %> <%= t(:'recipes.clone') %>
             <% end %>
 

@@ -167,6 +167,9 @@ sv:
       BeerXML i ett receptprogram som
       Beersmith 2, Brewpal eller Wort.
     clone: Klona
+    clone_description: Klona detta recept till din egen receptlista
+    qrcode: QR-kod
+    qrcode_description: Skriv ut en QR-kod som länkar till receptet
   users:
     index: Bryggare
     other_users: Användare utan recept

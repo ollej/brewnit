@@ -28,6 +28,9 @@ Rails.application.routes.draw do
     member do
       post :like, controller: :likes, action: :create
       delete :like, controller: :likes, action: :destroy, as: :unlike
+      get :clone, to: 'clone_recipe#new'
+      post :clone, to: 'clone_recipe#create'
+      get :qr, to: 'qr#show'
     end
     resources :placements, only: [:destroy], controller: :recipe_placements
     resource :details, only: [:show, :update], controller: :recipe_details
@@ -37,10 +40,6 @@ Rails.application.routes.draw do
     resources :yeasts, only: [:index, :create, :destroy], controller: :recipe_yeasts
     resources :mash_steps, only: [:index, :create, :destroy], controller: :recipe_mash_steps
     resource :complete, only: [:update], controller: :recipe_complete
-    member do
-      get :clone, to: 'clone_recipe#new'
-      post :clone, to: 'clone_recipe#create'
-    end
   end
 
   get :register_recipe, controller: :register_recipe, action: :new

@@ -50,6 +50,7 @@ gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844572b25fda3
 gem 'axlsx_rails'
 gem 'dotenv-rails'
 gem 'httparty'
+gem 'rqrcode'
 
 # spam protection
 gem 'invisible_captcha'
