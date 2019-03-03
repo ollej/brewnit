@@ -112,7 +112,7 @@ module ApplicationHelper
   end
 
   def icon(type=nil)
-    content_tag(:i, '', class: "fa fa-#{type}") if type.present?
+    content_tag(:i, '', class: "fas fa-#{type}") if type.present?
   end
 
   def badge(content, opts={})

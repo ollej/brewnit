@@ -61,7 +61,7 @@
                   :id => "thread_#{thread.id.to_s}_#{close_string}_link",
                   :class => "thread_#{close_string}_link pure-button pure-button-secondary",
                   :remote => true do %>
-        <i class="fa <%= is_closed ? 'fa-unlock' : 'fa-lock' %>"></i> <%= t("commontator.thread.actions.#{close_string}") %>
+        <i class="fas <%= is_closed ? 'fa-lock-open' : 'fa-lock' %>"></i> <%= t("commontator.thread.actions.#{close_string}") %>
       <% end %>
     <% end %>
   </span>

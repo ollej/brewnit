@@ -29,13 +29,13 @@ set_meta_tags title: @event.name,
               <%= link_to register_recipe_path(event_id: @event.id),
                 disabled: @event.registration_closed?,
                 class: 'pure-button primary-button' do %>
-                <i class="fa fa-beer"></i> <%= t(:'events.register_recipe') %>
+                <i class="fas fa-beer"></i> <%= t(:'events.register_recipe') %>
               <% end %>
             <% else %>
               <%= link_to new_recipe_path(event_id: @event.id),
                 disabled: @event.registration_closed?,
                 class: 'pure-button primary-button' do %>
-                <i class="fa fa-beer"></i> <%= t(:'events.add_recipe') %>
+                <i class="fas fa-beer"></i> <%= t(:'events.add_recipe') %>
               <% end %>
             <% end %>
             <%= form_tag(events_path, method: 'get', class: 'pure-form quicksearch', id: 'eventsearch-form') do %>
@@ -52,11 +52,11 @@ set_meta_tags title: @event.name,
             <% end %>
             <% if current_user.can_modify?(@event) %>
               <%= link_to edit_event_path(@event), class: 'pure-button secondary-button' do %>
-                <%= icon('pencil-square-o') %> <%= t(:'events.edit') %>
+                <%= icon('edit') %> <%= t(:'events.edit') %>
               <% end %>
               <%= link_to event_recipes_path(@event, format: :xlsx), rel: nofollow,
                 method: :get, class: 'pure-button secondary-button' do %>
-                <%= icon('file-excel-o') %> <%= t(:'events.recipes_excel') %>
+                <%= icon('file-excel') %> <%= t(:'events.recipes_excel') %>
               <% end %>
               <%= link_to event_recipes_path(@event, format: :csv), rel: nofollow,
                 method: :get, class: 'pure-button secondary-button' do %>

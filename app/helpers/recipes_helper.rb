@@ -37,7 +37,7 @@ module RecipesHelper
 
   def visibility_badge(recipe)
     if recipe.public?
-      badge(I18n.t(:'common.public'), type: 'public', icon: 'unlock')
+      badge(I18n.t(:'common.public'), type: 'public', icon: 'lock-open')
     else
       badge(I18n.t(:'common.private'), type: 'private', icon: 'lock')
     end
@@ -73,7 +73,7 @@ module RecipesHelper
       link_to like_recipe_path(recipe), method: :post, remote: true,
         class: 'thumb-unlike like-link pure-button secondary-button',
         data: tooltip_data(I18n.t(:'recipes.likes.like_description')) do
-        concat icon('thumbs-o-up')
+        concat icon('thumbs-up')
         concat ' ' + I18n.t(:'recipes.likes.like')
       end
     end

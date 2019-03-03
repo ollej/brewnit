@@ -1,5 +1,5 @@
                 <li class="pure-menu-item" data-recipe-event-id="<%= event.id %>">
-                  <i class="fa fa-calendar-o"></i>
+                  <i class="fas fa-calendar-alt"></i>
                   <%= link_to event.name, event_path(event), class: 'pure-menu-link' %>
 
                   <% if user_signed_in? && current_user.can_modify?(recipe) %>

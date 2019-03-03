@@ -19,7 +19,7 @@
             users_path(clear_search: true), class: 'pure-menu-link' %>
         </li>
         <li class="pure-menu-item">
-          <i class="far fa-calendar-alt"></i><%= link_to t(:'events.index'),
+          <i class="fas fa-calendar-alt"></i><%= link_to t(:'events.index'),
             events_path(clear_search: true), class: 'pure-menu-link' %>
         </li>
         <li class="pure-menu-item">
@@ -29,7 +29,7 @@
         </li>
       <% if user_signed_in? %>
         <li class="pure-menu-item">
-          <i class="fas fa-user"></i><%= link_to t(:'users.profile'),
+          <i class="fas fa-user-cog"></i><%= link_to t(:'users.profile'),
             edit_user_registration_path, class: 'pure-menu-link' %>
         </li>
         <li class="pure-menu-item">

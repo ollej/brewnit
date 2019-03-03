@@ -52,7 +52,7 @@
       </div>
     </div>
     <%= link_to "#search-advanced" do %>
-      <i class="fa fa-search-plus"></i> <%= t(:'common.search.open_advanced') %>
+      <i class="fas fa-search-plus"></i> <%= t(:'common.search.open_advanced') %>
     <% end %>
   </fieldset>
   <div id="search-advanced" class="search-advanced expand-div">
@@ -98,10 +98,10 @@
   </div>
   <div class="actions pure-controls">
     <%= button_tag type: :submit, class: 'pure-button pure-button-primary' do %>
-      <i class="fa fa-search"></i> <%= t(:'recipes.search.button') %>
+      <i class="fas fa-search"></i> <%= t(:'recipes.search.button') %>
     <% end %>
     <%= link_to recipes_path(clear_search: true), class: 'pure-button' do %>
-      <i class="fa fa-times-circle"></i> <%= t(:'recipes.search.clear') %>
+      <i class="fas fa-times-circle"></i> <%= t(:'recipes.search.clear') %>
     <% end %>
   </div>
  <% end %>

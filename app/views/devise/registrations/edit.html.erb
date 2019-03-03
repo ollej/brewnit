@@ -108,7 +108,7 @@
             <%= form_tag user_media_path(resource), method: :post,
               id: 'mediaUploadForm', remote: true, multipart: true do %>
               <%= link_to '#', class: 'pure-button secondary-button upload-button' do %>
-                <i class="fa fa-upload"></i> <%= t(:'common.media.upload') %>
+                <i class="fas fa-upload"></i> <%= t(:'common.media.upload') %>
               <% end %>
               <%= file_field_tag 'media[]', type: :file, multiple: true,
                 accept: 'image/png,image/gif,image/jpeg,image/jpg',
