@@ -1,11 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe CloneRecipeController, type: :controller do
+  let(:other_user) {
+    user = User.new(name: 'other user', email: 'foo@example.com', password: 'password')
+    user.skip_confirmation!
+    user.save!
+    user
+  }
   let(:recipe) { Recipe.create(recipe_attributes) }
   let(:beerxml) { file_fixture('beerxml.xml').read }
   let(:recipe_attributes) do
     {
-      user: user,
+      user: other_user,
       name: 'recipe test',
       beerxml: beerxml
     }
@@ -28,8 +34,11 @@ RSpec.describe CloneRecipeController, type: :controller do
       cloned_recipe = Recipe.last
       expect(response).to redirect_to(cloned_recipe)
       expect(cloned_recipe.id).not_to eq recipe.id
-      expect(cloned_recipe.name).to eq "foo bar"
-      expect(cloned_recipe.beerxml).to eq beerxml
+      expect(cloned_recipe).to have_attributes(
+        name: "foo bar",
+        beerxml: beerxml,
+        user: user
+      )
     end
   end
 end
