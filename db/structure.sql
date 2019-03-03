@@ -413,8 +413,8 @@ ALTER SEQUENCE public.events_id_seq OWNED BY public.events.id;
 --
 
 CREATE TABLE public.events_recipes (
-    event_id bigint NOT NULL,
-    recipe_id bigint NOT NULL
+    event_id integer NOT NULL,
+    recipe_id integer NOT NULL
 );
 
 

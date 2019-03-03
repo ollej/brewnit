@@ -166,6 +166,7 @@ sv:
       Ladda upp recept som exporterats till
       BeerXML i ett receptprogram som
       Beersmith 2, Brewpal eller Wort.
+    clone: Klona
   users:
     index: Bryggare
     other_users: Användare utan recept
@@ -345,6 +346,14 @@ sv:
     recipe_registered: Tack för att du anmälde ditt recept "%{recipe}" till evenemanget "%{event}".
   pages:
     tools: Verktyg
+  clone_recipe:
+    new: Klona recept
+    clone: Klona
+    recipe_name: Nytt receptnamn
+    clone_name_suffix:  (klon)
+    create:
+      successful: Receptet har klonats
+      failed: Kunde inte klona receptet
 
   beerxml:
     name: Ölnamn

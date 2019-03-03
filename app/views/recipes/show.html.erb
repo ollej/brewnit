@@ -61,6 +61,10 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
           <% if user_signed_in? %>
             <div class="controls-signed-in">
             <%= like_tag(@recipe, current_user) %>
+            <%= link_to clone_recipe_path(id: @recipe), class: 'pure-button secondary-button' do %>
+              <%= icon('clone') %> <%= t(:'recipes.clone') %>
+            <% end %>
+
             <% if current_user.can_modify?(@recipe) %>
               <%= link_to recipe_details_path(@recipe), class: 'pure-button secondary-button',
                   data: tooltip_data(I18n.t(:'recipes.build_recipe_description')) do %>
@@ -89,8 +93,6 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
                 <%= hidden_field_tag :media_type, 'main' %>
                 <div id="progressbar"></div>
               <% end %>
-
-              <%#= link_to t(:'recipes.clone'), clone_recipe_path(@recipe), class: 'pure-button secondary-button' %>
             <% end %>
             </div>
           <% end %>

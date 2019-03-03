@@ -1,0 +1,15 @@
+<%= form_with url: clone_recipe_path(id: @clone_recipe_id), local: true,
+  class: 'pure-form pure-form-aligned' do |f| %>
+  <%= invisible_captcha %>
+
+  <fieldset>
+    <div class="field pure-control-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, value: @clone_recipe_name, class: 'pure-input-1-4' %>
+    </div>
+    <div class="actions pure-controls">
+      <%= f.submit I18n.t(:'clone_recipe.clone'),
+        { class: 'pure-button pure-button-primary' } %>
+    </div>
+  </fieldset>
+<% end %>
