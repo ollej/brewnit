@@ -16,8 +16,6 @@ Rails.application.routes.draw do
     root to: 'users#index'
   end
 
-  get 'add_media/create'
-
   get 'open_search/show'
   get 'likes/update'
 

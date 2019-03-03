@@ -23,10 +23,10 @@ require 'rails_helper'
 # removed from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
-RSpec.describe RecipeIngredientsController, type: :controller do
+RSpec.describe RecipeFermentablesController, type: :controller do
 
   # This should return the minimal set of attributes required to create a valid
-  # RecipeIngredient. As you add validations to RecipeIngredient, be sure to
+  # Fermentable. As you add validations to Fermentable, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
     skip("Add a hash of attributes valid for your model")
@@ -38,12 +38,12 @@ RSpec.describe RecipeIngredientsController, type: :controller do
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
-  # RecipeIngredientsController. Be sure to keep this updated too.
+  # RecipeFermentablesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   describe "GET #index" do
     it "returns a success response" do
-      recipe_ingredient = RecipeIngredient.create! valid_attributes
+      fermentable = Fermentable.create! valid_attributes
       get :index, params: {}, session: valid_session
       expect(response).to be_success
     end
@@ -51,21 +51,21 @@ RSpec.describe RecipeIngredientsController, type: :controller do
 
   describe "POST #create" do
     context "with valid params" do
-      it "creates a new RecipeIngredient" do
+      it "creates a new Fermentable" do
         expect {
-          post :create, params: {recipe_ingredient: valid_attributes}, session: valid_session
-        }.to change(RecipeIngredient, :count).by(1)
+          post :create, params: {fermentable: valid_attributes}, session: valid_session
+        }.to change(Fermentable, :count).by(1)
       end
 
-      it "redirects to the created recipe_ingredient" do
-        post :create, params: {recipe_ingredient: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(RecipeIngredient.last)
+      it "redirects to the created fermentable" do
+        post :create, params: {fermentable: valid_attributes}, session: valid_session
+        expect(response).to redirect_to(Fermentable.last)
       end
     end
 
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
-        post :create, params: {recipe_ingredient: invalid_attributes}, session: valid_session
+        post :create, params: {fermentable: invalid_attributes}, session: valid_session
         expect(response).to be_success
       end
     end
@@ -77,41 +77,41 @@ RSpec.describe RecipeIngredientsController, type: :controller do
         skip("Add a hash of attributes valid for your model")
       }
 
-      it "updates the requested recipe_ingredient" do
-        recipe_ingredient = RecipeIngredient.create! valid_attributes
-        put :update, params: {id: recipe_ingredient.to_param, recipe_ingredient: new_attributes}, session: valid_session
-        recipe_ingredient.reload
+      it "updates the requested fermentable" do
+        fermentable = Fermentable.create! valid_attributes
+        put :update, params: {id: fermentable.to_param, fermentable: new_attributes}, session: valid_session
+        fermentable.reload
         skip("Add assertions for updated state")
       end
 
-      it "redirects to the recipe_ingredient" do
-        recipe_ingredient = RecipeIngredient.create! valid_attributes
-        put :update, params: {id: recipe_ingredient.to_param, recipe_ingredient: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(recipe_ingredient)
+      it "redirects to the fermentable" do
+        fermentable = Fermentable.create! valid_attributes
+        put :update, params: {id: fermentable.to_param, fermentable: valid_attributes}, session: valid_session
+        expect(response).to redirect_to(fermentable)
       end
     end
 
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'edit' template)" do
-        recipe_ingredient = RecipeIngredient.create! valid_attributes
-        put :update, params: {id: recipe_ingredient.to_param, recipe_ingredient: invalid_attributes}, session: valid_session
+        fermentable = Fermentable.create! valid_attributes
+        put :update, params: {id: fermentable.to_param, fermentable: invalid_attributes}, session: valid_session
         expect(response).to be_success
       end
     end
   end
 
   describe "DELETE #destroy" do
-    it "destroys the requested recipe_ingredient" do
-      recipe_ingredient = RecipeIngredient.create! valid_attributes
+    it "destroys the requested fermentable" do
+      fermentable = Fermentable.create! valid_attributes
       expect {
-        delete :destroy, params: {id: recipe_ingredient.to_param}, session: valid_session
-      }.to change(RecipeIngredient, :count).by(-1)
+        delete :destroy, params: {id: fermentable.to_param}, session: valid_session
+      }.to change(Fermentable, :count).by(-1)
     end
 
-    it "redirects to the recipe_ingredients list" do
-      recipe_ingredient = RecipeIngredient.create! valid_attributes
-      delete :destroy, params: {id: recipe_ingredient.to_param}, session: valid_session
-      expect(response).to redirect_to(recipe_ingredients_url)
+    it "redirects to the fermentables list" do
+      fermentable = Fermentable.create! valid_attributes
+      delete :destroy, params: {id: fermentable.to_param}, session: valid_session
+      expect(response).to redirect_to(fermentables_url)
     end
   end
 

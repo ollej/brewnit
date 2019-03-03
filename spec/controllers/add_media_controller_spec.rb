@@ -23,7 +23,7 @@ require 'rails_helper'
 # removed from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
-RSpec.describe AddMediaController, type: :controller do
+RSpec.describe AddMediumController, type: :controller do
 
   # This should return the minimal set of attributes required to create a valid
   # AddMedium. As you add validations to AddMedium, be sure to
@@ -41,12 +41,12 @@ RSpec.describe AddMediaController, type: :controller do
       it "creates a new AddMedium" do
         expect {
           post :create, params: {add_medium: valid_attributes}, session: valid_session
-        }.to change(AddMedium, :count).by(1)
+        }.to change(Medium, :count).by(1)
       end
 
       it "redirects to the created add_medium" do
         post :create, params: {add_medium: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(AddMedium.last)
+        expect(response).to redirect_to(Medium.last)
       end
     end
 
