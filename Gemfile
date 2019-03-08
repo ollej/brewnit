@@ -51,6 +51,7 @@ gem 'axlsx_rails'
 gem 'dotenv-rails'
 gem 'httparty'
 gem 'rqrcode'
+gem 'py3o_fusion'
 
 # spam protection
 gem 'invisible_captcha'

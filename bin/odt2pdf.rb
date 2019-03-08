@@ -1,5 +1,6 @@
+#!/usr/bin/env ruby
 require 'rubygems'
-require_relative '../lib/py3o_fusion'
+require 'py3o_fusion'
 
 data = {
   'item': {
@@ -14,7 +15,8 @@ data = {
 }
 image = File.open('logo.png')
 
-Py3oFusion.new("mall.odt")
+Py3oFusion.new(ENV.fetch('PY3OFUSION_ENDPOINT'))
+  .template("mall.odt")
   .data(data)
   .static_image("logo1", image)
   .static_image("logo2", image)
