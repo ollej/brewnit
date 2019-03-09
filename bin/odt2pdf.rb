@@ -16,7 +16,7 @@ data = {
 image = File.open('logo.png')
 
 Py3oFusion.new(ENV.fetch('PY3OFUSION_ENDPOINT'))
-  .template("mall.odt")
+  .template("files/label_template.odt")
   .data(data)
   .static_image("logo1", image)
   .static_image("logo2", image)

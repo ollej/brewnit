@@ -170,6 +170,8 @@ sv:
     clone_description: Klona detta recept till din egen receptlista
     qrcode: QR-kod
     qrcode_description: Skriv ut en QR-kod som länkar till receptet
+    labels: Etiketter
+    labels_description: Skapa en PDF med baksidesetiketter för det här receptet
   users:
     index: Bryggare
     other_users: Användare utan recept
@@ -357,6 +359,9 @@ sv:
     create:
       successful: Receptet har klonats
       failed: Kunde inte klona receptet
+  label:
+    new: Skapa etiketter
+    generate: Skapa
 
   beerxml:
     name: Ölnamn

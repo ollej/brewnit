@@ -168,5 +168,4 @@ class Recipe < ApplicationRecord
   def self.equipments
     self.distinct.pluck(:equipment).reject { |r| r.empty? }.map(&:capitalize).uniq.sort
   end
-
 end

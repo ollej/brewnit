@@ -1,0 +1,39 @@
+<%= form_with url: label_recipe_path(id: @recipe.id), local: true,
+  class: 'pure-form pure-form-aligned' do |f| %>
+  <%= invisible_captcha %>
+
+  <fieldset>
+    <div class="field pure-control-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, value: @recipe.name, class: 'pure-input-1-4' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :description %>
+      <%= f.text_field :description, value: @recipe.description, class: 'pure-input-1-4' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :abv %>
+      <%= f.text_field :abv, value: @recipe.abv, class: 'pure-input-1-4' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :ibu %>
+      <%= f.text_field :ibu, value: @recipe.ibu, class: 'pure-input-1-4' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :ebc %>
+      <%= f.text_field :ebc, value: @recipe.color, class: 'pure-input-1-4' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :bottledate %>
+      <%= f.text_field :bottledate, value: @recipe.created_at, class: 'pure-input-1-4' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :bottlesize %>
+      <%= f.text_field :bottlesize, value: '50 cl', class: 'pure-input-1-4' %>
+    </div>
+    <div class="actions pure-controls">
+      <%= f.submit I18n.t(:'label.generate'),
+        { class: 'pure-button pure-button-primary' } %>
+    </div>
+  </fieldset>
+<% end %>
