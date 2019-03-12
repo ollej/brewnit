@@ -4,7 +4,6 @@
     update_cache: yes
     cache_valid_time: 3600
 
-
 - name: Install apt dependencies
   apt: name={{ item }}
   with_items:
@@ -23,6 +22,11 @@
     - git
     - libgmp-dev
     - libpq-dev
+
+- name: Upgrade kernel
+  apt:
+    name: linux-generic-lts-xenial
+    install_recommends: yes
 
 - name: Install additional packages
   apt: name={{ item }}

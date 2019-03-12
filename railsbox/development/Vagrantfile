@@ -20,7 +20,8 @@ def require_plugins(plugins = {})
 end
 
 require_plugins \
-  'vagrant-bindfs' => '0.3.2'
+  'vagrant-bindfs' => '0.3.2',
+  'vagrant-docker-compose' => '1.3.0'
 
 def ansible_installed?
   exts = ENV['PATHEXT'] ? ENV['PATHEXT'].split(';') : ['']
@@ -65,7 +66,6 @@ Vagrant.configure('2') do |config|
     machine.bindfs.bind_folder '/ansible', '/ansible'
   end
 
-
   config.ssh.forward_agent = true
 
   if ansible_installed?
@@ -86,4 +86,11 @@ Vagrant.configure('2') do |config|
       config.vm.provision 'shell', :path => script, :privileged => false, :args => ENV['ANSIBLE_ARGS']
     end
   end
+
+  # Provision Py3o.Fusion
+  config.vm.provision :docker
+  config.vm.provision :docker_compose,
+    yml: '/vagrant/py3ofusion-docker.yml',
+    run: 'always',
+    project_name: 'py3ofusion'
 end
