@@ -52,6 +52,8 @@ gem 'dotenv-rails'
 gem 'httparty'
 gem 'rqrcode'
 gem 'py3o_fusion'
+gem 'prawn'
+gem 'prawn-svg'
 
 # spam protection
 gem 'invisible_captcha'

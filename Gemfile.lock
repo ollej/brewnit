@@ -90,6 +90,8 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     acts_as_votable (0.12.0)
+    addressable (2.6.0)
+      public_suffix (>= 2.0.2, < 4.0)
     administrate (0.11.0)
       actionpack (>= 4.2, < 6.0)
       actionview (>= 4.2, < 6.0)
@@ -134,6 +136,8 @@ GEM
       rails (>= 5.0)
     concurrent-ruby (1.1.4)
     crass (1.0.4)
+    css_parser (1.7.0)
+      addressable
     csv_shaper (1.3.0)
       activesupport (>= 3.0.0)
     datetime_picker_rails (0.0.7)
@@ -248,13 +252,21 @@ GEM
       mime-types
       mimemagic (~> 0.3.0)
       terrapin (~> 0.6.0)
+    pdf-core (0.7.0)
     pg (1.1.4)
     polyglot (0.3.5)
+    prawn (2.2.2)
+      pdf-core (~> 0.7.0)
+      ttfunk (~> 1.5)
+    prawn-svg (0.29.1)
+      css_parser (~> 1.6)
+      prawn (>= 0.11.1, < 3)
     project_honeypot (0.3.1)
       net-dns (~> 0.7.1)
     pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
+    public_suffix (3.0.3)
     py3o_fusion (1.2.1)
       httparty (~> 0.16.4)
     quilljs-rails (0.0.4)
@@ -377,6 +389,7 @@ GEM
     tilt (2.0.9)
     treetop (1.6.10)
       polyglot (~> 0.3)
+    ttfunk (1.5.1)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uglifier (4.1.20)
@@ -435,6 +448,8 @@ DEPENDENCIES
   omniauth-google-oauth2
   paperclip
   pg
+  prawn
+  prawn-svg
   project_honeypot
   pry
   pushover!
