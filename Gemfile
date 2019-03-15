@@ -51,7 +51,6 @@ gem 'axlsx_rails'
 gem 'dotenv-rails'
 gem 'httparty'
 gem 'rqrcode'
-gem 'py3o_fusion'
 gem 'prawn'
 gem 'prawn-svg'
 

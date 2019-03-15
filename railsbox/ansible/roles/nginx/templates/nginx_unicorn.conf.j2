@@ -26,14 +26,6 @@ server {
     proxy_set_header Host $http_host;
     proxy_redirect off;
     proxy_pass http://app;
-    proxy_read_timeout 240s;
-    proxy_set_header X-Sendfile-Type X-Accel-Redirect;
-    proxy_set_header X-Accel-Mapping {{ path }}/pdf/=/pdf/;
-  }
-
-  location /pdf/ {
-    internal;
-    root {{ path }}/;
   }
 
   error_page 500 502 503 504 /500.html;

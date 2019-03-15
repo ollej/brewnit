@@ -126,11 +126,6 @@ For mailers to work, an SMTP password needs to be configured in
 
 The SMTP server and user_name is hardcoded in `config/application.rb`
 
-##### Py3o.Fusion
-
-For label making to work, an instance of Py3o.Fusion needs to be running and
-the endpoint needs to be configured in `PY3OFUSION_ENDPOINT`.
-
 #### For production mode
 
 Create a file called `.envrc` in the project root directory with the
@@ -154,7 +149,6 @@ SMTP_PASSWORD=changeme
 RECAPTCHA_SITE_KEY=changeme
 RECAPTCHA_SECRET_KEY=changeme
 SPAM_IP=space separated list of IP addresses to block
-PY3OFUSION_ENDPOINT=changeme
 ```
 
 ### Step 4 - Start application
