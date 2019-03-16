@@ -4,31 +4,43 @@
 
   <fieldset>
     <div class="field pure-control-group">
-      <%= f.label :name %>
+      <%= f.label :name, I18n.t(:'label.name') %>
       <%= f.text_field :name, value: @recipe.name, class: 'pure-input-1-4' %>
     </div>
     <div class="field pure-control-group">
-      <%= f.label :description %>
-      <%= f.text_field :description, value: @recipe.description, class: 'pure-input-1-4' %>
+      <%= f.label :description1, I18n.t(:'label.description1') %>
+      <%= f.text_field :description1, value: @recipe.description, class: 'pure-input-1-4' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :description2, I18n.t(:'label.description2') %>
+      <%= f.text_field :description2, value: "", class: 'pure-input-1-4' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :description3, I18n.t(:'label.description3') %>
+      <%= f.text_field :description3, value: "", class: 'pure-input-1-4' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :description4, I18n.t(:'label.description4') %>
+      <%= f.text_field :description4, value: "", class: 'pure-input-1-4' %>
     </div>
     <div class="field pure-control-group">
       <%= f.label :abv %>
-      <%= f.text_field :abv, value: @recipe.abv, class: 'pure-input-1-4' %>
+      <%= f.text_field :abv, value: format_abv(@recipe.abv), class: 'pure-input-1-4' %>
     </div>
     <div class="field pure-control-group">
       <%= f.label :ibu %>
-      <%= f.text_field :ibu, value: @recipe.ibu, class: 'pure-input-1-4' %>
+      <%= f.text_field :ibu, value: number_with_precision(@recipe.ibu, precision: 0), class: 'pure-input-1-4' %>
     </div>
     <div class="field pure-control-group">
       <%= f.label :ebc %>
-      <%= f.text_field :ebc, value: @recipe.color, class: 'pure-input-1-4' %>
+      <%= f.text_field :ebc, value: number_with_precision(@recipe.color, precision: 0), class: 'pure-input-1-4' %>
     </div>
     <div class="field pure-control-group">
-      <%= f.label :bottledate %>
-      <%= f.text_field :bottledate, value: @recipe.created_at, class: 'pure-input-1-4' %>
+      <%= f.label :bottledate, I18n.t(:'label.bottledate') %>
+      <%= f.text_field :bottledate, value: I18n.l(@recipe.created_at.to_date), class: 'pure-input-1-4' %>
     </div>
     <div class="field pure-control-group">
-      <%= f.label :bottlesize %>
+      <%= f.label :bottlesize, I18n.t(:'label.bottlesize') %>
       <%= f.text_field :bottlesize, value: '50 cl', class: 'pure-input-1-4' %>
     </div>
     <div class="actions pure-controls">

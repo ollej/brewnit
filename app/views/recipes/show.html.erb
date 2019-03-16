@@ -83,12 +83,10 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
               <%= trash_button(@recipe, t(:'recipes.destroy.link'),
                               tooltip: t(:'recipes.destroy.link_description')) %>
 
-              <% if current_user.admin? %>
               <%= link_to label_recipe_path(id: @recipe),
                 class: 'pure-button secondary-button',
                 data: tooltip_data(I18n.t(:'recipes.labels_description')) do %>
-                <%= icon('clone') %> <%= t(:'recipes.labels') %>
-              <% end %>
+                <%= icon('wine-bottle') %> <%= t(:'recipes.labels') %>
               <% end %>
 
               <%= link_to recipe_events_path(@recipe), class: 'pure-button secondary-button',

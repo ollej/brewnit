@@ -7,6 +7,7 @@ class Medium < ActiveRecord::Base
       small_thumbnail: '40x40#',
       medium_thumbnail: '64x64#',
       large_thumbnail: '80x80#',
+      label: '236x236#',
       small: '160x120#',
       medium: '320x240>',
       large: '640x480>'
@@ -24,5 +25,4 @@ class Medium < ActiveRecord::Base
   def remove_references
     parent.remove_media_references(self)
   end
-
 end

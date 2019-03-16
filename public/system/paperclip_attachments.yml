@@ -1,0 +1,10 @@
+---
+:Medium:
+  :file:
+  - :label
+  - :large
+  - :large_thumbnail
+  - :medium
+  - :medium_thumbnail
+  - :small
+  - :small_thumbnail

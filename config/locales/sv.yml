@@ -362,6 +362,13 @@ sv:
   label:
     new: Skapa etiketter
     generate: Skapa
+    name: Ölnamn
+    description1: Beskrivning rad 1
+    description2: Beskrivning rad 2
+    description3: Beskrivning rad 3
+    description4: Beskrivning rad 4
+    bottledate: Buteljeringsdatum
+    bottlesize: Flaskstorlek
 
   beerxml:
     name: Ölnamn
