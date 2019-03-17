@@ -2,7 +2,7 @@ class LabelController < ApplicationController
   def new
     @recipe = Recipe.find(params[:id])
     @preview_svg = label_template(recipe_data)
-    @logo_url = full_url_for(logo_url)
+    @logo_url = full_url_for(logo_url) if logo_url
     @qrcode = ImageData.new(qrcode).data
   end
 

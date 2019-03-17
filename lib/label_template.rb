@@ -12,7 +12,7 @@ class LabelTemplate
   def initialize(template, data)
     @doc = Nokogiri::XML.parse(template)
     data.each do |attribute, value|
-      value = sanitize_field(value) unless excluded(attribute)
+      value = sanitize_field(value) unless excluded?(attribute)
       send("#{attribute}=", value) if respond_to? "#{attribute}="
     end
   end
@@ -76,8 +76,8 @@ class LabelTemplate
     @doc.at_css(css).set_attribute("xlink:href", ImageData.new(file).data)
   end
 
-  def excluded(attribute)
-    EXCLUDE_SANITIZATION.include? attribute
+  def excluded?(attribute)
+    EXCLUDE_SANITIZATION.include? attribute.to_sym
   end
 
   def html_entities

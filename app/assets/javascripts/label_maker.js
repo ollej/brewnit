@@ -44,7 +44,10 @@ class LabelMaker {
   }
 
   updateImage(label) {
-    this.svgEl(label.id).setAttribute("xlink:href", this.fieldText(label));
+    let image = this.fieldText(label);
+    if (image != "") {
+      this.svgEl(label.id).setAttribute("xlink:href", image);
+    }
   }
 
   updateText(label) {
