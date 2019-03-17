@@ -1,6 +1,7 @@
 class LabelController < ApplicationController
   def new
     @recipe = Recipe.find(params[:id])
+    @preview_svg = label_template(recipe_data)
     @logo_url = full_url_for(logo_url)
     @qrcode = ImageData.new(qrcode).data
   end
@@ -12,19 +13,37 @@ class LabelController < ApplicationController
 
   private
   def render_pdf
-    LabelMaker.new(template).generate
+    LabelMaker.new(label_template(params_data)).generate
   end
 
-  def template
-    template = IO.read Rails.root.join('app', 'assets', 'labeltemplates', 'back-label.svg')
-    LabelTemplate.new(template, data).generate
+  def label_template(data)
+    LabelTemplate.new(template_file, data).generate
   end
 
-  def data
+  def template_file
+    IO.read Rails.root.join('app', 'assets', 'labeltemplates', 'back-label.svg')
+  end
+
+  def params_data
     label_params.merge(
       qrcode: qrcode,
       logo: logo
     )
+  end
+
+  def recipe_data
+    {
+      name: @recipe.name,
+      description1: @recipe.description,
+      abv: view_context.number_with_precision(@recipe.abv, precision: 0),
+      ibu: view_context.number_with_precision(@recipe.ibu, precision: 0),
+      ebc: view_context.number_with_precision(@recipe.color, precision: 0),
+      og: view_context.format_sg(@recipe.og),
+      fg: view_context.format_sg(@recipe.fg),
+      brewdate: I18n.l(@recipe.created_at.to_date),
+      logo: logo,
+      qrcode: qrcode
+    }
   end
 
   def logo

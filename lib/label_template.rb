@@ -1,7 +1,7 @@
 class LabelTemplate
   include ActiveModel::Validations
 
-  EXCLUDE_SANITIZATION = %(logo, qrcode)
+  EXCLUDE_SANITIZATION = %i(logo qrcode)
 
   attr_accessor :name, :description1, :description2, :description3,
     :description4, :abv, :ibu, :ebc, :og, :fg, :brewdate, :contactinfo,
@@ -12,7 +12,7 @@ class LabelTemplate
   def initialize(template, data)
     @doc = Nokogiri::XML.parse(template)
     data.each do |attribute, value|
-      value = sanitize_field(value) unless EXCLUDE_SANITIZATION.include? attribute
+      value = sanitize_field(value) unless excluded(attribute)
       send("#{attribute}=", value) if respond_to? "#{attribute}="
     end
   end
@@ -74,6 +74,10 @@ class LabelTemplate
 
   def image(css, file)
     @doc.at_css(css).set_attribute("xlink:href", ImageData.new(file).data)
+  end
+
+  def excluded(attribute)
+    EXCLUDE_SANITIZATION.include? attribute
   end
 
   def html_entities

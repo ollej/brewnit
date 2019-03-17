@@ -24,10 +24,13 @@ class LabelMaker {
     this.svg = document.getElementById(svg);
     this.form = $(form);
     this.form.on("change", this.update.bind(this));
-    this.update();
   }
 
   update(event) {
+    if (this.svg === null) {
+      console.error('SVG element not found on page');
+      return false;
+    }
     this.labelMapping().forEach(this.updateLabel.bind(this));
     return false;
   }
