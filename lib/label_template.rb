@@ -73,13 +73,7 @@ class LabelTemplate
   end
 
   def image(css, file)
-    @doc.at_css(css).set_attribute("xlink:href", image_data(file))
-  end
-
-  def image_data(file)
-    img_mime = Marcel::MimeType.for file
-    img_data = Base64.strict_encode64(file)
-    "data:#{img_mime};base64,#{img_data}"
+    @doc.at_css(css).set_attribute("xlink:href", ImageData.new(file).data)
   end
 
   def html_entities

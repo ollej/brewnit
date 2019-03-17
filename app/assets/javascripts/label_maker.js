@@ -1,8 +1,9 @@
 class LabelField {
-  constructor({ id, field, prefix = null } = {}) {
+  constructor({ id, field, prefix = null, image = false } = {}) {
     this.id = id;
     this.field = field;
     this.prefix = prefix;
+    this.image = image;
   }
 
   text(text) {
@@ -32,12 +33,28 @@ class LabelMaker {
   }
 
   updateLabel(label) {
+    if (label.image) {
+      this.updateImage(label);
+    } else {
+      this.updateText(label);
+    }
+  }
+
+  updateImage(label) {
+    this.svgEl(label.id).setAttribute("xlink:href", this.fieldText(label));
+  }
+
+  updateText(label) {
     let text = this.fieldText(label);
-    this.svg.getElementById(label.id).textContent = label.text(text);
+    this.svgEl(label.id).textContent = label.text(text);
   }
 
   fieldText(label) {
     return this.form.find(label.fieldSelector()).val();
+  }
+
+  svgEl(selector) {
+    return this.svg.getElementById(selector);
   }
 
   labelMapping() {
@@ -98,6 +115,16 @@ class LabelMaker {
       new LabelField({
         id: 'bottlesize',
         field: 'bottlesize'
+      }),
+      new LabelField({
+        id: 'logo',
+        field: 'logo',
+        image: true
+      }),
+      new LabelField({
+        id: 'qrcode',
+        field: 'qrcode',
+        image: true
       })
     ];
   }

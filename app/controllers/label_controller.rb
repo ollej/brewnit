@@ -1,6 +1,8 @@
 class LabelController < ApplicationController
   def new
     @recipe = Recipe.find(params[:id])
+    @logo_url = full_url_for(logo_url)
+    @qrcode = ImageData.new(qrcode).data
   end
 
   def create
@@ -28,6 +30,12 @@ class LabelController < ApplicationController
   def logo
     path = logo_path
     File.open(path, 'rb') { |f| f.read } if path.present?
+  end
+
+  def logo_url
+    if @recipe.user.present? && @recipe.user.media_brewery.present?
+      @recipe.user.media_brewery.file.url(:label)
+    end
   end
 
   def logo_path

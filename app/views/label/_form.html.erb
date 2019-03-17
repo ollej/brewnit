@@ -67,5 +67,7 @@
       <%= f.submit I18n.t(:'label.generate'),
         { class: 'pure-button pure-button-primary' } %>
     </div>
+    <%= f.hidden_field :logo, value: @logo_path %>
+    <%= f.hidden_field :qrcode, value: @qrcode %>
   </fieldset>
 <% end %>
