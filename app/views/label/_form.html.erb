@@ -9,7 +9,7 @@
     </div>
     <div class="field pure-control-group">
       <%= f.label :description1, I18n.t(:'label.description1') %>
-      <%= f.text_field :description1, value: @recipe.description, class: 'pure-input-1-4' %>
+      <%= f.text_field :description1, value: strip_tags(@recipe.description), class: 'pure-input-1-4' %>
     </div>
     <div class="field pure-control-group">
       <%= f.label :description2, I18n.t(:'label.description2') %>
