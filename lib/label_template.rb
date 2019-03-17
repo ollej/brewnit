@@ -4,7 +4,7 @@ class LabelTemplate
   EXCLUDE_SANITIZATION = %(logo, qrcode)
 
   attr_accessor :name, :description1, :description2, :description3,
-    :description4, :abv, :ibu, :ebc, :bottledate,
+    :description4, :abv, :ibu, :ebc, :og, :fg, :brewdate, :contactinfo,
     :bottlesize, :logo, :qrcode
 
   validates :name, presence: true
@@ -23,30 +23,37 @@ class LabelTemplate
 
   private
   def build
-    content("#beername > tspan > tspan", name)
-    content("#beerdescription1", description1)
-    content("#beerdescription2", description2)
-    content("#beerdescription3", description3)
-    content("#beerdescription4", description4)
+    content("#beername", name)
+    content("#description1", description1)
+    content("#description2", description2)
+    content("#description3", description3)
+    content("#description4", description4)
     details([
       Detail.new("ABV", abv),
       Detail.new("IBU", ibu),
-      Detail.new("EBC", ebc)
+      Detail.new("EBC", ebc),
+      Detail.new("OG", og),
+      Detail.new("FG", fg)
     ])
-    if bottledate.present?
-      content("#beerdetails6", bottledate)
+    if brewdate.present?
+      content("#beerdetails7", brewdate)
     else
-      clear("#beerdetails5")
       clear("#beerdetails6")
+      clear("#beerdetails7")
     end
-    content("#bottlesize > tspan", bottlesize)
+    content("#beerdetails8", contactinfo)
+    content("#bottlesize", bottlesize)
     image("#logo", logo) if logo.present?
     image("#qrcode", qrcode) if qrcode.present?
     @doc
   end
 
   def content(css, content)
-    @doc.at_css(css).content = content
+    begin
+      @doc.at_css(css).content = content
+    rescue NoMethodError
+      Rails.logger.warn { "CSS not found: #{css}" }
+    end
   end
 
   def clear(css)
@@ -55,7 +62,7 @@ class LabelTemplate
 
   def details(details)
     details.select! { |detail| detail.has_value? }
-    3.times do |index|
+    5.times do |index|
       detail = details.fetch(index, Detail.new)
       detail("#beerdetails#{index + 1}", detail)
     end

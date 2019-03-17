@@ -367,8 +367,9 @@ sv:
     description2: Beskrivning rad 2
     description3: Beskrivning rad 3
     description4: Beskrivning rad 4
-    bottledate: Buteljeringsdatum
+    brewdate: Bryggdatum
     bottlesize: Flaskstorlek
+    contactinfo: Kontaktinfo
 
   beerxml:
     name: Ölnamn

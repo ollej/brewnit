@@ -44,6 +44,6 @@ class LabelController < ApplicationController
   end
 
   def label_params
-    params.permit(:name, :description1, :description2, :description3, :description4, :abv, :ibu, :ebc, :bottledate, :bottlesize)
+    params.permit(:name, :description1, :description2, :description3, :description4, :abv, :ibu, :ebc, :og, :fg, :brewdate, :bottlesize, :contactinfo)
   end
 end
