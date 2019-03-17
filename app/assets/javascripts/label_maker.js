@@ -1,3 +1,23 @@
+class LabelField {
+  constructor({ id, field, prefix = null } = {}) {
+    this.id = id;
+    this.field = field;
+    this.prefix = prefix;
+  }
+
+  text(text) {
+    if (this.prefix !== null) {
+      return `${this.prefix}: ${text}`;
+    } else {
+      return text;
+    }
+  }
+
+  fieldSelector() {
+    return `input[name=${this.field}]`;
+  }
+}
+
 class LabelMaker {
   constructor(svg, form) {
     this.svg = document.getElementById(svg);
@@ -7,79 +27,78 @@ class LabelMaker {
   }
 
   update(event) {
-    this.labelMapping().forEach(this.updateText.bind(this));
+    this.labelMapping().forEach(this.updateLabel.bind(this));
     return false;
   }
 
-  updateText(label) {
-    let input_selector = `input[name=${label.field}]`;
-    let input = this.form.find(input_selector)
-    let text = input.val();
-    if (label.prefix !== undefined) {
-      text = label.prefix + text;
-    }
-    this.svg.getElementById(label.id).textContent = text;
+  updateLabel(label) {
+    let text = this.fieldText(label);
+    this.svg.getElementById(label.id).textContent = label.text(text);
+  }
+
+  fieldText(label) {
+    return this.form.find(label.fieldSelector()).val();
   }
 
   labelMapping() {
     return [
-      {
-        field: 'name',
-        id: 'beername'
-      },
-      {
-        field: 'description1',
-        id: 'description1'
-      },
-      {
-        field: 'description2',
-        id: 'description2'
-      },
-      {
-        field: 'description3',
-        id: 'description3'
-      },
-      {
-        field: 'description4',
-        id: 'description4'
-      },
-      {
-        field: 'abv',
+      new LabelField({
+        id: 'beername',
+        field: 'name'
+      }),
+      new LabelField({
+        id: 'description1',
+        field: 'description1'
+      }),
+      new LabelField({
+        id: 'description2',
+        field: 'description2'
+      }),
+      new LabelField({
+        id: 'description3',
+        field: 'description3'
+      }),
+      new LabelField({
+        id: 'description4',
+        field: 'description4'
+      }),
+      new LabelField({
         id: 'beerdetails1',
-        prefix: 'ABV: '
-      },
-      {
-        field: 'ibu',
+        field: 'abv',
+        prefix: 'ABV'
+      }),
+      new LabelField({
         id: 'beerdetails2',
-        prefix: 'IBU: '
-      },
-      {
-        field: 'ebc',
+        field: 'ibu',
+        prefix: 'IBU'
+      }),
+      new LabelField({
         id: 'beerdetails3',
-        prefix: 'EBC: '
-      },
-      {
-        field: 'og',
+        field: 'ebc',
+        prefix: 'EBC'
+      }),
+      new LabelField({
         id: 'beerdetails4',
-        prefix: 'OG: '
-      },
-      {
-        field: 'fg',
+        field: 'og',
+        prefix: 'OG'
+      }),
+      new LabelField({
         id: 'beerdetails5',
-        prefix: 'FG: '
-      },
-      {
-        field: 'brewdate',
-        id: 'beerdetails7'
-      },
-      {
-        field: 'contactinfo',
-        id: 'beerdetails8'
-      },
-      {
-        field: 'bottlesize',
-        id: 'bottlesize'
-      }
+        field: 'fg',
+        prefix: 'FG'
+      }),
+      new LabelField({
+        id: 'beerdetails7',
+        field: 'brewdate'
+      }),
+      new LabelField({
+        id: 'beerdetails8',
+        field: 'contactinfo'
+      }),
+      new LabelField({
+        id: 'bottlesize',
+        field: 'bottlesize'
+      })
     ];
   }
 
