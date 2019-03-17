@@ -361,7 +361,7 @@ sv:
       failed: Kunde inte klona receptet
   label:
     new: Skapa etiketter
-    generate: Skapa
+    generate: Skapa PDF
     name: Ölnamn
     description1: Beskrivning rad 1
     description2: Beskrivning rad 2

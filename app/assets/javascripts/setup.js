@@ -93,5 +93,10 @@ $( document ).ready(function() {
     });
     $field.trigger("click");
   });
+
+  // Setup LabelMaker only on label page
+  if ($("body").hasClass("page-label-new")) {
+    var labelMaker = new LabelMaker("brygglogg-label-back", ".label-form");
+  }
 });
 
