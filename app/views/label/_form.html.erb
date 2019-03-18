@@ -27,41 +27,42 @@
     <div class="field pure-control-group">
       <%= f.label :abv %>
       <%= f.text_field :abv,
-        value: format_abv(@recipe.abv), class: 'pure-input-1-2' %>
+        value: format_abv(@recipe.abv), class: 'pure-input-1-4' %>
     </div>
     <div class="field pure-control-group">
       <%= f.label :ibu %>
       <%= f.text_field :ibu,
         value: number_with_precision(@recipe.ibu, precision: 0),
-        class: 'pure-input-1-2' %>
+        class: 'pure-input-1-4' %>
     </div>
     <div class="field pure-control-group">
       <%= f.label :ebc %>
       <%= f.text_field :ebc,
         value: number_with_precision(@recipe.color, precision: 0),
-        class: 'pure-input-1-2' %>
+        class: 'pure-input-1-4' %>
     </div>
     <div class="field pure-control-group">
       <%= f.label :og %>
-      <%= f.text_field :og, value: format_sg(@recipe.og), class: 'pure-input-1-2' %>
+      <%= f.text_field :og, value: format_sg(@recipe.og),
+        class: 'pure-input-1-4' %>
     </div>
     <div class="field pure-control-group">
       <%= f.label :fg %>
       <%= f.text_field :fg, value: format_sg(@recipe.fg),
-        class: 'pure-input-1-2' %>
+        class: 'pure-input-1-4' %>
     </div>
     <div class="field pure-control-group">
       <%= f.label :brewdate, I18n.t(:'label.brewdate') %>
       <%= f.text_field :brewdate, value: I18n.l(@recipe.created_at.to_date),
-        class: 'pure-input-1-2' %>
+        class: 'pure-input-1-4' %>
     </div>
     <div class="field pure-control-group">
       <%= f.label :contactinfo, I18n.t(:'label.contactinfo') %>
-      <%= f.text_field :contactinfo, value: "", class: 'pure-input-1-2' %>
+      <%= f.text_field :contactinfo, value: "", class: 'pure-input-1-4' %>
     </div>
     <div class="field pure-control-group">
       <%= f.label :bottlesize, I18n.t(:'label.bottlesize') %>
-      <%= f.text_field :bottlesize, value: '50 cl', class: 'pure-input-1-2' %>
+      <%= f.text_field :bottlesize, value: '50 cl', class: 'pure-input-1-4' %>
     </div>
     <div class="actions pure-controls">
       <%= f.submit I18n.t(:'label.generate'),
