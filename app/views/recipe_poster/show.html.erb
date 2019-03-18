@@ -1,0 +1,12 @@
+<div class="print-header">
+  <h1><%= @recipe.name %></h1>
+  <h2><%= @beerxml.style&.name %> <%= @presenter.style_type %></h2>
+</div>
+
+<div class="print-main">
+  <div class="poster-image">
+    <%= image_tag @recipe.main_image(:original) %>
+  </div>
+</div>
+
+<%= render 'shared/print_footer' %>

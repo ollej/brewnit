@@ -5,43 +5,56 @@
 
 .print-content {
   padding: 10mm;
-  h1, p {
+  h1, h2, p {
     color: #666;
     font-weight: 300;
     font-family: Montserrat,FreeSans,Arimo,"Droid Sans",verdana,arial,helvetica,sans-serif;
   }
-}
+  .print-footer {
+    font-size: 10pt;
+    position: fixed;
+    bottom: 10mm;
+    left: 50%;
+    transform: translate(-50%, 0);
 
-.page-qr-show {
-  .print-content {
-    h1 {
-      width: 100%;
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translate(-50%, 0);
-      font-size: 48pt;
-      text-align: center;
+    h2 {
+      font-size: 16pt;
     }
 
+    .print-logo {
+      padding-right: 10pt;
+      float: left;
+    }
+  }
+}
+
+.page-recipe_poster-show,
+.page-qr-show {
+  .print-header {
+    width: 100%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    text-align: center;
+    top: 0;
+
+    h1 {
+      font-size: 48pt;
+    }
+    h2 {
+      font-size: 24pt;
+    }
+  }
+
+  .print-main {
+    .poster-image img,
     .qr-code svg {
       position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-    }
-
-    .qr-footer {
-      font-size: 10pt;
-      position: fixed;
-      bottom: 10mm;
-      left: 50%;
-      transform: translate(-50%, 0);
-
-      .qr-logo {
-        padding-right: 10pt;
-        float: left;
-      }
+      max-width: 80%;
+      max-width: 75%;
     }
   }
 }

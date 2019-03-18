@@ -1,16 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "qr/show.html.erb", type: :view do
-  let(:user) {
-    User.create(name: 'devise user', email: 'foo@bar.com', password: 'password')
-  }
-  let(:recipe) { Recipe.create!(recipe_attributes) }
-  let(:recipe_attributes) do
-    {
-      name: 'recipe test',
-      user: user
-    }
-  end
+  include RecipeContext
+  include UserContext
 
   it "renders qr code" do
     assign(:recipe, recipe)

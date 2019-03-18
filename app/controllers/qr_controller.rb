@@ -1,9 +1,8 @@
 class QrController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:show]
   layout 'print'
+  before_action :load_and_authorize_recipe_by_id
 
   def show
-    @recipe = Recipe.find(params[:id])
     @qrcode = RQRCode::QRCode.new(recipe_url(@recipe)).as_svg
   end
 end

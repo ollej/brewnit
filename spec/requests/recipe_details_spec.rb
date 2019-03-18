@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "RecipeDetails", type: :request do
   include RecipeContext
-  let(:user) { User.create!(name: "test user", email: "test@example.com", password: "abcd1234") }
+  include UserContext
 
   before(:each) do
     sign_in user

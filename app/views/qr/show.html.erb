@@ -1,14 +1,11 @@
-<h1><%= @recipe.name %></h1>
-
-<div class="qr-code">
-  <%= raw @qrcode %>
+<div class="print-header">
+  <h1><%= @recipe.name %></h1>
 </div>
 
-<div class="qr-footer">
-  <div>
-    <%= image_tag 'brygglogg-logo.png', width: 96, height: 96, id: 'logo', class: 'qr-logo' %>
-    <h2>Brygglogg.se</h2>
-    <p>Visa eller ladda ner receptet på Brygglogg.se</p>
+<div class="print-main">
+  <div class="qr-code">
+    <%= raw @qrcode %>
   </div>
 </div>
-<script>window.print();</script>
+
+<%= render 'shared/print_footer' %>

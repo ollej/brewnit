@@ -1,11 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe "AddMedium", type: :request do
+  include UserContext
+
   def file_fixture_upload(filename)
     File.open(file_fixture(filename), 'rb')
   end
 
-  let(:user) { User.create!(name: "test user", email: "test@example.com", password: "abcd1234") }
   let!(:medium) { Medium.create!(parent: parent, file: file_fixture_upload('favicon.png')) }
   let(:params) do
     {

@@ -1,13 +1,13 @@
 class LabelController < ApplicationController
+  before_action :load_and_authorize_recipe_by_id
+
   def new
-    @recipe = Recipe.find(params[:id])
     @preview_svg = label_template(recipe_data)
     @logo_url = full_url_for(logo_url) if logo_url
     @qrcode = ImageData.new(qrcode).data
   end
 
   def create
-    @recipe = Recipe.find(params[:id])
     send_data render_pdf, filename: 'etiketter.pdf', type: :pdf, disposition: :attachment
   end
 

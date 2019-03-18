@@ -57,11 +57,6 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
               data: tooltip_data(I18n.t(:'recipes.print_description')) do %>
               <%= icon('print') %> <%= t(:'recipes.print') %>
             <% end %>
-            <%= link_to qr_recipe_path(@recipe), class: 'pure-button secondary-button',
-              data: tooltip_data(I18n.t(:'recipes.qrcode_description')),
-              target: '_blank' do %>
-              <%= icon('qrcode') %> <%= t(:'recipes.qrcode') %>
-            <% end %>
           </div>
           <% if user_signed_in? %>
             <div class="controls-signed-in">
@@ -87,6 +82,18 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
                 class: 'pure-button secondary-button',
                 data: tooltip_data(I18n.t(:'recipes.labels_description')) do %>
                 <%= icon('wine-bottle') %> <%= t(:'recipes.labels') %>
+              <% end %>
+
+              <%= link_to qr_recipe_path(@recipe), class: 'pure-button secondary-button',
+                data: tooltip_data(I18n.t(:'recipes.qrcode_description')),
+                target: '_blank' do %>
+                <%= icon('qrcode') %> <%= t(:'recipes.qrcode') %>
+              <% end %>
+
+              <%= link_to poster_recipe_path(@recipe), class: 'pure-button secondary-button',
+                data: tooltip_data(I18n.t(:'recipes.poster_description')),
+                target: '_blank' do %>
+                <%= icon('scroll') %> <%= t(:'recipes.poster') %>
               <% end %>
 
               <%= link_to recipe_events_path(@recipe), class: 'pure-button secondary-button',
