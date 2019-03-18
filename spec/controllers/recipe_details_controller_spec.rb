@@ -1,11 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe RecipeDetailsController, type: :controller do
-  let(:beerxml) { file_fixture('beerxml.xml').read }
-  let(:recipe) { Recipe.create!(beerxml: beerxml, user: user) }
-  let!(:recipe_detail) { RecipeDetail.create! valid_attributes }
+  include RecipeContext
+  login_user
+
+  let!(:recipe_detail) { RecipeDetail.create! detail_attributes }
   # TODO: Add ingredients
-  let(:valid_attributes) {
+  let(:detail_attributes) {
     {
       batch_size: 20.0,
       efficiency: 72.0,

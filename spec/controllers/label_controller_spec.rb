@@ -1,14 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe LabelController, type: :controller do
-  let(:recipe) { Recipe.create(recipe_attributes) }
-  let(:recipe_attributes) do
-    {
-      user: user,
-      name: 'recipe test'
-    }
-  end
-
+  include RecipeContext
   login_user
 
   describe "GET #new" do
@@ -18,9 +11,9 @@ RSpec.describe LabelController, type: :controller do
     end
   end
 
-  describe "GET #create" do
+  describe "POST #create" do
     it "returns http success" do
-      get :create, params: { id: recipe.id }
+      post :create, params: { id: recipe.id }
       expect(response).to have_http_status(:success)
       expect(response.content_type).to eq "application/pdf"
     end

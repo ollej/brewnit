@@ -58,6 +58,7 @@ RSpec.configure do |config|
 
   config.include Devise::Test::ControllerHelpers, :type => :controller
   config.extend ControllerMacros, :type => :controller
+  config.include DeviseRequestSpecHelpers, type: :request
 
   # Disable timestamp for invisible_captcha
   InvisibleCaptcha.timestamp_enabled = false
