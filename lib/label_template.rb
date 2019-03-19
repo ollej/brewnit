@@ -80,12 +80,12 @@ class LabelTemplate
     EXCLUDE_SANITIZATION.include? attribute.to_sym
   end
 
-  def html_entities
-    @html_entities ||= HTMLEntities.new
+  def sanitize_field(value)
+    sanitizer.sanitize(value)
   end
 
-  def sanitize_field(value)
-    html_entities.decode Rails::Html::WhiteListSanitizer.new.sanitize(value, tags: [], attributes: [])
+  def sanitizer
+    @sanitizer ||= Sanitizer.new(html_entity_decode: true)
   end
 
   class Detail

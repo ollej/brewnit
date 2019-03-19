@@ -5,6 +5,7 @@ class LabelController < ApplicationController
     @preview_svg = label_template(recipe_data)
     @logo_url = full_url_for(logo_url) if logo_url
     @qrcode = ImageData.new(qrcode).data
+    @recipe_data = recipe_data
   end
 
   def create
@@ -34,15 +35,27 @@ class LabelController < ApplicationController
   def recipe_data
     {
       name: @recipe.name,
-      description1: @recipe.description,
       abv: view_context.number_with_precision(@recipe.abv, precision: 0),
       ibu: view_context.number_with_precision(@recipe.ibu, precision: 0),
       ebc: view_context.number_with_precision(@recipe.color, precision: 0),
       og: view_context.format_sg(@recipe.og),
       fg: view_context.format_sg(@recipe.fg),
       brewdate: I18n.l(@recipe.created_at.to_date),
+      bottlesize: '50 cl',
       logo: logo,
       qrcode: qrcode
+    }.merge(beer_description_lines)
+  end
+
+  def beer_description_lines
+    description = Sanitizer.new(html_entity_decode: true)
+      .sanitize(@recipe.description)
+    lines = WordWrap.ww(description, 28).split("\n")
+    {
+      description1: lines[0],
+      description2: lines[1],
+      description3: lines[2],
+      description4: lines[3]
     }
   end
 

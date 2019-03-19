@@ -55,7 +55,7 @@ gem 'httparty'
 gem 'rqrcode'
 gem 'prawn'
 gem 'prawn-svg'
-gem 'inline_svg'
+gem 'word_wrap'
 
 # spam protection
 gem 'invisible_captcha'

@@ -28,10 +28,10 @@ module SanitizerConcern
   end
 
   def sanitize_field(field)
-    sanitize_string(send(field))
+    sanitizer.sanitize(send(field))
   end
 
-  def sanitize_string(string)
-    Rails::Html::WhiteListSanitizer.new.sanitize(string, tags: ALLOWED_TAGS, attributes: ALLOWED_ATTRIBUTES)
+  def sanitizer
+    @sanitizer ||= Sanitizer.new(tags: ALLOWED_TAGS, attributes: ALLOWED_ATTRIBUTES)
   end
 end
