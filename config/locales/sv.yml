@@ -89,7 +89,6 @@ sv:
     build_new_recipe_description: Bygg ditt recept genom att lägga till ingredienser.
     build_recipe_description: Ändra namn, beskrivning och ingredienser på receptet.
     upload_description: Ladda upp bilder som visas på receptsidan.
-    print_description: Skriv ut receptet.
     download_description: Ladda ner en BeerXML-fil som kan importeras i receptprogram.
     recipe_create_information: |
         <p>Fyll i namn och eventuell beskrivning av receptet.</p>
@@ -117,13 +116,26 @@ sv:
       equipment: Bryggverk
       event: Evenemang
     download: Ladda ner
-    print: Skriv ut
+    print:
+      button: Skriv ut
+      description: Skriv ut dokument för det här receptet.
+      recipe:
+        link: Recept
+        description: Skriv ut bryggschemat för det här receptet-
+      labels:
+        link: Etiketter
+        description: Skapa en PDF med baksidesetiketter för det här receptet
+      poster:
+        link: Affisch
+        description: Skriv ut en affisch med receptets namn och bild
+      qrcode:
+        link: QR-kod
+        description: Skriv ut en QR-kod som länkar till receptet
     private: Privat
     own: Egna recept
     winner: Medaljör
     incomplete: Ofärdig
     incomplete_description: Detta recept är inte färdigbyggt än, importera BeerXML eller bygg.
-    labels: Etiketter
     recipe_details: Recept
     recipe_analytics: Analys
     recipe_comments: Diskussion
@@ -168,12 +180,6 @@ sv:
       Beersmith 2, Brewpal eller Wort.
     clone: Klona
     clone_description: Klona detta recept till din egen receptlista
-    qrcode: QR-kod
-    qrcode_description: Skriv ut en QR-kod som länkar till receptet
-    labels: Etiketter
-    labels_description: Skapa en PDF med baksidesetiketter för det här receptet
-    poster: Affisch
-    poster_description: Skriv ut en affisch med receptets namn och bild
   users:
     index: Bryggare
     other_users: Användare utan recept

@@ -7,7 +7,7 @@ $( document ).ready(function() {
 
   // Handle clicks in recipe list
   $(".linked-list").on("click", ".linked-item", function(ev) {
-    var $target = $(ev.target);
+    let $target = $(ev.target);
     if ($target.is("a") && !$target.is(".item-link")) {
       return true;
     }
@@ -22,7 +22,7 @@ $( document ).ready(function() {
   });
 
   // Setup gauges
-  var dataGauge = new DataGauge(".gauge-chart");
+  let dataGauge = new DataGauge(".gauge-chart");
   dataGauge.init();
 
   // Click on comments count opens comments tab.
@@ -41,19 +41,19 @@ $( document ).ready(function() {
   });
 
   // Setup range sliders
-  var sliders = new RangeSliders(".range-slider");
+  let sliders = new RangeSliders(".range-slider");
   sliders.init();
 
   // Image upload
-  var uploader = new MediaUpload(".upload-button", "#uploadMediaField", "#slider");
+  let uploader = new MediaUpload(".upload-button", "#uploadMediaField", "#slider");
   uploader.init();
 
   // Media Tools
-  var mediaTools = new MediaTools("li.media-thumbnail", ".media-buttons", "#slider");
+  let mediaTools = new MediaTools("li.media-thumbnail", ".media-buttons", "#slider");
   mediaTools.init();
 
   // Initialize flasher
-  var flasher = new Flasher("#flasher");
+  let flasher = new Flasher("#flasher");
 
   // Auto submit quicksearch
   $("#sort_order").on('change', function() {
@@ -61,7 +61,7 @@ $( document ).ready(function() {
   });
 
   $("form.medal-placement #event_medal").on("change", function() {
-    var $cat = $("form.medal-placement #event_category");
+    let $cat = $("form.medal-placement #event_category");
     $cat.prop('disabled', ($(this).val() == ''));
   });
 
@@ -98,5 +98,8 @@ $( document ).ready(function() {
   if ($("body").hasClass("page-label-new")) {
     var labelMaker = new LabelMaker("brygglogg-label-back", ".label-form");
   }
+
+  // Setup Dropdown to cancel on escape or click on body
+  let dropdown = new Dropdown(".purecss-dropdown", ".dd-input");
 });
 
