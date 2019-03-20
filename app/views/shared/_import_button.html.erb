@@ -1,8 +1,11 @@
+<%
+css = local_assigns.fetch :button_css, "pure-button secondary-button"
+tooltip = local_assigns.fetch :tooltip, tooltip_data(I18n.t(:'recipes.beerxml_description'))
+%>
 <%= form_for @recipe, method: :patch, id: 'beerxml-import-form',
   multipart: true, html: { class: 'form-button file-form' } do |f| %>
-  <%= link_to '#', class: 'pure-button secondary-button file-button',
-    data: tooltip_data(I18n.t(:'recipes.beerxml_description'))
-      .merge(:'file-field' => '#import-beerxml') do %>
+  <%= link_to '#', class: "#{css} file-button",
+    data: tooltip.merge(:'file-field' => '#import-beerxml') do %>
     <%= icon('upload') %> <%= I18n.t(:'recipes.import') %>
   <% end %>
   <%= f.file_field :beerxml, class: 'hidden-file-field', multiple: false,

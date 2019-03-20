@@ -104,8 +104,6 @@ sv:
         <li>Välj "Export selected"</li>
         <li>Välj "BeerXML File" vid "Save as type"</li>
       </ol>
-    event_recipes: Evenemang
-    event_recipes_description: Ändra vilka evenemang detta recept har deltagit i.
     import: Importera
     search:
       button: Sök recept
@@ -131,6 +129,24 @@ sv:
       qrcode:
         link: QR-kod
         description: Skriv ut en QR-kod som länkar till receptet
+    edit:
+      button: Ändra
+      description: Ändra information om det här receptet.
+      events:
+        link: Evenemang
+        description: Ändra vilka evenemang detta recept har deltagit i.
+      build:
+        link: Bygg
+        description: Ändra beskrivning eller ingredienser i receptet.
+      import:
+        link: Importera
+        description: Importera BeerXML från ett receptprogram.
+      images:
+        link: Bilder
+        description: Ladda upp bilder till detta recept.
+      destroy:
+        link: Ta bort
+        description: Ta bort receptet från Brygglogg
     private: Privat
     own: Egna recept
     winner: Medaljör

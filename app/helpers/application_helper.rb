@@ -141,11 +141,10 @@ module ApplicationHelper
     end
   end
 
-  def trash_button(url, text, tooltip: nil)
+  def trash_button(url, text, tooltip: nil, classes: 'pure-button secondary-button')
     data = tooltip_data(tooltip, length: 'small')
     data[:confirm] = I18n.t(:'common.are_you_sure')
-    link_to url, method: :delete, data: data,
-      class: 'pure-button secondary-button' do
+    link_to url, method: :delete, data: data, class: classes do
       concat icon('trash')
       concat ' ' + text
     end
@@ -153,6 +152,7 @@ module ApplicationHelper
 
   def tooltip_data(tooltip, position: 'down', length: 'medium')
     return {} unless tooltip.present?
+    return tooltip if tooltip.kind_of? Hash
     {
       :'balloon' => tooltip,
       :'balloon-pos' => position,
