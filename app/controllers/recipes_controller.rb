@@ -59,7 +59,7 @@ class RecipesController < ApplicationController
   # POST /recipes
   # POST /recipes.json
   def create
-    @recipe = create_recipes!.last
+    @recipe = create_recipes
 
     respond_to do |format|
       if @recipe.present? && @recipe.persisted?
@@ -87,9 +87,9 @@ class RecipesController < ApplicationController
 
     respond_to do |format|
       if @recipe.update(recipe_params)
-        if beerxml_file.present?
+        if beerxml_files.present?
           Rails.logger.debug { "RecipesController#update updating recipe with a beerxml file" }
-          update_beerxml(recipe: @recipe, beerxml: beerxml_file.read)
+          update_beerxml(recipe: @recipe, beerxml: beerxml_files.read)
           # TODO: Handle errors gracefully
         end
         format.html { redirect_to redirect_path, notice: I18n.t(:'recipes.update.successful') }
@@ -148,7 +148,6 @@ class RecipesController < ApplicationController
       recipe ||= new_recipe
       BeerxmlImport.new(recipe, beer_recipe).run
       recipe.beerxml = beerxml || BeerxmlExport.new(recipe).render
-      recipe.detail.save! # TODO: Needed?
       recipe.save!
       recipe
     end
@@ -159,12 +158,18 @@ class RecipesController < ApplicationController
       end
     end
 
-    def beerxml_file
-      params.dig(:recipe, :beerxml).presence
+    def beerxml_files
+      params.dig(:recipe, :beerxml)
     end
 
-    def beerxml_files
-      params.dig(:recipe, :beerxml).presence || [nil]
+    def create_recipes
+      if beerxml_files.present?
+        create_recipes!.last
+      else
+        recipe = new_recipe
+        recipe.save
+        recipe
+      end
     end
 
     def create_recipes!
