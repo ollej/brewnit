@@ -57,7 +57,7 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
               <div class="pure-button secondary-button dd-button"
                 data-balloon="<%= I18n.t(:'recipes.print.description') %>"
                 data-balloon-pos="left" data-balloon-length="medium">
-                <%= icon('print') %> <%= t(:'recipes.print.button') %>
+                <%= icon('print') %> <%= t(:'recipes.print.button') %> <%= icon('caret-down') %>
               </div>
               <input type="checkbox" class="dd-input" id="test">
               <ul class="dd-menu">
@@ -106,7 +106,7 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
                   <div class="pure-button secondary-button dd-button"
                     data-balloon="<%= I18n.t(:'recipes.edit.description') %>"
                     data-balloon-pos="left" data-balloon-length="medium">
-                    <%= icon('edit') %> <%= t(:'recipes.edit.button') %>
+                    <%= icon('edit') %> <%= t(:'recipes.edit.button') %> <%= icon('caret-down') %>
                   </div>
                   <input type="checkbox" class="dd-input" id="test">
                   <ul class="dd-menu">
