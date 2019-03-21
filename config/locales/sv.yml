@@ -394,6 +394,9 @@ sv:
     brewdate: Bryggdatum
     bottlesize: Flaskstorlek
     contactinfo: Kontaktinfo
+  recipe_details:
+    build:
+      save: Spara
 
   beerxml:
     name: Ölnamn
@@ -872,7 +875,7 @@ sv:
         boil_size: Kokmängd (L)
         boil_time: Koktid (min)
         grain_temp: Malttemperatur (°C)
-        sparge_temp: Lakningstemperatur (°C)
+        sparge_temp: Lakningstemp. (°C)
         efficiency: Utbyte (%)
         og: OG
         fg: FG

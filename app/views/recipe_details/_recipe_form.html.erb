@@ -28,11 +28,16 @@
           placeholder: I18n.t(:'activerecord.attributes.recipe.description') %>
       </div>
     </div>
-    <div class="actions pure-controls">
+    <div class="actions pure-controls pure-g">
+      <div class="pure-u-1-2">
       <%= f.label :public, class: 'pure-checkbox' do %>
         <%= f.check_box :public %> <%= I18n.t(:'activerecord.attributes.recipe.public') %>
         <%= form_info_icon(I18n.t(:'recipes.public_description')) %>
       <% end %>
+      </div>
+      <div class="pure-u-1-2 button-center">
+        <%= f.submit I18n.t(:'recipe_details.build.save'), class: 'pure-button pure-button-primary' %>
+      </div>
     </div>
   </fieldset>
 <% end %>
