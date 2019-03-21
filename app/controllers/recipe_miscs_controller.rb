@@ -1,6 +1,6 @@
 class RecipeMiscsController < ApplicationController
   before_action :deny_spammers!
-  before_action -> { load_and_authorize_recipe(:miscs) }
+  before_action -> { load_and_authorize_recipe!(:miscs) }
 
   def index
     @miscs = @details.miscs

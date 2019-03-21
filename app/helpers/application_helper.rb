@@ -159,4 +159,12 @@ module ApplicationHelper
       :'balloon-length' => length
     }
   end
+
+  def can_show?(model)
+    user_signed_in? && current_user.can_show?(model)
+  end
+
+  def can_modify?(model)
+    user_signed_in? && current_user.can_modify?(model)
+  end
 end

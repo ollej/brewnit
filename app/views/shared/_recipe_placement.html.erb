@@ -2,7 +2,7 @@
                         <%= medal_tag(placement, :tiny) %>
                         <span class="medal-category"><%= placement.category %></span>
 
-                        <% if user_signed_in? && current_user.can_modify?(event) %>
+                        <% if can_modify?(event) %>
                           <%= trash_icon(recipe_placement_path(recipe, placement)) %>
                         <% end %>
                       </li>

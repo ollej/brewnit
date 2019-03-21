@@ -2,7 +2,7 @@
                   <i class="fas fa-calendar-alt"></i>
                   <%= link_to event.name, event_path(event), class: 'pure-menu-link' %>
 
-                  <% if user_signed_in? && current_user.can_modify?(recipe) %>
+                  <% if can_modify?(recipe) %>
                     <%= trash_icon(recipe_event_path(recipe, event)) %>
                   <% end %>
 

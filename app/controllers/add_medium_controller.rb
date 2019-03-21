@@ -5,7 +5,7 @@ class AddMediumController < ApplicationController
 
   def create
     @parent = load_parent
-    raise AuthorizationException unless current_user.can_modify?(@parent)
+    authorize_modify!(@parent)
     @media = @parent.media.find(params[:medium_id])
     if @parent.add_medium(@media, params[:media_type])
       respond_to do |format|

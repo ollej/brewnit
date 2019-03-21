@@ -115,7 +115,7 @@ sv:
       event: Evenemang
     download: Ladda ner
     print:
-      button: Skriv ut
+      button: Promotion
       description: Skriv ut dokument för det här receptet.
       recipe:
         link: Recept

@@ -1,5 +1,5 @@
 class LabelController < ApplicationController
-  before_action :load_and_authorize_recipe_by_id
+  before_action :load_and_authorize_recipe_by_id!
 
   def new
     @preview_svg = label_template(recipe_data)

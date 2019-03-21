@@ -1,6 +1,6 @@
 class RecipeCompleteController < ApplicationController
   before_action :deny_spammers!, only: [:update]
-  before_action :load_and_authorize_recipe
+  before_action :load_and_authorize_recipe!
   invisible_captcha only: [:update], on_spam: :redirect_spammers!
 
   def update

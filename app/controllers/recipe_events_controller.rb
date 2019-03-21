@@ -3,7 +3,7 @@ class RecipeEventsController < ApplicationController
 
   def index
     @recipe = Recipe.find(params[:recipe_id])
-    raise AuthorizationException unless current_user.can_modify?(@recipe)
+    authorize_modify!(@recipe)
 
     respond_to do |format|
       format.html { render :index }
@@ -13,7 +13,7 @@ class RecipeEventsController < ApplicationController
 
   def create
     @recipe = Recipe.find(event_params[:recipe_id])
-    raise AuthorizationException unless current_user.can_modify?(@recipe)
+    authorize_modify!(@recipe)
     @error = nil
     @event = begin
       @recipe.add_event(
@@ -46,7 +46,7 @@ class RecipeEventsController < ApplicationController
 
   def destroy
     @recipe = Recipe.find(params[:recipe_id])
-    raise AuthorizationException unless current_user.can_modify?(@recipe)
+    authorize_modify!(@recipe)
     @success = true
     begin
       @event = @recipe.events.find(params[:id])

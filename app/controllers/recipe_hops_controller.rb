@@ -1,6 +1,6 @@
 class RecipeHopsController < ApplicationController
   before_action :deny_spammers!
-  before_action -> { load_and_authorize_recipe(:hops) }
+  before_action -> { load_and_authorize_recipe!(:hops) }
 
   def index
     @hops = @details.hops

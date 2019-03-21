@@ -50,7 +50,7 @@ set_meta_tags title: @event.name,
             <% if current_user.admin? %>
               <%= trash_button(@event, t(:'events.destroy.link')) %>
             <% end %>
-            <% if current_user.can_modify?(@event) %>
+            <% if can_modify?(@event) %>
               <%= link_to edit_event_path(@event), class: 'pure-button secondary-button' do %>
                 <%= icon('edit') %> <%= t(:'events.edit') %>
               <% end %>

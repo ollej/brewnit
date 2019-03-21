@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :deny_spammers!, only: [:create, :update, :destroy]
+  before_action :load_and_authorize_event_by_id!, only: [:edit, :update, :destroy]
   invisible_captcha only: [:create, :update], on_spam: :redirect_spammers!
 
   def index
@@ -45,14 +46,9 @@ class EventsController < ApplicationController
   end
 
   def edit
-    @event = Event.find(params[:id])
-    raise AuthorizationException unless current_user.can_modify?(@event)
   end
 
   def update
-    @event = Event.find(params[:id])
-    raise AuthorizationException unless current_user.can_modify?(@event)
-
     respond_to do |format|
       if @event.update(event_params)
         format.html { redirect_to @event, notice: I18n.t(:'events.update.successful') }
@@ -65,8 +61,6 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    @event = Event.find(params[:id])
-    raise AuthorizationException unless current_user.can_modify?(@event)
     @event.destroy
 
     respond_to do |format|

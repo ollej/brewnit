@@ -1,6 +1,6 @@
 class RecipeMashStepsController < ApplicationController
   before_action :deny_spammers!
-  before_action -> { load_and_authorize_recipe(:mash_steps) }
+  before_action -> { load_and_authorize_recipe!(:mash_steps) }
 
   def index
     @mash_steps = @details.mash_steps

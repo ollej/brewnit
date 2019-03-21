@@ -3,7 +3,7 @@
         <%= image_tag medium.file.url(:small) %>
       <% end %>
       <% if user_signed_in? %>
-        <% if current_user.can_modify?(medium.parent) %>
+        <% if can_modify?(medium.parent) %>
           <div class="media-buttons">
             <% if medium.parent.class.name == 'User' %>
               <%= link_to add_medium_path(medium, 'avatar'), remote: true, method: :post,

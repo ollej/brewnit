@@ -18,7 +18,7 @@ class RecipesController < ApplicationController
   # GET /recipes/1.json
   def show
     @recipe = find_recipe
-    raise AuthorizationException unless can_show?(@recipe)
+    authorize_show!(@recipe)
     raise RecipeNotComplete unless @recipe.complete?
     @beerxml = BeerxmlParser.new(@recipe.beerxml).recipe
     @presenter = RecipePresenter.new(@recipe, @beerxml)
@@ -53,7 +53,7 @@ class RecipesController < ApplicationController
   # GET /recipes/1/edit
   def edit
     @recipe = find_recipe
-    raise AuthorizationException unless current_user.can_modify?(@recipe)
+    authorize_modify!(@recipe)
   end
 
   # POST /recipes
@@ -83,7 +83,7 @@ class RecipesController < ApplicationController
   # PATCH/PUT /recipes/1.json
   def update
     @recipe = find_recipe
-    raise AuthorizationException unless current_user.can_modify?(@recipe)
+    authorize_modify!(@recipe)
 
     respond_to do |format|
       if @recipe.update(recipe_params)
@@ -110,7 +110,7 @@ class RecipesController < ApplicationController
   # DELETE /recipes/1.json
   def destroy
     @recipe = find_recipe
-    raise AuthorizationException unless current_user.can_modify?(@recipe)
+    authorize_modify!(@recipe)
     @recipe.destroy
 
     respond_to do |format|

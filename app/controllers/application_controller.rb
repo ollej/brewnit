@@ -63,10 +63,6 @@ class ApplicationController < ActionController::Base
     session.delete(:search) if params[:clear_search].present?
   end
 
-  def can_show?(resource)
-    resource.public? || user_signed_in? && current_user.can_show?(resource)
-  end
-
   def search_keys
     %i(q style ogfrom ogto fgfrom fgto ibufrom ibuto
       colorfrom colorto abvfrom abvto sort_order equipment
@@ -95,21 +91,42 @@ class ApplicationController < ActionController::Base
     redirect_spammers! if spammer?
   end
 
-  def load_and_authorize_recipe_by_id
-    @recipe = Recipe.for_user(current_user).where(id: params[:id]).first!
-    raise AuthorizationException unless current_user.can_modify?(@recipe)
+  def load_and_authorize_event_by_id!
+    @event = Event.find(params[:id])
+    authorize_modify!(@event)
   end
 
-  def load_and_authorize_recipe(ingredient = nil)
+  def load_and_authorize_recipe_by_id!
+    @recipe = Recipe.for_user(current_user).where(id: params[:id]).first!
+    authorize_modify!(@recipe)
+  end
+
+  def load_and_authorize_recipe!(ingredient = nil)
     scope = if ingredient.nil?
       Recipe.unscoped.with_all_details
-    elsif ingredent == :none
+    elsif ingredient == :none
       Recipe.unscoped
     else
       Recipe.unscoped.with_details(ingredient)
     end
     @recipe = scope.where(id: params[:recipe_id]).first!
-    raise AuthorizationException unless current_user.can_modify?(@recipe)
+    authorize_modify!(@recipe)
     @details = @recipe.detail
+  end
+
+  def authorize_show!(model)
+    raise AuthorizationException unless can_show?(model)
+  end
+
+  def authorize_modify!(model)
+    raise AuthorizationException unless can_modify?(model)
+  end
+
+  def can_show?(resource)
+    resource.public? || user_signed_in? && current_user.can_show?(resource)
+  end
+
+  def can_modify?(resource)
+    user_signed_in? && current_user.can_modify?(resource)
   end
 end

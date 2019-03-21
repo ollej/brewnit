@@ -1,6 +1,6 @@
 class RecipeYeastsController < ApplicationController
   before_action :deny_spammers!
-  before_action -> { load_and_authorize_recipe(:yeasts) }
+  before_action -> { load_and_authorize_recipe!(:yeasts) }
 
   def index
     @yeasts = @details.yeasts

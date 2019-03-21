@@ -1,6 +1,6 @@
 class RecipeFermentablesController < ApplicationController
   before_action :deny_spammers!
-  before_action -> { load_and_authorize_recipe(:fermentables) }
+  before_action -> { load_and_authorize_recipe!(:fermentables) }
 
   def index
     @fermentables = @details.fermentables

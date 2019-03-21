@@ -68,13 +68,13 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
                     <%= icon('file-alt') %> <%= t(:'recipes.print.recipe.link') %>
                   <% end %>
                 </li>
-                <% if current_user.can_modify?(@recipe) %>
+                <% if can_modify?(@recipe) %>
                 <li>
                   <%= link_to label_recipe_path(id: @recipe),
                     data: tooltip_data(
                       I18n.t(:'recipes.print.labels.description'), position: 'left'),
                     target: '_blank' do %>
-                    <%= icon('wine-bottle') %> <%= t(:'recipes.labels') %>
+                    <%= icon('wine-bottle') %> <%= t(:'recipes.print.labels.link') %>
                   <% end %>
                 </li>
                 <li>
@@ -101,7 +101,7 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
             <div class="controls-signed-in">
               <%= like_tag(@recipe, current_user) %>
 
-              <% if current_user.can_modify?(@recipe) %>
+              <% if can_modify?(@recipe) %>
                 <label class="purecss-dropdown">
                   <div class="pure-button secondary-button dd-button"
                     data-balloon="<%= I18n.t(:'recipes.edit.description') %>"
