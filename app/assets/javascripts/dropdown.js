@@ -1,13 +1,16 @@
 class Dropdown {
-  constructor(dropdownSelector, inputSelector) {
+  constructor(dropdownSelector, inputSelector, menuSelector) {
     this.dropdownSelector = dropdownSelector;
     this.input = $(inputSelector);
+    this.menuSelector = menuSelector;
     $(document).on('click', this.click.bind(this));
     $(document).on('keydown', this.escape.bind(this));
   }
 
   click(event) {
-    if (!$(event.target).closest(this.dropdownSelector).length) {
+    if (!$(event.target).closest(this.dropdownSelector).length ||
+      $(event.target).closest(this.menuSelector).length) {
+      // Close when clicking outside dropdown, or when clicking on menu
       this.close();
     }
   }

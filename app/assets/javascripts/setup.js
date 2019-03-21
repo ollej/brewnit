@@ -100,6 +100,6 @@ $( document ).ready(function() {
   }
 
   // Setup Dropdown to cancel on escape or click on body
-  let dropdown = new Dropdown(".purecss-dropdown", ".dd-input");
+  let dropdown = new Dropdown(".purecss-dropdown", ".dd-input", ".dd-menu");
 });
 
