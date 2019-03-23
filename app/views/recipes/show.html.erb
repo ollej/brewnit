@@ -62,9 +62,10 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
               <input type="checkbox" class="dd-input" id="test">
               <ul class="dd-menu">
                 <li>
-                  <%= link_to 'javascript:window.print()',
+                  <%= link_to print_recipe_path(id: @recipe),
                     data: tooltip_data(
-                      I18n.t(:'recipes.print.recipe.description'), position: 'left') do %>
+                      I18n.t(:'recipes.print.recipe.description'),
+                      position: 'left'), target: '_blank' do %>
                     <%= icon('file-alt') %> <%= t(:'recipes.print.recipe.link') %>
                   <% end %>
                 </li>
@@ -208,7 +209,7 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
             <%= icon('sliders-h') %> <span><%= t(:'recipes.recipe_style') %></span>
           </label>
           <div id="tab-content1" class="tab-content">
-<%= render 'shared/recipe_details' %>
+<%= render 'shared/recipe_main' %>
           </div>
           <div id="tab-content2" class="tab-content">
 <%= render 'shared/gauges' %>

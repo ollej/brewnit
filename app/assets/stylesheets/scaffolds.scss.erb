@@ -5,7 +5,7 @@ html, body {
   overflow: hidden;
 }
 
-html, body, button, input, select, textarea, p, ol, ul, td,
+html, body, button, input, select, textarea, p, ol, ul, td, caption,
 .pure-g [class *= "pure-u"] {
   font-family: Montserrat,FreeSans,Arimo,"Droid Sans",verdana,arial,helvetica,sans-serif;
 }
@@ -19,7 +19,7 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
-p, ol, ul, td {
+p, ol, ul, td, th {
   font-size: 13px;
   line-height: 18px;
 }
@@ -34,6 +34,16 @@ div {
   &.field, &.actions {
     margin-bottom: 10px;
   }
+}
+
+caption {
+  text-align: left;
+  font-size: 1.5em;
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
 }
 
 .notice {

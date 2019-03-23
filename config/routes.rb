@@ -34,6 +34,7 @@ Rails.application.routes.draw do
       get :label, to: 'label#new'
       post :label, to: 'label#create'
       get :poster, to: 'recipe_poster#show'
+      get :print, to: 'recipe_print#show'
     end
     resources :placements, only: [:destroy], controller: :recipe_placements
     resource :details, only: [:show, :update], controller: :recipe_details

@@ -3,15 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <%= display_meta_tags site: 'Brygglogg.se' %>
-  <%= yield(:head) %>
   <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="https://yui-s.yahooapis.com/pure/0.6.0/pure-min.css">
   <%= stylesheet_link_tag 'layouts/print', media: 'all' %>
+  <%= yield(:head) %>
   <%= csrf_meta_tags %>
   <%= render 'favicon' %>
 </head>
-<body class="page-<%= controller_name %>-<%= action_name %>">
+<body class="page-<%= controller_name %>-<%= action_name %> print-body">
 
 <div id="main" class="print-content">
 <%= yield %>
