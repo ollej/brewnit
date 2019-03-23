@@ -1,5 +1,5 @@
 class RecipePosterController < ApplicationController
-  before_action :load_and_authorize_recipe_by_id!
+  before_action :load_and_authorize_show_recipe!
   layout 'print'
 
   def show

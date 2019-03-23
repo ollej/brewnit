@@ -96,6 +96,11 @@ class ApplicationController < ActionController::Base
     authorize_modify!(@event)
   end
 
+  def load_and_authorize_show_recipe!
+    @recipe = Recipe.unscoped.find(params[:id])
+    authorize_show!(@recipe)
+  end
+
   def load_and_authorize_recipe_by_id!
     @recipe = Recipe.for_user(current_user).where(id: params[:id]).first!
     authorize_modify!(@recipe)

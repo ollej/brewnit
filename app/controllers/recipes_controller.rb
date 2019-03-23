@@ -1,6 +1,8 @@
 class RecipesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :deny_spammers!, only: [:create, :update, :destroy]
+  before_action :load_and_authorize_recipe_by_id!, only: [:edit, :update, :destroy]
+  before_action :load_and_authorize_show_recipe!, only: [:show]
   invisible_captcha only: [:create, :update], on_spam: :redirect_spammers!
 
   # GET /recipes
@@ -17,8 +19,6 @@ class RecipesController < ApplicationController
   # GET /recipes/1
   # GET /recipes/1.json
   def show
-    @recipe = find_recipe
-    authorize_show!(@recipe)
     raise RecipeNotComplete unless @recipe.complete?
     @beerxml = BeerxmlParser.new(@recipe.beerxml).recipe
     @presenter = RecipePresenter.new(@recipe, @beerxml)
@@ -52,8 +52,6 @@ class RecipesController < ApplicationController
 
   # GET /recipes/1/edit
   def edit
-    @recipe = find_recipe
-    authorize_modify!(@recipe)
   end
 
   # POST /recipes
@@ -82,9 +80,6 @@ class RecipesController < ApplicationController
   # PATCH/PUT /recipes/1
   # PATCH/PUT /recipes/1.json
   def update
-    @recipe = find_recipe
-    authorize_modify!(@recipe)
-
     respond_to do |format|
       if @recipe.update(recipe_params)
         if beerxml_files.present?
@@ -109,8 +104,6 @@ class RecipesController < ApplicationController
   # DELETE /recipes/1
   # DELETE /recipes/1.json
   def destroy
-    @recipe = find_recipe
-    authorize_modify!(@recipe)
     @recipe.destroy
 
     respond_to do |format|
@@ -120,10 +113,6 @@ class RecipesController < ApplicationController
   end
 
   private
-    def find_recipe
-      Recipe.unscoped.find(params[:id])
-    end
-
     def recipe_params
       params.require(:recipe).permit(:name, :description, :public)
     end
