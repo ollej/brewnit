@@ -41,8 +41,8 @@ class RecipePresenter
   end
 
   def style_type
-    return unless @beerxml.style_code.present? && @style.style_guide.present?
-    "(#{[ @beerxml.style_code, @style.style_guide ].join(' / ')})"
+    return unless @recipe.style_code && @recipe.style_guide.present?
+    "(#{[ @recipe.style_code, @recipe.style_guide ].join(' / ')})"
   end
 
   def hop_grams_per_liter(hop)
@@ -120,5 +120,4 @@ class RecipePresenter
       children: hop_additions.values
     }
   end
-
 end

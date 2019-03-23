@@ -18,6 +18,10 @@ class Style < ApplicationRecord
     where(number: number, letter: letter)
   }
 
+  def style_code
+    "#{letter} #{number}"
+  end
+
   def self.style_options
     order(number: :asc, letter: :asc).map do |style|
       ["#{style.number}#{style.letter}. #{style.name}", style.id]

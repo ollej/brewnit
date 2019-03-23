@@ -13,7 +13,7 @@ RSpec.describe "recipe_poster/show.html.erb", type: :view do
 
     expect(rendered).to match("<h1>recipe test</h1>")
     expect(rendered).to match("IPA")
-    expect(rendered).to match("(5 C / SHBF 2015)")
+    expect(rendered).to match("(5 C / SHBF 2017)")
     expect(rendered).to match(%Q{<img src="https://api.adorable.io/avatars/64/55502f40dc8b7c769880b10874abc9d0" />})
   end
 end

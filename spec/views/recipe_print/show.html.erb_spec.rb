@@ -13,6 +13,6 @@ RSpec.describe "recipe_print/show.html.erb", type: :view do
 
     expect(rendered).to match("<h1>recipe test</h1>")
     expect(rendered).to match("IPA")
-    expect(rendered).to match("(5 C / SHBF 2015)")
+    expect(rendered).to match("(5 C / SHBF 2017)")
   end
 end

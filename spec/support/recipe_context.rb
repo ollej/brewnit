@@ -9,7 +9,12 @@ module RecipeContext
     }
   end
 
-  let(:recipe_with_beerxml) { Recipe.create!(recipe_with_beerxml_attributes) }
+  let(:recipe_with_beerxml) {
+    recipe = Recipe.new(recipe_with_beerxml_attributes)
+    BeerxmlImport.new(recipe, parsed_beerxml).run
+    recipe.save!
+    recipe
+  }
   let(:beerxml) { file_fixture('beerxml.xml').read }
   let(:parsed_beerxml) { BeerxmlParser.new(beerxml).recipe }
   let(:recipe_presenter) { RecipePresenter.new(recipe_with_beerxml, parsed_beerxml) }
