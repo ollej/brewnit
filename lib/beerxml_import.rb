@@ -133,8 +133,8 @@ class BeerxmlImport
   end
 
   def find_style(style)
-    if style&.style_guide == 'SHBF 2017'
-      Style.by_code(style.category_number, style.style_letter).first
+    if style&.style_guide.start_with? 'SHBF'
+      Style.by_code(style.style_guide, style.category_number, style.style_letter).first
     end
   end
 

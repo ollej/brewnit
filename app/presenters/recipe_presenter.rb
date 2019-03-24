@@ -1,7 +1,7 @@
 class RecipePresenter
-  def initialize(recipe, beerxml)
+  def initialize(recipe, beerxml = nil)
     @recipe = recipe
-    @beerxml = beerxml
+    @beerxml = beerxml || BeerxmlParser.new(@recipe.beerxml).recipe
     @style = @beerxml.style
   end
 

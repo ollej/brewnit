@@ -16,8 +16,9 @@ namespace :recipe do
   end
 
   desc 'Import SHBF recipes'
-  task :import_shbf => :environment do
-    ShbfClient.new(2017).import
+  task :import_shbf, [:year] => :environment do |t, args|
+    args.with_defaults(year: 2018)
+    ShbfClient.new(args.year).import
   end
 
   desc 'Update recipes_count on users'

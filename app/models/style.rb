@@ -14,8 +14,8 @@ class Style < ApplicationRecord
   validates :abv_min, numericality: true
   validates :abv_max, numericality: true
 
-  scope :by_code, -> (number, letter) {
-    where(number: number, letter: letter)
+  scope :by_code, -> (guide, number, letter) {
+    where(style_guide: guide, number: number, letter: letter)
   }
 
   def style_code
