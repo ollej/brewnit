@@ -21,7 +21,7 @@ class ShbfClient
   def import
     styles.each do |category|
       category_data = {
-        'number' => category['number'],
+        'number' => category['number'].to_i,
         'category' => category['name'],
         'style_guide' => "SHBF #{@year}"
       }
@@ -34,7 +34,7 @@ class ShbfClient
   def create_style(data)
     query = data.slice('style_guide', 'letter', 'number')
     Style.where(query).first_or_initialize.tap do |style|
-      style.update(from_shbf(data))
+      style.update!(from_shbf(data))
     end
   end
 
@@ -44,17 +44,17 @@ class ShbfClient
       category: data['category'],
       name: data['name'],
       letter: data['letter'].upcase,
-      number: data['number'],
-      og_min: data['ogMax'],
-      og_max: data['ogMin'],
-      fg_min: data['fgMin'],
-      fg_max: data['fgMax'],
-      ebc_min: data['ebcMin'],
-      ebc_max: data['ebcMax'],
-      ibu_min: data['ibuMin'],
-      ibu_max: data['ibuMax'],
-      abv_min: data['abvMin'],
-      abv_max: data['abvMax'],
+      number: data['number'].to_i,
+      og_min: data['ogMin'] || "1.000",
+      og_max: data['ogMax'] || "1.200",
+      fg_min: data['fgMin'] || "1.000",
+      fg_max: data['fgMax'] || "1.200",
+      ebc_min: data['ebcMin'] || 0,
+      ebc_max: data['ebcMax'] || 120,
+      ibu_min: data['ibuMin'] || 0,
+      ibu_max: data['ibuMax'] || 200,
+      abv_min: data['abvMin'] || 0,
+      abv_max: data['abvMax'] || 100,
       description: data['description'] || '',
       aroma: data['aroma'] || '',
       appearance: data['appearance'] || '',

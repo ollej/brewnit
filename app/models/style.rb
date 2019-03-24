@@ -22,12 +22,12 @@ class Style < ApplicationRecord
   }
 
   def style_code
-    "#{letter} #{number}"
+    "#{number}#{letter}"
   end
 
   def self.style_options(style_guide)
     where(style_guide: style_guide).order(number: :asc, letter: :asc).map do |style|
-      ["#{style.number}#{style.letter}. #{style.name}", style.id]
+      ["#{style.style_code}. #{style.name}", style.id]
     end
   end
 
