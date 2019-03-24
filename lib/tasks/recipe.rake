@@ -4,7 +4,8 @@ namespace :recipe do
     Recipe.unscoped.all.each do |recipe|
       puts "Extracting recipe details for Recipe##{recipe.id}"
       if recipe.beerxml.present?
-        BeerxmlImport.new(recipe, recipe.beerxml).run
+        beer_recipe = BeerxmlParser.new(recipe.beerxml).recipe
+        BeerxmlImport.new(recipe, beer_recipe).run
         recipe.save!
       end
     end

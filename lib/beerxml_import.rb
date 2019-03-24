@@ -56,7 +56,7 @@ class BeerxmlImport
         amount: fermentable.amount.round(2),
         ebc: fermentable.color_ebc,
         grain_type: find_grain_type(fermentable.type),
-        yield: fermentable.yield,
+        yield: fermentable.yield || 0,
         potential: fermentable.potential.to_f,
         after_boil: fermentable.add_after_boil || true
       )
@@ -117,7 +117,10 @@ class BeerxmlImport
   end
 
   def extract_details
-    @details.brewed_at = Date.parse(beer_recipe.date) if beer_recipe.date
+    begin
+      @details.brewed_at = Date.parse(beer_recipe.date) if beer_recipe.date
+    rescue ArgumentError
+    end
     @details.batch_size = beer_recipe.batch_size
     @details.boil_time = beer_recipe.boil_time
     @details.efficiency = beer_recipe.efficiency
@@ -133,7 +136,7 @@ class BeerxmlImport
   end
 
   def find_style(style)
-    if style&.style_guide.start_with? 'SHBF'
+    if style&.style_guide && style&.style_guide.start_with?('SHBF')
       Style.by_code(style.style_guide, style.category_number, style.style_letter).first
     end
   end
