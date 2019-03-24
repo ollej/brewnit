@@ -1,6 +1,8 @@
 module RecipeContext
   extend RSpec::SharedContext
 
+  let(:user) { User.new }
+
   let(:recipe) { Recipe.create!(recipe_attributes) }
   let(:recipe_attributes) do
     {

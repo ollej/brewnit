@@ -129,6 +129,9 @@ sv:
       qrcode:
         link: QR-kod
         description: Skriv ut en QR-kod som länkar till receptet
+      shopping:
+        link: Inköpslista
+        description: Skriv ut en lista med mängder av alla ingredienser i receptet.
     edit:
       button: Ändra
       description: Ändra information om det här receptet.
@@ -397,6 +400,17 @@ sv:
   recipe_details:
     build:
       save: Spara
+  recipe_shopping_list:
+    header: 'Inköpslista för:'
+    type:
+      fermentable: Malt
+      hops: Humle
+      yeast: Jäst
+      miscs: Övrigt
+    units:
+      packet: paket
+      kg: kg
+      gr: gr
 
   beerxml:
     name: Ölnamn

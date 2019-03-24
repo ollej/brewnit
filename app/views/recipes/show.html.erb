@@ -94,6 +94,14 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
                     <%= icon('scroll') %> <%= t(:'recipes.print.poster.link') %>
                   <% end %>
                 </li>
+                <li>
+                <%= link_to shopping_recipe_path(@recipe),
+                    data: tooltip_data(
+                      I18n.t(:'recipes.print.shopping.description'), position: 'left'),
+                    target: '_blank' do %>
+                    <%= icon('shopping-basket') %> <%= t(:'recipes.print.shopping.link') %>
+                  <% end %>
+                </li>
                 <% end %>
               </ul>
             </label>
