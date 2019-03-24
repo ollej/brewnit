@@ -73,8 +73,7 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
                 <li>
                   <%= link_to label_recipe_path(id: @recipe),
                     data: tooltip_data(
-                      I18n.t(:'recipes.print.labels.description'), position: 'left'),
-                    target: '_blank' do %>
+                      I18n.t(:'recipes.print.labels.description'), position: 'left') do %>
                     <%= icon('wine-bottle') %> <%= t(:'recipes.print.labels.link') %>
                   <% end %>
                 </li>

@@ -69,7 +69,7 @@ $( document ).ready(function() {
     ev.preventDefault();
   });
 
-  $("form.js-auto-submit").change(function() {
+  $("form.js-auto-submit").change(function(event) {
     $(this).trigger("submit.rails");
   });
 
@@ -94,12 +94,13 @@ $( document ).ready(function() {
     $field.trigger("click");
   });
 
-  // Setup LabelMaker only on label page
-  if ($("body").hasClass("page-label-new")) {
-    var labelMaker = new LabelMaker("brygglogg-label-back", ".label-form");
-  }
+  // Setup LabelMaker to update preview
+  let labelMaker = new LabelMaker("brygglogg-label-back", ".label-form");
 
   // Setup Dropdown to cancel on escape or click on body
   let dropdown = new Dropdown(".purecss-dropdown", ".dd-input", ".dd-menu");
+
+  // Repopulate style select when a style guide is selected
+  let styleGuide = new StyleGuide("#style_guide", "#style");
 });
 

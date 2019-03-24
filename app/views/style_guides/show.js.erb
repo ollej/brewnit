@@ -1,0 +1,3 @@
+$("#style_guide").val("<%= @style_guide %>");
+$("#style option").remove();
+$("#style").innerHTML = "<%= options_for_select(@styles) %>";

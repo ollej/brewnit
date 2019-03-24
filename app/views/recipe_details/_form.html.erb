@@ -1,5 +1,5 @@
-<%= form_for(@details, url: recipe_details_path(@recipe), remote: true,
-             html: { class: 'pure-form pure-form-stacked js-auto-submit' }) do |f| %>
+<%= form_with(model: @details, url: recipe_details_path(@recipe), local: false,
+             class: 'pure-form pure-form-stacked js-auto-submit') do |f| %>
   <%= invisible_captcha %>
 
   <% if @details.errors.any? %>
@@ -18,9 +18,16 @@
     <legend><%= I18n.t(:'recipe_detail.main_details') %></legend>
 
     <div class="field pure-control-group">
+      <%= f.label :style_guide %>
+      <%= f.select :style_guide,
+        options_for_select(Style.style_guides, @details.style&.style_guide),
+        {}, { class: 'pure-input-1-4', id: :style_guide } %>
+    </div>
+
+    <div class="field pure-control-group">
       <%= f.label :style %>
-      <%= f.select :style, options_for_select(Style.style_options, @details.style&.id),
-        class: 'pure-input-1-4' %>
+      <%= f.select :style, options_for_select(@styles, @details.style&.id),
+        {}, { class: 'pure-input-1-4', id: :style } %>
     </div>
 
     <div class="pure-g">

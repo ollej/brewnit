@@ -1,0 +1,128 @@
+      <div class="page-content-header pure-g">
+        <div class="pure-u-2-3">
+          <h1 class="styles-content-title"><%= title "#{@style.style_code}. #{@style.name}" %></h1>
+        </div>
+      </div>
+
+      <div class="page-content-body">
+<h2><%= @style.category %></h2>
+<h3 class="inline-heading"><%= t(:'styles.style_guide') %></h3>
+<%= @style.style_guide %><br>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="height:0px;width:0px">
+    <defs>
+        <linearGradient id="NORMAL_COLOR" x1="0%" y1="0%" x2="0%" y2="100%" spreadMethod="pad">
+            <stop offset="0%" stop-color="#C1DC99" stop-opacity="1" />
+            <stop offset="100%" stop-color="#669900" stop-opacity="1" />
+        </linearGradient>
+        <linearGradient id="CRITICAL_COLOR" x1="0%" y1="0%" x2="0%" y2="100%" spreadMethod="pad">
+            <stop offset="0%" stop-color="#E70030" stop-opacity="1" />
+            <stop offset="100%" stop-color="#B30020" stop-opacity="1" />
+        </linearGradient>
+    </defs>
+</svg>
+
+<div class="gauge-box">
+<h3><%= t(:'styles.og') %></h3>
+<div id="linear-gauge-og" class="linear-gauge"></div>
+<p><%= format_sg(@style.og_min) %> - <%= format_sg(@style.og_max) %></p>
+<script>
+var ogGauge = new LinearGauge("#linear-gauge-og", {});
+ogGauge.data({
+  value: null,
+  ranges: [
+    { from: 1.020, to: <%= @style.og_min %>, color: "CRITICAL" },
+    { from: <%= @style.og_min %>, to: <%= @style.og_max %>, color: "NORMAL" },
+    { from: <%= @style.og_max %>, to: 1.130, color: "CRITICAL" }
+  ]
+});
+</script>
+</div>
+
+<div class="gauge-box">
+<h3><%= t(:'styles.fg') %></h3>
+<div id="linear-gauge-fg" class="linear-gauge"></div>
+<p><%= format_sg(@style.fg_min) %> - <%= format_sg(@style.fg_max) %></p>
+<script>
+var fgGauge = new LinearGauge("#linear-gauge-fg", {});
+fgGauge.data({
+  value: null,
+  ranges: [
+    { from: 1.000, to: <%= @style.fg_min %>, color: "CRITICAL" },
+    { from: <%= @style.fg_min %>, to: <%= @style.fg_max %>, color: "NORMAL" },
+    { from: <%= @style.fg_max %>, to: 1.060, color: "CRITICAL" }
+  ]
+});
+</script>
+</div>
+
+<div class="gauge-box">
+<h3><%= t(:'styles.ibu') %></h3>
+<div id="linear-gauge-ibu" class="linear-gauge"></div>
+<p><%= number_with_precision(@style.ibu_min, precision: 0) %> - <%= number_with_precision(@style.ibu_max, precision: 0) %></p>
+<script>
+var ibuGauge = new LinearGauge("#linear-gauge-ibu", { labelFormat: ".0f" });
+ibuGauge.data({
+  value: null,
+  ranges: [
+    { from: 0, to: <%= @style.ibu_min %>, color: "CRITICAL" },
+    { from: <%= @style.ibu_min %>, to: <%= @style.ibu_max %>, color: "NORMAL" },
+    { from: <%= @style.ibu_max %>, to: 120, color: "CRITICAL" }
+  ]
+});
+</script>
+</div>
+
+<div class="gauge-box">
+<h3><%= t(:'beerxml.ebc') %></h3>
+<div id="linear-gauge-color" class="linear-gauge"></div>
+<p><%= number_with_precision(@style.ebc_min, precision: 0) %> - <%= number_with_precision(@style.ebc_max, precision: 0) %></p>
+<script>
+var colorGauge = new LinearGauge("#linear-gauge-color", { labelFormat: ".0f" });
+colorGauge.data({
+  value: null,
+  ranges: [
+    { from: 0, to: <%= @style.ebc_min %>, color: "CRITICAL" },
+    { from: <%= @style.ebc_min %>, to: <%= @style.ebc_max %>, color: "NORMAL" },
+    { from: <%= @style.ebc_max %>, to: 120, color: "CRITICAL" }
+  ]
+});
+</script>
+</div>
+
+<% if @style.summary.present? %>
+<h3><%= t(:'styles.summary') %></h3>
+<p><%= @style.summary %></p>
+<% end %>
+
+<% if @style.description.present? %>
+<h3><%= t(:'styles.description') %></h3>
+<p><%= @style.description %></p>
+<% end %>
+
+<% if @style.aroma.present? %>
+<h3><%= t(:'styles.aroma') %></h3>
+<p><%= @style.aroma %></p>
+<% end %>
+
+<% if @style.appearance.present? %>
+<h3><%= t(:'styles.appearance') %></h3>
+<p><%= @style.appearance %></p>
+<% end %>
+
+<% if @style.flavor.present? %>
+<h3><%= t(:'styles.flavor') %></h3>
+<p><%= @style.flavor %></p>
+<% end %>
+
+<% if @style.texture.present? %>
+<h3><%= t(:'styles.texture') %></h3>
+<p><%= @style.texture %></p>
+<% end %>
+
+<% if @style.examples.present? %>
+<h3><%= t(:'styles.examples') %></h3>
+<p><%= @style.examples %></p>
+<% end %>
+
+      </div>

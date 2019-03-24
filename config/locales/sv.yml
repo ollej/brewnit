@@ -411,6 +411,24 @@ sv:
       packet: paket
       kg: kg
       gr: gr
+  style_guides:
+    index: Stilguider
+    show: "Stiltyper för %{style_guide}"
+  styles:
+    show: Stiltypsinformation
+    style_guide: Stilguide
+    og: OG
+    fg: FG
+    ebc: EBC
+    ibu: IBU
+    abv: ABV
+    description: Beskrivning
+    aroma: Arom
+    appearance: Utseende
+    flavor: Smak
+    texture: Munkänsla
+    examples: Förebilder
+    summary: Sammanfattning
 
   beerxml:
     name: Ölnamn

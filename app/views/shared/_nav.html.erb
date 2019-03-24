@@ -27,6 +27,10 @@
             pages_path(clear_search: true, page: 'verktyg'),
             class: 'pure-menu-link' %>
         </li>
+        <li class="pure-menu-item">
+          <i class="fas fa-dna"></i><%= link_to t(:'style_guides.index'),
+            style_guides_path, class: 'pure-menu-link' %>
+        </li>
       <% if user_signed_in? %>
         <li class="pure-menu-item">
           <i class="fas fa-user-cog"></i><%= link_to t(:'users.profile'),

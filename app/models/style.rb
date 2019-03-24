@@ -17,14 +17,21 @@ class Style < ApplicationRecord
   scope :by_code, -> (guide, number, letter) {
     where(style_guide: guide, number: number, letter: letter)
   }
+  scope :for_guide, -> (guide) {
+    where(style_guide: guide).order(number: :asc, letter: :asc)
+  }
 
   def style_code
     "#{letter} #{number}"
   end
 
-  def self.style_options
-    order(number: :asc, letter: :asc).map do |style|
+  def self.style_options(style_guide)
+    where(style_guide: style_guide).order(number: :asc, letter: :asc).map do |style|
       ["#{style.number}#{style.letter}. #{style.name}", style.id]
     end
+  end
+
+  def self.style_guides
+    order(style_guide: :asc).distinct.pluck(:style_guide)
   end
 end

@@ -23,7 +23,9 @@ class LabelMaker {
   constructor(svg, form) {
     this.svg = document.getElementById(svg);
     this.form = $(form);
-    this.form.on("change", this.update.bind(this));
+    if (this.form.length) {
+      this.form.on("change", this.update.bind(this));
+    }
   }
 
   update(event) {
@@ -134,5 +136,4 @@ class LabelMaker {
       })
     ];
   }
-
 }
