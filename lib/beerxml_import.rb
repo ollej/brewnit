@@ -53,7 +53,7 @@ class BeerxmlImport
     beer_recipe.fermentables&.each do |fermentable|
       @details.fermentables.build(
         name: fermentable.name,
-        amount: fermentable.amount,
+        amount: fermentable.amount.round(2),
         ebc: fermentable.color_ebc,
         grain_type: find_grain_type(fermentable.type),
         yield: fermentable.yield,
@@ -67,7 +67,7 @@ class BeerxmlImport
     beer_recipe.hops&.each do |hop|
       @details.hops.build(
         name: hop.name,
-        amount: hop.amount.to_f,
+        amount: hop.amount.to_f.round(2),
         use_time: normalize_time(hop),
         alpha_acid: hop.alpha,
         use: find_hop_use(hop.use),
@@ -93,6 +93,7 @@ class BeerxmlImport
     beer_recipe.yeasts&.each do |yeast|
       @details.yeasts.build(
         name: yeast.name,
+        product_id: yeast.product_id,
         amount: normalize_amount(yeast.amount || 1, yeast.amount_is_weight),
         weight: yeast.amount_is_weight || true,
         yeast_type: find_yeast_type(yeast.type),

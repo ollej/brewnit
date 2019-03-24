@@ -911,7 +911,8 @@ CREATE TABLE public.yeasts (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     form public.yeast_form DEFAULT 'Dry'::public.yeast_form NOT NULL,
-    yeast_type public.yeast_type DEFAULT 'Ale'::public.yeast_type NOT NULL
+    yeast_type public.yeast_type DEFAULT 'Ale'::public.yeast_type NOT NULL,
+    product_id text
 );
 
 
@@ -1848,6 +1849,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180205203125'),
 ('20180501134640'),
 ('20180501150416'),
-('20180501151104');
+('20180501151104'),
+('20190324004643');
 
 
