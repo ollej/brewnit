@@ -3,7 +3,8 @@ class LabelController < ApplicationController
 
   def new
     @preview_svg = label_template(recipe_data)
-    @logo_url = full_url_for(logo_url) if logo_url
+    @logo_url = full_url_for(logo.url(:label)) if logo.present?
+    @mainimage_url = full_url_for(mainimage.url(:label_main)) if mainimage.present?
     @qrcode = ImageData.new(qrcode).data
     @recipe_data = recipe_data
   end
@@ -18,18 +19,15 @@ class LabelController < ApplicationController
   end
 
   def label_template(data)
-    LabelTemplate.new(template_file, data).generate
+    LabelTemplate.new(template_file('back-label.svg'), data).generate
   end
 
-  def template_file
-    IO.read Rails.root.join('app', 'assets', 'labeltemplates', 'back-label.svg')
+  def template_file(name)
+    IO.read Rails.root.join('app', 'assets', 'labeltemplates', name)
   end
 
   def params_data
-    label_params.merge(
-      qrcode: qrcode,
-      logo: logo
-    )
+    label_params.merge(images)
   end
 
   def recipe_data
@@ -42,9 +40,15 @@ class LabelController < ApplicationController
       fg: view_context.format_sg(@recipe.fg),
       brewdate: I18n.l(@recipe.created_at.to_date),
       bottlesize: '50 cl',
-      logo: logo,
-      qrcode: qrcode
-    }.merge(beer_description_lines)
+    }.merge(beer_description_lines).merge(images)
+  end
+
+  def images
+    {
+      logo: readfile(logo),
+      qrcode: qrcode,
+      mainimage: readfile(mainimage, :label_main)
+    }
   end
 
   def beer_description_lines
@@ -59,20 +63,19 @@ class LabelController < ApplicationController
     }
   end
 
-  def logo
-    path = logo_path
-    File.open(path, 'rb') { |f| f.read } if path.present?
+  def readfile(file, size = :label)
+    File.open(file.path(size), 'rb') { |f| f.read } if file.present?
   end
 
-  def logo_url
+  def logo
     if @recipe.user.present? && @recipe.user.media_brewery.present?
-      @recipe.user.media_brewery.file.url(:label)
+      @recipe.user.media_brewery.file
     end
   end
 
-  def logo_path
-    if @recipe.user.present? && @recipe.user.media_brewery.present?
-      @recipe.user.media_brewery.file.path(:label)
+  def mainimage
+    if @recipe.media_main.present?
+      @recipe.media_main.file
     end
   end
 

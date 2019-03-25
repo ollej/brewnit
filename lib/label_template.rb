@@ -1,11 +1,11 @@
 class LabelTemplate
   include ActiveModel::Validations
 
-  EXCLUDE_SANITIZATION = %i(logo qrcode)
+  EXCLUDE_SANITIZATION = %i(logo qrcode mainimage)
 
   attr_accessor :name, :description1, :description2, :description3,
     :description4, :abv, :ibu, :ebc, :og, :fg, :brewdate, :contactinfo,
-    :bottlesize, :logo, :qrcode
+    :bottlesize, :logo, :qrcode, :mainimage
 
   validates :name, presence: true
 
@@ -41,6 +41,7 @@ class LabelTemplate
     ])
     image("#logo", logo)
     image("#qrcode", qrcode)
+    image("#mainimage", mainimage)
     @doc
   end
 
@@ -64,7 +65,7 @@ class LabelTemplate
 
   def image(css, file)
     if file.present?
-      @doc.at_css(css).set_attribute("xlink:href", ImageData.new(file).data)
+      @doc.at_css(css)&.set_attribute("xlink:href", ImageData.new(file).data)
     end
   end
 

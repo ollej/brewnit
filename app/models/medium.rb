@@ -10,7 +10,8 @@ class Medium < ActiveRecord::Base
       label: '236x236#',
       small: '160x120#',
       medium: '320x240>',
-      large: '640x480>'
+      large: '640x480>',
+      label_main: '640x640#'
     },
     convert_options: {
       all: '-strip -quality 75',
