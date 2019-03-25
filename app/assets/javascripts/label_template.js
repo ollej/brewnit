@@ -1,9 +1,10 @@
 class LabelField {
-  constructor({ id, field, prefix = null, image = false } = {}) {
+  constructor({ id, field, prefix = null, image = false, textIfFieldSet = false } = {}) {
     this.id = id;
     this.field = field;
     this.prefix = prefix;
     this.image = image;
+    this.textIfFieldSet = textIfFieldSet;
   }
 
   text(text) {
@@ -19,7 +20,7 @@ class LabelField {
   }
 }
 
-class LabelMaker {
+class LabelTemplate {
   constructor(svg, form) {
     this.svg = document.getElementById(svg);
     this.form = $(form);
@@ -38,10 +39,12 @@ class LabelMaker {
   }
 
   updateLabel(label) {
-    if (label.image) {
+    if (label.textIfFieldSet) {
+      this.textIfFieldSet(label);
+    } else if (label.image) {
       this.updateImage(label);
     } else {
-      this.updateText(label);
+      this.updateTextLabel(label);
     }
   }
 
@@ -52,9 +55,22 @@ class LabelMaker {
     }
   }
 
-  updateText(label) {
+  updateTextLabel(label) {
     let text = this.fieldText(label);
-    this.svgEl(label.id).textContent = label.text(text);
+    this.updateText(label.id, label.text(text));
+  }
+
+  updateText(id, text) {
+    this.svgEl(id).textContent = text;
+  }
+
+  textIfFieldSet(label) {
+    let text = this.fieldText(label);
+    if (text === undefined || text === "") {
+      this.updateText(label.id, label.text(""));
+    } else {
+      this.updateText(label.id, label.textIfFieldSet);
+    }
   }
 
   fieldText(label) {
@@ -111,6 +127,11 @@ class LabelMaker {
         id: 'beerdetails5',
         field: 'fg',
         prefix: 'FG'
+      }),
+      new LabelField({
+        id: 'beerdetails6',
+        field: 'brewdate',
+        textIfFieldSet: "Bryggdatum:"
       }),
       new LabelField({
         id: 'beerdetails7',

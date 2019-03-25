@@ -95,7 +95,7 @@ $( document ).ready(function() {
   });
 
   // Setup LabelMaker to update preview
-  let labelMaker = new LabelMaker("brygglogg-label-back", ".label-form");
+  let labelTemplate = new LabelTemplate("brygglogg-label-back", ".label-form");
 
   // Setup Dropdown to cancel on escape or click on body
   let dropdown = new Dropdown(".purecss-dropdown", ".dd-input", ".dd-menu");

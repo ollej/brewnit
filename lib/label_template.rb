@@ -23,28 +23,24 @@ class LabelTemplate
 
   private
   def build
-    content("#beername", name)
-    content("#description1", description1)
-    content("#description2", description2)
-    content("#description3", description3)
-    content("#description4", description4)
-    details([
-      Detail.new("ABV", abv),
-      Detail.new("IBU", ibu),
-      Detail.new("EBC", ebc),
-      Detail.new("OG", og),
-      Detail.new("FG", fg)
+    update_fields([
+      LabelField.new(css: "#beername", value: name),
+      LabelField.new(css: "#description1", value: description1),
+      LabelField.new(css: "#description2", value: description2),
+      LabelField.new(css: "#description3", value: description3),
+      LabelField.new(css: "#description4", value: description4),
+      LabelField.new(css: "#beerdetails1", value: abv, header: "ABV"),
+      LabelField.new(css: "#beerdetails2", value: ibu, header: "IBU"),
+      LabelField.new(css: "#beerdetails3", value: ebc, header: "EBC"),
+      LabelField.new(css: "#beerdetails4", value: og, header: "OG"),
+      LabelField.new(css: "#beerdetails5", value: fg, header: "FG"),
+      LabelField.new(css: "#beerdetails6", value: "Bryggdatum:", clear: brewdate.blank?),
+      LabelField.new(css: "#beerdetails7", value: brewdate),
+      LabelField.new(css: "#beerdetails8", value: contactinfo),
+      LabelField.new(css: "#bottlesize", value: bottlesize)
     ])
-    if brewdate.present?
-      content("#beerdetails7", brewdate)
-    else
-      clear("#beerdetails6")
-      clear("#beerdetails7")
-    end
-    content("#beerdetails8", contactinfo)
-    content("#bottlesize", bottlesize)
-    image("#logo", logo) if logo.present?
-    image("#qrcode", qrcode) if qrcode.present?
+    image("#logo", logo)
+    image("#qrcode", qrcode)
     @doc
   end
 
@@ -60,20 +56,16 @@ class LabelTemplate
     content(css, "")
   end
 
-  def details(details)
-    details.select! { |detail| detail.has_value? }
-    5.times do |index|
-      detail = details.fetch(index, Detail.new)
-      detail("#beerdetails#{index + 1}", detail)
+  def update_fields(fields)
+    fields.each do |field|
+      content(field.css, field.content)
     end
   end
 
-  def detail(css, detail)
-    content(css, detail.content)
-  end
-
   def image(css, file)
-    @doc.at_css(css).set_attribute("xlink:href", ImageData.new(file).data)
+    if file.present?
+      @doc.at_css(css).set_attribute("xlink:href", ImageData.new(file).data)
+    end
   end
 
   def excluded?(attribute)
@@ -88,23 +80,23 @@ class LabelTemplate
     @sanitizer ||= Sanitizer.new(html_entity_decode: true)
   end
 
-  class Detail
-    attr_reader :name, :value
+  class LabelField
+    attr_reader :css, :value, :header, :clear
 
-    def initialize(name = nil, value = nil)
-      @name = name
+    def initialize(css:, value:, header: nil, clear: false)
+      @css = css
       @value = value
-    end
-
-    def has_value?
-      @value.present?
+      @header = header
+      @clear = clear
     end
 
     def content
-      if has_value?
-        "#{@name}: #{@value}"
-      else
+      if clear
         ""
+      elsif value.present? && header.present?
+        "#{header}: #{value}"
+      else
+        value || ""
       end
     end
   end
