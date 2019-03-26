@@ -112,7 +112,7 @@ xml.RECIPES do
             xml.STEP_TIME mash_step.step_time
             xml.RAMP_TIME mash_step.ramp_time if mash_step.ramp_time.present?
             xml.END_TEMP mash_step.end_temperature if mash_step.end_temperature.present?
-            xml.WATER_GRAiN_RATIO mash_step.water_grain_ratio if mash_step.water_grain_ratio.present?
+            xml.WATER_GRAIN_RATIO mash_step.water_grain_ratio if mash_step.water_grain_ratio.present?
             xml.INFUSE_AMOUNT mash_step.infuse_amount if mash_step.infuse_amount.present?
             xml.INFUSE_TEMPERATURE mash_step.infuse_temperature if mash_step.infuse_temperature.present?
           end
