@@ -15,12 +15,8 @@ class LabelController < ApplicationController
   end
 
   private
-  def label_template_path
-    Rails.root.join('app', 'assets', 'labeltemplates')
-  end
-
   def label_templates
-    @label_templates ||= LabelTemplates.new(path: label_template_path)
+    @label_templates ||= LabelTemplates.new(template: label_params[:template])
   end
 
   def render_pdf
@@ -28,11 +24,7 @@ class LabelController < ApplicationController
   end
 
   def label_template(data)
-    LabelTemplate.new(template_file, data).generate
-  end
-
-  def template_file
-    IO.read label_templates.template(label_params[:template])
+    label_templates.template(data)
   end
 
   def params_data

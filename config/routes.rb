@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :style_guides, only: [:index, :show], param: :guide
   resources :styles, only: [:show]
 
+  resources :label_templates, only: [:show], param: :template
+
   resources :events do
     resources :media, only: [:create, :destroy]
     resource :add_medium, only: [:create], controller: :add_medium
