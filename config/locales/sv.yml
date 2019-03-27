@@ -389,14 +389,21 @@ sv:
   label:
     new: Skapa etiketter
     generate: Skapa PDF
-    name: Ölnamn
-    description1: Beskrivning rad 1
-    description2: Beskrivning rad 2
-    description3: Beskrivning rad 3
-    description4: Beskrivning rad 4
-    brewdate: Bryggdatum
-    bottlesize: Flaskstorlek
-    contactinfo: Kontaktinfo
+    template: Mall
+    field:
+      name: Ölnamn
+      abv: ABV
+      ibu: IBU
+      og: OG
+      fg: FG
+      ebc: EBC
+      description1: Beskrivning rad 1
+      description2: Beskrivning rad 2
+      description3: Beskrivning rad 3
+      description4: Beskrivning rad 4
+      brewdate: Bryggdatum
+      bottlesize: Flaskstorlek
+      contactinfo: Kontaktinfo
   recipe_details:
     build:
       save: Spara

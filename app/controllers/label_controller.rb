@@ -7,6 +7,7 @@ class LabelController < ApplicationController
     @mainimage_url = full_url_for(mainimage.url(:label_main)) if mainimage.present?
     @qrcode = ImageData.new(qrcode).data
     @recipe_data = recipe_data
+    @templates = label_templates.list
   end
 
   def create
@@ -14,16 +15,24 @@ class LabelController < ApplicationController
   end
 
   private
+  def label_template_path
+    Rails.root.join('app', 'assets', 'labeltemplates')
+  end
+
+  def label_templates
+    @label_templates ||= LabelTemplates.new(path: label_template_path)
+  end
+
   def render_pdf
     LabelMaker.new(label_template(params_data)).generate
   end
 
   def label_template(data)
-    LabelTemplate.new(template_file('back-label.svg'), data).generate
+    LabelTemplate.new(template_file, data).generate
   end
 
-  def template_file(name)
-    IO.read Rails.root.join('app', 'assets', 'labeltemplates', name)
+  def template_file
+    IO.read label_templates.template(label_params[:template])
   end
 
   def params_data
@@ -87,6 +96,8 @@ class LabelController < ApplicationController
   end
 
   def label_params
-    params.permit(:name, :description1, :description2, :description3, :description4, :abv, :ibu, :ebc, :og, :fg, :brewdate, :bottlesize, :contactinfo)
+    params.permit(:name, :description1, :description2, :description3, :description4,
+                  :abv, :ibu, :ebc, :og, :fg, :brewdate, :bottlesize, :contactinfo,
+                  :template)
   end
 end
