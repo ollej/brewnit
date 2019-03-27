@@ -36,7 +36,7 @@ class LabelMaker
     pdf.image path, width: 1.cm, at: [145.mm, hposition]
     pdf.font "Merriweather" do
       pdf.text_box "Etiketter utskrivna från Brygglogg.se",
-        at: [42.mm, hposition - 2.mm]
+        at: [52.mm, hposition - 2.mm]
     end
     self
   end
