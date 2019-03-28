@@ -26,10 +26,16 @@ class LabelTemplates
 
   private
   def template_path(name = DEFAULT)
-    templates.fetch(name) { templates[DEFAULT] }
+    begin
+      templates.fetch(name)
+    rescue KeyError
+      raise LabelTemplateNotFound.new("LabelTemplate not found: #{name}")
+    end
   end
 
   def template_file
     IO.read template_path(@template)
   end
+
+  class LabelTemplateNotFound < ActionController::RoutingError; end
 end

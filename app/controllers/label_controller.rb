@@ -2,7 +2,7 @@ class LabelController < ApplicationController
   before_action :load_and_authorize_recipe_by_id!
 
   def new
-    @preview_svg = label_template(recipe_data)
+    @preview_svg = label_templates.template(recipe_data)
     @logo_url = full_url_for(logo.url(:label)) if logo.present?
     @mainimage_url = full_url_for(mainimage.url(:label_main)) if mainimage.present?
     @qrcode = ImageData.new(qrcode).data
@@ -16,15 +16,11 @@ class LabelController < ApplicationController
 
   private
   def label_templates
-    @label_templates ||= LabelTemplates.new(template: label_params[:template])
+    @label_templates ||= LabelTemplates.new(template: label_params[:template] || LabelTemplates::DEFAULT)
   end
 
   def render_pdf
-    LabelMaker.new(label_template(params_data)).generate
-  end
-
-  def label_template(data)
-    label_templates.template(data)
+    LabelMaker.new(label_templates.template(params_data)).generate
   end
 
   def params_data
