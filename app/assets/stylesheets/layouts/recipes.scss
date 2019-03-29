@@ -59,20 +59,29 @@ a {
   right: 0.5em;
   position: absolute;
 }
+#nav .home-link {
+  display: block;
+  top: 0.5em;
+  left: 0.5em;
+  position: absolute;
+}
 
 /* When "Menu" is clicked, the navbar should be 80% height */
 #nav.active {
-  height: 80%;
+  height: 100%;
 }
+
 /* Don't show the navigation items... */
 .nav-inner {
   display: none;
 }
-
 /* ...until the "Menu" button is clicked */
 #nav.active .nav-inner {
   display: block;
   padding: 2em 0;
+}
+.home-link {
+  display: none;
 }
 
 /*
@@ -357,6 +366,7 @@ a {
   }
 
   /* Hide the "Menu" button on larger screens */
+  #nav .home-link,
   #nav .nav-menu-button {
     display: none;
   }
@@ -436,3 +446,18 @@ a {
   }
 }
 
+/*
+ * Mobile iPhone SE
+ */
+@media (max-width: 320px) {
+  #nav {
+    &.active {
+      #logo {
+        display: none !important;
+      }
+      .home-link {
+        display: inline;
+      }
+    }
+  }
+}
