@@ -65,9 +65,13 @@
     </div>
     <div class="actions pure-controls">
       <%= f.submit I18n.t(:'label.generate'),
-        { class: 'pure-button pure-button-primary' } %>
+        { id: 'generate-label', class: 'pure-button pure-button-primary',
+          data: { disable_with: false } } %>
     </div>
-    <%= f.hidden_field :logo, value: @logo_url %>
+    <%= f.hidden_field :logo_url, value: @logo_url %>
+    <%= f.hidden_field :mainimage_url, value: @mainimage_url %>
+    <%= f.hidden_field :mainimage_wide_url, value: @mainimage_wide_url %>
+    <%= f.hidden_field :mainimage_full_url, value: @mainimage_full_url %>
     <%= f.hidden_field :qrcode, value: @qrcode %>
   </fieldset>
 <% end %>

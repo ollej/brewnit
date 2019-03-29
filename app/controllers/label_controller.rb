@@ -4,7 +4,11 @@ class LabelController < ApplicationController
   def new
     @preview_svg = label_templates.template(recipe_data)
     @logo_url = full_url_for(logo.url(:label)) if logo.present?
-    @mainimage_url = full_url_for(mainimage.url(:label_main)) if mainimage.present?
+    if mainimage.present?
+      @mainimage_url = full_url_for(mainimage.url(:label_main))
+      @mainimage_wide_url = full_url_for(mainimage.url(:label_main_wide))
+      @mainimage_full_url = full_url_for(mainimage.url(:label_main_full))
+    end
     @qrcode = ImageData.new(qrcode).data
     @recipe_data = recipe_data
     @templates = label_templates.list
@@ -44,7 +48,9 @@ class LabelController < ApplicationController
     {
       logo: readfile(logo),
       qrcode: qrcode,
-      mainimage: readfile(mainimage, :label_main)
+      mainimage: readfile(mainimage, :label_main),
+      mainimage_wide: readfile(mainimage, :label_main_wide),
+      mainimage_full: readfile(mainimage, :label_main_full)
     }
   end
 

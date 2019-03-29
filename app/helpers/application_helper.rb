@@ -26,11 +26,8 @@ module ApplicationHelper
   end
 
   def full_url_for(url)
-    unless full_url?(url)
-      asset_url(url)
-    else
-      url
-    end
+    return url if full_url?(url)
+    asset_url(url)
   end
 
   def shorten(text, len = 45)

@@ -25,7 +25,7 @@ class LabelTemplates
   end
 
   private
-  def template_path(name = DEFAULT)
+  def template_path(name)
     begin
       templates.fetch(name)
     rescue KeyError

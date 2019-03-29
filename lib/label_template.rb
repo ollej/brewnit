@@ -1,11 +1,13 @@
 class LabelTemplate
   include ActiveModel::Validations
 
-  EXCLUDE_SANITIZATION = %i(logo qrcode mainimage)
+  EXCLUDE_SANITIZATION = %i(logo qrcode mainimage mainimage_wide mainimage_full)
 
   attr_accessor :name, :description1, :description2, :description3,
     :description4, :abv, :ibu, :ebc, :og, :fg, :brewdate, :contactinfo,
-    :bottlesize, :logo, :qrcode, :mainimage
+    :bottlesize, :logo, :qrcode, :logo_url, :qrcode_url,
+    :mainimage, :mainimage_wide, :mainimage_full,
+    :mainimage_url, :mainimage_wide_url, :mainimage_full_url
 
   validates :name, presence: true
 
@@ -37,11 +39,13 @@ class LabelTemplate
       LabelField.new(css: "#beerdetails6", value: "Bryggdatum:", clear: brewdate.blank?),
       LabelField.new(css: "#beerdetails7", value: brewdate),
       LabelField.new(css: "#beerdetails8", value: contactinfo),
-      LabelField.new(css: "#bottlesize", value: bottlesize)
+      LabelField.new(css: "#bottlesize", value: bottlesize),
     ])
-    image("#logo", logo)
+    image("#logo", logo, logo_url)
     image("#qrcode", qrcode)
-    image("#mainimage", mainimage)
+    image("#mainimage", mainimage, mainimage_url)
+    image("#mainimagewide", mainimage_wide, mainimage_wide_url)
+    image("#mainimagefull", mainimage_full, mainimage_full_url)
     @doc
   end
 
@@ -63,9 +67,10 @@ class LabelTemplate
     end
   end
 
-  def image(css, file)
-    if file.present?
-      @doc.at_css(css)&.set_attribute("xlink:href", ImageData.new(file).data)
+  def image(css, file, url=nil)
+    href = file.present? ? ImageData.new(file).data : url
+    if href.present?
+      @doc.at_css(css)&.set_attribute("xlink:href", href)
     end
   end
 

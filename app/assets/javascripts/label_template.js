@@ -21,15 +21,43 @@ class LabelField {
 }
 
 class LabelTemplate {
-  constructor(svg, form) {
-    this.svg = document.getElementById(svg);
+  constructor({ preview, form, templates } = {}) {
+    this.preview = $(preview);
+    this.svg = this.preview.find("svg")[0];
     this.form = $(form);
+    this.templates = $(templates);
     if (this.form.length) {
-      this.form.on("change", this.update.bind(this));
+      this.form.on("change", this.updateFields.bind(this));
+    }
+    if (this.templates.length) {
+      this.templates.on("change", this.getTemplate.bind(this));
     }
   }
 
-  update(event) {
+  getTemplate(event) {
+    let template = this.templates.val();
+    $.ajax({
+      url: `/label_templates/${template}`,
+      data: this.getTemplateData(),
+      success: this.updateTemplate.bind(this),
+      dataType: "text"
+    });
+  }
+
+  getTemplateData() {
+    let data = {};
+    this.labelMapping().forEach(function(label) {
+      data[label.field] = this.fieldText(label);
+    }.bind(this));
+    return data;
+  }
+
+  updateTemplate(data) {
+    this.preview.html(data);
+    this.svg = this.preview.find("svg")[0];
+  }
+
+  updateFields(event) {
     if (this.svg === null) {
       console.error('SVG element not found on page');
       return false;
@@ -50,8 +78,9 @@ class LabelTemplate {
 
   updateImage(label) {
     let image = this.fieldText(label);
-    if (image != "") {
-      this.svgEl(label.id).setAttribute("xlink:href", image);
+    let el = this.svgEl(label.id);
+    if (image != "" && el) {
+      el.setAttribute("xlink:href", image);
     }
   }
 
@@ -61,7 +90,10 @@ class LabelTemplate {
   }
 
   updateText(id, text) {
-    this.svgEl(id).textContent = text;
+    let el = this.svgEl(id);
+    if (el) {
+      el.textContent = text;
+    }
   }
 
   textIfFieldSet(label) {
@@ -147,7 +179,22 @@ class LabelTemplate {
       }),
       new LabelField({
         id: 'logo',
-        field: 'logo',
+        field: 'logo_url',
+        image: true
+      }),
+      new LabelField({
+        id: 'mainimage',
+        field: 'mainimage_url',
+        image: true
+      }),
+      new LabelField({
+        id: 'mainimagewide',
+        field: 'mainimage_wide_url',
+        image: true
+      }),
+      new LabelField({
+        id: 'mainimagefull',
+        field: 'mainimage_full_url',
         image: true
       }),
       new LabelField({
