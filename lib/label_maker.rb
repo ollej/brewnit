@@ -32,8 +32,8 @@ class LabelMaker
 
   def render_footer(hposition)
     path = Rails.root.join('app', 'assets', 'images', 'brygglogg-logo-hires.png')
-    pdf.image path, width: 1.cm, at: [25.mm, hposition]
-    pdf.image path, width: 1.cm, at: [145.mm, hposition]
+    pdf.image path, width: 1.5.cm, at: [25.mm, hposition + 2.5.mm]
+    pdf.image path, width: 1.5.cm, at: [145.mm, hposition + 2.5.mm]
     pdf.font "Merriweather" do
       pdf.text_box "Etiketter utskrivna från Brygglogg.se",
         at: [52.mm, hposition - 2.mm]
