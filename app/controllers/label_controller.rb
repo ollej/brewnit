@@ -34,13 +34,15 @@ class LabelController < ApplicationController
   def recipe_data
     {
       name: @recipe.name,
-      abv: view_context.number_with_precision(@recipe.abv, precision: 0),
+      abv: "#{view_context.number_with_precision(@recipe.abv, precision: 1)}%",
       ibu: view_context.number_with_precision(@recipe.ibu, precision: 0),
       ebc: view_context.number_with_precision(@recipe.color, precision: 0),
       og: view_context.format_sg(@recipe.og),
       fg: view_context.format_sg(@recipe.fg),
       brewdate: I18n.l(@recipe.created_at.to_date),
       bottlesize: '50 cl',
+      brewery: @recipe.brewer_name,
+      beerstyle: @recipe.style_name
     }.merge(beer_description_lines).merge(images)
   end
 
@@ -92,6 +94,6 @@ class LabelController < ApplicationController
   def label_params
     params.permit(:name, :description1, :description2, :description3, :description4,
                   :abv, :ibu, :ebc, :og, :fg, :brewdate, :bottlesize, :contactinfo,
-                  :template)
+                  :brewery, :beerstyle, :template)
   end
 end

@@ -5,7 +5,7 @@ class LabelTemplate
 
   attr_accessor :name, :description1, :description2, :description3,
     :description4, :abv, :ibu, :ebc, :og, :fg, :brewdate, :contactinfo,
-    :bottlesize, :logo, :qrcode, :logo_url, :qrcode_url,
+    :bottlesize, :brewery, :beerstyle, :logo, :qrcode, :logo_url, :qrcode_url,
     :mainimage, :mainimage_wide, :mainimage_full,
     :mainimage_url, :mainimage_wide_url, :mainimage_full_url
 
@@ -31,6 +31,7 @@ class LabelTemplate
       LabelField.new(css: "#description2", value: description2),
       LabelField.new(css: "#description3", value: description3),
       LabelField.new(css: "#description4", value: description4),
+      LabelField.new(css: "#abv", value: abv),
       LabelField.new(css: "#beerdetails1", value: abv, header: "ABV"),
       LabelField.new(css: "#beerdetails2", value: ibu, header: "IBU"),
       LabelField.new(css: "#beerdetails3", value: ebc, header: "EBC"),
@@ -40,6 +41,8 @@ class LabelTemplate
       LabelField.new(css: "#beerdetails7", value: brewdate),
       LabelField.new(css: "#beerdetails8", value: contactinfo),
       LabelField.new(css: "#bottlesize", value: bottlesize),
+      LabelField.new(css: "#brewery", value: brewery),
+      LabelField.new(css: "#beerstyle", value: beerstyle),
     ])
     image("#logo", logo, logo_url)
     image("#qrcode", qrcode)

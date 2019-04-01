@@ -392,6 +392,8 @@ sv:
     template: Mall
     field:
       name: Ölnamn
+      beerstyle: Ölstil
+      brewery: Bryggare
       abv: ABV
       ibu: IBU
       og: OG

@@ -13,6 +13,14 @@
       <%= f.text_field :name, value: @recipe_data[:name], class: 'pure-input-1-2' %>
     </div>
     <div class="field pure-control-group">
+      <%= f.label :beerstyle, I18n.t(:'label.field.beerstyle') %>
+      <%= f.text_field :beerstyle, value: @recipe_data[:beerstyle], class: 'pure-input-1-2' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :brewery, I18n.t(:'label.field.brewery') %>
+      <%= f.text_field :brewery, value: @recipe_data[:brewery], class: 'pure-input-1-2' %>
+    </div>
+    <div class="field pure-control-group">
       <%= f.label :description1, I18n.t(:'label.field.description1') %>
       <%= f.text_field :description1, value: @recipe_data[:description1],
         class: 'pure-input-1-2' %>
@@ -31,8 +39,7 @@
     </div>
     <div class="field pure-control-group">
       <%= f.label :abv, I18n.t(:'label.field.abv') %>
-      <%= f.text_field :abv,
-        value: @recipe_data[:abv], class: 'pure-input-1-4' %>
+      <%= f.text_field :abv, value: @recipe_data[:abv], class: 'pure-input-1-4' %>
     </div>
     <div class="field pure-control-group">
       <%= f.label :ibu, I18n.t(:'label.field.ibu') %>

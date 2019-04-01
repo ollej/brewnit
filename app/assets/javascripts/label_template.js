@@ -136,6 +136,10 @@ class LabelTemplate {
         field: 'description4'
       }),
       new LabelField({
+        id: 'abv',
+        field: 'abv'
+      }),
+      new LabelField({
         id: 'beerdetails1',
         field: 'abv',
         prefix: 'ABV'
@@ -176,6 +180,14 @@ class LabelTemplate {
       new LabelField({
         id: 'bottlesize',
         field: 'bottlesize'
+      }),
+      new LabelField({
+        id: 'brewery',
+        field: 'brewery'
+      }),
+      new LabelField({
+        id: 'beerstyle',
+        field: 'beerstyle'
       }),
       new LabelField({
         id: 'logo',
