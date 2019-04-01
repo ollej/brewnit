@@ -58,13 +58,33 @@
       <%= f.text_field :fg, value: @recipe_data[:fg], class: 'pure-input-1-4' %>
     </div>
     <div class="field pure-control-group">
+      <%= f.label :malt1, I18n.t(:'label.field.malt1') %>
+      <%= f.text_field :malt1, value: @recipe_data[:malt1], class: 'pure-input-1-2' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :malt2, I18n.t(:'label.field.malt2') %>
+      <%= f.text_field :malt2, value: @recipe_data[:malt2], class: 'pure-input-1-2' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :hops1, I18n.t(:'label.field.hops1') %>
+      <%= f.text_field :hops1, value: @recipe_data[:hops1], class: 'pure-input-1-2' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :hops2, I18n.t(:'label.field.hops2') %>
+      <%= f.text_field :hops2, value: @recipe_data[:hops2], class: 'pure-input-1-2' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :yeast, I18n.t(:'label.field.yeast') %>
+      <%= f.text_field :yeast, value: @recipe_data[:yeast], class: 'pure-input-1-2' %>
+    </div>
+    <div class="field pure-control-group">
       <%= f.label :brewdate, I18n.t(:'label.field.brewdate') %>
       <%= f.text_field :brewdate, value: @recipe_data[:brewdate],
-        class: 'pure-input-1-4' %>
+        class: 'pure-input-1-2' %>
     </div>
     <div class="field pure-control-group">
       <%= f.label :contactinfo, I18n.t(:'label.field.contactinfo') %>
-      <%= f.text_field :contactinfo, value: "", class: 'pure-input-1-4' %>
+      <%= f.text_field :contactinfo, value: "", class: 'pure-input-1-2' %>
     </div>
     <div class="field pure-control-group">
       <%= f.label :bottlesize, I18n.t(:'label.field.bottlesize') %>

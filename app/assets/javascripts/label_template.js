@@ -178,6 +178,14 @@ class LabelTemplate {
         field: 'contactinfo'
       }),
       new LabelField({
+        id: 'brewdate',
+        field: 'brewdate'
+      }),
+      new LabelField({
+        id: 'contactinfo',
+        field: 'contactinfo'
+      }),
+      new LabelField({
         id: 'bottlesize',
         field: 'bottlesize'
       }),
@@ -188,6 +196,41 @@ class LabelTemplate {
       new LabelField({
         id: 'beerstyle',
         field: 'beerstyle'
+      }),
+      new LabelField({
+        id: 'malt-header',
+        field: 'malt1',
+        textIfFieldSet: "Malt:"
+      }),
+      new LabelField({
+        id: 'malt1',
+        field: 'malt1'
+      }),
+      new LabelField({
+        id: 'malt2',
+        field: 'malt2'
+      }),
+      new LabelField({
+        id: 'hops-header',
+        field: 'hops1',
+        textIfFieldSet: "Humle:"
+      }),
+      new LabelField({
+        id: 'hops1',
+        field: 'hops1'
+      }),
+      new LabelField({
+        id: 'hops2',
+        field: 'hops2'
+      }),
+      new LabelField({
+        id: 'yeast-header',
+        field: 'yeast',
+        textIfFieldSet: "Jäst:"
+      }),
+      new LabelField({
+        id: 'yeast',
+        field: 'yeast'
       }),
       new LabelField({
         id: 'logo',

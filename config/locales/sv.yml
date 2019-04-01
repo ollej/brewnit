@@ -406,6 +406,11 @@ sv:
       brewdate: Bryggdatum
       bottlesize: Flaskstorlek
       contactinfo: Kontaktinfo
+      malt1: Malt rad 1
+      malt2: Malt rad 2
+      hops1: Humle rad 1
+      hops2: Humle rad 2
+      yeast: Jäst
   recipe_details:
     build:
       save: Spara

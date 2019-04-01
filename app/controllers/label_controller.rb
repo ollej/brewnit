@@ -42,7 +42,13 @@ class LabelController < ApplicationController
       brewdate: I18n.l(@recipe.created_at.to_date),
       bottlesize: '50 cl',
       brewery: @recipe.brewer_name,
-      beerstyle: @recipe.style_name
+      beerstyle: @recipe.style_name,
+      contactinfo: "",
+      malt1: "",
+      malt2: "",
+      hops1: "",
+      hops2: "",
+      yeast: ""
     }.merge(beer_description_lines).merge(images)
   end
 
@@ -94,6 +100,7 @@ class LabelController < ApplicationController
   def label_params
     params.permit(:name, :description1, :description2, :description3, :description4,
                   :abv, :ibu, :ebc, :og, :fg, :brewdate, :bottlesize, :contactinfo,
-                  :brewery, :beerstyle, :template)
+                  :brewery, :beerstyle, :malt1, :malt2, :hops1, :hops2, :yeast,
+                  :template)
   end
 end
