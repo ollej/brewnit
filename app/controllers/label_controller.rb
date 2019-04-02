@@ -44,12 +44,27 @@ class LabelController < ApplicationController
       brewery: @recipe.brewer_name,
       beerstyle: @recipe.style_name,
       contactinfo: "",
-      malt1: "",
-      malt2: "",
-      hops1: "",
-      hops2: "",
-      yeast: ""
-    }.merge(beer_description_lines).merge(images)
+      yeast: yeasts
+    }.merge(beer_description_lines)
+      .merge(malt_lines)
+      .merge(hop_lines)
+      .merge(images)
+  end
+
+  def ingredients
+    @ingredients ||= IngredientList.new(@recipe).build
+  end
+
+  def fermentables
+    ingredients.fermentables.map { |item| item.name }.join(", ")
+  end
+
+  def hops
+    ingredients.hops.map { |item| item.name }.join(", ")
+  end
+
+  def yeasts
+    ingredients.yeasts.map { |item| item.name }.join(", ")
   end
 
   def images
@@ -59,6 +74,22 @@ class LabelController < ApplicationController
       mainimage: readfile(mainimage, :label_main),
       mainimage_wide: readfile(mainimage, :label_main_wide),
       mainimage_full: readfile(mainimage, :label_main_full)
+    }
+  end
+
+  def malt_lines
+    lines = WordWrap.ww(fermentables, 44).split("\n")
+    {
+      malt1: lines[0],
+      malt2: lines[1]
+    }
+  end
+
+  def hop_lines
+    lines = WordWrap.ww(hops, 44).split("\n")
+    {
+      hops1: lines[0],
+      hops2: lines[1]
     }
   end
 

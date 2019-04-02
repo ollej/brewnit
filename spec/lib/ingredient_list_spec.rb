@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe ShoppingList do
+RSpec.describe IngredientList do
   include RecipeContext
-  subject { ShoppingList.new(recipe_with_beerxml) }
+  subject { IngredientList.new(recipe_with_beerxml) }
 
   def fermentable(name, amount)
     {
       name: name,
-      type: I18n.t(:'recipe_shopping_list.type.fermentable'),
+      type: :fermentable,
       amount: amount,
       unit: I18n.t(:'recipe_shopping_list.units.kg')
     }
@@ -16,7 +16,7 @@ RSpec.describe ShoppingList do
   def hop(name, amount)
     {
       name: name,
-      type: I18n.t(:'recipe_shopping_list.type.hops'),
+      type: :hop,
       amount: amount,
       unit: I18n.t(:'recipe_shopping_list.units.gr')
     }
@@ -46,14 +46,19 @@ RSpec.describe ShoppingList do
         # TODO: Add misc in beerxml
         # TODO: Order items by amount
         # TODO: Fix amount for misc
-        expect(subject.build.items).to include(
+        subject.build
+        expect(subject.fermentables).to include(
           have_attributes(fermentable("Pale Ale", 4.25)),
           have_attributes(fermentable("Carahell (Weyermann)", 0.28)),
-          have_attributes(fermentable("Crystal 400 (Dark Crystal)", 0.05)),
-          have_attributes(hop("Eureka!", 198)),
+          have_attributes(fermentable("Crystal 400 (Dark Crystal)", 0.05))
+        )
+        expect(subject.hops).to include(
+          have_attributes(hop("Eureka!", 197))
+        )
+        expect(subject.yeasts).to include(
           have_attributes(
             name: "Safale American US-05",
-            type: I18n.t(:'recipe_shopping_list.type.yeast'),
+            type: :yeast,
             amount: 1,
             unit: I18n.t(:'recipe_shopping_list.units.packet')
           )

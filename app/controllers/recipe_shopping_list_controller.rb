@@ -4,6 +4,6 @@ class RecipeShoppingListController < ApplicationController
 
   def show
     @presenter = RecipePresenter.new(@recipe)
-    @shopping = ShoppingList.new(@recipe).build
+    @shopping = IngredientList.new(@recipe).build
   end
 end

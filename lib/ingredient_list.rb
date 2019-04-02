@@ -1,4 +1,4 @@
-class ShoppingList
+class IngredientList
   include ActionView::Helpers::NumberHelper
 
   def initialize(recipe)
@@ -7,6 +7,7 @@ class ShoppingList
   end
 
   def build
+    @items = {}
     build_fermentables
     build_hops
     build_yeasts
@@ -18,7 +19,27 @@ class ShoppingList
     @items.values
   end
 
+  def fermentables
+    items_by_type(:fermentable)
+  end
+
+  def hops
+    items_by_type(:hop)
+  end
+
+  def yeasts
+    items_by_type(:yeast)
+  end
+
+  def miscs
+    items_by_type(:misc)
+  end
+
   private
+  def items_by_type(type)
+    @items.values.select { |item| item.type == type }
+  end
+
   def build_fermentables
     @recipe.detail.fermentables.each do |fermentable|
       add_item(
@@ -36,7 +57,7 @@ class ShoppingList
         name: hops.name,
         amount: hops.amount.to_i,
         unit: I18n.t(:'recipe_shopping_list.units.gr'),
-        type: :hops
+        type: :hop
       )
     end
   end
@@ -59,7 +80,7 @@ class ShoppingList
         name: misc.name,
         amount: misc.amount.round(2),
         unit: I18n.t(:'recipe_shopping_list.units.gr'),
-        type: :miscs
+        type: :misc
       )
     end
   end
@@ -69,7 +90,7 @@ class ShoppingList
     if @items[name].present?
       @items[name].add_amount(data[:amount])
     else
-      @items[name] = ShoppingItem.new(data)
+      @items[name] = IngredientItem.new(data)
     end
   end
 end

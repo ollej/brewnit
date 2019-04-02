@@ -4,7 +4,7 @@ RSpec.describe "recipe_shopping_list/show.html.erb", type: :view do
   include RecipeContext
   include UserContext
 
-  let(:shopping) { ShoppingList.new(recipe).build }
+  let(:shopping) { IngredientList.new(recipe_with_beerxml).build }
 
   it "renders poster" do
     assign(:recipe, recipe_with_beerxml)
