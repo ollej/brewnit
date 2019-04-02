@@ -64,10 +64,8 @@ class LabelTemplate
   end
 
   def content(css, content)
-    begin
-      @doc.at_css(css).content = content
-    rescue NoMethodError
-      Rails.logger.warn { "CSS not found: #{css}" }
+    if node = @doc.css(css)&.first
+      node.content = content
     end
   end
 
