@@ -2,7 +2,7 @@ class LabelTemplates
   DEFAULT = 'back-label'
 
   def initialize(path: nil, template: nil)
-    @path = path || Rails.root.join('app', 'assets', 'labeltemplates')
+    @path = path || Rails.root.join('app', 'assets', 'labels', 'templates')
     @template = template
   end
 
