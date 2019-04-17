@@ -1,15 +1,35 @@
 class LabelTemplates
   DEFAULT = 'back-label'
+  FILE_TYPES = {
+    template: {
+      dir: 'templates',
+      extension: '.svg'
+    },
+    background: {
+      dir: 'backgrounds',
+      extension: '.png'
+    },
+    border: {
+      dir: 'borders',
+      extension: '.png'
+    }
+  }
 
   def initialize(path: nil, template: nil)
-    @path = path || Rails.root.join('app', 'assets', 'labels', 'templates')
+    @path = path || Rails.root.join('app', 'assets', 'labels')
     @template = template
   end
 
   def templates
-    @templates ||= Hash[Dir.glob(@path.join("*.svg")).sort.map do |filename|
-      [File.basename(filename, '.svg'), filename]
-    end]
+    @templates ||= files(FILE_TYPES[:template])
+  end
+
+  def backgrounds
+    @backgrounds ||= files(FILE_TYPES[:background])
+  end
+
+  def borders
+    @borders ||= files(FILE_TYPES[:border])
   end
 
   def list
@@ -25,6 +45,14 @@ class LabelTemplates
   end
 
   private
+  def files(dir:, extension:)
+    Rails.logger.debug { "dir: #{dir} extension: #{extension}" }
+    Rails.logger.debug { @path.join(dir, "*#{extension}") }
+    Hash[Dir.glob(@path.join(dir, "*#{extension}")).sort.map do |filename|
+      [File.basename(filename, extension), filename]
+    end]
+  end
+
   def template_path(name)
     begin
       templates.fetch(name)

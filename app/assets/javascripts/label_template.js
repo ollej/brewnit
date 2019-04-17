@@ -1,10 +1,11 @@
 class LabelField {
-  constructor({ id, field, prefix = null, image = false, textIfFieldSet = false } = {}) {
+  constructor({ id, field, prefix = null, image = false, textIfFieldSet = false, skipUpdate = false } = {}) {
     this.id = id;
     this.field = field;
     this.prefix = prefix;
     this.image = image;
     this.textIfFieldSet = textIfFieldSet;
+    this.skipUpdate = skipUpdate;
   }
 
   text(text) {
@@ -16,12 +17,12 @@ class LabelField {
   }
 
   fieldSelector() {
-    return `input[name=${this.field}]`;
+    return `[name=${this.field}]`;
   }
 }
 
 class LabelTemplate {
-  constructor({ preview, form, templates } = {}) {
+  constructor({ preview, form, templates, updateSelectors } = {}) {
     this.preview = $(preview);
     this.svg = this.preview.find("svg")[0];
     this.form = $(form);
@@ -29,9 +30,7 @@ class LabelTemplate {
     if (this.form.length) {
       this.form.on("change", this.updateFields.bind(this));
     }
-    if (this.templates.length) {
-      this.templates.on("change", this.getTemplate.bind(this));
-    }
+    $(updateSelectors).on("change", this.getTemplate.bind(this));
   }
 
   getTemplate(event) {
@@ -63,10 +62,13 @@ class LabelTemplate {
       return false;
     }
     this.labelMapping().forEach(this.updateLabel.bind(this));
-    return false;
+    //return false;
   }
 
   updateLabel(label) {
+    if (label.skipUpdate) {
+      return;
+    }
     if (label.textIfFieldSet) {
       this.textIfFieldSet(label);
     } else if (label.image) {
@@ -256,6 +258,18 @@ class LabelTemplate {
         id: 'qrcode',
         field: 'qrcode',
         image: true
+      }),
+      new LabelField({
+        id: 'border',
+        field: 'border',
+        image: true,
+        skipUpdate: true
+      }),
+      new LabelField({
+        id: 'background',
+        field: 'background',
+        image: true,
+        skipUpdate: true
       })
     ];
   }

@@ -11,7 +11,7 @@ class LabelController < ApplicationController
     end
     @qrcode = ImageData.new(qrcode).data
     @recipe_data = recipe_data
-    @templates = label_templates.list
+    @templates = label_templates
   end
 
   def create
@@ -69,12 +69,26 @@ class LabelController < ApplicationController
 
   def images
     {
-      logo: readfile(logo),
+      logo: readmedia(logo),
       qrcode: qrcode,
-      mainimage: readfile(mainimage, :label_main),
-      mainimage_wide: readfile(mainimage, :label_main_wide),
-      mainimage_full: readfile(mainimage, :label_main_full)
+      mainimage: readmedia(mainimage, :label_main),
+      mainimage_wide: readmedia(mainimage, :label_main_wide),
+      mainimage_full: readmedia(mainimage, :label_main_full),
+      background: background_image,
+      border: border_image
     }
+  end
+
+  def background_image
+    if background = label_params[:background].presence
+      readfile(label_templates.backgrounds.fetch(background))
+    end
+  end
+
+  def border_image
+    if border = label_params[:border].presence
+      readfile(label_templates.borders.fetch(border))
+    end
   end
 
   def malt_lines
@@ -105,8 +119,12 @@ class LabelController < ApplicationController
     }
   end
 
-  def readfile(file, size = :label)
-    File.open(file.path(size), 'rb') { |f| f.read } if file.present?
+  def readmedia(file, size = :label)
+    readfile(file.path(size)) if file.present?
+  end
+
+  def readfile(path)
+    File.open(path, 'rb') { |file| file.read } if path.present?
   end
 
   def logo
@@ -132,6 +150,6 @@ class LabelController < ApplicationController
     params.permit(:name, :description1, :description2, :description3, :description4,
                   :abv, :ibu, :ebc, :og, :fg, :brewdate, :bottlesize, :contactinfo,
                   :brewery, :beerstyle, :malt1, :malt2, :hops1, :hops2, :yeast,
-                  :template)
+                  :template, :background, :border)
   end
 end

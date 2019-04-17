@@ -390,6 +390,8 @@ sv:
     new: Skapa etiketter
     generate: Skapa PDF
     template: Mall
+    background: Bakgrund
+    border: Ram
     field:
       name: Ölnamn
       beerstyle: Ölstil

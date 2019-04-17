@@ -5,8 +5,21 @@
   <fieldset>
     <div class="field pure-control-group">
       <%= f.label :template, I18n.t(:'label.template') %>
-      <%= f.select :template, options_for_select(@templates, LabelTemplates::DEFAULT),
+      <%= f.select :template,
+        options_for_select(@templates.templates.keys, LabelTemplates::DEFAULT),
         {}, { class: 'pure-input-1-2', id: :template } %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :background, I18n.t(:'label.background') %>
+      <%= f.select :background,
+        options_for_select(@templates.backgrounds.keys, ''), { include_blank: true },
+        { class: 'pure-input-1-2', id: :background } %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :border, I18n.t(:'label.border') %>
+      <%= f.select :border,
+        options_for_select(@templates.borders.keys, ''), { include_blank: true },
+        { class: 'pure-input-1-2', id: :border } %>
     </div>
     <div class="field pure-control-group">
       <%= f.label :name, I18n.t(:'label.field.name') %>

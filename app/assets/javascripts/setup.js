@@ -98,7 +98,8 @@ $( document ).ready(function() {
   let labelTemplate = new LabelTemplate({
     preview: "#preview-template",
     form: ".label-form",
-    templates: "#template"
+    templates: "select#template",
+    updateSelectors: "select#template, select#background, select#border"
   });
 
   // Setup Dropdown to cancel on escape or click on body

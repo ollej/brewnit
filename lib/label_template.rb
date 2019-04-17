@@ -1,12 +1,15 @@
 class LabelTemplate
+  #  591 x 827 px
+  #  620 x 827 px
+
   include ActiveModel::Validations
 
-  EXCLUDE_SANITIZATION = %i(logo qrcode mainimage mainimage_wide mainimage_full)
+  EXCLUDE_SANITIZATION = %i(logo qrcode mainimage mainimage_wide mainimage_full background border)
 
   attr_accessor :name, :description1, :description2, :description3,
     :description4, :abv, :ibu, :ebc, :og, :fg, :brewdate, :contactinfo,
     :bottlesize, :brewery, :beerstyle, :malt1, :malt2, :hops1, :hops2, :yeast,
-    :logo, :qrcode, :logo_url, :qrcode_url,
+    :logo, :qrcode, :background, :border, :logo_url, :qrcode_url,
     :mainimage, :mainimage_wide, :mainimage_full,
     :mainimage_url, :mainimage_wide_url, :mainimage_full_url
 
@@ -60,6 +63,8 @@ class LabelTemplate
     image("#mainimage", mainimage, mainimage_url)
     image("#mainimagewide", mainimage_wide, mainimage_wide_url)
     image("#mainimagefull", mainimage_full, mainimage_full_url)
+    image("#background", background)
+    image("#border", border)
     @doc
   end
 
