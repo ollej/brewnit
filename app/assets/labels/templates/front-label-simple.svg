@@ -24,7 +24,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.4266071"
-     inkscape:cx="22.974463"
+     inkscape:cx="78.607697"
      inkscape:cy="132.28346"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -121,16 +121,16 @@
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;line-height:0%;font-family:Impact;-inkscape-font-specification:'Impact, Condensed';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="92.885468"
-       y="834.86896"
+       y="844.24396"
        id="beername-text"
        inkscape:label="#text6005"><tspan
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:22.5px;line-height:1.25;font-family:Impact;-inkscape-font-specification:'Impact, Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle"
          sodipodi:role="line"
          x="92.885468"
-         y="834.86896"
+         y="844.24396"
          id="beername">Beer Name</tspan></text>
     <image
-       y="988.33618"
+       y="978.96118"
        x="66.560143"
        id="logo"
        xlink:href=""
@@ -143,26 +143,26 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:15px;line-height:125%;font-family:Palatino;-inkscape-font-specification:'Palatino, Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="139.78394"
-       y="1020.84"
+       x="125.28336"
+       y="1011.465"
        id="bottlesize-text"
        inkscape:label="#text4489"><tspan
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;font-family:Impact;-inkscape-font-specification:'Impact, Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:1px"
          sodipodi:role="line"
          id="bottlesize"
-         x="139.78394"
-         y="1020.84">50 cl</tspan></text>
+         x="125.28336"
+         y="1011.465">50 cl</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:15px;line-height:125%;font-family:Palatino;-inkscape-font-specification:'Palatino, Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="16.540874"
-       y="1020.8436"
+       x="30.476591"
+       y="1011.4686"
        id="abv-text"
        inkscape:label="#text4489"><tspan
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;font-family:Impact;-inkscape-font-specification:'Impact, Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:1px"
          sodipodi:role="line"
          id="abv"
-         x="16.540874"
-         y="1020.8436">6.6%</tspan></text>
+         x="30.476591"
+         y="1011.4686">6.6%</tspan></text>
   </g>
 </svg>

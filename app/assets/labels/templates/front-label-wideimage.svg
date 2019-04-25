@@ -24,7 +24,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.4266071"
-     inkscape:cx="76.959305"
+     inkscape:cx="66.656854"
      inkscape:cy="132.28346"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -37,33 +37,14 @@
      inkscape:window-y="1"
      inkscape:window-maximized="1"
      inkscape:snap-page="true"
-     showguides="false"
+     showguides="true"
      borderlayer="true"
      objecttolerance="10"
-     fit-margin-right="-1">
+     fit-margin-right="-1"
+     inkscape:guide-bbox="true">
     <inkscape:grid
        type="xygrid"
        id="grid4274" />
-    <sodipodi:guide
-       id="guide8202"
-       position="0,163.511354507"
-       orientation="0,198.4252"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       id="guide8204"
-       position="0,101.055574632"
-       orientation="0,198.4252"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       id="guide8206"
-       position="122.63351588,0"
-       orientation="264.5669,0"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       id="guide8208"
-       position="75.791680974,0"
-       orientation="264.5669,0"
-       inkscape:locked="false" />
   </sodipodi:namedview>
   <defs
      id="defs4">
@@ -84,7 +65,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -108,7 +89,7 @@
        xlink:href=""
        id="mainimagewide"
        x="-1.2797303e-06"
-       y="858.83856" />
+       y="855.29407" />
     <image
        y="804.33069"
        x="-1.2797303e-06"
@@ -121,16 +102,16 @@
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:12px;line-height:0%;font-family:Impact;-inkscape-font-specification:'Impact, Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="92.885468"
-       y="851.74396"
+       y="849.86896"
        id="beername-text"
        inkscape:label="#text6005"><tspan
          sodipodi:role="line"
          id="beername"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:22.5px;font-family:Impact;-inkscape-font-specification:'Impact, Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle"
          x="92.885468"
-         y="851.74396">Beer Name</tspan></text>
+         y="849.86896">Beer Name</tspan></text>
     <image
-       y="988.33618"
+       y="982.71118"
        x="67.146988"
        id="logo"
        xlink:href=""
@@ -143,26 +124,26 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:15px;line-height:125%;font-family:Palatino;-inkscape-font-specification:'Palatino, Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="140.37079"
-       y="1020.84"
+       x="130.99579"
+       y="1015.215"
        id="bottlesize-text"
        inkscape:label="#text4489"><tspan
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;font-family:Impact;-inkscape-font-specification:'Impact, Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:1px"
          sodipodi:role="line"
          id="bottlesize"
-         x="140.37079"
-         y="1020.84">50 cl</tspan></text>
+         x="130.99579"
+         y="1015.215">50 cl</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:15px;line-height:125%;font-family:Palatino;-inkscape-font-specification:'Palatino, Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="17.12771"
-       y="1020.8436"
+       x="26.50271"
+       y="1015.2186"
        id="abv-text"
        inkscape:label="#text4489"><tspan
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;font-family:Impact;-inkscape-font-specification:'Impact, Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:1px"
          sodipodi:role="line"
          id="abv"
-         x="17.12771"
-         y="1020.8436">6.6%</tspan></text>
+         x="26.50271"
+         y="1015.2186">6.6%</tspan></text>
   </g>
 </svg>
