@@ -107,5 +107,16 @@ $( document ).ready(function() {
 
   // Repopulate style select when a style guide is selected
   let styleGuide = new StyleGuide("#style_guide", "#style");
+
+  // Color picker for label template
+  // TODO: Read palette from selected background, border, main image, logo
+  // TODO: Allow full color picker
+  // TODO: Byt font
+  var labelColor = new LabelColor({
+    picker: ".picker",
+    textsel: "#preview-template text tspan",
+    input: "input[name=textcolor]",
+    form: ".label-form"
+  });
 });
 

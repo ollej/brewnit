@@ -19,6 +19,7 @@
 //= require thirdparty/jquery.fileupload
 //= require thirdparty/jquery.fileupload-process
 //= require thirdparty/jquery.fileupload-validate
+//= require thirdparty/colorPick
 //= require quill.global
 //= require_tree .
 

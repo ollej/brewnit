@@ -150,6 +150,6 @@ class LabelController < ApplicationController
     params.permit(:name, :description1, :description2, :description3, :description4,
                   :abv, :ibu, :ebc, :og, :fg, :brewdate, :bottlesize, :contactinfo,
                   :brewery, :beerstyle, :malt1, :malt2, :hops1, :hops2, :yeast,
-                  :template, :background, :border)
+                  :template, :background, :border, :textcolor)
   end
 end

@@ -9,7 +9,7 @@ class LabelTemplate
   attr_accessor :name, :description1, :description2, :description3,
     :description4, :abv, :ibu, :ebc, :og, :fg, :brewdate, :contactinfo,
     :bottlesize, :brewery, :beerstyle, :malt1, :malt2, :hops1, :hops2, :yeast,
-    :logo, :qrcode, :background, :border, :logo_url, :qrcode_url,
+    :logo, :qrcode, :background, :border, :textcolor, :logo_url, :qrcode_url,
     :mainimage, :mainimage_wide, :mainimage_full,
     :mainimage_url, :mainimage_wide_url, :mainimage_full_url
 
@@ -65,7 +65,15 @@ class LabelTemplate
     image("#mainimagefull", mainimage_full, mainimage_full_url)
     image("#background", background)
     image("#border", border)
+    set_text_color
     @doc
+  end
+
+  def set_text_color
+    @doc.css("text tspan").each do |element|
+      style = element.attributes["style"]
+      element.attributes["style"].value = "#{style};fill:#{textcolor}"
+    end
   end
 
   def content(css, content)

@@ -16,5 +16,6 @@
  *= require commontator/application
  *= require fancybox
  *= require balloon-css/src/balloon
+ *= require thirdparty/colorPick
  *= require_self
  */

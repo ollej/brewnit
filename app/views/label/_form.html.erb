@@ -22,6 +22,10 @@
         { class: 'pure-input-1-2', id: :border } %>
     </div>
     <div class="field pure-control-group">
+      <%= f.label :textcolor, I18n.t(:'label.textcolor') %>
+      <div class="picker"></div>
+    </div>
+    <div class="field pure-control-group">
       <%= f.label :name, I18n.t(:'label.field.name') %>
       <%= f.text_field :name, value: @recipe_data[:name], class: 'pure-input-1-2' %>
     </div>
@@ -113,5 +117,6 @@
     <%= f.hidden_field :mainimage_wide_url, value: @mainimage_wide_url %>
     <%= f.hidden_field :mainimage_full_url, value: @mainimage_full_url %>
     <%= f.hidden_field :qrcode, value: @qrcode %>
+    <%= f.hidden_field :textcolor, value: "" %>
   </fieldset>
 <% end %>

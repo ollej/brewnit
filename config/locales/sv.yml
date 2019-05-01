@@ -392,6 +392,7 @@ sv:
     template: Mall
     background: Bakgrund
     border: Ram
+    textcolor: Textfärg
     field:
       name: Ölnamn
       beerstyle: Ölstil

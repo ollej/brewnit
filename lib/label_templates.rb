@@ -46,8 +46,6 @@ class LabelTemplates
 
   private
   def files(dir:, extension:)
-    Rails.logger.debug { "dir: #{dir} extension: #{extension}" }
-    Rails.logger.debug { @path.join(dir, "*#{extension}") }
     Hash[Dir.glob(@path.join(dir, "*#{extension}")).sort.map do |filename|
       [File.basename(filename, extension), filename]
     end]

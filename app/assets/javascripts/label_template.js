@@ -54,6 +54,11 @@ class LabelTemplate {
   updateTemplate(data) {
     this.preview.html(data);
     this.svg = this.preview.find("svg")[0];
+    this.form.trigger("LabelTemplate:update", {
+      "labelTemplate": this,
+      "templateData": data,
+      "templateElement": this.svg
+    });
   }
 
   updateFields(event) {
@@ -62,7 +67,6 @@ class LabelTemplate {
       return false;
     }
     this.labelMapping().forEach(this.updateLabel.bind(this));
-    //return false;
   }
 
   updateLabel(label) {
