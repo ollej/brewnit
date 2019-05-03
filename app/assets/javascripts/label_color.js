@@ -22,7 +22,6 @@ class LabelColor {
   }
 
   onColorChange(color, picker) {
-    //console.log("The user has selected the color: " + color);
     this.picker.css({'backgroundColor': color, 'color': color});
     this.color = color;
     $(this.textsel).css("fill", color);
@@ -30,8 +29,12 @@ class LabelColor {
   }
 
   onTemplateUpdate(event) {
-    //console.log("onTemplateUpdate", event);
-    $(this.textsel).css("fill", this.color);
+    $(this.textsel).css({
+      "fill": this.color,
+      "stroke": "#000000",
+      "stroke-width": "0.1px",
+      "paint-order": "stroke"
+    });
   }
 
   setupPicker(palette) {

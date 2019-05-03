@@ -70,9 +70,14 @@ class LabelTemplate
   end
 
   def set_text_color
+    return unless textcolor.present?
     @doc.css("text tspan").each do |element|
-      style = element.attributes["style"]
-      element.attributes["style"].value = "#{style};fill:#{textcolor}"
+      css = "fill:#{textcolor};stroke: #000000;stroke-width: 0.1px;paint-order:stroke"
+      if style = element.attributes["style"]
+        element.attributes["style"].value = "#{style};#{css}"
+      else
+        element["style"] = css
+      end
     end
   end
 
