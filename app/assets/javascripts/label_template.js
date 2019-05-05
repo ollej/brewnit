@@ -92,6 +92,10 @@ class LabelTemplate {
 
   updateTextLabel(label) {
     let text = this.fieldText(label);
+    if (label.id === 'style') {
+      console.log(label);
+      console.log(label.text(text));
+    }
     this.updateText(label.id, label.text(text));
   }
 

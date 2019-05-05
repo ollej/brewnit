@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="52.5mm"
+   height="70mm"
+   viewBox="0 0 186.02362 248.03149"
+   id="brygglogg-label-back"
+   version="1.1"
+   inkscape:version="0.92.2 5c3e80d, 2017-08-06"
+   sodipodi:docname="front-label-angledname.svg">
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.4266071"
+     inkscape:cx="81.080287"
+     inkscape:cy="131.64467"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:snap-text-baseline="true"
+     inkscape:snap-grids="true"
+     inkscape:window-width="1440"
+     inkscape:window-height="855"
+     inkscape:window-x="0"
+     inkscape:window-y="1"
+     inkscape:window-maximized="1"
+     inkscape:snap-page="true"
+     showguides="false"
+     borderlayer="true"
+     objecttolerance="10"
+     fit-margin-right="-1"
+     inkscape:measure-start="24.7259,19.6198"
+     inkscape:measure-end="23.0775,0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid4274" />
+    <sodipodi:guide
+       id="guide8202"
+       position="0,163.511354507"
+       orientation="0,198.4252"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       id="guide8204"
+       position="0,101.055574632"
+       orientation="0,198.4252"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       id="guide8206"
+       position="122.63351588,0"
+       orientation="264.5669,0"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       id="guide8208"
+       position="75.791680974,0"
+       orientation="264.5669,0"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient4138"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#0000ff;stop-opacity:1;"
+         offset="0"
+         id="stop4140" />
+    </linearGradient>
+  </defs>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-804.33071)">
+    <image
+       y="804.33069"
+       x="-1.2797303e-06"
+       id="background"
+       xlink:href=""
+       preserveAspectRatio="none"
+       height="248.03151"
+       width="186.02362" />
+    <image
+       y="804.33069"
+       x="-1.2797303e-06"
+       id="mainimage"
+       xlink:href=""
+       preserveAspectRatio="none"
+       height="248.03151"
+       width="186.02362"
+       style="image-rendering:optimizeQuality" />
+    <image
+       y="804.33069"
+       x="-1.2797302e-06"
+       id="border"
+       xlink:href=""
+       preserveAspectRatio="none"
+       height="248.03151"
+       width="186.02362" />
+    <g
+       id="g10005"
+       transform="translate(3.5641324,35.000847)">
+      <text
+         transform="rotate(-45)"
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:22.5px;line-height:0%;font-family:Impact;-inkscape-font-specification:'Impact, Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="-568.50763"
+         y="702.57544"
+         id="beername-text"
+         inkscape:label="#text6005"><tspan
+           y="702.57544"
+           x="-568.50763"
+           id="beername"
+           sodipodi:role="line">Bryggeri</tspan></text>
+      <rect
+         transform="rotate(-45)"
+         y="670.90411"
+         x="-642.83392"
+         height="5.2812181"
+         width="148.78448"
+         id="rect5219"
+         style="opacity:0.93000034;fill:#1d071d;fill-opacity:1;stroke:#000000;stroke-width:0.0337423;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <rect
+         transform="rotate(-45)"
+         y="713.69458"
+         x="-642.83392"
+         height="5.2812181"
+         width="148.78448"
+         id="rect5219-9"
+         style="opacity:0.93000034;fill:#1d071d;fill-opacity:1;stroke:#000000;stroke-width:0.0337423;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <image
+         transform="rotate(-45)"
+         inkscape:transform-center-y="519.60211"
+         inkscape:transform-center-x="-246.12736"
+         width="53.149605"
+         height="53.149605"
+         preserveAspectRatio="none"
+         style="image-rendering:optimizeQuality"
+         xlink:href=""
+         id="logo"
+         x="-595.01648"
+         y="623.05261" />
+    </g>
+  </g>
+</svg>
