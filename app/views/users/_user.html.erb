@@ -6,7 +6,7 @@
     </div>
 
     <div class="pure-u-5-8 item-information user-item-information">
-      <h5 class="item-header-small user-brewery"><%= shorten(user.brewery, 30) %></h5>
+      <h5 class="item-header-small user-brewery item-subtitle"><%= shorten(user.brewery, 30) %></h5>
       <h4 class="item-header-main user-name item-title"><%= link_to shorten(user.name), user, class: 'user-link item-link' %></h4>
       <p class="item-desc item-item-details">
         <span class="user-recipes"><%= I18n.t(:'users.recipes', count: user.recipes.size) %></span>

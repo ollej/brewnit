@@ -5,7 +5,7 @@
                   alt: event.name, height: 64, width: 64 %>
               </div>
               <div class="pure-u-5-8 item-information event-item-information">
-                <h5 class="item-header-small event-organizer"><%= shorten(event.organizer, 30) %></h5>
+                <h5 class="item-header-small event-organizer item-subtitle"><%= shorten(event.organizer, 30) %></h5>
                 <h4 class="item-header-main event-name item-title">
                   <%= link_to shorten(event.name), event, class: 'event-link item-link' %>
                 </h4>
