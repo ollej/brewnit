@@ -146,6 +146,8 @@ a {
   .item-subtitle,
   .item-title {
     margin: 0;
+    word-break: break-all;
+    hyphens: auto;
   }
   .item-title {
     font-size: 120%;
@@ -166,6 +168,8 @@ a {
     height: 18px;
     display: inline-block;
     overflow: hidden;
+    word-break: break-all;
+    hyphens: auto;
   }
 }
 
