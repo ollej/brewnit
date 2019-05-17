@@ -146,19 +146,22 @@ a {
   .item-subtitle,
   .item-title {
     margin: 0;
-    word-break: break-all;
-    hyphens: auto;
   }
   .item-title {
     font-size: 120%;
+    height: 37px;
+    display: inline-block;
+    overflow: hidden;
+    hyphens: auto;
     a {
       color: #333;
-      height: 37px;
-      display: inline-block;
-      overflow: hidden;
     }
   }
   .item-subtitle {
+    height: 18px;
+    overflow: hidden;
+    word-break: break-all;
+    hyphens: auto;
     text-transform: uppercase;
     a {
       color: #999;
@@ -166,7 +169,6 @@ a {
   }
   .item-desc {
     height: 18px;
-    display: inline-block;
     overflow: hidden;
     word-break: break-all;
     hyphens: auto;
