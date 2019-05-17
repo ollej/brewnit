@@ -1,0 +1,32 @@
+.feature-list {
+  &.page-content-body {
+    padding: 0;
+  }
+  img {
+    width: 100%;
+  }
+  .feature-orange,
+  .feature-white,
+  .feature-blue {
+    min-height: 300px;
+    padding: 3em 2em;
+
+    .padding-left {
+      padding-left: 2em;
+    }
+    .padding-right {
+      padding-right: 2em;
+    }
+  }
+  .feature-orange {
+    background-color: #ffcd40; /* #ffc94c;*/
+  }
+  .feature-white {
+    background-color: #fff4d6; /* #4a4a4a; */
+  }
+  .feature-blue {
+    background-color: #005493;
+    color: #fff;
+  }
+
+}
