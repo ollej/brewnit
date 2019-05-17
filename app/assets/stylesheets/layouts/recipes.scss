@@ -151,6 +151,9 @@ a {
     font-size: 120%;
     a {
       color: #333;
+      height: 37px;
+      display: inline-block;
+      overflow: hidden;
     }
   }
   .item-subtitle {
@@ -158,6 +161,11 @@ a {
     a {
       color: #999;
     }
+  }
+  .item-desc {
+    height: 18px;
+    display: inline-block;
+    overflow: hidden;
   }
 }
 
@@ -311,7 +319,8 @@ a {
 
   h1 {
     margin: 0.5em 0 0.5em;
-    color: #333
+    color: #333;
+    line-height: 1.2em;
   }
 }
 .recipe-content-title {
