@@ -199,6 +199,7 @@ sv:
       Beersmith 2, Brewpal eller Wort.
     clone: Klona
     clone_description: Klona detta recept till din egen receptlista
+    labels: Etiketter
   users:
     index: Bryggare
     other_users: Användare utan recept
