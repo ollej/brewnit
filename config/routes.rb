@@ -67,7 +67,12 @@ Rails.application.routes.draw do
 
   resources :latest_items, only: [:index]
 
-  root to: 'latest_items#index'
+  authenticated do
+    root to: 'latest_items#index', as: :authenticated
+  end
+  unauthenticated do
+    root to: 'pages#show', page: 'about'
+  end
 
   get '/404.html', to: redirect('/404.html')
   get '/500.html', to: redirect('/500.html')

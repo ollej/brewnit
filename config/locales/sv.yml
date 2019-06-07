@@ -68,6 +68,7 @@ sv:
     searched_term: "Sökresultat för: %{search_term}"
     clear_search: Rensa sökning
   latest_items:
+    latest_items: Senaste
     index: Nytt på Brygglogg.se
     recipe: Recept
     user: Användare
@@ -379,6 +380,7 @@ sv:
     recipe_registered: Tack för att du anmälde ditt recept "%{recipe}" till evenemanget "%{event}".
   pages:
     tools: Verktyg
+    about: Features
   clone_recipe:
     new: Klona recept
     clone: Klona

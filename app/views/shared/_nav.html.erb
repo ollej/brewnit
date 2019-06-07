@@ -18,6 +18,10 @@
             recipes_path(clear_search: true), class: 'pure-menu-link' %>
         </li>
         <li class="pure-menu-item">
+          <i class="fas fa-layer-group fa-fw"></i><%= link_to t(:'latest_items.latest_items'),
+            latest_items_path, class: 'pure-menu-link' %>
+        </li>
+        <li class="pure-menu-item">
           <i class="fas fa-users fa-fw"></i><%= link_to t(:'users.index'),
             users_path(clear_search: true), class: 'pure-menu-link' %>
         </li>
@@ -33,6 +37,10 @@
         <li class="pure-menu-item">
           <i class="fas fa-dna fa-fw"></i><%= link_to t(:'style_guides.index'),
             style_guides_path, class: 'pure-menu-link' %>
+        </li>
+        <li class="pure-menu-item">
+          <i class="fas fa-info-circle fa-fw"></i><%= link_to t(:'pages.about'),
+            pages_path(page: 'about'), class: 'pure-menu-link' %>
         </li>
       <% if user_signed_in? %>
         <li class="pure-menu-item">
