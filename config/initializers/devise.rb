@@ -281,5 +281,5 @@ Devise.setup do |config|
     manager.failure_app = AuthenticationFailure
   end
 
-  config.timeout_in = 2.hours
+  config.timeout_in = 30.days
 end
