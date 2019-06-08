@@ -45,7 +45,7 @@ sv:
       label:
         created:
           title: "Flasketikett skapad"
-          message: "En flasketikett för ölen %{name} av %{brewery} har skapats"
+          message: "En flasketikett för ölen %{name} av %{brewery} har skapats."
     search:
       advanced: Utökad sökning
       open_advanced: Fler sökmöjligheter
