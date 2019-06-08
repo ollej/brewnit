@@ -98,25 +98,28 @@ class User < ApplicationRecord
     end
   end
 
-  def pushover_values(type = :create)
-    translation_values = {
+  def pushover_translation
+    {
       name: name.blank? ? email : name,
       email: email,
     }
-    if type == :create
-      super.merge({
-        title: I18n.t(:'common.notification.user.created.title', translation_values),
-        message: I18n.t(:'common.notification.user.created.message', translation_values),
-        sound: 'bugle',
-        url: Rails.application.routes.url_helpers.user_url(self)
-      })
-    else
-      super.merge({
-        title: I18n.t(:'common.notification.user.destroyed.title', translation_values),
-        message: I18n.t(:'common.notification.user.destroyed.message', translation_values),
-        sound: 'siren',
-      })
-    end
+  end
+
+  def pushover_values_create
+    {
+      title: I18n.t(:'common.notification.user.created.title', pushover_translation),
+      message: I18n.t(:'common.notification.user.created.message', pushover_translation),
+      sound: :bugle,
+      url: Rails.application.routes.url_helpers.user_url(self)
+    }
+  end
+
+  def pushover_values_destroy
+    {
+      title: I18n.t(:'common.notification.user.destroyed.title', pushover_translation),
+      message: I18n.t(:'common.notification.user.destroyed.message', pushover_translation),
+      sound: :siren,
+    }
   end
 
   def self.from_omniauth(auth_hash, honeypot)

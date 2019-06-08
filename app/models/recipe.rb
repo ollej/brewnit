@@ -99,32 +99,37 @@ class Recipe < ApplicationRecord
     registrations.by_event(event).first&.message
   end
 
-  def pushover_values(type = :create)
-    translation_values = {
+  def pushover_translation
+    {
       recipe_name: name,
       brewer_name: brewer_name,
       style_name: style_name.presence || I18n.t(:'common.beer')
     }
-    if type == :create
-      super.merge({
-        title: I18n.t(:'common.notification.recipe.created.title', translation_values),
-        message: I18n.t(:'common.notification.recipe.created.message', translation_values),
-        url: Rails.application.routes.url_helpers.recipe_url(self)
-      })
-    else
-      super.merge({
-        title: I18n.t(:'common.notification.recipe.destroyed.title', translation_values),
-        message: I18n.t(:'common.notification.recipe.destroyed.message', translation_values),
-        sound: 'falling'
-      })
-    end
+  end
+
+  def pushover_values_create
+    {
+      title: I18n.t(:'common.notification.recipe.created.title', pushover_translation),
+      message: I18n.t(:'common.notification.recipe.created.message', pushover_translation),
+      url: Rails.application.routes.url_helpers.recipe_url(self),
+      user: pushover_user
+    }
+  end
+
+  def pushover_values_destroy
+    {
+      title: I18n.t(:'common.notification.recipe.destroyed.title', pushover_translation),
+      message: I18n.t(:'common.notification.recipe.destroyed.message', pushover_translation),
+      sound: :falling,
+      user: pushover_user
+    }
   end
 
   def pushover_user
     if public?
       Rails.application.secrets.pushover_group_recipe
     else
-      super
+      Rails.application.secrets.pushover_user
     end
   end
 

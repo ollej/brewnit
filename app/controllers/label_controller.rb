@@ -15,10 +15,23 @@ class LabelController < ApplicationController
   end
 
   def create
+    push_message
     send_data render_pdf, filename: 'etiketter.pdf', type: :pdf, disposition: :attachment
   end
 
   private
+  def push_message
+    PushMessage.new(push_values).notify
+  end
+
+  def push_values
+    {
+      title: I18n.t(:'common.notification.label.created.title', recipe_data),
+      message: I18n.t(:'common.notification.label.created.message', recipe_data),
+      sound: :magic
+    }
+  end
+
   def label_templates
     @label_templates ||= LabelTemplates.new(template: label_params[:template] || LabelTemplates::DEFAULT)
   end

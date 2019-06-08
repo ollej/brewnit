@@ -42,6 +42,10 @@ sv:
         destroyed:
           title: "Bryggare borttagen: %{name}"
           message: "Användaren %{name} med e-post %{email} har tagits bort."
+      label:
+        created:
+          title: "Flasketikett skapad"
+          message: "En flasketikett för ölen %{name} av %{brewery} har skapats"
     search:
       advanced: Utökad sökning
       open_advanced: Fler sökmöjligheter
@@ -1016,6 +1020,11 @@ sv:
             other: "%{count} fel förhindrade detta evenemang från att sparas"
         placement:
           no_placement_on_official_event: Du får inte sätta medalj på officiella evenemang.
+        recipe_detail:
+          attributes:
+            recipe:
+              required:
+                Recept måste sättas på recipe detail
   date:
     formats:
       default: "%Y-%m-%d"
