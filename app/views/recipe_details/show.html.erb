@@ -19,8 +19,8 @@
             <% end %>
             <%= button_to recipe_complete_path(@recipe), method: :put,
               class: 'pure-button primary-button',
-              data: tooltip_data(I18n.t(:'recipe_detail.complete_description'),
-                                length: 'small') do %>
+              data: tooltip_data(I18n.t(:'recipe_detail.complete_description'), length: 'small') do %>
+              <%= invisible_captcha %>
               <%= icon('flag-checkered') %> <%= t(:'recipe_detail.complete') %>
             <% end %>
           </div>
