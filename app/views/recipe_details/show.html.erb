@@ -11,12 +11,13 @@
                 <%= icon('beer') %> <%= t(:'recipe_detail.show_recipe') %>
               <% end %>
             <% end %>
-            <%= render 'shared/import_button' %>
             <%= link_to recipe_details_path(@recipe, format: :xml), rel: nofollow,
               class: 'pure-button secondary-button',
               data: tooltip_data(I18n.t(:'recipe_detail.download_description')) do %>
               <%= icon('download') %> <%= t(:'recipe_detail.download') %>
             <% end %>
+            <%= render 'shared/promotion_button' %>
+            <%= render 'shared/edit_button' %>
             <%= button_to recipe_complete_path(@recipe), method: :put,
               class: 'pure-button primary-button',
               data: tooltip_data(I18n.t(:'recipe_detail.complete_description'), length: 'small') do %>

@@ -48,126 +48,25 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
 
         <div class="page-content-controls pure-u-1 pure-u-sm-2-5">
           <div class="controls-public">
+            <%= link_to recipe_details_path(@recipe),
+              class: 'pure-button secondary-button',
+              data: tooltip_data(
+                I18n.t(:'recipes.edit.build.description'), position: 'left') do %>
+              <%= icon('edit') %> <%= I18n.t(:'recipes.edit.build.link') %>
+            <% end %>
             <%= link_to recipe_path(@recipe, format: :xml), rel: :nofollow,
               method: :get, class: 'pure-button secondary-button',
               data: tooltip_data(I18n.t(:'recipes.download_description')) do %>
               <%= icon('download') %> <%= t(:'recipes.download') %>
             <% end %>
-            <label class="purecss-dropdown">
-              <div class="pure-button secondary-button dd-button"
-                data-balloon="<%= I18n.t(:'recipes.print.description') %>"
-                data-balloon-pos="left" data-balloon-length="medium">
-                <%= icon('print') %> <%= t(:'recipes.print.button') %> <%= icon('caret-down') %>
-              </div>
-              <input type="checkbox" class="dd-input" id="test">
-              <ul class="dd-menu">
-                <li>
-                  <%= link_to print_recipe_path(id: @recipe),
-                    data: tooltip_data(
-                      I18n.t(:'recipes.print.recipe.description'),
-                      position: 'left'), target: '_blank' do %>
-                    <%= icon('file-alt') %> <%= t(:'recipes.print.recipe.link') %>
-                  <% end %>
-                </li>
-                <% if can_modify?(@recipe) %>
-                <li>
-                  <%= link_to label_recipe_path(id: @recipe),
-                    data: tooltip_data(
-                      I18n.t(:'recipes.print.labels.description'), position: 'left') do %>
-                    <%= icon('wine-bottle') %> <%= t(:'recipes.print.labels.link') %>
-                  <% end %>
-                </li>
-                <li>
-                <%= link_to qr_recipe_path(@recipe),
-                    data: tooltip_data(
-                      I18n.t(:'recipes.print.qrcode.description'), position: 'left'),
-                    target: '_blank' do %>
-                    <%= icon('qrcode') %> <%= t(:'recipes.print.qrcode.link') %>
-                  <% end %>
-                </li>
-                <li>
-                <%= link_to poster_recipe_path(@recipe),
-                    data: tooltip_data(
-                      I18n.t(:'recipes.print.poster.description'), position: 'left'),
-                    target: '_blank' do %>
-                    <%= icon('scroll') %> <%= t(:'recipes.print.poster.link') %>
-                  <% end %>
-                </li>
-                <li>
-                <%= link_to shopping_recipe_path(@recipe),
-                    data: tooltip_data(
-                      I18n.t(:'recipes.print.shopping.description'), position: 'left'),
-                    target: '_blank' do %>
-                    <%= icon('shopping-basket') %> <%= t(:'recipes.print.shopping.link') %>
-                  <% end %>
-                </li>
-                <% end %>
-              </ul>
-            </label>
+            <%= render 'shared/promotion_button' %>
           </div>
           <% if user_signed_in? %>
             <div class="controls-signed-in">
               <%= like_tag(@recipe, current_user) %>
 
               <% if can_modify?(@recipe) %>
-                <label class="purecss-dropdown">
-                  <div class="pure-button secondary-button dd-button"
-                    data-balloon="<%= I18n.t(:'recipes.edit.description') %>"
-                    data-balloon-pos="left" data-balloon-length="medium">
-                    <%= icon('edit') %> <%= t(:'recipes.edit.button') %> <%= icon('caret-down') %>
-                  </div>
-                  <input type="checkbox" class="dd-input" id="test">
-                  <ul class="dd-menu">
-                    <li>
-                      <%= link_to recipe_details_path(@recipe),
-                        data: tooltip_data(
-                          I18n.t(:'recipes.edit.build.description'), position: 'left') do %>
-                        <%= icon('edit') %> <%= I18n.t(:'recipes.edit.build.link') %>
-                      <% end %>
-                    </li>
-                    <li>
-                    <%= render 'shared/import_button', button_css: '',
-                          tooltip: tooltip_data(
-                            I18n.t(:'recipes.edit.import.description'),
-                            position: 'left'
-                          ) %>
-                    </li>
-                    <li>
-                      <%= form_tag recipe_media_path(@recipe),
-                        method: :post, id: 'mediaUploadForm',
-                        remote: true, multipart: true, class: 'form-button' do %>
-                        <%= link_to '#', class: 'upload-button',
-                          data: tooltip_data(
-                            I18n.t(:'recipes.edit.images.description'),
-                            position: 'left') do %>
-                          <%= icon('upload') %> <%= I18n.t(:'recipes.edit.images.link') %>
-                        <% end %>
-                        <%= file_field_tag 'media[]', type: :file, multiple: true,
-                          accept: 'image/png,image/gif,image/jpeg,image/jpg',
-                          id: 'uploadMediaField', class: 'hidden-file-field' %>
-                        <%= hidden_field_tag :media_type, 'main' %>
-                      <% end %>
-                    </li>
-                    <li>
-                      <%= link_to recipe_events_path(@recipe),
-                            data: tooltip_data(
-                              I18n.t(:'recipes.edit.events.description'),
-                              position: 'left') do %>
-                        <%= icon('calendar-alt') %> <%= I18n.t(:'recipes.edit.events.link') %>
-                      <% end %>
-                    </li>
-                    <li>
-                    <%= trash_button(
-                          @recipe,
-                          t(:'recipes.edit.destroy.link'),
-                          tooltip: tooltip_data(
-                            t(:'recipes.edit.destroy.description'),
-                            position: 'left'
-                          ),
-                          classes: '') %>
-                    </li>
-                  </ul>
-                </label>
+                <%= render 'shared/edit_button' %>
 
                 <%= link_to clone_recipe_path(id: @recipe),
                   class: 'pure-button secondary-button',
