@@ -164,4 +164,10 @@ module ApplicationHelper
   def can_modify?(model)
     user_signed_in? && current_user.can_modify?(model)
   end
+
+  def disallow_tracking?
+    Rails.env.development? ||
+      (request.headers['HTTP_DNT'].present? && request.headers['HTTP_DNT'] == "1") ||
+      (request.headers['HTTP_X_DO_NOT_TRACK'].present? && request.headers['HTTP_X_DO_NOT_TRACK'] == "1")
+  end
 end
