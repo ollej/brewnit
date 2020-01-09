@@ -1,43 +1,46 @@
 class LabelPresenter
-  include ActionView::Helpers::NumberHelper
   include ActionView::Helpers::AssetUrlHelper
 
-  def initialize(recipe, recipe_url, params)
-    @recipe = recipe
-    @recipe_url = recipe_url
+  def initialize(user, params, qrcode_url)
+    @user = user
+    @qrcode_url = qrcode_url
     @params = params
   end
 
   def recipe_data
-    @recipe_data ||= {
-      name: @recipe.name,
-      abv: "#{number_with_precision(@recipe.abv, precision: 1)}%",
-      ibu: number_with_precision(@recipe.ibu, precision: 0),
-      ebc: number_with_precision(@recipe.color, precision: 0),
-      og: format_sg(@recipe.og),
-      fg: format_sg(@recipe.fg),
-      brewdate: I18n.l(@recipe.created_at.to_date),
+    {
+      brewdate: I18n.l(Date.today),
       bottlesize: '50 cl',
-      brewery: @recipe.brewer_name,
-      beerstyle: @recipe.style_name,
-      contactinfo: "",
-      yeast: yeasts
-    }.merge(beer_description_lines)
-      .merge(malt_lines)
-      .merge(hop_lines)
-      .merge(images)
+      brewery: @user&.brewery,
+      qrcode: Qrcode.new(@qrcode_url).code,
+      logo: readmedia(logo),
+      background: background_image,
+      border: border_image
+    }
   end
 
   def label_templates
     @label_templates ||= LabelTemplates.new(template: @params[:template] || LabelTemplates::DEFAULT)
   end
 
+  def pdf
+    LabelMaker.new(template).generate
+  end
+
+  def push_values
+    {
+      title: I18n.t(:'common.notification.label.created.title', @params),
+      message: I18n.t(:'common.notification.label.created.message', @params),
+      sound: :magic
+    }
+  end
+
   def template
-    label_templates.template(params_data)
+    label_templates.template(@params.merge(images))
   end
 
   def qrcode_image
-    ImageData.new(qrcode).data
+    Qrcode.new(@qrcode_url).image
   end
 
   def preview_svg
@@ -45,81 +48,34 @@ class LabelPresenter
   end
 
   def logo_url
-    full_url_for(logo.url(:label)) if logo.present?
+    full_asset_url_for(logo.url(:label)) if logo.present?
   end
 
   def mainimage_url
-    full_url_for(mainimage.url(:label_main)) if mainimage.present?
+    nil
   end
 
   def mainimage_wide_url
-    full_url_for(mainimage.url(:label_main_wide)) if mainimage.present?
+    nil
   end
 
   def mainimage_full_url
-    full_url_for(mainimage.url(:label_main_full)) if mainimage.present?
+    nil
   end
 
   private
-
-  def params_data
-    @params.merge(images)
-  end
-
-  def beer_description_lines
-    description = Sanitizer.new(html_entity_decode: true)
-      .sanitize(@recipe.description)
-    lines = WordWrap.ww(description, 28).split("\n")
-    {
-      description1: lines[0],
-      description2: lines[1],
-      description3: lines[2],
-      description4: lines[3]
-    }
-  end
-
-  def malt_lines
-    lines = WordWrap.ww(fermentables, 44).split("\n")
-    {
-      malt1: lines[0],
-      malt2: lines[1]
-    }
-  end
-
-  def hop_lines
-    lines = WordWrap.ww(hops, 44).split("\n")
-    {
-      hops1: lines[0],
-      hops2: lines[1]
-    }
-  end
 
   def images
     {
       logo: readmedia(logo),
       qrcode: qrcode,
-      mainimage: readmedia(mainimage, :label_main),
-      mainimage_wide: readmedia(mainimage, :label_main_wide),
-      mainimage_full: readmedia(mainimage, :label_main_full),
       background: background_image,
       border: border_image
     }
   end
 
-  def fermentables
-    ingredients.fermentables.map { |item| item.name }.join(", ")
-  end
-
-  def hops
-    ingredients.hops.map { |item| item.name }.join(", ")
-  end
-
-  def yeasts
-    ingredients.yeasts.map { |item| item.name }.join(", ")
-  end
-
-  def ingredients
-    @ingredients ||= IngredientList.new(@recipe).build
+  def qrcode
+    Qrcode.new(@qrcode_url).code
   end
 
   def background_image
@@ -135,22 +91,9 @@ class LabelPresenter
   end
 
   def logo
-    if @recipe.user.present? && @recipe.user.media_brewery.present?
-      @recipe.user.media_brewery.file
+    if @user.present? && @user.media_brewery.present?
+      @user.media_brewery.file
     end
-  end
-
-  def mainimage
-    if @recipe.media_main.present?
-      @recipe.media_main.file
-    end
-  end
-
-  def qrcode
-    RQRCode::QRCode.new(@recipe_url).as_png(
-      size: 236,
-      border_modules: 1
-    ).to_s
   end
 
   def readmedia(file, size = :label)
@@ -161,10 +104,6 @@ class LabelPresenter
     File.open(path, 'rb') { |file| file.read } if path.present?
   end
 
-  def format_sg(value)
-    number_with_precision(value, precision: 3, separator: '.')
-  end
-
   def full_url?(url)
     uri = URI.parse(url)
     uri.hostname.present? && uri.scheme.present?
@@ -172,7 +111,7 @@ class LabelPresenter
     false
   end
 
-  def full_url_for(url)
+  def full_asset_url_for(url)
     return url if full_url?(url)
     asset_url(url)
   end

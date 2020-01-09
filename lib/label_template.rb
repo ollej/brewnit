@@ -109,7 +109,7 @@ class LabelTemplate
   end
 
   def sanitize_field(value)
-    sanitizer.sanitize(value)
+    sanitizer.sanitize(value) unless value.nil?
   end
 
   def sanitizer

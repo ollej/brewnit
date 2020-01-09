@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :styles, only: [:show]
 
   resources :label_templates, only: [:show], param: :template
+  get :label, to: 'label#new'
+  post :label, to: 'label#create'
 
   resources :events do
     resources :media, only: [:create, :destroy]
@@ -36,8 +38,8 @@ Rails.application.routes.draw do
       get :clone, to: 'clone_recipe#new'
       post :clone, to: 'clone_recipe#create'
       get :qr, to: 'qr#show'
-      get :label, to: 'label#new'
-      post :label, to: 'label#create'
+      get :label, to: 'recipe_label#new'
+      post :label, to: 'recipe_label#create'
       get :poster, to: 'recipe_poster#show'
       get :print, to: 'recipe_print#show'
       get :shopping, to: 'recipe_shopping_list#show'

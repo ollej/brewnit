@@ -1,14 +1,14 @@
-class LabelController < ApplicationController
+class RecipeLabelController < ApplicationController
   invisible_captcha only: [:create], on_spam: :redirect_spammers!
-  skip_before_action :authenticate_user!, only: [:new, :create]
-  before_action :deny_spammers!, only: [:new, :create]
+  before_action :deny_spammers!, only: [:create]
+  before_action :load_and_authorize_recipe_by_id!
 
   def new
-    @label_presenter = LabelPresenter.new(current_user, label_params, root_url)
+    @label_presenter = RecipeLabelPresenter.new(@recipe, recipe_url(@recipe), label_params)
   end
 
   def create
-    @label_presenter = LabelPresenter.new(current_user, label_params, root_url)
+    @label_presenter = RecipeLabelPresenter.new(@recipe, recipe_url(@recipe), label_params)
     PushMessage.new(@label_presenter.push_values).notify
     send_data @label_presenter.pdf, filename: 'etiketter.pdf', type: :pdf, disposition: :attachment
   end
