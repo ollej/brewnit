@@ -7,7 +7,7 @@ class RecipeDetailsController < ApplicationController
     # Never cache this page to ensure browser reloads
     expires_now
 
-    @details ||= RecipeDetail.create!(recipe_id: @recipe.id)
+    @details ||= RecipeDetail.create!(recipe: @recipe)
     @hops = @details.hops
     @fermentables = @details.fermentables
     @miscs = @details.miscs
