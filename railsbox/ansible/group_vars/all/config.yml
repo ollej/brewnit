@@ -17,11 +17,11 @@ packages:
   - imagemagick
   - qt5-default
   - libqt5webkit5-dev
-manual_ruby_version: 2.6.1
+manual_ruby_version: 2.7.0
 server_name: localhost
 rails_version: 4
 ruby_install: rbenv
-ruby_version: 2.6.1
+ruby_version: 2.7.0
 environment_file: /brewnit/.envrc
 databases:
   - postgresql

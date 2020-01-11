@@ -31,7 +31,7 @@ Requirements
 
 This application needs the following:
 
- * Ruby v2.5.3
+ * Ruby v2.7.0
  * Postgres v9.6
 
 Vagrant
@@ -171,10 +171,10 @@ If you don't have Ruby, here is a short primer:
    ```bash
    $ git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
    ```
- * Install Ruby v2.5.3
+ * Install Ruby v2.7.0
 
    ```bash
-   $ rbenv install 2.5.3
+   $ rbenv install 2.7.0
    ```
  * Install bundler
 
