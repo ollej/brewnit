@@ -1,6 +1,7 @@
 <%= form_with url: form_url, local: true,
-  class: 'pure-form pure-form-aligned label-form' do |f| %>
-  <%= invisible_captcha %>
+  class: 'pure-form pure-form-aligned label-form',
+  html: { target: '_blank', onsubmit: onsubmit } do |f| %>
+  <%= invisible_captcha if captcha %>
 
   <fieldset>
     <div class="field pure-control-group">

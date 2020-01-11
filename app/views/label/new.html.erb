@@ -10,6 +10,8 @@
             <%= render partial: 'shared/label_form',
               locals: {
                 form_url: label_path,
+                captcha: !user_signed_in?,
+                onsubmit: @onsubmit,
                 label_presenter: @label_presenter,
                 recipe_data: @label_presenter.recipe_data,
                 templates: @label_presenter.label_templates } %>

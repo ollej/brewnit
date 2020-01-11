@@ -65,7 +65,7 @@ sv:
     "no": Nej
     "true": Ja
     "false": Nej
-    spammer_detected: Kunde inte skapa kontot då du verkar vara en spammare.
+    spammer_detected: Spammingförsök upptäckt
     media:
       upload: Ladda upp bild
     no_event: Inget evenemang

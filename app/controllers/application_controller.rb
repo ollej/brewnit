@@ -81,14 +81,21 @@ class ApplicationController < ActionController::Base
     !honeypot.safe?
   end
 
+  def redirect_guest_spammers!
+    Rails.logger.debug { "redirect_guest_spammers! user_signed_in? #{user_signed_in?}" }
+    redirect_spammers! unless user_signed_in?
+  end
+
   def redirect_spammers!
-    Rails.logger.debug { "Spammer detected! IP: #{honeypot.ip_address} Score: #{honeypot.score} Offenses: #{honeypot.offenses} Last activity: #{honeypot.last_activity}" }
     flash[:alert] = I18n.t(:'common.spammer_detected')
     redirect_to root_path
   end
 
   def deny_spammers!
-    redirect_spammers! if spammer?
+    if spammer?
+      Rails.logger.debug { "Spammer detected by honeypot! IP: #{honeypot.ip_address} Score: #{honeypot.score} Offenses: #{honeypot.offenses} Last activity: #{honeypot.last_activity}" }
+      redirect_spammers!
+    end
   end
 
   def load_and_authorize_event_by_id!

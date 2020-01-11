@@ -1,5 +1,4 @@
 class RecipeLabelController < ApplicationController
-  invisible_captcha only: [:create], on_spam: :redirect_spammers!
   before_action :deny_spammers!, only: [:create]
   before_action :load_and_authorize_recipe_by_id!
 
@@ -10,7 +9,7 @@ class RecipeLabelController < ApplicationController
   def create
     @label_presenter = RecipeLabelPresenter.new(@recipe, recipe_url(@recipe), label_params)
     PushMessage.new(@label_presenter.push_values).notify
-    send_data @label_presenter.pdf, filename: 'etiketter.pdf', type: :pdf, disposition: :attachment
+    send_data @label_presenter.pdf, filename: 'etiketter.pdf', type: :pdf, disposition: :attachment, status: :created
   end
 
   private

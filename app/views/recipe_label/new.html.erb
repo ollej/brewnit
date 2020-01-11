@@ -10,6 +10,8 @@
             <%= render partial: 'shared/label_form',
               locals: {
                 form_url: label_recipe_path(id: @recipe.id),
+                captcha: false,
+                onsubmit: '',
                 label_presenter: @label_presenter,
                 recipe_data: @label_presenter.recipe_data,
                 templates: @label_presenter.label_templates } %>
