@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-//= require fancybox
+//= require fancybox/dist/js/jquery.fancybox
 //= require commontator/application
 //= require thirdparty/d3
 //= require thirdparty/jquery.fileupload

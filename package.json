@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "balloon-css": "^0.5.0"
+    "balloon-css": "^0.5.0",
+    "fancybox": "^3.0.1"
   },
   "devDependencies": {}
 }

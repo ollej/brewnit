@@ -1,12 +1,4 @@
 GIT
-  remote: https://github.com/ChallahuAkbar/fancybox2-rails.git
-  revision: 34a70fa57148bc74bedc896df8e37fb56d136e5b
-  ref: 34a70fa57148bc74bedc896df8e37fb56d136e5b
-  specs:
-    fancybox2-rails (0.3.0)
-      railties (>= 4.2.0, < 6.0)
-
-GIT
   remote: https://github.com/mrkamel/search_cop.git
   revision: 1082a2f7862321cf8f1c4560a2b6602a0c256e59
   ref: 1082a2f7862321cf8f1c4560a2b6602a0c256e59
@@ -432,7 +424,6 @@ DEPENDENCIES
   devise
   dotenv-rails
   execjs
-  fancybox2-rails!
   ffi
   httparty
   invisible_captcha
