@@ -4,7 +4,7 @@ class LabelPresenter
   def initialize(user, params, qrcode_url)
     @user = user
     @qrcode_url = qrcode_url
-    @params = params
+    @params = params.to_hash.symbolize_keys
   end
 
   def recipe_data
