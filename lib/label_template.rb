@@ -23,7 +23,7 @@ class LabelTemplate
     end
   end
 
-  def generate
+  def generate_svg
     build.to_s
   end
 

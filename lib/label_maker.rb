@@ -1,10 +1,6 @@
 require  "prawn/measurement_extensions"
 
 class LabelMaker
-  def initialize(template)
-    @template = template
-  end
-
   def generate
     build.render
   end
@@ -20,11 +16,7 @@ class LabelMaker
   def render_labels
     %i(top center bottom).each do |vposition|
       %i(left center right).each do |hposition|
-        pdf.svg @template, {
-          enable_web_requests: false,
-          position: hposition,
-          vposition: vposition
-        }
+        render_label vposition, hposition
       end
     end
     self

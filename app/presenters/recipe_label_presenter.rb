@@ -30,11 +30,11 @@ class RecipeLabelPresenter
   end
 
   def label_templates
-    @label_templates ||= LabelTemplates.new(template: @params[:template] || LabelTemplates::DEFAULT)
+    @label_templates ||= LabelTemplates.new(template_name: @params[:template] || LabelTemplates::DEFAULT)
   end
 
   def pdf
-    LabelMaker.new(template).generate
+    LabelMakerSvg.new(template).generate
   end
 
   def push_values
@@ -54,7 +54,7 @@ class RecipeLabelPresenter
   end
 
   def preview_svg
-    label_templates.template(recipe_data)
+    label_templates.template(recipe_data).generate_svg
   end
 
   def logo_url

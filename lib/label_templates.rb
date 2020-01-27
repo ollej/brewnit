@@ -15,9 +15,9 @@ class LabelTemplates
     }
   }
 
-  def initialize(path: nil, template: nil)
+  def initialize(path: nil, template_name: nil)
     @path = path || Rails.root.join('app', 'assets', 'labels')
-    @template = template
+    @template_name = template_name
   end
 
   def templates
@@ -37,11 +37,11 @@ class LabelTemplates
   end
 
   def filename
-    File.basename(template_path(@template))
+    File.basename(template_path(@template_name))
   end
 
   def template(data = {})
-    LabelTemplate.new(template_file, data).generate
+    LabelTemplate.new(template_file, data)
   end
 
   private
@@ -60,7 +60,7 @@ class LabelTemplates
   end
 
   def template_file
-    IO.read template_path(@template)
+    IO.read template_path(@template_name)
   end
 
   class LabelTemplateNotFound < ActionController::RoutingError; end
