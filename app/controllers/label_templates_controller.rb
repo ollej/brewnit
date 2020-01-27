@@ -2,11 +2,14 @@ class LabelTemplatesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show]
 
   def show
-    svg = label_templates.template(label_params.merge(images)).generate_svg
     send_data svg, filename: label_templates.filename, type: :svg, disposition: :inline
   end
 
   private
+  def svg
+    label_templates.template(label_params.merge(images)).generate_svg
+  end
+
   def label_templates
     @label_templates ||= LabelTemplates.new(template_name: params[:template])
   end

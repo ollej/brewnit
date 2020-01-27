@@ -1,4 +1,6 @@
 class LabelTemplate
+  WIDTH = 591
+  HEIGHT = 827
   #  591 x 827 px
   #  620 x 827 px
 
@@ -25,6 +27,10 @@ class LabelTemplate
 
   def generate_svg
     build.to_s
+  end
+
+  def generate_png
+    SvgToPng.new(generate_svg, width: WIDTH, height: HEIGHT).convert
   end
 
   private

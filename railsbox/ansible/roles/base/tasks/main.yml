@@ -22,6 +22,7 @@
     - git
     - libgmp-dev
     - libpq-dev
+    - libmagickwand-dev
 
 - name: Upgrade kernel
   apt:

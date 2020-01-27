@@ -10,13 +10,14 @@ class LabelMaker
     render_labels
     render_footer(90.mm)
     render_footer(188.mm)
+    cleanup
     pdf
   end
 
   def render_labels
     %i(top center bottom).each do |vposition|
       %i(left center right).each do |hposition|
-        render_label vposition, hposition
+        render_label hposition, vposition
       end
     end
     self
@@ -41,5 +42,8 @@ class LabelMaker
     )
     @pdf.font_families.update("Merriweather" => { normal: Rails.root.join('app', 'assets', 'fonts', 'merriweather.ttf') })
     @pdf
+  end
+
+  def cleanup
   end
 end
