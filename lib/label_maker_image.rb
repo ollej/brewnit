@@ -1,21 +1,33 @@
 class LabelMakerImage < LabelMaker
   def initialize(template)
-    Rails.logger.debug { "Generate label pdf using rsvg2" }
-    @png_temp = template.generate_png
-    @image = @png_temp.path
+    Rails.logger.debug { "Generate label png using inkscape" }
+    @template = template
+  end
+
+  def self.supported?
+    @@supported ||= File.exist?("/usr/bin/inkscape")
   end
 
   private
   def render_label(hposition, vposition)
-    pdf.image @image, {
-      width: LabelTemplate::WIDTH,
-      height: LabelTemplate::HEIGHT,
-      position: hposition,
-      vposition: vposition
-    }
+    pdf.float do
+      pdf.image image, {
+        fit: [52.5.mm, 70.mm],
+        position: hposition,
+        vposition: vposition
+      }
+    end
+  end
+
+  def image
+    return @image unless @image.nil?
+    @png_temp = @template.generate_png
+    @image = @png_temp.path
   end
 
   def cleanup
+    return if @png_temp.nil?
+    @png_temp.close
     @png_temp.unlink
   end
 end

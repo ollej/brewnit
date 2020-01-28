@@ -22,7 +22,7 @@
     - git
     - libgmp-dev
     - libpq-dev
-    - libmagickwand-dev
+    - inkscape
 
 - name: Upgrade kernel
   apt:

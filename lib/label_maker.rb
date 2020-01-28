@@ -5,12 +5,23 @@ class LabelMaker
     build.render
   end
 
+  def self.create(template)
+    if LabelMakerImage.supported?
+      LabelMakerImage.new(template).generate
+    else
+      LabelMakerSvg.new(template).generate
+    end
+  end
+
   private
   def build
-    render_labels
-    render_footer(90.mm)
-    render_footer(188.mm)
-    cleanup
+    begin
+      render_labels
+      render_footer(90.mm)
+      render_footer(188.mm)
+    ensure
+      cleanup
+    end
     pdf
   end
 
@@ -38,7 +49,8 @@ class LabelMaker
     return @pdf if @pdf.present?
     @pdf ||= Prawn::Document.new(
       page_size: "A4",
-      margin: 42
+      #margin: 42,
+      page_layout: :portrait
     )
     @pdf.font_families.update("Merriweather" => { normal: Rails.root.join('app', 'assets', 'fonts', 'merriweather.ttf') })
     @pdf

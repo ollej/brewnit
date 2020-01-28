@@ -34,7 +34,7 @@ class RecipeLabelPresenter
   end
 
   def pdf
-    LabelMakerSvg.new(template).generate
+    LabelMaker.create(template)
   end
 
   def push_values

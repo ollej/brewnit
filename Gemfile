@@ -55,8 +55,6 @@ gem 'httparty'
 gem 'rqrcode'
 gem 'prawn'
 gem 'prawn-svg'
-gem 'rsvg2'
-gem 'rmagick'
 gem 'word_wrap'
 
 # spam protection
