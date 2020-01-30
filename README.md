@@ -78,18 +78,19 @@ The file `config/secrets.yml` needs to be created from
 Then add the following to a file called `.env.development`.
 
 ```
-DEVISE_PEPPER=changeme
-GOOGLE_CLIENT_ID=changeme
-GOOGLE_CLIENT_SECRET=changeme
-SECRET_KEY_BASE=changeme
-WEB_CONCURRENCY=3
-PUSHOVER_USER=changeme
-PUSHOVER_TOKEN=changeme
-PUSHOVER_GROUP_RECIPE=changeme
-PROJECT_HONEYPOT_KEY=changeme
-SMTP_PASSWORD=changeme
-RECAPTCHA_SITE_KEY=changeme
-RECAPTCHA_SECRET_KEY=changeme
+DEVISE_PEPPER: changeme
+GOOGLE_CLIENT_ID: changeme
+GOOGLE_CLIENT_SECRET: changeme
+SECRET_KEY_BASE: changeme
+WEB_CONCURRENCY: 3
+PUSHOVER_USER: changeme
+PUSHOVER_TOKEN: changeme
+PUSHOVER_GROUP_RECIPE: changeme
+PROJECT_HONEYPOT_KEY: changeme
+SMTP_PASSWORD: changeme
+RECAPTCHA_SITE_KEY: changeme
+RECAPTCHA_SECRET_KEY: changeme
+INKSCAPE_PATH: /usr/bin/inkscape
 ```
 
 #### Development mode
@@ -126,6 +127,11 @@ For mailers to work, an SMTP password needs to be configured in
 
 The SMTP server and user_name is hardcoded in `config/application.rb`
 
+##### Inkscape
+
+If you have inkscape installed, you can set `INKSCAPE_PATH` to use inkscape
+to generate beer labels when creating the beer label pdf.
+
 #### For production mode
 
 Create a file called `.envrc` in the project root directory with the
@@ -149,6 +155,7 @@ SMTP_PASSWORD=changeme
 RECAPTCHA_SITE_KEY=changeme
 RECAPTCHA_SECRET_KEY=changeme
 SPAM_IP=space separated list of IP addresses to block
+INKSCAPE_PATH=/usr/bin/inkscape
 ```
 
 ### Step 4 - Start application

@@ -5,7 +5,7 @@ class LabelMakerImage < LabelMaker
   end
 
   def self.supported?
-    @@supported ||= File.exist?("/usr/bin/inkscape")
+    @@supported ||= SvgToPng.inkscape_present?
   end
 
   private
