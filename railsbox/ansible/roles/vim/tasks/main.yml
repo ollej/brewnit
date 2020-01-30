@@ -9,7 +9,7 @@
     - '{{ vim_bundle_path }}'
 
 - name: Install pathogen.vim
-  get_url: url=https://tpo.pe/pathogen.vim dest={{ vim_autoload_path }}/pathogen.vim
+  get_url: url=https://tpo.pe/pathogen.vim dest={{ vim_autoload_path }}/pathogen.vim validate_certs=False
   become_user: '{{ user_name }}'
 
 - name: Create ~/.vimrc

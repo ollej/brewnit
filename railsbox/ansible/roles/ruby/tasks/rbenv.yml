@@ -26,7 +26,7 @@
 - name: Install ruby
   command: '{{ rbenv_bin }} install {{ rbenv_ruby_version }}'
   become_user: '{{ user_name }}'
-  when: ruby_installed|failed
+  when: ruby_installed is failed
 
 - name: Set global ruby version
   command: '{{ rbenv_bin }} global {{ rbenv_ruby_version }}'

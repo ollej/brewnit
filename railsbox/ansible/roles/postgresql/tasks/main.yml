@@ -11,11 +11,11 @@
     repo: "deb http://apt.postgresql.org/pub/repos/apt/ {{ansible_distribution_release}}-pgdg main"
 
 - name: Install dependency packages
-  apt: name={{ item }}
-  with_items:
-    - libpq-dev
-    - python-pip
-    - python-dev
+  apt:
+    name:
+      - libpq-dev
+      - python-pip
+      - python-dev
 
 - name: Install PostgreSQL
   become: yes
@@ -56,19 +56,19 @@
   when: postgresql_orm in ['activerecord', 'sequel', 'datamapper']
 
 - name: Make sure the postgis extensions are installed
-  apt: name={{ item }}
-  with_items:
-    - libgeos-c1
-    - 'postgresql-{{ postgresql_version }}-postgis-{{ postgresql_ext_postgis_version }}'
+  apt:
+    name:
+      - libgeos-c1
+      - 'postgresql-{{ postgresql_version }}-postgis-{{ postgresql_ext_postgis_version }}'
   notify: restart postgresql
   when: "postgresql_extensions and 'postgis' in postgresql_extensions"
 
 - name: Create extensions
   postgresql_ext:
     db: '{{ postgresql_db_name }}'
-    name: '{{ item }}'
+    name: "{{ item }}"
   with_items: '{{ postgresql_extensions }}'
-  when: postgresql_extensions
+  when: (postgresql_extensions is defined) and (postgresql_extensions|length > 0)
   become: yes
   become_user: '{{ postgresql_db_user }}'
 
