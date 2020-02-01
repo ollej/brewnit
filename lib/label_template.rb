@@ -104,10 +104,14 @@ class LabelTemplate
   end
 
   def image(css, file, url=nil)
-    href = file.present? ? ImageData.new(file).data : url
+    href = file.present? ? ImageData.new(file).data : url.presence || empty_pixel
     if href.present?
       @doc.at_css(css)&.set_attribute("xlink:href", href)
     end
+  end
+
+  def empty_pixel
+    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
   end
 
   def excluded?(attribute)
