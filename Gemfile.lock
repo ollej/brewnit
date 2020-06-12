@@ -16,17 +16,6 @@ GIT
       nokogiri
 
 GIT
-  remote: https://github.com/randym/axlsx.git
-  revision: c8ac844572b25fda358cc01d2104720c4c42f450
-  ref: c8ac844572b25fda358cc01d2104720c4c42f450
-  specs:
-    axlsx (2.1.0.pre)
-      htmlentities (~> 4.3.4)
-      mimemagic (~> 0.3)
-      nokogiri (>= 1.6.6)
-      rubyzip (>= 1.2.1)
-
-GIT
   remote: https://github.com/vito-lbs/pushover.git
   revision: 3bbb7ea026b3d30c043ba033d596dab6fec2a031
   ref: 3bbb7ea026b3d30c043ba033d596dab6fec2a031
@@ -100,9 +89,6 @@ GEM
     arel (9.0.0)
     autoprefixer-rails (9.7.6)
       execjs
-    axlsx_rails (0.6.1)
-      actionpack (>= 3.1)
-      caxlsx (>= 3.0)
     bcrypt (3.1.13)
     beer_recipe (0.4.24)
       docopt (~> 0.5)
@@ -117,6 +103,9 @@ GEM
       mimemagic (~> 0.3)
       nokogiri (~> 1.10, >= 1.10.4)
       rubyzip (>= 1.3.0, < 3)
+    caxlsx_rails (0.6.2)
+      actionpack (>= 3.1)
+      caxlsx (>= 3.0)
     chronic (0.10.2)
     chunky_png (1.3.11)
     climate_control (0.2.0)
@@ -405,11 +394,11 @@ DEPENDENCIES
   acts_as_votable
   administrate
   administrate-field-image
-  axlsx!
-  axlsx_rails
   beer_recipe
   bootsnap
   byebug
+  caxlsx
+  caxlsx_rails
   chronic
   coffee-rails
   commontator

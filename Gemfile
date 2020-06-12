@@ -46,8 +46,8 @@ gem 'chronic', require: true
 gem 'actionview-encoded_mail_to'
 gem 'quilljs-rails'
 gem 'csv_shaper'
-gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844572b25fda358cc01d2104720c4c42f450'
-gem 'axlsx_rails'
+gem 'caxlsx'
+gem 'caxlsx_rails'
 gem 'dotenv-rails'
 gem 'httparty'
 
