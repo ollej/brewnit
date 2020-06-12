@@ -1,6 +1,6 @@
 class ShbfClient
   include HTTParty
-  base_uri 'https://shbf.se'
+  base_uri 'https://styles.shbf.se'
   format :json
 
   def initialize(year, options = {})
@@ -8,18 +8,29 @@ class ShbfClient
     @year = year
   end
 
+  def request(path, options = {})
+    Rails.logger.debug { "Requesting SHBF style guide: #{self.class.base_uri}#{path}, options: #{options}" }
+    begin
+      self.class.get(path, options)
+    rescue JSON::ParserError => e
+      Rails.logger.error { "JSON parse error: #{e.message}" }
+    end
+  end
+
   def style(category_number, style_letter = nil)
-    path = "/styles/json/#{@year}/styles/#{category_number}"
+    path = "/json/#{@year}/styles/#{category_number}"
     path += "/#{style_letter}" if style_letter.present?
-    self.class.get(path)
+    request(path)
   end
 
   def styles
-    self.class.get("/styles/json/#{@year}/styles", @options)
+    path = "/json/#{@year}/styles"
+    request(path, @options)
   end
 
   def import
     styles.each do |category|
+      Rails.logger.debug { "Importing #{category['name']}" }
       category_data = {
         'number' => category['number'].to_i,
         'category' => category['name'],

@@ -20,7 +20,7 @@
     <div class="field pure-control-group">
       <%= f.label :style_guide %>
       <%= f.select :style_guide,
-        options_for_select(Style.style_guides, @details.style&.style_guide),
+        options_for_select(Style.style_guides, @details.style&.style_guide || Style::DEFAULT_GUIDE),
         {}, { class: 'pure-input-1-4', id: :style_guide } %>
     </div>
 

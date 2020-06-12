@@ -14,7 +14,7 @@ class RecipeDetailsController < ApplicationController
     @yeasts = @details.yeasts
     @mash_steps = @details.mash_steps
     @style = @details.style
-    @styles = Style.style_options(@style&.style_guide || 'SHBF 2018')
+    @styles = Style.style_options(@style&.style_guide || Style::DEFAULT_GUIDE)
 
     respond_to do |format|
       format.html

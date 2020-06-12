@@ -18,7 +18,8 @@ namespace :recipe do
 
   desc 'Import SHBF recipes'
   task :import_shbf, [:year] => :environment do |t, args|
-    args.with_defaults(year: 2018)
+    default_year = Style::DEFAULT_GUIDE.slice(-4, 4)
+    args.with_defaults(year: default_year)
     ShbfClient.new(args.year).import
   end
 

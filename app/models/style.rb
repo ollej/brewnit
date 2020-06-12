@@ -1,4 +1,6 @@
 class Style < ApplicationRecord
+  DEFAULT_GUIDE = 'SHBF 2019'
+
   validates :style_guide, presence: true
   validates :name, presence: true
   validates :letter, presence: true
