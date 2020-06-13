@@ -11,7 +11,7 @@
     <div class="pure-u-5-8 item-information comment-item-information">
       <h5 class="item-subtitle comment-recipe"><%= t(:'latest_items.comment') %></h5>
       <h4 class="item-title comment-name">
-        <%= link_to truncate(recipe.name, length: 45, omission: '…'), recipe, class: 'comment-link item-link' %>
+        <%= link_to shorten(recipe.name, 45), recipe_path(recipe, anchor: "commontator-comment-#{item.id}"), class: 'comment-link item-link' %>
       </h4>
       <p class="item-desc comment-item-details">
         <%= shorten(item.body, 27) %>

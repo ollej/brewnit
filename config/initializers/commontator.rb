@@ -257,7 +257,7 @@ Commontator.configure do |config|
   #                                              anchor: "comment_#{comment.id}_div") }
   # (defaults to the commontable's show url with an anchor pointing to the comment's div)
   config.comment_url_proc = lambda { |comment, app_routes|
-    app_routes.polymorphic_url(comment.thread.commontable, anchor: "comment_#{comment.id}_div") }
+    app_routes.polymorphic_url(comment.thread.commontable, anchor: "commontator-comment-#{comment.id}") }
 
   # mentions_enabled
   # Type: Boolean

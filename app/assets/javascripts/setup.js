@@ -118,5 +118,13 @@ $( document ).ready(function() {
     input: "input[name=textcolor]",
     form: ".label-form"
   });
+
+  // Activate comments tab
+  const anchor = window.location.hash;
+  console.log("anchor", anchor);
+  if (anchor && anchor.startsWith("#commontator-comment-")) {
+    console.log("comment");
+    $("#tab3").prop("checked", true);
+  }
 });
 
