@@ -15,7 +15,7 @@ RSpec.describe LabelController, type: :controller do
     it "returns http success" do
       post :create, params: { id: recipe.id }
       expect(response).to have_http_status(:success)
-      expect(response.content_type).to eq "application/pdf"
+      expect(response.media_type).to eq "application/pdf"
     end
   end
 end

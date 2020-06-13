@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.7.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.2.4.3'
+gem 'rails', '6.0.3.1'
 
 gem 'bootsnap'
 # Use sqlite3 as the database for Active Record
@@ -36,7 +36,7 @@ gem 'unicorn-rails'
 
 gem 'nrb-beerxml', git: 'https://github.com/ollej/beerxml.git', ref: '3c3a9c6d7b138a1160e481f276bb2d0923c83911'
 gem 'beer_recipe' #, path: './vendor/beer_recipe/'
-gem 'commontator'
+gem 'commontator', '~>5.1'
 gem 'acts_as_votable'
 gem 'search_cop', git: 'https://github.com/mrkamel/search_cop.git', ref: '1082a2f7862321cf8f1c4560a2b6602a0c256e59' # Use Ruby v2.4 compatible fork
 gem 'meta-tags'
