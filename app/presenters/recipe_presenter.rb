@@ -98,13 +98,17 @@ class RecipePresenter
       aau: hop.aau,
       mgl_alpha: hop.mgl_added_alpha_acids,
       grams_per_liter: hop.amount / @recipe.batch_size,
-      tooltip: "#{hop.formatted_amount} #{I18n.t(:'beerxml.grams')} #{hop.name} @ #{hop.formatted_time} #{I18n.t("beerxml.#{hop.time_unit}", default: hop.time_unit)}"
+      tooltip: hop_info(hop)
     }
+  end
+
+  def hop_info(hop)
+    "#{hop.formatted_amount} #{I18n.t(:'beerxml.grams')} #{hop.name} @ #{hop.formatted_time} #{I18n.t("beerxml.#{hop.time_unit}", default: hop.time_unit)}"
   end
 
   def hop_additions
     hops = {}
-    @beerxml.hops.map do |h|
+    hops_sorted.map do |h|
       if hops[h.time]
         hops[h.time][:children] << hop_data(h)
       else
@@ -112,6 +116,10 @@ class RecipePresenter
       end
     end
     hops
+  end
+
+  def hops_sorted
+    @beerxml.hops.sort_by { |hop| hop.time }
   end
 
   def hops_data

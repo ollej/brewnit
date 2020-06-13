@@ -4,7 +4,7 @@ class RecipeStepsController < ApplicationController
   def show
     @recipe = find_recipe
     raise AuthorizationException unless can_show?(@recipe)
-    @beerxml = @recipe.beerxml_details
+    @brew_steps = BrewStepsPresenter.new(@recipe)
   end
 
   private
@@ -12,5 +12,4 @@ class RecipeStepsController < ApplicationController
   def find_recipe
     Recipe.unscoped.find(params[:id])
   end
-
 end

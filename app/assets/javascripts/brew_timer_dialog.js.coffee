@@ -33,7 +33,7 @@ class BrewTimerDialog
 
   toggleTimer: =>
     console.log('toggleTimer')
-    @timer.toggle()
+    @timer?.toggle()
     # TODO: Switch button between play/pause
   
 (exports ? this).BrewTimerDialog = BrewTimerDialog
