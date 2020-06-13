@@ -8,6 +8,7 @@ class BrewTimer
   # TODO: Find current step in list
 
   constructor: (@el, @steps) ->
+    console.log "steps: ", @steps
     @reset()
     @render()
 
@@ -44,13 +45,13 @@ class BrewTimer
       @start()
 
   render: ->
-    #console.log('render')
+    console.log('render')
     time = @calculateTime()
     @el.html("#{time} s")
 
   calculateTime: ->
     return 0 unless @start_time?
-    Math.round((Date.now() - @start_time) / 1000)
+    Math.floor((Date.now() - @start_time) / 1000)
 
   setInterval: ->
     @interval = window.setTimeout(@onInterval, @interval_time)

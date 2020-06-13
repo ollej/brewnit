@@ -100,7 +100,7 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
         <%= render partial: 'shared/image_slider', locals: { media: @recipe.media } %>
       </div>
 
-      <div class="page-content-body recipe-show">
+      <div id="recipe_div" class="page-content-body recipe-show" data-recipe-id="<%= @recipe.id %>">
         <div class="tabs">
           <input type="radio" name="tabs" id="tab1" checked>
           <label for="tab1" class="tab-trigger">

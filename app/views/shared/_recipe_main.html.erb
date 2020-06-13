@@ -1,5 +1,6 @@
     <article class="box post beer-recipe pure-g" itemscope
-        itemtype="http://schema.org/Recipe">
+      itemtype="http://schema.org/Recipe"
+      id="recipe_article" data-recipe-id="<%= @recipe.id %>" >
       <meta itemprop="image" content="<%= full_url_for(@recipe.main_image(:large)) %>">
       <meta itemprop="name" content="<%= @beerxml.name %>">
       <meta itemprop="author" content="<%= @beerxml.brewer %>">

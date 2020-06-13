@@ -71,7 +71,7 @@
         <li class="pure-menu-heading"><%= t(:'recipes.labels') %></li>
         <li class="pure-menu-item">
           <%= link_to recipes_path(private: true), class: 'pure-menu-link' do %>
-            <span class="recipe-label-private"></span><%= t(:'recipes.private') %></a></li>
+            <span class="recipe-label-private"></span><%= t(:'recipes.private') %></li>
           <% end %>
         <li class="pure-menu-item">
           <%= link_to user_path(current_user, clear_search: true), class: 'pure-menu-link' do %>
