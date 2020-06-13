@@ -215,7 +215,7 @@ Commontator.configure do |config|
   #   :m (manual subscriptions only)
   #   :b (both automatic, when commenting, and manual)
   # Default: :n
-  config.thread_subscription = :n
+  config.thread_subscription = :b
 
   # email_from_proc
   # Type: Proc
@@ -225,7 +225,7 @@ Commontator.configure do |config|
   # Default: lambda { |thread|
   #                   "no-reply@#{Rails.application.class.parent.to_s.downcase}.com" }
   config.email_from_proc = lambda { |thread|
-    "no-reply@#{Rails.application.class.parent.to_s.downcase}.com" }
+    "brewmaster@brygglogg.se" }
 
   # commontable_name_proc
   # Type: Proc
@@ -236,7 +236,8 @@ Commontator.configure do |config|
   # Default: lambda { |thread|
   #                   "#{thread.commontable.class.name} ##{thread.commontable.id}" }
   config.commontable_name_proc = lambda { |thread|
-    "#{thread.commontable.class.name} ##{thread.commontable.id}" }
+    "#{thread.commontable.name} (#{thread.commontable.brewer_name})"
+  }
 
   # comment_url_proc
   # Type: Proc

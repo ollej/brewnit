@@ -6,9 +6,11 @@
 
 <% is_subscribed = !!thread.subscription_for(user) %>
 <% sub_string = is_subscribed ? 'unsubscribe' : 'subscribe' %>
-<%= link_to t("commontator.subscription.actions.#{sub_string}"),
-            commontator.polymorphic_path([sub_string, thread]),
+<%= link_to commontator.polymorphic_path([sub_string, thread]),
             method: :put,
             id: "commontator-thread-#{thread.id}-#{sub_string}",
-            class: sub_string,
-            remote: true %>
+            class: "#{sub_string} pure-button pure-button-secondary",
+            remote: true do %>
+  
+  <i class="fas fa-envelope"></i> <%= t("commontator.subscription.actions.#{sub_string}") %>
+<% end %>
