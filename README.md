@@ -31,7 +31,7 @@ Requirements
 
 This application needs the following:
 
- * Ruby v2.7.0
+ * Ruby v2.7.1
  * Postgres v9.6
  * Vagrant 2.8+ for development
 
