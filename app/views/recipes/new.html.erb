@@ -1,6 +1,12 @@
       <div class="page-content-header pure-g">
         <div class="pure-u">
-          <h1 class="recipe-content-title"><%= title I18n.t(:'recipes.new') %></h1>
+          <h1 class="recipe-content-title">
+          <% if @event&.official? %>
+            <%= title I18n.t(:'events.register_recipe') %>
+          <% else %>
+            <%= title I18n.t(:'recipes.new') %>
+          <% end %>
+          </h1>
         </div>
       </div>
 

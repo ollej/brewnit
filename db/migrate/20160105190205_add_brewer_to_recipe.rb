@@ -1,4 +1,4 @@
-class AddBrewerToRecipe < ActiveRecord::Migration
+class AddBrewerToRecipe < ActiveRecord::Migration[4.2]
   def up
     add_column :recipes, :brewer, :string
     add_index :recipes, :brewer

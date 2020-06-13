@@ -1,0 +1,2 @@
+class MediaAttributeError < StandardError
+end

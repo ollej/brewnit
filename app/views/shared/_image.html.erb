@@ -3,22 +3,22 @@
         <%= image_tag medium.file.url(:small) %>
       <% end %>
       <% if user_signed_in? %>
-        <% if current_user.can_modify?(medium.parent) %>
+        <% if can_modify?(medium.parent) %>
           <div class="media-buttons">
             <% if medium.parent.class.name == 'User' %>
               <%= link_to add_medium_path(medium, 'avatar'), remote: true, method: :post,
                 alt: t(:'activerecord.attributes.user.medium_avatar'),
                 title: t(:'activerecord.attributes.user.medium_avatar'),
                 data: { confirm: I18n.t(:'activerecord.attributes.medium.confirm_avatar') },
-                class: 'media-button media-add-button' do %>
-                <i class="fa fa-user"></i>
+                class: 'inline-button add-button' do %>
+                <i class="fas fa-user"></i>
               <% end %>
               <%= link_to add_medium_path(medium, 'brewery'), remote: true, method: :post,
                 alt: t(:'activerecord.attributes.user.medium_brewery'),
                 title: t(:'activerecord.attributes.user.medium_brewery'),
                 data: { confirm: I18n.t(:'activerecord.attributes.medium.confirm_brewery') },
-                class: 'media-button media-add-button' do %>
-                <i class="fa fa-industry"></i>
+                class: 'inline-button add-button' do %>
+                <i class="fas fa-industry"></i>
               <% end %>
             <% end %>
             <% if medium.parent.class.name == 'Recipe' %>
@@ -26,16 +26,25 @@
                 alt: t(:'activerecord.attributes.recipe.medium_main'),
                 title: t(:'activerecord.attributes.recipe.medium_main'),
                 data: { confirm: I18n.t(:'activerecord.attributes.medium.confirm_main') },
-                class: 'media-button media-add-button' do %>
-                <i class="fa fa-photo"></i>
+                class: 'inline-button add-button' do %>
+                <i class="fas fa-image"></i>
+              <% end %>
+            <% end %>
+            <% if medium.parent.class.name == 'Event' %>
+              <%= link_to add_medium_path(medium, 'main'), remote: true, method: :post,
+                alt: t(:'activerecord.attributes.event.medium_main'),
+                title: t(:'activerecord.attributes.event.medium_main'),
+                data: { confirm: I18n.t(:'activerecord.attributes.medium.confirm_main') },
+                class: 'inline-button add-button' do %>
+                <i class="fas fa-image"></i>
               <% end %>
             <% end %>
             <%= link_to destroy_medium_path(medium), remote: true, method: :delete,
               alt: t(:'activerecord.attributes.user.destroy.media'),
               title: t(:'activerecord.attributes.user.destroy.media'),
               data: { confirm: I18n.t(:'activerecord.attributes.medium.confirm_destroy') },
-              class: 'media-button media-destroy-button' do %>
-              <i class="fa fa-trash"></i>&nbsp;
+              class: 'inline-button destroy-button' do %>
+              <i class="fas fa-trash-alt"></i>&nbsp;
             <% end %>
           </div>
         <% end %>

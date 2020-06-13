@@ -1,0 +1,32 @@
+      <div class="page-content-header pure-g">
+        <div class="pure-u-1">
+          <h1 class="label-content-title"><%= title I18n.t(:'label.new') %></h1>
+        </div>
+      </div>
+
+      <div class="page-content-body">
+        <div class="pure-g">
+          <div class="pure-u-1 pure-u-lg-1-2">
+            <%= render partial: 'shared/label_form',
+              locals: {
+                form_url: label_recipe_path(id: @recipe.id),
+                captcha: false,
+                onsubmit: '',
+                label_presenter: @label_presenter,
+                recipe_data: @label_presenter.recipe_data,
+                templates: @label_presenter.label_templates } %>
+          </div>
+          <div class="pure-u-1 pure-u-lg-1-2">
+            <h2>Förhandsgranskning</h2>
+            <div id="preview-template" class="label-preview">
+              <%= raw @label_presenter.preview_svg %>
+            </div>
+            <p>Ladda upp en huvudbild till <%= link_to 'receptet', recipe_path(@recipe) %>
+              för att det ska visas på framsidesetiketter.
+              Logotyp kan laddas upp till <%= link_to 'profilen', user_path(@recipe.user) %>.</p>
+            <p>Kontakta <%= mail_to 'brewmaster@brygglogg.se', 'Olle Wreede',
+              encode: 'javascript', class: 'email' %> om du vill skapa
+              en egen etikettmall.</p>
+          </div>
+        </div>
+      </div>

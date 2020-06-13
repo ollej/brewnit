@@ -1,16 +1,24 @@
-<h2>Forgot your password?</h2>
+      <div class="page-content-header pure-g">
+        <div class="pure-u">
+          <h1 class="recipe-content-title"><%= I18n.t(:'devise.passwords.recover_password') %></h1>
+        </div>
+      </div>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <div class="page-content-body password-new">
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name),
+                   html: { method: :post, class: 'pure-form pure-form-aligned' }) do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+        <fieldset>
+          <div class="field pure-control-group">
+            <%= f.label :email %>
+            <%= f.email_field :email, autofocus: true, required: true %>
+          </div>
 
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
+          <div class="actions pure-controls">
+            <%= f.submit I18n.t(:'devise.passwords.reset_password'), class: 'pure-button pure-button-primary' %>
+          </div>
+        </fieldset>
 <% end %>
 
-<%= render "devise/shared/links" %>
+      </div>

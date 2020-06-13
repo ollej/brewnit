@@ -5,11 +5,15 @@ sv:
       errors:
         max_file_size_exceeded: Du kan inte ladda upp bilder större än 2 MB.
         backend_error: "Kunde inte ladda up filen på grund av:"
+  admin:
+    root: Admin
+    public_link: Publik site
   common:
     are_you_sure: Är du säker?
     public: Offentlig
     private: Privat
     unknown_name: N.N.
+    beer: öl
     share:
       single_title: Dela recept!
       facebook:
@@ -37,7 +41,11 @@ sv:
           message: "%{name} med e-post %{email} har registrerat sig på Brygglogg.se"
         destroyed:
           title: "Bryggare borttagen: %{name}"
-          message: "Användaren %{name} med e-post %{email} har stängt sitt konto."
+          message: "Användaren %{name} med e-post %{email} har tagits bort."
+      label:
+        created:
+          title: "Flasketikett skapad"
+          message: "En flasketikett för ölen %{name} av %{brewery} har skapats."
     search:
       advanced: Utökad sökning
       open_advanced: Fler sökmöjligheter
@@ -52,16 +60,24 @@ sv:
         abv: ABV
         ibu: IBU
         style: Stiltyp
+        medal: Medalj
     "yes": Ja
     "no": Nej
-    spammer_detected: Kunde inte skapa kontot då du verkar vara en spammare.
+    "true": Ja
+    "false": Nej
+    spammer_detected: Spammingförsök upptäckt
     media:
       upload: Ladda upp bild
+    no_event: Inget evenemang
+    searched_term: "Sökresultat för: %{search_term}"
+    clear_search: Rensa sökning
   latest_items:
+    latest_items: Senaste
     index: Nytt på Brygglogg.se
     recipe: Recept
     user: Användare
     comment: Kommentar
+    event: Evenemang
   recipes:
     name: Namn
     description: Beskrivning
@@ -73,18 +89,77 @@ sv:
     edit: Ändra recept
     show: Visa recept
     save: Spara recept
+    build_recipe: Bygg recept
+    or_build: ...eller skapa
+    build_new_recipe_description: Bygg ditt recept genom att lägga till ingredienser.
+    build_recipe_description: Ändra namn, beskrivning och ingredienser på receptet.
+    upload_description: Ladda upp bilder som visas på receptsidan.
+    download_description: Ladda ner en BeerXML-fil som kan importeras i receptprogram.
+    recipe_create_information: |
+        <p>Fyll i namn och eventuell beskrivning av receptet.</p>
+        <p>Klicka på knappen <em>"Importera"</em> för att importera ett eller flera
+        recept exporterade som BeerXML från ett receptprogram (t.ex. BeerSmith).</p>
+        <p>Annars klickar du på knappen <em>"Bygg recept"</em> för att öppna
+        receptbyggaren där du kan fylla i alla ingredienser och övriga uppgifter
+        om receptet.</p>
+    beersmith_export: Exportera från BeerSmith 2
+    beersmith_export_description: |
+      <ol>
+        <li>Högerklicka på receptet</li>
+        <li>Välj "Export selected"</li>
+        <li>Välj "BeerXML File" vid "Save as type"</li>
+      </ol>
+    import: Importera
     search:
       button: Sök recept
       description: Sök recept
       freetext: Fritext
       style: Stiltyp
       clear: Nollställ sökning
+      equipment: Bryggverk
+      event: Evenemang
     download: Ladda ner
-    print: Skriv ut
+    print:
+      button: Promotion
+      description: Skriv ut dokument för det här receptet.
+      recipe:
+        link: Recept
+        description: Skriv ut bryggschemat för det här receptet-
+      labels:
+        link: Etiketter
+        description: Skapa en PDF med baksidesetiketter för det här receptet
+      poster:
+        link: Affisch
+        description: Skriv ut en affisch med receptets namn och bild
+      qrcode:
+        link: QR-kod
+        description: Skriv ut en QR-kod som länkar till receptet
+      shopping:
+        link: Inköpslista
+        description: Skriv ut en lista med mängder av alla ingredienser i receptet.
+    edit:
+      button: Ändra
+      description: Ändra information om det här receptet.
+      events:
+        link: Evenemang
+        description: Ändra vilka evenemang detta recept har deltagit i.
+      build:
+        link: Bygg
+        description: Ändra beskrivning eller ingredienser i receptet.
+      import:
+        link: Importera
+        description: Importera BeerXML från ett receptprogram.
+      images:
+        link: Bilder
+        description: Ladda upp bilder till detta recept.
+      destroy:
+        link: Ta bort
+        description: Ta bort receptet från Brygglogg
     private: Privat
     own: Egna recept
     winner: Medaljör
-    labels: Etiketter
+    incomplete: Ofärdig
+    incomplete_description: Detta recept är inte färdigbyggt än, importera BeerXML eller bygg.
     recipe_details: Recept
     recipe_analytics: Analys
     recipe_comments: Diskussion
@@ -93,8 +168,10 @@ sv:
       successful: Receptet har uppdaterats.
     create:
       successful: Receptet har skapats.
+      failed: Kunde inte skapa receptet.
     destroy:
       link: Ta bort
+      link_description: Ta bort hela receptet från sidan, kan inte ångras.
       successful: Receptet har tagits bort.
     new: Lägg till recept
     comments_count:
@@ -105,21 +182,36 @@ sv:
       other: '%{count} gillade'
     likes:
       like: Gilla!
+      like_description: Visa om du gillar detta recept.
       unlike: Sluta gilla
+      unlike_description: Du har gillat detta recept, klicka för att sluta gilla receptet.
       successful: Tack för att du gillade receptet!
       successful_unlike: Du gillar inte längre receptet.
+    name_description: Namnet på receptet visas i alla listningar.
     name_not_needed: Namn hämtas från BeerXML-filen om det inte fylls i.
     no_style_information: Det finns ingen stiltypsinformation för detta recept.
     show_all: Visa alla %{count} recept
+    show_more: Visa fler
     downloads_count:
       one: 1 nedladdning
       other: '%{count} nedladdningar'
     timer: Timer
+    public_description: |
+      Kryssa för denna ruta om du vill att
+      andra ska kunna se ditt recept.
+    beerxml_description: |
+      Ladda upp recept som exporterats till
+      BeerXML i ett receptprogram som
+      Beersmith 2, Brewpal eller Wort.
+    clone: Klona
+    clone_description: Klona detta recept till din egen receptlista
+    labels: Etiketter
   brewtimer:
     title: Bryggklocka
     start: Påbörja bryggning
   users:
     index: Bryggare
+    other_users: Användare utan recept
     profile: Profil
     edit: Ändra profil
     sign_up: Registrera
@@ -127,8 +219,9 @@ sv:
     sign_out: Logga ut
     sign_in_with_provider: Logga in med %{provider}
     min_pwd_length: Minst %{min_length} tecken
-    leave_pwd_blank: lämna blankt om du inte vill ändra lösenord
-    pwd_needed_to_confirm: behövs bara för att ändra lösenord
+    leave_pwd_blank: Lämna blankt om du inte vill ändra lösenord.
+    pwd_needed_to_confirm: Behövs bara för att ändra lösenord.
+    password_confirmation_description: Upprepa nya lösenordet för att garantera att det blir rätt.
     save: Spara ändringar
     cancel_account: Avsluta konto
     cancel_my_account: Avsluta mitt konto
@@ -143,7 +236,230 @@ sv:
     recipe_count: Antal recept
     media:
       title: Bilder
+    search: Sök användare
+    add_avatar_image: Ladda gärna upp en avatarbild!
+  events:
+    index: Evenemang
+    new: Skapa evenemang
+    edit: Ändra
+    save: Spara
+    search: Sök evenemang
+    searched_term: "Sökresultat för: %{search_term}"
+    clear_search: Rensa sökning
+    register_recipe: Anmäl recept
+    add_recipe: Lägg till recept
+    registrations_closed: Anmälan stängd
+    last_registration_header: Sista anmälningsdatum
+    official_event_info: Anmäl recept till detta evenemang.
+    create:
+      successful: Evenemanget har skapats.
+    update:
+      successful: Evenemanget har uppdaterats.
+    destroy:
+      link: Ta bort
+      successful: Evenemanget har tagits bort.
+    past_events: Tidigare evenemang
+    upcoming_events: Kommande evenemang
+    recipes_excel: Excel
+    recipes_csv: CSV
+    official_badge_title: Officiell
+    official_badge_description: Detta är ett officiellt evenemang där du kan anmäla ditt recept för att delta på evenemanget.
+    recipe_count: "%{count} recept"
+    recipes_count_info: Recepten kopplade till evenemanget listas i receptlistan.
+    event_type_description: Är detta evenemang en Tävling, en Utmaning eller en Träff.
+    organizer_description: Vem eller vilka arrangerar detta evenemang?
+    location_description: I vilken lokal hålls detta evenemang?
+    url_description: Webbadress till arrangemangets hemsida.
+    held_at_description: Vilket datum hålls detta arrangemang?
+    address_description: Address till arrangemangets lokal.
+    coordinates_description: Fyll i GPS-koordinater för att visa karta till evenemanget.
+    contact_email_description: E-postadress till arrangören av evenemanget.
+    last_registration_description: Senaste datum och tid som det går att anmäla sig till detta arrangemang.
+    registration_information_description: Information som visas vid anmälan av recept till evenemanget.
+  recipe_events:
+    events_for_recipe: Evenemang för %{recipe_name}
+    recipe_must_be_completed: Du måste bygga färdigt och publicera receptet, och markera det publikt, för att kunna lägga till evenemang.
+    add_event: Lägg till evenemang
+    add: Lägg till
+    choose: Välj evenemang
+    create:
+      successful: Evenemanget har lagts till på receptet.
+      failed: "Kunde inte lägga till evenemanget till receptet: %{error}"
+    destroy:
+      successful: Receptet har tagits bort från evenemanget.
+      failed: Kunde inte ta bort receptet från evenemanget.
+    exhibited_at_event: Deltog på evenemang
+    exhibited_at_event_description: Om du deltagit i en tävling med denna öl.
+    medal: Medaljplats
+    medal_description: Välj medaljplats om receptet vann pris på tävlingen.
+    category: Tävlingsgrupp
+    categeory_description: Vilken tävlingsgrupp vann receptet medalj i?
+    registration_message: Meddelande
+    registration_message_description: Skriv ett meddelande till arrangörerna.
+    medals:
+      gold: 🥇 Guld
+      silver: 🥈 Silver
+      bronze: 🥉 Brons
+      none: Ingen medalj
+  event_recipes:
+    add_placement: Lägg till placering
+    choose_recipe: Välj recept
+    create:
+      successful: Sparade placeringen på receptet.
+      failed: Kunde inte spara placeringen på receptet.
+  recipe_placements:
+    destroy:
+      successful: Placeringen har tagits bort från receptet.
+      failed: Kunde inte ta bort placeringen från receptet.
+  recipe_detail:
+    edit: Bygg recept
+    main_details: Receptuppgifter
+    save: Spara
+    add: Lägg till
+    fermentables: Malt
+    hops: Humle
+    miscs: Övrigt
+    yeasts: Jäst
+    complete: Publicera
+    complete_description: Publicera receptet för att ändringar ska visas på sidan.
+    download: Ladda ner
+    download_description: Ladda ner en BeerXML-fil som kan importeras i receptprogram.
+    show_recipe: Visa recept
+    show_recipe_description: Visa receptsidan för detta recept.
+    edit_recipe: Ändra recept
+    mash_steps: Mäskning
+    weight_option:
+      weight: Vikt
+      volume: Volym
+    fermentable_type:
+      grain: Malt
+      extract: Sirap
+      dry_extract: Torrextrakt
+      sugar: Socker
+      adjunct: Adjunkt
+    hop_use:
+      boil: Kok
+      dry_hop: Torrhumling
+      mash: Mäskhumling
+      first_wort: Vörthumling
+      aroma: Whirlpool
+    hop_form:
+      pellet: Pellets
+      plug: Puck
+      leaf: Kottar
+    misc_type:
+      spice: Krydda
+      fining: Klarning
+      water_agent: Vattenjustering
+      herb: Ört
+      flavor: Smak
+      other: Övrigt
+    misc_use:
+      mash: Mäskning
+      boil: Kok
+      primary: Primärjäsning
+      secondary: Sekundärjäsning
+      bottling: Buteljering
+    yeast_type:
+      wheat: Vete
+      wine: Vin
+      ale: Ale
+      lager: Lager
+      champagne: Champagne
+    yeast_form:
+      dry: Torr
+      liquid: Flytande
+      culture: Kultur
+      slant: Slant
+    mash_type:
+      infusion: Infusion
+      temperature: Temperatur
+      decoction: Dekoktion
+  register_recipe:
+    new: Anmäl recept
+    save: Anmäl
+    choose_event: Välj evenamang
+    choose_event_description: Välj ett evenemang att anmäla receptet till.
+    no_recipes: Du har inga färdiga recept.
+    recipe: Recept
+    recipe_description: Välj ett av dina färdiga recept att anmäla till evenemanget.
+    message: Meddelande
+    message_description: Skriv ett meddelande till arrangörerna.
+    recipe_registered: Tack för att du anmälde ditt recept "%{recipe}" till evenemanget "%{event}".
+  pages:
+    tools: Verktyg
+    about: Features
+  clone_recipe:
+    new: Klona recept
+    clone: Klona
+    recipe_name: Nytt receptnamn
+    clone_name_suffix:  (klon)
+    create:
+      successful: Receptet har klonats
+      failed: Kunde inte klona receptet
+  label:
+    new: Skapa etiketter
+    generate: Skapa PDF
+    template: Mall
+    background: Bakgrund
+    border: Ram
+    textcolor: Textfärg
+    field:
+      name: Ölnamn
+      beerstyle: Ölstil
+      brewery: Bryggare
+      abv: ABV
+      ibu: IBU
+      og: OG
+      fg: FG
+      ebc: EBC
+      description1: Beskrivning rad 1
+      description2: Beskrivning rad 2
+      description3: Beskrivning rad 3
+      description4: Beskrivning rad 4
+      brewdate: Bryggdatum
+      bottlesize: Flaskstorlek
+      contactinfo: Kontaktinfo
+      malt1: Malt rad 1
+      malt2: Malt rad 2
+      hops1: Humle rad 1
+      hops2: Humle rad 2
+      yeast: Jäst
+  recipe_details:
+    build:
+      save: Spara
+  recipe_shopping_list:
+    header: 'Inköpslista för:'
+    type:
+      fermentable: Malt
+      hops: Humle
+      yeast: Jäst
+      miscs: Övrigt
+    units:
+      packet: paket
+      kg: kg
+      gr: gr
+  style_guides:
+    index: Stilguider
+    show: "Stiltyper för %{style_guide}"
+  styles:
+    show: Stiltypsinformation
+    style_guide: Stilguide
+    og: OG
+    fg: FG
+    ebc: EBC
+    ibu: IBU
+    abv: ABV
+    description: Beskrivning
+    aroma: Arom
+    appearance: Utseende
+    flavor: Smak
+    texture: Munkänsla
+    examples: Förebilder
+    summary: Sammanfattning
+
   beerxml:
+    name: Ölnamn
     information: Information
     style: Ölstil
     type: Typ
@@ -151,7 +467,7 @@ sv:
     kilograms: kg
     hops: Humle
     grams: gr
-    equipment: Utrustning
+    equipment: Bryggverk
     brew_date: Bryggdatum
     brewer: Bryggare
     assisted_by: med hjälp av %{assistant}
@@ -188,7 +504,7 @@ sv:
     hops_form: Form
     hops_alpha: Alfa
     hops_ibu: IBU
-    Pellet: Pellet
+    Pellet: Pellets
     Leaf: Kottar
     Plug: Puck
     days: dgr
@@ -228,7 +544,7 @@ sv:
     misc_type: Typ
     misc_amount: Mängd
     misc_use: Användning
-    misc_use_for: Användningsområde
+    misc_use_for: Används till
     misc_time: Tid
     Fining: Klarning
     Herb: Ört
@@ -249,7 +565,9 @@ sv:
     addition_flavour: Smakgiva
     addition_aroma: Aromgiva
     addition_dry_hop: Torrhumling
+    style_name: Stilyp
     style_guide: Stilguide
+    style_code: Typkod
     style_type: Typ
     style_examples: Förebild
     style_ingredients: Ingredienser
@@ -306,18 +624,92 @@ sv:
       Aroma: Whirlpool
       Mash: Mäskhumling
     boil_time: Koka i %{boil_time} minuter.
+    hop_uses:
+      Mash: Mäskhumling
+      First Wort: Vörthumling
+      Boil: Kok
+      Aroma: Whirlpool
+      Dry Hop: Torrhumling
+    hop_forms:
+      Pellet: Pellets
+      Leaf: Kottar
+      Plug: Puck
+    time_unit:
+      days: dgr
+      min: min
+    yeast_types:
+      Wheat: Vete
+      Wine: Vin
+      Ale: Ale
+      Lager: Lager
+      Champagne: Champagne
+    yeast_forms:
+      Dry: Torr
+      Liquid: Flytande
+      Culture: Kultur
+      Slant: Slant
+    misc_types:
+      Spice: Krydda
+      Fining: Klarning
+      Water Agent: Vattenjustering
+      Herb: Ört
+      Flavor: Smak
+      Other: Övrigt
+    misc_uses:
+      Mash: Mäskning
+      Boil: Kok
+      Primary: Primärjäsning
+      Secondary: Sekundärjäsning
+      Bottling: Buteljering
+    misc_used_for:
+      Clearing: Klarning
+      Fermentation: Jäsning
+      Water Agent: Vattenjustering
+      Mash pH: Mäsk pH
+      Flavoring: Smaksättning
+      Spiced Beer: Kryddöl
+    misc_names:
+      Ginger Root: Ingefära
+      Coffee: Kaffe
+      Seeds of Paradise: Paradisfrön
+    mash_step_name:
+      Dough In: Dough In
+      Conversion: Conversion
+      Mash In: Inmäskning
+      Protein Rest: Proteinrast
+      Saccharification: Försockringsrast
+      Low Saccharification: Låg försockring
+      High Saccharification: Hög försockring
+      Mash Out: Utmäskning
+      Mash: Mäskning
+      Sparge: Lakning
+      Step 1: Steg 1
+      Step: Steg
+    mash_step_type:
+      Temperature: Temperatur
+      Infusion: Infusion
+      Decoction: Dekoktion
+    fermentable_types:
+      Grain: Malt
+      Extract: Sirap
+      "Dry Extract": Torrextrakt
+      Sugar: Socker
+      Adjunct: Adjunkt
   devise:
     confirmations:
       confirmed: "Ditt konto har bekräftats. Du är nu inloggad."
-      send_instructions: "Du kommer att få epost med instruktioner om hur du kan bekräfta ditt konto inom några minuter."
-      send_paranoid_instructions: "Om din email är i vår databas, kommer du att få ett mail med instruktioner om hur du ska aktivera ditt konto inom några minuter."
+      send_instructions: "Du kommer att få e-post med instruktioner om hur du kan bekräfta ditt konto inom några minuter."
+      send_paranoid_instructions: "Om din e-postadress är i vår databas, kommer du att få ett mail med instruktioner om hur du ska aktivera ditt konto inom några minuter."
+      didnt_receive_instructions: Fick du inga bekräftelseinstruktioner?
+      new:
+        resend_confirmation_instructions: Skicka om bekräftelseinstruktioner
     failure:
       already_authenticated: "Du har redan loggat in."
       inactive: "Ditt konto har inte aktiverats ännu."
-      invalid: "Ogiltig epost eller lösenord."
+      invalid: "Ogiltigt e-post eller lösenord."
       locked: "Ditt konto är låst."
       last_attempt: "Du har ett till försök innan ditt konto blir låst."
-      not_found_in_database: "Ogiltig epost eller lösenord."
+      not_found_in_database: "Ogiltigt e-post eller lösenord."
       timeout: "Din session är inte längre giltig, vänligen logga in igen för att fortsätta."
       unauthenticated: "Du måste logga in eller skapa ett konto innan du kan fortsätta."
       unconfirmed: "Du måste bekräfta ditt konto innan du kan fortsätta."
@@ -325,25 +717,32 @@ sv:
       confirmation_instructions:
         subject: "Instruktioner för att bekräfta konto"
       reset_password_instructions:
-        subject: "Instrukionter för att återställa lösenord"
+        subject: "Instruktioner för att återställa lösenord"
       unlock_instructions:
         subject: "Instruktioner för att låsa up konto"
     omniauth_callbacks:
       failure: "Kunde inte autentisera dig med %{kind} för \"%{reason}\"."
       success: "Autentiserat med %{kind}-konto."
     passwords:
-      no_token: "Du har endast tillgång till den här sidan via ett epost för att återställa ditt lösenord. Om detta är fallet, var god kontrollera att du använder den fullständiga adressen i meddelandet."
-      send_instructions: "Du kommer få epost med instruktioner om hur du kan återställa ditt lösenord inom några minuter."
-      send_paranoid_instructions: "Om din email är i vår databas, kommer du att få en lösenordslänk till din mail."
+      no_token: "Du har endast tillgång till den här sidan via ett e-post för att återställa ditt lösenord. Om detta är fallet, var god kontrollera att du använder den fullständiga adressen i meddelandet."
+      send_instructions: "Du kommer få e-post med instruktioner om hur du kan återställa ditt lösenord inom några minuter."
+      send_paranoid_instructions: "Om din e-post är i vår databas, kommer du att få en lösenordslänk till din mail."
       updated: "Ditt lösenord har uppdaterats. Du är nu inloggad."
       updated_not_active: "Ditt lösenord har uppdaterats."
+      recover_password: Återställ lösenord
+      reset_password: Skicka instruktioner för att återställa lösenord
+      change_your_password: Ändra ditt lösenord
+      change_my_password: Ändra mitt lösenord
+      new_password: Nytt lösenord
+      confirm_new_password: Bekräfta lösenord
+      forgot_your_password: Glömt ditt lösenord?
     registrations:
       destroyed: "Ditt konto är nu avregistrerat. Vi hoppas få se dig snart igen."
       signed_up: "Välkommen till Brygglogg.se! Fyll gärna i uppgifterna nedan."
       signed_up_but_inactive: "Ett nytt konto har skapats. Men vi kunde tyvärr inte logga in dig eftersom ditt konto inte är aktiverat."
       signed_up_but_locked: "Ett nytt konto har skapats. Men vi kunde tyvärr inte logga in dig eftersom ditt konto inte är låst."
-      signed_up_but_unconfirmed: "En bekräftelse har skickats till din epost. Klicka på länken i meddelandet för att aktivera ditt konto."
-      update_needs_confirmation: "Ditt konto har uppdaterats, men vi behöver bekräfta din epostadress. En bekräftelse har skickats till din nya epostadress."
+      signed_up_but_unconfirmed: "En bekräftelse har skickats till din e-post. Klicka på länken i meddelandet för att aktivera ditt konto."
+      update_needs_confirmation: "Ditt konto har uppdaterats, men vi behöver bekräfta din e-postadress. En bekräftelse har skickats till din nya e-postadress."
       updated: "Din profil har uppdaterats."
       user:
         destroyed: Ditt konto har tagits bort.
@@ -352,13 +751,13 @@ sv:
       signed_out: "Du är utloggad."
       already_signed_out: "Du är utloggad."
     unlocks:
-      send_instructions: "Du kommer få epost med instruktioner om hur du kan låsa upp ditt konto inom några minuter."
-      send_paranoid_instructions: "Om ditt konto finns, kommer du att få ett email med instruktioner om hur du låser upp det inom några minuter."
+      send_instructions: "Du kommer få e-post med instruktioner om hur du kan låsa upp ditt konto inom några minuter."
+      send_paranoid_instructions: "Om ditt konto finns, kommer du att få e-post med instruktioner om hur du låser upp det inom några minuter."
       unlocked: "Ditt konto är upp låsts. Du kan nu logga in."
   errors:
     messages:
       already_confirmed: "är redan bekräftad, vänligen logga in igen"
-      confirmation_period_expired: "needs to be confirmed within %{period}, please request a new one"
+      confirmation_period_expired: "behöver bekräftas inom %{period}. Vänligen begär en ny"
       expired: "har löpt ut, var god begär en ny"
       not_found: "hittades inte"
       not_locked: "var inte låst"
@@ -486,32 +885,37 @@ sv:
     models:
       user: Användare
       recipe: Recept
+      event: Evenemang
     attributes:
       user:
         sign_in: Logga in
         email: E-post
-        password: Lösenord
+        password: Nytt lösenord
         current_password: Nuvarande lösenord
+        password_confirmation: Upprepa lösenord
         remember_me: Kom ihåg mig
-        password_confirmation: Lösenordsverifiering
         presentation: Presentation
         location: Hemort
         url: Hemsida
         brewery: Bryggeri
         twitter: Twitter
-        equipment: Utrustning
+        instagram: Instagram
+        equipment: Bryggverk
         name: Namn
         avatar: Avatar
         medium_avatar: Avatarbild
         medium_brewery: Bryggerilogga
+        receive_email: Tillåt e-postutskick
         destroy:
           media: Ta bort
       recipe:
         name: Namn
         description: Beskrivning
-        beerxml: Beer XML
+        beerxml: Importera BeerXML
         public: Offentlig?
         medium_main: Huvudbild
+        events: Deltagit i evenemang
+        medals: Medaljer
       medium:
         created: Mediat har sparats.
         destroyed: Mediat har tagits bort.
@@ -519,6 +923,67 @@ sv:
         confirm_avatar: Sätt denna bild som din avatar-bild?
         confirm_brewery: Sätt denna bild som logga for ditt bryggeri?
         confirm_main: Sätt denna bild som huvudbild för detta recept?
+      event:
+        name: Namn
+        event_type: Typ
+        organizer: Arrangör
+        location: Plats
+        held_at: Datum
+        url: Hemsida
+        description: Beskrivning
+        medium_main: Huvudbild
+        last_registration: Sista anmälan
+        recipes: Placeringar
+        address: Adress
+        contact_email: E-post
+        coordinates: Kartkoordinater
+        last_registration: Sista anmälan
+        registration_information: Anmälingsinfo
+      recipe_detail:
+        batch_size: Mängd (L)
+        boil_size: Kokmängd (L)
+        boil_time: Koktid (min)
+        grain_temp: Malttemperatur (°C)
+        sparge_temp: Lakningstemp. (°C)
+        efficiency: Utbyte (%)
+        og: OG
+        fg: FG
+        carbonation: Kolsyrevolym
+        brewed_at: Bryggdatum
+        style: Stiltyp
+      fermentable:
+        name: Namn
+        amount: Mängd (kg)
+        grain_type: Typ
+        ebc: EBC
+      hop:
+        name: Namn
+        amount: Mängd (gr)
+        alpha_acid: Alfasyra (%)
+        form: Typ
+        use: Användning
+        use_time: Tid (min/dgr)
+      misc:
+        name: Namn
+        amount: Mängd (L / gr)
+        weight: Vikt/Volym
+        use: Användning
+        use_time: Tid
+        misc_type: Typ
+      yeast:
+        name: Namn
+        amount: Mängd (L / gr)
+        weight: Vikt/Volym
+        yeast_type: Jästsort
+        form: Form
+      mash_step:
+        name: Namn
+        step_temperature: Temperatur (°C)
+        step_time: Tid (min)
+        ramp_time: Höjningstid
+        infuse_amount: Vatten (L)
+        mash_type: Mäskningstyp
+
     errors:
       template:
         header:
@@ -527,6 +992,7 @@ sv:
         body: "Det var problem med följande fält:"
       messages:
         taken: "är upptaget"
+        invalid_url: "måste vara en giltig URL"
         record_invalid: "Validering misslyckades: %{errors}"
         <<: *errors_messages
       full_messages:
@@ -537,6 +1003,7 @@ sv:
             email:
               blank: får inte vara tomt.
               invalid: kunde inte valideras.
+              not_found: kunde inte hittas.
             password:
               blank: får inte vara tomt.
               too_short: är för kort.
@@ -557,9 +1024,24 @@ sv:
               blank: måste skickas med.
               invalid: är inte en giltig BeerXML-fil.
               parse_error: kunde inte läsas in på grund av syntax-fel.
+          event_registration_closed: Anmälan har stängts på detta evenemang.
         medium:
           medium_not_added: Media kunde inte läggas till.
-
+        event:
+          header:
+            one: "Ett fel förhindrade detta evenemang från att sparas"
+            other: "%{count} fel förhindrade detta evenemang från att sparas"
+        placement:
+          no_placement_on_official_event: Du får inte sätta medalj på officiella evenemang.
+        recipe_detail:
+          attributes:
+            recipe:
+              required:
+                Recept måste sättas på recipe detail
+        commontator/comment:
+          attributes:
+            body:
+              double_posted: har redan postats.
   date:
     formats:
       default: "%Y-%m-%d"
@@ -627,3 +1109,10 @@ sv:
       last_word_connector: " och "
     select:
       prompt: "Välj"
+  recaptcha:
+    errors:
+      verification_failed: Verifieringen med reCAPTCHA misslyckades.
+      recaptcha_unreachable: Kunde inte nå reCAPTCHA-verifieringen.
+  will_paginate:
+    page_entries_info:
+      single_page_html: ""

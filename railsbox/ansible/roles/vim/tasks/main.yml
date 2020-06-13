@@ -9,13 +9,13 @@
     - '{{ vim_bundle_path }}'
 
 - name: Install pathogen.vim
-  get_url: url=https://tpo.pe/pathogen.vim dest={{ vim_autoload_path }}/pathogen.vim
-  sudo_user: '{{ user_name }}'
+  get_url: url=https://tpo.pe/pathogen.vim dest={{ vim_autoload_path }}/pathogen.vim validate_certs=False
+  become_user: '{{ user_name }}'
 
 - name: Create ~/.vimrc
   template: src=vimrc.j2 dest={{ user_home_path }}/.vimrc owner={{ user_name }} group={{ group_name }}
 
 - name: Install plugins
   git: repo={{ item.git }} dest={{ vim_bundle_path }}/{{ item.name }} version=master accept_hostkey=yes
-  sudo_user: '{{ user_name }}'
-  with_items: vim_plugins
+  become_user: '{{ user_name }}'
+  with_items: '{{ vim_plugins }}'

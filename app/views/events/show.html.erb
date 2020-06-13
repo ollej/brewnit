@@ -1,0 +1,151 @@
+<%
+set_meta_tags title: @event.name,
+  description: @event.description,
+  og: {
+    title: :title,
+    description: :description,
+    site_name: 'Brygglogg.se',
+    url: event_url(@event),
+    type: 'event',
+    locale: 'sv_SE',
+    image: full_url_for(@event.main_image(:large)),
+  }
+%>
+      <div class="page-content-header pure-g">
+        <div class="pure-u-1 pure-u-sm-1-5 event-image"><%= media_main_tag(@event) %></div>
+        <div class="pure-u-1 pure-u-sm-2-5 recipe-header">
+          <h1 class="event-content-title item-content-title"><%= title @event.name %></h1>
+          <p class="item-content-info"><%= @event.organizer %> - <%= @event.event_type %></p>
+
+          <div class="event-badge-list">
+            <%= official_badge(@event) if @event.official? %>
+            <%= recipes_badge(@event) %>
+          </div>
+
+        </div>
+        <div class="page-content-controls pure-u-1 pure-u-sm-2-5">
+          <div class="controls-public">
+            <% if @event.official? %>
+              <%= link_to register_recipe_path(event_id: @event.id),
+                disabled: @event.registration_closed?,
+                class: 'pure-button primary-button' do %>
+                <i class="fas fa-beer"></i> <%= t(:'events.register_recipe') %>
+              <% end %>
+            <% else %>
+              <%= link_to new_recipe_path(event_id: @event.id),
+                disabled: @event.registration_closed?,
+                class: 'pure-button primary-button' do %>
+                <i class="fas fa-beer"></i> <%= t(:'events.add_recipe') %>
+              <% end %>
+            <% end %>
+            <%= form_tag(events_path, method: 'get', class: 'pure-form quicksearch', id: 'eventsearch-form') do %>
+              <%= search_field_tag :event_search, @event_search, autocomplete: 'off',
+                  class: 'pure-input-2-5 pure-input-rounded',
+                  placeholder: t(:'events.search'),
+                  results: 5, autosave: 'brygglogg-search-events' %>
+            <% end %>
+          </div>
+          <% if user_signed_in? %>
+          <div class="controls-signed-in">
+            <% if current_user.admin? %>
+              <%= trash_button(@event, t(:'events.destroy.link')) %>
+            <% end %>
+            <% if can_modify?(@event) %>
+              <%= link_to edit_event_path(@event), class: 'pure-button secondary-button' do %>
+                <%= icon('edit') %> <%= t(:'events.edit') %>
+              <% end %>
+              <%= link_to event_recipes_path(@event, format: :xlsx), rel: nofollow,
+                method: :get, class: 'pure-button secondary-button' do %>
+                <%= icon('file-excel') %> <%= t(:'events.recipes_excel') %>
+              <% end %>
+              <%= link_to event_recipes_path(@event, format: :csv), rel: nofollow,
+                method: :get, class: 'pure-button secondary-button' do %>
+                <%= icon('table') %> <%= t(:'events.recipes_csv') %>
+              <% end %>
+            <% end %>
+            <div style="display: inline-block">
+              <%= form_tag event_media_path(@event), method: :post, id: 'mediaUploadForm',
+                    remote: true, multipart: true do %>
+                <%= link_to '#', class: 'pure-button secondary-button upload-button' do %>
+                  <%= icon('upload') %> <%= t(:'common.media.upload') %>
+                <% end %>
+                <%= file_field_tag 'media[]', type: :file, multiple: true,
+                  accept: 'image/png,image/gif,image/jpeg,image/jpg',
+                  id: 'uploadMediaField', class: 'hidden-file-field' %>
+                <%= hidden_field_tag :media_type, 'main' %>
+                <div id="progressbar"></div>
+              <% end %>
+            </div>
+          </div>
+          <% end %>
+        </div>
+
+        <%= render partial: 'shared/image_slider', locals: { media: @event.media } %>
+      </div>
+
+      <div class="page-content-body event-show item-show">
+
+        <div class="pure-g">
+          <div class="pure-u-2-3">
+            <% if @event.official? && @event.last_registration.present? %>
+              <div class="item-field">
+                <span class="item-field-heading"><%= I18n.t(:'activerecord.attributes.event.last_registration') %></span>
+                <p class="item-field-value"><%= I18n.l(@event.last_registration) %></p>
+              </div>
+            <% end %>
+
+            <div class="item-field">
+              <span class="item-field-heading"><%= I18n.t(:'activerecord.attributes.event.held_at') %></span>
+              <p class="item-field-value"><%= I18n.l(@event.held_at) %></p>
+            </div>
+
+            <% if @event.location.present? %>
+              <div class="item-field">
+                <span class="item-field-heading"><%= I18n.t(:'activerecord.attributes.event.location') %></span>
+                <p class="item-field-value"><%= @event.location %></p>
+              </div>
+            <% end %>
+
+            <% if @event.address.present? %>
+              <div class="item-field">
+                <span class="item-field-heading"><%= I18n.t(:'activerecord.attributes.event.address') %></span>
+                <p class="item-field-value"><%= @event.address %></p>
+              </div>
+            <% end %>
+
+            <% if @event.url.present? %>
+              <div class="item-field">
+                <span class="item-field-heading"><%= I18n.t(:'activerecord.attributes.event.url') %></span>
+                <p class="item-field-value">
+                  <%= link_to @event.url, @event.url, target: '_blank', rel: 'noopener noreferrer' %>
+                </p>
+              </div>
+            <% end %>
+
+            <% if @event.contact_email.present? %>
+              <div class="item-field">
+                <span class="item-field-heading"><%= I18n.t(:'activerecord.attributes.event.contact_email') %></span>
+                <p class="item-field-value">
+                  <%= mail_to @event.contact_email, @event.contact_email, encode: 'javascript', class: 'email' %>
+                </p>
+              </div>
+            <% end %>
+          </div>
+          <div class="pure-u-1-3 event-map">
+            <% if @event.map_position.present? %>
+              <%= image_tag google_map(@event.map_position) %>
+            <% end %>
+          </div>
+        </div>
+
+        <% if @event.description.present? %>
+          <div class="pure-g">
+            <div class="pure-u-2-3">
+              <div class="item-field">
+                <h3 class="item-field-heading"><%= I18n.t(:'activerecord.attributes.event.description') %></h3>
+                <p class="item-field-text"><%= format_html(@event.description) %></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>

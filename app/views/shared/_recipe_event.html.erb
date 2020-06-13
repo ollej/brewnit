@@ -1,0 +1,21 @@
+                <li class="pure-menu-item" data-recipe-event-id="<%= event.id %>">
+                  <i class="fas fa-calendar-alt"></i>
+                  <%= link_to event.name, event_path(event), class: 'pure-menu-link' %>
+
+                  <% if can_modify?(recipe) %>
+                    <%= trash_icon(recipe_event_path(recipe, event)) %>
+                  <% end %>
+
+                  <ul class="pure-menu-list recipe-medals">
+                    <% event.placements.by_recipe(recipe).ordered.each do |placement| %>
+                      <li class="pure-menu-item">
+                        <%= link_to placement.event, class: 'pure-menu-link' do %>
+                          <%= medal_tag(placement, :tiny) %>
+                          <span class="medal-category"><%= placement.category %></span>
+                        <% end %>
+                      </li>
+                    <% end %>
+                  </ul>
+                </li>
+
+

@@ -4,11 +4,11 @@ class MediaController < ApplicationController
 
   def create
     @parent = load_parent
-    raise AuthorizationException unless current_user.can_modify?(@parent)
+    authorize_modify!(@parent)
     @media = []
     if params[:media]
       params[:media].each do |file|
-        @media << @parent.media.create(file: file)
+        @media << @parent.create_medium(file, params[:media_type], !!params[:force])
       end
     end
     respond_to do |format|
@@ -20,7 +20,7 @@ class MediaController < ApplicationController
   def destroy
     @medium = Medium.find(params[:id])
     @parent = @medium.parent
-    raise AuthorizationException unless current_user.can_modify?(@parent)
+    authorize_modify!(@parent)
     @medium.destroy
     if request.xhr?
       head :no_content
@@ -31,5 +31,4 @@ class MediaController < ApplicationController
       end
     end
   end
-
 end

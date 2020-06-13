@@ -4,13 +4,17 @@
         </div>
       </div>
 
-      <div class="page-content-body latest_items-index">
-        <ul class="user-list linked-list pure-g">
-        <% @latest.each do |item| %>
-          <li class="pure-u-1 pure-u-xl-1-3">
-            <%= render_item(item) %>
-          </li>
+      <div class="page-content-body latest_items-index item-index">
+        <% if @event.present? %>
+          <%= render partial: 'shared/event_plate', locals: { event: @event } %>
         <% end %>
-      </ul>
+
+        <ul class="linked-list pure-g">
+          <% @latest.each do |item| %>
+            <li class="pure-u-1 pure-u-xl-1-3">
+              <%= render_item(item) %>
+            </li>
+          <% end %>
+        </ul>
       </div>
 

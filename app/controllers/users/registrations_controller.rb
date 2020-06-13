@@ -1,7 +1,8 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-  before_filter :deny_spammers!, only: [:create, :update]
-  before_filter :configure_sign_up_params, only: [:create]
-  before_filter :configure_account_update_params, only: [:update]
+  before_action :deny_spammers!, only: [:create, :update]
+  before_action :configure_sign_up_params, only: [:create]
+  before_action :configure_account_update_params, only: [:update]
+  prepend_before_action :check_captcha, only: [:create]
   invisible_captcha only: [:create, :update], on_spam: :redirect_spammers!
 
   # GET /resource/sign_up
@@ -13,6 +14,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def create
   #   super
   # end
+
+  def create
+    super do |resource|
+      if resource.persisted?
+        resource.update_columns(
+          registration_data: User.registration_data_hash('devise', resource.email, honeypot)
+        )
+      end
+    end
+  end
 
   # GET /resource/edit
   # def edit
@@ -42,12 +53,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
-  #   devise_parameter_sanitizer.for(:sign_up) << :attribute
+  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute))
   # end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_account_update_params
-  #   devise_parameter_sanitizer.for(:account_update) << :attribute
+  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
   # end
 
   # The path used after sign up.
@@ -70,11 +81,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def configure_sign_up_params
-    devise_parameter_sanitizer.for(:sign_up) << :name
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :receive_email])
   end
 
   def configure_account_update_params
-    devise_parameter_sanitizer.for(:account_update).push(:name, :presentation, :location, :brewery, :twitter, :url, :equipment, :avatar).delete(:email)
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :presentation, :location, :brewery, :twitter, :url, :equipment, :instagram, :receive_email])
   end
 
   def update_resource(resource, params)
@@ -83,6 +94,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       params.delete(:current_password)
       resource.update_without_password(params)
+    end
+  end
+
+  private
+
+  def check_captcha
+    unless verify_recaptcha
+      self.resource = resource_class.new sign_up_params
+      respond_with_navigational(resource) { render :new }
     end
   end
 end

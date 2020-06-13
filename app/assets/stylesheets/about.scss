@@ -1,0 +1,35 @@
+.feature-list {
+  &.page-content-body {
+    padding: 0;
+  }
+  img {
+    width: 100%;
+  }
+  .feature-orange,
+  .feature-white,
+  .feature-blue {
+    min-height: 300px;
+    padding: 3em 2em;
+
+    @media screen and (min-width: 64em) {
+      .padding-left {
+        padding-left: 2em;
+      }
+      .padding-right {
+        padding-right: 2em;
+      }
+    }
+  }
+  .feature-orange {
+    background-color: #ffd663; /* #ffcd40; */ /* #ffc94c;*/
+    color: #000;
+  }
+  .feature-white {
+    background-color: #ffebb2; /* #fff4d6; */ /* #4a4a4a; */
+    color: #000;
+  }
+  .feature-blue {
+    background-color: #005493;
+    color: #fff;
+  }
+}

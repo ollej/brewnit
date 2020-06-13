@@ -1,0 +1,22 @@
+          <div class="linked-list">
+            <div class="pure-g next-event info-plate ad-plate linked-item">
+              <div class="pure-u">
+                <%= image_tag @event.main_image(:medium), class: 'plate-image',
+                  alt: @event.name %>
+              </div>
+              <div class="pure-u-5-8">
+                <h2 class="item-title event-name item-content-title">
+                  <%= link_to @event.name, @event, class: 'item-link event-link' %>
+                </h2>
+                <h3 class="item-subtitle event-type">
+                  <%= @event.event_type %> |
+                  <%= @event.held_at %> |
+                  <%= @event.organizer %>
+                </h3>
+                <p class="item-desc event-description">
+                  <%= shorten_strip(@event.description, 200) %>
+                </p>
+              </div>
+            </div>
+          </div>
+

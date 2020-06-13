@@ -37,7 +37,7 @@ class MediaUpload
     $("#progressbar").show().progressbar({ value: progress })
 
   handleProcess: (ev, data) =>
-    console.log("handleProcess", ev, data)
+    #console.log("handleProcess", ev, data)
     currentFile = data.files[data.index]
     if data.files.error && currentFile.error
       @showError(currentFile.error)
@@ -49,7 +49,7 @@ class MediaUpload
     $("body").trigger("flasher:clear")
 
   handleFailure: (ev, data) =>
-    console.log("handleFailure", ev, data)
+    #console.log("handleFailure", ev, data)
     if data.errorThrown?
       @showError(I18n['fileupload']['errors']['backend_error'] + ' ' + data.errorThrown)
 
@@ -57,7 +57,7 @@ class MediaUpload
     $("#progressbar").hide()
 
   showError: (error) =>
-    console.log('MediaUpload.showError', error)
+    #console.log('MediaUpload.showError', error)
     $("body").trigger("flasher:show", { message: error, level: 'error' })
 
   addMedium: (medium) ->

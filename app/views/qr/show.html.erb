@@ -1,0 +1,11 @@
+<div class="print-header">
+  <h1><%= @recipe.name %></h1>
+</div>
+
+<div class="print-main">
+  <div class="qr-code page-center">
+    <%= raw @qrcode %>
+  </div>
+</div>
+
+<%= render 'shared/print_footer' %>

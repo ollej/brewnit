@@ -1,0 +1,22 @@
+---
+- name: Install prerequisities
+  apt:
+    name: ['apt-transport-https', 'gnupg', 'python2.7']
+    state: present
+
+- name: Import the NodeSource GPG key into apt
+  apt_key:
+    id: "68576280"
+    url: "https://keyserver.ubuntu.com/pks/lookup?op=get&fingerprint=on&search=0x1655A0AB68576280"
+
+- name: Install the nodejs LTS repos
+  apt_repository:
+    repo: "deb https://deb.nodesource.com/node_{{ nodejs_version }}.x trusty main"
+    state: present
+    update_cache: yes
+
+- name: Install the nodejs
+  apt:
+    name: nodejs
+    state: present
+    update_cache: yes

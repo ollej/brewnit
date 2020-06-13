@@ -1,0 +1,11 @@
+<% if @error.nil? %>
+  let changed_fields = <%= raw @details.previous_changes.keys - ['updated_at'] %>;
+  changed_fields.forEach(function(element) {
+    $("#recipe_detail_" + element).effect("highlight", {}, 500);
+  });
+<% else %>
+  $('body').trigger('flasher:show', {
+    message: '<%= j(@error) %>',
+    level: 'error'
+  })
+<% end %>

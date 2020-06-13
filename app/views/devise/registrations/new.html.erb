@@ -1,6 +1,6 @@
       <div class="page-content-header pure-g">
         <div class="pure-u">
-          <h1 class="recipe-content-title"><%= I18n.t(:'users.sign_up') %></h1>
+          <h1 class="pagee-content-title"><%= I18n.t(:'users.sign_up') %></h1>
         </div>
       </div>
 
@@ -23,6 +23,11 @@
     </div>
 
     <div class="field pure-control-group">
+      <%= f.label :receive_email, class: 'pure-checkbox' %>
+      <%= f.check_box :receive_email %>
+    </div>
+
+    <div class="field pure-control-group">
       <%= f.label :password %>
       <%= f.password_field :password, autocomplete: 'off', required: true %>
       <% if @minimum_password_length %>
@@ -36,12 +41,14 @@
     </div>
 
     <div class="actions pure-controls">
-      <%= f.submit I18n.t(:'users.sign_up'), class: 'pure-button pure-button-primary' %>
+    <%= recaptcha_tags %>
     </div>
 
     <div class="actions pure-controls">
-      <%= render "devise/shared/links" %>
+      <%= f.submit I18n.t(:'users.sign_up'), class: 'pure-button pure-button-primary' %>
     </div>
+
+    <%= render "devise/shared/links" %>
   <% end %>
 
   </fieldset>

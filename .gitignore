@@ -29,5 +29,17 @@
 /config/unicorn.development.rb
 /.envrc
 
+.env.development
+.env.test
+
 /todo.txt
 /public/uploads
+
+public/assets
+/pdf
+
+/public/packs
+/public/packs-test
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity

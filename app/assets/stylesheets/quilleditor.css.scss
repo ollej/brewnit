@@ -1,0 +1,40 @@
+/* Text editor */
+
+.quill-wrapper {
+  display: inline-block;
+  height: 200px;
+  width: 600px;
+
+  .ql-toolbar {
+    height: 42px;
+  }
+
+  .ql-container {
+    height: 158px;
+  }
+
+  .ql-editor {
+    p {
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
+    p:first-child {
+      margin-top: 0;
+    }
+  }
+}
+.pure-form label.large-group {
+  vertical-align: top;
+}
+/* tablets */
+@media (min-width: 40em) and (max-width: 1024px) {
+  .quill-wrapper {
+    width: 400px;
+  }
+}
+/* mobile */
+@media (max-width: 40em) {
+  .quill-wrapper {
+    width: 96%;
+  }
+}

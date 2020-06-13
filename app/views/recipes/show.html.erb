@@ -1,7 +1,7 @@
 <%
-set_meta_tags title: @recipe.name,
+set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
   description: @recipe.display_desc,
-  keywords: [@recipe.style_name, @beerxml.style.type, @beerxml.style_code, @beerxml.style.style_guide],
+  keywords: [@recipe.style_name, @beerxml.style&.type, @beerxml.style_code, @beerxml.style&.style_guide],
   reverse: true,
   og: {
     title: :title,
@@ -10,15 +10,26 @@ set_meta_tags title: @recipe.name,
     url: recipe_url(@recipe),
     type: 'product',
     locale: 'sv_SE',
-    image: asset_url('brygglogg-logo.png'),
+    image: full_url_for(@recipe.main_image(:large)),
   },
   twitter: {
-    card: 'summary',
-    site: @recipe.user.try(:twitter) || '@ollej',
+    card: 'summary_large_image',
+    site: '@ollej',
+    creator: @recipe.user&.twitter,
     title: :title,
     description: :description,
-    image: asset_url('brygglogg-logo.png'),
-  }
+    image: full_url_for(@recipe.main_image(:large)),
+    label1: I18n.t(:'recipes.recipe_style'),
+    data1: @recipe.style_name,
+    label2: I18n.t(:'recipes.owner'),
+    data2: @recipe.brewer_name,
+    label3: I18n.t(:'beerxml.abv'),
+    data3: format_abv(@beerxml.abv),
+    label4: I18n.t(:'beerxml.ibu'),
+    data4: number_with_precision(@beerxml.ibu, precision: 0),
+    label5: I18n.t(:'beerxml.batch_size'),
+    data5: "#{number_with_precision(@beerxml.batch_size, precision: 1)} #{t(:'beerxml.liter_abbr')}",
+}
 %>
 <% content_for :head do %>
   <meta name="author" content="<%= @recipe.brewer_name %>">
@@ -33,43 +44,41 @@ set_meta_tags title: @recipe.name,
             <span class="recipe-brewer"><%= link_to @recipe.brewer_name, @recipe.user %></span><br>
             <span class="recipe-created"><%= l(@recipe.created_at, format: :long) %></span>
           </p>
-
         </div>
 
         <div class="page-content-controls pure-u-1 pure-u-sm-2-5">
           <div class="controls-public">
-          <%= link_to recipe_path(@recipe, format: :xml), rel: nofollow, method: :get, class: 'pure-button secondary-button' do %>
-            <i class="fa fa-download"></i> <%= t(:'recipes.download') %>
-          <% end %>
-          <%= link_to "javascript:window.print()", class: 'pure-button secondary-button' do %>
-            <i class="fa fa-print"></i> <%= t(:'recipes.print') %>
-          <% end %>
-          <%= link_to "#", class: 'pure-button secondary-button',
-            data: { toggle: 'modal', target: '#brew-timer', keyboard: true, backdrop: true } do %>
-            <i class="fa fa-clock-o"></i> <%= t(:'recipes.timer') %>
-          <% end %>
-        </div>
+            <%= link_to recipe_details_path(@recipe),
+              class: 'pure-button secondary-button',
+              data: tooltip_data(
+                I18n.t(:'recipes.edit.build.description'), position: 'left') do %>
+              <%= icon('edit') %> <%= I18n.t(:'recipes.edit.build.link') %>
+            <% end %>
+            <%= link_to recipe_path(@recipe, format: :xml), rel: :nofollow,
+              method: :get, class: 'pure-button secondary-button',
+              data: tooltip_data(I18n.t(:'recipes.download_description')) do %>
+              <%= icon('download') %> <%= t(:'recipes.download') %>
+            <% end %>
+            <%= render 'shared/promotion_button' %>
+            <%= link_to "#", class: 'pure-button secondary-button',
+              data: { toggle: 'modal', target: '#brew-timer', keyboard: true, backdrop: true } do %>
+              <i class="far fa-clock"></i> <%= t(:'recipes.timer') %>
+            <% end %>
+          </div>
           <% if user_signed_in? %>
             <div class="controls-signed-in">
-            <%= like_tag(@recipe, current_user) %>
-            <% if current_user.can_modify?(@recipe) %>
-              <%= link_to edit_recipe_path(@recipe), class: 'pure-button secondary-button' do %>
-                <i class="fa fa-pencil-square-o"></i> <%= t(:'recipes.edit') %>
-              <% end %>
-              <%= link_to @recipe, method: :delete, data: { confirm: t(:'common.are_you_sure') }, class: 'pure-button secondary-button' do %>
-                <i class="fa fa-trash"></i> <%= t(:'recipes.destroy.link') %>
-              <% end %>
-              <%= form_tag recipe_media_path(@recipe), method: :post, id: 'mediaUploadForm', remote: true, html: { multipart: true } do %>
-                <%= link_to '#', class: 'pure-button secondary-button upload-button' do %>
-                  <i class="fa fa-upload"></i> <%= t(:'common.media.upload') %>
+              <%= like_tag(@recipe, current_user) %>
+
+              <% if can_modify?(@recipe) %>
+                <%= render 'shared/edit_button' %>
+
+                <%= link_to clone_recipe_path(id: @recipe),
+                  class: 'pure-button secondary-button',
+                  data: tooltip_data(I18n.t(:'recipes.clone_description')) do %>
+                  <%= icon('clone') %> <%= t(:'recipes.clone') %>
                 <% end %>
-                <%= file_field_tag 'media[]', type: :file, multiple: true,
-                  accept: 'image/png,image/gif,image/jpeg,image/jpg',
-                  id: 'uploadMediaField' %>
-                <div id="progressbar"></div>
               <% end %>
-              <%#= link_to t(:'recipes.clone'), clone_recipe_path(@recipe), class: 'pure-button secondary-button' %>
-            <% end %>
+              <div id="progressbar"></div>
             </div>
           <% end %>
         </div>
@@ -83,7 +92,7 @@ set_meta_tags title: @recipe.name,
         <div class="recipe-badge-list pure-u-1">
           <%= visibility_badge(@recipe) %>
           <%= comments_badge(@recipe) %>
-          <%= render 'shared/likes_badge' %>
+          <%= likes_badge(@recipe) %>
           <%= downloads_badge(@recipe) %>
           <%= render 'shared/share_buttons' %>
         </div>
@@ -95,22 +104,22 @@ set_meta_tags title: @recipe.name,
         <div class="tabs">
           <input type="radio" name="tabs" id="tab1" checked>
           <label for="tab1" class="tab-trigger">
-            <i class="fa fa-beer"></i><span><%= t(:'recipes.recipe_details') %></span>
+            <%= icon('beer') %> <span><%= t(:'recipes.recipe_details') %></span>
           </label>
           <input type="radio" name="tabs" id="tab2">
           <label for="tab2" class="tab-trigger">
-            <i class="fa fa-pie-chart"></i><span><%= t(:'recipes.recipe_analytics') %></span>
+            <%= icon('chart-pie') %> <span><%= t(:'recipes.recipe_analytics') %></span>
           </label>
           <input type="radio" name="tabs" id="tab3">
           <label for="tab3" class="tab-trigger">
-            <i class="fa fa-comments"></i><span><%= t(:'recipes.recipe_comments') %></span>
+            <%= icon('comments') %> <span><%= t(:'recipes.recipe_comments') %></span>
           </label>
           <input type="radio" name="tabs" id="tab4">
           <label for="tab4" class="tab-trigger">
-            <i class="fa fa-sliders"></i><span><%= t(:'recipes.recipe_style') %></span>
+            <%= icon('sliders-h') %> <span><%= t(:'recipes.recipe_style') %></span>
           </label>
           <div id="tab-content1" class="tab-content">
-<%= render 'shared/recipe_details' %>
+<%= render 'shared/recipe_main' %>
           </div>
           <div id="tab-content2" class="tab-content">
 <%= render 'shared/gauges' %>

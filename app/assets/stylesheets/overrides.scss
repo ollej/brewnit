@@ -1,0 +1,30 @@
+.pure-form-aligned .pure-control-group {
+  margin-bottom: 1.5em;
+}
+
+.badge {
+  /* blue and yellow: Sweden */
+  .ribbon.blue-yellow, .ribbon.sweden {
+    background: linear-gradient(to right, blue, blue, blue, blue, blue, blue, blue, blue, blue, blue, blue, yellow, yellow, yellow, yellow, yellow, yellow, yellow, yellow, yellow, yellow, yellow);
+  }
+}
+
+/* Set bg color on body row for pure-table to allow jquery ui highlight. */
+.pure-table-striped tbody tr:nth-child(2n-1) {
+  background-color: #f2f2f2;
+}
+.pure-table-striped tr:nth-child(2n-1) td {
+  background-color: transparent;
+}
+
+/* Button form takes up too much space. */
+.button_to {
+  display: inline-block;
+}
+
+.commontator .pure-button {
+  padding: 0.5em 1em;
+}
+.commontator .secondary-button {
+  border: 1px solid #ddd;
+}

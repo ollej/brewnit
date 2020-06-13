@@ -1,0 +1,50 @@
+/* Pure CSS Dropdown */
+
+.purecss-dropdown {
+  display: inline-block;
+  position: relative;
+
+  /* hide and close menu */
+  .dd-input {
+    display: none;
+
+    + .dd-menu {
+      display: none;
+    }
+
+    &:checked + .dd-menu {
+      display: block;
+    }
+  }
+
+  .dd-menu {
+    position: absolute;
+    top: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0;
+    margin: 2px 0 0 0;
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
+    background-color: #ffffff;
+    list-style-type: none;
+    z-index: 1;
+
+    li {
+      padding: 10px 20px;
+      cursor: pointer;
+      white-space: nowrap;
+      text-align: left,
+    }
+
+    li:hover {
+      background-color: #f6f6f6;
+    }
+
+    li a {
+      display: block;
+      margin: -10px -20px;
+      padding: 10px 20px;
+      color: #333;
+    }
+  }
+}

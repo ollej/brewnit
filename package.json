@@ -1,0 +1,10 @@
+{
+  "name": "Brewnit",
+  "dscription": "A website to create and upload homebrew reipes",
+  "license": "MIT",
+  "dependencies": {
+    "balloon-css": "^0.5.0",
+    "fancybox": "^3.0.1"
+  },
+  "devDependencies": {}
+}

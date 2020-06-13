@@ -25,4 +25,4 @@
 
 - name: Mount swap
   command: "swapon {{ swap_file_path }}"
-  when: write_swap_entry|changed
+  when: write_swap_entry is changed

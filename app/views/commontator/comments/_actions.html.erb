@@ -11,7 +11,7 @@
               :id => "comment_#{comment.id.to_s}_edit_link",
               :class => "comment_edit_link pure-button secondary-button",
               :remote => true do %>
-    <i class="fa fa-pencil-square-o"></i> <%= t('commontator.comment.actions.edit') %>
+    <i class="fas fa-edit"></i> <%= t('commontator.comment.actions.edit') %>
   <% end %>
 <% end %>
 
@@ -26,6 +26,6 @@
               :id => "comment_#{comment.id.to_s}_#{del_string}_link",
               :class => "comment_#{del_string}_link pure-button secondary-button",
               :remote => true do %>
-    <i class="fa fa-trash"></i> <%= t("commontator.comment.actions.#{del_string}") %>
+    <i class="fas fa-trash-alt"></i> <%= t("commontator.comment.actions.#{del_string}") %>
   <% end %>
 <% end %>

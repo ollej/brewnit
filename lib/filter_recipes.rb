@@ -9,17 +9,21 @@ class FilterRecipes
     I18n.t(:'common.search.order.ibu') => 'ibu',
     I18n.t(:'common.search.order.style') => 'style',
     I18n.t(:'common.search.order.likes') => 'likes',
+    I18n.t(:'common.search.order.medal') => 'medal',
   }
 
   SORT_ORDER = {
-    created_at: 'recipes.created_at desc',
-    name: 'recipes.name asc',
-    downloads: 'recipes.downloads desc',
-    abv: 'recipes.abv desc',
-    ibu: 'recipes.ibu desc',
-    style: 'recipes.style_name asc',
-    likes: 'recipes.cached_votes_up desc'
+    created_at: 'recipes.created_at DESC',
+    name: 'recipes.name ASC',
+    downloads: 'recipes.downloads DESC',
+    abv: 'recipes.abv DESC',
+    ibu: 'recipes.ibu DESC',
+    style: 'recipes.style_name ASC',
+    likes: 'recipes.cached_votes_up DESC',
+    medal: 'placements.medal ASC'
   }
+
+  PAGE_LIMIT = 50
 
   OGMIN = '1.020'
   OGMAX = '1.150'
@@ -51,6 +55,7 @@ class FilterRecipes
   # X TODO: Clear search
   # X TODO: Search all fields by default
   # TODO: Search comments
+  # TODO: Namespace search query params to avoid collisions
 
   def initialize(scope, hash)
     @scope = scope
@@ -60,6 +65,14 @@ class FilterRecipes
 
   def query?
     !query.empty?
+  end
+
+  def total_count
+    @total_count ||= resolved.limit(nil).count
+  end
+
+  def resolved
+    @resolved ||= resolve
   end
 
   def resolve
@@ -91,8 +104,17 @@ class FilterRecipes
   def query
     @query ||= begin
       query = []
-      query << { query: @hash[:q] } if @hash[:q].present?
+      if @hash[:q].present?
+        query << { or: [{ query: @hash[:q] }, { name: @hash[:q] }] }
+      end
       query << { style_name: @hash[:style] } if @hash[:style].present?
+      query << { equipment: @hash[:equipment] } if @hash[:equipment].present?
+      query << { event: @hash[:event] } if @hash[:event].present?
+      query << { event_id: @hash[:event_id] } if @hash[:event_id].present?
+      query << { medal: @hash[:medal] } if @hash[:medal].present?
+      query << { complete: false } if @hash[:incomplete].present?
+      query << { public: false } if @hash[:private].present?
+      query << { or: [{ medal: 'gold' }, { medal: 'silver' }, { medal: 'bronze' }] } if @hash[:has_medal].present?
       add_filters(query)
       query
     end

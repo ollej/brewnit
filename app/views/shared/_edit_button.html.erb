@@ -1,0 +1,52 @@
+                <label class="purecss-dropdown">
+                  <div class="pure-button secondary-button dd-button"
+                    data-balloon="<%= I18n.t(:'recipes.edit.description') %>"
+                    data-balloon-pos="left" data-balloon-length="medium">
+                    <%= icon('edit') %> <%= t(:'recipes.edit.button') %> <%= icon('caret-down') %>
+                  </div>
+                  <input type="checkbox" class="dd-input" id="test">
+                  <ul class="dd-menu">
+                    <li>
+                    <%= render 'shared/import_button', button_css: '',
+                          tooltip: tooltip_data(
+                            I18n.t(:'recipes.edit.import.description'),
+                            position: 'left'
+                          ) %>
+                    </li>
+                    <li>
+                      <%= form_tag recipe_media_path(@recipe),
+                        method: :post, id: 'mediaUploadForm',
+                        remote: true, multipart: true, class: 'form-button' do %>
+                        <%= link_to '#', class: 'upload-button',
+                          data: tooltip_data(
+                            I18n.t(:'recipes.edit.images.description'),
+                            position: 'left') do %>
+                          <%= icon('images') %> <%= I18n.t(:'recipes.edit.images.link') %>
+                        <% end %>
+                        <%= file_field_tag 'media[]', type: :file, multiple: true,
+                          accept: 'image/png,image/gif,image/jpeg,image/jpg',
+                          id: 'uploadMediaField', class: 'hidden-file-field' %>
+                        <%= hidden_field_tag :media_type, 'main' %>
+                      <% end %>
+                    </li>
+                    <li>
+                      <%= link_to recipe_events_path(@recipe),
+                            data: tooltip_data(
+                              I18n.t(:'recipes.edit.events.description'),
+                              position: 'left') do %>
+                        <%= icon('calendar-alt') %> <%= I18n.t(:'recipes.edit.events.link') %>
+                      <% end %>
+                    </li>
+                    <li>
+                    <%= trash_button(
+                          @recipe,
+                          t(:'recipes.edit.destroy.link'),
+                          tooltip: tooltip_data(
+                            t(:'recipes.edit.destroy.description'),
+                            position: 'left'
+                          ),
+                          classes: '') %>
+                    </li>
+                  </ul>
+                </label>
+

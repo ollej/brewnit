@@ -6,4 +6,9 @@
 
       <div class="page-content-body">
 <%= render 'form' %>
+
+<% if @recipe.complete? %>
+  <%= render 'shared/recipe_events' %>
+  <%= render 'shared/recipe_events_form' %>
+<% end %>
       </div>

@@ -14,6 +14,8 @@
  *= require jquery-ui/progressbar
  *= require jquery-ui/autocomplete
  *= require commontator/application
- *= require fancybox
+ *= require fancybox/dist/css/jquery.fancybox
+ *= require balloon-css/src/balloon
+ *= require thirdparty/colorPick
  *= require_self
  */

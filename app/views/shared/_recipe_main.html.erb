@@ -1,0 +1,68 @@
+    <article class="box post beer-recipe pure-g" itemscope
+        itemtype="http://schema.org/Recipe">
+      <meta itemprop="image" content="<%= full_url_for(@recipe.main_image(:large)) %>">
+      <meta itemprop="name" content="<%= @beerxml.name %>">
+      <meta itemprop="author" content="<%= @beerxml.brewer %>">
+      <meta itemprop="description" content="<%= @recipe.display_desc %>">
+      <meta itemprop="recipeCategory" content="beverage">
+      <meta itemprop="totalTime" content="<%= @beerxml.total_time_period %>">
+      <meta itemprop="cookTime" content="<%= @beerxml.boil_time_period %>">
+
+      <div class="pure-u-1 pure-u-xl-4-5">
+<%= render 'shared/recipe_details' %>
+      </div>
+
+      <div class="recipe-aside pure-u-1 pure-u-xl-1-5">
+        <aside class="recipe_information">
+          <h2><%= t(:'beerxml.information') %></h2>
+
+          <div class="recipe_style">
+            <h3><%= t(:'beerxml.style') %></h3>
+            <p><%= @beerxml.style&.name %> <%= @presenter.style_type %></p>
+          </div>
+
+          <% if @beerxml.style&.type.present? %>
+          <div class="recipe_type">
+            <h3><%= t(:'beerxml.type') %></h3>
+            <p><%= @beerxml.style.type %></p>
+          </div>
+          <% end %>
+
+          <div class="recipe_grains">
+            <h3><%= t(:'beerxml.grains') %></h3>
+            <p><%= number_with_precision(@beerxml.total_grains, precision: 2) %> <%= t(:'beerxml.kilograms') %></p>
+          </div>
+
+          <div class="recipe_hops">
+            <h3><%= t(:'beerxml.hops') %></h3>
+            <p><%= number_with_precision(@beerxml.total_hops, precision: 2) %> <%= t(:'beerxml.grams') %></p>
+          </div>
+
+          <div class="recipe_equipment">
+            <% if @presenter.equipment_name.present? %>
+            <h3><%= t(:'beerxml.equipment') %></h3>
+            <p><%= @presenter.equipment_name %></p>
+            <% end %>
+          </div>
+
+          <div class="recipe_date">
+            <h3><%= t(:'beerxml.brew_date') %></h3>
+            <p><%= @presenter.long_date %></p>
+          </div>
+
+          <% if @beerxml.brewer.present? %>
+          <div class="recipe_brewer">
+            <h3><%= t(:'beerxml.brewer') %></h3>
+            <p>
+              <%= @beerxml.brewer %>
+              <% unless @beerxml.asst_brewer.blank? %>(<%= t(:'beerxml.assisted_by', assistant: @beerxml.asst_brewer) %>)<% end %>
+            </p>
+          </div>
+          <% end %>
+
+          <% if @recipe.events.present? %>
+            <%= render partial: 'shared/recipe_events', locals: { current_user: current_user, recipe: @recipe } %>
+          <% end %>
+        </aside>
+      </div>
+    </article>

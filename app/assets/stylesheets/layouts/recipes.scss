@@ -59,20 +59,29 @@ a {
   right: 0.5em;
   position: absolute;
 }
+#nav .home-link {
+  display: block;
+  top: 0.5em;
+  left: 0.5em;
+  position: absolute;
+}
 
 /* When "Menu" is clicked, the navbar should be 80% height */
 #nav.active {
-  height: 80%;
+  height: 100%;
 }
+
 /* Don't show the navigation items... */
 .nav-inner {
   display: none;
 }
-
 /* ...until the "Menu" button is clicked */
 #nav.active .nav-inner {
   display: block;
   padding: 2em 0;
+}
+.home-link {
+  display: none;
 }
 
 /*
@@ -106,6 +115,7 @@ a {
   color: rgb(75, 113, 151);
 }
 
+.recipe-label-incomplete,
 .recipe-label-private,
 .recipe-label-winner,
 .recipe-label-own {
@@ -124,6 +134,9 @@ a {
 .recipe-label-winner {
   background: #ffc94c;
 }
+.recipe-label-incomplete {
+  background: #8F1D21;
+}
 
 /* recipe Item Styles */
 .list-item {
@@ -136,17 +149,32 @@ a {
   }
   .item-title {
     font-size: 120%;
+    height: 37px;
+    display: inline-block;
+    overflow: hidden;
+    hyphens: auto;
     a {
       color: #333;
     }
   }
   .item-subtitle {
+    height: 18px;
+    overflow: hidden;
+    word-break: break-all;
+    hyphens: auto;
     text-transform: uppercase;
     a {
       color: #999;
     }
   }
+  .item-desc {
+    height: 18px;
+    overflow: hidden;
+    word-break: break-all;
+    hyphens: auto;
+  }
 }
+
 .recipe-quicksearch {
   padding: 0.8em 0 0 1em;
   border-bottom: 1px solid #ddd;
@@ -157,15 +185,27 @@ a {
     margin-left: 0.5em !important;
   }
 }
+
 .recipe-item {
-  padding: 0.9em 1em;
+  padding: 0.8em 0.8em;
   border-bottom: 1px solid #ddd;
   border-left: 6px solid transparent;
   cursor: pointer;
 
+  .recipe-image {
+    position: relative;
+
+    .badge {
+      position: absolute;
+      top: 2px;
+      left: 4px;
+    }
+  }
   .recipe-avatar {
     border-radius: 3px;
-    margin-right: 0.5em;
+    margin-right: 0.8em;
+    width: 64px;
+    height: 64px;
   }
   .recipe-name,
   .recipe-subject {
@@ -191,22 +231,76 @@ a {
     font-size: 85%;
     text-align: right;
   }
-  .recipe-item-selected {
+  &.recipe-item-selected {
     background: #eee;
   }
-  .recipe-item-unread {
+  &.recipe-item-unread {
     border-left: 6px solid #1b98f8;
   }
-  .recipe-item-own {
+  &.recipe-item-own {
     border-left: 6px solid #40c365;
   }
-  .recipe-item-private {
+  &.recipe-item-private {
     border-left: 6px solid #41ccb4;
   }
-  .recipe-item-public {
+  &.recipe-item-public {
   }
-  .recipe-item-winner {
+  &.recipe-item-winner {
     border-left: 6px solid #ffc94c;
+  }
+  &.recipe-item-incomplete {
+    border-left: 6px solid #8F1D21;
+  }
+}
+
+.recipe-medals {
+  .badge.tiny {
+    display: inline-block;
+
+    .circle {
+      line-height: 8px;
+      vertical-align: top;
+    }
+  }
+  .medal-category {
+    vertical-align: top;
+  }
+}
+
+.recipe_information {
+  #recipe-events {
+    >.pure-menu-item {
+      position: relative;
+    }
+    .destroy-button {
+      position: absolute;
+      top: 7px;
+      right: 0;
+    }
+  }
+}
+
+#recipe-events {
+  padding-top: 0.5em;
+  >.pure-menu-item {
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    position: relative;
+  }
+  .pure-menu-link {
+    display: inline;
+    white-space: normal;
+  }
+  .pure-menu-link:hover {
+    background: none;
+  }
+  .recipe-medals {
+    padding-top: 0.5em;
+    .pure-menu-item {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
   }
 }
 
@@ -231,7 +325,8 @@ a {
 
   h1 {
     margin: 0.5em 0 0.5em;
-    color: #333
+    color: #333;
+    line-height: 1.2em;
   }
 }
 .recipe-content-title {
@@ -251,10 +346,6 @@ a {
 }
 .page-content-controls .secondary-button {
   margin-bottom: 0.3em;
-}
-.recipe-avatar {
-  width: 40px;
-  height: 40px;
 }
 
 /*
@@ -290,6 +381,7 @@ a {
   }
 
   /* Hide the "Menu" button on larger screens */
+  #nav .home-link,
   #nav .nav-menu-button {
     display: none;
   }
@@ -369,3 +461,18 @@ a {
   }
 }
 
+/*
+ * Mobile iPhone SE
+ */
+@media (max-width: 320px) {
+  #nav {
+    &.active {
+      #logo {
+        display: none !important;
+      }
+      .home-link {
+        display: inline;
+      }
+    }
+  }
+}

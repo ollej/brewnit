@@ -1,0 +1,11 @@
+      <div class="page-content-header pure-g">
+        <div class="pure-u-2-3">
+          <h1 class="style_guides-content-title"><%= title I18n.t(:'style_guides.index') %></h1>
+        </div>
+      </div>
+
+      <div class="page-content-body style_guides-index item-index">
+        <ul class="style_guides-list linked-list pure-g">
+          <%= render partial: 'style_guide', collection: @style_guides %>
+        </ul>
+      </div>

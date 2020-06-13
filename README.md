@@ -1,15 +1,39 @@
 Brewnit
 =======
 
-A site to upload and view beerxml recipes.
+A site to upload, view, and edit beerxml recipes.
+
+Related resources
+-----------------
+
+### Recipe sites
+
+ * http://olrecept.se
+ * http://malt.io
+ * http://beercalc.org
+ * http://beerrecipes.org
+ * http://brewgr.com
+ * http://brewtoad.com
+ * http://brewersfriend.com
+
+### Recipe applications
+
+ * [Beersmith](http://beersmith.com/)
+ * [QBrew](http://freecode.com/projects/qbrew)
+ * [Brewtarget](http://www.brewtarget.org/)
+ * [Brew Pal (iOS)](http://www.djpsoftware.com/brewpal/)
+ * [BrewR (Android)](https://play.google.com/store/apps/details?id=com.weekendcoders.brewr&hl=en)
+ * [Wort (Android)](https://play.google.com/store/apps/details?id=info.dynamicdesigns.wort&hl=en)
+ * [Brewer's Friend (iOS, Android)](https://www.brewersfriend.com/)
 
 Requirements
 ------------
 
 This application needs the following:
 
- * Ruby v2.2.3
- * Postgres
+ * Ruby v2.7.1
+ * Postgres v9.6
+ * Vagrant 2.8+ for development
 
 Vagrant
 -------
@@ -50,16 +74,64 @@ issue: https://github.com/andreychernih/railsbox/issues/29
 
 ### Step 3 - Create config
 
+The file `config/secrets.yml` needs to be created from
+`config/secrets.yml.sample` and keys added for external services.
+Then add the following to a file called `.env.development`.
+
+```
+DEVISE_PEPPER: changeme
+GOOGLE_CLIENT_ID: changeme
+GOOGLE_CLIENT_SECRET: changeme
+SECRET_KEY_BASE: changeme
+WEB_CONCURRENCY: 3
+PUSHOVER_USER: changeme
+PUSHOVER_TOKEN: changeme
+PUSHOVER_GROUP_RECIPE: changeme
+PROJECT_HONEYPOT_KEY: changeme
+SMTP_PASSWORD: changeme
+RECAPTCHA_SITE_KEY: changeme
+RECAPTCHA_SECRET_KEY: changeme
+INKSCAPE_PATH: /usr/bin/inkscape
+```
+
 #### Development mode
 
 Run `bundle exec rake secret` twice and add them to the `config/secrets.yml`
-where it says 'changeme' (`secret_key_base` and `devise_pepper`).
+where it says 'changeme' (`SECRET_KEY_BASE` and `DEVISE_PEPPER`).
+
+##### Google authentication
 
 For the Google signin support, you need to create credentials on the Google
-Developers console and add client_id and client_secret to the
-config/secrets.yml
+Developers console and add `client_id` and `client_secret` to the
+`config/secrets.yml`
 
 https://console.developers.google.com
+
+##### reCAPTCHA
+
+The reCAPTCHA supports needs a `site_key` and `secret_key`:
+https://www.google.com/recaptcha/admin
+
+##### Pushover
+
+The Pushover integration needs keys from https://pushover.net/
+
+##### Project Honeypot
+
+Project Honeypot is used for spam protection. A key can be obtained from:
+https://www.projecthoneypot.org/
+
+##### SMTP password
+
+For mailers to work, an SMTP password needs to be configured in
+`smtp_password`.
+
+The SMTP server and user_name is hardcoded in `config/application.rb`
+
+##### Inkscape
+
+If you have inkscape installed, you can set `INKSCAPE_PATH` to use inkscape
+to generate beer labels when creating the beer label pdf.
 
 #### For production mode
 
@@ -70,12 +142,21 @@ environments below.
 
 ```
 DEVISE_PEPPER=changeme
-GOOGLE_CLIENT_ID=
-GOOGLE_CLIENT_SECRET=
+GOOGLE_CLIENT_ID=changeme
+GOOGLE_CLIENT_SECRET=changeme
 RACK_ENV=production
 RAILS_ENV=production
 SECRET_KEY_BASE=changeme
 WEB_CONCURRENCY=3
+PUSHOVER_USER=changeme
+PUSHOVER_TOKEN=changeme
+PUSHOVER_GROUP_RECIPE=changeme
+PROJECT_HONEYPOT_KEY=changeme
+SMTP_PASSWORD=changeme
+RECAPTCHA_SITE_KEY=changeme
+RECAPTCHA_SECRET_KEY=changeme
+SPAM_IP=space separated list of IP addresses to block
+INKSCAPE_PATH=/usr/bin/inkscape
 ```
 
 ### Step 4 - Start application
@@ -98,10 +179,10 @@ If you don't have Ruby, here is a short primer:
    ```bash
    $ git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
    ```
- * Install Ruby v2.2.3
+ * Install Ruby v2.7.0
 
    ```bash
-   $ rbenv install 2.2.3
+   $ rbenv install 2.7.0
    ```
  * Install bundler
 
@@ -138,3 +219,17 @@ Start the web server with the following command.
 $ bundle exec rails s
 ```
 
+### Useful commands
+
+#### Regenerate favicon files
+
+```
+rails generate favicon
+```
+
+How to Contribute?
+------------------
+
+It's easy, just follow the [contribution guidelines][contribution].
+
+[contribution]: https://github.com/ollej/brewnit/blob/master/CONTRIBUTING.md

@@ -36,7 +36,7 @@ Commontator.configure do |config|
   # Arguments: a user (acts_as_commontator)
   # Returns: the user's name (String)
   # Default: lambda { |user| I18n.t('commontator.anonymous') } (all users are anonymous)
-  config.user_name_proc = lambda { |user| user.name || I18n.t('commontator.anonymous') }
+  config.user_name_proc = lambda { |user| user.display_name || I18n.t('commontator.anonymous') }
 
   # user_link_proc
   # Type: Proc
@@ -78,7 +78,13 @@ Commontator.configure do |config|
   # If the mailer argument is not nil, then Commontator intends to send an email to
   # the address returned; you can prevent it from being sent by returning a blank String
   # Default: lambda { |user, mailer| user.try(:email) || '' }
-  config.user_email_proc = lambda { |user, mailer| user.try(:email) || '' }
+  config.user_email_proc = lambda { |user, mailer| 
+    if user.receive_emails?
+      user.email
+    else
+      ''
+    end
+  }
 
 
 
@@ -196,7 +202,7 @@ Commontator.configure do |config|
   # Not yet implemented:
   #   :n (link to the form; opens in a new window)
   # Default: :l
-  config.new_comment_style = :l
+  config.new_comment_style = :t
 
   # comments_per_page
   # Type: Fixnum or nil
@@ -204,7 +210,7 @@ Commontator.configure do |config|
   # Set to nil to disable pagination
   # Any other value requires the will_paginate gem
   # Default: nil (no pagination)
-  config.comments_per_page = nil
+  config.comments_per_page = [ 50, 5, 2 ]
 
   # thread_subscription
   # Type: Symbol
@@ -215,7 +221,7 @@ Commontator.configure do |config|
   #   :m (manual subscriptions only)
   #   :b (both automatic, when commenting, and manual)
   # Default: :n
-  config.thread_subscription = :n
+  config.thread_subscription = :b
 
   # email_from_proc
   # Type: Proc
@@ -225,7 +231,7 @@ Commontator.configure do |config|
   # Default: lambda { |thread|
   #                   "no-reply@#{Rails.application.class.parent.to_s.downcase}.com" }
   config.email_from_proc = lambda { |thread|
-    "no-reply@#{Rails.application.class.parent.to_s.downcase}.com" }
+    "brewmaster@brygglogg.se" }
 
   # commontable_name_proc
   # Type: Proc
@@ -236,7 +242,8 @@ Commontator.configure do |config|
   # Default: lambda { |thread|
   #                   "#{thread.commontable.class.name} ##{thread.commontable.id}" }
   config.commontable_name_proc = lambda { |thread|
-    "#{thread.commontable.class.name} ##{thread.commontable.id}" }
+    "#{thread.commontable.name} (#{thread.commontable.brewer_name})"
+  }
 
   # comment_url_proc
   # Type: Proc
@@ -250,7 +257,7 @@ Commontator.configure do |config|
   #                                              anchor: "comment_#{comment.id}_div") }
   # (defaults to the commontable's show url with an anchor pointing to the comment's div)
   config.comment_url_proc = lambda { |comment, app_routes|
-    app_routes.polymorphic_url(comment.thread.commontable, anchor: "comment_#{comment.id}_div") }
+    app_routes.polymorphic_url(comment.thread.commontable, anchor: "commontator-comment-#{comment.id}") }
 
   # mentions_enabled
   # Type: Boolean
@@ -279,7 +286,7 @@ Commontator.configure do |config|
   #
   # Default: lambda { |current_user, query|
   #                   current_user.class.where('username LIKE ?', "#{query}%") }
-  config.user_mentions_proc = lambda { |current_user, query|
+  config.user_mentions_proc = ->(current_user, thread, query) {
     User.by_query(query)
   }
 end

@@ -1,0 +1,17 @@
+                <li class="pure-menu-item" data-event-recipe-id="<%= recipe.id %>">
+                  <%= icon('beer') %>
+                  <%= link_to recipe.name, recipe_path(recipe), class: 'pure-menu-link' %>
+
+                  <ul class="pure-menu-list recipe-medals">
+                    <% recipe.placements.by_event(event).ordered.each do |placement| %>
+                      <%= render partial: 'shared/recipe_placement', locals: {
+                        placement: placement,
+                        current_user: current_user,
+                        event: event,
+                        recipe: recipe
+                      } %>
+                    <% end %>
+                  </ul>
+                </li>
+
+

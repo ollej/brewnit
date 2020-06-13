@@ -1,0 +1,24 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: t(:'recipes.index')) do |sheet|
+  header = sheet.styles.add_style alignment: { horizontal: :center },
+    b: true, sz: 12, bg_color: 'C0C0C0', font_name: 'Arial'
+
+  sheet.add_row ['ID', t(:'beerxml.name'), t(:'beerxml.style_name'),
+    t(:'beerxml.style_code'), t(:'beerxml.style_guide'),
+    t(:'beerxml.brewer'), t(:'beerxml.og'), t(:'beerxml.fg'),
+    t(:'beerxml.ibu'), 'EBC', t(:'beerxml.abv'),
+    'URL', 'BeerXML', t(:'recipe_events.registration_message')]
+  sheet.row_style 0, header
+
+  @recipes.each do |recipe|
+    sheet.add_row [recipe.id, recipe.name, recipe.style_name, recipe.style_code,
+      recipe.style_guide, recipe.owner_name, format_sg(recipe.og), format_sg(recipe.fg),
+      number_with_precision(recipe.ibu, precision: 0),
+      number_with_precision(recipe.color, precision: 0), format_abv(recipe.abv),
+      recipe_url(recipe), recipe_url(recipe, format: :xml), registration_message(recipe)],
+      types: [:integer, :string, :string, :string, :string, :string, :string, :string,
+             :integer, :integer, :string, :string, :string]
+    sheet.add_hyperlink location: recipe_url(recipe), ref: sheet.rows.last.cells[11]
+    sheet.add_hyperlink location: recipe_url(recipe), ref: sheet.rows.last.cells[12]
+  end
+end

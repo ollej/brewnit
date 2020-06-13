@@ -1,0 +1,25 @@
+---
+- name: Create font directory
+  file:
+    path: "{{ system_font_path }}"
+    state: directory
+    mode: '0755'
+  tags: fonts
+
+- name: Install fonts
+  copy:
+    remote_src: yes
+    src: "{{ app_path }}/app/assets/fonts/"
+    dest: "{{ system_font_path }}"
+    mode: '0644'
+  tags: fonts
+
+- name: Ensure font directory has correct permissions
+  command: chmod 0755 {{ system_font_path }} warn=false
+  become: yes
+  tags: fonts
+
+- name: Update fc-cache
+  command: fc-cache
+  tags: fonts
+

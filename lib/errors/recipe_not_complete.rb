@@ -1,0 +1,1 @@
+class RecipeNotComplete < StandardError; end

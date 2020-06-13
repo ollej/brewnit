@@ -1,12 +1,35 @@
 ---
-- name: Install packages
-  apt: name={{ item }}
-  with_items:
-    - libpq-dev
-    - postgresql
-    - postgresql-contrib
-    - python-pip
-    - python-dev
+- name: Adding APT repository key
+  become: yes
+  apt_key:
+    id: ACCC4CF8
+    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+
+- name: Add PostgreSQL official APT repository
+  become: yes
+  apt_repository:
+    repo: "deb http://apt.postgresql.org/pub/repos/apt/ {{ansible_distribution_release}}-pgdg main"
+
+- name: Install dependency packages
+  apt:
+    name:
+      - libpq-dev
+      - python-pip
+      - python-dev
+
+- name: Install PostgreSQL
+  become: yes
+  apt:
+    name: "postgresql-{{postgresql_version}}"
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Install PostgreSQL contribs
+  become: yes
+  apt:
+    name: "postgresql-contrib-{{postgresql_version}}"
+  notify: restart postgresql
 
 - name: Configure PostgreSQL - postgresql.conf
   template: src=postgresql.conf.j2 dest=/etc/postgresql/{{ postgresql_version }}/main/postgresql.conf
@@ -16,17 +39,14 @@
   template: src=pg_hba.conf.j2 dest=/etc/postgresql/{{ postgresql_version }}/main/pg_hba.conf
   notify: restart postgresql
 
-
 - name: Install required Python modules
   pip: name=psycopg2
 
 - name: Create postgresql user
   postgresql_user: name={{ postgresql_db_user }} password={{ postgresql_db_password }} role_attr_flags=CREATEDB,SUPERUSER,CREATEROLE
-  sudo_user: postgres
 
 - name: Create postgresql database
   postgresql_db: name={{ postgresql_db_name }} owner={{ postgresql_db_user }}
-  sudo_user: postgres
 
 - name: Assure that config dir exists
   file: path={{ app_config_path }} state=directory
@@ -36,15 +56,36 @@
   when: postgresql_orm in ['activerecord', 'sequel', 'datamapper']
 
 - name: Make sure the postgis extensions are installed
-  apt: name={{ item }}
-  with_items:
-    - libgeos-c1
-    - 'postgresql-{{ postgresql_version }}-postgis-{{ postgresql_ext_postgis_version }}'
+  apt:
+    name:
+      - libgeos-c1
+      - 'postgresql-{{ postgresql_version }}-postgis-{{ postgresql_ext_postgis_version }}'
   notify: restart postgresql
   when: "postgresql_extensions and 'postgis' in postgresql_extensions"
 
 - name: Create extensions
-  sudo_user: '{{ postgresql_admin_user }}'
-  shell: "psql {{ postgresql_db_name }} -c 'CREATE EXTENSION IF NOT EXISTS {{ item }};'"
-  with_items: postgresql_extensions
-  when: postgresql_extensions
+  postgresql_ext:
+    db: '{{ postgresql_db_name }}'
+    name: "{{ item }}"
+  with_items: '{{ postgresql_extensions }}'
+  when: (postgresql_extensions is defined) and (postgresql_extensions|length > 0)
+  become: yes
+  become_user: '{{ postgresql_db_user }}'
+
+- name: Add swedish dictionary
+  copy:
+    src: "{{ item }}"
+    dest: /usr/share/postgresql/{{ postgresql_version }}/tsearch_data/
+  with_fileglob:
+    - files/sv_se.*
+
+- name: Upload sql script for Swedish dictionary
+  template: src="files/swedish_dictionary.sql" dest="/tmp/swedish_dictionary.sql"
+
+- name: Execute sql script
+  shell: "psql --file /tmp/swedish_dictionary.sql {{ postgresql_db_name }}"
+  become: yes
+  become_user: '{{ postgresql_db_user }}'
+
+- name: Delete sql script
+  file: path="/tmp/swedish_dictionary.sql" state=absent

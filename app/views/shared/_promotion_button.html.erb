@@ -1,0 +1,52 @@
+            <label class="purecss-dropdown">
+              <div class="pure-button secondary-button dd-button"
+                data-balloon="<%= I18n.t(:'recipes.print.description') %>"
+                data-balloon-pos="left" data-balloon-length="medium">
+                <%= icon('print') %> <%= t(:'recipes.print.button') %> <%= icon('caret-down') %>
+              </div>
+              <input type="checkbox" class="dd-input" id="test">
+              <ul class="dd-menu">
+                <li>
+                  <%= link_to print_recipe_path(id: @recipe),
+                    data: tooltip_data(
+                      I18n.t(:'recipes.print.recipe.description'),
+                      position: 'left'), target: '_blank' do %>
+                    <%= icon('file-alt') %> <%= t(:'recipes.print.recipe.link') %>
+                  <% end %>
+                </li>
+                <% if can_modify?(@recipe) %>
+                <li>
+                  <%= link_to label_recipe_path(id: @recipe),
+                    data: tooltip_data(
+                      I18n.t(:'recipes.print.labels.description'), position: 'left') do %>
+                    <%= icon('wine-bottle') %> <%= t(:'recipes.print.labels.link') %>
+                  <% end %>
+                </li>
+                <li>
+                <%= link_to qr_recipe_path(@recipe),
+                    data: tooltip_data(
+                      I18n.t(:'recipes.print.qrcode.description'), position: 'left'),
+                    target: '_blank' do %>
+                    <%= icon('qrcode') %> <%= t(:'recipes.print.qrcode.link') %>
+                  <% end %>
+                </li>
+                <li>
+                <%= link_to poster_recipe_path(@recipe),
+                    data: tooltip_data(
+                      I18n.t(:'recipes.print.poster.description'), position: 'left'),
+                    target: '_blank' do %>
+                    <%= icon('scroll') %> <%= t(:'recipes.print.poster.link') %>
+                  <% end %>
+                </li>
+                <li>
+                <%= link_to shopping_recipe_path(@recipe),
+                    data: tooltip_data(
+                      I18n.t(:'recipes.print.shopping.description'), position: 'left'),
+                    target: '_blank' do %>
+                    <%= icon('shopping-basket') %> <%= t(:'recipes.print.shopping.link') %>
+                  <% end %>
+                </li>
+                <% end %>
+              </ul>
+            </label>
+

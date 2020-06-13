@@ -1,0 +1,14 @@
+<div class="print-header">
+  <h1><%= I18n.t(:'recipe_shopping_list.header') %> <%= @recipe.name %></h1>
+  <h2><%= @recipe.style_name %> <%= @presenter.style_type %></h2>
+</div>
+
+<div class="print-main">
+  <ul class="page-center">
+    <% @shopping.items.each do |item| %>
+      <li><%= item.amount %> <%= item.unit %> <%= item.name %></li>
+    <% end %>
+  </ul>
+</div>
+
+<%= render 'shared/print_footer' %>

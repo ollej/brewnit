@@ -1,0 +1,19 @@
+    <tr data-fermentable-id="<%= fermentable.id %>">
+      <td class="ingredient name"><%= fermentable.name %></td>
+      <td class="ingredient amount format-number">
+        <%= number_with_precision(fermentable.amount, precision: 2) %>
+      </td>
+      <td class="ingredient grain_type">
+        <%= I18n.t("recipe_detail.fermentable_type.#{fermentable.grain_type}") %>
+      </td>
+      <td class="ingredient ebc format-number">
+        <%= number_with_precision(fermentable.ebc, precision: 0) %>
+        <%= t(:'activerecord.attributes.fermentable.ebc') %>
+      </td>
+      <td>
+        <div class="colorbox" style="background-color: <%= ebc_hex(fermentable.ebc) %>">&nbsp;</div>
+      </td>
+      <td>
+        <%= trash_icon(recipe_fermentable_path(@recipe, fermentable)) %>
+      </td>
+    </tr>

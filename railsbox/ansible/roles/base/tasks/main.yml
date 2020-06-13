@@ -4,30 +4,34 @@
     update_cache: yes
     cache_valid_time: 3600
 
-
 - name: Install apt dependencies
-  apt: name={{ item }}
-  with_items:
-    - autoconf
-    - bison
-    - build-essential
-    - libssl-dev
-    - libyaml-dev
-    - libreadline6-dev
-    - zlib1g-dev
-    - libncurses5-dev
-    - nodejs
-    - python-pip
-    - python-dev
-    - htop
-    - git
-    - libgmp-dev
-    - libpq-dev
+  apt:
+    name:
+      - autoconf
+      - bison
+      - build-essential
+      - libssl-dev
+      - libyaml-dev
+      - libreadline6-dev
+      - zlib1g-dev
+      - libncurses5-dev
+      - nodejs
+      - python-pip
+      - python-dev
+      - htop
+      - git
+      - libgmp-dev
+      - libpq-dev
+      - inkscape
+
+- name: Upgrade kernel
+  apt:
+    name: linux-generic-lts-xenial
+    install_recommends: yes
 
 - name: Install additional packages
-  apt: name={{ item }}
-  with_items: packages
-  when: packages
+  apt: name={{ packages }}
+  when: (packages is defined) and (packages|length > 0)
 
 - name: Create application group
   group: name={{ group_name }}
@@ -42,7 +46,7 @@
 
 - name: Create temp directory
   file: path={{ app_temp_path }} state=directory
-  sudo: no
+  become: no
 
 - name: Create profile.d directory
   file: path={{ profile_d_path }} state=directory owner={{ user_name }} group={{ group_name }}

@@ -1,7 +1,7 @@
 class RecipePresenter
-  def initialize(recipe)
+  def initialize(recipe, beerxml = nil)
     @recipe = recipe
-    @beerxml = recipe.beerxml_details
+    @beerxml = beerxml || BeerxmlParser.new(@recipe.beerxml).recipe
     @style = @beerxml.style
   end
 
@@ -31,7 +31,8 @@ class RecipePresenter
   end
 
   def style_has_values?
-    @style.category_number.present? && @style.style_letter.present? &&
+    @style.present? &&
+      @style.category_number.present? && @style.style_letter.present? &&
       @style.category.present? &&
       @style.og_min.present? && @style.og_max.present? &&
       @style.fg_min.present? && @style.fg_max.present? &&
@@ -40,8 +41,8 @@ class RecipePresenter
   end
 
   def style_type
-    return unless @beerxml.style_code.present? && @style.style_guide.present?
-    "(#{[ @beerxml.style_code, @style.style_guide ].join(' / ')})"
+    return unless @recipe.style_code && @recipe.style_guide.present?
+    "(#{[ @recipe.style_code, @recipe.style_guide ].join(' / ')})"
   end
 
   def hop_grams_per_liter(hop)
@@ -62,5 +63,61 @@ class RecipePresenter
 
   def hop_aau(hop)
     '%.1f' % hop.aau
+  end
+
+  def malt_data
+    @beerxml.fermentables.map do |f|
+      {
+        label: f.name,
+        value: f.formatted_amount.to_f,
+        color: f.color_hex,
+      }
+    end
+  end
+
+  def hop_addition_name(hop)
+    if hop.use == 'Boil'
+      if hop.time >= 30
+        I18n.t(:'beerxml.addition_bitter')
+      elsif hop.time >= 10
+        I18n.t(:'beerxml.addition_flavour')
+      else
+        I18n.t(:'beerxml.addition_aroma')
+      end
+    else
+      I18n.t("beerxml.#{hop.use}")
+    end
+  end
+
+  def hop_data(hop)
+    {
+      name: hop.name,
+      size: hop.amount,
+      time: hop.time,
+      ibu: hop.ibu,
+      aau: hop.aau,
+      mgl_alpha: hop.mgl_added_alpha_acids,
+      grams_per_liter: hop.amount / @recipe.batch_size,
+      tooltip: "#{hop.formatted_amount} #{I18n.t(:'beerxml.grams')} #{hop.name} @ #{hop.formatted_time} #{I18n.t("beerxml.#{hop.time_unit}", default: hop.time_unit)}"
+    }
+  end
+
+  def hop_additions
+    hops = {}
+    @beerxml.hops.map do |h|
+      if hops[h.time]
+        hops[h.time][:children] << hop_data(h)
+      else
+        hops[h.time] = { name: hop_addition_name(h), children: [hop_data(h)] }
+      end
+    end
+    hops
+  end
+
+  def hops_data
+    {
+      name: I18n.t(:'beerxml.hops'),
+      children: hop_additions.values
+    }
   end
 end

@@ -1,37 +1,52 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   include MediaParentConcern
+  include SearchCop
   include SanitizerConcern
   include PushoverConcern
+
+  media_attribute :media_avatar, :media_brewery
+
+  search_scope :search do
+    attributes primary: [:name, :presentation, :equipment, :brewery, :twitter]
+    attributes :name, :brewer, :equipment
+    options :primary, type: :fulltext, default: true, dictionary: 'swedish_snowball'
+    options :brewery, type: :fulltext, default: false, dictionary: 'swedish_snowball'
+    options :equipment, type: :fulltext, default: false, dictionary: 'swedish_snowball'
+  end
 
   before_validation :cleanup_fields
   has_many :recipes, dependent: :destroy
   has_many :media, as: :parent, dependent: :destroy
-  belongs_to :media_avatar, class_name: "Medium"
-  belongs_to :media_brewery, class_name: "Medium"
+  belongs_to :media_avatar, class_name: 'Medium', optional: true
+  belongs_to :media_brewery, class_name: 'Medium', optional: true
   accepts_nested_attributes_for :media, :reject_if => lambda { |r| r['media'].nil? }
 
   validates :name, presence: true
-  validates_format_of :avatar,
-    with: %r{\Ahttps?://.+/.+\.(gif|jpe?g|png)\z}i,
-    message: I18n.t(:'activerecord.errors.models.user.attributes.avatar.format'),
-    allow_blank: true
+  validates :url, url: true, allow_blank: true
 
   acts_as_commontator
   acts_as_voter
 
   sanitized_fields :presentation
 
-  # Unused: :recoverable, :confirmable, :lockable
-  devise :database_authenticatable, :rememberable, :trackable, :validatable,
-         :registerable, :timeoutable, :omniauthable, omniauth_providers: [:google]
+  # Unused: :lockable
+  devise :database_authenticatable, :rememberable, :trackable, :validatable, :recoverable,
+         :registerable, :timeoutable, :confirmable, :omniauthable, omniauth_providers: [:google]
 
   scope :by_query, lambda { |query, col = :name|
     where arel_table[col].matches("%#{query}%")
   }
-  scope :ordered, -> { order("name = '', name ASC, brewery ASC") }
+  scope :ordered, -> { order("users.name = '', users.name ASC, brewery ASC") }
+  scope :confirmed, -> { where('confirmed_at IS NOT NULL') }
+  scope :unconfirmed, -> { where( 'confirmed_at is NULL AND confirmation_sent_at < ?', Time.now - Devise.confirm_within) }
+  scope :latest, -> { confirmed.limit(10).order('created_at desc') }
+  scope :has_recipes, -> {
+    select('users.*, (users.recipes_count > 0) as has_recipes')
+      .order('has_recipes DESC')
+  }
 
-  def display_name
-    name || I18n.t(:'common.unknown_name')
+  def display_name(default = nil)
+    name.presence || brewery.presence || default.presence || I18n.t(:'common.unknown_name')
   end
 
   def admin?
@@ -42,17 +57,24 @@ class User < ActiveRecord::Base
     self == user
   end
 
+  def has_avatar?
+    media_avatar.present?
+  end
+
   def avatar_image(size = :medium_thumbnail)
-    if media_avatar.present?
+    if has_avatar?
       media_avatar.file.url(size)
-    elsif avatar.present?
-      avatar
     elsif email.present?
-      hash = Digest::MD5.hexdigest(email)
-      "https://secure.gravatar.com/avatar/#{hash}?s=100&d=retro"
+      default_avatar
     else
       nil
     end
+  end
+
+  def default_avatar
+    return nil unless email.present?
+    hash = Digest::MD5.hexdigest(email)
+    "https://api.adorable.io/avatars/64/#{hash}"
   end
 
   def can_modify?(resource)
@@ -68,52 +90,68 @@ class User < ActiveRecord::Base
   end
 
   def cleanup_fields
-    if !url.blank? && !url.start_with?('http')
+    if url.present? && !url.start_with?('http')
       self.url = "http://#{url.strip}"
     end
-    if !twitter.blank? && !twitter.start_with?('@')
+    if twitter.present? && !twitter.start_with?('@')
       self.twitter = "@#{twitter.strip}"
     end
   end
 
-  def pushover_values(type = :create)
-    translation_values = {
+  def pushover_translation
+    {
       name: name.blank? ? email : name,
       email: email,
     }
-    if type == :create
-      super.merge({
-        title: I18n.t(:'common.notification.user.created.title', translation_values),
-        message: I18n.t(:'common.notification.user.created.message', translation_values),
-        sound: 'bugle',
-        url: Rails.application.routes.url_helpers.user_url(self)
-      })
-    else
-      super.merge({
-        title: I18n.t(:'common.notification.user.destroyed.title', translation_values),
-        message: I18n.t(:'common.notification.user.destroyed.message', translation_values),
-        sound: 'siren',
-      })
-    end
   end
 
-  def self.from_omniauth(access_token)
-    data = access_token.info
+  def pushover_values_create
+    {
+      title: I18n.t(:'common.notification.user.created.title', pushover_translation),
+      message: I18n.t(:'common.notification.user.created.message', pushover_translation),
+      sound: :bugle,
+      url: Rails.application.routes.url_helpers.user_url(self)
+    }
+  end
+
+  def pushover_values_destroy
+    {
+      title: I18n.t(:'common.notification.user.destroyed.title', pushover_translation),
+      message: I18n.t(:'common.notification.user.destroyed.message', pushover_translation),
+      sound: :siren,
+    }
+  end
+
+  def self.from_omniauth(auth_hash, honeypot)
+    data = auth_hash.info
 
     user = User.find_or_create_by(email: data[:email]) do |u|
       u.name = data[:name]
       u.password = Devise.friendly_token[0,20]
-      u.avatar = data[:image]
+      u.registration_data = self.registration_data_hash(auth_hash.provider, data[:email], honeypot)
     end
-    if data[:image].present? && user.avatar.blank?
-      user.avatar = data[:image]
-      user.save
+    if data[:image].present? && !user.has_avatar?
+      user.create_medium(data[:image], :avatar)
     end
     user
   end
 
-  def self.latest
-    self.limit(10).order('created_at desc')
+  def self.search_name(query)
+    if query.present?
+      self.search(or: [{ query: query }, { name: query }])
+    else
+      all
+    end
   end
 
+  def self.registration_data_hash(provider, email, honeypot)
+    {
+      provider: provider,
+      email: email,
+      ip_address: honeypot.ip_address,
+      score: honeypot.score,
+      safe: honeypot.safe?,
+      offences: honeypot.offenses,
+    }
+  end
 end

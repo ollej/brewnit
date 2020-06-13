@@ -3,7 +3,10 @@
     <%= image_tag 'brygglogg-logo.png', width: 96, height: 96, id: 'logo' %>
   <% end %>
 
-  <a href="#" class="nav-menu-button">Menu</a>
+  <%= link_to root_path, class: 'home-link' do %>
+    <i class="fas fa-home"></i> Hem
+  <% end %>
+  <a href="#" class="nav-menu-button"><i class="fas fa-bars"></i> Meny</a>
 
   <div class="nav-inner">
     <%= link_to t(:'recipes.new'), new_recipe_path, class: 'primary-button pure-button' %>
@@ -11,42 +14,81 @@
     <div class="pure-menu">
       <ul class="pure-menu-list">
         <li class="pure-menu-item">
-          <i class="fa fa-beer"></i><%= link_to t(:'recipes.index'),
+          <i class="fas fa-beer fa-fw"></i><%= link_to t(:'recipes.index'),
             recipes_path(clear_search: true), class: 'pure-menu-link' %>
         </li>
         <li class="pure-menu-item">
-          <i class="fa fa-user"></i><%= link_to t(:'users.index'),
-            users_path, class: 'pure-menu-link' %>
+          <i class="fas fa-layer-group fa-fw"></i><%= link_to t(:'latest_items.latest_items'),
+            latest_items_path, class: 'pure-menu-link' %>
+        </li>
+        <li class="pure-menu-item">
+          <i class="fas fa-users fa-fw"></i><%= link_to t(:'users.index'),
+            users_path(clear_search: true), class: 'pure-menu-link' %>
+        </li>
+        <li class="pure-menu-item">
+          <i class="fas fa-calendar-alt fa-fw"></i><%= link_to t(:'events.index'),
+            events_path(clear_search: true), class: 'pure-menu-link' %>
+        </li>
+        <li class="pure-menu-item">
+          <i class="fas fa-tools fa-fw"></i><%= link_to t(:'pages.tools'),
+            pages_path(clear_search: true, page: 'verktyg'),
+            class: 'pure-menu-link' %>
+        </li>
+        <li class="pure-menu-item">
+          <i class="fas fa-dna fa-fw"></i><%= link_to t(:'style_guides.index'),
+            style_guides_path, class: 'pure-menu-link' %>
+        </li>
+        <li class="pure-menu-item">
+          <i class="fas fa-info-circle fa-fw"></i><%= link_to t(:'pages.about'),
+            pages_path(page: 'about'), class: 'pure-menu-link' %>
         </li>
       <% if user_signed_in? %>
         <li class="pure-menu-item">
-          <i class="fa fa-user"></i><%= link_to t(:'users.profile'),
+          <i class="fas fa-user-cog fa-fw"></i><%= link_to t(:'users.profile'),
             edit_user_registration_path, class: 'pure-menu-link' %>
         </li>
         <li class="pure-menu-item">
-          <i class="fa fa-sign-out"></i><%= link_to t(:'users.sign_out'),
+          <i class="fas fa-sign-out-alt fa-fw"></i><%= link_to t(:'users.sign_out'),
             destroy_user_session_path, class: 'pure-menu-link' %>
         </li>
+        <% if current_user.admin? %>
+        <li class="pure-menu-item">
+          <i class="fas fa-user-secret fa-fw"></i><%= link_to t(:'admin.root'),
+            admin_root_path, class: 'pure-menu-link' %>
+        </li>
+        <% end %>
       <% else %>
         <li class="pure-menu-item">
-          <i class="fa fa-sign-in"></i><%= link_to t(:'users.sign_in'),
+          <i class="fas fa-sign-in-alt fa-fw"></i><%= link_to t(:'users.sign_in'),
             new_user_session_path, class: 'pure-menu-link' %>
         </li>
         <li class="pure-menu-item">
-          <i class="fa fa-user-plus"></i><%= link_to t(:'users.sign_up'),
+          <i class="fas fa-user-plus fa-fw"></i><%= link_to t(:'users.sign_up'),
             new_user_registration_path, class: 'pure-menu-link' %>
         </li>
       <% end %>
       <% if user_signed_in? %>
         <li class="pure-menu-heading"><%= t(:'recipes.labels') %></li>
-        <li class="pure-menu-item"><a href="#" class="pure-menu-link"><span class="recipe-label-private"></span><%= t(:'recipes.private') %></a></li>
         <li class="pure-menu-item">
-          <%= link_to user_path(current_user), class: 'pure-menu-link' do %>
+          <%= link_to recipes_path(private: true), class: 'pure-menu-link' do %>
+            <span class="recipe-label-private"></span><%= t(:'recipes.private') %></a></li>
+          <% end %>
+        <li class="pure-menu-item">
+          <%= link_to user_path(current_user, clear_search: true), class: 'pure-menu-link' do %>
             <span class="recipe-label-own"></span><%= t(:'recipes.own') %>
           <% end %>
         </li>
+        <li class="pure-menu-item">
+          <%= link_to recipes_path(incomplete: true), class: 'pure-menu-link' do %>
+            <span class="recipe-label-incomplete"></span><%= t(:'recipes.incomplete') %>
+          <% end %>
+        </li>
       <% end %>
-        <!-- <li class="pure-menu-item"><a href="#" class="pure-menu-link"><span class="recipe-label-winner"></span><%= t(:'recipes.winner') %></a></li> -->
+        <li class="pure-menu-item">
+          <%= link_to recipes_path(has_medal: true), class: 'pure-menu-link' do %>
+            <span class="recipe-label-winner"></span><%= t(:'recipes.winner') %>
+          <% end %>
+        </li>
       </ul>
     </div>
 
@@ -55,8 +97,8 @@
     <!-- <a href="http://utopianrealms.org/dextral.php?pg=8792">gala</a> -->
 
     <footer>
-    &copy; 2016
-    <%= mail_to 'brewmaster@brygglogg.se', 'Olle Johansson', encode: 'javascript', class: 'email' %>
+    &copy; 2020
+    <%= mail_to 'brewmaster@brygglogg.se', 'Olle Wreede', encode: 'javascript', class: 'email' %>
     <!-- <a href="http://www.google.com/recaptcha/mailhide/d?k=01S4b3Q57ofDLXf80wxBqgxQ==&amp;c=HO2dRU06mfdMGsSwTF6PfqMbcyqNEvpxwCWcep_9Ol0=" onclick="window.open('http://www.google.com/recaptcha/mailhide/d?k\07501S4b3Q57ofDLXf80wxBqgxQ\75\75\46c\75HO2dRU06mfdMGsSwTF6PfqMbcyqNEvpxwCWcep_9Ol0\075', '', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=500,height=300'); return false;" title="Visa e-postadressen">b...</a>@brygglogg.se -->
     </footer>
   </div>

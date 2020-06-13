@@ -1,0 +1,123 @@
+<%= form_with url: form_url, local: true,
+  class: 'pure-form pure-form-aligned label-form',
+  html: { target: '_blank', onsubmit: onsubmit } do |f| %>
+  <%= invisible_captcha if captcha %>
+
+  <fieldset>
+    <div class="field pure-control-group">
+      <%= f.label :template, I18n.t(:'label.template') %>
+      <%= f.select :template,
+        options_for_select(templates.templates.keys, LabelTemplates::DEFAULT),
+        {}, { class: 'pure-input-1-2', id: :template } %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :background, I18n.t(:'label.background') %>
+      <%= f.select :background,
+        options_for_select(templates.backgrounds.keys, ''), { include_blank: true },
+        { class: 'pure-input-1-2', id: :background } %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :border, I18n.t(:'label.border') %>
+      <%= f.select :border,
+        options_for_select(templates.borders.keys, ''), { include_blank: true },
+        { class: 'pure-input-1-2', id: :border } %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :textcolor, I18n.t(:'label.textcolor') %>
+      <div class="picker"></div>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :name, I18n.t(:'label.field.name') %>
+      <%= f.text_field :name, value: recipe_data[:name], class: 'pure-input-1-2' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :beerstyle, I18n.t(:'label.field.beerstyle') %>
+      <%= f.text_field :beerstyle, value: recipe_data[:beerstyle], class: 'pure-input-1-2' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :brewery, I18n.t(:'label.field.brewery') %>
+      <%= f.text_field :brewery, value: recipe_data[:brewery], class: 'pure-input-1-2' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :description1, I18n.t(:'label.field.description1') %>
+      <%= f.text_field :description1, value: recipe_data[:description1],
+        class: 'pure-input-1-2' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :description2, I18n.t(:'label.field.description2') %>
+      <%= f.text_field :description2, value: recipe_data[:description2], class: 'pure-input-1-2' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :description3, I18n.t(:'label.field.description3') %>
+      <%= f.text_field :description3, value: recipe_data[:description3], class: 'pure-input-1-2' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :description4, I18n.t(:'label.field.description4') %>
+      <%= f.text_field :description4, value: recipe_data[:description4], class: 'pure-input-1-2' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :abv, I18n.t(:'label.field.abv') %>
+      <%= f.text_field :abv, value: recipe_data[:abv], class: 'pure-input-1-4' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :ibu, I18n.t(:'label.field.ibu') %>
+      <%= f.text_field :ibu, value: recipe_data[:ibu], class: 'pure-input-1-4' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :ebc, I18n.t(:'label.field.ebc') %>
+      <%= f.text_field :ebc, value: recipe_data[:ebc], class: 'pure-input-1-4' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :og, I18n.t(:'label.field.og') %>
+      <%= f.text_field :og, value: recipe_data[:og], class: 'pure-input-1-4' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :fg, I18n.t(:'label.field.fg') %>
+      <%= f.text_field :fg, value: recipe_data[:fg], class: 'pure-input-1-4' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :malt1, I18n.t(:'label.field.malt1') %>
+      <%= f.text_field :malt1, value: recipe_data[:malt1], class: 'pure-input-1-2' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :malt2, I18n.t(:'label.field.malt2') %>
+      <%= f.text_field :malt2, value: recipe_data[:malt2], class: 'pure-input-1-2' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :hops1, I18n.t(:'label.field.hops1') %>
+      <%= f.text_field :hops1, value: recipe_data[:hops1], class: 'pure-input-1-2' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :hops2, I18n.t(:'label.field.hops2') %>
+      <%= f.text_field :hops2, value: recipe_data[:hops2], class: 'pure-input-1-2' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :yeast, I18n.t(:'label.field.yeast') %>
+      <%= f.text_field :yeast, value: recipe_data[:yeast], class: 'pure-input-1-2' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :brewdate, I18n.t(:'label.field.brewdate') %>
+      <%= f.text_field :brewdate, value: recipe_data[:brewdate],
+        class: 'pure-input-1-2' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :contactinfo, I18n.t(:'label.field.contactinfo') %>
+      <%= f.text_field :contactinfo, value: "", class: 'pure-input-1-2' %>
+    </div>
+    <div class="field pure-control-group">
+      <%= f.label :bottlesize, I18n.t(:'label.field.bottlesize') %>
+      <%= f.text_field :bottlesize, value: recipe_data[:bottlesize], class: 'pure-input-1-4' %>
+    </div>
+    <div class="actions pure-controls">
+      <%= f.submit I18n.t(:'label.generate'),
+        { id: 'generate-label', class: 'pure-button pure-button-primary',
+          data: { disable_with: false } } %>
+    </div>
+    <%= f.hidden_field :logo_url, value: label_presenter.logo_url %>
+    <%= f.hidden_field :mainimage_url, value: label_presenter.mainimage_url %>
+    <%= f.hidden_field :mainimage_wide_url, value: label_presenter.mainimage_wide_url %>
+    <%= f.hidden_field :mainimage_full_url, value: label_presenter.mainimage_full_url %>
+    <%= f.hidden_field :qrcode, value: label_presenter.qrcode_image %>
+    <%= f.hidden_field :textcolor, value: "" %>
+  </fieldset>
+<% end %>

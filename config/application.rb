@@ -1,7 +1,6 @@
-require File.expand_path('../boot', __FILE__)
+require_relative 'boot'
 
 require 'rails/all'
-require 'chronic'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -9,6 +8,9 @@ Bundler.require(*Rails.groups)
 
 module Brewnit
   class Application < Rails::Application
+    # Initialize configuration defaults for originally generated Rails version.
+    config.load_defaults "6.0"
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -24,13 +26,8 @@ module Brewnit
     config.i18n.default_locale = :sv
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
 
-    # Do not swallow errors in after_commit/after_rollback callbacks.
-    config.active_record.raise_in_transactional_callbacks = true
-
-    config.autoload_paths << Rails.root.join('lib')
-    config.autoload_paths << Rails.root.join('lib/errors')
-    config.autoload_paths << Rails.root.join('/app/validators')
-    config.autoload_paths << Rails.root.join('/app/presenters')
+    config.eager_load_paths << Rails.root.join('lib')
+    config.eager_load_paths << Rails.root.join('lib/errors')
 
     config.sass.preferred_syntax = :scss
     config.sass.line_comments = false
@@ -42,8 +39,29 @@ module Brewnit
       'AuthorizationException' => :unauthorized
     )
 
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.perform_deliveries = true
+    config.action_mailer.raise_delivery_errors = true
+    config.action_mailer.logger = Rails.logger
+    config.action_mailer.default_options = {
+      charset: 'UTF-8',
+      from: 'brewmaster@brygglogg.se',
+      reply_to: 'brewmaster@brygglogg.se',
+    }
+    config.action_mailer.smtp_settings = {
+      address:              'mail.gandi.net',
+      port:                 587,
+      domain:               'brygglogg.se',
+      user_name:            'smtp@brygglogg.se',
+      password:             Rails.application.secrets.smtp_password,
+      authentication:       :login,
+      enable_starttls_auto: true
+    }
+
     config.after_initialize do
       Rails.application.routes.default_url_options = config.action_mailer.default_url_options
     end
+
+    config.middleware.use Rack::Attack
   end
 end

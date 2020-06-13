@@ -1,0 +1,14 @@
+<%
+  footer_css ||= "fixed-bottom"
+%>
+<div class="print-footer <%= footer_css %>">
+  <div>
+    <%= image_tag 'brygglogg-logo.png', width: 96, height: 96, id: 'logo', class: 'print-logo' %>
+    <h2>Brygglogg.se</h2>
+    <p>Visa och ladda ner receptet på www.brygglogg.se</p>
+  </div>
+</div>
+
+<% content_for :footer do %>
+<script>window.print();</script>
+<% end %>

@@ -1,15 +1,5 @@
 /* Badges/Pills */
-.pure-badge,
-.pure-badge-error,
-.pure-badge-warning,
-.pure-badge-success,
-.pure-badge-info,
-.pure-badge-inverse,
-.pure-badge-private,
-.pure-badge-public,
-.pure-badge-comments,
-.pure-badge-likes,
-.pure-badge-downloads {
+.pure-badge {
   padding: 0.35em 0.9em 0.35em;
   background-color: #9D988E;
   color: #fff;
@@ -22,56 +12,53 @@
   border-radius: 20px;
   margin: 0.2em;
 
-  i {
+  &.pure-badge-error {
+    background-color: #D13C38;
+  }
+  &.pure-badge-warning {
+    background-color: #E78C05;
+  }
+  &.pure-badge-success {
+    background-color: rgb(83, 180, 79);
+  }
+  &.pure-badge-info {
+    background-color: rgb(18, 169, 218);
+  }
+  &.pure-badge-inverse {
+    background-color: #4D370C;
+  }
+  &.pure-badge-private {
+    background-color: #41ccb4;
+  }
+  &.pure-badge-public {
+    background-color: #40c365;
+  }
+  &.pure-badge-comments {
+    background-color: #B590D4;
+    cursor: pointer;
+  }
+  &.pure-badge-likes {
+    background-color: rgb(18, 169, 218);
+  }
+  &.pure-badge-downloads {
+    background-color: #e67110;
+  }
+  &.pure-badge-official {
+    background-color: #6d0f77;
+  }
+  &.pure-badge-event-recipes {
+    background-color: #fcb400;
+  }
+  &.badge-link {
+    &:hover {
+      background-image: linear-gradient(transparent,rgba(0,0,0,.05) 40%,rgba(0,0,0,.1));
+    }
+    &:active {
+      box-shadow: 0 0 0 1px rgba(0,0,0,.15) inset,0 0 6px rgba(0,0,0,.2) inset;
+    }
+  }
+
+  i.fas {
     padding-right: 0.5em;
-  }
-}
-.pure-badge-error {
-  background-color: #D13C38;
-}
-.pure-badge-warning {
-  background-color: #E78C05;
-}
-.pure-badge-success {
-  background-color: rgb(83, 180, 79);
-}
-.pure-badge-info {
-  background-color: rgb(18, 169, 218);
-}
-.pure-badge-inverse {
-  background-color: #4D370C;
-}
-.pure-badge-private {
-  background-color: #41ccb4;
-}
-.pure-badge-public {
-  background-color: #40c365;
-}
-.pure-badge-comments {
-  background-color: #B590D4;
-  cursor: pointer;
-}
-.pure-badge-likes {
-  background-color: rgb(18, 169, 218);
-}
-.pure-badge-downloads {
-  background-color: #e67110;
-}
-#likes-list {
-  display: none;
-  position: absolute;
-  border: 1px solid rgb(119, 119, 119);
-  border-radius: 4px;
-  padding: 5px;
-  max-width: 250px;
-  background: white;
-  z-index: 1000;
-}
-.badge-link {
-  &:hover {
-    background-image: linear-gradient(transparent,rgba(0,0,0,.05) 40%,rgba(0,0,0,.1));
-  }
-  &:active {
-    box-shadow: 0 0 0 1px rgba(0,0,0,.15) inset,0 0 6px rgba(0,0,0,.2) inset;
   }
 }

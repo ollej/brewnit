@@ -1,0 +1,11 @@
+<% if @error.nil? %>
+  <% html = j(render partial: 'shared/hop_item', locals: { hop: @hop }) %>
+  $("<%= html %>").appendTo("#hops")
+  $("#new_hop").trigger('reset');
+  $("#hops tr[data-hop-id=<%= @hop.id %>]").effect("highlight", {}, 500);
+<% else %>
+  $('body').trigger('flasher:show', {
+    message: 'js <%= j(@error) %>',
+    level: 'error'
+  })
+<% end %>

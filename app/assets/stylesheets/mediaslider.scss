@@ -1,0 +1,25 @@
+.media-thumbnail-list {
+  background: #ddd !important;
+
+  .media-thumbnail {
+    background: white;
+  }
+  .media-buttons {
+    display: none;
+    position: absolute;
+    z-index: 1000;
+    opacity: 0.9;
+
+    .inline-button.destroy-button {
+      padding-right: 0;
+    }
+  }
+}
+
+#slider {
+  overflow: auto;
+  height: auto;
+  margin-top: 1em;
+  display: none;
+}
+

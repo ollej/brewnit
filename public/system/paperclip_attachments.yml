@@ -1,0 +1,13 @@
+---
+:Medium:
+  :file:
+  - :label
+  - :label_main
+  - :label_main_full
+  - :label_main_wide
+  - :large
+  - :large_thumbnail
+  - :medium
+  - :medium_thumbnail
+  - :small
+  - :small_thumbnail

@@ -1,0 +1,8 @@
+                      <li class="pure-menu-item" data-placement-id="<%= placement.id %>">
+                        <%= medal_tag(placement, :tiny) %>
+                        <span class="medal-category"><%= placement.category %></span>
+
+                        <% if can_modify?(event) %>
+                          <%= trash_icon(recipe_placement_path(recipe, placement)) %>
+                        <% end %>
+                      </li>

@@ -1,0 +1,42 @@
+      <div class="page-content-header pure-g">
+        <div class="pure-u-1 pure-u-sm-3-5">
+          <h1 class="recipe-details-content-title"><%= title I18n.t(:'recipe_detail.edit') %></h1>
+        </div>
+        <div class="page-content-controls pure-u-1 pure-u-sm-2-5">
+          <div class="controls-signed-in">
+            <% if @recipe.complete? %>
+              <%= link_to @recipe, class: 'pure-button secondary-button',
+                data: tooltip_data(I18n.t(:'recipe_detail.show_recipe_description'),
+                                  length: 'small') do %>
+                <%= icon('beer') %> <%= t(:'recipe_detail.show_recipe') %>
+              <% end %>
+            <% end %>
+            <%= link_to recipe_details_path(@recipe, format: :xml), rel: nofollow,
+              class: 'pure-button secondary-button',
+              data: tooltip_data(I18n.t(:'recipe_detail.download_description')) do %>
+              <%= icon('download') %> <%= t(:'recipe_detail.download') %>
+            <% end %>
+            <%= render 'shared/promotion_button' %>
+            <%= render 'shared/edit_button' %>
+            <%= button_to recipe_complete_path(@recipe), method: :put,
+              class: 'pure-button primary-button',
+              data: tooltip_data(I18n.t(:'recipe_detail.complete_description'), length: 'small') do %>
+              <%= invisible_captcha %>
+              <%= icon('flag-checkered') %> <%= t(:'recipe_detail.complete') %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-content-body">
+        <div class="info-plate">
+          <p><strong><em>N.B.:</em></strong> Funktionen att bygga recepet är en beta-version och under aktiv utveckling.</p>
+          <p>Om du hittar några fel eller konstigheter får du gärna rapportera dom på
+          <a href="https://github.com/ollej/brewnit/issues">GitHub</a>, eller skicka
+          e-post till <%= mail_to 'brewmaster@brygglogg.se', 'Olle Wreede',
+            encode: 'javascript', class: 'email' %></p>
+        </div>
+
+<%= render 'recipe_form' %>
+<%= render 'form' %>
+      </div>

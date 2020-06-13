@@ -1,16 +1,26 @@
-<h2>Resend confirmation instructions</h2>
+      <div class="page-content-header pure-g">
+        <div class="pure-u">
+          <h1 class="page-content-title"><%= I18n.t(:'devise.confirmations.new.resend_confirmation_instructions') %></h1>
+        </div>
+      </div>
 
-<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+      <div class="page-content-body confirmation-new">
+        <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name),
+                     html: { method: :post, class: 'pure-form pure-form-aligned' }) do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %> 
-  </div>
+  <fieldset>
+    <div class="field pure-control-group">
+      <%= f.label :email %>
+      <%= f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Resend confirmation instructions" %>
-  </div>
+    <div class="actions pure-controls">
+      <%= f.submit I18n.t(:'devise.confirmations.new.resend_confirmation_instructions'),
+        class: 'pure-button pure-button-primary' %>
+    </div>
 <% end %>
 
 <%= render "devise/shared/links" %>
+  </fieldset>
+        </div>
