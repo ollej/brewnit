@@ -237,7 +237,8 @@ CREATE TABLE public.commontator_comments (
     cached_votes_up integer DEFAULT 0,
     cached_votes_down integer DEFAULT 0,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    parent_id bigint
 );
 
 
@@ -1290,6 +1291,13 @@ CREATE INDEX index_commontator_comments_on_cached_votes_up ON public.commontator
 
 
 --
+-- Name: index_commontator_comments_on_parent_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_commontator_comments_on_parent_id ON public.commontator_comments USING btree (parent_id);
+
+
+--
 -- Name: index_commontator_comments_on_thread_id_and_created_at; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1702,6 +1710,14 @@ ALTER TABLE ONLY public.miscs
 
 
 --
+-- Name: commontator_comments fk_rails_558e599d00; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.commontator_comments
+    ADD CONSTRAINT fk_rails_558e599d00 FOREIGN KEY (parent_id) REFERENCES public.commontator_comments(id) ON UPDATE RESTRICT ON DELETE CASCADE;
+
+
+--
 -- Name: hops fk_rails_58ff15d669; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1851,6 +1867,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180501150416'),
 ('20180501151104'),
 ('20190324004643'),
-('20200613142912');
+('20200613142912'),
+('20200613154041');
 
 

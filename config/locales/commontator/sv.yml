@@ -36,7 +36,7 @@ sv:
         update: Ändra kommentar
       errors:
         already_deleted: "Denna kommentar har redan tagits bort."
-        create: "Kommentaren kunde int sparas på grund av:"
+        create: "Kommentaren kunde inte sparas på grund av:"
         double_posted: "är en dublett av en annan kommentar."
         not_deleted: "Denna kommentar är inte borttagen."
         update: "Denna kommentar kunde inte ändras på grund av:"

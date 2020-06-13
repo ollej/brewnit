@@ -92,7 +92,7 @@ class Recipe < ApplicationRecord
   end
 
   def comments
-    thread.comments.size
+    commontator_thread.comments.size
   end
 
   def registration_message_for(event)

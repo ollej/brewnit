@@ -1096,3 +1096,6 @@ sv:
     errors:
       verification_failed: Verifieringen med reCAPTCHA misslyckades.
       recaptcha_unreachable: Kunde inte nå reCAPTCHA-verifieringen.
+  will_paginate:
+    page_entries_info:
+      single_page_html: ""
