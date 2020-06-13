@@ -66,6 +66,11 @@
     </div>
 
     <div class="field pure-control-group">
+      <%= f.label :receive_email, class: 'pure-checkbox' %>
+      <%= f.check_box :receive_email %>
+    </div>
+
+    <div class="field pure-control-group">
       <%= f.label :presentation, class: 'large-group' %>
       <div class="quill-wrapper">
         <%= f.text_area :presentation, placeholder: t(:'activerecord.attributes.user.presentation'), class: 'quill_container' %>

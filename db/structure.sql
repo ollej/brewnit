@@ -839,7 +839,8 @@ CREATE TABLE public.users (
     media_brewery_id integer,
     registration_data jsonb,
     recipes_count integer DEFAULT 0,
-    instagram text
+    instagram text,
+    receive_email boolean DEFAULT false
 );
 
 
@@ -1868,6 +1869,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180501151104'),
 ('20190324004643'),
 ('20200613142912'),
-('20200613154041');
+('20200613154041'),
+('20200613182041'),
+('20200613184054');
 
 

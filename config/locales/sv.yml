@@ -893,6 +893,7 @@ sv:
         avatar: Avatar
         medium_avatar: Avatarbild
         medium_brewery: Bryggerilogga
+        receive_email: Tillåt e-postutskick
         destroy:
           media: Ta bort
       recipe:
@@ -1025,6 +1026,10 @@ sv:
             recipe:
               required:
                 Recept måste sättas på recipe detail
+        commontator/comment:
+          attributes:
+            body:
+              double_posted: har redan postats.
   date:
     formats:
       default: "%Y-%m-%d"

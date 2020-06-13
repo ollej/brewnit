@@ -20,6 +20,10 @@ class Recipe < ApplicationRecord
     options :event, type: :fulltext, dictionary: 'swedish_snowball'
   end
 
+  after_create do |recipe|
+    recipe.commontator_thread.subscribe(recipe.user)
+  end
+
   belongs_to :user, counter_cache: true
   belongs_to :media_main, class_name: 'Medium', optional: true
   has_many :media, as: :parent, dependent: :destroy

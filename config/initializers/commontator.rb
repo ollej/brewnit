@@ -78,7 +78,13 @@ Commontator.configure do |config|
   # If the mailer argument is not nil, then Commontator intends to send an email to
   # the address returned; you can prevent it from being sent by returning a blank String
   # Default: lambda { |user, mailer| user.try(:email) || '' }
-  config.user_email_proc = lambda { |user, mailer| user.try(:email) || '' }
+  config.user_email_proc = lambda { |user, mailer| 
+    if user.receive_emails?
+      user.email
+    else
+      ''
+    end
+  }
 
 
 
@@ -196,7 +202,7 @@ Commontator.configure do |config|
   # Not yet implemented:
   #   :n (link to the form; opens in a new window)
   # Default: :l
-  config.new_comment_style = :l
+  config.new_comment_style = :t
 
   # comments_per_page
   # Type: Fixnum or nil
