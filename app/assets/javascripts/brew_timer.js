@@ -2,7 +2,6 @@ class BrewTimer {
   // TODO: Configuration
   // TODO: Listen to start/stop events
   // TODO: Send start/stop/interval events
-  // TODO: Render step list
   // TODO: Find current step in list
 
   constructor(el, steps) {
@@ -47,6 +46,8 @@ class BrewTimer {
     this.timer = 0;
     this.running = false;
     this.clearTimeout();
+    this.updateTime(0);
+    $(".timer-step").removeClass("timer-step-passed timer-step-current");
   }
 
   toggle() {
@@ -124,7 +125,9 @@ class BrewTimer {
   }
 
   updateTime(time) {
-    this.timerEl.html(this.displayTime(time));
+    if (this.timerEl) {
+      this.timerEl.html(this.displayTime(time));
+    }
   }
 
   calculateTime() {
@@ -156,8 +159,7 @@ class BrewTimer {
       this.setInterval();
     } else {
       this.timerEl.html("Klar!");
-      $(".timer-step").addClass("timer-step-passed");
-      $(".timer-step").removeClass("timer-step-current");
+      this.reset();
     }
   }
 }

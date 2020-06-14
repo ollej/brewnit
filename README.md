@@ -227,6 +227,12 @@ $ bundle exec rails s
 rails generate favicon
 ```
 
+Attributions
+------------
+
+ * Loading spinner from: https://preloaders.net
+ * Flat icons from: https://flaticon.com
+
 How to Contribute?
 ------------------
 

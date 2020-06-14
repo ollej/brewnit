@@ -5,7 +5,7 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <%= button_tag class: 'close ', data: { dismiss: 'modal' } do %>
+        <%= button_tag class: 'close brew-timer-close', data: { dismiss: 'modal' } do %>
           <i class="fa fa-times"></i>
         <% end %>
         <h3 class="modal-title" id="brew-timer-title">
@@ -14,16 +14,20 @@
       </div>
       <div class="modal-body">
         <div class="timer-steps">
+          <%= image_tag "timer-spinner.svg", class: "timer-spinner" %>
         </div>
       </div>
       <div class="modal-footer">
-        <%= link_to '#start-timer', class: 'brew-timer-start pure-button' do %>
+        <%= link_to '#reset-timer', class: 'brew-timer-reset pure-button pure-button-secondary' do %>
+          <i class="fas fa-undo-alt"></i> <%= t(:'brewtimer.reset') %>
+        <% end %>
+        <%= link_to '#start-timer', class: 'brew-timer-start pure-button pure-button-primary' do %>
           <i class="fa fa-play-circle"></i> <%= t(:'brewtimer.start') %>
+        <% end %>
+        <%= link_to '#pause-timer', class: 'brew-timer-pause pure-button pure-button-primary hidden' do %>
+          <i class="fa fa-pause-circle"></i> <%= t(:'brewtimer.pause') %>
         <% end %>
       </div>
     </div>
-
   </div>
-
 </div>
-

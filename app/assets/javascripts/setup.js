@@ -127,7 +127,7 @@ $( document ).ready(function() {
     $("#tab3").prop("checked", true);
   }
 
-  var brewTimer = new BrewTimerDialog("#brew-timer", ".brew-timer-start", "#recipe_article");
+  var brewTimer = new BrewTimerDialog("#brew-timer", "#recipe_article");
   brewTimer.init();
 });
 

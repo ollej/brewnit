@@ -1,44 +1,42 @@
 class BrewTimerDialog {
-  constructor(el, link, recipeEl) {
-    this.storeSteps = this.storeSteps.bind(this);
-    this.setupDialog = this.setupDialog.bind(this);
-    this.setupTimer = this.setupTimer.bind(this);
-    this.keyPressed = this.keyPressed.bind(this);
-    this.cancelDialog = this.cancelDialog.bind(this);
-    this.toggleTimer = this.toggleTimer.bind(this);
-    this.el = el;
-    this.link = link;
+  constructor(el, recipeEl) {
+    this.el = $(el);
+    this.startEl = this.el.find(".brew-timer-start");
+    this.pauseEl = this.el.find(".brew-timer-pause");
+    this.resetEl = this.el.find(".brew-timer-reset");
     this.recipeEl = recipeEl;
   }
 
   init() {
-    console.log('BrewTimerDialog', $(this.el), $(this.recipeEl));
+    console.log('BrewTimerDialog', this.el, $(this.recipeEl));
     if ($(this.recipeEl).length == 0) {
       return;
     }
     $("#brew-timer")
-      .on('shown.bs.modal', this.setupDialog)
-      .on('hidden.bs.modal', this.cancelDialog);
+      .on('shown.bs.modal', this.setupDialog.bind(this))
+      .on('hidden.bs.modal', this.cancelDialog.bind(this));
   }
 
   loadSteps(id) {
     console.log("loadSteps", id);
-    $.get(`/recipe_steps/${id}`, this.storeSteps);
+    $.get(`/recipe_steps/${id}`, this.storeSteps.bind(this));
   }
 
   storeSteps(data) {
     console.log("storeSteps", data);
     this.steps = data;
-    this.timer = new BrewTimer($('.timer-steps', $(this.el)), this.steps);
+    this.timer = new BrewTimer($('.timer-steps', this.el), this.steps);
     console.log(this.steps);
   }
 
   setupDialog() {
     console.log('setup events');
     this.setupTimer();
-    $(this.link).on("click", this.toggleTimer);
+    this.startEl.on("click", this.toggleTimer.bind(this));
+    this.pauseEl.on("click", this.toggleTimer.bind(this));
+    this.resetEl.on("click", this.resetTimer.bind(this));
     // TODO: Only when modal is active
-    $(window).on("keypress", this.keyPressed);
+    $(window).on("keypress", this.keyPressed.bind(this));
   }
 
   setupTimer() {
@@ -56,16 +54,38 @@ class BrewTimerDialog {
 
   cancelDialog() {
     console.log('cancel events');
-    $(this.link).off("click", this.toggleTimer);
-    $(window).off("keypress", this.keyPressed);
+    this.startEl.off("click", this.toggleTimer.bind(this));
+    this.pauseEl.off("click", this.toggleTimer.bind(this));
+    this.resetEl.off("click", this.resetTimer.bind(this));
+    $(window).off("keypress", this.keyPressed.bind(this));
+  }
+
+  togglePlayButton() {
+    console.log("togglePlayButton, timer running?", this.timer.running);
+    if (this.timer.running) {
+      this.startEl.toggleClass("hidden");
+      this.pauseEl.toggleClass("hidden");
+    } else {
+      this.startEl.toggleClass("hidden");
+      this.pauseEl.toggleClass("hidden");
+    }
+  }
+
+  resetTimer() {
+    console.log("resetTimer");
+    if (this.timer) {
+      this.timer.reset();
+      this.togglePlayButton();
+    }
+    return false;
   }
 
   toggleTimer() {
     console.log('toggleTimer');
-    if (this.timer != null) {
+    if (this.timer) {
       this.timer.toggle();
+      this.togglePlayButton();
     }
-    // TODO: Switch button between play/pause
     return false;
   }
 }

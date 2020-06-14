@@ -208,7 +208,9 @@ sv:
     labels: Etiketter
   brewtimer:
     title: Bryggklocka
-    start: Påbörja bryggning
+    start: Starta timer
+    pause: Pausa timer
+    reset: Börja om
   users:
     index: Bryggare
     other_users: Användare utan recept
