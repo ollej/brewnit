@@ -11,6 +11,10 @@ class BrewTimer {
     this.el = el;
     this.steps = steps;
     console.log("steps: ", this.steps);
+    this.totalTime = 0;
+    this.steps["mash_steps"].forEach(function(step, index) {
+      this.totalTime += step["time"];
+    }.bind(this));
     this.reset();
     this.render();
   }
@@ -56,8 +60,66 @@ class BrewTimer {
 
   render() {
     console.log('render');
-    const time = this.calculateTime();
-    this.el.html(`${time} s`);
+    this.el.html(this.renderSteps(this.steps["mash_steps"]));
+    this.timerEl = $("#timer-time");
+  }
+
+  renderSteps(steps) {
+    return `
+      <div id="timer-data">
+        <span id="timer-time">0 s</span>
+        <div id="timer-steps">
+        ${steps.map(this.renderStep.bind(this)).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  renderStep(step, index) {
+    return `
+      <div id="timer-step-${index}" class="timer-step">
+        <span class="timer-step-time">${this.displayTime(step.time)}</span>
+        <span class="timer-step-name">${step.name}</span>
+        <span class="timer-step-description">${step.description}</span>
+      </div>
+    `;
+  }
+
+  highlightStep(time) {
+    let accumulatedTime = 0;
+    this.steps["mash_steps"].forEach(function(step, index) {
+      let $el = $("#timer-step-" + index);
+      accumulatedTime += step["time"];
+      if (accumulatedTime - step["time"] <= time) {
+        $el.addClass("timer-step-current");
+      }
+      if (time >= accumulatedTime) {
+        $el.addClass("timer-step-passed");
+        $el.removeClass("timer-step-current");
+      }
+    });
+  }
+
+  displayTime(time) {
+    let timestr = "";
+    const hours = Math.floor(time / 3600);
+    time = time - hours * 3600;
+    if (hours > 0) {
+      timestr += `${hours} t `;
+    }
+    const minutes = Math.floor(time / 60);
+    time = time - minutes * 60;
+    if (minutes > 0) {
+      timestr += ` ${minutes} m `;
+    }
+    if (time > 0) {
+      timestr += ` ${time} s`;
+    }
+    return timestr;
+  }
+
+  updateTime(time) {
+    this.timerEl.html(this.displayTime(time));
   }
 
   calculateTime() {
@@ -82,8 +144,16 @@ class BrewTimer {
   onInterval() {
     // TODO: Render list, update timer, add current class on step, remove current class on other steps
     //console.log('onInterval')
-    this.render();
-    this.setInterval();
+    const time = this.calculateTime();
+    if (time < this.totalTime) {
+      this.updateTime(time);
+      this.highlightStep(time);
+      this.setInterval();
+    } else {
+      this.timerEl.html("Klar!");
+      $(".timer-step").addClass("timer-step-passed");
+      $(".timer-step").removeClass("timer-step-current");
+    }
   }
 }
 
