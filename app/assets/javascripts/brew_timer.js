@@ -67,7 +67,7 @@ class BrewTimer {
   renderSteps(steps) {
     return `
       <div id="timer-data">
-        <span id="timer-time">0 s</span>
+        <div id="timer-time">0 s</div>
         <div id="timer-steps">
         ${steps.map(this.renderStep.bind(this)).join('')}
         </div>
@@ -77,10 +77,15 @@ class BrewTimer {
 
   renderStep(step, index) {
     return `
-      <div id="timer-step-${index}" class="timer-step">
-        <span class="timer-step-time">${this.displayTime(step.time)}</span>
-        <span class="timer-step-name">${step.name}</span>
-        <span class="timer-step-description">${step.description}</span>
+      <div id="timer-step-${index}" class="timer-step pure-g">
+        <div class="timer-step-icon pure-u-1-8"><div class="timer-step-malt"></div></div>
+        <div class="timer-step-info pure-u-3-4">
+          <div class="pure-g">
+            <div class="timer-step-name pure-u-1">${step.name}</div>
+            <div class="timer-step-description pure-u-1">${step.description}</div>
+          </div>
+        </div>
+        <div class="timer-step-time pure-u-1-8">${this.displayTime(step.time)}</div>
       </div>
     `;
   }
@@ -110,10 +115,10 @@ class BrewTimer {
     const minutes = Math.floor(time / 60);
     time = time - minutes * 60;
     if (minutes > 0) {
-      timestr += ` ${minutes} m `;
+      timestr += `${minutes} m `;
     }
-    if (time > 0) {
-      timestr += ` ${time} s`;
+    if (time > 0 || timestr.trim().length == 0) {
+      timestr += `${time} s`;
     }
     return timestr;
   }

@@ -1,0 +1,69 @@
+#timer-data {
+  #timer-time {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+  }
+
+  .timer-step {
+    font-size: 1em;
+    line-height: 1.2em;
+    color: darkgray;
+    height: 2em;
+    vertical-align: middle;
+
+    .timer-step-time {
+      text-align: right;
+    }
+
+    .timer-step-name {
+      text-align: center;
+    }
+
+    .timer-step-icon {
+      display: inline-block;
+    }
+
+    .timer-step-description {
+      display: none;
+      text-align: center;
+    }
+
+    &.timer-step-passed {
+      color: lightgray;
+      opacity: 0.9;
+    }
+    &.timer-step-current {
+      color: black;
+      font-weight: bold;
+      height: 4em;
+      margin-bottom: 1em;
+
+      .timer-step-name {
+        font-size: 2em;
+        line-height: 1.4em;
+        vertical-align: top;
+      }
+
+      .timer-step-description {
+        display: inline;
+        font-size: 1.2em;
+        font-weight: normal;
+        line-height: 1.4em;
+      }
+
+      .timer-step-icon {
+        height: 4em;
+
+        .timer-step-malt {
+          background-image: image-url("flaticon/malt.svg");
+          background-position: center;
+          background-size: 4em 4em;
+          width: 4em;
+          height: 4em;
+        }
+      }
+    }
+  }
+}

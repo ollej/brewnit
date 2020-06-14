@@ -37,7 +37,9 @@ $( document ).ready(function() {
 
   // Close modals
   $("body").on("click", function() {
-    $(".modal").hide();
+    if (!$("#brew-timer").is(":visible")) {
+      $(".modal").hide();
+    }
   });
 
   // Setup range sliders
