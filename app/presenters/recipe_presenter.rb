@@ -75,20 +75,6 @@ class RecipePresenter
     end
   end
 
-  def hop_addition_name(hop)
-    if hop.use == 'Boil'
-      if hop.time >= 30
-        I18n.t(:'beerxml.addition_bitter')
-      elsif hop.time >= 10
-        I18n.t(:'beerxml.addition_flavour')
-      else
-        I18n.t(:'beerxml.addition_aroma')
-      end
-    else
-      I18n.t("beerxml.#{hop.use}")
-    end
-  end
-
   def hop_data(hop)
     {
       name: hop.name,
@@ -98,12 +84,8 @@ class RecipePresenter
       aau: hop.aau,
       mgl_alpha: hop.mgl_added_alpha_acids,
       grams_per_liter: hop.amount / @recipe.batch_size,
-      tooltip: hop_info(hop)
+      tooltip: self.class.hop_info(hop)
     }
-  end
-
-  def hop_info(hop)
-    "#{hop.formatted_amount} #{I18n.t(:'beerxml.grams')} #{hop.name} @ #{hop.formatted_time} #{I18n.t("beerxml.#{hop.time_unit}", default: hop.time_unit)}"
   end
 
   def hop_additions
@@ -112,7 +94,7 @@ class RecipePresenter
       if hops[h.time]
         hops[h.time][:children] << hop_data(h)
       else
-        hops[h.time] = { name: hop_addition_name(h), children: [hop_data(h)] }
+        hops[h.time] = { name: self.class.hop_addition_name(h), children: [hop_data(h)] }
       end
     end
     hops
@@ -127,5 +109,23 @@ class RecipePresenter
       name: I18n.t(:'beerxml.hops'),
       children: hop_additions.values
     }
+  end
+
+  def self.hop_addition_name(hop)
+    if hop.use == 'Boil'
+      if hop.time >= 30
+        I18n.t(:'beerxml.addition_bitter')
+      elsif hop.time >= 10
+        I18n.t(:'beerxml.addition_flavour')
+      else
+        I18n.t(:'beerxml.addition_aroma')
+      end
+    else
+      I18n.t("beerxml.#{hop.use}")
+    end
+  end
+
+  def self.hop_info(hop)
+    "#{hop.formatted_amount} #{I18n.t(:'beerxml.grams')} #{hop.name} @ #{hop.formatted_time} #{I18n.t("beerxml.#{hop.time_unit}", default: hop.time_unit)}"
   end
 end

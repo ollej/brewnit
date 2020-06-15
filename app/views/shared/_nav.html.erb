@@ -71,22 +71,23 @@
         <li class="pure-menu-heading"><%= t(:'recipes.labels') %></li>
         <li class="pure-menu-item">
           <%= link_to recipes_path(private: true), class: 'pure-menu-link' do %>
-            <span class="recipe-label-private"></span><%= t(:'recipes.private') %></li>
+            <span class="recipe-label-private"></span> <%= t(:'recipes.private') %>
           <% end %>
+        </li>
         <li class="pure-menu-item">
           <%= link_to user_path(current_user, clear_search: true), class: 'pure-menu-link' do %>
-            <span class="recipe-label-own"></span><%= t(:'recipes.own') %>
+            <span class="recipe-label-own"></span> <%= t(:'recipes.own') %>
           <% end %>
         </li>
         <li class="pure-menu-item">
           <%= link_to recipes_path(incomplete: true), class: 'pure-menu-link' do %>
-            <span class="recipe-label-incomplete"></span><%= t(:'recipes.incomplete') %>
+            <span class="recipe-label-incomplete"></span> <%= t(:'recipes.incomplete') %>
           <% end %>
         </li>
       <% end %>
         <li class="pure-menu-item">
           <%= link_to recipes_path(has_medal: true), class: 'pure-menu-link' do %>
-            <span class="recipe-label-winner"></span><%= t(:'recipes.winner') %>
+            <span class="recipe-label-winner"></span> <%= t(:'recipes.winner') %>
           <% end %>
         </li>
       </ul>

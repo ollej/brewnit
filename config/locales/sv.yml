@@ -155,6 +155,9 @@ sv:
       destroy:
         link: Ta bort
         description: Ta bort receptet från Brygglogg
+    tools:
+      button: Verktyg
+      description: Bryggverktyg för detta recept.
     private: Privat
     own: Egna recept
     winner: Medaljör
@@ -210,8 +213,12 @@ sv:
     start: Starta timer
     pause: Pausa timer
     reset: Börja om
-    mash: Mäsktimer
-    boil: Koktimer
+    mash:
+      button: Mäsktimer
+      description: Öppna timer för mäskning
+    boil:
+      button: Koktimer
+      description: Öppna timer för vörtkok
   users:
     index: Bryggare
     other_users: Användare utan recept

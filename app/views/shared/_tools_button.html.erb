@@ -1,0 +1,33 @@
+            <label class="purecss-dropdown">
+              <div class="pure-button secondary-button dd-button"
+                data-balloon="<%= I18n.t(:'recipes.tools.description') %>"
+                data-balloon-pos="left" data-balloon-length="medium">
+                <%= icon('cog') %> <%= t(:'recipes.tools.button') %> <%= icon('caret-down') %>
+              </div>
+              <input type="checkbox" class="dd-input" id="tool-button-checkbox">
+              <ul class="dd-menu">
+                <li>
+                <%= link_to "#", data: tooltip_data(I18n.t(:'brewtimer.mash.description'), position: :left).merge({
+                  toggle: 'modal', target: '#brew-timer-mash',
+                  keyboard: true, backdrop: true
+                }) do %>
+                    <i class="far fa-clock"></i> <%= t(:'brewtimer.mash.button') %>
+                  <% end %>
+                </li>
+                <li>
+                <%= link_to "#", data: tooltip_data(I18n.t(:'brewtimer.boil.description'), position: :left).merge(
+                  { toggle: 'modal', target: '#brew-timer-boil', keyboard: true, backdrop: true }) do %>
+                    <i class="fas fa-clock"></i> <%= t(:'brewtimer.boil.button') %>
+                  <% end %>
+                </li>
+                <% if user_signed_in? %>
+                <li>
+                  <%= link_to clone_recipe_path(id: @recipe),
+                    data: tooltip_data(I18n.t(:'recipes.clone_description'), position: :left) do %>
+                    <%= icon('clone') %> <%= t(:'recipes.clone') %>
+                  <% end %>
+                </li>
+                <% end %>
+              </ul>
+            </label>
+

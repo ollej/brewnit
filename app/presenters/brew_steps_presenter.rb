@@ -19,7 +19,7 @@ class BrewStepsPresenter
     boil_hops.map do |step|
       {
         name: RecipePresenter::hop_addition_name(step),
-        description: hop_info(step),
+        description: RecipePresenter::hop_info(step),
         addition_time: step.time.to_i,
       }
     end

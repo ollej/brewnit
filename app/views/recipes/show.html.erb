@@ -48,40 +48,27 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
 
         <div class="page-content-controls pure-u-1 pure-u-sm-2-5">
           <div class="controls-public">
-            <%= link_to recipe_details_path(@recipe),
-              class: 'pure-button secondary-button',
-              data: tooltip_data(
-                I18n.t(:'recipes.edit.build.description'), position: 'left') do %>
-              <%= icon('edit') %> <%= I18n.t(:'recipes.edit.build.link') %>
-            <% end %>
             <%= link_to recipe_path(@recipe, format: :xml), rel: :nofollow,
               method: :get, class: 'pure-button secondary-button',
               data: tooltip_data(I18n.t(:'recipes.download_description')) do %>
               <%= icon('download') %> <%= t(:'recipes.download') %>
             <% end %>
             <%= render 'shared/promotion_button' %>
-            <%= link_to "#", class: 'pure-button secondary-button',
-              data: { toggle: 'modal', target: '#brew-timer-mash', keyboard: true, backdrop: true } do %>
-              <i class="far fa-clock"></i> <%= t(:'brewtimer.mash') %>
-            <% end %>
-            <%= link_to "#", class: 'pure-button secondary-button',
-              data: { toggle: 'modal', target: '#brew-timer-boil', keyboard: true, backdrop: true } do %>
-              <i class="far fa-clock"></i> <%= t(:'brewtimer.boil') %>
-            <% end %>
+            <%= render 'shared/tools_button' %>
           </div>
           <% if user_signed_in? %>
             <div class="controls-signed-in">
+              <% if can_modify?(@recipe) %>
+                <%= link_to recipe_details_path(@recipe),
+                  class: 'pure-button secondary-button',
+                  data: tooltip_data(
+                    I18n.t(:'recipes.edit.build.description'), position: 'left') do %>
+                  <%= icon('edit') %> <%= I18n.t(:'recipes.edit.build.link') %>
+                <% end %>
+                <%= render 'shared/edit_button' %>
+              <% end %>
               <%= like_tag(@recipe, current_user) %>
 
-              <% if can_modify?(@recipe) %>
-                <%= render 'shared/edit_button' %>
-
-                <%= link_to clone_recipe_path(id: @recipe),
-                  class: 'pure-button secondary-button',
-                  data: tooltip_data(I18n.t(:'recipes.clone_description')) do %>
-                  <%= icon('clone') %> <%= t(:'recipes.clone') %>
-                <% end %>
-              <% end %>
               <div id="progressbar"></div>
             </div>
           <% end %>

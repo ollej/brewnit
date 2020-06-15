@@ -41,6 +41,13 @@ class BrewTimerDialog {
     const steps = data[stepType + "_steps"];
     console.log("stepType", stepType, "steps", steps);
     this.timer = new BrewTimer(this.el.find('.timer-content'), steps, stepType);
+    this.timer.addEventListener("brewtimer.done", (event) => {
+      console.log("timer done!");
+      this.togglePlayButton();
+    });
+    this.timer.addEventListener("brewtimer.step", (event) => {
+      console.log("New step started", event.target.currentStep);
+    });
   }
 
   keyPressed(ev) {

@@ -1,21 +1,20 @@
-class BrewTimer {
+class BrewTimer extends EventTarget {
   // TODO: Configuration
   // TODO: Listen to start/stop events
-  // TODO: Send start/stop/interval events
   // TODO: Find current step in list
 
   constructor(el, steps, stepType) {
+    super();
     this.interval_time = 250;
     this.increment = 1000;
     this.el = el;
     this.steps = steps;
     this.stepType = stepType;
     console.log("steps: ", this.steps);
+    this.currentStep = -1;
     this.totalTime = 0;
-    this.steps.forEach((step, index) => {
-      step["time"] = 5;
-      this.totalTime += step["time"];
-    });
+    this.totalTime = this.steps.reduce((accumulator, step) => accumulator + parseInt(step["time"]), 0);
+    console.log("totalTime", this.totalTime);
     this.reset();
     this.render();
   }
@@ -29,6 +28,7 @@ class BrewTimer {
     }
     this.running = true;
     this.setInterval();
+    this.dispatchEvent(new Event("brewtimer.start"));
   }
 
   stop() {
@@ -36,6 +36,7 @@ class BrewTimer {
     this.updateTimer();
     this.running = false;
     this.clearTimeout();
+    this.dispatchEvent(new Event("brewtimer.stop"));
   }
 
   updateTimer() {
@@ -46,10 +47,12 @@ class BrewTimer {
     console.log('reset');
     this.start_time = null;
     this.timer = 0;
+    this.currentStep = -1;
     this.running = false;
     this.clearTimeout();
     this.updateTime(0);
     this.render();
+    this.dispatchEvent(new Event("brewtimer.reset"));
   }
 
   toggle() {
@@ -103,6 +106,10 @@ class BrewTimer {
       let $el = this.el.find(".timer-step-" + index);
       accumulatedTime += step["time"];
       if (accumulatedTime - step["time"] <= time) {
+        if (this.currentStep < index) {
+          this.currentStep = index;
+          this.dispatchEvent(new Event("brewtimer.step"));
+        }
         $el.addClass("timer-step-current");
       }
       if (time >= accumulatedTime) {
@@ -144,14 +151,14 @@ class BrewTimer {
   }
 
   setInterval() {
-    this.interval = window.setTimeout(this.onInterval.bind(this), this.interval_time);
+    this.timeoutId = window.setTimeout(this.onInterval.bind(this), this.interval_time);
   }
 
   clearTimeout() {
     console.log('clearTimeout');
-    if (this.interval != null) {
-      window.clearTimeout(this.interval);
-      this.interval = null;
+    if (this.timeoutId != null) {
+      window.clearTimeout(this.timeoutId);
+      this.timeoutId = null;
     }
   }
 
@@ -165,6 +172,7 @@ class BrewTimer {
       this.setInterval();
     } else {
       this.renderDone();
+      this.dispatchEvent(new Event("brewtimer.done"));
       this.reset();
     }
   }
