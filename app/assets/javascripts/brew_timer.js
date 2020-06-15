@@ -11,9 +11,10 @@ class BrewTimer {
     this.steps = steps;
     console.log("steps: ", this.steps);
     this.totalTime = 0;
-    this.steps["mash_steps"].forEach(function(step, index) {
+    this.steps["mash_steps"].forEach((step, index) => {
+      step["time"] = 5;
       this.totalTime += step["time"];
-    }.bind(this));
+    });
     this.reset();
     this.render();
   }
@@ -47,7 +48,7 @@ class BrewTimer {
     this.running = false;
     this.clearTimeout();
     this.updateTime(0);
-    $(".timer-step").removeClass("timer-step-passed timer-step-current");
+    this.el.find(".timer-step").removeClass("timer-step-passed timer-step-current");
   }
 
   toggle() {
@@ -62,13 +63,17 @@ class BrewTimer {
   render() {
     console.log('render');
     this.el.html(this.renderSteps(this.steps["mash_steps"]));
-    this.timerEl = $("#timer-time");
+    this.timerEl = this.el.find(".timer-time");
+  }
+
+  renderDone() {
+    this.el.html("Klar!");
   }
 
   renderSteps(steps) {
     return `
-      <div id="timer-data">
-        <div id="timer-time">0 s</div>
+      <div class="timer-data">
+        <div class="timer-time">0 s</div>
         <div id="timer-steps">
         ${steps.map(this.renderStep.bind(this)).join('')}
         </div>
@@ -78,7 +83,7 @@ class BrewTimer {
 
   renderStep(step, index) {
     return `
-      <div id="timer-step-${index}" class="timer-step pure-g">
+      <div class="timer-step-${index} timer-step pure-g">
         <div class="timer-step-icon pure-u-1-8"><div class="timer-step-malt"></div></div>
         <div class="timer-step-info pure-u-3-4">
           <div class="pure-g">
@@ -93,8 +98,8 @@ class BrewTimer {
 
   highlightStep(time) {
     let accumulatedTime = 0;
-    this.steps["mash_steps"].forEach(function(step, index) {
-      let $el = $("#timer-step-" + index);
+    this.steps["mash_steps"].forEach((step, index) => {
+      let $el = this.el.find(".timer-step-" + index);
       accumulatedTime += step["time"];
       if (accumulatedTime - step["time"] <= time) {
         $el.addClass("timer-step-current");
@@ -158,7 +163,7 @@ class BrewTimer {
       this.highlightStep(time);
       this.setInterval();
     } else {
-      this.timerEl.html("Klar!");
+      this.renderDone();
       this.reset();
     }
   }

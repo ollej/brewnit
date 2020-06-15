@@ -12,7 +12,7 @@ class BrewTimerDialog {
     if ($(this.recipeEl).length == 0) {
       return;
     }
-    $("#brew-timer")
+    this.el
       .on('shown.bs.modal', this.setupDialog.bind(this))
       .on('hidden.bs.modal', this.cancelDialog.bind(this));
   }
@@ -25,7 +25,7 @@ class BrewTimerDialog {
   storeSteps(data) {
     console.log("storeSteps", data);
     this.steps = data;
-    this.timer = new BrewTimer($('.timer-steps', this.el), this.steps);
+    this.timer = new BrewTimer(this.el.find('.timer-steps'), this.steps);
     console.log(this.steps);
   }
 
@@ -62,13 +62,8 @@ class BrewTimerDialog {
 
   togglePlayButton() {
     console.log("togglePlayButton, timer running?", this.timer.running);
-    if (this.timer.running) {
-      this.startEl.toggleClass("hidden");
-      this.pauseEl.toggleClass("hidden");
-    } else {
-      this.startEl.toggleClass("hidden");
-      this.pauseEl.toggleClass("hidden");
-    }
+    this.startEl.toggleClass("hidden");
+    this.pauseEl.toggleClass("hidden");
   }
 
   resetTimer() {
