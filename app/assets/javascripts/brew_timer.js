@@ -4,14 +4,15 @@ class BrewTimer {
   // TODO: Send start/stop/interval events
   // TODO: Find current step in list
 
-  constructor(el, steps) {
+  constructor(el, steps, stepType) {
     this.interval_time = 250;
     this.increment = 1000;
     this.el = el;
     this.steps = steps;
+    this.stepType = stepType;
     console.log("steps: ", this.steps);
     this.totalTime = 0;
-    this.steps["mash_steps"].forEach((step, index) => {
+    this.steps.forEach((step, index) => {
       step["time"] = 5;
       this.totalTime += step["time"];
     });
@@ -48,7 +49,7 @@ class BrewTimer {
     this.running = false;
     this.clearTimeout();
     this.updateTime(0);
-    this.el.find(".timer-step").removeClass("timer-step-passed timer-step-current");
+    this.render();
   }
 
   toggle() {
@@ -62,7 +63,7 @@ class BrewTimer {
 
   render() {
     console.log('render');
-    this.el.html(this.renderSteps(this.steps["mash_steps"]));
+    this.el.html(this.renderSteps(this.steps));
     this.timerEl = this.el.find(".timer-time");
   }
 
@@ -84,7 +85,7 @@ class BrewTimer {
   renderStep(step, index) {
     return `
       <div class="timer-step-${index} timer-step pure-g">
-        <div class="timer-step-icon pure-u-1-8"><div class="timer-step-malt"></div></div>
+        <div class="timer-step-icon pure-u-1-8"><div class="timer-step-image timer-step-${this.stepType}"></div></div>
         <div class="timer-step-info pure-u-3-4">
           <div class="pure-g">
             <div class="timer-step-name pure-u-1">${step.name}</div>
@@ -98,7 +99,7 @@ class BrewTimer {
 
   highlightStep(time) {
     let accumulatedTime = 0;
-    this.steps["mash_steps"].forEach((step, index) => {
+    this.steps.forEach((step, index) => {
       let $el = this.el.find(".timer-step-" + index);
       accumulatedTime += step["time"];
       if (accumulatedTime - step["time"] <= time) {

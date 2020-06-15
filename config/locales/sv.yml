@@ -195,7 +195,6 @@ sv:
     downloads_count:
       one: 1 nedladdning
       other: '%{count} nedladdningar'
-    timer: Timer
     public_description: |
       Kryssa för denna ruta om du vill att
       andra ska kunna se ditt recept.
@@ -211,6 +210,8 @@ sv:
     start: Starta timer
     pause: Pausa timer
     reset: Börja om
+    mash: Mäsktimer
+    boil: Koktimer
   users:
     index: Bryggare
     other_users: Användare utan recept
@@ -625,7 +626,10 @@ sv:
       Boil: Kok
       Aroma: Whirlpool
       Mash: Mäskhumling
-    boil_time: Koka i %{boil_time} minuter.
+    brew_step:
+      boil_time: Koka i %{boil_time} minuter.
+      raise_temperature: Raise to %{temperature}°C
+      hold_temperature: Hold at %{temperature}°C for %{minutes} min
     hop_uses:
       Mash: Mäskhumling
       First Wort: Vörthumling

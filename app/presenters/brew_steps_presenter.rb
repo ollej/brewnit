@@ -65,7 +65,7 @@ class BrewStepsPresenter
     if highest_step_time < @beerxml.boil_time
       steps << {
         name: I18n.t(:'beerxml.Boil'),
-        description: I18n.t(:'beerxml.boil_time', boil_time: boil_time),
+        description: I18n.t(:'beerxml.brew_step.boil_time', boil_time: boil_time),
         addition_time: @beerxml.boil_time.to_i
       }
     end
@@ -102,12 +102,12 @@ class BrewStepsPresenter
     @beerxml.mash.steps.each do |step|
       steps.push({
         name: step.name,
-        description: "Raise to #{step.step_temp}°C",
+        description: I18n.t(:'beerxml.brew_step.raise_temperature', { temperature: step.step_temp }),
         time: step.ramp_time * 60,
       })
       steps.push({
         name: step.name,
-        description: "Hold at #{step.step_temp}°C for #{step.step_time} min",
+        description: I18n.t(:'beerxml.brew_step.hold_temperature', { temperature: step.step_temp, minutes: step.step_time }),
         time: step.step_time * 60,
       })
     end

@@ -127,7 +127,13 @@ $( document ).ready(function() {
     $("#tab3").prop("checked", true);
   }
 
-  var brewTimer = new BrewTimerDialog("#brew-timer", "#recipe_article");
-  brewTimer.init();
+  const recipeId = $("#recipe_article").data("recipeId");
+  console.log("recipeId", recipeId);
+  if (recipeId) {
+    $(".brew-timer").each(function(index) {
+      console.log("BrewTimer", this);
+      new BrewTimerDialog($(this), recipeId);
+    });
+  }
 });
 

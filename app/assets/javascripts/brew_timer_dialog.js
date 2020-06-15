@@ -1,32 +1,13 @@
 class BrewTimerDialog {
-  constructor(el, recipeEl) {
-    this.el = $(el);
+  constructor(el, recipeId) {
+    this.el = el;
+    this.recipeId = recipeId;
     this.startEl = this.el.find(".brew-timer-start");
     this.pauseEl = this.el.find(".brew-timer-pause");
     this.resetEl = this.el.find(".brew-timer-reset");
-    this.recipeEl = recipeEl;
-  }
-
-  init() {
-    console.log('BrewTimerDialog', this.el, $(this.recipeEl));
-    if ($(this.recipeEl).length == 0) {
-      return;
-    }
     this.el
       .on('shown.bs.modal', this.setupDialog.bind(this))
       .on('hidden.bs.modal', this.cancelDialog.bind(this));
-  }
-
-  loadSteps(id) {
-    console.log("loadSteps", id);
-    $.get(`/recipe_steps/${id}`, this.storeSteps.bind(this));
-  }
-
-  storeSteps(data) {
-    console.log("storeSteps", data);
-    this.steps = data;
-    this.timer = new BrewTimer(this.el.find('.timer-steps'), this.steps);
-    console.log(this.steps);
   }
 
   setupDialog() {
@@ -39,10 +20,27 @@ class BrewTimerDialog {
     $(window).on("keypress", this.keyPressed.bind(this));
   }
 
+  cancelDialog() {
+    console.log('cancel events');
+    this.startEl.off("click", this.toggleTimer.bind(this));
+    this.pauseEl.off("click", this.toggleTimer.bind(this));
+    this.resetEl.off("click", this.resetTimer.bind(this));
+    $(window).off("keypress", this.keyPressed.bind(this));
+  }
+
   setupTimer() {
-    const recipe = $(this.recipeEl).data("recipeId");
-    console.log("recipe", recipe);
-    this.loadSteps(recipe);
+    console.log("recipe", this.recipeId);
+    if (!this.timer) {
+      $.get(`/recipe_steps/${this.recipeId}`, this.storeRecipeSteps.bind(this));
+    }
+  }
+
+  storeRecipeSteps(data) {
+    console.log("storeRecipeSteps", data);
+    const stepType = this.el.data("stepType");
+    const steps = data[stepType + "_steps"];
+    console.log("stepType", stepType, "steps", steps);
+    this.timer = new BrewTimer(this.el.find('.timer-content'), steps, stepType);
   }
 
   keyPressed(ev) {
@@ -50,14 +48,6 @@ class BrewTimerDialog {
       this.toggleTimer();
     }
     return false;
-  }
-
-  cancelDialog() {
-    console.log('cancel events');
-    this.startEl.off("click", this.toggleTimer.bind(this));
-    this.pauseEl.off("click", this.toggleTimer.bind(this));
-    this.resetEl.off("click", this.resetTimer.bind(this));
-    $(window).off("keypress", this.keyPressed.bind(this));
   }
 
   togglePlayButton() {

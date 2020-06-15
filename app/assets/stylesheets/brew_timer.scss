@@ -67,12 +67,19 @@
       .timer-step-icon {
         height: 4em;
 
-        .timer-step-malt {
-          background-image: image-url("flaticon/malt.svg");
+        .timer-step-image {
           background-position: center;
           background-size: 4em 4em;
           width: 4em;
           height: 4em;
+        }
+
+        .timer-step-mash {
+          background-image: image-url("flaticon/mash.svg");
+        }
+
+        .timer-step-boil {
+          background-image: image-url("flaticon/boil.svg");
         }
       }
     }

@@ -61,8 +61,12 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
             <% end %>
             <%= render 'shared/promotion_button' %>
             <%= link_to "#", class: 'pure-button secondary-button',
-              data: { toggle: 'modal', target: '#brew-timer', keyboard: true, backdrop: true } do %>
-              <i class="far fa-clock"></i> <%= t(:'recipes.timer') %>
+              data: { toggle: 'modal', target: '#brew-timer-mash', keyboard: true, backdrop: true } do %>
+              <i class="far fa-clock"></i> <%= t(:'brewtimer.mash') %>
+            <% end %>
+            <%= link_to "#", class: 'pure-button secondary-button',
+              data: { toggle: 'modal', target: '#brew-timer-boil', keyboard: true, backdrop: true } do %>
+              <i class="far fa-clock"></i> <%= t(:'brewtimer.boil') %>
             <% end %>
           </div>
           <% if user_signed_in? %>
@@ -139,4 +143,5 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
         </div>
       </div>
 
-<%= render 'shared/brew_timer' %>
+<%= render partial: 'shared/brew_timer', locals: { step_type: 'mash' } %>
+<%= render partial: 'shared/brew_timer', locals: { step_type: 'boil' } %>
