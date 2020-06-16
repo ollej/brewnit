@@ -61,6 +61,7 @@ class RecipesController < ApplicationController
 
     respond_to do |format|
       if @recipe.present? && @recipe.persisted?
+        send_new_recipe_email(@recipe)
         format.html { redirect_to redirect_path, notice: I18n.t(:'recipes.create.successful') }
         format.json { render :show, status: :created, location: @recipe }
       else
@@ -188,6 +189,12 @@ class RecipesController < ApplicationController
         import_recipe(recipe: recipe, beer_recipe: parser.recipes.first)
       else
         import_recipe(recipe: recipe, beer_recipe: parser.recipe, beerxml: beerxml)
+      end
+    end
+
+    def send_new_recipe_email(recipe)
+      User.where(receive_email: true).each do |user|
+        RecipeMailer.with(user: user, recipe: recipe).new_recipe.deliver_later
       end
     end
 end

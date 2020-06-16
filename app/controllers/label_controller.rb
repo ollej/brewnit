@@ -10,7 +10,7 @@ class LabelController < ApplicationController
 
   def create
     @label_presenter = LabelPresenter.new(current_user, label_params, root_url)
-    PushMessage.new(@label_presenter.push_values).notify
+    send_notifications
     send_data @label_presenter.pdf, filename: 'etiketter.pdf', type: :pdf, disposition: :attachment, status: :created
   end
 
@@ -21,5 +21,17 @@ class LabelController < ApplicationController
                   :abv, :ibu, :ebc, :og, :fg, :brewdate, :bottlesize, :contactinfo,
                   :brewery, :beerstyle, :malt1, :malt2, :hops1, :hops2, :yeast,
                   :template, :background, :border, :textcolor)
+  end
+
+  def send_notifications
+    PushMessage.new(@label_presenter.push_values).notify
+    label = @label_presenter.template.generate_png.read
+    User.where(admin: true, receive_email: true).each do |admin_user|
+      LabelMailer.with(
+        user: admin_user,
+        creator: current_user,
+        label: label
+      ).new_label.deliver_later
+    end
   end
 end

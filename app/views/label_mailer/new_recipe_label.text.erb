@@ -1,0 +1,8 @@
+En ny etikett har skapats på Brygglogg.se för receptet <%= @recipe.name %>.
+
+Länk till receptet: <%= @recipe_url %>
+
+<% if @creator.present? %>
+Etiketten skapades av <%= @creator.name %>
+Länk till bryggaren: <%= user_url(@creator) %>
+<% end %>

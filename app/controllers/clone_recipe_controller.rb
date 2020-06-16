@@ -9,11 +9,11 @@ class CloneRecipeController < ApplicationController
   end
 
   def create
-    Rails.logger.debug { "recipe: #{params[:id]}" }
     @recipe = Recipe.find(params[:id])
     @clone = RecipeCloner.new(@recipe, current_user, clone_params).clone
 
     if @clone.save!
+      RecipeMailer.with(user: @recipe.user, recipe: @recipe, clone: @clone).recipe_cloned.deliver_later
       redirect_to @clone, notice: I18n.t(:'clone_recipe.create.successful')
     else
       flash[:error] = I18n.t(:'clone_recipe.create.failed')

@@ -1,0 +1,6 @@
+<p>En ny etikett har skapats på Brygglogg.se.</p>
+<% if @creator.present? %>
+<p>Etiketten skapades av <a href="<%= user_url(@creator) %>"><%= @creator.name %></a>.</p>
+<% end %>
+
+<%= image_tag attachments['label.png'].url %>

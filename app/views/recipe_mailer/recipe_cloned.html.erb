@@ -1,0 +1,5 @@
+<p>Ditt recept med namn "<%= @recipe.name %>" på Brygglogg.se har
+klonats av <%= @clone.user.display_name %>.</p>
+
+<p>Gå till klonen: <a href="<%= @clone_url %>"><%= @clone_url %></a>.</p>
+<p>Gå till ditt recept: <a href="<%= @recipe_url %>"><%= @recipe_url %></a>.</p>
