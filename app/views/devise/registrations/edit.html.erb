@@ -10,17 +10,17 @@
              as: resource_name,
              url: registration_path(resource_name),
              html: { method: :put, class: 'pure-form pure-form-aligned' }) do |f| %>
-  <%= devise_error_messages! %>
+  <%= render "devise/shared/error_messages", resource: resource %>
   <%= invisible_captcha %>
 
   <fieldset>
     <div class="field pure-control-group">
       <%= f.label :email %>
-      <%= f.email_field :email, disabled: true, autofocus: true, class: 'pure-input-1-4' %>
+      <%= f.email_field :email, disabled: true, autofocus: true, autocomplete: "email", class: 'pure-input-1-4' %>
     </div>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <div>Väntar på aktivering av: <%= resource.unconfirmed_email %></div>
     <% end %>
 
     <div class="field pure-control-group">
@@ -79,21 +79,21 @@
 
     <div class="field pure-control-group">
       <%= f.label :password %>
-      <%= f.password_field :password, class: 'pure-input-1-4', autocomplete: 'off',
+      <%= f.password_field :password, class: 'pure-input-1-4', autocomplete: "new-password",
         placeholder: t(:'activerecord.attributes.user.password') %>
       <%= form_info_icon(t(:'users.leave_pwd_blank')) %>
     </div>
 
     <div class="field pure-control-group">
       <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation, class: 'pure-input-1-4', autocomplete: 'off',
+      <%= f.password_field :password_confirmation, class: 'pure-input-1-4', autocomplete: "new-password",
         placeholder: t(:'activerecord.attributes.user.password_confirmation') %>
       <%= form_info_icon(t(:'users.password_confirmation_description')) %>
     </div>
 
     <div class="field pure-control-group">
       <%= f.label :current_password %>
-      <%= f.password_field :current_password, class: 'pure-input-1-4', autocomplete: 'off',
+      <%= f.password_field :current_password, class: 'pure-input-1-4', autocomplete: "current-password",
         placeholder: t(:'activerecord.attributes.user.current_password')  %>
       <%= form_info_icon(t(:'users.pwd_needed_to_confirm')) %>
     </div>

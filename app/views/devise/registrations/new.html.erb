@@ -7,14 +7,14 @@
       <div class="page-content-body user-new">
         <%= form_for(resource, as: resource_name,
                      url: registration_path(resource_name),
-                     html: { class: 'pure-form pure-form-aligned' }) do |f| %>
-  <%= devise_error_messages! %>
+                     html: { class: "pure-form pure-form-aligned" }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
   <%= invisible_captcha %>
 
   <fieldset>
     <div class="field pure-control-group">
       <%= f.label :email %>
-      <%= f.email_field :email, autofocus: true, required: true %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
     </div>
 
     <div class="field pure-control-group">
@@ -23,13 +23,13 @@
     </div>
 
     <div class="field pure-control-group">
-      <%= f.label :receive_email, class: 'pure-checkbox' %>
+      <%= f.label :receive_email, class: "pure-checkbox" %>
       <%= f.check_box :receive_email %>
     </div>
 
     <div class="field pure-control-group">
       <%= f.label :password %>
-      <%= f.password_field :password, autocomplete: 'off', required: true %>
+      <%= f.password_field :password, autocomplete: "new-password", required: true %>
       <% if @minimum_password_length %>
       <em>(<%= I18n.t(:'users.min_pwd_length', min_length: @minimum_password_length) %>)</em>
       <% end %>
@@ -37,7 +37,7 @@
 
     <div class="field pure-control-group">
       <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation, autocomplete: 'off' %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
     </div>
 
     <div class="actions pure-controls">
@@ -45,7 +45,7 @@
     </div>
 
     <div class="actions pure-controls">
-      <%= f.submit I18n.t(:'users.sign_up'), class: 'pure-button pure-button-primary' %>
+      <%= f.submit I18n.t(:'users.sign_up'), class: "pure-button pure-button-primary" %>
     </div>
 
     <%= render "devise/shared/links" %>

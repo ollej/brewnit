@@ -12,25 +12,25 @@
   <fieldset>
     <div class="field pure-control-group">
       <%= f.label :email %>
-      <%= f.email_field :email, autofocus: true, required: true,
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true,
             placeholder: I18n.t(:'activerecord.attributes.user.email') %>
     </div>
 
     <div class="field pure-control-group">
       <%= f.label :password %>
-      <%= f.password_field :password, autocomplete: 'off', required: true,
+      <%= f.password_field :password, autocomplete: "current-password", required: true,
            placeholder: I18n.t(:'activerecord.attributes.user.password') %>
     </div>
 
     <div class="actions pure-controls">
       <% if devise_mapping.rememberable? -%>
-        <%= f.label :remember_me, class: 'pure-checkbox' do %>
+        <%= f.label :remember_me, class: "pure-checkbox" do %>
           <%= f.check_box :remember_me %>
           <%= I18n.t(:'activerecord.attributes.user.remember_me') %>
         <% end %><br />
       <% end -%>
 
-      <%= f.submit I18n.t(:'users.sign_in'), class: 'pure-button pure-button-primary' %>
+      <%= f.submit I18n.t(:'users.sign_in'), class: "pure-button pure-button-primary" %>
     </div>
 
 <%= render "devise/shared/links" %>
