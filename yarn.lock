@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@ungap/event-target@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@ungap/event-target/-/event-target-0.2.0.tgz#a79dbea40db5e1fe496c9804a6e0346f942a04ce"
+  integrity sha512-9uhX3uyWuSgNbwY6TwXxat12Y48nODsQ3LBRvCVtUg23OsFqnXOcKqRA51dwZhG+Prx3nh8MWwwgm2P5O2nFMw==
+
 balloon-css@^0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/balloon-css/-/balloon-css-0.5.0.tgz#6a3c065efab9ea5f509a95d4315df00aae114fa3"

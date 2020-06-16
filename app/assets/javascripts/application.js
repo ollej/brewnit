@@ -21,4 +21,5 @@
 //= require thirdparty/jquery.fileupload-validate
 //= require thirdparty/colorPick
 //= require quill.global
+//= require @ungap/event-target/index
 //= require_tree .
