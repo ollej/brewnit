@@ -16,7 +16,7 @@
   <fieldset>
     <div class="field pure-control-group">
       <%= f.label :email %>
-      <%= f.email_field :email, disabled: true, autofocus: true, autocomplete: "email", class: 'pure-input-1-4' %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'pure-input-1-4' %>
     </div>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
