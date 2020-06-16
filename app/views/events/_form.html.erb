@@ -15,66 +15,66 @@
   <fieldset>
     <div class="field pure-control-group">
       <%= f.label :name %>
-      <%= f.text_field :name, class: 'pure-input-1-4',
+      <%= f.text_field :name,
         placeholder: I18n.t(:'activerecord.attributes.event.name') %>
     </div>
     <div class="field pure-control-group">
       <%= f.label :event_type %>
-      <%= f.select :event_type, Event::EVENT_TYPES, {}, class: 'pure-input-1-4' %>
+      <%= f.select :event_type, Event::EVENT_TYPES, {} %>
       <%= form_info_icon(I18n.t(:'events.event_type_description')) %>
     </div>
     <div class="field pure-control-group">
       <%= f.label :held_at %>
-      <%= f.date_field :held_at, class: 'pure-input-1-4',
+      <%= f.date_field :held_at,
         placeholder: I18n.t(:'activerecord.attributes.event.held_at') %>
       <%= form_info_icon(I18n.t(:'events.held_at_description')) %>
     </div>
     <div class="field pure-control-group">
       <%= f.label :organizer %>
-      <%= f.text_field :organizer, class: 'pure-input-1-4',
+      <%= f.text_field :organizer,
         placeholder: I18n.t(:'activerecord.attributes.event.organizer') %>
       <%= form_info_icon(I18n.t(:'events.organizer_description')) %>
     </div>
     <div class="field pure-control-group">
       <%= f.label :location %>
-      <%= f.text_field :location, class: 'pure-input-1-4',
+      <%= f.text_field :location,
         placeholder: I18n.t(:'activerecord.attributes.event.location') %>
       <%= form_info_icon(I18n.t(:'events.location_description')) %>
     </div>
     <div class="field pure-control-group">
       <%= f.label :address %>
-      <%= f.text_area :address, class: 'pure-input-1-4',
+      <%= f.text_area :address,
         placeholder: I18n.t(:'activerecord.attributes.event.address') %>
       <%= form_info_icon(I18n.t(:'events.address_description')) %>
     </div>
     <div class="field pure-control-group">
       <%= f.label :coordinates %>
-      <%= f.text_field :coordinates, class: 'pure-input-1-4',
+      <%= f.text_field :coordinates,
         placeholder: I18n.t(:'activerecord.attributes.event.coordinates') %>
       <%= form_info_icon(I18n.t(:'events.coordinates_description')) %>
     </div>
     <div class="field pure-control-group">
       <%= f.label :url %>
-      <%= f.url_field :url, class: 'pure-input-1-4',
+      <%= f.url_field :url,
         placeholder: I18n.t(:'activerecord.attributes.event.url') %>
       <%= form_info_icon(I18n.t(:'events.url_description')) %>
     </div>
     <div class="field pure-control-group">
       <%= f.label :contact_email %>
-      <%= f.email_field :contact_email, class: 'pure-input-1-4',
+      <%= f.email_field :contact_email,
         placeholder: I18n.t(:'activerecord.attributes.event.contact_email') %>
       <%= form_info_icon(I18n.t(:'events.contact_email_description')) %>
     </div>
     <% if @event.persisted? && @event.official? %>
       <div class="field pure-control-group">
         <%= f.label :last_registration %>
-        <%= f.datetime_field :last_registration, class: 'pure-input-1-4',
+        <%= f.datetime_field :last_registration,
           placeholder: I18n.t(:'activerecord.attributes.event.last_registration') %>
         <%= form_info_icon(I18n.t(:'events.last_registration_description')) %>
       </div>
       <div class="field pure-control-group">
         <%= f.label :registration_information, class: 'large-group' %>
-        <%= f.text_area :registration_information, class: 'pure-input-1-4',
+        <%= f.text_area :registration_information,
           placeholder: I18n.t(:'activerecord.attributes.event.registration_information') %>
         <%= form_info_icon(I18n.t(:'events.registration_information_description')) %>
       </div>
