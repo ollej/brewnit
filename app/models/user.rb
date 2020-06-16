@@ -123,15 +123,17 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(auth_hash, honeypot)
-    data = auth_hash.info
-
-    user = User.find_or_create_by(email: data[:email]) do |u|
-      u.name = data[:name]
-      u.password = Devise.friendly_token[0,20]
-      u.registration_data = self.registration_data_hash(auth_hash.provider, data[:email], honeypot)
+    user = User.find_by(uid: auth_hash.uid, provider: auth_hash.provider) ||
+      User.find_by(email: auth_hash.info.email) ||
+      User.create!(self.omniauth_user_data(auth_hash, honeypot))
+    if user.uid.blank?
+      user.update(
+        uid: auth_hash.uid,
+        provider: auth_hash.provider
+      )
     end
-    if data[:image].present? && !user.has_avatar?
-      user.create_medium(data[:image], :avatar)
+    if auth_hash.info.image.present? && !user.has_avatar?
+      user.create_medium(auth_hash.info.image, :avatar)
     end
     user
   end
@@ -142,6 +144,17 @@ class User < ApplicationRecord
     else
       all
     end
+  end
+
+  def self.omniauth_user_data(auth_hash, honeypot)
+    {
+      uid: auth_hash.uid,
+      email: auth_hash.info.email,
+      provider: auth_hash.provider,
+      name: auth_hash.info.name,
+      password: Devise.friendly_token[0,20],
+      registration_data: self.registration_data_hash(auth_hash.provider, auth_hash.info.email, honeypot)
+    }
   end
 
   def self.registration_data_hash(provider, email, honeypot)
