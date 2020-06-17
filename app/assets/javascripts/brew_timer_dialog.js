@@ -17,7 +17,6 @@ class BrewTimerDialog {
     this.startEl.on("click", this.toggleTimer.bind(this));
     this.pauseEl.on("click", this.toggleTimer.bind(this));
     this.resetEl.on("click", this.resetTimer.bind(this));
-    // TODO: Only when modal is active
     $(window).on("keypress", this.keyPressed.bind(this));
   }
 
@@ -62,6 +61,9 @@ class BrewTimerDialog {
   }
 
   keyPressed(ev) {
+    if (this.el.is(":hidden")) {
+      return;
+    }
     if ((ev.keyCode === 0) || (ev.keyCode === 32)) {
       this.toggleTimer();
     }
