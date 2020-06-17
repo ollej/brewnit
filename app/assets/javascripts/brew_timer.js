@@ -10,17 +10,13 @@ class BrewTimer extends EventTarget {
     this.el = el;
     this.steps = steps;
     this.stepType = stepType;
-    console.log("steps: ", this.steps);
     this.currentStep = -1;
-    this.totalTime = 0;
     this.totalTime = this.steps.reduce((accumulator, step) => accumulator + parseInt(step["time"]), 0);
-    console.log("totalTime", this.totalTime);
     this.reset();
     this.render();
   }
 
   start() {
-    console.log('start');
     if (this.start_time != null) {
       this.start_time = Date.now() - this.timer;
     } else {
@@ -32,7 +28,6 @@ class BrewTimer extends EventTarget {
   }
 
   stop() {
-    console.log('stop');
     this.updateTimer();
     this.running = false;
     this.clearTimeout();
@@ -44,7 +39,6 @@ class BrewTimer extends EventTarget {
   }
 
   reset() {
-    console.log('reset');
     this.start_time = null;
     this.timer = 0;
     this.currentStep = -1;
@@ -56,7 +50,6 @@ class BrewTimer extends EventTarget {
   }
 
   toggle() {
-    console.log('toggle', this.running);
     if (this.running) {
       this.stop();
     } else {
@@ -65,7 +58,6 @@ class BrewTimer extends EventTarget {
   }
 
   render() {
-    console.log('render');
     this.el.html(this.renderSteps(this.steps));
     this.timerEl = this.el.find(".timer-time");
   }
@@ -155,7 +147,6 @@ class BrewTimer extends EventTarget {
   }
 
   clearTimeout() {
-    console.log('clearTimeout');
     if (this.timeoutId != null) {
       window.clearTimeout(this.timeoutId);
       this.timeoutId = null;
@@ -164,7 +155,6 @@ class BrewTimer extends EventTarget {
 
   onInterval() {
     // TODO: Render list, update timer, add current class on step, remove current class on other steps
-    //console.log('onInterval')
     const time = this.calculateTime();
     if (time < this.totalTime) {
       this.updateTime(time);

@@ -22,4 +22,5 @@
 //= require thirdparty/colorPick
 //= require quill.global
 //= require @ungap/event-target/index
+//= require howler/dist/howler
 //= require_tree .

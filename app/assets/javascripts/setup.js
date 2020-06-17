@@ -128,10 +128,8 @@ $( document ).ready(function() {
   }
 
   const recipeId = $("#recipe_article").data("recipeId");
-  console.log("recipeId", recipeId);
   if (recipeId) {
     $(".brew-timer").each(function(index) {
-      console.log("BrewTimer", this);
       new BrewTimerDialog($(this), recipeId);
     });
   }
