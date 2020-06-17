@@ -209,15 +209,17 @@ sv:
     clone_description: Klona detta recept till din egen receptlista
     labels: Etiketter
   brewtimer:
-    title: Bryggklocka
+    title:
+      mash: Mäskklocka
+      boil: Kokklocka
     start: Starta timer
     pause: Pausa timer
     reset: Börja om
     mash:
-      button: Mäsktimer
+      button: Mäskklocka
       description: Öppna timer för mäskning
     boil:
-      button: Koktimer
+      button: Kokklocka
       description: Öppna timer för vörtkok
   users:
     index: Bryggare
