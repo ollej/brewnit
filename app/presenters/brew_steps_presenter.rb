@@ -1,4 +1,6 @@
 class BrewStepsPresenter
+  include ActionView::Helpers::NumberHelper
+
   def initialize(recipe, beerxml = nil)
     @beerxml = beerxml || BeerxmlParser.new(recipe.beerxml).recipe
   end
@@ -77,7 +79,10 @@ class BrewStepsPresenter
     steps.sort_by! { |step| step[:addition_time] }
     steps.each do |step|
       if additions[step[:addition_time]]
-        description = [step[:description], additions[step[:addition_time]][:description]].join("\n")
+        description = [
+          step[:description],
+          additions[step[:addition_time]][:description]
+        ].join("\n")
         additions[step[:addition_time]][:description] = description
       else
         additions[step[:addition_time]] = step
@@ -102,12 +107,17 @@ class BrewStepsPresenter
     @beerxml.mash.steps.each do |step|
       steps.push({
         name: step.name,
-        description: I18n.t(:'beerxml.brew_step.raise_temperature', { temperature: step.step_temp }),
+        description: I18n.t(:'beerxml.brew_step.raise_temperature', {
+          temperature: number_with_precision(step.step_temp, precision: 1)
+        }),
         time: step.ramp_time * 60,
       })
       steps.push({
         name: step.name,
-        description: I18n.t(:'beerxml.brew_step.hold_temperature', { temperature: step.step_temp, minutes: step.step_time }),
+        description: I18n.t(:'beerxml.brew_step.hold_temperature', {
+          temperature: number_with_precision(step.step_temp, precision: 1),
+          minutes: step.step_time
+        }),
         time: step.step_time * 60,
       })
     end
