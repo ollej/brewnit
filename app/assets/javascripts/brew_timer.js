@@ -87,7 +87,7 @@ class BrewTimer extends EventTarget {
             <div class="timer-step-description pure-u-1">${step.description}</div>
           </div>
         </div>
-        <div class="timer-step-time pure-u-1-8">${this.displayTime(step.time)}</div>
+        <div class="timer-step-time pure-u-1-8"><span>${this.displayTime(step.time)}</span></div>
       </div>
     `;
   }

@@ -50,6 +50,11 @@
       font-weight: bold;
       height: 4em;
       margin-bottom: 1em;
+      background-color: #fff4d7;
+      padding-top: 1em;
+      padding-bottom: 1em;
+      border-radius: 0.5em;
+
 
       .timer-step-name {
         font-size: 2em;
@@ -64,6 +69,10 @@
         line-height: 1.4em;
       }
 
+      .timer-step-time span {
+        padding-right: 0.5em;
+      }
+
       .timer-step-icon {
         height: 4em;
 
@@ -72,6 +81,7 @@
           background-size: 4em 4em;
           width: 4em;
           height: 4em;
+          padding-left: 0.5em;
         }
 
         .timer-step-mash {
