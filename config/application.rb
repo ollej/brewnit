@@ -26,9 +26,6 @@ module Brewnit
     config.i18n.default_locale = :sv
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
 
-    config.eager_load_paths << Rails.root.join('lib')
-    config.eager_load_paths << Rails.root.join('lib/errors')
-
     config.sass.preferred_syntax = :scss
     config.sass.line_comments = false
     config.sass.cache = false
