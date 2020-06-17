@@ -9,22 +9,25 @@ class BrewTimerDialog {
     this.el
       .on('shown.bs.modal', this.setupDialog.bind(this))
       .on('hidden.bs.modal', this.cancelDialog.bind(this));
+    this.toggleTimer = this.toggleTimer.bind(this);
+    this.resetTimer = this.resetTimer.bind(this);
+    this.keyPressed = this.keyPressed.bind(this);
   }
 
   setupDialog() {
     this.setupSounds();
     this.setupTimer();
-    this.startEl.on("click", this.toggleTimer.bind(this));
-    this.pauseEl.on("click", this.toggleTimer.bind(this));
-    this.resetEl.on("click", this.resetTimer.bind(this));
-    $(window).on("keypress", this.keyPressed.bind(this));
+    this.startEl.on("click", this.toggleTimer);
+    this.pauseEl.on("click", this.toggleTimer);
+    this.resetEl.on("click", this.resetTimer);
+    $(window).on("keypress", this.keyPressed);
   }
 
   cancelDialog() {
-    this.startEl.off("click", this.toggleTimer.bind(this));
-    this.pauseEl.off("click", this.toggleTimer.bind(this));
-    this.resetEl.off("click", this.resetTimer.bind(this));
-    $(window).off("keypress", this.keyPressed.bind(this));
+    this.startEl.off("click", this.toggleTimer);
+    this.pauseEl.off("click", this.toggleTimer);
+    this.resetEl.off("click", this.resetTimer);
+    $(window).off("keypress", this.keyPressed);
   }
 
   setupTimer() {
