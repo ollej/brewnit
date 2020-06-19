@@ -44,3 +44,5 @@ public/assets
 yarn-debug.log*
 .yarn-integrity
 #/node_modules/
+
+/slask
