@@ -41,6 +41,14 @@
   &.button-xlarge {
     font-size: 125%;
   }
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &.pure-button-primary:hover {
+    color: white;
+  }
 }
 
 .inline-button {
