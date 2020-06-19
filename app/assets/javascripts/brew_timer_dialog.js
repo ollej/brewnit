@@ -6,7 +6,7 @@ class BrewTimerDialog {
     this.pauseEl = this.el.find(".brew-timer-pause");
     this.resetEl = this.el.find(".brew-timer-reset");
     this.expandEl = this.el.find(".brew-timer-expand");
-    this.sounds = new Map();
+    this.sounds = null;
     this.el
       .on('shown.bs.modal', this.setupDialog.bind(this))
       .on('hidden.bs.modal', this.cancelDialog.bind(this));
@@ -41,20 +41,25 @@ class BrewTimerDialog {
   }
 
   setupSounds() {
-    if (this.sounds.size > 0) {
+    if (this.sounds) {
       return;
     }
-    window.assets.audio.forEach((path, key) => {
-      this.sounds.set(key, new Howl({ src: [path] }));
+    this.sounds = {};
+    ["step", "done"].forEach((sound_type) => {
+      this.sounds[sound_type] = new Map();
+      window.audio_assets[sound_type].forEach((path, key) => {
+        this.sounds[sound_type].set(key, new Howl({ src: [path] }));
+      });
     });
   }
 
-  play() {
-    this.getRandomItem(this.sounds).play();
+  play(sound_type) {
+    this.getRandomItem(this.sounds[sound_type]).play();
   }
 
   getRandomItem(iterable) {
-    return iterable.get([...iterable.keys()][Math.floor(Math.random() * iterable.size)]);
+    const randomIndex = Math.floor(Math.random() * iterable.size);
+    return iterable.get(Array.from(iterable.keys())[randomIndex]);
   }
 
   storeRecipeSteps(data) {
@@ -66,11 +71,11 @@ class BrewTimerDialog {
     });
     this.timer.addEventListener("brewtimer.step", (event) => {
       if (this.timer.currentStep > 0) {
-        this.play();
+        this.play("step");
       }
     });
     this.timer.addEventListener("brewtimer.done", (event) => {
-      this.play();
+      this.play("done");
     });
     // Update modal if content changes
     this.el.modal('handleUpdate');

@@ -232,6 +232,8 @@ Attributions
 
  * Loading spinner from: https://preloaders.net
  * Flat icons from: https://flaticon.com
+ * Sounds from: https://www.soundjay.com
+ * Sounds from: https://www.freesound.org
 
 How to Contribute?
 ------------------

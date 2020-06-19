@@ -1,7 +1,13 @@
-window.assets = {
-  audio: new Map([
+window.audio_assets = {
+  step: new Map([
     ["bottle-open", '<%= asset_path("bottle-open.mp3") %>'],
     ["glass-clink-1", '<%= asset_path("glass-clink-1.mp3") %>'],
-    ["glass-clink-2", '<%= asset_path("glass-clink-2.mp3") %>']
+    ["glass-clink-2", '<%= asset_path("glass-clink-2.mp3") %>'],
+    ["microwave-oven-bell", '<%= asset_path("microwave-oven-bell.mp3") %>'],
+    ["typewriter-key", '<%= asset_path("typewriter-key.mp3") %>']
+  ]),
+  done: new Map([
+    ["trumpet-fanfare", '<%= asset_path("trumpet-fanfare.mp3") %>'],
+    ["alarm-clock", '<%= asset_path("alarm-clock.mp3") %>']
   ])
 }
