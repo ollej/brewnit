@@ -1,5 +1,6 @@
-<div id="brew-timer-<%= step_type %>" class="brew-timer modal fade no-auto-hide" role="dialog"
-  data-step-type="<%= step_type %>" aria-labelledby="#brew-timer-title" tabindex='-1'>
+<div id="brew-timer-<%= step_type %>" role="dialog" data-step-type="<%= step_type %>"
+  class="brew-timer modal fade no-auto-hide modal-fullscreen"
+  aria-labelledby="brew-timer-title-<%= step_type %>" tabindex='-1'>
   <div class="modal-dialog modal-lg" role="document">
 
     <!-- Modal content-->
@@ -8,7 +9,7 @@
         <%= button_tag class: 'close brew-timer-close', data: { dismiss: 'modal' } do %>
           <i class="fa fa-times"></i>
         <% end %>
-        <h3 class="modal-title" id="brew-timer-title">
+        <h3 class="modal-title" id="brew-timer-title-<%= step_type %>">
           <i class="far fa-clock"></i>
           <%= t(:"brewtimer.title.#{step_type}") %></h3>
       </div>

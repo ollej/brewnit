@@ -10,43 +10,36 @@ class BrewTimer extends EventTarget {
     this.el = el;
     this.steps = steps;
     this.stepType = stepType;
-    this.currentStep = -1;
-    this.totalTime = this.steps.reduce((accumulator, step) => accumulator + parseInt(step["time"]), 0);
     this.reset();
-    this.render();
   }
 
   start() {
     if (this.start_time != null) {
-      this.start_time = Date.now() - this.timer;
+      this.start_time = Date.now() - this.elapsed_time;
     } else {
       this.start_time = Date.now();
     }
     this.running = true;
     this.setInterval();
-    this.dispatchEvent(new Event("brewtimer.start"));
+    this.fire("start");
   }
 
   stop() {
-    this.updateTimer();
+    this.updateElapsedTime();
     this.running = false;
     this.clearTimeout();
-    this.dispatchEvent(new Event("brewtimer.stop"));
-  }
-
-  updateTimer() {
-    this.timer = Date.now() - this.start_time;
+    this.fire("stop");
   }
 
   reset() {
     this.start_time = null;
-    this.timer = 0;
+    this.elapsed_time = 0;
     this.currentStep = -1;
     this.running = false;
     this.clearTimeout();
-    this.updateTime(0);
+    this.renderTime(0);
     this.render();
-    this.dispatchEvent(new Event("brewtimer.reset"));
+    this.fire("reset");
   }
 
   toggle() {
@@ -57,13 +50,11 @@ class BrewTimer extends EventTarget {
     }
   }
 
+  // Private methods
+
   render() {
     this.el.html(this.renderSteps(this.steps));
     this.timerEl = this.el.find(".timer-time");
-  }
-
-  renderDone() {
-    this.el.html("Klar!");
   }
 
   renderSteps(steps) {
@@ -92,6 +83,12 @@ class BrewTimer extends EventTarget {
     `;
   }
 
+  renderTime(time) {
+    if (this.timerEl) {
+      this.timerEl.html(this.displayTime(time));
+    }
+  }
+
   highlightStep(time) {
     let accumulatedTime = 0;
     this.steps.forEach((step, index) => {
@@ -100,7 +97,7 @@ class BrewTimer extends EventTarget {
       if (accumulatedTime - step["time"] <= time) {
         if (this.currentStep < index) {
           this.currentStep = index;
-          this.dispatchEvent(new Event("brewtimer.step"));
+          this.fire("step");
         }
         $el.addClass("timer-step-current");
       }
@@ -129,10 +126,17 @@ class BrewTimer extends EventTarget {
     return timestr;
   }
 
-  updateTime(time) {
-    if (this.timerEl) {
-      this.timerEl.html(this.displayTime(time));
+  totalTime() {
+    if (!this._totalTime) {
+      console.log("updating totalTime");
+      this._totalTime = this.steps.reduce((accumulator, step) => accumulator + parseInt(step["time"]), 0);
     }
+    console.log("totalTime", this._totalTime);
+    return this._totalTime;
+  }
+
+  updateElapsedTime() {
+    this.elapsed_time = Date.now() - this.start_time;
   }
 
   calculateTime() {
@@ -154,17 +158,20 @@ class BrewTimer extends EventTarget {
   }
 
   onInterval() {
-    // TODO: Render list, update timer, add current class on step, remove current class on other steps
     const time = this.calculateTime();
-    if (time < this.totalTime) {
-      this.updateTime(time);
+    if (time < this.totalTime()) {
+      this.renderTime(time);
       this.highlightStep(time);
       this.setInterval();
     } else {
-      this.renderDone();
-      this.dispatchEvent(new Event("brewtimer.done"));
+      this.fire("done");
       this.reset();
     }
+  }
+
+  fire(event) {
+    this.dispatchEvent(new Event("brewtimer." + event));
+    this.dispatchEvent(new Event("brewtimer.update"));
   }
 }
 

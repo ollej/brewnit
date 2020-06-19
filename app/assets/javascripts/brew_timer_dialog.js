@@ -61,6 +61,11 @@ class BrewTimerDialog {
       this.togglePlayButton();
       this.play();
     });
+    // Update modal if content changes
+    this.el.modal('handleUpdate');
+    this.timer.addEventListener("brewtimer.update", (event) => {
+      this.el.modal('handleUpdate');
+    });
   }
 
   keyPressed(ev) {
