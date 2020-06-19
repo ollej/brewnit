@@ -17,5 +17,6 @@
  *= require fancybox/dist/css/jquery.fancybox
  *= require balloon-css/src/balloon
  *= require thirdparty/colorPick
+ *= require thirdparty/bootstrap-modal
  *= require_self
  */

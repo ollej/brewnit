@@ -23,4 +23,5 @@
 //= require quill.global
 //= require @ungap/event-target/index
 //= require howler/dist/howler
+//= require thirdparty/bootstrap-modal
 //= require_tree .
