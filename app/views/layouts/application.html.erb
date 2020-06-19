@@ -13,9 +13,6 @@
   <link rel="search" type="application/opensearchdescription+xml"
         href="<%= open_search_show_url(format: :xml) %>" title="Recipe search" />
   <%= stylesheet_link_tag 'application', media: 'all' %>
-  <script type="text/javascript">
-    window.I18n = <%= I18n.t(:'javascript').to_json.html_safe %>;
-  </script>
   <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
   <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
   <%= javascript_include_tag 'application' %>

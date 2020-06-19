@@ -5,6 +5,8 @@ sv:
       errors:
         max_file_size_exceeded: Du kan inte ladda upp bilder större än 2 MB.
         backend_error: "Kunde inte ladda up filen på grund av:"
+    brewtimer:
+      finish_time: "Sluttid: "
   admin:
     root: Admin
     public_link: Publik site

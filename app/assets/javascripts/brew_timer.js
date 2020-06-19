@@ -10,16 +10,18 @@ class BrewTimer extends EventTarget {
     this.el = el;
     this.steps = steps;
     this.stepType = stepType;
+    //this.steps.map((step) => step["time"] = 5);
     this.reset();
   }
 
   start() {
-    if (this.start_time != null) {
-      this.start_time = Date.now() - this.elapsed_time;
+    if (this.startTime != null) {
+      this.startTime = Date.now() - this.elapsed_time;
     } else {
-      this.start_time = Date.now();
+      this.startTime = Date.now();
     }
     this.running = true;
+    this.renderFinishTime();
     this.setInterval();
     this.fire("start");
   }
@@ -32,7 +34,7 @@ class BrewTimer extends EventTarget {
   }
 
   reset() {
-    this.start_time = null;
+    this.startTime = null;
     this.elapsed_time = 0;
     this.currentStep = -1;
     this.running = false;
@@ -64,6 +66,7 @@ class BrewTimer extends EventTarget {
         <div id="timer-steps">
         ${steps.map(this.renderStep.bind(this)).join('')}
         </div>
+        <div class="timer-time-done"></div>
       </div>
     `;
   }
@@ -92,10 +95,18 @@ class BrewTimer extends EventTarget {
     }
   }
 
-  startTime(time) {
-    let starttime = new Date();
-    starttime.setTime(starttime.getTime() + time * 1000);
-    return starttime;
+  renderFinishTime() {
+    this.el
+      .find(".timer-time-done")
+      .html(I18n["brewtimer"]["finish_time"] + this.formatTime(this.addSeconds(this.totalTime(), new Date(this.startTime))));
+  }
+
+  addSeconds(seconds, time) {
+    if (!time) {
+      time = new Date();
+    }
+    time.setTime(time.getTime() + seconds * 1000);
+    return time;
   }
 
   formatTime(date) {
@@ -114,7 +125,7 @@ class BrewTimer extends EventTarget {
           $el
             .next(".timer-step")
             .find(".timer-step-starttime")
-            .html(this.formatTime(this.startTime(step["time"])));
+            .html(this.formatTime(this.addSeconds(step["time"])));
           this.fire("step");
         }
       }
@@ -151,14 +162,14 @@ class BrewTimer extends EventTarget {
   }
 
   updateElapsedTime() {
-    this.elapsed_time = Date.now() - this.start_time;
+    this.elapsed_time = Date.now() - this.startTime;
   }
 
   calculateTime() {
-    if (this.start_time == null) {
+    if (this.startTime == null) {
       return 0;
     }
-    return Math.floor((Date.now() - this.start_time) / 1000);
+    return Math.floor((Date.now() - this.startTime) / 1000);
   }
 
   setInterval() {
