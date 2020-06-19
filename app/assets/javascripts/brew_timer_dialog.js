@@ -13,6 +13,7 @@ class BrewTimerDialog {
     this.toggleTimer = this.toggleTimer.bind(this);
     this.resetTimer = this.resetTimer.bind(this);
     this.toggleExpand = this.toggleExpand.bind(this);
+    this.toggleCountdown = this.toggleCountdown.bind(this);
     this.keyPressed = this.keyPressed.bind(this);
   }
 
@@ -23,6 +24,7 @@ class BrewTimerDialog {
     this.pauseEl.on("click", this.toggleTimer);
     this.resetEl.on("click", this.resetTimer);
     this.expandEl.on("click", this.toggleExpand);
+    this.el.on("click", ".timer-time", this.toggleCountdown);
     $(window).on("keypress", this.keyPressed);
   }
 
@@ -31,6 +33,7 @@ class BrewTimerDialog {
     this.pauseEl.off("click", this.toggleTimer);
     this.resetEl.off("click", this.resetTimer);
     this.expandEl.off("click", this.toggleExpand);
+    this.el.off("click", ".timer-time", this.toggleCountdown);
     $(window).off("keypress", this.keyPressed);
   }
 
@@ -118,6 +121,10 @@ class BrewTimerDialog {
   toggleExpand() {
     this.expandEl.find("i").toggleClass("fa-expand fa-compress");
     this.el.toggleClass("brewtimer-fullscreen");
+  }
+
+  toggleCountdown() {
+    this.timer.toggleCountDown();
   }
 }
 

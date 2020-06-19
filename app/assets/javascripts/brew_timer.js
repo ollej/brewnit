@@ -53,6 +53,10 @@ class BrewTimer extends EventTarget {
     }
   }
 
+  toggleCountDown() {
+    this.countDown = !this.countDown;
+  }
+
   // Private methods
 
   render() {
