@@ -5,12 +5,14 @@ class BrewTimerDialog {
     this.startEl = this.el.find(".brew-timer-start");
     this.pauseEl = this.el.find(".brew-timer-pause");
     this.resetEl = this.el.find(".brew-timer-reset");
+    this.expandEl = this.el.find(".brew-timer-expand");
     this.sounds = new Map();
     this.el
       .on('shown.bs.modal', this.setupDialog.bind(this))
       .on('hidden.bs.modal', this.cancelDialog.bind(this));
     this.toggleTimer = this.toggleTimer.bind(this);
     this.resetTimer = this.resetTimer.bind(this);
+    this.toggleExpand = this.toggleExpand.bind(this);
     this.keyPressed = this.keyPressed.bind(this);
   }
 
@@ -20,6 +22,7 @@ class BrewTimerDialog {
     this.startEl.on("click", this.toggleTimer);
     this.pauseEl.on("click", this.toggleTimer);
     this.resetEl.on("click", this.resetTimer);
+    this.expandEl.on("click", this.toggleExpand);
     $(window).on("keypress", this.keyPressed);
   }
 
@@ -27,6 +30,7 @@ class BrewTimerDialog {
     this.startEl.off("click", this.toggleTimer);
     this.pauseEl.off("click", this.toggleTimer);
     this.resetEl.off("click", this.resetTimer);
+    this.expandEl.off("click", this.toggleExpand);
     $(window).off("keypress", this.keyPressed);
   }
 
@@ -97,6 +101,11 @@ class BrewTimerDialog {
       this.togglePlayButton();
     }
     return false;
+  }
+
+  toggleExpand() {
+    this.expandEl.find("i").toggleClass("fa-expand fa-compress");
+    this.el.toggleClass("brewtimer-fullscreen");
   }
 }
 
