@@ -10,6 +10,18 @@
 }
 
 .brew-timer {
+  .timer-content {
+    background: white;
+
+    &:fullscreen {
+      padding: 2em;
+
+      .timer-time {
+        font-size: 6em;
+      }
+    }
+  }
+
   .brew-timer-expand {
     background: transparent;
     border: 0;
@@ -108,7 +120,6 @@
       }
 
       .timer-step-time span {
-        padding-right: 0.5em;
         white-space: normal;
         display: inline-block;
       }
@@ -173,10 +184,29 @@
   }
 }
 
+@media screen and (min-width: 48em) {
+  .brew-timer {
+    .timer-step {
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+
+    .timer-step-current {
+      padding-top: 2em;
+      padding-bottom: 3em;
+      height: 8em;
+    }
+  }
+}
+
 @media screen and (max-width: 48em) {
   .brew-timer {
     .brew-timer-expand {
       display: none;
+    }
+
+    .timer-step-time {
+      padding-right: 0.5em;
     }
 
     @include brewtimer-fullscreen();

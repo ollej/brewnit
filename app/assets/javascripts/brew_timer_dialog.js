@@ -119,8 +119,7 @@ class BrewTimerDialog {
   }
 
   toggleExpand() {
-    this.expandEl.find("i").toggleClass("fa-expand fa-compress");
-    this.el.toggleClass("brewtimer-fullscreen");
+    this.el.find(".timer-content").get(0).requestFullscreen();
   }
 
   toggleCountdown() {
