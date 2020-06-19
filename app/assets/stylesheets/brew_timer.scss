@@ -103,6 +103,10 @@
       .timer-step-icon {
         height: 4em;
 
+        .timer-step-starttime {
+          display: none;
+        }
+
         .timer-step-image {
           background-position: center;
           background-size: 4em 4em;

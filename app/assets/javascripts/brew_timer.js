@@ -5,7 +5,7 @@ class BrewTimer extends EventTarget {
 
   constructor(el, steps, stepType) {
     super();
-    this.interval_time = 250;
+    this.interval_time = 100;
     this.increment = 1000;
     this.el = el;
     this.steps = steps;
@@ -71,22 +71,35 @@ class BrewTimer extends EventTarget {
   renderStep(step, index) {
     return `
       <div class="timer-step-${index} timer-step pure-g">
-        <div class="timer-step-icon pure-u-1-8"><div class="timer-step-image timer-step-${this.stepType}"></div></div>
+        <div class="timer-step-icon pure-u-1-8">
+          <div class="timer-step-image timer-step-${this.stepType}"></div>
+          <span class="timer-step-starttime"></span>
+        </div>
         <div class="timer-step-info pure-u-3-4">
           <div class="pure-g">
             <div class="timer-step-name pure-u-1">${step.name}</div>
             <div class="timer-step-description pure-u-1">${step.description}</div>
           </div>
         </div>
-        <div class="timer-step-time pure-u-1-8"><span>${this.displayTime(step.time)}</span></div>
+        <div class="timer-step-time pure-u-1-8"><span>${this.humanReadableDuration(step.time)}</span></div>
       </div>
     `;
   }
 
   renderTime(time) {
     if (this.timerEl) {
-      this.timerEl.html(this.displayTime(time));
+      this.timerEl.html(this.humanReadableDuration(time));
     }
+  }
+
+  startTime(time) {
+    let starttime = new Date();
+    starttime.setTime(starttime.getTime() + time * 1000);
+    return starttime;
+  }
+
+  formatTime(date) {
+    return dateFormat(date, "HH:MM");
   }
 
   highlightStep(time) {
@@ -97,9 +110,13 @@ class BrewTimer extends EventTarget {
       if (accumulatedTime - step["time"] <= time) {
         if (this.currentStep < index) {
           this.currentStep = index;
+          $el.addClass("timer-step-current");
+          $el
+            .next(".timer-step")
+            .find(".timer-step-starttime")
+            .html(this.formatTime(this.startTime(step["time"])));
           this.fire("step");
         }
-        $el.addClass("timer-step-current");
       }
       if (time >= accumulatedTime) {
         $el.addClass("timer-step-passed");
@@ -108,7 +125,7 @@ class BrewTimer extends EventTarget {
     });
   }
 
-  displayTime(time) {
+  humanReadableDuration(time) {
     let timestr = "";
     const hours = Math.floor(time / 3600);
     time = time - hours * 3600;
@@ -128,10 +145,8 @@ class BrewTimer extends EventTarget {
 
   totalTime() {
     if (!this._totalTime) {
-      console.log("updating totalTime");
       this._totalTime = this.steps.reduce((accumulator, step) => accumulator + parseInt(step["time"]), 0);
     }
-    console.log("totalTime", this._totalTime);
     return this._totalTime;
   }
 

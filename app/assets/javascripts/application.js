@@ -24,4 +24,5 @@
 //= require @ungap/event-target/index
 //= require howler/dist/howler
 //= require thirdparty/bootstrap-modal
+//= require dateformat/lib/dateformat
 //= require_tree .
