@@ -63,6 +63,13 @@ class BrewTimerDialog {
     this.timer = new BrewTimer(this.el.find('.timer-content'), steps, stepType);
     this.timer.addEventListener("brewtimer.done", (event) => {
       this.togglePlayButton();
+    });
+    this.timer.addEventListener("brewtimer.step", (event) => {
+      if (this.timer.currentStep > 0) {
+        this.play();
+      }
+    });
+    this.timer.addEventListener("brewtimer.done", (event) => {
       this.play();
     });
     // Update modal if content changes
