@@ -71,6 +71,10 @@
     &.timer-step-passed {
       color: lightgray;
       opacity: 0.9;
+
+      .timer-step-starttime {
+        display: none;
+      }
     }
     &.timer-step-current {
       color: black;
@@ -81,7 +85,6 @@
       padding-top: 1em;
       padding-bottom: 1em;
       border-radius: 0.5em;
-
 
       .timer-step-name {
         font-size: 2em;
