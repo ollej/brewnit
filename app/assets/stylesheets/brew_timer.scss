@@ -83,6 +83,7 @@
         display: none;
       }
     }
+
     &.timer-step-current {
       color: black;
       font-weight: bold;
@@ -108,6 +109,8 @@
 
       .timer-step-time span {
         padding-right: 0.5em;
+        white-space: normal;
+        display: inline-block;
       }
 
       .timer-step-icon {

@@ -79,28 +79,34 @@ class BrewTimer extends EventTarget {
   renderStep(step, index) {
     return `
       <div class="timer-step-${index} timer-step pure-g">
-        <div class="timer-step-icon pure-u-1-8">
+        <div class="timer-step-icon pure-u-1-6 pure-u-md-1-8">
           <div class="timer-step-image timer-step-${this.stepType}"></div>
           <span class="timer-step-starttime"></span>
         </div>
-        <div class="timer-step-info pure-u-3-4">
+        <div class="timer-step-info pure-u-2-3 pure-u-md-3-4">
           <div class="pure-g">
             <div class="timer-step-name pure-u-1">${step.name}</div>
             <div class="timer-step-description pure-u-1">${step.description}</div>
           </div>
         </div>
-        <div class="timer-step-time pure-u-1-8"><span>${this.humanReadableDuration(step.time)}</span></div>
+        <div class="timer-step-time pure-u-1-6 pure-u-md-1-8"><span>${this.humanReadableDuration(step.time)}</span></div>
       </div>
     `;
   }
 
-  renderTime(time, countDown = this.countDown) {
+  renderTime(time) {
     if (this.timerEl) {
-      if (countDown) {
+      if (this.countDown) {
         time = this.totalTime() - time;
       }
-      this.timerEl.html(this.humanReadableDuration(time));
+      this.timerEl.html(this.humanReadableDuration(time, true));
     }
+  }
+
+  renderTimeToNextStep(time) {
+    const step = this.steps[this.currentStep];
+    const timeStr = this.humanReadableDuration(step["endtime"] - time, true);
+    this.el.find(".timer-step-current .timer-step-time span").html(timeStr);
   }
 
   renderFinishTime() {
@@ -129,11 +135,12 @@ class BrewTimer extends EventTarget {
       if (accumulatedTime - step["time"] <= time) {
         if (this.currentStep < index) {
           this.currentStep = index;
-          $el.addClass("timer-step-current");
+          $el.addClass("timer-step-current").removeClass("timer-step-next");
           $el
             .next(".timer-step")
             .find(".timer-step-starttime")
-            .html(this.formatTime(this.addSeconds(step["time"])));
+            .html(this.formatTime(this.addSeconds(step["time"])))
+            .addClass("timer-step-next");
           this.fire("step");
         }
       }
@@ -144,20 +151,20 @@ class BrewTimer extends EventTarget {
     });
   }
 
-  humanReadableDuration(time) {
+  humanReadableDuration(time, showZero = false) {
     let timestr = "";
     const hours = Math.floor(time / 3600);
     time = time - hours * 3600;
     if (hours > 0) {
-      timestr += `${hours} t `;
+      timestr += `${hours}&nbsp;t `;
     }
     const minutes = Math.floor(time / 60);
     time = time - minutes * 60;
     if (minutes > 0) {
-      timestr += `${minutes} m `;
+      timestr += `${minutes}&nbsp;m `;
     }
-    if (time > 0 || timestr.trim().length == 0) {
-      timestr += `${time} s`;
+    if (showZero || time > 0 || timestr.trim().length == 0) {
+      timestr += `${time}&nbsp;s`;
     }
     return timestr;
   }
@@ -165,6 +172,10 @@ class BrewTimer extends EventTarget {
   totalTime() {
     if (!this._totalTime) {
       this._totalTime = this.steps.reduce((accumulator, step) => accumulator + parseInt(step["time"]), 0);
+      let endtime = 0;
+      this.steps.forEach((step) => {
+        step["endtime"] = endtime = endtime + step["time"];
+      });
     }
     return this._totalTime;
   }
@@ -196,6 +207,7 @@ class BrewTimer extends EventTarget {
     if (time < this.totalTime()) {
       this.renderTime(time);
       this.highlightStep(time);
+      this.renderTimeToNextStep(time);
       this.setInterval();
     } else {
       this.fire("done");
