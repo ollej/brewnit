@@ -2,6 +2,7 @@ class BrewTimerDialog {
   constructor(el, recipeId) {
     this.el = el;
     this.recipeId = recipeId;
+    this.notify = new Notify();
     this.startEl = this.el.find(".brew-timer-start");
     this.pauseEl = this.el.find(".brew-timer-pause");
     this.resetEl = this.el.find(".brew-timer-reset");
@@ -75,10 +76,12 @@ class BrewTimerDialog {
     this.timer.addEventListener("brewtimer.step", (event) => {
       if (this.timer.currentStep > 0) {
         this.play("step");
+        this.notify.send(I18n["brewtimer"]["notification"]["step"] + this.timer.getCurrentStep()["name"]);
       }
     });
     this.timer.addEventListener("brewtimer.done", (event) => {
       this.play("done");
+      this.notify.send(I18n["brewtimer"]["notification"]["done"][this.timer.stepType], "done");
     });
     // Update modal if content changes
     this.el.modal('handleUpdate');
@@ -111,6 +114,7 @@ class BrewTimerDialog {
   }
 
   toggleTimer() {
+    this.notify.requestPermission();
     if (this.timer) {
       this.timer.toggle();
       this.togglePlayButton();

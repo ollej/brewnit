@@ -58,6 +58,10 @@ class BrewTimer extends EventTarget {
     this.countDown = !this.countDown;
   }
 
+  getCurrentStep() {
+    return this.steps[this.currentStep];
+  }
+
   // Private methods
 
   render() {
@@ -105,8 +109,7 @@ class BrewTimer extends EventTarget {
   }
 
   renderTimeToNextStep(time) {
-    const step = this.steps[this.currentStep];
-    const timeStr = this.humanReadableDuration(step["endtime"] - time, true);
+    const timeStr = this.humanReadableDuration(this.getCurrentStep()["endtime"] - time, true);
     this.el.find(".timer-step-current .timer-step-time span").html(timeStr);
   }
 

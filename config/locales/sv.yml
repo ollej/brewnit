@@ -7,6 +7,11 @@ sv:
         backend_error: "Kunde inte ladda up filen på grund av:"
     brewtimer:
       finish_time: "Sluttid: "
+      notification:
+        step: "Börja nästa bryggsteg: "
+        done:
+          boil: "Koket är klart!"
+          mash: "Mäskningen är klar!"
   admin:
     root: Admin
     public_link: Publik site
