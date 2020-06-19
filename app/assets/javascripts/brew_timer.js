@@ -5,18 +5,19 @@ class BrewTimer extends EventTarget {
 
   constructor(el, steps, stepType) {
     super();
-    this.interval_time = 100;
+    this.intervalTime = 100;
     this.increment = 1000;
     this.el = el;
     this.steps = steps;
     this.stepType = stepType;
+    this.countDown = true;
     //this.steps.map((step) => step["time"] = 5);
     this.reset();
   }
 
   start() {
     if (this.startTime != null) {
-      this.startTime = Date.now() - this.elapsed_time;
+      this.startTime = Date.now() - this.elapsedTime;
     } else {
       this.startTime = Date.now();
     }
@@ -35,7 +36,7 @@ class BrewTimer extends EventTarget {
 
   reset() {
     this.startTime = null;
-    this.elapsed_time = 0;
+    this.elapsedTime = 0;
     this.currentStep = -1;
     this.running = false;
     this.clearTimeout();
@@ -89,8 +90,11 @@ class BrewTimer extends EventTarget {
     `;
   }
 
-  renderTime(time) {
+  renderTime(time, countDown = this.countDown) {
     if (this.timerEl) {
+      if (countDown) {
+        time = this.totalTime() - time;
+      }
       this.timerEl.html(this.humanReadableDuration(time));
     }
   }
@@ -162,7 +166,7 @@ class BrewTimer extends EventTarget {
   }
 
   updateElapsedTime() {
-    this.elapsed_time = Date.now() - this.startTime;
+    this.elapsedTime = Date.now() - this.startTime;
   }
 
   calculateTime() {
@@ -173,7 +177,7 @@ class BrewTimer extends EventTarget {
   }
 
   setInterval() {
-    this.timeoutId = window.setTimeout(this.onInterval.bind(this), this.interval_time);
+    this.timeoutId = window.setTimeout(this.onInterval.bind(this), this.intervalTime);
   }
 
   clearTimeout() {
