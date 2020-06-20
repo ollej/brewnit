@@ -1,18 +1,23 @@
-class BeerPie
-  drawn: false
+class BeerPie {
+  constructor(el, tab, data) {
+    this.drawn = false;
+    this.draw = this.draw.bind(this);
+    this.el = el;
+    this.tab = tab;
+    this.data = data;
+    this.d3 = new d3pie(this.el, this.config());
+    $("body").on("tab-changed", this.draw);
+  }
 
-  constructor: (@el, @tab, @data) ->
-    @d3 = new d3pie(@el, @config())
-    $("body").on("tab-changed", @draw)
+  draw(ev, id) {
+    if (id !== this.tab) { return; }
+    if (this.drawn) { return; }
+    this.d3.redraw();
+    this.drawn = true;
+  }
 
-  draw: (ev, id) =>
-    return unless id == @tab
-    return if @drawn
-    @d3.redraw()
-    @drawn = true
-
-  config: ->
-    {
+  config() {
+    return {
       "footer": {
         "color": "#999999",
         "fontSize": 11,
@@ -26,7 +31,7 @@ class BeerPie
       },
       "data": {
         "sortOrder": "value-desc",
-        "content": @data
+        "content": this.data
       },
       "labels": {
         "outer": {
@@ -84,6 +89,8 @@ class BeerPie
         }
       },
       "callbacks": {}
-    }
-  
-(exports ? this).BeerPie = BeerPie
+    };
+  }
+}
+
+(typeof exports !== 'undefined' && exports !== null ? exports : this).BeerPie = BeerPie;
