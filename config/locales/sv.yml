@@ -8,6 +8,7 @@ sv:
     brewtimer:
       finish_time: "Sluttid: "
       notification:
+        title: Bryggklocka
         step: "Börja nästa bryggsteg: "
         done:
           boil: "Koket är klart!"

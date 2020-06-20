@@ -12,10 +12,8 @@ class Notify {
   }
 
   requestPermission() {
-    if (!this.granted() && !this.denied()) {
-      Notification.requestPermission((permission) => {
-        this.permission = permission;
-      }).then((permission) => {
+    if (this.available && !this.granted() && !this.denied()) {
+      Promise.resolve(Notification.requestPermission()).then((permission) => {
         this.permission = permission;
       });
     }
@@ -23,7 +21,7 @@ class Notify {
 
   send(message, tag = "step") {
     if (this.available && this.granted()) {
-      var n = new Notification("Bryggklocka", { body: message, tag: tag });
+      var n = new Notification(I18n["brewtimer"]["notification"]["title"], { body: message, tag: tag });
     } else {
       // Fallback to html toast
     }
