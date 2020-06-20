@@ -28,7 +28,7 @@ class MediaUpload
     #console.log("updateScroller", images)
     @$slider.toggle(images > 0)
     @$slider.mThumbnailScroller("update")
-    @$slider.mThumbnailScroller("scrollTo", "last")
+    @$slider.mThumbnailScroller("scrollTo", "last") if images > 0
 
   updateProgress: (ev, data) =>
     # FIXME: Uploading multiple images only show progress for first image.
