@@ -85,7 +85,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :email, :presentation, :location, :brewery, :twitter, :url, :equipment, :instagram, :receive_email, :native_notifications])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :email, :presentation, :location, :brewery, :twitter, :url, :equipment, :instagram, :receive_email, :native_notifications, :pushover_user_key])
   end
 
   def update_resource(resource, params)

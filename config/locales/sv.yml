@@ -230,6 +230,8 @@ sv:
     boil:
       button: Kokklocka
       description: Öppna timer för vörtkok
+    notification:
+      title: Brygglogg.se bryggklocka
   users:
     index: Bryggare
     other_users: Användare utan recept
@@ -246,6 +248,7 @@ sv:
       password_confirmation_description: Upprepa nya lösenordet för att garantera att det blir rätt.
       use_native_notifications: Använd webbläsarens egna notifieringar. Måste vara tillåtna i browsern och din enhet.
       allow_email_notifications: Tillåt Brygglogg.se att skicka e-post om uppdateringar och nyheter. Tekniska e-post för lösenordsändringar m.m. kommer fortfarande skickas.
+      pushover_user_key: Om du vill få push-notiser till din telefon så kan du lägga till din användarnyckel från Pushover här.
     save: Spara ändringar
     cancel_account: Avsluta konto
     cancel_my_account: Avsluta mitt konto
@@ -934,6 +937,7 @@ sv:
         medium_brewery: Bryggerilogga
         receive_email: Tillåt e-postutskick
         native_notifications: Systemnotifieringar
+        pushover_user_key: Pushover-nyckel
         destroy:
           media: Ta bort
       recipe:

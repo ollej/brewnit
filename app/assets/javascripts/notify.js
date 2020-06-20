@@ -1,6 +1,7 @@
 class Notify {
   constructor() {
     this.available = window.user["native_notifications"] && ("Notification" in window);
+    this.server_notifications = window.user["server_notifications"];
     this.notifier = new AWN({
       labels: {
         success: I18n["brewtimer"]["notification"]["success"]
@@ -33,6 +34,9 @@ class Notify {
       } else {
         this.notifier.info(message);
       }
+    }
+    if (this.server_notifications) {
+      $.post("/notifications", { message: message, type: tag }, null, "json");
     }
   }
 }

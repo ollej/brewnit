@@ -843,7 +843,8 @@ CREATE TABLE public.users (
     receive_email boolean DEFAULT false,
     uid character varying,
     provider character varying,
-    native_notifications boolean DEFAULT true
+    native_notifications boolean DEFAULT true,
+    pushover_user_key character varying
 );
 
 
@@ -1876,6 +1877,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200613182041'),
 ('20200613184054'),
 ('20200616170418'),
-('20200620114227');
+('20200620114227'),
+('20200620124947');
 
 

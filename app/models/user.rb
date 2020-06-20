@@ -99,7 +99,12 @@ class User < ApplicationRecord
   end
 
   def user_info
-    attributes.slice('brewery', 'native_notifications').merge(name: display_name)
+    attributes
+      .slice('brewery', 'native_notifications')
+      .merge(
+        name: display_name,
+        server_notifications: pushover_user_key.present?
+      )
   end
 
   def pushover_translation

@@ -19,13 +19,15 @@ class PushMessage
     Rails.application.secrets.pushover_user
   end
 
-  def enabled?
-    user.present? && Rails.env.production?
+  def enabled?(user_key)
+    user_key.present? && Rails.env.production?
   end
 
   def notify
-    Rails.logger.debug { "notify_pushover user: #{user} enabled? #{enabled?} development? #{Rails.env.development?}" }
-    return unless enabled?
+    user_key = values[:user]
+    Rails.logger.debug { "notify_pushover user: #{user_key} enabled? #{enabled?(user_key)} development? #{Rails.env.development?}" }
+    return false unless enabled?(user_key)
     Pushover.notification(values)
+    return true
   end
 end

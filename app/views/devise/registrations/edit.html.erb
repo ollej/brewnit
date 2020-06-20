@@ -66,6 +66,13 @@
     </div>
 
     <div class="field pure-control-group">
+      <%= f.label :pushover_user_key %>
+      <%= f.text_field :pushover_user_key,
+        placeholder: t(:'activerecord.attributes.user.pushover_user_key') %>
+      <%= form_info_icon(t(:'users.info.pushover_user_key')) %>
+    </div>
+
+    <div class="field pure-control-group">
       <%= f.label :presentation, class: 'large-group' %>
       <div class="quill-wrapper">
         <%= f.text_area :presentation, placeholder: t(:'activerecord.attributes.user.presentation'), class: 'quill_container' %>
