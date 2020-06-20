@@ -102,7 +102,7 @@ class BrewTimer extends EventTarget {
     return `
       <div class="timer-step-${index} timer-step pure-g">
         <div class="timer-step-icon pure-u-1-6 pure-u-md-1-8">
-          <div class="timer-step-image timer-step-${this.stepType}"></div>
+          <div class="timer-step-image timer-step-${step.type}"></div>
           <span class="timer-step-starttime"></span>
         </div>
         <div class="timer-step-info pure-u-2-3 pure-u-md-3-4">

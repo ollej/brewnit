@@ -23,6 +23,7 @@ class BrewStepsPresenter
         name: RecipePresenter::hop_addition_name(step),
         description: RecipePresenter::hop_info(step),
         addition_time: step.time.to_i,
+        type: "hops"
       }
     end
   end
@@ -45,6 +46,7 @@ class BrewStepsPresenter
         name: step.type,
         description: misc_info(step),
         addition_time: step.time.to_i,
+        type: "misc"
       }
     end
   end
@@ -76,7 +78,8 @@ class BrewStepsPresenter
       steps << {
         name: I18n.t(:'beerxml.Boil'),
         description: I18n.t(:'beerxml.brew_step.boil_time', boil_time: boil_time),
-        addition_time: @beerxml.boil_time.to_i
+        addition_time: @beerxml.boil_time.to_i,
+        type: "boil"
       }
     end
     steps
