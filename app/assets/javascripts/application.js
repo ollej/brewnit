@@ -25,4 +25,5 @@
 //= require howler/dist/howler
 //= require thirdparty/bootstrap-modal
 //= require dateformat/lib/dateformat
+//= require awesome-notifications/dist/index.var
 //= require_tree .

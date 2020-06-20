@@ -1,6 +1,11 @@
 class Notify {
   constructor() {
     this.available = ("Notification" in window);
+    this.notifier = new AWN({
+      labels: {
+        success: I18n["brewtimer"]["notification"]["success"]
+      }
+    });
   }
 
   granted() {
@@ -23,7 +28,11 @@ class Notify {
     if (this.available && this.granted()) {
       var n = new Notification(I18n["brewtimer"]["notification"]["title"], { body: message, tag: tag });
     } else {
-      // Fallback to html toast
+      if (tag == "done") {
+        this.notifier.success(message);
+      } else {
+        this.notifier.info(message);
+      }
     }
   }
 }

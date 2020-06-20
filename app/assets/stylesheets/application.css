@@ -18,5 +18,6 @@
  *= require balloon-css/src/balloon
  *= require thirdparty/colorPick
  *= require thirdparty/bootstrap-modal
+ *= require awesome-notifications/dist/style
  *= require_self
  */
