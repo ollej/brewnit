@@ -221,12 +221,6 @@ class BrewTimer extends EventTarget {
   totalTime() {
     if (!this._totalTime) {
       this._totalTime = this.steps.reduce((accumulator, step) => accumulator + parseInt(step["time"]), 0);
-      let seconds = 0;
-      this.steps.forEach((step, index) => {
-        step["index"] = index;
-        step["starttime"] = seconds;
-        step["endtime"] = seconds = seconds + step["time"];
-      });
     }
     return this._totalTime;
   }

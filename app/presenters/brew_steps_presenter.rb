@@ -55,6 +55,14 @@ class BrewStepsPresenter
       step_time = step[:addition_time] - step_times
       step_times += step_time
       step[:time] = step_time * 60
+    end
+    time = 0
+    index = 0
+    steps.reverse.map do |step|
+      step[:starttime] = time
+      step[:endtime] = time += step[:time]
+      step[:index] = index
+      index += 1
       step
     end
 
@@ -104,22 +112,34 @@ class BrewStepsPresenter
 
   def mash_step_list
     steps = []
+    time = 0
+    index = 0
     @beerxml.mash.steps.each do |step|
       steps.push({
         name: step.name,
         description: I18n.t(:'beerxml.brew_step.raise_temperature', {
           temperature: number_with_precision(step.step_temp, precision: 1)
         }),
+        type: "raise",
         time: step.ramp_time * 60,
+        starttime: time,
+        endtime: time += step.ramp_time * 60,
+        index: index
       })
+      index += 1
       steps.push({
         name: step.name,
         description: I18n.t(:'beerxml.brew_step.hold_temperature', {
           temperature: number_with_precision(step.step_temp, precision: 1),
           minutes: step.step_time
         }),
+        type: "mash",
         time: step.step_time * 60,
+        starttime: time,
+        endtime: time += step.step_time * 60,
+        index: index
       })
+      index += 1
     end
     steps
   end

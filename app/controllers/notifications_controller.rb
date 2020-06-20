@@ -2,14 +2,10 @@ class NotificationsController < ApplicationController
   before_action :deny_spammers!
 
   def create
+    PushMessage.new(notification).notify
     respond_to do |format|
-      if PushMessage.new(notification).notify
-        format.html { head :no_content }
-        format.json { head :no_content }
-      else
-        format.html { head :unprocessable_entity }
-        format.json { head :unprocessable_entity }
-      end
+      format.html { head :no_content }
+      format.json { head :no_content }
     end
   end
 
