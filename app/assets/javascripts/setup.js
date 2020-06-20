@@ -31,8 +31,8 @@ $( document ).ready(function() {
   });
 
   // Update like button
-  $(".recipe-content").on("ajax:success", "a.like-link", function(e, data, status, xhr) {
-    $(this).replaceWith(xhr.responseText);
+  $(".recipe-content").on("ajax:success", "a.like-link", function(event) {
+    $(this).replaceWith(event.detail[2].responseText);
   });
 
   // Close modals

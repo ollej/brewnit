@@ -11,8 +11,8 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
 //= require jquery-ui
+//= require rails-ujs
 //= require fancybox/dist/js/jquery.fancybox
 //= require commontator/application
 //= require thirdparty/d3
