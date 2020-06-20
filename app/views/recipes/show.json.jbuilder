@@ -9,7 +9,7 @@ json.brewer do
   json.brewery @recipe.user.brewery
   json.avatar full_url_for(@recipe.user.avatar_image)
 end
-json.comments @recipe.thread.comments do |comment|
+json.comments @recipe.commontator_thread.comments do |comment|
   json.body comment.body
   json.created_at comment.created_at
   json.creator do
