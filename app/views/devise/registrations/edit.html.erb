@@ -76,26 +76,33 @@
       <%= f.label :password %>
       <%= f.password_field :password, autocomplete: "new-password",
         placeholder: t(:'activerecord.attributes.user.password') %>
-      <%= form_info_icon(t(:'users.leave_pwd_blank')) %>
+      <%= form_info_icon(t(:'users.info.leave_pwd_blank')) %>
     </div>
 
     <div class="field pure-control-group">
       <%= f.label :password_confirmation %>
       <%= f.password_field :password_confirmation, autocomplete: "new-password",
         placeholder: t(:'activerecord.attributes.user.password_confirmation') %>
-      <%= form_info_icon(t(:'users.password_confirmation_description')) %>
+      <%= form_info_icon(t(:'users.info.password_confirmation_description')) %>
     </div>
 
     <div class="field pure-control-group">
       <%= f.label :current_password %>
       <%= f.password_field :current_password, autocomplete: "current-password",
         placeholder: t(:'activerecord.attributes.user.current_password')  %>
-      <%= form_info_icon(t(:'users.pwd_needed_to_confirm')) %>
+      <%= form_info_icon(t(:'users.info.pwd_needed_to_confirm')) %>
+    </div>
+
+    <div class="field pure-control-group">
+      <%= f.label :native_notifications, class: 'pure-checkbox' %>
+      <%= f.check_box :native_notifications %>
+      <%= form_info_icon(t(:'users.info.use_native_notifications')) %>
     </div>
 
     <div class="field pure-control-group">
       <%= f.label :receive_email, class: 'pure-checkbox' %>
       <%= f.check_box :receive_email %>
+      <%= form_info_icon(t(:'users.info.allow_email_notifications')) %>
     </div>
 
     <div class="actions pure-controls">

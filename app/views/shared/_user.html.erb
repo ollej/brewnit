@@ -1,0 +1,7 @@
+<script>
+<% if user_signed_in? %>
+window.user = <%= current_user.user_info.to_json.html_safe %>;
+<% else %>
+window.user = {};
+<% end %>
+</script>

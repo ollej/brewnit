@@ -1,6 +1,6 @@
 class Notify {
   constructor() {
-    this.available = ("Notification" in window);
+    this.available = window.user["native_notifications"] && ("Notification" in window);
     this.notifier = new AWN({
       labels: {
         success: I18n["brewtimer"]["notification"]["success"]

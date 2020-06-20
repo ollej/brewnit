@@ -98,6 +98,10 @@ class User < ApplicationRecord
     end
   end
 
+  def user_info
+    attributes.slice('brewery', 'native_notifications').merge(name: display_name)
+  end
+
   def pushover_translation
     {
       name: name.blank? ? email : name,

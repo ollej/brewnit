@@ -240,9 +240,12 @@ sv:
     sign_out: Logga ut
     sign_in_with_provider: Logga in med %{provider}
     min_pwd_length: Minst %{min_length} tecken
-    leave_pwd_blank: Lämna blankt om du inte vill ändra lösenord.
-    pwd_needed_to_confirm: Behövs bara för att ändra lösenord.
-    password_confirmation_description: Upprepa nya lösenordet för att garantera att det blir rätt.
+    info:
+      leave_pwd_blank: Lämna blankt om du inte vill ändra lösenord.
+      pwd_needed_to_confirm: Behövs bara för att ändra lösenord.
+      password_confirmation_description: Upprepa nya lösenordet för att garantera att det blir rätt.
+      use_native_notifications: Använd webbläsarens egna notifieringar. Måste vara tillåtna i browsern och din enhet.
+      allow_email_notifications: Tillåt Brygglogg.se att skicka e-post om uppdateringar och nyheter. Tekniska e-post för lösenordsändringar m.m. kommer fortfarande skickas.
     save: Spara ändringar
     cancel_account: Avsluta konto
     cancel_my_account: Avsluta mitt konto
@@ -930,6 +933,7 @@ sv:
         medium_avatar: Avatarbild
         medium_brewery: Bryggerilogga
         receive_email: Tillåt e-postutskick
+        native_notifications: Systemnotifieringar
         destroy:
           media: Ta bort
       recipe:

@@ -842,7 +842,8 @@ CREATE TABLE public.users (
     instagram text,
     receive_email boolean DEFAULT false,
     uid character varying,
-    provider character varying
+    provider character varying,
+    native_notifications boolean DEFAULT true
 );
 
 
@@ -1874,6 +1875,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200613154041'),
 ('20200613182041'),
 ('20200613184054'),
-('20200616170418');
+('20200616170418'),
+('20200620114227');
 
 
