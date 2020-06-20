@@ -41,8 +41,7 @@ $( document ).ready(function() {
   });
 
   // Setup range sliders
-  let sliders = new RangeSliders(".range-slider");
-  sliders.init();
+  let sliders = new RangeSliders(".range-slider").init();
 
   // Image upload
   let uploader = new MediaUpload(".upload-button", "#uploadMediaField", "#slider");
