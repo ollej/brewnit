@@ -181,13 +181,18 @@ class BrewTimer extends EventTarget {
   }
 
   setCurrentStep(index) {
+    const cls = this.currentStep < index ? "timer-step-passed" : "timer-step-next";
     this.currentStep = index;
     let $el = this.el.find(".timer-step-" + index);
-    $(".timer-step")
-      .removeClass("timer-step-current timer-step-next");
-    $el
-      .addClass("timer-step-current")
-      .removeClass("timer-step-passed");
+    this.el.find(".timer-step-current").switchClass("timer-step-current", cls, {
+      duration: 500,
+      easing: "swing"
+    });
+    $el.switchClass("timer-step-next timer-step-passed", "timer-step-current", {
+      duration: 500,
+      easing: "swing",
+      queue: true
+    });
     $el.next(".timer-step")
       .addClass("timer-step-next");
     $el.prev(".timer-step")
