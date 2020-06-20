@@ -227,6 +227,8 @@ sv:
     start: Starta timer
     pause: Pausa timer
     reset: Börja om
+    next: Nästa
+    previous: Förra
     mash:
       button: Mäskklocka
       description: Öppna timer för mäskning

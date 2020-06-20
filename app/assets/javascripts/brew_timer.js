@@ -22,8 +22,7 @@ class BrewTimer extends EventTarget {
       this.startTime = Date.now();
     }
     this.running = true;
-    this.renderFinishTime();
-    this.renderStartTimeForSteps();
+    this.renderTimes();
     this.setInterval();
     this.fire("start");
   }
@@ -60,6 +59,24 @@ class BrewTimer extends EventTarget {
 
   getCurrentStep() {
     return this.steps[this.currentStep];
+  }
+
+  nextStep() {
+    const step = this.getCurrentStep();
+    this.startTime = Date.now() - step["endtime"] * 1000;
+    this.renderTimes();
+  }
+
+  previousStep() {
+    const step = this.steps[this.currentStep - 1];
+    if (step) {
+      this.startTime = Date.now() - step["starttime"] * 1000;
+      this.setCurrentStep(this.currentStep - 1);
+    } else {
+      this.startTime = Date.now();
+    }
+    this.renderStepTime(this.currentStep + 1);
+    this.renderTimes();
   }
 
   // Private methods
@@ -109,16 +126,31 @@ class BrewTimer extends EventTarget {
   }
 
   renderTimeToNextStep(time) {
-    const timeStr = this.humanReadableDuration(this.getCurrentStep()["endtime"] - time, true);
-    this.el.find(".timer-step-current .timer-step-time span").html(timeStr);
+    const step = this.getCurrentStep();
+    const timeStr = this.humanReadableDuration(step["endtime"] - time, true);
+    this.el.find(`.timer-step-${step["index"]} .timer-step-time span`).html(timeStr);
+  }
+
+  renderTimes() {
+    this.renderFinishTime();
+    this.renderStartTimeForSteps();
   }
 
   renderStartTimeForSteps() {
+    const startDate = new Date(this.startTime);
     this.steps.forEach((step, index) => {
       this.el
           .find(".timer-step-" + index + " .timer-step-starttime")
-          .html(this.formatTime(this.addSeconds(step["starttime"])));
+          .html(this.formatTime(this.addSeconds(step["starttime"], startDate)));
     });
+  }
+
+  renderStepTime(stepIndex) {
+    const step = this.steps[stepIndex];
+    if (step) {
+      const timeStr = this.humanReadableDuration(step["time"]);
+      this.el.find(`.timer-step-${step["index"]} .timer-step-time span`).html(timeStr);
+    }
   }
 
   renderFinishTime() {
@@ -127,12 +159,9 @@ class BrewTimer extends EventTarget {
       .html(I18n["brewtimer"]["finish_time"] + this.formatTime(this.addSeconds(this.totalTime(), new Date(this.startTime))));
   }
 
-  addSeconds(seconds, time) {
-    if (!time) {
-      time = new Date();
-    }
-    time.setTime(time.getTime() + seconds * 1000);
-    return time;
+  addSeconds(seconds, time = new Date()) {
+    let newtime = new Date(time.getTime() + seconds * 1000);
+    return newtime;
   }
 
   formatTime(date) {
@@ -142,20 +171,28 @@ class BrewTimer extends EventTarget {
   highlightStep(time) {
     let accumulatedTime = 0;
     this.steps.forEach((step, index) => {
-      let $el = this.el.find(".timer-step-" + index);
       accumulatedTime += step["time"];
       if (accumulatedTime - step["time"] <= time) {
         if (this.currentStep < index) {
-          this.currentStep = index;
-          $el.addClass("timer-step-current").removeClass("timer-step-next");
-          $el.next(".timer-step").addClass("timer-step-next");
-          $el.prev(".timer-step")
-            .addClass("timer-step-passed")
-            .removeClass("timer-step-current");
-          this.fire("step");
+          this.setCurrentStep(index);
         }
       }
     });
+  }
+
+  setCurrentStep(index) {
+    this.currentStep = index;
+    let $el = this.el.find(".timer-step-" + index);
+    $(".timer-step")
+      .removeClass("timer-step-current timer-step-next");
+    $el
+      .addClass("timer-step-current")
+      .removeClass("timer-step-passed");
+    $el.next(".timer-step")
+      .addClass("timer-step-next");
+    $el.prev(".timer-step")
+      .addClass("timer-step-passed");
+    this.fire("step");
   }
 
   humanReadableDuration(time, showZero = false) {
@@ -180,7 +217,8 @@ class BrewTimer extends EventTarget {
     if (!this._totalTime) {
       this._totalTime = this.steps.reduce((accumulator, step) => accumulator + parseInt(step["time"]), 0);
       let seconds = 0;
-      this.steps.forEach((step) => {
+      this.steps.forEach((step, index) => {
+        step["index"] = index;
         step["starttime"] = seconds;
         step["endtime"] = seconds = seconds + step["time"];
       });

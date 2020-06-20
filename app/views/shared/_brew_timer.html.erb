@@ -22,10 +22,16 @@
         </div>
       </div>
       <div class="modal-footer">
-        <%= link_to '#reset-timer', class: 'brew-timer-reset pure-button pure-button-secondary' do %>
+        <%= link_to '#reset-timer', class: 'brew-timer-reset pure-button button-warning' do %>
           <i class="fas fa-undo-alt"></i> <%= t(:'brewtimer.reset') %>
         <% end %>
-        <%= link_to '#start-timer', class: 'brew-timer-start pure-button pure-button-primary' do %>
+        <%= link_to '#step-backward', class: 'brew-timer-step-backward pure-button pure-button-secondary' do %>
+          <i class="fas fa-step-backward"></i> <%= t(:'brewtimer.previous') %>
+        <% end %>
+        <%= link_to '#step-forward', class: 'brew-timer-step-forward pure-button pure-button-secondary' do %>
+          <i class="fas fa-step-forward"></i> <%= t(:'brewtimer.next') %>
+        <% end %>
+        <%= link_to '#next-step', class: 'brew-timer-start pure-button pure-button-primary' do %>
           <i class="fa fa-play-circle"></i> <%= t(:'brewtimer.start') %>
         <% end %>
         <%= link_to '#pause-timer', class: 'brew-timer-pause pure-button pure-button-primary hidden' do %>
