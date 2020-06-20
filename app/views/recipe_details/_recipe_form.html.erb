@@ -1,5 +1,6 @@
-<%= form_for(@recipe, remote: true,
-             html: { class: 'pure-form pure-form-aligned js-auto-submit' }) do |f| %>
+<%= form_for(@recipe, remote: true, html: {
+  class: 'pure-form pure-form-aligned js-auto-submit',
+  data: { type: :json } }) do |f| %>
   <%= invisible_captcha %>
 
   <% if @recipe.errors.any? %>

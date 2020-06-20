@@ -70,11 +70,11 @@ $( document ).ready(function() {
   });
 
   $("form.js-auto-submit").change(function(event) {
-    $(this).trigger("submit.rails");
+    Rails.fire($(this)[0], 'submit')
   });
 
-  $("form[data-remote=true]").on('ajax:error', function(event, xhr, status, error) {
-    const json = xhr.responseJSON;
+  $("form[data-remote=true]").on('ajax:error', function(event) {
+    const json = event.detail[2].responseJSON;
     if (json && json['error']) {
       console.error('Received AJAX error', json['error']);
       $('body').trigger('flasher:show', {

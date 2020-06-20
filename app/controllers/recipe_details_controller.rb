@@ -31,16 +31,16 @@ class RecipeDetailsController < ApplicationController
     respond_to do |format|
       if @details.update(details_params)
         format.html { redirect_to recipe_details_path }
-        format.json { render json: @details, status: :ok, location: recipe_details_path }
-        format.js { render layout: false, status: :ok, location: recipe_details_path }
+        format.json { render json: @details, status: :ok }
+        format.js { render layout: false, status: :ok }
       else
         @error = @details.errors.full_messages.to_sentence
         format.html {
           flash[:error] = @error
           redirect_to recipe_details_path
         }
-        format.json { render json: { error: @error }, status: :unprocessable_entity, location: recipe_details_path }
-        format.js { render layout: false, status: :unprocessable_entity, location: recipe_details_path }
+        format.json { render json: { error: @error }, status: :unprocessable_entity }
+        format.js { render layout: false, status: :unprocessable_entity }
       end
     end
   end

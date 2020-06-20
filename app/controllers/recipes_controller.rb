@@ -63,7 +63,7 @@ class RecipesController < ApplicationController
       if @recipe.present? && @recipe.persisted?
         send_new_recipe_email(@recipe)
         format.html { redirect_to redirect_path, notice: I18n.t(:'recipes.create.successful') }
-        format.json { render :show, status: :created, location: @recipe }
+        format.json { render :show, status: :created }
       else
         format.html {
           if @recipe.present?
@@ -89,8 +89,8 @@ class RecipesController < ApplicationController
           # TODO: Handle errors gracefully
         end
         format.html { redirect_to redirect_path, notice: I18n.t(:'recipes.update.successful') }
-        format.json { render :show, status: :ok, location: @recipe }
-        format.js { head :ok, location: @recipe }
+        format.json { render :show, status: :ok }
+        format.js { render json: @recipe, status: :ok }
       else
         format.html {
           flash[:error] = @recipe.errors.full_messages.to_sentence

@@ -1,5 +1,6 @@
 <%= form_with(model: @details, url: recipe_details_path(@recipe), local: false,
-             class: 'pure-form pure-form-stacked js-auto-submit') do |f| %>
+              class: 'pure-form pure-form-stacked js-auto-submit',
+              html: { data: { type: :json } }) do |f| %>
   <%= invisible_captcha %>
 
   <% if @details.errors.any? %>
