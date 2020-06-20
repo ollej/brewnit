@@ -765,7 +765,7 @@ tbody.collapse.in {
   -o-transition-timing-function: ease;
   transition-timing-function: ease;
 }
-.close {
+.modal .close {
   float: right;
   font-size: 21px;
   font-weight: bold;
@@ -775,15 +775,15 @@ tbody.collapse.in {
   filter: alpha(opacity=20);
   opacity: 0.2;
 }
-.close:hover,
-.close:focus {
+.modal .close:hover,
+.modal .close:focus {
   color: #000000;
   text-decoration: none;
   cursor: pointer;
   filter: alpha(opacity=50);
   opacity: 0.5;
 }
-button.close {
+.modal button.close {
   padding: 0;
   cursor: pointer;
   background: transparent;
