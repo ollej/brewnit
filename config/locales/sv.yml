@@ -1,6 +1,9 @@
 ---
 sv:
   javascript:
+    confirm:
+      title: Är du säker?
+      cancel: Avbryt
     fileupload:
       errors:
         max_file_size_exceeded: Du kan inte ladda upp bilder större än 2 MB.
