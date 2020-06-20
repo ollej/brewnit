@@ -35,3 +35,5 @@ class Dropdown {
     this.input.attr('checked', false);
   }
 }
+
+(typeof exports !== "undefined" && exports !== null ? exports : this).Dropdown = Dropdown;

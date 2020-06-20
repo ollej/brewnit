@@ -42,3 +42,5 @@ class LabelColor {
     this.picker.colorPick(options);
   }
 }
+
+(typeof exports !== "undefined" && exports !== null ? exports : this).LabelColor = LabelColor;

@@ -54,3 +54,6 @@ class StyleGuide {
     }.bind(this));
   }
 }
+
+(typeof exports !== "undefined" && exports !== null ? exports : this).Style = Style;
+(typeof exports !== "undefined" && exports !== null ? exports : this).StyleGuide = StyleGuide;

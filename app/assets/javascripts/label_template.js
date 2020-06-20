@@ -282,3 +282,5 @@ class LabelTemplate {
     ];
   }
 }
+
+(typeof exports !== "undefined" && exports !== null ? exports : this).LabelField = LabelField;
