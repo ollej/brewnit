@@ -18,6 +18,7 @@ class MediaTools {
       closeEffect: "fade",
       preload: 3
     });
+    return this;
   }
 
   removeMedium(ev) {

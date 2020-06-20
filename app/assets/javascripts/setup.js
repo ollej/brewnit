@@ -22,8 +22,7 @@ $( document ).ready(function() {
   });
 
   // Setup gauges
-  let dataGauge = new DataGauge(".gauge-chart");
-  dataGauge.init();
+  let dataGauge = new DataGauge(".gauge-chart").init();
 
   // Click on comments count opens comments tab.
   $(".pure-badge-comments").on("click", function() {
@@ -44,12 +43,10 @@ $( document ).ready(function() {
   let sliders = new RangeSliders(".range-slider").init();
 
   // Image upload
-  let uploader = new MediaUpload(".upload-button", "#uploadMediaField", "#slider");
-  uploader.init();
+  let uploader = new MediaUpload(".upload-button", "#uploadMediaField", "#slider").init();
 
   // Media Tools
-  let mediaTools = new MediaTools("li.media-thumbnail", ".media-buttons", "#slider");
-  mediaTools.init();
+  let mediaTools = new MediaTools("li.media-thumbnail", ".media-buttons", "#slider").init();
 
   // Initialize flasher
   let flasher = new Flasher("#flasher");

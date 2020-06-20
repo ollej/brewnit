@@ -32,6 +32,7 @@ class MediaUpload {
         maxFileSize: I18n["fileupload"]["errors"]["max_file_size_exceeded"]
       }
     });
+    return this;
   }
 
   updateScroller() {

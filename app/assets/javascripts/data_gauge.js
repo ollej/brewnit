@@ -24,6 +24,7 @@ class DataGauge {
 
   init() {
     $(this.cls).each((idx, el) => this.setupGauge($(el)));
+    return this;
   }
 }
 
