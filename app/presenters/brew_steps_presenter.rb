@@ -91,8 +91,8 @@ class BrewStepsPresenter
     steps.each do |step|
       if additions[step[:addition_time]]
         description = [
-          step[:description],
-          additions[step[:addition_time]][:description]
+          additions[step[:addition_time]][:description],
+          step[:description]
         ].join("\n")
         additions[step[:addition_time]][:description] = description
       else
@@ -102,11 +102,18 @@ class BrewStepsPresenter
     additions.values
   end
 
+  def add_addition_time_to_names(steps)
+    steps.each do |step|
+      step[:name] = step[:name] + " (#{step[:addition_time]} #{I18n.t("beerxml.time_unit.min")})"
+    end
+  end
+
   def boil_step_list
     steps = hop_steps + misc_steps
     steps = merge_steps(steps)
     steps = add_boil_step(steps)
     steps = calculate_step_times(steps)
+    steps = add_addition_time_to_names(steps)
 
     # TODO: Add whirlpool additions
 
