@@ -16,6 +16,8 @@
     height: 100vh;
 
     .timer-time {
+      margin-top: 0.5em;
+      padding-bottom: 0.25em;
       font-size: 6em;
     }
   }
@@ -54,8 +56,9 @@
   .timer-time {
     text-align: center;
     font-weight: bold;
-    font-size: 1.5em;
-    margin-bottom: 0.5em;
+    font-size: 2.8em;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
     cursor: pointer;
   }
 
@@ -64,14 +67,18 @@
     font-weight: bold;
     font-size: 1.5em;
     margin-bottom: 0.5em;
+    margin-top: 0.5em;
   }
 
   .timer-step {
     font-size: 1em;
     line-height: 1.2em;
     color: darkgray;
-    height: 2em;
     vertical-align: middle;
+
+    &:not(.timer-step-current) {
+      height: 2em;
+    }
 
     .timer-step-time {
       text-align: right;
@@ -104,7 +111,7 @@
     &.timer-step-current {
       color: black;
       font-weight: bold;
-      height: 4em;
+      min-height: 5em;
       margin-bottom: 1em;
       background-color: #fff4d7;
       padding-top: 1em;
@@ -115,6 +122,7 @@
         font-size: 2em;
         line-height: 1.4em;
         vertical-align: top;
+        margin-top: -0.25em;
       }
 
       .timer-step-description {
@@ -208,10 +216,8 @@
       padding-right: 1em;
     }
 
-    .timer-step-current {
-      padding-top: 2em;
-      padding-bottom: 3em;
-      height: 8em;
+    .timer-step.timer-step-current {
+      padding-top: 1em;
     }
   }
 }

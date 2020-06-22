@@ -105,10 +105,10 @@ class BrewTimer extends EventTarget {
           <div class="timer-step-image timer-step-${step.type}"></div>
           <span class="timer-step-starttime"></span>
         </div>
-        <div class="timer-step-info pure-u-2-3 pure-u-md-3-4" data-balloon="${step.description}" data-balloon-pos="down">
+        <div class="timer-step-info pure-u-2-3 pure-u-md-3-4" data-balloon="${step.description.replace("\n", ", ")}" data-balloon-pos="down">
           <div class="pure-g">
             <div class="timer-step-name pure-u-1">${step.name}</div>
-            <div class="timer-step-description pure-u-1">${step.description}</div>
+            <div class="timer-step-description pure-u-1">${step.description.replace("\n", "<br>")}</div>
           </div>
         </div>
         <div class="timer-step-time pure-u-1-6 pure-u-md-1-8"><span>${this.humanReadableDuration(step.time)}</span></div>
