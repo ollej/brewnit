@@ -41,7 +41,7 @@ gem 'acts_as_votable'
 gem 'search_cop', git: 'https://github.com/mrkamel/search_cop.git', ref: '1082a2f7862321cf8f1c4560a2b6602a0c256e59' # Use Ruby v2.4 compatible fork
 gem 'meta-tags'
 gem 'pushover', git: 'https://github.com/vito-lbs/pushover.git', ref: '3bbb7ea026b3d30c043ba033d596dab6fec2a031' # Use Ruby v2.4 compatible fork
-gem 'paperclip'
+gem "kt-paperclip", "~> 6.2.0"
 gem 'chronic', require: true
 gem 'actionview-encoded_mail_to'
 gem 'quilljs-rails'
