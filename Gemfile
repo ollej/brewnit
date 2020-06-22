@@ -50,6 +50,7 @@ gem 'caxlsx'
 gem 'caxlsx_rails'
 gem 'dotenv-rails'
 gem 'httparty'
+gem "lograge"
 
 # PDF
 gem 'rqrcode'
