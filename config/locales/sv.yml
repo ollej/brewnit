@@ -58,6 +58,10 @@ sv:
         created:
           title: "Flasketikett skapad"
           message: "En flasketikett för ölen %{name} av %{brewery} har skapats."
+      brewtimer:
+        opened:
+          title: Bryggklocka öppnad
+          message: "Användaren %{user} öppnade bryggklocka för receptet %{recipe}"
     search:
       advanced: Utökad sökning
       open_advanced: Fler sökmöjligheter
