@@ -224,17 +224,17 @@ sv:
     title:
       mash: Mäskklocka
       boil: Kokklocka
-    start: Starta timer
-    pause: Pausa timer
+    start: Starta klocka
+    pause: Pausa klocka
     reset: Börja om
     next: Nästa
     previous: Förra
     mash:
       button: Mäskklocka
-      description: Öppna timer för mäskning
+      description: Öppna klocka för mäskning
     boil:
       button: Kokklocka
-      description: Öppna timer för vörtkok
+      description: Öppna klocka för vörtkok
     notification:
       title: Brygglogg.se bryggklocka
   users:

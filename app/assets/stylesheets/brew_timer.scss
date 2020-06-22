@@ -195,9 +195,9 @@
 
   .modal-footer {
     border-radius: 0;
-    bottom: 0px;
+    bottom: 0;
     position: absolute;
-    width: 100%;
+    width: calc(100% - 30px);
   }
 }
 
@@ -222,8 +222,17 @@
       display: none;
     }
 
-    .timer-step-time {
+    .timer-step-time span {
       padding-right: 0.5em;
+      display: block;
+    }
+
+    .modal-footer {
+      text-align: center;
+
+      .pure-button span {
+        display: none;
+      }
     }
 
     @include brewtimer-fullscreen();
