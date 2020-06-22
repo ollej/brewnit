@@ -87,7 +87,7 @@ module RecipesHelper
   def trans(field, options={})
     options[:default] ||= [field, '']
     options[:scope] ||= :beerxml
-    I18n.t(field, options)
+    I18n.t(field, **options)
   end
 
   def format_sg(value)
