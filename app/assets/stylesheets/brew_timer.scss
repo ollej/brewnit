@@ -10,16 +10,19 @@
 }
 
 .brew-timer {
+  &.brewtimer-fullscreen .timer-content {
+    padding: 2em;
+    width: 100vw;
+    height: 100vh;
+
+    .timer-time {
+      font-size: 6em;
+    }
+  }
+
   .timer-content {
     background: white;
 
-    &:fullscreen {
-      padding: 2em;
-
-      .timer-time {
-        font-size: 6em;
-      }
-    }
   }
 
   .brew-timer-expand {

@@ -16,8 +16,10 @@ class BrewTimerDialog {
     this.toggleTimer = this.toggleTimer.bind(this);
     this.resetTimer = this.resetTimer.bind(this);
     this.toggleExpand = this.toggleExpand.bind(this);
+    this.toggleCountdown = this.toggleCountdown.bind(this);
     this.stepForward = this.stepForward.bind(this);
     this.stepBackward = this.stepBackward.bind(this);
+    this.onFullscreenChange = this.onFullscreenChange.bind(this);
     this.keyPressed = this.keyPressed.bind(this);
   }
 
@@ -31,6 +33,7 @@ class BrewTimerDialog {
     this.stepForwardEl.on("click", this.stepForward);
     this.stepBackwardEl.on("click", this.stepBackward);
     this.el.on("click", ".timer-time", this.toggleCountdown);
+    $(document).on("fullscreenchange", this.onFullscreenChange);
     $(window).on("keypress", this.keyPressed);
   }
 
@@ -42,6 +45,7 @@ class BrewTimerDialog {
     this.stepForwardEl.off("click", this.stepForward);
     this.stepBackwardEl.off("click", this.stepBackward);
     this.el.off("click", ".timer-time", this.toggleCountdown);
+    $(document).off("fullscreenchange", this.onFullscreenChange);
     $(window).off("keypress", this.keyPressed);
   }
 
@@ -130,7 +134,23 @@ class BrewTimerDialog {
   }
 
   toggleExpand() {
-    this.el.find(".timer-content").get(0).requestFullscreen();
+    this.openFullscreen(this.el.find(".timer-content").get(0));
+  }
+
+  openFullscreen(el) {
+    if (el.requestFullscreen) {
+      el.requestFullscreen();
+    } else {
+      this.expandEl.find("i").toggleClass("fa-expand fa-compress");
+    }
+  }
+
+  onFullscreenChange(event) {
+    if (document.fullscreenElement) {
+      this.el.addClass("brewtimer-fullscreen");
+    } else {
+      this.el.removeClass("brewtimer-fullscreen");
+    }
   }
 
   stepForward() {
