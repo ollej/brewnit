@@ -169,11 +169,9 @@ class BrewTimer extends EventTarget {
   }
 
   highlightStep(time) {
-    let accumulatedTime = 0;
     this.steps.forEach((step, index) => {
-      accumulatedTime += step["time"];
-      if (accumulatedTime - step["time"] <= time) {
-        if (this.currentStep < index) {
+      if (time >= step["starttime"] && time < step["endtime"]) {
+        if (this.currentStep != index) {
           this.setCurrentStep(index);
         }
       }
