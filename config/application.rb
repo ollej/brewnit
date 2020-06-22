@@ -2,6 +2,11 @@ require_relative 'boot'
 
 require 'rails/all'
 
+if Rails.env.production?
+  ActiveSupport::Deprecation.silenced = true
+  ActiveSupport::Deprecation.behavior = :silence
+end
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
