@@ -242,14 +242,6 @@
 }
 
 @media screen and (max-width: 48em) {
-  div#awn-toast-container {
-    bottom: 85px;
-    right: 50%;
-    margin-right: -160px;
-  }
-}
-
-@media screen and (max-width: 48em) {
   .brew-timer {
     .brew-timer-expand {
       display: none;
@@ -281,6 +273,12 @@
     }
 
     @include brewtimer-fullscreen();
+  }
+
+  div#awn-toast-container {
+    bottom: 85px;
+    right: 50%;
+    margin-right: -160px;
   }
 }
 

@@ -1,12 +1,11 @@
 class BeerPie {
   constructor(el, tab, data) {
     this.drawn = false;
-    this.draw = this.draw.bind(this);
     this.el = el;
     this.tab = tab;
     this.data = data;
     this.d3 = new d3pie(this.el, this.config());
-    $("body").on("tab-changed", this.draw);
+    $("body").on("tab-changed", this.draw.bind(this));
   }
 
   draw(ev, id) {

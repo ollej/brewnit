@@ -85,8 +85,17 @@
   .tabs label span {
     display: inline-block;
   }
+}
 
-  .tabs {
+@media screen and (max-width: 48em) {
+  .tabs > label {
+    padding: 0 1.5em;
+  }
+}
+
+@media screen and (max-width: 26em) {
+  .tabs > label {
+    padding: 0 0.75em;
   }
 }
 

@@ -8,6 +8,9 @@ class Sunburst
     @color = d3.scale.ordinal().range(["#637939", "#8ca252", "#b5cf6b", "#cedb9c"]) #category20b()
     @tip = d3.tip().attr('class', 'd3-tip').html((d) -> d?.tooltip)
     $("body").on("tab-changed", @redraw)
+    if $(@sel).is(":visible")
+      console.log "asdf"
+      @redraw(null, @tab)
 
   setup: ->
     @svg = d3.select(@sel).append("svg")

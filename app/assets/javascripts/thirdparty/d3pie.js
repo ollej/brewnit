@@ -254,9 +254,14 @@ var helpers = {
 		var canvasHeight = pie.options.size.canvasHeight;
 		var backgroundColor = pie.options.misc.colors.background;
 
-		var svg = d3.select(element).append("svg:svg")
-			.attr("width", canvasWidth)
-			.attr("height", canvasHeight);
+	// Modified to make responsive
+		var svg = d3.select(element)
+			.append("div")
+			.classed("svg-container", true)
+			.append("svg:svg")
+			.attr("preserveAspectRatio", "xMinYMin meet")
+			.attr("viewBox", "0 0 " + canvasWidth + " " + 320) //canvasHeight)
+			.classed("svg-content-responsive", true);
 
 		if (backgroundColor !== "transparent") {
 			svg.style("background-color", function() { return backgroundColor; });
