@@ -93,9 +93,9 @@
       display: inline-block;
     }
 
-    .timer-step-description {
+    .timer-step-description,
+    .timer-step-description-wide {
       display: none;
-      text-align: center;
     }
 
     &.timer-step-passed {
@@ -126,11 +126,20 @@
         margin-top: -0.25em;
       }
 
-      .timer-step-description {
-        display: inline;
+      .timer-step-description,
+      .timer-step-description-wide {
+        text-align: center;
         font-size: 1.2em;
         font-weight: normal;
         line-height: 1.4em;
+      }
+
+      .timer-step-description {
+        display: inline-block;
+      }
+
+      .timer-step-description-wide {
+        display: none;
       }
 
       .timer-step-time span {
@@ -233,6 +242,16 @@
     .timer-step-time span {
       padding-right: 0.5em;
       display: block;
+    }
+
+    .timer-step.timer-step-current {
+      .timer-step-description {
+        display: none;
+      }
+
+      .timer-step-description-wide {
+        display: inline-block;
+      }
     }
 
     .modal-footer {

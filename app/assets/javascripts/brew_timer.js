@@ -112,6 +112,7 @@ class BrewTimer extends EventTarget {
           </div>
         </div>
         <div class="timer-step-time pure-u-1-6 pure-u-md-1-8"><span>${this.humanReadableDuration(step.time)}</span></div>
+        <div class="timer-step-description-wide pure-u-1">${step.description.replace("\n", "<br>")}</div>
       </div>
     `;
   }
