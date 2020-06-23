@@ -51,7 +51,9 @@ class BrewTimerDialog {
 
   setupTimer() {
     if (!this.timer) {
-      $.get(`/recipe_steps/${this.recipeId}`, this.storeRecipeSteps.bind(this));
+      const stepType = this.el.data("stepType");
+      const steps = this.el.data("brewtimerSteps");
+      this.createTimer(steps, stepType);
     }
   }
 
@@ -77,9 +79,7 @@ class BrewTimerDialog {
     return iterable.get(Array.from(iterable.keys())[randomIndex]);
   }
 
-  storeRecipeSteps(data) {
-    const stepType = this.el.data("stepType");
-    const steps = data[stepType + "_steps"];
+  createTimer(steps, stepType) {
     this.timer = new BrewTimer(this.el.find('.timer-content'), steps, stepType);
     this.timer.addEventListener("brewtimer.done", (event) => {
       this.togglePlayButton();

@@ -22,6 +22,7 @@ class RecipesController < ApplicationController
     raise RecipeNotComplete unless @recipe.complete?
     @beerxml = BeerxmlParser.new(@recipe.beerxml).recipe
     @presenter = RecipePresenter.new(@recipe, @beerxml)
+    @brew_steps = BrewStepsPresenter.new(@recipe)
     Recipe.unscoped do
       commontator_thread_show(@recipe)
     end

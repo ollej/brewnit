@@ -1,6 +1,11 @@
-<div id="brew-timer-<%= step_type %>" role="dialog" data-step-type="<%= step_type %>"
-  class="brew-timer modal fade no-auto-hide"
-  aria-labelledby="brew-timer-title-<%= step_type %>" tabindex='-1'>
+<div id="brew-timer-<%= step_type %>" role="dialog" class="brew-timer modal fade no-auto-hide"
+  data-step-type="<%= step_type %>"
+  <% if step_type == "mash" %>
+  data-brewtimer-steps="<%= @brew_steps.mash_step_list.to_json %>"
+  <% else %>
+  data-brewtimer-steps="<%= @brew_steps.boil_step_list.to_json %>"
+  <% end %>
+  aria-labelledby="brew-timer-title-<%= step_type %>" tabindex="-1">
   <div class="modal-dialog modal-lg" role="document">
 
     <!-- Modal content-->
