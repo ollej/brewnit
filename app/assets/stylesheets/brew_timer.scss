@@ -144,14 +144,6 @@
           display: none;
         }
 
-        .timer-step-image {
-          background-position: center;
-          background-size: 4em 4em;
-          width: 4em;
-          height: 4em;
-          padding-left: 0.5em;
-        }
-
         .timer-step-mash {
           background-image: image-url("flaticon/mash.svg");
         }
@@ -170,6 +162,15 @@
 
         .timer-step-misc {
           background-image: image-url("flaticon/misc.svg");
+        }
+
+        .timer-step-image {
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: 4em 4em;
+          width: 4em;
+          height: 4em;
+          padding-left: 0.5em;
         }
       }
     }
