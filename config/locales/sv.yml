@@ -12,7 +12,7 @@ sv:
       finish_time: "Sluttid: "
       notification:
         title: Bryggklocka
-        success: Klar
+        finished: Klar
         step: "Börja nästa bryggsteg: "
         done:
           boil: "Koket är klart!"

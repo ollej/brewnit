@@ -4,7 +4,7 @@ class Notify {
     this.server_notifications = window.user["server_notifications"];
     this.notifier = new AWN({
       labels: {
-        success: I18n["brewtimer"]["notification"]["success"]
+        success: I18n["brewtimer"]["notification"]["finished"]
       }
     });
   }
