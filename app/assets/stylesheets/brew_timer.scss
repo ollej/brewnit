@@ -190,6 +190,14 @@
     overflow-y: auto;
   }
 
+  .modal-footer {
+    text-align: center;
+
+    .pure-button {
+      margin-left: 0.25em;
+      margin-right: 0.25em;
+    }
+  }
 }
 
 @mixin brewtimer-fullscreen() {
@@ -234,6 +242,14 @@
 }
 
 @media screen and (max-width: 48em) {
+  div#awn-toast-container {
+    bottom: 85px;
+    right: 50%;
+    margin-right: -160px;
+  }
+}
+
+@media screen and (max-width: 48em) {
   .brew-timer {
     .brew-timer-expand {
       display: none;
@@ -255,10 +271,12 @@
     }
 
     .modal-footer {
-      text-align: center;
+      .pure-button {
+        font-size: 150%;
 
-      .pure-button span {
-        display: none;
+        span {
+          display: none;
+        }
       }
     }
 
