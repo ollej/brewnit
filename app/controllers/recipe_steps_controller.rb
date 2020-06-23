@@ -19,11 +19,19 @@ class RecipeStepsController < ApplicationController
       title: I18n.t('common.notification.brewtimer.opened.title'),
       message: I18n.t(
         'common.notification.brewtimer.opened.message', {
-          user: current_user.display_name,
+          user: user_name,
           recipe: @recipe.name
       }),
       sound: "gamelan",
       url: recipe_url(@recipe)
     }
+  end
+
+  def user_name
+    if user_signed_in?
+      current_user.display_name
+    else
+      request.remote_ip
+    end
   end
 end
