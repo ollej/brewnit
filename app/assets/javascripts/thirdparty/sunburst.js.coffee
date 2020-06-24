@@ -9,7 +9,6 @@ class Sunburst
     @tip = d3.tip().attr('class', 'd3-tip').html((d) -> d?.tooltip)
     $("body").on("tab-changed", @redraw)
     if $(@sel).is(":visible")
-      console.log "asdf"
       @redraw(null, @tab)
 
   setup: ->
