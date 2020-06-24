@@ -106,7 +106,7 @@
                   <% end %>
                 </p>
                 <% if f.notes.present? %>
-                  <p><span class="fermentable-info fermentable-notes"><%= format_text(f.notes) %></span></p>
+                  <span class="fermentable-info fermentable-notes"><%= format_text(f.notes) %></span>
                 <% end %>
               </td>
             </tr>
@@ -179,7 +179,7 @@
                   <% end %>
                 </p>
                 <% if hop.notes.present? %>
-                  <p><span class="hop-info hop-notes"><%= format_text(hop.notes) %></span></p>
+                  <span class="hop-info hop-notes"><%= format_text(hop.notes) %></span>
                 <% end %>
               </td>
             </tr>
@@ -290,11 +290,10 @@
                   <% end %>
                 </p>
                 <% if yeast.notes.present? %>
-                  <p><span class="yeast-info yeast-notes"><%= format_text(yeast.notes) %></span></p>
+                  <span class="yeast-info yeast-notes"><%= format_text(yeast.notes) %></span>
                 <% end %>
               </td>
             </tr>
-
             <% end %>
           </tbody>
         </table>
