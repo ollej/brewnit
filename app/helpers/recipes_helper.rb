@@ -9,7 +9,7 @@ module RecipesHelper
   end
 
   def media_main_tag(recipe)
-    image_tag recipe.main_image(:small), class: 'user-avatar', alt: recipe.name,
+    image_tag recipe.main_image(:small), class: 'item-avatar', alt: recipe.name,
       width: 160, height: 120
   end
 
