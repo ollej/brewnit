@@ -11,7 +11,12 @@ class BrewTimer extends EventTarget {
     this.steps = steps;
     this.stepType = stepType;
     this.countDown = true;
-    //this.steps.map((step) => step["time"] = 5);
+    //this.steps.map((step, index) => {
+    //  step["time"] = 5;
+    //  step["starttime"] = 5 * index;
+    //  step["endtime"] = 5 * (index + 1);
+    //  return step;
+    //});
     this.reset();
   }
 
