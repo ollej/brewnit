@@ -19,3 +19,9 @@
     }
   }
 }
+
+@media screen and (min-width: 64em) and (max-width: 79.99em) {
+  .gauge-box {
+    padding: 0 1em;
+  }
+}

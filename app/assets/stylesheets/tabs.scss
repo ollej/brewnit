@@ -76,26 +76,33 @@
   display: block;
 }
 
-@media (min-width: 768px) {
-  .tab-trigger i {
+@media screen and (min-width: 48em) and (max-width: 79.99em) {
+  .tab-trigger > i {
     padding: 5px;
     margin-right: 10px;
   }
-
-  .tabs label span {
-    display: inline-block;
-  }
 }
 
-@media screen and (max-width: 48em) {
+@media screen and (max-width: 47.99em) {
   .tabs > label {
     padding: 0 1.5em;
   }
 }
 
-@media screen and (max-width: 26em) {
+@media screen and (max-width: 25.99em) {
   .tabs > label {
     padding: 0 0.75em;
+  }
+}
+
+@media screen and (min-width: 80em) {
+  .tab-trigger > i {
+    padding: 5px;
+    margin-right: 10px;
+  }
+
+  .tabs > label > span {
+    display: inline-block;
   }
 }
 
