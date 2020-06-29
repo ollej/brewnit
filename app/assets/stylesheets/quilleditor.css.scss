@@ -26,15 +26,13 @@
 .pure-form label.large-group {
   vertical-align: top;
 }
-/* tablets */
-@media (min-width: 40em) and (max-width: 1024px) {
+
+@media screen and (max-width: 64em) {
   .quill-wrapper {
-    width: 400px;
-  }
-}
-/* mobile */
-@media (max-width: 40em) {
-  .quill-wrapper {
+
     width: 96%;
+    .ql-toolbar.ql-snow {
+      height: auto;
+    }
   }
 }
