@@ -181,6 +181,10 @@ a {
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
 
+  .pure-form input[type=search] {
+    width: 100%;
+  }
+
   select {
     margin-left: 0.5em !important;
   }

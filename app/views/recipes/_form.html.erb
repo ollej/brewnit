@@ -1,4 +1,4 @@
-<%= form_for(@recipe, html: { class: 'pure-form pure-form-stacked medal-placement' }) do |f| %>
+<%= form_for(@recipe, html: { class: 'pure-form pure-form-aligned medal-placement' }) do |f| %>
   <%= invisible_captcha %>
   <%= hidden_field_tag :clear_search, true %>
 
@@ -19,52 +19,53 @@
   <% end %>
 
   <fieldset>
-    <div class="pure-g">
-      <div class="pure-u-1">
-        <%= f.label :name %>
-        <%= f.text_field :name, class: 'pure-input-1-2 inline-input', required: true,
-          placeholder: I18n.t(:'activerecord.attributes.recipe.name') %>
-        <%= form_info_icon(I18n.t(:'recipes.name_not_needed')) %>
+    <div class="pure-control-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, required: true,
+        placeholder: I18n.t(:'activerecord.attributes.recipe.name') %>
+      <%= form_info_icon(I18n.t(:'recipes.name_not_needed')) %>
+    </div>
+    <div class="pure-control-group">
+      <%= f.label :description, class: 'large-group' %>
+      <div class="quill-wrapper">
+        <%= f.text_area :description, class: 'quill_container',
+          placeholder: I18n.t(:'activerecord.attributes.recipe.description') %>
       </div>
-      <div class="pure-u-1">
-        <%= f.label :description, class: 'large-group' %>
-        <div class="quill-wrapper">
-          <%= f.text_area :description, class: 'quill_container',
-            placeholder: I18n.t(:'activerecord.attributes.recipe.description') %>
+    </div>
+    <div class="pure-control-group">
+      <%= f.label :public, class: 'pure-checkbox' do %>
+        <%= I18n.t(:'activerecord.attributes.recipe.public') %>
+      <% end %>
+      <%= f.check_box :public %>
+      <%= form_info_icon(I18n.t(:'recipes.public_description')) %>
+    </div>
+
+    <div class="pure-controls">
+      <div class="pure-g">
+        <div class="pure-u-1-2 pure-u-sm-2-3">
+          <%= link_to('#', class: 'pure-button secondary-button form-button file-button',
+            data: tooltip_data(I18n.t(:'recipes.beerxml_description'), length: 'large')
+              .merge(:'file-field' => '#import-beerxml')) do %>
+            <%= I18n.t(:'recipes.import') %>
+          <% end %>
+          <%= form_info_icon(I18n.t(:'recipes.beerxml_description'), length: 'large') %>
+          <%= f.file_field :beerxml, class: 'hidden-file-field', multiple: true,
+            accept: 'application/xml,.xml', id: 'import-beerxml' %>
         </div>
-      </div>
-      <div class="pure-u-1">
-        <%= f.label :public, class: 'pure-checkbox' do %>
-          <%= f.check_box :public %> <%= I18n.t(:'activerecord.attributes.recipe.public') %>
-          <%= form_info_icon(I18n.t(:'recipes.public_description')) %>
-        <% end %>
-      </div>
 
-      <div class="pure-u-1-2">
-        <%= link_to('#', class: 'pure-button secondary-button form-button file-button',
-          data: tooltip_data(I18n.t(:'recipes.beerxml_description'), length: 'large')
-            .merge(:'file-field' => '#import-beerxml')) do %>
-          <%= I18n.t(:'recipes.import') %>
-        <% end %>
-        <%= form_info_icon(I18n.t(:'recipes.beerxml_description'), length: 'large') %>
-        <%= f.file_field :beerxml, class: 'hidden-file-field', multiple: true,
-          accept: 'application/xml,.xml', id: 'import-beerxml' %>
-      </div>
-
-      <div class="pure-u" data-balloon-pos="down" data-balloon="<%= I18n.t(:'recipes.build_new_recipe_description') %>">
-        <%= f.submit I18n.t(:'recipes.build_recipe'), class: 'pure-button pure-button-primary' %>
-        <%= form_info_icon('') %>
-      </div>
-
-      <div class="pure-u-1">
-        <%= raw I18n.t(:'recipes.recipe_create_information') %>
-      </div>
-
-      <div class="pure-u-1">
-        <h3><%= I18n.t(:'recipes.beersmith_export') %></h3>
-        <%= image_tag 'beersmith-export.png', class: "fullwidth" %>
-        <%= raw I18n.t(:'recipes.beersmith_export_description') %>
+        <div class="pure-u">
+          <span data-balloon-pos="down" data-balloon="<%= I18n.t(:'recipes.build_new_recipe_description') %>">
+            <%= f.submit I18n.t(:'recipes.build_recipe'), class: 'pure-button pure-button-primary' %>
+            <%= form_info_icon('') %>
+          </span>
+        </div>
       </div>
     </div>
   </fieldset>
 <% end %>
+
+<%= raw I18n.t(:'recipes.recipe_create_information') %>
+
+<h3><%= I18n.t(:'recipes.beersmith_export') %></h3>
+<%= image_tag 'beersmith-export.png', class: "fullwidth" %>
+<%= raw I18n.t(:'recipes.beersmith_export_description') %>

@@ -4,7 +4,7 @@
     <%= form_tag(recipes_path, method: 'get', class: 'pure-form', id: 'quicksearch-form') do %>
       <div class="field pure-control-group pure-u-2-3">
         <%= search_field_tag :q, @search[:q], autocomplete: 'off',
-            class: 'pure-input-1 pure-input-rounded',
+            class: 'pure-input-rounded',
             placeholder: t(:'common.search.quicksearch'),
             results: 5, autosave: 'brygglogg-search' %>
       </div>

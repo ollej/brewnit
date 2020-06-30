@@ -82,8 +82,8 @@
     <div class="pure-u-1-2 pure-u-sm-1-3 pure-u-sm-landscape-1">
       <div class="pure-menu">
         <ul class="pure-menu-list">
-        <% if user_signed_in? %>
           <li class="pure-menu-heading"><%= t(:'recipes.labels') %></li>
+        <% if user_signed_in? %>
           <li class="pure-menu-item">
             <%= link_to recipes_path(private: true), class: 'pure-menu-link' do %>
               <span class="recipe-label-private"></span> <%= t(:'recipes.private') %>
