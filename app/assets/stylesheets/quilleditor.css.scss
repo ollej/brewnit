@@ -29,8 +29,9 @@
 
 @media screen and (max-width: 64em) {
   .quill-wrapper {
-
     width: 96%;
+    height: auto;
+
     .ql-toolbar.ql-snow {
       height: auto;
     }
