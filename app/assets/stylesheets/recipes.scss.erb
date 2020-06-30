@@ -10,6 +10,7 @@ body {
     overflow-x: scroll;
   }
 }
+
 @media only print {
   .beer_recipe {
     display: table;
@@ -21,6 +22,7 @@ body {
     }
   }
 }
+
 @media only screen and (max-width: 768px) {
   .beer_recipe {
     .recipe-section {
@@ -41,11 +43,13 @@ body {
     }
   }
 }
+
 @media screen and (max-width: 320px) {
   .beer_recipe .recipe_information {
     width: 95%;
   }
 }
+
 @media print {
   body {
     background: white;
@@ -117,6 +121,7 @@ body {
     }
   }
 }
+
 .recipe-index {
   min-height: 500px;
   position: relative;
@@ -135,4 +140,17 @@ body {
     opacity: 0.2;
     z-index: -1;
   }
+}
+
+.colorbox {
+  width: 1em;
+  height: 1em;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  border-width: 1px;
+  border-color: beige;
+  border-style: solid;
+  display: inline-block;
+  vertical-align: text-top;
 }

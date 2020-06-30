@@ -1,42 +1,42 @@
-<%= form_for(Hop.new, url: recipe_hops_path(@recipe),
-             class: 'pure-form pure-form-stacked', remote: true) do |f| %>
+<%= form_with model: Hop.new, url: recipe_hops_path(@recipe),
+      local: false, class: 'pure-form pure-form-stacked' do |f| %>
   <fieldset>
     <legend><%= I18n.t(:'recipe_detail.hops') %></legend>
 
     <div class="pure-g">
-      <div class="pure-u-1 pure-u-md-1-4">
+      <div class="pure-u-1 pure-u-md-1-3">
         <%= f.label :name, I18n.t(:'activerecord.attributes.hop.name') %>
-        <%= f.text_field :name, class: 'pure-u-23-24', required: true,
+        <%= f.text_field :name, class: 'pure-u-1', required: true,
           placeholder: I18n.t(:'activerecord.attributes.hop.name') %>
       </div>
-      <div class="pure-u-1 pure-u-md-1-8">
+      <div class="pure-u-1-2 pure-u-sm-1-3 pure-u-md-1-5 pure-u-xl-1-8">
         <%= f.label :amount, I18n.t(:'activerecord.attributes.hop.amount') %>
-        <%= f.number_field :amount, class: 'pure-u-22-24', required: true, step: :any,
+        <%= f.number_field :amount, class: 'pure-u-1', required: true, step: :any,
           placeholder: I18n.t(:'activerecord.attributes.hop.amount') %>
       </div>
-      <div class="pure-u-1 pure-u-md-1-8">
+      <div class="pure-u-1-2 pure-u-sm-1-3 pure-u-md-1-5 pure-u-xl-1-8">
         <%= f.label :use_time, I18n.t(:'activerecord.attributes.hop.use_time') %>
-        <%= f.number_field :use_time, class: 'pure-u-22-24', required: true,
+        <%= f.number_field :use_time, class: 'pure-u-1', required: true,
           placeholder: I18n.t(:'activerecord.attributes.hop.use_time') %>
         <% # välj minuter/dagar %>
       </div>
-      <div class="pure-u-1 pure-u-md-1-8">
+      <div class="pure-u-1-2 pure-u-sm-1-3 pure-u-md-1-5 pure-u-xl-1-8">
         <%= f.label :alpha_acid, I18n.t(:'activerecord.attributes.hop.alpha_acid') %>
-        <%= f.number_field :alpha_acid, class: 'pure-u-22-24', step: :any,
+        <%= f.number_field :alpha_acid, class: 'pure-u-1', step: :any,
           placeholder: I18n.t(:'activerecord.attributes.hop.alpha_acid') %>
       </div>
-      <div class="pure-u-1 pure-u-md-1-8">
+      <div class="pure-u-1-2 pure-u-sm-1-3 pure-u-md-1-5 pure-u-xl-1-8">
         <%= f.label :use, I18n.t(:'activerecord.attributes.hop.use') %>
-        <%= f.select :use, options_for_select(hop_use_options, 'Boil'), {}, class: 'pure-u-22-24' %>
+        <%= f.select :use, options_for_select(hop_use_options, 'Boil'), {}, class: 'pure-u-1' %>
       </div>
-      <div class="pure-u-1 pure-u-md-1-8">
+      <div class="pure-u-1-2 pure-u-sm-1-3 pure-u-md-1-5 pure-u-xl-1-8">
         <%= f.label :form, I18n.t(:'activerecord.attributes.hop.form') %>
-        <%= f.select :form, options_for_select(hop_form_options), {}, class: 'pure-u-22-24' %>
+        <%= f.select :form, options_for_select(hop_form_options), {}, class: 'pure-u-1' %>
       </div>
-    </div>
-
-    <div class="actions pure-controls">
-      <%= f.submit I18n.t(:'recipe_detail.add'), class: 'pure-button pure-button-secondary' %>
+      <div class="pure-u-1-2 pure-u-sm-1-3 pure-u-md-1-5 pure-u-xl-1-8">
+        <label>&nbsp;</label>
+        <%= f.submit I18n.t(:'recipe_detail.add'), class: 'pure-button pure-button-secondary' %>
+      </div>
     </div>
 
     <%= render 'hop_list' %>

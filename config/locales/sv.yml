@@ -984,8 +984,8 @@ sv:
         batch_size: Mängd (L)
         boil_size: Kokmängd (L)
         boil_time: Koktid (min)
-        grain_temp: Malttemperatur (°C)
-        sparge_temp: Lakningstemp. (°C)
+        grain_temp: Malttemp. (°C)
+        sparge_temp: Laktemp. (°C)
         efficiency: Utbyte (%)
         og: OG
         fg: FG
@@ -1019,11 +1019,11 @@ sv:
         form: Form
       mash_step:
         name: Namn
-        step_temperature: Temperatur (°C)
+        step_temperature: Temp. (°C)
         step_time: Tid (min)
         ramp_time: Höjningstid
         infuse_amount: Vatten (L)
-        mash_type: Mäskningstyp
+        mash_type: Mäskning
 
     errors:
       template:
