@@ -68,7 +68,7 @@ a {
 
 /* When "Menu" is clicked, the navbar should be 80% height */
 #nav.active {
-  height: 100vh;
+  height: 60vh;
 }
 
 /* Don't show the navigation items... */
@@ -348,6 +348,17 @@ a {
   margin-bottom: 0.3em;
 }
 
+.recipe-subject,
+.recipe-content-title {
+  color: #333
+}
+.recipe-badge-list {
+  margin-top: 0.5em;
+}
+.recipe-content-subtitle {
+  margin: 0.5em 0;
+}
+
 /*
  * -- TABLET (AND UP) MEDIA QUERIES --
  * On tablets and other medium-sized devices, we want to customize some
@@ -357,7 +368,7 @@ a {
 
   /* Move the layout over so we can fit the nav + list in on the left */
   #layout {
-    padding-left:500px; /* "left col (nav + list)" width */
+    padding-left: 500px; /* "left col (nav + list)" width */
     position: relative;
   }
 
@@ -369,7 +380,7 @@ a {
     overflow: auto;
   }
   #nav {
-    margin-left:-500px; /* "left col (nav + list)" width */
+    margin-left: -500px; /* "left col (nav + list)" width */
     width:150px;
     height: 100%;
   }
@@ -415,7 +426,7 @@ a {
   /* This will take up the entire height, and be a little thinner */
   #list {
     margin-left: -350px;
-    width:350px;
+    width: 350px;
     height: 100%;
     border-right: 1px solid #ddd;
   }
@@ -426,17 +437,6 @@ a {
     margin: 0;
     padding: 0;
   }
-}
-
-.recipe-subject,
-.recipe-content-title {
-  color: #333
-}
-.recipe-badge-list {
-  margin-top: 0.5em;
-}
-.recipe-content-subtitle {
-  margin: 0.5em 0;
 }
 
 /*
@@ -467,12 +467,29 @@ a {
 @media (max-width: 320px) {
   #nav {
     &.active {
-      #logo {
-        display: none !important;
-      }
+      height: 100vh;
+
       .home-link {
         display: inline;
       }
     }
   }
 }
+
+@media (min-width: 360px) {
+  #nav {
+    &.active {
+      height: 80%;
+    }
+  }
+}
+
+
+@media (min-width: 35.5em) {
+  #nav {
+    &.active {
+      height: 100%;
+    }
+  }
+}
+
