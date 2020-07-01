@@ -1,5 +1,10 @@
 .page-recipe_details-show {
-  .pure-table {
+  .ingredients-list {
     overflow-x: scroll;
+  }
+
+  fieldset .pure-button {
+    margin-left: 0.5em;
+    margin-top: 0.25em;
   }
 }

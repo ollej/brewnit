@@ -1,17 +1,19 @@
-<table id="fermentables" class="pure-table pure-table-striped">
-  <thead>
-    <tr>
-      <th><%= I18n.t(:'activerecord.attributes.fermentable.name') %></th>
-      <th><%= I18n.t(:'activerecord.attributes.fermentable.amount') %></th>
-      <th><%= I18n.t(:'activerecord.attributes.fermentable.grain_type') %></th>
-      <th><%= I18n.t(:'activerecord.attributes.fermentable.ebc') %></th>
-      <th>&nbsp;</th>
-      <th>&nbsp;</th>
-    </tr>
-  </thead>
-  <tbody>
-  <% @fermentables.each do |fermentable| %>
-    <%= render partial: 'shared/fermentable_item', locals: { fermentable: fermentable } %>
-  <% end %>
-  </tbody>
-</table>
+<div class="ingredients-list">
+  <table id="fermentables" class="pure-table pure-table-striped">
+    <thead>
+      <tr>
+        <th><%= I18n.t(:'activerecord.attributes.fermentable.name') %></th>
+        <th><%= I18n.t(:'activerecord.attributes.fermentable.amount') %></th>
+        <th><%= I18n.t(:'activerecord.attributes.fermentable.grain_type') %></th>
+        <th><%= I18n.t(:'activerecord.attributes.fermentable.ebc') %></th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @fermentables.each do |fermentable| %>
+      <%= render partial: 'shared/fermentable_item', locals: { fermentable: fermentable } %>
+    <% end %>
+    </tbody>
+  </table>
+</div>
