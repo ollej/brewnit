@@ -127,5 +127,7 @@ $( document ).ready(function() {
       new BrewTimerDialog($(this), recipeId);
     });
   }
+
+  new IngredientsList(".ingredients-list").setup();
 });
 

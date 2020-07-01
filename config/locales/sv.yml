@@ -411,6 +411,7 @@ sv:
       infusion: Infusion
       temperature: Temperatur
       decoction: Dekoktion
+    nothing_added: Listan är tom
   register_recipe:
     new: Anmäl recept
     save: Anmäl

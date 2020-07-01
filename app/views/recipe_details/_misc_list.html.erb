@@ -1,5 +1,5 @@
 <div class="ingredients-list">
-  <table id="miscs" class="pure-table pure-table-striped">
+  <table id="miscs" class="pure-table pure-table-striped ingredients-table">
     <thead>
       <tr>
         <th><%= I18n.t(:'activerecord.attributes.misc.name') %></th>
@@ -17,4 +17,5 @@
     <% end %>
     </tbody>
   </table>
+  <p class="empty-table"><em><%= I18n.t(:"recipe_detail.nothing_added") %></em></p>
 </div>
