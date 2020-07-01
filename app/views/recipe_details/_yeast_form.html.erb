@@ -6,30 +6,30 @@
     <div class="pure-g">
       <div class="pure-u-1 pure-u-md-1-3 pure-u-xl-1-4">
         <%= f.label :name, I18n.t(:'activerecord.attributes.yeast.name') %>
-        <%= f.text_field :name, class: 'pure-input-1', required: true,
+        <%= f.text_field :name, class: "pure-input-1", required: true,
           placeholder: I18n.t(:'activerecord.attributes.yeast.name') %>
       </div>
       <div class="pure-u-1 pure-u-md-1-6 pure-u-lg-1-5 pure-u-xl-1-8">
         <%= f.label :amount, I18n.t(:'activerecord.attributes.yeast.amount') %>
-        <%= f.number_field :amount, class: 'pure-input-1', required: true, step: :any,
+        <%= f.number_field :amount, class: "pure-input-1", required: true, step: :any,
           placeholder: I18n.t(:'activerecord.attributes.yeast.amount') %>
       </div>
       <div class="pure-u-1 pure-u-md-1-6 pure-u-lg-1-5 pure-u-xl-1-8">
         <%= f.label :weight, I18n.t(:'activerecord.attributes.yeast.weight') %>
         <%= f.select :weight, options_for_select(weight_options), {},
-          { class: 'pure-u-23-24' } %>
+          { class: "pure-input-1" } %>
       </div>
       <div class="pure-u-1 pure-u-md-1-6 pure-u-lg-1-5 pure-u-xl-1-8">
         <%= f.label :form, I18n.t(:'activerecord.attributes.yeast.form') %>
-        <%= f.select :form, options_for_select(yeast_form_options), {}, class: 'pure-input-1' %>
+        <%= f.select :form, options_for_select(yeast_form_options), {}, class: "pure-input-1" %>
       </div>
       <div class="pure-u-1 pure-u-md-1-6 pure-u-lg-1-5 pure-u-xl-1-8">
         <%= f.label :yeast_type, I18n.t(:'activerecord.attributes.yeast.yeast_type') %>
-        <%= f.select :yeast_type, options_for_select(yeast_type_options), {}, class: 'pure-input-1' %>
+        <%= f.select :yeast_type, options_for_select(yeast_type_options), {}, class: "pure-input-1" %>
       </div>
       <div class="pure-u-1 pure-u-md-1-6 pure-u-lg-1-5 pure-u-xl-1-8">
         <label>&nbsp;</label>
-        <%= f.submit I18n.t(:'recipe_detail.add'), class: 'pure-button pure-button-secondary' %>
+        <%= f.submit I18n.t(:'recipe_detail.add'), class: "pure-button pure-button-secondary" %>
       </div>
     </div>
   </fieldset>
