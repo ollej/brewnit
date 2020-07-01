@@ -60,7 +60,8 @@
 
     <div class="field pure-control-group">
       <%= f.label :pushover_user_key %>
-      <%= f.text_field :pushover_user_key, placeholder: t(:'activerecord.attributes.user.pushover_user_key') %>
+      <%= f.text_field :pushover_user_key, class: "with-info",
+        placeholder: t(:'activerecord.attributes.user.pushover_user_key') %>
       <%= form_info_icon(t(:'users.info.pushover_user_key')) %>
     </div>
 
@@ -73,14 +74,14 @@
 
     <div class="field pure-control-group">
       <%= f.label :password %>
-      <%= f.password_field :password, autocomplete: "new-password",
+      <%= f.password_field :password, autocomplete: "new-password", class: "with-info",
         placeholder: t(:'activerecord.attributes.user.password') %>
       <%= form_info_icon(t(:'users.info.leave_pwd_blank')) %>
     </div>
 
     <div class="field pure-control-group">
       <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation, autocomplete: "new-password",
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "with-info",
         placeholder: t(:'activerecord.attributes.user.password_confirmation') %>
       <%= form_info_icon(t(:'users.info.password_confirmation_description')) %>
     </div>
@@ -106,7 +107,6 @@
 
     <div class="actions pure-controls">
       <%= f.submit t(:'users.save'), class: 'pure-button pure-button-primary' %>
-
     </div>
   </fieldset>
 <% end %>
@@ -141,5 +141,4 @@
             data: { confirm: t(:'users.confirm_cancel')},
             method: :delete, class: 'pure-button secondary-button button-error' %></p>
         </div>
-
       </div>

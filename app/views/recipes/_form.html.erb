@@ -21,7 +21,7 @@
   <fieldset>
     <div class="pure-control-group">
       <%= f.label :name %>
-      <%= f.text_field :name, required: true,
+      <%= f.text_field :name, required: true, class: "with-info",
         placeholder: I18n.t(:'activerecord.attributes.recipe.name') %>
       <%= form_info_icon(I18n.t(:'recipes.name_not_needed')) %>
     </div>
