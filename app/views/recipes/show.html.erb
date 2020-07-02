@@ -130,5 +130,7 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
         </div>
       </div>
 
-<%= render partial: 'shared/brew_timer', locals: { step_type: 'mash' } %>
-<%= render partial: 'shared/brew_timer', locals: { step_type: 'boil' } %>
+<% content_for :modals do %>
+  <%= render partial: 'shared/brew_timer', locals: { step_type: 'mash' } %>
+  <%= render partial: 'shared/brew_timer', locals: { step_type: 'boil' } %>
+<% end %>
