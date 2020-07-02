@@ -2,10 +2,14 @@
   margin-top: 0.5em;
 }
 .event-map {
-  position: relative;
-
   img {
-    position: absolute;
-    right: 0;
+    max-width: 100%;
+  }
+}
+
+@media screen and (min-width: 48em) {
+  .event-map {
+    display: flex;
+    justify-content: flex-end;
   }
 }

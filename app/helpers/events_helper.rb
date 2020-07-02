@@ -1,5 +1,4 @@
 module EventsHelper
-
   def official_badge(recipe)
     badge(
       I18n.t(:'events.official_badge_title'),
@@ -22,5 +21,4 @@ module EventsHelper
     key = Rails.application.secrets.google_maps_api_key
     "https://maps.googleapis.com/maps/api/staticmap?center=#{center}&size=300x300&zoom=17&language=sv&key=#{key}"
   end
-
 end
