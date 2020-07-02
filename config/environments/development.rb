@@ -71,9 +71,8 @@ Rails.application.configure do
     url: '/uploads/:class/:id_partition/:style/:filename'
   }
 
-  # Use an evented file watcher to asynchronously detect changes in source code,
-  # routes, locales, etc. This feature depends on the listen gem.
-  config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  # Support auto reload in Vagrant on mac
+  config.file_watcher = ActiveSupport::FileUpdateChecker
 
   config.secret_key_base = SecureRandom.hex(64)
 end
