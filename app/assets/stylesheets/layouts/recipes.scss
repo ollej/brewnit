@@ -442,6 +442,12 @@ a {
   }
 }
 
+@media screen and (min-width: 80em) {
+  #main {
+    width: 100%;
+  }
+}
+
 /*
  * Mobile
  */
