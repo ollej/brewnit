@@ -3,12 +3,14 @@
 
   .media-thumbnail {
     background: white;
+    position: relative;
   }
 
   .media-buttons {
-    display: none;
-    position: absolute;
     opacity: 0.9;
+    position: absolute;
+    right: 4px;
+    top: 4px;
     z-index: 1000;
 
     .inline-button.destroy-button {
