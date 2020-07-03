@@ -62,8 +62,6 @@ set_meta_tags title: @event.name,
                 method: :get, class: 'pure-button secondary-button' do %>
                 <%= icon('table') %> <%= t(:'events.recipes_csv') %>
               <% end %>
-            <% end %>
-            <div style="display: inline-block">
               <%= form_tag event_media_path(@event), method: :post, id: 'mediaUploadForm',
                     remote: true, multipart: true do %>
                 <%= link_to '#', class: 'pure-button secondary-button upload-button' do %>
@@ -75,7 +73,7 @@ set_meta_tags title: @event.name,
                 <%= hidden_field_tag :media_type, 'main' %>
                 <div id="progressbar"></div>
               <% end %>
-            </div>
+            <% end %>
           </div>
           <% end %>
         </div>
