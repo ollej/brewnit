@@ -95,14 +95,14 @@ DEVELOPMENT_HOST: yourcomputer.local
 
 #### Development mode
 
-Run `bundle exec rake secret` twice and add them to the `config/secrets.yml`
+Run `bundle exec rake secret` twice and add them to the `.env.development`
 where it says 'changeme' (`SECRET_KEY_BASE` and `DEVISE_PEPPER`).
 
 ##### Google authentication
 
 For the Google signin support, you need to create credentials on the Google
 Developers console and add `client_id` and `client_secret` to the
-`config/secrets.yml`
+`.env.development`
 
 https://console.developers.google.com
 
