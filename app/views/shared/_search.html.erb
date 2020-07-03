@@ -1,4 +1,5 @@
-<div class="search-form">
+<div class="pure-g">
+<div class="search-form pure-u-1 pure-u-md-2-3 pure-u-lg-3-4 pure-u-xl-1-2">
  <%= form_tag(recipes_path, method: 'get', class: 'pure-form', id: 'search-form') do %>
   <fieldset>
     <%= hidden_field_tag :clear_search, true %>
@@ -105,4 +106,5 @@
     <% end %>
   </div>
  <% end %>
+</div>
 </div>
