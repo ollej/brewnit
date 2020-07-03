@@ -38,7 +38,8 @@ class MediaUpload {
   updateScroller() {
     const images = this.$slider.find("img").length;
     //console.log("updateScroller", images)
-    this.$slider.toggle(images > 0);
+    //this.$slider.toggle(images > 0);
+    this.$slider.toggleClass("no-images", images == 0);
     this.$slider.mThumbnailScroller("update");
     if (images > 0) {
       this.$slider.mThumbnailScroller("scrollTo", "last");

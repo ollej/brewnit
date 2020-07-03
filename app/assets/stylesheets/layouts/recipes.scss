@@ -417,7 +417,6 @@ a {
     overflow: auto;
     width: auto; /* so that it's not 100% */
   }
-
 }
 
 /*
@@ -497,3 +496,7 @@ a {
   }
 }
 
+#list, #main {
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
