@@ -722,7 +722,7 @@ For production, use the minified jquery.mThumbnailScroller.min.js script.
 		/* icons */
 		_icons=function(){
 			/* SVG */
-			var svgo="<svg version='1.1' viewBox='0 0 24 24' preserveAspectRatio='xMinYMin meet' class='mTSButtonIcon'><g><line stroke-width='1' x1='' y1='' x2='' y2='' stroke='#449FDB' opacity=''></line></g>",
+			var svgo="<svg version='1.1' viewBox='0 0 24 24' preserveAspectRatio='xMinYMin meet' class='mTSButtonIcon'><g><line stroke-width='1' x1='0' y1='0' x2='0' y2='0' stroke='#449FDB' opacity=''></line></g>",
 				svgc="</svg>";
 			return [
 				/* set 1 */
