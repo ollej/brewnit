@@ -74,9 +74,7 @@ issue: https://github.com/andreychernih/railsbox/issues/29
 
 ### Step 3 - Create config
 
-The file `config/secrets.yml` needs to be created from
-`config/secrets.yml.sample` and keys added for external services.
-Then add the following to a file called `.env.development`.
+Add the following to a file called `.env.development`.
 
 ```
 DEVISE_PEPPER: changeme
@@ -92,6 +90,7 @@ SMTP_PASSWORD: changeme
 RECAPTCHA_SITE_KEY: changeme
 RECAPTCHA_SECRET_KEY: changeme
 INKSCAPE_PATH: /usr/bin/inkscape
+DEVELOPMENT_HOST: yourcomputer.local
 ```
 
 #### Development mode

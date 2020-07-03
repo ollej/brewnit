@@ -75,4 +75,6 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::FileUpdateChecker
 
   config.secret_key_base = SecureRandom.hex(64)
+
+  config.hosts << ENV['DEVELOPMENT_HOST']
 end
