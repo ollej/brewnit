@@ -35,9 +35,11 @@ class BrewTimerDialog {
     this.el.on("click", ".timer-time", this.toggleCountdown);
     $(document).on("fullscreenchange", this.onFullscreenChange);
     $(window).on("keypress", this.keyPressed);
+    this.tag('open');
   }
 
   cancelDialog() {
+    this.tag('close');
     this.startEl.off("click", this.toggleTimer);
     this.pauseEl.off("click", this.toggleTimer);
     this.resetEl.off("click", this.resetTimer);
@@ -51,9 +53,9 @@ class BrewTimerDialog {
 
   setupTimer() {
     if (!this.timer) {
-      const stepType = this.el.data("stepType");
-      const steps = this.el.data("brewtimerSteps");
-      this.createTimer(steps, stepType);
+      this.stepType = this.el.data("stepType");
+      this.steps = this.el.data("brewtimerSteps");
+      this.createTimer(this.steps, this.stepType);
     }
   }
 
@@ -70,7 +72,7 @@ class BrewTimerDialog {
     });
   }
 
-  play(sound_type) {
+  playSound(sound_type) {
     this.getRandomItem(this.sounds[sound_type]).play();
   }
 
@@ -86,12 +88,12 @@ class BrewTimerDialog {
     });
     this.timer.addEventListener("brewtimer.step", (event) => {
       if (this.timer.currentStep > 0) {
-        this.play("step");
+        this.playSound("step");
         this.notify.send(I18n["brewtimer"]["notification"]["step"] + this.timer.getCurrentStep()["name"]);
       }
     });
     this.timer.addEventListener("brewtimer.done", (event) => {
-      this.play("done");
+      this.playSound("done");
       this.notify.send(I18n["brewtimer"]["notification"]["done"][this.timer.stepType], "done");
     });
     // Update modal if content changes
@@ -127,6 +129,11 @@ class BrewTimerDialog {
   toggleTimer() {
     this.notify.requestPermission();
     if (this.timer) {
+      if (this.timer.running) {
+        this.tag('pause');
+      } else {
+        this.tag('play');
+      }
       this.timer.toggle();
       this.togglePlayButton();
     }
@@ -167,6 +174,14 @@ class BrewTimerDialog {
 
   toggleCountdown() {
     this.timer.toggleCountDown();
+  }
+
+  tag(event_name) {
+    gtag('event', event_name, {
+      'event_category': 'BrewTimer',
+      'event_label': this.stepType,
+      'value': this.recipeId
+    });
   }
 }
 
