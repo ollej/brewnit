@@ -177,11 +177,13 @@ class BrewTimerDialog {
   }
 
   tag(event_name) {
-    gtag('event', event_name, {
-      'event_category': 'BrewTimer',
-      'event_label': this.stepType,
-      'value': this.recipeId
-    });
+    if (window["gtag"]) {
+      gtag('event', event_name, {
+        'event_category': 'BrewTimer',
+        'event_label': this.stepType,
+        'value': this.recipeId
+      });
+    }
   }
 }
 
