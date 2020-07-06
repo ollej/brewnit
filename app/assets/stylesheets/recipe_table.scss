@@ -46,10 +46,10 @@
     tbody tr:nth-child(4n), tbody tr:nth-child(4n-1) {
       background-color: #f5f5f5;
     }
-    tr.details-row:hover + tr {
+    .details-row:hover + .info-row {
       display: table-row;
     }
-    tr.info-row {
+    .info-row {
       display: none;
       td {
         white-space: normal;

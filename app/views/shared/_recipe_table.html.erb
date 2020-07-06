@@ -93,35 +93,44 @@
             <tr class="info-row">
               <td class="fermentables-info" colspan="5">
                 <p>
+                    <span class="fermentable-info pure-sm-hidden">
+                      <%= t(:'beerxml.fermentable_type') %>:
+                      <%= t(f.type, default: :Grain, scope: :'beerxml.fermentable_types') %><br>
+                    </span>
+                    <span class="fermentable-info pure-sm-hidden">
+                      <%= t(:'beerxml.fermentable_color') %>:
+                      <%= number_with_precision(f.color_ebc, precision: 0) %> <%= t(:'beerxml.ebc') %>
+                      <span class="colorbox" style="background-color: <%= f.color_hex %>">&nbsp;</span><br>
+                    </span>
                   <% if f.coarse_fine_diff.present? %>
-                    <span class="hop-info"><%= t(:'beerxml.coarse_fine_difference') %>: <%= number_to_percentage(f.coarse_fine_diff, precision: 2) %></span><br>
+                    <span class="fermentable-info"><%= t(:'beerxml.coarse_fine_difference') %>: <%= number_to_percentage(f.coarse_fine_diff, precision: 2) %></span><br>
                   <% end %>
                   <% if f.moisture.present? %>
-                    <span class="hop-info"><%= t(:'beerxml.moisture') %>: <%= number_to_percentage(f.moisture, precision: 2) %></span><br>
+                    <span class="fermentable-info"><%= t(:'beerxml.moisture') %>: <%= number_to_percentage(f.moisture, precision: 2) %></span><br>
                   <% end %>
                   <% if f.yield.present? %>
-                    <span class="hop-info"><%= t(:'beerxml.yield') %>: <%= number_to_percentage(f.yield, precision: 0) %></span><br>
+                    <span class="fermentable-info"><%= t(:'beerxml.yield') %>: <%= number_to_percentage(f.yield, precision: 0) %></span><br>
                   <% end %>
                   <% if f.potential.present? %>
-                    <span class="hop-info"><%= t(:'beerxml.potential') %>: <%= format_sg(f.potential) %> <%= t(:'beerxml.sg') %></span><br>
+                    <span class="fermentable-info"><%= t(:'beerxml.potential') %>: <%= format_sg(f.potential) %> <%= t(:'beerxml.sg') %></span><br>
                   <% end %>
                   <% if f.diastatic_power.present? %>
-                    <span class="hop-info"><%= t(:'beerxml.diastatic_power') %>: <%= number_with_precision(f.diastatic_power, precision: 1) %> Lintner</span><br>
+                    <span class="fermentable-info"><%= t(:'beerxml.diastatic_power') %>: <%= number_with_precision(f.diastatic_power, precision: 1) %> Lintner</span><br>
                   <% end %>
                   <% if f.max_in_batch.present? %>
-                    <span class="hop-info"><%= t(:'beerxml.max_in_batch') %>: <%= number_to_percentage(f.max_in_batch, precision: 0) %></span><br>
+                    <span class="fermentable-info"><%= t(:'beerxml.max_in_batch') %>: <%= number_to_percentage(f.max_in_batch, precision: 0) %></span><br>
                   <% end %>
                   <% if f.protein.present? %>
-                    <span class="hop-info"><%= t(:'beerxml.protein') %>: <%= number_to_percentage(f.protein, precision: 1) %></span><br>
+                    <span class="fermentable-info"><%= t(:'beerxml.protein') %>: <%= number_to_percentage(f.protein, precision: 1) %></span><br>
                   <% end %>
                   <% if f.ibu_gal_per_lb.present? && f.ibu_gal_per_lb > 0 %>
-                    <span class="hop-info"><%= t(:'beerxml.ibu_gal_per_lb') %>: <%= number_with_precision(f.ibu_gal_per_lb, precision: 1) %></span><br>
+                    <span class="fermentable-info"><%= t(:'beerxml.ibu_gal_per_lb') %>: <%= number_with_precision(f.ibu_gal_per_lb, precision: 1) %></span><br>
                   <% end %>
                   <% if f.recommend_mash.present? %>
-                    <span class="hop-info"><%= t(:'beerxml.recommend_mash') %>: <%= t("common.#{f.recommend_mash ? 'yes' : 'no'}") %></span><br>
+                    <span class="fermentable-info"><%= t(:'beerxml.recommend_mash') %>: <%= t("common.#{f.recommend_mash ? 'yes' : 'no'}") %></span><br>
                   <% end %>
                   <% if f.add_after_boil.present? %>
-                    <span class="hop-info"><%= t(:'beerxml.add_after_boil') %>: <%= t("common.#{f.add_after_boil ? 'yes' : 'no'}") %></span><br>
+                    <span class="fermentable-info"><%= t(:'beerxml.add_after_boil') %>: <%= t("common.#{f.add_after_boil ? 'yes' : 'no'}") %></span><br>
                   <% end %>
                   <% if f.origin.present? %>
                     <span class="fermentable-info"><%= t(:'beerxml.origin') %>: <%= trans(f.origin) %></span><br>
@@ -176,6 +185,21 @@
             <tr class="info-row">
               <td class="hops-info" colspan="8">
                 <p>
+                  <span class="hop-info pure-sm-hidden">
+                    <%= t(:'beerxml.hops_use') %>: <%= t(hop.use, default: :Boil, scope: 'beerxml.hop_uses') %><br>
+                  </span>
+                  <span class="hop-info pure-sm-hidden">
+                    <%= t(:'beerxml.hops_form') %>: <%= t(hop.form, default: :Leaf, scope: 'beerxml.hop_forms') %><br>
+                  </span>
+                  <span class="hop-info pure-sm-hidden">
+                    <%= t(:'beerxml.hops_alpha') %>: <%= number_to_percentage(hop.alpha, precision: 2) %><br>
+                  </span>
+                  <span class="hop-info pure-sm-hidden">
+                    <%= t(:'beerxml.hops_ibu') %>: <%= number_with_precision(hop.ibu, precision: 1) %><br>
+                  </span>
+                  <span class="hop-info pure-sm-hidden">
+                    <%= t(:'beerxml.grams_per_liter') %>: <%= number_with_precision(@presenter.hop_grams_per_liter(hop), precision: 1) %><br>
+                  </span>
                   <span class="hop-info"><%= @presenter.mgl_added_alpha_acids(hop) %> <%= t(:'beerxml.mg_per_liter_aa') %></span><br>
                   <span class="hop-info"><%= number_with_precision(hop.aau, precision: 1) %> <%= t(:'beerxml.aau') %></span><br>
                   <% if hop.beta.present? %>
@@ -247,6 +271,8 @@
             <tr class="info-row">
               <td class="miscs-info" colspan="6">
                 <p>
+                  <span class="misc-info pure-sm-hidden"><%= t(:'beerxml.misc_type') %>: <%= t(misc.type, default: :Other, scope: :'beerxml.misc_types') %><br></span>
+                  <span class="misc-info pure-sm-hidden"><%= t(:'beerxml.misc_use') %>: <%= trans(misc.use, scope: :'beerxml.misc_uses') %><br></span>
                   <% if misc.use_for.present? %>
                     <span class="misc-info"><%= t(:'beerxml.misc_use_for') %>: <%= trans(misc.use_for, scope: :'beerxml.misc_used_for') %></span><br>
                   <% end %>
@@ -292,6 +318,10 @@
             <tr class="info-row">
               <td class="yeasts-info" colspan="6">
                 <p>
+                  <span class="yeast-info pure-sm-hidden"><%= t(:'beerxml.yeast_lab') %>: <%= yeast.laboratory %><br></span>
+                  <span class="yeast-info pure-sm-hidden"><%= t(:'beerxml.yeast_form') %>: <%= trans(yeast.form, scope: :'beerxml.yeast_forms') %><br></span>
+                  <span class="yeast-info pure-sm-hidden"><%= t(:'beerxml.yeast_attenuation') %>: <%= number_to_percentage(yeast.attenuation, precision: 0) %><br></span>
+                  <span class="yeast-info pure-sm-hidden"><%= t(:'beerxml.yeast_temperature') %>: <%= yeast.formatted_temperatures %><br></span>
                   <% if yeast.type.present? %>
                     <span class="yeast-info"><%= t(:'beerxml.yeast_type') %>: <%= trans(yeast.type, scope: :'beerxml.yeast_types') %></span><br>
                   <% end %>
@@ -332,7 +362,7 @@
             @ <%= number_with_precision(step.step_time, precision: 0) %>
             <%= t(:'beerxml.minutes') %>">
         <% end %>
-        <table class="recipe-table zebra">
+        <table class="recipe-table zebra-expanded">
           <caption><%= t(:'beerxml.mash') %></caption>
           <thead>
             <tr>
@@ -346,13 +376,22 @@
           </thead>
           <tbody>
             <% @beerxml.mash.steps.each do |step| %>
-              <tr>
+              <tr class="details-row">
                 <td class="mash_name"><%= trans(step.name, scope: :'beerxml.mash_step_name') %></td>
                 <td class="mash_step_temp format-number"><%= number_with_precision(step.step_temp, precision: 0) %><%= t(:'beerxml.degrees') %></td>
                 <td class="mash_step_time format-number"><%= number_with_precision(step.step_time, precision: 0) %> <%= t(:'beerxml.minutes') %></td>
                 <td class="mash_ramp_time format-number pure-hidden pure-sm-table-cell"><%= number_with_precision(step.ramp_time, precision: 0) %> <%= t(:'beerxml.minutes') %></td>
                 <td class="mash_type pure-hidden pure-sm-table-cell"><%= trans(step.type, scope: :'beerxml.mash_step_type') %></td>
                 <td class="mash_infuse_amount format-number pure-hidden pure-sm-table-cell"><%= number_with_precision(step.infuse_amount, precision: 2) %> <%= t(:'beerxml.liter_abbr') %></td>
+              </tr>
+              <tr class="info-row">
+                <td class="mash-info pure-sm-hidden" colspan="6">
+                  <p>
+                  <span class="mash-info pure-sm-hidden"><%= t(:'beerxml.mash_ramp_time') %>: <%= number_with_precision(step.ramp_time, precision: 0) %> <%= t(:'beerxml.minutes') %><br></span>
+                  <span class="mash-info pure-sm-hidden"><%= t(:'beerxml.mash_type') %>: <%= trans(step.type, scope: :'beerxml.mash_step_type') %><br></span>
+                  <span class="mash-info pure-sm-hidden"><%= t(:'beerxml.mash_infuse_amount') %>: <%= number_with_precision(step.infuse_amount, precision: 2) %> <%= t(:'beerxml.liter_abbr') %><br></span>
+                  </p>
+                </td>
               </tr>
             <% end %>
           </tbody>
