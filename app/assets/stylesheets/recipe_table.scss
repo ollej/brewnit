@@ -63,6 +63,8 @@
     border-top: 1px solid #e0e0e0;
     border-left: 1px solid #e0e0e0;
     padding: 6px;
+  }
+  th {
     white-space: nowrap
   }
   tbody tr td:first-child {
@@ -75,6 +77,9 @@
   tbody tr:last-child td:last-child {
     border-bottom-right-radius: 3px;
     border-radius: 0 0 3px 0;
+  }
+  .recipe-table + .recipe-table {
+    margin-top: 1em;
   }
   .recipe_information {
     border: 1px solid #e0e0e0;
@@ -95,6 +100,7 @@
   }
   .format-number {
     text-align: right;
+    white-space: nowrap
   }
   @media print {
     .beer-recipe {

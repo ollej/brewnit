@@ -516,7 +516,7 @@ sv:
     og: OG
     fg: FG
     abv: ABV
-    calories_per_liter: Kalorier / L
+    calories_per_liter: Kalorier/L
     color: Färg
     liter_abbr: L
     degrees: '°C'
@@ -564,7 +564,7 @@ sv:
     mash_name: Namn
     mash_type: Typ
     mash_infuse_amount: Vatten
-    mash_step_temp: Stegtemperatur
+    mash_step_temp: Stegtemp.
     mash_ramp_time: Höjningstid
     mash_step_time: Stegtid
     Temperature: Temperatur
