@@ -8,10 +8,10 @@
               <th><%= t(:'beerxml.boil_time') %></th>
               <th><%= t(:'beerxml.og') %></th>
               <th><%= t(:'beerxml.fg') %></th>
-              <th class="pure-hidden pure-sm-table-cell"><%= t(:'beerxml.ibu') %></th>
-              <th class="pure-hidden pure-sm-table-cell"><%= t(:'beerxml.abv') %></th>
-              <th class="pure-hidden pure-sm-table-cell"><%= t(:'beerxml.calories_per_liter') %></th>
-              <th class="pure-hidden pure-sm-table-cell"><%= t(:'beerxml.color') %></th>
+              <th class="pure-hidden pure-sm-table-cell pure-lg-hidden pure-xl-table-cell"><%= t(:'beerxml.ibu') %></th>
+              <th class="pure-hidden pure-sm-table-cell pure-lg-hidden pure-xl-table-cell"><%= t(:'beerxml.abv') %></th>
+              <th class="pure-hidden pure-sm-table-cell pure-lg-hidden pure-xl-table-cell"><%= t(:'beerxml.calories_per_liter') %></th>
+              <th class="pure-hidden pure-sm-table-cell pure-lg-hidden pure-xl-table-cell"><%= t(:'beerxml.color') %></th>
             </tr>
           </thead>
           <tbody>
@@ -20,21 +20,21 @@
               <td class="recipe_boil_time format-number"><%= number_with_precision(@beerxml.boil_time, precision: 0) %> <%= t(:'beerxml.minutes') %></td>
               <td class="recipe_og format-number"><%= format_sg(@beerxml.og) %> <%= t(:'beerxml.sg') %></td>
               <td class="recipe_fg format-number"><%= format_sg(@beerxml.fg) %> <%= t(:'beerxml.sg') %></td>
-              <td class="recipe_ibu format-number pure-hidden pure-sm-table-cell"><%= number_with_precision(@beerxml.ibu, precision: 0) %></td>
-              <td class="recipe_abv format-number pure-hidden pure-sm-table-cell"><%= format_abv(@beerxml.abv) %></td>
-              <td class="recipe_calories format-number pure-hidden pure-sm-table-cell" itemprop="nutrition" itemscope
+              <td class="recipe_ibu format-number pure-hidden pure-sm-table-cell pure-lg-hidden pure-xl-table-cell"><%= number_with_precision(@beerxml.ibu, precision: 0) %></td>
+              <td class="recipe_abv format-number pure-hidden pure-sm-table-cell pure-lg-hidden pure-xl-table-cell"><%= format_abv(@beerxml.abv) %></td>
+              <td class="recipe_calories format-number pure-hidden pure-sm-table-cell pure-lg-hidden pure-xl-table-cell" itemprop="nutrition" itemscope
                 itemtype="http://schema.org/NutritionInformation">
                 <span itemprop="calories"><%= number_with_precision(@beerxml.calories, precision: 0) %></span>
                 <meta itemprop="servingSize" content="1 L">
               </td>
-              <td class="recipe_color format-number pure-hidden pure-sm-table-cell">
+              <td class="recipe_color format-number pure-hidden pure-sm-table-cell pure-lg-hidden pure-xl-table-cell">
                 <%= number_with_precision(@beerxml.color_ebc, precision: 0) %> <%= t(:'beerxml.ebc') %>
                 <div class="colorbox" style="background-color: <%= @beerxml.color_hex %>">&nbsp;</div>
               </td>
             </tr>
           </tbody>
         </table>
-        <table class="recipe-table zebra pure-sm-hidden">
+        <table class="recipe-table zebra pure-sm-hidden pure-lg-table-cell pure-xl-hidden">
           <thead>
             <tr>
               <th><%= t(:'beerxml.ibu') %></th>
