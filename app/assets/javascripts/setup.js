@@ -129,5 +129,13 @@ $( document ).ready(function() {
   }
 
   new IngredientsList(".ingredients-list").setup();
+
+  $(".toggle-link").click(function(event) {
+    const $target = $($(this).data("toggleTarget"));
+    if ($target.length > 0) {
+      $(this).find("i").toggleClass("fa-caret-down fa-caret-up");
+      $target.toggle(250);
+    }
+  });
 });
 

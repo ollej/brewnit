@@ -76,10 +76,11 @@
               <th><%= t(:'beerxml.percent') %></th>
               <th class="pure-hidden pure-sm-table-cell"><%= t(:'beerxml.fermentable_type') %></th>
               <th class="pure-hidden pure-sm-table-cell"><%= t(:'beerxml.fermentable_color') %></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
-            <% @beerxml.fermentables.each do |f| %>
+            <% @beerxml.fermentables.each_with_index do |f, index| %>
             <tr class="details-row">
               <td class="fermentable_name"><%= f.name %></td>
               <td class="fermentable_amount format-number"><%= number_with_precision(f.amount, precision: 2) %> <%= t(:'beerxml.kilograms') %></td>
@@ -89,9 +90,12 @@
                 <%= number_with_precision(f.color_ebc, precision: 0) %> <%= t(:'beerxml.ebc') %>
                 <div class="colorbox" style="background-color: <%= f.color_hex %>">&nbsp;</div>
               </td>
+              <td class="toggle-link" data-toggle-target="#fermentables-info-<%= index %>">
+                <%= icon("caret-down") %>
+              </td>
             </tr>
-            <tr class="info-row">
-              <td class="fermentables-info" colspan="5">
+            <tr class="info-row" id="fermentables-info-<%= index %>">
+              <td class="fermentables-info" colspan="6">
                 <p>
                     <span class="fermentable-info pure-sm-hidden">
                       <%= t(:'beerxml.fermentable_type') %>:
@@ -168,10 +172,11 @@
               <th class="pure-hidden pure-sm-table-cell"><%= t(:'beerxml.hops_alpha') %></th>
               <th class="pure-hidden pure-sm-table-cell"><%= t(:'beerxml.hops_ibu') %></th>
               <th class="pure-hidden pure-sm-table-cell"><%= t(:'beerxml.grams_per_liter') %></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
-            <% @beerxml.hops.each do |hop| %>
+            <% @beerxml.hops.each_with_index do |hop, index| %>
             <tr class="details-row">
               <td class="hops_name"><%= hop.name %></td>
               <td class="hops_amount format-number"><%= number_with_precision(hop.amount, precision: 0) %> <%= t(:'beerxml.grams') %></td>
@@ -181,9 +186,12 @@
               <td class="hops_alpha format-number pure-hidden pure-sm-table-cell"><%= number_to_percentage(hop.alpha, precision: 2) %></td>
               <td class="hops_ibu format-number pure-hidden pure-sm-table-cell"><%= number_with_precision(hop.ibu, precision: 1) %></td>
               <td class="hops_grpl format-number pure-hidden pure-sm-table-cell"><%= number_with_precision(@presenter.hop_grams_per_liter(hop), precision: 1) %></td>
+              <td class="toggle-link" data-toggle-target="#hops-info-<%= index %>">
+                <%= icon("caret-down") %>
+              </td>
             </tr>
-            <tr class="info-row">
-              <td class="hops-info" colspan="8">
+            <tr class="info-row" id="hops-info-<%= index %>">
+              <td class="hops-info" colspan="9">
                 <p>
                   <span class="hop-info pure-sm-hidden">
                     <%= t(:'beerxml.hops_use') %>: <%= t(hop.use, default: :Boil, scope: 'beerxml.hop_uses') %><br>
@@ -250,10 +258,11 @@
               <th><%= t(:'beerxml.misc_time') %></th>
               <th class="pure-hidden pure-sm-table-cell"><%= t(:'beerxml.misc_type') %></th>
               <th class="pure-hidden pure-sm-table-cell"><%= t(:'beerxml.misc_use') %></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
-            <% @beerxml.miscs.each do |misc| %>
+            <% @beerxml.miscs.each_with_index do |misc, index| %>
             <tr class="details-row">
               <td class="misc_name"><%= trans(misc.name, scope: :'beerxml.misc_names') %></td>
               <td class="misc_amount format-number">
@@ -267,9 +276,12 @@
               </td>
               <td class="misc_type pure-hidden pure-sm-table-cell"><%= t(misc.type, default: :Other, scope: :'beerxml.misc_types') %></td>
               <td class="misc_use pure-hidden pure-sm-table-cell"><%= trans(misc.use, scope: :'beerxml.misc_uses') %></td>
+              <td class="toggle-link" data-toggle-target="#misc-info-<%= index %>">
+                <%= icon("caret-down") %>
+              </td>
             </tr>
-            <tr class="info-row">
-              <td class="miscs-info" colspan="6">
+            <tr class="info-row" id="misc-info-<%= index %>">
+              <td class="miscs-info" colspan="7">
                 <p>
                   <span class="misc-info pure-sm-hidden"><%= t(:'beerxml.misc_type') %>: <%= t(misc.type, default: :Other, scope: :'beerxml.misc_types') %><br></span>
                   <span class="misc-info pure-sm-hidden"><%= t(:'beerxml.misc_use') %>: <%= trans(misc.use, scope: :'beerxml.misc_uses') %><br></span>
@@ -299,25 +311,30 @@
             <tr>
               <th><%= t(:'beerxml.yeast_name') %></th>
               <th><%= t(:'beerxml.yeast_product_id') %></th>
-              <th class="pure-hidden pure-sm-table-cell"><%= t(:'beerxml.yeast_lab') %></th>
+              <th class="pure-hidden pure-md-table-cell"><%= t(:'beerxml.yeast_lab') %></th>
               <th class="pure-hidden pure-sm-table-cell"><%= t(:'beerxml.yeast_form') %></th>
               <th class="pure-hidden pure-sm-table-cell"><%= t(:'beerxml.yeast_attenuation') %></th>
               <th class="pure-hidden pure-sm-table-cell"><%= t(:'beerxml.yeast_temperature') %></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
-            <% @beerxml.yeasts.each do |yeast| %>
+            <% @beerxml.yeasts.each_with_index do |yeast, index| %>
             <tr class="details-row">
               <td class="yeast_name"><%= yeast.name %></td>
               <td class="yeast_product_id"><%= yeast.product_id %></td>
-              <td class="yeast_laboratory pure-hidden pure-sm-table-cell"><%= yeast.laboratory %></td>
+              <td class="yeast_laboratory pure-hidden pure-md-table-cell"><%= yeast.laboratory %></td>
               <td class="yeast_form pure-hidden pure-sm-table-cell"><%= trans(yeast.form, scope: :'beerxml.yeast_forms') %></td>
               <td class="yeast_attenuation format-number pure-hidden pure-sm-table-cell"><%= number_to_percentage(yeast.attenuation, precision: 0) %></td>
               <td class="yeast_temperatures format-number pure-hidden pure-sm-table-cell"><%= yeast.formatted_temperatures %></td>
+              <td class="toggle-link" data-toggle-target="#yeast-info-<%= index %>">
+                <%= icon("caret-down") %>
+              </td>
             </tr>
-            <tr class="info-row">
-              <td class="yeasts-info" colspan="6">
+            <tr class="info-row" id="yeast-info-<%= index %>">
+              <td class="yeasts-info" colspan="7">
                 <p>
+                  <span class="yeast-info pure-md-hidden"><%= t(:'beerxml.yeast_lab') %>: <%= yeast.laboratory %><br></span>
                   <span class="yeast-info pure-sm-hidden"><%= t(:'beerxml.yeast_lab') %>: <%= yeast.laboratory %><br></span>
                   <span class="yeast-info pure-sm-hidden"><%= t(:'beerxml.yeast_form') %>: <%= trans(yeast.form, scope: :'beerxml.yeast_forms') %><br></span>
                   <span class="yeast-info pure-sm-hidden"><%= t(:'beerxml.yeast_attenuation') %>: <%= number_to_percentage(yeast.attenuation, precision: 0) %><br></span>
@@ -372,10 +389,11 @@
               <th class="pure-hidden pure-sm-table-cell"><%= t(:'beerxml.mash_ramp_time') %></th>
               <th class="pure-hidden pure-sm-table-cell"><%= t(:'beerxml.mash_type') %></th>
               <th class="pure-hidden pure-sm-table-cell"><%= t(:'beerxml.mash_infuse_amount') %></th>
+              <th class="pure-sm-hidden"></th>
             </tr>
           </thead>
           <tbody>
-            <% @beerxml.mash.steps.each do |step| %>
+            <% @beerxml.mash.steps.each_with_index do |step, index| %>
               <tr class="details-row">
                 <td class="mash_name"><%= trans(step.name, scope: :'beerxml.mash_step_name') %></td>
                 <td class="mash_step_temp format-number"><%= number_with_precision(step.step_temp, precision: 0) %><%= t(:'beerxml.degrees') %></td>
@@ -383,9 +401,12 @@
                 <td class="mash_ramp_time format-number pure-hidden pure-sm-table-cell"><%= number_with_precision(step.ramp_time, precision: 0) %> <%= t(:'beerxml.minutes') %></td>
                 <td class="mash_type pure-hidden pure-sm-table-cell"><%= trans(step.type, scope: :'beerxml.mash_step_type') %></td>
                 <td class="mash_infuse_amount format-number pure-hidden pure-sm-table-cell"><%= number_with_precision(step.infuse_amount, precision: 2) %> <%= t(:'beerxml.liter_abbr') %></td>
+                <td class="toggle-link pure-sm-hidden" data-toggle-target="#mash-info-<%= index %>">
+                  <%= icon("caret-down") %>
+                </td>
               </tr>
-              <tr class="info-row">
-                <td class="mash-info pure-sm-hidden" colspan="6">
+              <tr class="info-row" id="mash-info-<%= index %>">
+                <td class="mash-info pure-sm-hidden" colspan="7">
                   <p>
                   <span class="mash-info pure-sm-hidden"><%= t(:'beerxml.mash_ramp_time') %>: <%= number_with_precision(step.ramp_time, precision: 0) %> <%= t(:'beerxml.minutes') %><br></span>
                   <span class="mash-info pure-sm-hidden"><%= t(:'beerxml.mash_type') %>: <%= trans(step.type, scope: :'beerxml.mash_step_type') %><br></span>

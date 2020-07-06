@@ -510,7 +510,7 @@ sv:
     assisted_by: med hjälp av %{assistant}
     notes: Anteckningar
     recipe_details: Ölrecept
-    batch_size: Mängd
+    batch_size: Volym
     boil_time: Koktid
     ibu: IBU
     og: OG
@@ -564,9 +564,9 @@ sv:
     mash_name: Namn
     mash_type: Typ
     mash_infuse_amount: Vatten
-    mash_step_temp: Stegtemp.
+    mash_step_temp: Temp.
     mash_ramp_time: Höjningstid
-    mash_step_time: Stegtid
+    mash_step_time: Tid
     Temperature: Temperatur
     Infusion: Infusion
     Mash In: Inmäskning

@@ -46,17 +46,11 @@
     tbody tr:nth-child(4n), tbody tr:nth-child(4n-1) {
       background-color: #f5f5f5;
     }
-    .details-row:hover + .info-row {
-      display: table-row;
+    .toggle-link {
+      text-align: center;
     }
     .info-row {
       display: none;
-      td {
-        white-space: normal;
-      }
-      &:hover {
-        display: table-row;
-      }
     }
   }
   td, th {
@@ -101,6 +95,15 @@
   .format-number {
     text-align: right;
     white-space: nowrap
+  }
+  .fermentable_name,
+  .hops_name,
+  .misc_name,
+  .yeast_name,
+  .mash_name
+  {
+    overflow-wrap: anywhere;
+    hyphens: auto;
   }
   @media print {
     .beer-recipe {
