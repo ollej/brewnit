@@ -101,3 +101,16 @@
     }
   }
 }
+
+.colorbox {
+  width: 1em;
+  height: 1em;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  border-width: 1px;
+  border-color: beige;
+  border-style: solid;
+  display: inline-block;
+  vertical-align: text-top;
+}

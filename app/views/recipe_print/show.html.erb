@@ -1,11 +1,11 @@
 <% content_for :head do %>
-   <%= stylesheet_link_tag :recipe_details, media: 'all' -%>
+   <%= stylesheet_link_tag :recipe_table, media: 'all' -%>
 <% end %>
 
 <div class="print-main beer-recipe">
   <h1><%= @recipe.name %></h1>
   <h2><%= @beerxml.style&.name %> <%= @presenter.style_type %></h2>
-  <%= render 'shared/recipe_details' %>
+  <%= render 'shared/recipe_table' %>
 </div>
 
 <%= render 'shared/print_footer', footer_css: '' %>
