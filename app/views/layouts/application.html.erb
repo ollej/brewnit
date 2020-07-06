@@ -5,13 +5,13 @@
   <%= display_meta_tags site: 'Brygglogg.se' %>
   <%= yield(:head) %>
   <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css">
   <link rel="stylesheet" media="screen" href="https://unpkg.com/purecss@2.0.3/build/grids-responsive-min.css">
   <link rel="search" type="application/opensearchdescription+xml"
-        href="<%= open_search_show_url(format: :xml) %>" title="Recipe search" />
+        href="<%= open_search_show_url(format: :xml) %>" title="Recipe search">
   <%= render partial: 'shared/user' %>
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>

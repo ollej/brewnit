@@ -32,6 +32,10 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
 }
 %>
 <% content_for :head do %>
+  <link rel="alternate" type="application/json" href="<%= recipe_url(@recipe, format: :json) %>"
+    title="Recipe information in JSON format">
+  <link rel="alternate" type="application/xml" href="<%= recipe_url(@recipe, format: :xml) %>"
+    title="Recipe information in BeerXML format">
   <meta name="author" content="<%= @recipe.brewer_name %>">
 <% end %>
 
