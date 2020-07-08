@@ -25,6 +25,7 @@ Related resources
  * [BrewR (Android)](https://play.google.com/store/apps/details?id=com.weekendcoders.brewr&hl=en)
  * [Wort (Android)](https://play.google.com/store/apps/details?id=info.dynamicdesigns.wort&hl=en)
  * [Brewer's Friend (iOS, Android)](https://www.brewersfriend.com/)
+ * [Brewfather](https://brewfather.app)
 
 Requirements
 ------------
