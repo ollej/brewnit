@@ -91,6 +91,7 @@ RECAPTCHA_SITE_KEY: changeme
 RECAPTCHA_SECRET_KEY: changeme
 INKSCAPE_PATH: /usr/bin/inkscape
 DEVELOPMENT_HOST: yourcomputer.local
+SLACK_SIGNING_SECRET: changeme
 ```
 
 #### Development mode
@@ -156,6 +157,7 @@ RECAPTCHA_SITE_KEY=changeme
 RECAPTCHA_SECRET_KEY=changeme
 SPAM_IP=space separated list of IP addresses to block
 INKSCAPE_PATH=/usr/bin/inkscape
+SLACK_SIGNING_SECRET=changeme
 ```
 
 ### Step 4 - Start application
