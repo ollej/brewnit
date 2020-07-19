@@ -3,7 +3,9 @@ class SlackController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def create
-    if verified?
+    if slack_params[:ssl_check].present?
+      head :ok
+    elsif verified?
       render json: response_message(find_recipes), status: :ok
     else
       head :forbidden
