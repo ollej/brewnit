@@ -17,7 +17,7 @@ class EventRecipesController < ApplicationController
       format.rss { render layout: false, template: 'recipes/index' }
       format.csv
       format.xlsx {
-        response.headers['Content-Disposition'] = "attachment; filename='#{basename}.xlsx'"
+        response.headers['Content-Disposition'] = "attachment; filename=\"#{basename}.xlsx\""
       }
     end
   end
