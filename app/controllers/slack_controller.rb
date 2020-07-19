@@ -63,12 +63,13 @@ class SlackController < ApplicationController
     if recipes.size == 0
       return {
         response_type: "ephemeral",
-        text: "Hittade inga recept"
+        text: "*Brygglogg.se* - Hittade inga recept"
       }
     elsif recipes.size > 1
+      # TODO: If one recipe name matches exactly, return that
       return {
         response_type: "ephemeral",
-        text: "Hittade flera recept:\n#{recipe_names(recipes)}"
+        text: "*Brygglogg.se* - Hittade flera recept:\n#{recipe_names(recipes)}"
       }
     else
       return slack_message(recipes.first)
