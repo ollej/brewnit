@@ -1,0 +1,13 @@
+<%=
+content_tag :svg, class: avatar_class, width: width, height: height do
+  concat content_tag :rect, "", { fill: backgroundcolor, x: "0", y: "0", width: width, height: height }
+  concat content_tag :text, texts, {
+    "fill" => textcolor,
+    "font-size" => fontsize,
+    "font-weight" => "bold",
+    "text-anchor" => "middle",
+    "x" => width / 2,
+    "y" => height / 2 + fontsize * 0.375
+  }
+end
+%>

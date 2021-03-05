@@ -3,26 +3,12 @@ module ApplicationHelper
     image_tag user.avatar_image
   end
 
-  def svg_avatar(text, opts = {})
-    opts = {
-      class: "item-avatar",
-      width: 64,
-      bgcolor: "#df9c25",
-      fontcolor: "#ffffff"
-    }.with_indifferent_access.merge(opts)
-    opts[:height] ||= opts[:width]
-    opts[:fontsize] ||= opts[:height] / 2
-    content_tag :svg, class: opts[:class], width: opts[:width], height: opts[:height] do
-      concat content_tag :rect, "", { fill: opts[:bgcolor], x: "0", y: "0", height: opts[:width], width: opts[:height] }
-      concat content_tag :text, text, {
-        "fill" => opts[:fontcolor],
-        "font-size" => opts[:fontsize],
-        "font-weight" => "bold",
-        "text-anchor" => "middle",
-        "x" => opts[:width] / 2,
-        "y" => opts[:height] / 2 + opts[:fontsize] * 0.375
-      }
-    end
+  def svg_avatar_two_lines(lines, values = {})
+    render SvgAvatar.new(SvgAvatar::THEME_TWO_LINES, values.merge(texts: lines)).partial
+  end
+
+  def svg_avatar_two_letters(letters, values = {})
+    render SvgAvatar.new(SvgAvatar::THEME_TWO_LETTERS, values.merge(texts: letters)).partial
   end
 
   def destroy_medium_path(medium)
