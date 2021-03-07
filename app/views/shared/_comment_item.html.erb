@@ -4,8 +4,7 @@
 %>
   <div class="list-item comment-item linked-item pure-g">
     <div class="pure-u">
-      <%= image_tag user.avatar_image, class: 'item-avatar',
-        alt: user.name, height: 64, width: 64 %>
+      <%= user_avatar(user) %>
     </div>
 
     <div class="pure-u-5-8 item-information comment-item-information">

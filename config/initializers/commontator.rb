@@ -65,7 +65,8 @@ Commontator.configure do |config|
   #            view.commontator_gravatar_image_tag(
   #              user, 1, :s => 60, :d => 'mm') }
   config.user_avatar_proc = lambda { |user, view|
-    view.image_tag user.avatar_image
+    #view.image_tag user.avatar_image
+    view.user_avatar(user)
   }
 
   # user_email_proc

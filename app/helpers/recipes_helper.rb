@@ -1,16 +1,6 @@
 module RecipesHelper
-  def avatar_for(recipe)
-    if recipe.main_image.present?
-      recipe.main_image
-    else
-      hash = Digest::MD5.hexdigest("#{recipe.id}/#{recipe.name}")
-      "http://api.adorable.io/avatars/100/#{hash}.png"
-    end
-  end
-
   def media_main_tag(recipe)
-    image_tag recipe.main_image(:small), class: 'item-avatar', alt: recipe.name,
-      width: 160, height: 120
+    recipe_avatar(recipe, 160, 120)
   end
 
   def item_classes_for(recipe, current_user=nil, current_recipe=nil)

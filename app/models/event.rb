@@ -62,12 +62,11 @@ class Event < ApplicationRecord
   end
 
   def main_image(size = :medium_thumbnail)
-    if media_main.present?
-      media_main.file.url(size)
-    else
-      hash = Digest::MD5.hexdigest(organizer)
-      "https://secure.gravatar.com/avatar/#{hash}?s=100&d=retro"
-    end
+    media_main&.file&.url(size)
+  end
+
+  def default_avatar
+    SvgAvatar.for_user(username: name, email: organizer)
   end
 
   def option_values

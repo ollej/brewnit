@@ -15,7 +15,27 @@ class SvgAvatar
 
   def initialize(theme, values = {})
     @theme = theme
-    @values = values
+    values = values.with_indifferent_access
+    if values[:width].present? && !values[:height].present?
+      values[:height] = values[:width].present?
+    end
+    @values = default_values.merge(values)
+  end
+
+  def self.for_user(username:, email:, options: {})
+    SvgAvatar.new(THEME_TWO_LETTERS, options.merge({
+      texts: self.letters_for(username),
+      backgroundcolor: SvgAvatarColor.new(email).color
+    }))
+  end
+
+  def self.letters_for(string)
+    words = string.split
+    (self.initial(words.first) + self.initial(words.second)).upcase
+  end
+
+  def self.initial(string = "")
+    (string || "")[0] || ""
   end
 
   def default_values
@@ -35,7 +55,7 @@ class SvgAvatar
   end
 
   def avatar_values
-    default_values.merge(THEME_DEFAULTS[@theme]).merge(@values)
+    @values.merge(THEME_DEFAULTS[@theme]).merge(@values)
   end
 
   def partial

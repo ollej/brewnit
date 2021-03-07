@@ -81,6 +81,7 @@ class SlackController < ApplicationController
   end
 
   def slack_message(recipe)
+    # TODO: Change to blocks in response
     {
       response_type: "in_channel",
       attachments: [{

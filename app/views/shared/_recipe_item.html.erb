@@ -1,7 +1,6 @@
   <div class="list-item linked-item pure-g <%= item_classes_for(item, current_user) %>">
     <div class="pure-u">
-      <%= image_tag avatar_for(item), class: 'item-avatar item-image',
-        alt: item.owner_name, height: 64, width: 64 %>
+      <%= recipe_avatar(item) %>
     </div>
 
     <div class="pure-u-5-8 item-information recipe-item-description">

@@ -46,7 +46,11 @@ class User < ApplicationRecord
   }
 
   def display_name(default = nil)
-    name.presence || brewery.presence || default.presence || I18n.t(:'common.unknown_name')
+    name_or_brewery || default.presence || I18n.t(:'common.unknown_name')
+  end
+
+  def name_or_brewery
+    name.presence || brewery.presence
   end
 
   def admin?
@@ -64,17 +68,18 @@ class User < ApplicationRecord
   def avatar_image(size = :medium_thumbnail)
     if has_avatar?
       media_avatar.file.url(size)
-    elsif email.present?
-      default_avatar
     else
       nil
     end
   end
 
-  def default_avatar
-    return nil unless email.present?
-    hash = Digest::MD5.hexdigest(email)
-    "https://api.adorable.io/avatars/64/#{hash}"
+  def default_avatar(options = {})
+    SvgAvatar.for_user(
+      username: "#{name} #{brewery}".strip,
+      email: email.presence || name_or_brewery,
+      options: options.merge(
+        fontsize: (options[:height] || 64) / 2
+      ))
   end
 
   def can_modify?(resource)

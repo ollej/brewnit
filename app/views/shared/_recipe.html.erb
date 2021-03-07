@@ -2,8 +2,7 @@
   data-recipe-id="<%= recipe.id %>">
     <div class="pure-u">
       <div class="recipe-image">
-      <%= image_tag recipe.main_image, class: 'recipe-avatar',
-        alt: recipe.owner_name, height: 64, width: 64 %>
+        <%= recipe_avatar(recipe) %>
         <%= medal_tag(recipe.placement) %>
       </div>
     </div>

@@ -3,6 +3,33 @@ module ApplicationHelper
     image_tag user.avatar_image
   end
 
+  def user_avatar(user, width = 64, height = 64)
+    if user.has_avatar?
+      image_tag user.avatar_image, class: 'item-avatar',
+        alt: user.name_or_brewery, width: width, height: height
+    else
+      render user.default_avatar(width: width, height: height).partial
+    end
+  end
+
+  def recipe_avatar(recipe, width = 64, height = 64)
+    if recipe.main_image.present?
+      image_tag recipe.main_image, class: 'item-avatar',
+        alt: recipe.name_and_brewer, width: width, height: height
+    else
+      user_avatar(recipe.user, width, height)
+    end
+  end
+
+  def item_avatar(item, width = 64, height = 64)
+    if item.main_image.present?
+      image_tag item.main_image(:medium_thumbnail), class: 'item-avatar',
+        alt: item.name, width: width, height: height
+    else
+      render item.default_avatar.partial
+    end
+  end
+
   def svg_avatar_two_lines(lines, values = {})
     render SvgAvatar.new(SvgAvatar::THEME_TWO_LINES, values.merge(texts: lines)).partial
   end
@@ -34,6 +61,7 @@ module ApplicationHelper
   end
 
   def full_url_for(url)
+    return unless url.present?
     return url if full_url?(url)
     asset_url(url)
   end
