@@ -1,8 +1,7 @@
           <div class="linked-list">
             <div class="pure-g next-event info-plate ad-plate linked-item">
               <div class="pure-u">
-                <%= image_tag @event.main_image(:medium), class: "plate-image",
-                  alt: @event.name %>
+                <%= item_avatar(@event, 160, 120, :small) %>
               </div>
               <div class="pure-u-7-12">
                 <h2 class="item-title event-name item-content-title">

@@ -21,9 +21,9 @@ module ApplicationHelper
     end
   end
 
-  def item_avatar(item, width = 64, height = 64)
+  def item_avatar(item, width = 64, height = 64, size = :medium_thumbnail)
     if item.main_image.present?
-      image_tag item.main_image(:medium_thumbnail), class: 'item-avatar',
+      image_tag item.main_image(size), class: 'item-avatar',
         alt: item.name, width: width, height: height
     else
       render item.default_avatar(width: width, height: height).partial
