@@ -26,7 +26,7 @@ module ApplicationHelper
       image_tag item.main_image(:medium_thumbnail), class: 'item-avatar',
         alt: item.name, width: width, height: height
     else
-      render item.default_avatar.partial
+      render item.default_avatar(width: width, height: height).partial
     end
   end
 

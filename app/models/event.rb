@@ -65,8 +65,13 @@ class Event < ApplicationRecord
     media_main&.file&.url(size)
   end
 
-  def default_avatar
-    SvgAvatar.for_user(username: name, email: organizer)
+  def default_avatar(options = {})
+    SvgAvatar.for_user(
+      username: name,
+      email: organizer,
+      options: options.merge(
+        fontsize: (options[:height] || 64) / 2
+      ))
   end
 
   def option_values
