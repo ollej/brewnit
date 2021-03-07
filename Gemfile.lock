@@ -198,7 +198,6 @@ GEM
       mime-types
       mimemagic (~> 0.3.0)
       terrapin (~> 0.6.0)
-    libv8 (3.16.14.19)
     libxml-ruby (3.2.1)
     libxml-xmlrpc (0.1.5)
       libxml-ruby (> 0.0.0)
@@ -332,7 +331,6 @@ GEM
     rdoc (6.3.0)
     recaptcha (5.7.0)
       json
-    ref (2.0.0)
     request_store (1.5.0)
       rack (>= 1.4)
     responders (3.0.1)
@@ -384,9 +382,6 @@ GEM
       ffi
     terrapin (0.6.0)
       climate_control (>= 0.0.3, < 1.0)
-    therubyracer (0.12.3)
-      libv8 (~> 3.16.14.15)
-      ref
     thor (1.1.0)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -476,7 +471,6 @@ DEPENDENCIES
   search_cop!
   spring
   sys-proctable
-  therubyracer
   uglifier
   unicorn-rails
   web-console
