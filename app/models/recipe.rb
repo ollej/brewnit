@@ -117,8 +117,8 @@ class Recipe < ApplicationRecord
 
   def pushover_values_create
     {
-      title: I18n.t(:'common.notification.recipe.created.title', pushover_translation),
-      message: I18n.t(:'common.notification.recipe.created.message', pushover_translation),
+      title: I18n.t(:'common.notification.recipe.created.title', **pushover_translation),
+      message: I18n.t(:'common.notification.recipe.created.message', **pushover_translation),
       url: Rails.application.routes.url_helpers.recipe_url(self),
       user: pushover_user
     }
@@ -126,8 +126,8 @@ class Recipe < ApplicationRecord
 
   def pushover_values_destroy
     {
-      title: I18n.t(:'common.notification.recipe.destroyed.title', pushover_translation),
-      message: I18n.t(:'common.notification.recipe.destroyed.message', pushover_translation),
+      title: I18n.t(:'common.notification.recipe.destroyed.title', **pushover_translation),
+      message: I18n.t(:'common.notification.recipe.destroyed.message', **pushover_translation),
       sound: :falling,
       user: pushover_user
     }

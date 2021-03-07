@@ -21,15 +21,15 @@ class LabelTemplates
   end
 
   def templates
-    @templates ||= files(FILE_TYPES[:template])
+    @templates ||= files(**FILE_TYPES[:template])
   end
 
   def backgrounds
-    @backgrounds ||= files(FILE_TYPES[:background])
+    @backgrounds ||= files(**FILE_TYPES[:background])
   end
 
   def borders
-    @borders ||= files(FILE_TYPES[:border])
+    @borders ||= files(**FILE_TYPES[:border])
   end
 
   def list

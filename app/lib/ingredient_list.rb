@@ -90,7 +90,7 @@ class IngredientList
     if @items[name].present?
       @items[name].add_amount(data[:amount])
     else
-      @items[name] = IngredientItem.new(data)
+      @items[name] = IngredientItem.new(**data)
     end
   end
 end

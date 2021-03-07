@@ -29,8 +29,8 @@ class LabelPresenter
 
   def push_values
     {
-      title: I18n.t(:'common.notification.label.created.title', @params),
-      message: I18n.t(:'common.notification.label.created.message', @params),
+      title: I18n.t(:'common.notification.label.created.title', **@params),
+      message: I18n.t(:'common.notification.label.created.message', **@params),
       sound: :magic
     }
   end

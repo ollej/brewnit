@@ -125,10 +125,11 @@ class BrewStepsPresenter
     time = 0
     index = 0
     @beerxml.mash.steps.each do |step|
+      temp = number_with_precision(step.step_temp, precision: 1)
       steps.push({
         name: step.name,
-        description: I18n.t(:'beerxml.brew_step.raise_temperature', {
-          temperature: number_with_precision(step.step_temp, precision: 1)
+        description: I18n.t(:'beerxml.brew_step.raise_temperature', **{
+          temperature: temp
         }),
         type: "raise",
         time: step.ramp_time * 60,
@@ -139,8 +140,8 @@ class BrewStepsPresenter
       index += 1
       steps.push({
         name: step.name,
-        description: I18n.t(:'beerxml.brew_step.hold_temperature', {
-          temperature: number_with_precision(step.step_temp, precision: 1),
+        description: I18n.t(:'beerxml.brew_step.hold_temperature', **{
+          temperature: temp,
           minutes: step.step_time
         }),
         type: "mash",

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.7.2'
+ruby '3.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '6.1.3'
@@ -29,6 +29,7 @@ gem 'jbuilder'
 gem 'sdoc', group: :doc
 
 gem 'pg'
+gem 'rexml'
 gem 'libxml-xmlrpc'
 gem 'devise'
 gem 'omniauth', '1.9.1'
@@ -43,7 +44,7 @@ gem 'acts_as_votable'
 gem 'search_cop', git: 'https://github.com/mrkamel/search_cop.git', ref: '1082a2f7862321cf8f1c4560a2b6602a0c256e59' # Use Ruby v2.4 compatible fork
 gem 'meta-tags'
 gem 'pushover', git: 'https://github.com/vito-lbs/pushover.git', ref: '3bbb7ea026b3d30c043ba033d596dab6fec2a031' # Use Ruby v2.4 compatible fork
-gem "kt-paperclip", "~> 6.2.0"
+gem "kt-paperclip"
 gem 'chronic', require: true
 gem 'actionview-encoded_mail_to'
 gem 'quilljs-rails'
