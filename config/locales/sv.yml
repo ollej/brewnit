@@ -46,7 +46,7 @@ sv:
           message: "%{brewer_name} har lagt upp en %{style_name} som heter '%{recipe_name}'."
         destroyed:
           title: "Recept borttaget: %{recipe_name}"
-          message: "Receptet %{recipe_name} togs bort av %{brewer_name}."
+          message: "Receptet %{recipe_name} av %{brewer_name} togs bort."
       user:
         created:
           title: "Ny bryggare: %{name}"
