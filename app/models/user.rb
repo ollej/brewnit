@@ -121,8 +121,8 @@ class User < ApplicationRecord
 
   def pushover_values_create
     {
-      title: I18n.t(:'common.notification.user.created.title', pushover_translation),
-      message: I18n.t(:'common.notification.user.created.message', pushover_translation),
+      title: I18n.t(:'common.notification.user.created.title', **pushover_translation),
+      message: I18n.t(:'common.notification.user.created.message', **pushover_translation),
       sound: :bugle,
       url: Rails.application.routes.url_helpers.user_url(self)
     }
@@ -130,8 +130,8 @@ class User < ApplicationRecord
 
   def pushover_values_destroy
     {
-      title: I18n.t(:'common.notification.user.destroyed.title', pushover_translation),
-      message: I18n.t(:'common.notification.user.destroyed.message', pushover_translation),
+      title: I18n.t(:'common.notification.user.destroyed.title', **pushover_translation),
+      message: I18n.t(:'common.notification.user.destroyed.message', **pushover_translation),
       sound: :siren,
     }
   end
