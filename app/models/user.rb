@@ -36,7 +36,7 @@ class User < ApplicationRecord
   scope :by_query, lambda { |query, col = :name|
     where arel_table[col].matches("%#{query}%")
   }
-  scope :ordered, -> { order("users.name = '', users.name ASC, brewery ASC") }
+  scope :ordered, -> { order("users.name ASC, brewery ASC") }
   scope :confirmed, -> { where('confirmed_at IS NOT NULL') }
   scope :unconfirmed, -> { where( 'confirmed_at is NULL AND confirmation_sent_at < ?', Time.now - Devise.confirm_within) }
   scope :latest, -> { confirmed.limit(10).order('created_at desc') }
