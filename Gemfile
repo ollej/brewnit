@@ -31,7 +31,9 @@ gem 'sdoc', group: :doc
 gem 'pg'
 gem 'libxml-xmlrpc'
 gem 'devise'
+gem 'omniauth', '1.9.1'
 gem 'omniauth-google-oauth2'
+gem "omniauth-rails_csrf_protection"
 gem 'unicorn-rails'
 
 gem 'nrb-beerxml', git: 'https://github.com/ollej/beerxml.git', ref: '3c3a9c6d7b138a1160e481f276bb2d0923c83911'

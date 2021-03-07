@@ -39,8 +39,6 @@ class SvgAvatar
   end
 
   def default_values
-    #opts[:height] ||= opts[:width]
-    #opts[:fontsize] ||= opts[:height] / 2
     {
       avatar_class: "item-avatar",
       text_class: "avatar-text",
