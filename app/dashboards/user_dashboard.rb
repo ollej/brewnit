@@ -57,6 +57,7 @@ class UserDashboard < Administrate::BaseDashboard
     :name,
     :brewery,
     :location,
+    :created_at,
     :last_sign_in_ip,
     :recipes,
   ].freeze
