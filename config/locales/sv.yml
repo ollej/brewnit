@@ -494,6 +494,19 @@ sv:
     texture: Munkänsla
     examples: Förebilder
     summary: Sammanfattning
+  brewlogs:
+    save: Logga bryggning
+    button:
+      description: Logga en bryggning av detta recept.
+      text: Brygglogga
+    modal:
+      title: Logga bryggning av %{recipe_name}
+    create:
+      successful: Din bryggning har loggats.
+      failed: Kunde inte logga din bryggning.
+    destroy:
+      successful: Din bryggning har tagits bort.
+      failed: Kunde inte ta bort din bryggning.
 
   beerxml:
     name: Ölnamn
@@ -926,6 +939,9 @@ sv:
       user: Användare
       recipe: Recept
       event: Evenemang
+      brew_log:
+        one: Bryggloggning
+        other: Bryggloggningar
     attributes:
       user:
         sign_in: Logga in
@@ -1025,7 +1041,20 @@ sv:
         ramp_time: Höjningstid
         infuse_amount: Vatten (L)
         mash_type: Mäskning
-
+      brew_log:
+        description: Beskrivning
+        brewed_at: Bryggdatum
+        bottled_at: Buteljeringsdatum
+        brewers: Bryggare
+        equipment: Bryggverk
+        og: OG
+        fg: FG
+        preboil_og: OG före kok
+        mash_ph: Mäsk pH
+        batch_volume: Bryggvolym
+        boil_volume: Kokvolym
+        fermenter_volume: Jäsvolym
+        bottled_volume: Buteljeringsvolym
     errors:
       template:
         header:
@@ -1084,6 +1113,9 @@ sv:
           attributes:
             body:
               double_posted: har redan postats.
+        brewlog:
+          header: Det gick inte att spara loggningen.
+
   date:
     formats:
       default: "%Y-%m-%d"

@@ -27,6 +27,14 @@
                     <%= icon('clone') %> <%= t(:'recipes.clone') %>
                   <% end %>
                 </li>
+                <li>
+                <%= link_to "#", data: tooltip_data(I18n.t(:'brewlogs.button.description'), position: :left).merge({
+                  toggle: 'modal', target: '#brewlog-add-modal',
+                  keyboard: true, backdrop: true
+                }) do %>
+                    <i class="fas fa-clipboard-list"></i> <%= t(:'brewlogs.button.text') %>
+                  <% end %>
+                </li>
                 <% end %>
               </ul>
             </label>

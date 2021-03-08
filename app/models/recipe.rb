@@ -31,6 +31,7 @@ class Recipe < ApplicationRecord
   has_many :placements, dependent: :destroy
   has_many :registrations, dependent: :destroy, class_name: 'EventRegistration'
   has_one :detail, dependent: :destroy, class_name: 'RecipeDetail'
+  has_many :brew_logs, dependent: :destroy
 
   accepts_nested_attributes_for :media, reject_if: lambda { |r| r['media'].nil? }
 

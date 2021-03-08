@@ -23,9 +23,11 @@ class RecipesController < ApplicationController
     @beerxml = BeerxmlParser.new(@recipe.beerxml).recipe
     @presenter = RecipePresenter.new(@recipe, @beerxml)
     @brew_steps = BrewStepsPresenter.new(@recipe)
+    @brewlog = @recipe.brew_logs.build
     Recipe.unscoped do
       commontator_thread_show(@recipe)
     end
+
     respond_to do |format|
       format.html { render :show }
       format.json { render :layout => false }

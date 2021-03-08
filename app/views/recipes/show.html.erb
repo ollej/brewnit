@@ -126,7 +126,7 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
           </div>
           <div id="tab-content4" class="tab-content">
             <% if @presenter.style_has_values? %>
-            <%= render 'shared/style_guide' %>
+              <%= render 'shared/style_guide' %>
             <% else %>
               <p><%= t(:'recipes.no_style_information') %></p>
             <% end %>
@@ -137,4 +137,5 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
 <% content_for :modals do %>
   <%= render partial: 'shared/brew_timer', locals: { step_type: 'mash' } %>
   <%= render partial: 'shared/brew_timer', locals: { step_type: 'boil' } %>
+  <%= render partial: 'shared/modal_add_brewlog' %>
 <% end %>

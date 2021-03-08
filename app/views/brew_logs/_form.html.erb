@@ -1,0 +1,73 @@
+<%= form_with(model: @brewlog, url: recipe_brew_logs_path(@recipe), local: true,
+  id: "add-brewlog-form", html: { class: 'pure-form pure-form-stacked' }) do |f| %>
+  <%= invisible_captcha %>
+
+  <% if @brewlog.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= I18n.t(:'activerecord.errors.models.brewlog.header', count: @brewlog.errors.count) %></h2>
+
+      <ul>
+      <% @brewlog.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+    <div class="pure-g">
+      <div class="field pure-control-group pure-u-1 pure-u-sm-1-2 pure-u-lg-1-3">
+        <%= f.label :description %>
+        <%= f.text_area :description %>
+      </div>
+      <div class="field pure-control-group pure-u-1 pure-u-sm-1-2 pure-u-lg-1-3">
+        <%= f.label :brewed_at %>
+        <%= f.date_field :brewed_at, required: true %>
+      </div>
+      <div class="field pure-control-group pure-u-1 pure-u-sm-1-2 pure-u-lg-1-3">
+        <%= f.label :bottled_at %>
+        <%= f.date_field :bottled_at %>
+      </div>
+      <div class="field pure-control-group pure-u-1 pure-u-sm-1-2 pure-u-lg-1-3">
+        <%= f.label :brewers %>
+        <%= f.text_field :brewers %>
+      </div>
+      <div class="field pure-control-group pure-u-1 pure-u-sm-1-2 pure-u-lg-1-3">
+        <%= f.label :equipment %>
+        <%= f.text_field :equipment %>
+      </div>
+      <div class="field pure-control-group pure-u-1 pure-u-sm-1-2 pure-u-lg-1-3">
+        <%= f.label :og %>
+        <%= f.text_field :og %>
+      </div>
+      <div class="field pure-control-group pure-u-1 pure-u-sm-1-2 pure-u-lg-1-3">
+        <%= f.label :preboil_og %>
+        <%= f.text_field :preboil_og %>
+      </div>
+      <div class="field pure-control-group pure-u-1 pure-u-sm-1-2 pure-u-lg-1-3">
+        <%= f.label :fg %>
+        <%= f.text_field :fg %>
+      </div>
+      <div class="field pure-control-group pure-u-1 pure-u-sm-1-2 pure-u-lg-1-3">
+        <%= f.label :mash_ph %>
+        <%= f.text_field :fg %>
+      </div>
+      <div class="field pure-control-group pure-u-1 pure-u-sm-1-2 pure-u-lg-1-3">
+        <%= f.label :batch_volume %>
+        <%= f.text_field :batch_volume %>
+      </div>
+      <div class="field pure-control-group pure-u-1 pure-u-sm-1-2 pure-u-lg-1-3">
+        <%= f.label :boil_volume %>
+        <%= f.text_field :boil_volume %>
+      </div>
+      <div class="field pure-control-group pure-u-1 pure-u-sm-1-2 pure-u-lg-1-3">
+        <%= f.label :fermenter_volume %>
+        <%= f.text_field :fermenter_volume %>
+      </div>
+      <div class="field pure-control-group pure-u-1 pure-u-sm-1-2 pure-u-lg-1-3">
+        <%= f.label :bottled_volume %>
+        <%= f.text_field :bottled_volume %>
+      </div>
+    </div>
+  </fieldset>
+<% end %>

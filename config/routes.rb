@@ -52,7 +52,9 @@ Rails.application.routes.draw do
     resources :yeasts, only: [:index, :create, :destroy], controller: :recipe_yeasts
     resources :mash_steps, only: [:index, :create, :destroy], controller: :recipe_mash_steps
     resource :complete, only: [:update], controller: :recipe_complete
+    resources :brew_logs, only: [:index, :create], controller: :brew_logs
   end
+  resources :brew_logs, only: [:show, :destroy], controller: :brew_logs
 
   get :register_recipe, controller: :register_recipe, action: :new
   post :register_recipe, controller: :register_recipe, action: :create

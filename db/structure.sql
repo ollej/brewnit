@@ -222,6 +222,51 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
+-- Name: brew_logs; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.brew_logs (
+    id bigint NOT NULL,
+    description text,
+    brewers character varying,
+    equipment character varying,
+    brewed_at date,
+    bottled_at date,
+    og numeric,
+    fg numeric,
+    preboil_og numeric,
+    mash_ph numeric,
+    batch_volume numeric,
+    boil_volume numeric,
+    fermenter_volume numeric,
+    bottled_volume numeric,
+    user_id bigint NOT NULL,
+    recipe_id bigint NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: brew_logs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.brew_logs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: brew_logs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.brew_logs_id_seq OWNED BY public.brew_logs.id;
+
+
+--
 -- Name: commontator_comments; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -942,6 +987,13 @@ ALTER SEQUENCE public.yeasts_id_seq OWNED BY public.yeasts.id;
 
 
 --
+-- Name: brew_logs id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.brew_logs ALTER COLUMN id SET DEFAULT nextval('public.brew_logs_id_seq'::regclass);
+
+
+--
 -- Name: commontator_comments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -1066,6 +1118,14 @@ ALTER TABLE ONLY public.yeasts ALTER COLUMN id SET DEFAULT nextval('public.yeast
 
 ALTER TABLE ONLY public.ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: brew_logs brew_logs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.brew_logs
+    ADD CONSTRAINT brew_logs_pkey PRIMARY KEY (id);
 
 
 --
@@ -1272,6 +1332,20 @@ CREATE INDEX fulltext_index_users_on_name ON public.users USING gin (to_tsvector
 --
 
 CREATE INDEX fulltext_index_users_on_primary ON public.users USING gin (to_tsvector('public.swedish_snowball'::regconfig, (((((((((COALESCE(name, ''::character varying))::text || ' '::text) || COALESCE(presentation, ''::text)) || ' '::text) || (COALESCE(equipment, ''::character varying))::text) || ' '::text) || (COALESCE(brewery, ''::character varying))::text) || ' '::text) || (COALESCE(twitter, ''::character varying))::text)));
+
+
+--
+-- Name: index_brew_logs_on_recipe_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_brew_logs_on_recipe_id ON public.brew_logs USING btree (recipe_id);
+
+
+--
+-- Name: index_brew_logs_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_brew_logs_on_user_id ON public.brew_logs USING btree (user_id);
 
 
 --
@@ -1779,6 +1853,22 @@ ALTER TABLE ONLY public.event_registrations
 
 
 --
+-- Name: brew_logs fk_rails_9ff6a4b31a; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.brew_logs
+    ADD CONSTRAINT fk_rails_9ff6a4b31a FOREIGN KEY (recipe_id) REFERENCES public.recipes(id);
+
+
+--
+-- Name: brew_logs fk_rails_d284aafe2c; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.brew_logs
+    ADD CONSTRAINT fk_rails_d284aafe2c FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
 -- Name: yeasts fk_rails_e5e114c272; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1878,6 +1968,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200613184054'),
 ('20200616170418'),
 ('20200620114227'),
-('20200620124947');
+('20200620124947'),
+('20210308201612');
 
 
