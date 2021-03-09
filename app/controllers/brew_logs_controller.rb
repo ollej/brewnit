@@ -5,7 +5,7 @@ class BrewLogsController < ApplicationController
 
   def index
     @recipe = Recipe.find(params[:recipe_id])
-    @brew_logs = @recipe.brew_logs.persisted
+    @brew_logs = @recipe.brew_logs.ordered.persisted
 
     respond_to do |format|
       format.html { render :index }

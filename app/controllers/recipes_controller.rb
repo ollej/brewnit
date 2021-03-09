@@ -24,6 +24,8 @@ class RecipesController < ApplicationController
     @presenter = RecipePresenter.new(@recipe, @beerxml)
     @brew_steps = BrewStepsPresenter.new(@recipe)
     @brewlog = @recipe.brew_logs.build
+    @brewlogs = @recipe.brew_logs.ordered.persisted
+
     Recipe.unscoped do
       commontator_thread_show(@recipe)
     end

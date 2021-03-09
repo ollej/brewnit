@@ -86,7 +86,9 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
 
         <div class="recipe-badge-list pure-u-1">
           <%= visibility_badge(@recipe) %>
-          <%= brewlogs_badge(@recipe) %>
+          <span data-toggle="modal" data-target="#brewlogs-modal">
+            <%= brewlogs_badge(@recipe) %>
+          </span>
           <%= comments_badge(@recipe) %>
           <%= likes_badge(@recipe) %>
           <%= downloads_badge(@recipe) %>
@@ -139,4 +141,5 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
   <%= render partial: 'shared/brew_timer', locals: { step_type: 'mash' } %>
   <%= render partial: 'shared/brew_timer', locals: { step_type: 'boil' } %>
   <%= render partial: 'shared/modal_add_brewlog' %>
+  <%= render partial: 'shared/modal_brewlogs' %>
 <% end %>

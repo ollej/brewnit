@@ -176,11 +176,11 @@ class Recipe < ApplicationRecord
   end
 
   def brew_logs_list
-    brew_logs.persisted.map(&:display_title).to_sentence
+    brew_logs.ordered.persisted.map(&:display_title).to_sentence
   end
 
   def brew_logs_count
-    brew_logs.persisted.size
+    brew_logs.ordered.persisted.size
   end
 
   def self.recipe_options(scope)

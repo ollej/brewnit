@@ -1,25 +1,26 @@
-<div id="brewlog-add-modal" role="dialog" class="brewlog-modal modal fade no-auto-hide"
-  aria-labelledby="brewlog-modal-title" tabindex="-1">
+<div id="brewlogs-modal" role="dialog" class="brewlogs-modal modal fade no-auto-hide"
+  aria-labelledby="brewlogs-modal-title" tabindex="-1">
   <div class="modal-dialog modal-lg" role="document">
 
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <%= button_tag class: 'close brewlog-modal-close', data: { dismiss: 'modal' } do %>
+        <%= button_tag class: 'close brewlogs-modal-close', data: { dismiss: 'modal' } do %>
           <i class="fa fa-times"></i>
         <% end %>
-        <h3 class="modal-title" id="brewlog-modal-title">
+        <h3 class="modal-title" id="brewlogs-modal-title">
           <i class="fas fa-clipboard-list"></i>
-          <%= t(:"brewlogs.modal.title", recipe_name: @recipe.name) %></h3>
+          <%= t(:"brewlogs.modal.list.title", recipe_name: @recipe.name) %></h3>
       </div>
       <div class="modal-body">
-        <%= render partial: 'brew_logs/form' %>
+        <%= render partial: "shared/brewlogs" %>
       </div>
       <div class="modal-footer">
-        <div class="actions pure-controls">
-          <%= submit_tag I18n.t(:'brewlogs.save'), class: 'pure-button pure-button-primary',
-            form: "add-brewlog-form" %>
-        </div>
+        <%= link_to "#", class: "pure-button pure-button-primary", data: {
+          toggle: 'modal', target: '#brewlog-add-modal',
+          keyboard: true, backdrop: true } do %>
+            <%= t(:'brewlogs.button.text') %>
+          <% end %>
       </div>
     </div>
   </div>

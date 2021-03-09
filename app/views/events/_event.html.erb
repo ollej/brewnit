@@ -8,7 +8,7 @@
                 <h4 class="item-header-main event-name item-title">
                   <%= link_to shorten(event.name), event, class: 'event-link item-link' %>
                 </h4>
-                <p class="item-desc list-item-details">
+                <p class="item-desc">
                   <span class="event-held_at"><%= I18n.l(event.held_at.to_date) %></span>
                   <span class="event-type">| <%= event.event_type %></span>
                 </p>

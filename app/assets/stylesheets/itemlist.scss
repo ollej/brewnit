@@ -11,17 +11,20 @@
     border-left: 6px solid transparent;
     min-height: 5em;
 
-    .item-header-main,
-    .item-header-small {
-      margin: 0;
+    &.--without-padding {
+      padding-left: 0;
+      padding-right: 0;
     }
+
     .item-header-main {
+      margin: 0;
       font-size: 120%;
       a {
         color: #333;
       }
     }
     .item-header-small {
+      margin: 0;
       text-transform: uppercase;
       a {
         color: #999;
@@ -32,6 +35,12 @@
       height: 64px;
     }
     .list-item-details {
+      font-size: 85%;
+      text-align: right;
+
+      &.--left-aligned {
+        text-align: left;
+      }
     }
     .item-information {
       position: relative;
@@ -74,3 +83,4 @@
 .page-content-header .item-avatar {
   margin-top: 1em;
 }
+

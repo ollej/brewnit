@@ -501,6 +501,8 @@ sv:
       text: Brygglogga
     modal:
       title: Logga bryggning av %{recipe_name}
+      list:
+        title: Bryggningar av receptet %{recipe_name}
     create:
       successful: Din bryggning har loggats.
       failed: Kunde inte logga din bryggning.
@@ -511,6 +513,7 @@ sv:
       zero: Inga bryggningar
       one: 1 bryggning
       other: "%{count} bryggningar"
+    mash_ph: pH
 
   beerxml:
     name: Ölnamn

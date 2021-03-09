@@ -206,4 +206,10 @@ module ApplicationHelper
       (request.headers['HTTP_DNT'].present? && request.headers['HTTP_DNT'] == "1") ||
       (request.headers['HTTP_X_DO_NOT_TRACK'].present? && request.headers['HTTP_X_DO_NOT_TRACK'] == "1")
   end
+
+  def show?(value, prefix: "", suffix: "")
+    if value.present?
+      "#{prefix} #{value} #{suffix}<br>".html_safe
+    end
+  end
 end
