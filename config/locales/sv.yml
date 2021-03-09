@@ -507,6 +507,10 @@ sv:
     destroy:
       successful: Din bryggning har tagits bort.
       failed: Kunde inte ta bort din bryggning.
+    count:
+      zero: Inga bryggningar
+      one: 1 bryggning
+      other: "%{count} bryggningar"
 
   beerxml:
     name: Ölnamn

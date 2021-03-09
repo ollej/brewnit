@@ -86,6 +86,7 @@ set_meta_tags title: "#{@recipe.name} - #{@recipe.brewer_name}",
 
         <div class="recipe-badge-list pure-u-1">
           <%= visibility_badge(@recipe) %>
+          <%= brewlogs_badge(@recipe) %>
           <%= comments_badge(@recipe) %>
           <%= likes_badge(@recipe) %>
           <%= downloads_badge(@recipe) %>

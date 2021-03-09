@@ -51,6 +51,16 @@ module RecipesHelper
     badge(I18n.t(:'recipes.downloads_count', count: recipe.downloads), type: 'downloads', icon: 'bolt', class: 'badge-link')
   end
 
+  def brewlogs_badge(recipe)
+    badge(
+      I18n.t(:'brewlogs.count', count: recipe.brew_logs_count),
+      type: 'brewlogs',
+      icon: 'clipboard-list',
+      class: 'badge-link',
+      tooltip: recipe.brew_logs_list
+    )
+  end
+
   def like_tag(recipe, user)
     if user.liked? recipe
       link_to unlike_recipe_path(recipe), method: :delete, remote: true,

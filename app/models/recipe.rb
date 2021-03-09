@@ -31,7 +31,11 @@ class Recipe < ApplicationRecord
   has_many :placements, dependent: :destroy
   has_many :registrations, dependent: :destroy, class_name: 'EventRegistration'
   has_one :detail, dependent: :destroy, class_name: 'RecipeDetail'
-  has_many :brew_logs, dependent: :destroy
+  has_many :brew_logs, dependent: :destroy do
+    def persisted
+      select(&:persisted?)
+    end
+  end
 
   accepts_nested_attributes_for :media, reject_if: lambda { |r| r['media'].nil? }
 
@@ -169,6 +173,14 @@ class Recipe < ApplicationRecord
 
   def likes_list
     get_likes.map(&:voter).map(&:display_name).to_sentence
+  end
+
+  def brew_logs_list
+    brew_logs.persisted.map(&:display_title).to_sentence
+  end
+
+  def brew_logs_count
+    brew_logs.persisted.size
   end
 
   def self.recipe_options(scope)

@@ -53,6 +53,10 @@ class User < ApplicationRecord
     name.presence || brewery.presence
   end
 
+  def brewery_or_name
+    brewery.presence || name.presence
+  end
+
   def admin?
     admin
   end
