@@ -5,10 +5,11 @@ class BrewLogsController < ApplicationController
 
   def index
     @recipe = Recipe.find(params[:recipe_id])
+    @brew_logs = @recipe.brew_logs.persisted
 
     respond_to do |format|
       format.html { render :index }
-      format.json { render json: @recipe.brew_logs }
+      format.json { render :index }
     end
   end
 
