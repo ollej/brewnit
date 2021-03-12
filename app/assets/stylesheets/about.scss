@@ -5,31 +5,40 @@
   img {
     width: 100%;
   }
-  .feature-orange,
-  .feature-white,
-  .feature-blue {
+  .feature-item {
     min-height: 300px;
     padding: 3em 2em;
 
+    &:nth-child(4n+1) {
+      background-color: #ffd663; /* #ffcd40; */ /* #ffc94c;*/
+      color: #000;
+    }
+    &:nth-child(4n+2) {
+      background-color: #ffebb2; /* #fff4d6; */ /* #4a4a4a; */
+      color: #000;
+    }
+    &:nth-child(4n+3) {
+      background-color: #005493;
+      color: #fff;
+    }
+    &:nth-child(4n+4) {
+      background-color: #e8e8e8;
+      color: #000;
+    }
+
     @media screen and (min-width: 64em) {
-      .padding-left {
-        padding-left: 2em;
+      &:nth-child(even) {
+        .feature-description > * {
+          padding-right: 2rem;
+        }
       }
-      .padding-right {
-        padding-right: 2em;
+      &:nth-child(odd) {
+        flex-flow: row-reverse wrap;
+
+        .feature-description > * {
+          padding-left: 2rem;
+        }
       }
     }
-  }
-  .feature-orange {
-    background-color: #ffd663; /* #ffcd40; */ /* #ffc94c;*/
-    color: #000;
-  }
-  .feature-white {
-    background-color: #ffebb2; /* #fff4d6; */ /* #4a4a4a; */
-    color: #000;
-  }
-  .feature-blue {
-    background-color: #005493;
-    color: #fff;
   }
 }
