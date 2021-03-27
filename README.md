@@ -166,10 +166,10 @@ If you don't have Ruby, here is a short primer:
    ```bash
    $ git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
    ```
- * Install Ruby v2.7.0
+ * Install Ruby
 
    ```bash
-   $ rbenv install 2.7.0
+   $ rbenv install 3.0.0
    ```
  * Install bundler
 
