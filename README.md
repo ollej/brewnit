@@ -34,46 +34,38 @@ This application needs the following:
 
  * Ruby v3.0.0
  * Postgres v9.6
- * Vagrant 2.8+ for development
+ * Docker for development environment
 
-Vagrant
--------
+Docker
+------
 
-Use vagrant and ansible to setup a local development environment
-automatically.
+Use docker to setup a local development environment.
 
-### Step 1 - Setup vagrant
+### Step 1 - Build
 
-#### On Mac with homebrew:
-
-```bash
-$ brew install caskroom/cask/brew-cask
-$ brew cask install virtualbox
-$ brew cask install vagrant
-$ brew install ansible
+```
+docker-compose build
 ```
 
-#### Other systems
+### Step 2 - Start
 
-Follow instructions in Vagrant documentation:
-https://docs.vagrantup.com/v2/installation/index.html
-
-Also install ansible:
-https://docs.ansible.com/ansible/intro_installation.html
-
-### Step 2 - Start VM
-
-```bash
-$ cd railsbox/development
-$ vagrant up
+```
+docker-compose up
 ```
 
-#### Postgres installation issues
+### Step 3 - Create database
 
-If you encounter a postgres configuration error, try the solution in this
-issue: https://github.com/andreychernih/railsbox/issues/29
+```
+docker-compose run web rake db:create
+```
 
-### Step 3 - Create config
+### Step 4 - Run database migrations
+
+```
+docker-compose run web rake db:migrate
+```
+
+### Step 5 - Create config
 
 Add the following to a file called `.env.development`.
 
@@ -159,13 +151,6 @@ RECAPTCHA_SECRET_KEY=changeme
 SPAM_IP=space separated list of IP addresses to block
 INKSCAPE_PATH=/usr/bin/inkscape
 SLACK_SIGNING_SECRET=changeme
-```
-
-### Step 4 - Start application
-
-```bash
-$ vagrant ssh
-$ sudo start brewnit
 ```
 
 Manual installation
