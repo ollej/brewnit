@@ -1,4 +1,4 @@
-class Yeast < ActiveRecord::Migration[5.2]
+class AddProductIdToYeasts < ActiveRecord::Migration[5.2]
   def change
     add_column :yeasts, :product_id, :text
   end

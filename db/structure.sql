@@ -5,36 +5,9 @@ SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
+SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
-
---
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
-
-
---
--- Name: hstore; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS hstore WITH SCHEMA public;
-
-
---
--- Name: EXTENSION hstore; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs';
-
 
 --
 -- Name: pg_trgm; Type: EXTENSION; Schema: -; Owner: -
@@ -216,8 +189,8 @@ SET default_with_oids = false;
 CREATE TABLE public.ar_internal_metadata (
     key character varying NOT NULL,
     value character varying,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
 );
 
 
@@ -459,8 +432,8 @@ ALTER SEQUENCE public.events_id_seq OWNED BY public.events.id;
 --
 
 CREATE TABLE public.events_recipes (
-    event_id bigint NOT NULL,
-    recipe_id bigint NOT NULL
+    event_id integer NOT NULL,
+    recipe_id integer NOT NULL
 );
 
 
@@ -471,10 +444,10 @@ CREATE TABLE public.events_recipes (
 CREATE TABLE public.fermentables (
     id bigint NOT NULL,
     name character varying DEFAULT ''::character varying NOT NULL,
-    amount numeric DEFAULT 0 NOT NULL,
-    yield numeric DEFAULT 0 NOT NULL,
-    potential numeric DEFAULT 0 NOT NULL,
-    ebc numeric DEFAULT 0 NOT NULL,
+    amount numeric DEFAULT 0.0 NOT NULL,
+    yield numeric DEFAULT 0.0 NOT NULL,
+    potential numeric DEFAULT 0.0 NOT NULL,
+    ebc numeric DEFAULT 0.0 NOT NULL,
     after_boil boolean DEFAULT false NOT NULL,
     fermentable boolean DEFAULT true NOT NULL,
     recipe_detail_id bigint,
@@ -510,9 +483,9 @@ ALTER SEQUENCE public.fermentables_id_seq OWNED BY public.fermentables.id;
 CREATE TABLE public.hops (
     id bigint NOT NULL,
     name character varying DEFAULT ''::character varying NOT NULL,
-    amount numeric DEFAULT 0 NOT NULL,
-    alpha_acid numeric DEFAULT 0 NOT NULL,
-    use_time numeric DEFAULT 0 NOT NULL,
+    amount numeric DEFAULT 0.0 NOT NULL,
+    alpha_acid numeric DEFAULT 0.0 NOT NULL,
+    use_time numeric DEFAULT 0.0 NOT NULL,
     recipe_detail_id bigint,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
@@ -591,13 +564,13 @@ CREATE TABLE public.media (
     file character varying,
     caption character varying,
     sorting integer,
-    parent_id integer,
     parent_type character varying,
+    parent_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     file_file_name character varying,
     file_content_type character varying,
-    file_file_size integer,
+    file_file_size bigint,
     file_updated_at timestamp without time zone
 );
 
@@ -629,8 +602,8 @@ CREATE TABLE public.miscs (
     id bigint NOT NULL,
     name character varying DEFAULT ''::character varying NOT NULL,
     weight boolean DEFAULT true NOT NULL,
-    amount numeric DEFAULT 0 NOT NULL,
-    use_time numeric DEFAULT 0 NOT NULL,
+    amount numeric DEFAULT 0.0 NOT NULL,
+    use_time numeric DEFAULT 0.0 NOT NULL,
     recipe_detail_id bigint,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
@@ -709,10 +682,10 @@ CREATE TABLE public.recipe_details (
     recipe_id bigint,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    og numeric DEFAULT 0 NOT NULL,
-    fg numeric DEFAULT 0 NOT NULL,
+    og numeric DEFAULT 0.0 NOT NULL,
+    fg numeric DEFAULT 0.0 NOT NULL,
     brewed_at date,
-    carbonation numeric DEFAULT 0 NOT NULL,
+    carbonation numeric DEFAULT 0.0 NOT NULL,
     style_id bigint
 );
 
@@ -812,16 +785,16 @@ CREATE TABLE public.styles (
     texture text DEFAULT ''::text NOT NULL,
     examples text DEFAULT ''::text NOT NULL,
     summary text DEFAULT ''::text NOT NULL,
-    og_min numeric DEFAULT 0 NOT NULL,
-    og_max numeric DEFAULT 0 NOT NULL,
-    fg_min numeric DEFAULT 0 NOT NULL,
-    fg_max numeric DEFAULT 0 NOT NULL,
-    ebc_min numeric DEFAULT 0 NOT NULL,
-    ebc_max numeric DEFAULT 0 NOT NULL,
-    ibu_min numeric DEFAULT 0 NOT NULL,
-    ibu_max numeric DEFAULT 0 NOT NULL,
-    abv_min numeric DEFAULT 0 NOT NULL,
-    abv_max numeric DEFAULT 0 NOT NULL,
+    og_min numeric DEFAULT 0.0 NOT NULL,
+    og_max numeric DEFAULT 0.0 NOT NULL,
+    fg_min numeric DEFAULT 0.0 NOT NULL,
+    fg_max numeric DEFAULT 0.0 NOT NULL,
+    ebc_min numeric DEFAULT 0.0 NOT NULL,
+    ebc_max numeric DEFAULT 0.0 NOT NULL,
+    ibu_min numeric DEFAULT 0.0 NOT NULL,
+    ibu_max numeric DEFAULT 0.0 NOT NULL,
+    abv_min numeric DEFAULT 0.0 NOT NULL,
+    abv_max numeric DEFAULT 0.0 NOT NULL,
     style_guide character varying DEFAULT ''::character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
@@ -918,10 +891,10 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 CREATE TABLE public.votes (
     id integer NOT NULL,
-    votable_id integer,
     votable_type character varying,
-    voter_id integer,
+    votable_id integer,
     voter_type character varying,
+    voter_id integer,
     vote_flag boolean,
     vote_scope character varying,
     vote_weight integer,
@@ -957,7 +930,7 @@ CREATE TABLE public.yeasts (
     id bigint NOT NULL,
     name character varying DEFAULT ''::character varying NOT NULL,
     weight boolean DEFAULT true NOT NULL,
-    amount numeric DEFAULT 0 NOT NULL,
+    amount numeric DEFAULT 0.0 NOT NULL,
     recipe_detail_id bigint,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
@@ -1233,6 +1206,14 @@ ALTER TABLE ONLY public.recipes
 
 
 --
+-- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.schema_migrations
+    ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
 -- Name: styles styles_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1475,10 +1456,10 @@ CREATE INDEX index_mash_steps_on_recipe_detail_id ON public.mash_steps USING btr
 
 
 --
--- Name: index_media_on_parent_type_and_parent_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_media_on_parent; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_media_on_parent_type_and_parent_id ON public.media USING btree (parent_type, parent_id);
+CREATE INDEX index_media_on_parent ON public.media USING btree (parent_type, parent_id);
 
 
 --
@@ -1724,13 +1705,6 @@ CREATE INDEX index_yeasts_on_recipe_detail_id ON public.yeasts USING btree (reci
 --
 
 CREATE INDEX recipe_names_trigram_idx ON public.recipes USING gin (name public.gin_trgm_ops);
-
-
---
--- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX unique_schema_migrations ON public.schema_migrations USING btree (version);
 
 
 --

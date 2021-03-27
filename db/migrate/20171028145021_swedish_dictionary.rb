@@ -1,5 +1,15 @@
 class SwedishDictionary < ActiveRecord::Migration[4.2]
   def up
+    puts '-- Adding Swedish dictionary'
+    ActiveRecord::Base.connection.execute "
+      CREATE TEXT SEARCH DICTIONARY swedish (
+        TEMPLATE = ispell,
+        DictFile = sv_se,
+        AffFile = sv_se,
+        Stopwords = swedish
+      );
+    "
+
     puts '-- Adding Swedish snowball dictionary'
     ActiveRecord::Base.connection.execute "
       CREATE TEXT SEARCH DICTIONARY swedish_snowball_dict (
