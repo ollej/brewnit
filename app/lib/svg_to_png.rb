@@ -10,11 +10,23 @@ class SvgToPng
     png_temp_file = Tempfile.new(['label_png', '.png'], binmode: true)
     Tempfile.create(['label_svg', '.svg'], binmode: true) do |svg_temp_file|
       svg_temp_file.write @svg
-      svg_command = "#{self.class.inkscape_path} -z -y 0 -e #{png_temp_file.path} -w #{@width} -h #{@height} #{svg_temp_file.path}"
-      Rails.logger.debug { "Converting SVG to PNG with command: #{svg_command}" }
-      system svg_command
+      command = svg_to_png_command(png_temp_file.path, svg_temp_file.path)
+      Rails.logger.debug { "Converting SVG to PNG with command: #{command}" }
+      system command
     end
     return png_temp_file
+  end
+
+  def svg_to_png_command(png_path, svg_path)
+    if self.class.inkscape_version == '1'
+      return "#{self.class.inkscape_path} -o #{png_path} -w #{@width} -h #{@height} #{svg_path}"
+    else
+      return "#{self.class.inkscape_path} -z -y 0 -e #{png_path} -w #{@width} -h #{@height} #{svg_path}"
+    end
+  end
+
+  def self.inkscape_version
+    @inkscape_version ||= ENV.fetch('INKSCAPE_VERSION', '0')
   end
 
   def self.inkscape_path

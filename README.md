@@ -83,6 +83,7 @@ SMTP_PASSWORD: changeme
 RECAPTCHA_SITE_KEY: changeme
 RECAPTCHA_SECRET_KEY: changeme
 INKSCAPE_PATH: /usr/bin/inkscape
+INKSCAPE_VERSION=1
 DEVELOPMENT_HOST: yourcomputer.local
 SLACK_SIGNING_SECRET: changeme
 ```
