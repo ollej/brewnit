@@ -108,7 +108,7 @@ GEM
       docopt (~> 0.5)
       nrb-beerxml (~> 0.1)
     bindex (0.8.1)
-    bootsnap (1.7.3)
+    bootsnap (1.9.1)
       msgpack (~> 1.0)
     builder (3.2.4)
     byebug (11.1.3)
@@ -485,7 +485,7 @@ DEPENDENCIES
   word_wrap
 
 RUBY VERSION
-   ruby 3.0.0p0
+   ruby 3.0.2p107
 
 BUNDLED WITH
-   2.2.15
+   2.2.22
