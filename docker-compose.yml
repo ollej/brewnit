@@ -12,6 +12,6 @@ services:
     volumes:
       - .:/brewnit:cached
     ports:
-      - "3000:3000"
+      - "8088:3000"
     depends_on:
       - db
