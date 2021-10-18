@@ -39,8 +39,8 @@ class RecipeLabelPresenter
 
   def push_values
     {
-      title: I18n.t(:'common.notification.label.created.title', recipe_data),
-      message: I18n.t(:'common.notification.label.created.message', recipe_data),
+      title: I18n.t(:'common.notification.label.created.title', **recipe_data),
+      message: I18n.t(:'common.notification.label.created.message', **recipe_data),
       sound: :magic
     }
   end

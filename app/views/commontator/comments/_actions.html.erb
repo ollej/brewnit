@@ -19,7 +19,7 @@
 
 <% if can_delete %>
   <% is_deleted = comment.is_deleted? %>
-  <% del_string = is_deleted ? 'undelete' : 'delete' %>
+  <% del_string = is_deleted ? :undelete : :delete %>
   <%= link_to commontator.polymorphic_path([del_string, comment]),
               :confirm => (!is_deleted ? t('commontator.comment.actions.confirm_delete') : nil),
               :method => :put,
