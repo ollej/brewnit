@@ -1,6 +1,8 @@
 FROM ruby:3.0
 
-RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+RUN apt-get update -qq && \
+    apt-get install -qy nodejs postgresql-client inkscape && \
+    rm -rf /var/lib/apt/lists/*
 
 # Configure bundler
 ENV LANG=C.UTF-8 \
