@@ -74,7 +74,11 @@ class ApplicationController < ActionController::Base
   end
 
   def honeypot
-    @honeypot ||= ProjectHoneypot.lookup(request.remote_ip)
+    begin
+      @honeypot ||= ProjectHoneypot.lookup(request.remote_ip)
+    rescue Net::DNS::Resolver::NoResponseError => e
+      ProjectHoneypot::Url.new(request.remote_ip, nil)
+    end
   end
 
   def spammer?
