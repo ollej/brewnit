@@ -39,7 +39,7 @@ class RecipesController < ApplicationController
           disposition: 'attachment',
           filename: "#{@recipe.name}.xml"
         }
-        @recipe.increment(:downloads).save!
+        @recipe.increment!(:downloads)
       }
     end
   end
