@@ -3,18 +3,18 @@ module ApplicationHelper
     image_tag user.avatar_image
   end
 
-  def user_avatar(user, width = 64, height = 64)
+  def user_avatar(user, width = 64, height = 64, size = :medium_thumbnail)
     if user.has_avatar?
-      image_tag user.avatar_image, class: 'item-avatar',
+      image_tag user.avatar_image(size), class: 'item-avatar',
         alt: user.name_or_brewery, width: width, height: height
     else
       render user.default_avatar(width: width, height: height).partial
     end
   end
 
-  def recipe_avatar(recipe, width = 64, height = 64)
+  def recipe_avatar(recipe, width = 64, height = 64, size = :medium_thumbnail)
     if recipe.main_image.present?
-      image_tag recipe.main_image, class: 'item-avatar',
+      image_tag recipe.main_image(size), class: 'item-avatar',
         alt: recipe.name_and_brewer, width: width, height: height
     else
       user_avatar(recipe.user, width, height)

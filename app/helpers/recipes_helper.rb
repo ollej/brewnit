@@ -1,6 +1,6 @@
 module RecipesHelper
   def media_main_tag(recipe)
-    recipe_avatar(recipe, 160, 120)
+    recipe_avatar(recipe, 160, 120, :small)
   end
 
   def item_classes_for(recipe, current_user=nil, current_recipe=nil)
