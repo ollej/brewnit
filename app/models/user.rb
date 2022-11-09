@@ -23,6 +23,7 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :url, url: true, allow_blank: true
+  validates :email, presence: true, email: true
 
   acts_as_commontator
   acts_as_voter
