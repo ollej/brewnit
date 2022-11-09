@@ -1,1 +1,3 @@
-<%= link_to field.to_s, field.url, target: '_blank' %>
+<% if field.data %>
+  <%= link_to field.to_s, field.url, target: '_blank' %>
+<% end %>
