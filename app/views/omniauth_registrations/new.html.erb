@@ -1,0 +1,42 @@
+      <div class="page-content-header pure-g">
+        <div class="pure-u">
+          <h1 class="pagee-content-title"><%= I18n.t(:'omniauth_registration.sign_up') %></h1>
+        </div>
+      </div>
+
+      <div class="page-content-body user-new">
+        <%= form_for(@user, as: :user,
+                     url: omniauth_registration_path,
+                     html: { class: "pure-form pure-form-aligned" }) do |f| %>
+  <%= invisible_captcha %>
+
+  <fieldset>
+    <div class="field pure-control-group">
+      <%= f.label :receive_email, class: "pure-checkbox" %>
+      <%= f.check_box :receive_email %>
+    </div>
+
+    <div class="field pure-control-group">
+      <%= f.label :password %>
+      <%= f.password_field :password, autocomplete: "new-password", required: true %>
+      <% if @minimum_password_length %>
+      <em>(<%= I18n.t(:'users.min_pwd_length', min_length: @minimum_password_length) %>)</em>
+      <% end %>
+    </div>
+
+    <div class="field pure-control-group">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    </div>
+
+    <div class="actions pure-controls">
+    <%= recaptcha_tags %>
+    </div>
+
+    <div class="actions pure-controls">
+      <%= f.submit I18n.t(:'omniauth_registration.sign_up'), class: "pure-button pure-button-primary" %>
+    </div>
+  <% end %>
+
+  </fieldset>
+        </div>

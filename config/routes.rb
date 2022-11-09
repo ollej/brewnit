@@ -64,6 +64,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
     sessions: 'users/sessions'
   }
+  resource :omniauth_registration, only: [:new, :create]
   resources :users, only: [:index, :show] do
     resources :media, only: [:create, :destroy]
     resource :add_medium, only: [:create], controller: :add_medium

@@ -274,6 +274,8 @@ sv:
       title: Bilder
     search: Sök användare
     add_avatar_image: Ladda gärna upp en avatarbild!
+  omniauth_registration:
+    sign_up: Registrera konto
   events:
     index: Evenemang
     new: Skapa evenemang

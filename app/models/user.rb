@@ -143,15 +143,14 @@ class User < ApplicationRecord
 
   def self.from_omniauth(auth_hash, honeypot)
     user = User.find_by(uid: auth_hash.uid, provider: auth_hash.provider) ||
-      User.find_by(email: auth_hash.info.email) ||
-      User.create!(self.omniauth_user_data(auth_hash, honeypot))
-    if user.uid.blank?
+      User.find_by(email: auth_hash.info.email)
+    if user && user.uid.blank?
       user.update(
         uid: auth_hash.uid,
         provider: auth_hash.provider
       )
     end
-    if auth_hash.info.image.present? && !user.has_avatar?
+    if user && auth_hash.info.image.present? && !user.has_avatar?
       user.create_medium(auth_hash.info.image, :avatar)
     end
     user

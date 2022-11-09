@@ -5,12 +5,12 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def google
     @user = User.from_omniauth(request.env['omniauth.auth'], honeypot)
 
-    if @user.persisted?
+    if @user
       flash[:notice] = I18n.t :'devise.omniauth_callbacks.success', :kind => 'Google'
       sign_in_and_redirect @user, :event => :authentication
     else
-      session['devise.google_data'] = request.env['omniauth.auth']
-      redirect_to new_user_registration_url
+      session['devise.omniauth_data'] = User.omniauth_user_data(request.env['omniauth.auth'], honeypot)
+      redirect_to new_omniauth_registration_path
     end
   end
 end
