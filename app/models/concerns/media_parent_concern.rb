@@ -31,6 +31,9 @@ module MediaParentConcern
     if file.kind_of? String
       file = Downloader.new(file).get
     end
+    if file.nil?
+      return nil
+    end
     medium = media.create(file: file)
     if type.present? && (force || !has_medium?(type))
       add_medium(medium, type)

@@ -6,12 +6,16 @@ class Downloader
   end
 
   def get
-    stream = open(@url, 'rb')
-    Tempfile.new('download').tap do |tempfile|
-      tempfile.binmode
-      IO.copy_stream(stream, tempfile)
-      stream.close
-      tempfile.rewind
+    begin
+      stream = open(@url, 'rb')
+      Tempfile.new('download').tap do |tempfile|
+        tempfile.binmode
+        IO.copy_stream(stream, tempfile)
+        stream.close
+        tempfile.rewind
+      end
+    rescue Errno::ENOENT
+      nil
     end
   end
 end
