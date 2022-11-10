@@ -70,6 +70,7 @@ gem 'recaptcha', require: 'recaptcha/rails'
 # Admin interface
 gem 'administrate'
 gem 'administrate-field-image'
+gem 'administrate-field-jsonb'
 
 # Bundler fix
 gem 'sys-proctable'

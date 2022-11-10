@@ -45,6 +45,7 @@ class UserDashboard < Administrate::BaseDashboard
     equipment: Field::String,
     media_avatar_id: Field::Number,
     media_brewery_id: Field::Number,
+    registration_data: Field::JSONB,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -102,6 +103,7 @@ class UserDashboard < Administrate::BaseDashboard
     #:media_brewery_id,
     :recipes,
     :media,
+    :registration_data,
   ].freeze
 
   # FORM_ATTRIBUTES
