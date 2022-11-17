@@ -419,7 +419,7 @@ GEM
     websocket-extensions (0.1.5)
     will_paginate (3.3.0)
     word_wrap (1.0.0)
-    yajl-ruby (1.4.1)
+    yajl-ruby (1.4.3)
     zeitwerk (2.6.6)
 
 PLATFORMS
