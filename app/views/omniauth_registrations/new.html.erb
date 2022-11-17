@@ -29,6 +29,12 @@
       <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
     </div>
 
+    <div class="field pure-control-group">
+      <%= f.label :humanizer_answer, @user.humanizer_question %>
+      <%= f.text_field :humanizer_answer %>
+      <%= f.hidden_field :humanizer_question_id %>
+    </div>
+
     <div class="actions pure-controls">
     <%= recaptcha_tags %>
     </div>

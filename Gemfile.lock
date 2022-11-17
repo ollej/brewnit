@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/kiskolabs/humanizer
+  revision: c7789fb1f422922e7fd735346c13501ce7490ed8
+  ref: c7789fb1f422922e7fd735346c13501ce7490ed8
+  specs:
+    humanizer (2.6.4)
+
+GIT
   remote: https://github.com/mrkamel/search_cop.git
   revision: 1082a2f7862321cf8f1c4560a2b6602a0c256e59
   ref: 1082a2f7862321cf8f1c4560a2b6602a0c256e59
@@ -444,6 +451,7 @@ DEPENDENCIES
   ffi
   geocoder
   httparty
+  humanizer!
   invisible_captcha
   jbuilder
   jquery-rails

@@ -39,7 +39,7 @@ class OmniauthRegistrationsController < ApplicationController
 
   def registration_params
     params.require(:user).permit(
-      :password, :password_confirmation, :receive_email
+      :password, :password_confirmation, :receive_email, :humanizer_answer, :humanizer_question_id
     )
   end
 end
