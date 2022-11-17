@@ -65,7 +65,6 @@ gem 'word_wrap'
 gem 'invisible_captcha'
 gem 'project_honeypot'
 gem 'rack-attack'
-gem 'recaptcha', require: 'recaptcha/rails'
 gem 'geocoder'
 gem 'humanizer', git: 'https://github.com/kiskolabs/humanizer', ref: 'c7789fb1f422922e7fd735346c13501ce7490ed8' # Includes fix for frozen hash
 

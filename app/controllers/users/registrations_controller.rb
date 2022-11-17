@@ -2,7 +2,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :deny_spammers!, only: [:create, :update]
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
-  prepend_before_action :check_captcha, only: [:create]
   invisible_captcha only: [:create, :update], on_spam: :redirect_spammers!
 
   # GET /resource/sign_up
@@ -94,15 +93,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       params.delete(:current_password)
       resource.update_without_password(params)
-    end
-  end
-
-  private
-
-  def check_captcha
-    unless verify_recaptcha
-      self.resource = resource_class.new sign_up_params
-      respond_with_navigational(resource) { render :new }
     end
   end
 end

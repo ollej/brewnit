@@ -1,7 +1,6 @@
 class OmniauthRegistrationsController < ApplicationController
   skip_before_action :authenticate_user!
   before_action :deny_spammers!, only: [:create]
-  prepend_before_action :check_captcha, only: [:create]
   invisible_captcha only: [:create], on_spam: :redirect_spammers!
 
   def new
@@ -31,12 +30,6 @@ class OmniauthRegistrationsController < ApplicationController
   end
 
   private
-  def check_captcha
-    unless verify_recaptcha
-      redirect_to new_omniauth_registration_path
-    end
-  end
-
   def registration_params
     params.require(:user).permit(
       :password, :password_confirmation, :receive_email, :humanizer_answer, :humanizer_question_id

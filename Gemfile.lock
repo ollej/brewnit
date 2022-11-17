@@ -340,8 +340,6 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     rdoc (6.3.2)
-    recaptcha (5.7.0)
-      json
     request_store (1.5.0)
       rack (>= 1.4)
     responders (3.0.1)
@@ -477,7 +475,6 @@ DEPENDENCIES
   rails-controller-testing
   rails_12factor
   rails_real_favicon
-  recaptcha
   rexml
   rqrcode
   rspec-rails
