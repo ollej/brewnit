@@ -8,7 +8,7 @@ class IpValidator < ActiveModel::Validator
     if BLOCKED_COUNTRIES.include? geocode&.country_code&.upcase
       record.errors.add :base, "Spam registration suspected"
     else
-      record.geocode = geocode.data
+      record.geocode = geocode&.data
     end
   end
 end
