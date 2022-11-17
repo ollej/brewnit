@@ -66,6 +66,7 @@ gem 'invisible_captcha'
 gem 'project_honeypot'
 gem 'rack-attack'
 gem 'recaptcha', require: 'recaptcha/rails'
+gem 'geocoder'
 
 # Admin interface
 gem 'administrate'

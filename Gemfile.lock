@@ -161,6 +161,7 @@ GEM
       ruby2_keywords
     faraday-net_http (1.0.1)
     ffi (1.15.5)
+    geocoder (1.8.1)
     globalid (1.0.0)
       activesupport (>= 5.0)
     hashie (4.1.0)
@@ -441,6 +442,7 @@ DEPENDENCIES
   dotenv-rails
   execjs
   ffi
+  geocoder
   httparty
   invisible_captcha
   jbuilder

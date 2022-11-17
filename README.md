@@ -152,6 +152,7 @@ RECAPTCHA_SECRET_KEY=changeme
 SPAM_IP=space separated list of IP addresses to block
 INKSCAPE_PATH=/usr/bin/inkscape
 SLACK_SIGNING_SECRET=changeme
+SPAM_COUNTRIES=space separated list of countries to block registrations from
 ```
 
 Manual installation

@@ -180,8 +180,6 @@ ALTER TEXT SEARCH CONFIGURATION public.swedish_snowball
 
 SET default_tablespace = '';
 
-SET default_with_oids = false;
-
 --
 -- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
 --
@@ -862,7 +860,8 @@ CREATE TABLE public.users (
     uid character varying,
     provider character varying,
     native_notifications boolean DEFAULT true,
-    pushover_user_key character varying
+    pushover_user_key character varying,
+    geocode jsonb
 );
 
 
@@ -1943,6 +1942,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200616170418'),
 ('20200620114227'),
 ('20200620124947'),
-('20210308201612');
+('20210308201612'),
+('20221117125254');
 
 
