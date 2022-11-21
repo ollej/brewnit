@@ -319,15 +319,10 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.4.3)
       loofah (~> 2.3)
-    rails_12factor (0.0.3)
-      rails_serve_static_assets
-      rails_stdout_logging
     rails_real_favicon (0.1.0)
       json (>= 1.7, < 3)
       rails
       rubyzip (~> 2)
-    rails_serve_static_assets (0.0.5)
-    rails_stdout_logging (0.0.5)
     railties (6.1.7)
       actionpack (= 6.1.7)
       activesupport (= 6.1.7)
@@ -473,7 +468,6 @@ DEPENDENCIES
   rack-attack
   rails (= 6.1.7)
   rails-controller-testing
-  rails_12factor
   rails_real_favicon
   rexml
   rqrcode

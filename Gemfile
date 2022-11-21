@@ -78,7 +78,7 @@ gem 'sys-proctable'
 gem 'ffi'
 
 group :production do
-  gem 'rails_12factor'
+  #gem 'rails_12factor'
 end
 
 # Use ActiveModel has_secure_password
