@@ -127,7 +127,7 @@
                   <% if f.protein.present? %>
                     <span class="fermentable-info"><%= t(:'beerxml.protein') %>: <%= number_to_percentage(f.protein, precision: 1) %></span><br>
                   <% end %>
-                  <% if f.ibu_gal_per_lb.present? && f.is_a? Numeric && f.ibu_gal_per_lb > 0 %>
+                  <% if f.ibu_gal_per_lb.present? && f.ibu_gal_per_lb.is_a?(Numeric) && f.ibu_gal_per_lb > 0 %>
                     <span class="fermentable-info"><%= t(:'beerxml.ibu_gal_per_lb') %>: <%= number_with_precision(f.ibu_gal_per_lb, precision: 1) %></span><br>
                   <% end %>
                   <% if f.recommend_mash.present? %>
