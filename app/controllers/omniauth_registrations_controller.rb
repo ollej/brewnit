@@ -1,7 +1,7 @@
 class OmniauthRegistrationsController < ApplicationController
   skip_before_action :authenticate_user!
   before_action :deny_spammers!, only: [:create]
-  invisible_captcha only: [:create], on_spam: :redirect_spammers!
+  invisible_captcha honeypot: :honning, only: [:create], on_spam: :redirect_spammers!
 
   def new
     omniauth_data = session['devise.omniauth_data']
