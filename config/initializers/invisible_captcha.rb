@@ -1,7 +1,7 @@
 InvisibleCaptcha.setup do |config|
   # config.honeypots           << ['more', 'fake', 'attribute', 'names']
   # config.visual_honeypots    = false
-  config.visual_honeypots = true
+  config.visual_honeypots = false
   # config.timestamp_threshold = 4
   config.timestamp_threshold = 1
   # config.timestamp_enabled   = true
