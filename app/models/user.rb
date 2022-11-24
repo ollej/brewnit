@@ -26,7 +26,7 @@ class User < ApplicationRecord
   validates :url, url: true, allow_blank: true
   validates :email, presence: true, email: true
   validates_with IpValidator
-  #require_human_on :create
+  require_human_on :create
 
   acts_as_commontator
   acts_as_voter

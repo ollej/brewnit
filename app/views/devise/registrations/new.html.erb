@@ -43,13 +43,11 @@
       <%= invisible_captcha :honning %>
     </div>
 
-    <!--
     <div class="field pure-control-group">
-      <%#= f.label :humanizer_answer, resource.humanizer_question %>
-      <%#= f.text_field :humanizer_answer %>
-      <%#= f.hidden_field :humanizer_question_id %>
+      <%= f.label :humanizer_answer, resource.humanizer_question %>
+      <%= f.text_field :humanizer_answer %>
+      <%= f.hidden_field :humanizer_question_id %>
     </div>
-    -->
 
     <div class="actions pure-controls">
       <%= f.submit I18n.t(:'users.sign_up'), class: "pure-button pure-button-primary" %>
