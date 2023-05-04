@@ -4,9 +4,6 @@
 # Note: Do not "return" from a Proc, use "next" instead if necessary
 #       "return" in a lambda is OK
 
-require_dependency "will_paginate/view_helpers/action_view"
-require_dependency "will_paginate/view_helpers/link_renderer"
-
 Commontator.configure do |config|
   # Engine Configuration
 
