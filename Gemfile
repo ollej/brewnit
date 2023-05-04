@@ -32,7 +32,7 @@ gem 'pg'
 gem 'rexml'
 gem 'libxml-xmlrpc'
 gem 'devise'
-gem 'omniauth', '~> 1.9.2'
+gem 'omniauth', '~> 2.1.0'
 gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection"
 gem 'unicorn-rails'
