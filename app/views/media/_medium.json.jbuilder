@@ -11,4 +11,4 @@ json.scaled do
   json.medium medium.file.url(:medium)
   json.large medium.file.url(:large)
 end
-json.template render partial: 'shared/image.html.erb', locals: { recipe: medium.parent, medium: medium }
+json.template render partial: 'shared/image', formats: [:html], locals: { recipe: medium.parent, medium: medium }
