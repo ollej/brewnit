@@ -76,7 +76,9 @@ gem 'administrate-field-jsonb'
 # Bundler fix
 gem 'sys-proctable'
 gem 'ffi'
-gem 'net-smtp'
+gem 'net-smtp', require: false
+gem 'net-imap', require: false
+gem 'net-pop', require: false
 gem 'matrix'
 
 group :production do
