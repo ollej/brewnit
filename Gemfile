@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '3.0.4'
+ruby '3.1.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '6.1.7'
@@ -76,6 +76,8 @@ gem 'administrate-field-jsonb'
 # Bundler fix
 gem 'sys-proctable'
 gem 'ffi'
+gem 'net-smtp'
+gem 'matrix'
 
 group :production do
   #gem 'rails_12factor'
