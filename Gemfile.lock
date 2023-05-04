@@ -494,9 +494,6 @@ DEPENDENCIES
   lograge
   matrix
   meta-tags
-  net-imap
-  net-pop
-  net-smtp
   nrb-beerxml!
   omniauth (~> 2.1.0)
   omniauth-google-oauth2
