@@ -520,6 +520,7 @@ DEPENDENCIES
   uglifier
   unicorn-rails
   web-console
+  will_paginate
   word_wrap
 
 RUBY VERSION

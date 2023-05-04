@@ -78,6 +78,8 @@ gem 'sys-proctable'
 gem 'ffi'
 gem 'matrix'
 
+gem 'will_paginate'
+
 group :production do
   #gem 'rails_12factor'
 end
