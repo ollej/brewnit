@@ -63,7 +63,7 @@ gem 'word_wrap'
 
 # spam protection
 gem 'invisible_captcha'
-gem 'project_honeypot'
+gem 'project-honeypot', git: 'https://github.com/tyrauber/project-honeypot', ref: '3bb31bed726be568eab7ad1d4a1b47bb68542b51' # Use Ruby 3.1 compatible fork
 gem 'rack-attack'
 gem 'geocoder'
 gem 'humanizer', git: 'https://github.com/kiskolabs/humanizer', ref: 'c7789fb1f422922e7fd735346c13501ce7490ed8' # Includes fix for frozen hash

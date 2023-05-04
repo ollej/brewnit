@@ -75,7 +75,7 @@ class ApplicationController < ActionController::Base
 
   def honeypot
     begin
-      @honeypot ||= ProjectHoneypot.lookup(request.remote_ip)
+      @honeypot ||= ProjectHoneypot::Base.new.lookup(request.remote_ip)
     rescue Net::DNS::Resolver::NoResponseError => e
       ProjectHoneypot::Url.new(request.remote_ip, nil)
     end
