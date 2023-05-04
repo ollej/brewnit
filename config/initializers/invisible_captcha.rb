@@ -4,6 +4,7 @@ InvisibleCaptcha.setup do |config|
   config.visual_honeypots = false
   # config.timestamp_threshold = 4
   config.timestamp_threshold = 1
+  config.timestamp_enabled   = false # Doesn't seem to work in Rails 7.0 with defaults
   # config.timestamp_enabled   = true
   # config.injectable_styles   = false
 

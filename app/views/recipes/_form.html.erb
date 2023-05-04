@@ -49,7 +49,7 @@
             <%= I18n.t(:'recipes.import') %>
           <% end %>
           <%= form_info_icon(I18n.t(:'recipes.beerxml_description'), length: 'large') %>
-          <%= f.file_field :beerxml, class: 'hidden-file-field', multiple: true,
+          <%= f.file_field :beerxml, class: 'hidden-file-field', multiple: true, include_hidden: false,
             accept: 'application/xml,.xml', id: 'import-beerxml' %>
         </div>
 
