@@ -51,10 +51,10 @@ module Brewnit
       reply_to: 'brewmaster@brygglogg.se',
     }
     config.action_mailer.smtp_settings = {
-      address:              'mail.gandi.net',
+      address:              'live.smtp.mailtrap.io',
       port:                 587,
       domain:               'brygglogg.se',
-      user_name:            'smtp@brygglogg.se',
+      user_name:            'api',
       password:             Rails.application.secrets.smtp_password,
       authentication:       :login,
       enable_starttls_auto: true
