@@ -32,7 +32,7 @@ Requirements
 
 This application needs the following:
 
- * Ruby v3.3.7
+ * Ruby v3.4.1
  * Postgres v9.6
  * Docker for development environment
 
@@ -169,7 +169,7 @@ If you don't have Ruby, here is a short primer:
  * Install Ruby
 
    ```bash
-   $ rbenv install 3.3.7
+   $ rbenv install 3.4.1
    ```
  * Install bundler
 

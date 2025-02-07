@@ -1,4 +1,4 @@
-FROM ruby:3.3.7
+FROM ruby:3.4.1
 
 RUN apt-get update -qq && \
     apt-get install -qy nodejs postgresql-client inkscape && \
@@ -19,6 +19,10 @@ COPY Gemfile /brewnit/Gemfile
 COPY Gemfile.lock /brewnit/Gemfile.lock
 RUN bundle install
 COPY . /brewnit
+
+# Install fonts
+RUN mkdir -p /usr/share/fonts/truetype/
+RUN install -m644 /brewnit/app/assets/fonts/*.ttf /usr/share/fonts/truetype/
 
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh

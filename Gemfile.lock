@@ -126,10 +126,13 @@ GEM
     administrate-field-jsonb (0.4.6)
       administrate (< 1.0.0)
       rails (>= 4.2)
+    base64 (0.2.0)
     bcrypt (3.1.18)
     beer_recipe (0.4.24)
       docopt (~> 0.5)
       nrb-beerxml (~> 0.1)
+    benchmark (0.4.0)
+    bigdecimal (3.1.5)
     bindex (0.8.1)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
@@ -162,6 +165,7 @@ GEM
     crass (1.0.6)
     css_parser (1.14.0)
       addressable
+    csv (3.2.8)
     csv_shaper (1.3.2)
       activesupport (>= 3.0.0)
     date (3.3.3)
@@ -232,6 +236,7 @@ GEM
     listen (3.8.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
+    logger (1.6.5)
     lograge (0.12.0)
       actionpack (>= 4)
       activesupport (>= 4)
@@ -258,6 +263,7 @@ GEM
     minitest (5.18.0)
     msgpack (1.7.0)
     multi_xml (0.6.0)
+    mutex_m (0.2.0)
     net-dns (0.9.0)
     net-imap (0.3.4)
       date
@@ -295,6 +301,7 @@ GEM
       actionpack (>= 4.2)
       omniauth (~> 2.0)
     orm_adapter (0.5.0)
+    ostruct (0.6.1)
     pdf-core (0.9.0)
     pg (1.5.3)
     polyglot (0.3.5)
@@ -464,7 +471,10 @@ DEPENDENCIES
   administrate
   administrate-field-image
   administrate-field-jsonb
+  base64
   beer_recipe
+  benchmark
+  bigdecimal
   bootsnap
   byebug
   caxlsx
@@ -472,6 +482,7 @@ DEPENDENCIES
   chronic
   coffee-rails
   commontator
+  csv
   csv_shaper
   devise
   dotenv-rails
@@ -487,13 +498,16 @@ DEPENDENCIES
   kt-paperclip
   libxml-xmlrpc
   listen
+  logger
   lograge
   matrix
   meta-tags
+  mutex_m
   nrb-beerxml!
   omniauth (~> 2.1.0)
   omniauth-google-oauth2
   omniauth-rails_csrf_protection
+  ostruct
   pg
   prawn
   prawn-svg
@@ -520,7 +534,7 @@ DEPENDENCIES
   word_wrap
 
 RUBY VERSION
-   ruby 3.3.7p123
+   ruby 3.4.1p0
 
 BUNDLED WITH
-   2.2.32
+   2.6.3
