@@ -1,5 +1,5 @@
 class Fermentable < ApplicationRecord
-  enum grain_type: {
+  enum :grain_type, {
     grain: 'Grain',
     sugar: 'Sugar',
     extract: 'Extract',

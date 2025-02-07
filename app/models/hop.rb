@@ -1,12 +1,12 @@
 class Hop < ApplicationRecord
-  enum use: {
+  enum :use, {
     mash: 'Mash',
     first_wort: 'First Wort',
     boil: 'Boil',
     aroma: 'Aroma',
     dry_hop: 'Dry Hop'
   }
-  enum form: {
+  enum :form, {
     pellet: 'Pellet',
     plug: 'Plug',
     leaf: 'Leaf'

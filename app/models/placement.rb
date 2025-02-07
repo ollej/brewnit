@@ -5,7 +5,7 @@ class Placement < ApplicationRecord
     bronze: 3
   }
 
-  enum medal: {
+  enum :medal, {
     gold: 'gold',
     silver: 'silver',
     bronze: 'bronze'

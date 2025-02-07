@@ -1,5 +1,5 @@
 class MashStep < ApplicationRecord
-  enum mash_type: {
+  enum :mash_type, {
     infusion: 'Infusion',
     temperature: 'Temperature',
     decoction: 'Decoction'

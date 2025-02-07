@@ -1,12 +1,12 @@
 class Misc < ApplicationRecord
-  enum use: {
+  enum :use, {
     mash: 'Mash',
     boil: 'Boil',
     primary: 'Primary',
     secondary: 'Secondary',
     bottling: 'Bottling'
   }
-  enum misc_type: {
+  enum :misc_type, {
     spice: 'Spice',
     fining: 'Fining',
     water_agent: 'Water Agent',

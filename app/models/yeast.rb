@@ -1,11 +1,11 @@
 class Yeast < ApplicationRecord
-  enum form: {
+  enum :form, {
     liquid: 'Liquid',
     dry: 'Dry',
     slant: 'Slant',
     culture: 'Culture'
   }
-  enum yeast_type: {
+  enum :yeast_type, {
     ale: 'Ale',
     lager: 'Lager',
     wheat: 'Wheat',
