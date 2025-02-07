@@ -80,6 +80,12 @@ gem 'matrix'
 
 gem 'will_paginate'
 
+# Ruby 3.3.x gems
+gem 'base64'
+gem 'bigdecimal'
+gem 'mutex_m'
+gem 'csv'
+
 group :production do
   #gem 'rails_12factor'
 end
