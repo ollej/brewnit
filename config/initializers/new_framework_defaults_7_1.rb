@@ -251,7 +251,7 @@ Rails.application.config.active_record.generate_secure_token_on = :initialize
 #
 # In previous versions of Rails, Action View always used `Rails::HTML4::Sanitizer` as its vendor.
 #++
-# Rails.application.config.action_view.sanitizer_vendor = Rails::HTML::Sanitizer.best_supported_vendor
+Rails.application.config.action_view.sanitizer_vendor = Rails::HTML::Sanitizer.best_supported_vendor
 
 ###
 # Configure Action Text to use an HTML5 standards-compliant sanitizer when it is supported on your
@@ -262,13 +262,13 @@ Rails.application.config.active_record.generate_secure_token_on = :initialize
 #
 # In previous versions of Rails, Action Text always used `Rails::HTML4::Sanitizer` as its vendor.
 #++
-# Rails.application.config.action_text.sanitizer_vendor = Rails::HTML::Sanitizer.best_supported_vendor
+Rails.application.config.action_text.sanitizer_vendor = Rails::HTML::Sanitizer.best_supported_vendor
 
 ###
 # Configure the log level used by the DebugExceptions middleware when logging
 # uncaught exceptions during requests.
 #++
-# Rails.application.config.action_dispatch.debug_exception_log_level = :error
+Rails.application.config.action_dispatch.debug_exception_log_level = :error
 
 ###
 # Configure the test helpers in Action View, Action Dispatch, and rails-dom-testing to use HTML5
@@ -278,4 +278,4 @@ Rails.application.config.active_record.generate_secure_token_on = :initialize
 #
 # In previous versions of Rails, these test helpers always used an HTML4 parser.
 #++
-# Rails.application.config.dom_testing_default_html_version = :html5
+Rails.application.config.dom_testing_default_html_version = :html5
