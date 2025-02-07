@@ -140,9 +140,9 @@ class Recipe < ApplicationRecord
 
   def pushover_user
     if public?
-      Rails.application.secrets.pushover_group_recipe
+      Rails.configuration.secrets.pushover_group_recipe
     else
-      Rails.application.secrets.pushover_user
+      Rails.configuration.secrets.pushover_user
     end
   end
 

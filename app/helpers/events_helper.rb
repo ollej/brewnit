@@ -18,7 +18,7 @@ module EventsHelper
   end
 
   def google_map(center)
-    key = Rails.application.secrets.google_maps_api_key
+    key = Rails.configuration.secrets.google_maps_api_key
     "https://maps.googleapis.com/maps/api/staticmap?center=#{center}&size=300x300&zoom=14&language=sv&key=#{key}"
   end
 end

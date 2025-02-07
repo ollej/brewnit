@@ -1,6 +1,6 @@
 require 'pushover'
 
 Pushover.configure do |config|
-  config.user = Rails.application.secrets.pushover_user
-  config.token = Rails.application.secrets.pushover_token
+  config.user = Rails.configuration.secrets.pushover_user
+  config.token = Rails.configuration.secrets.pushover_token
 end

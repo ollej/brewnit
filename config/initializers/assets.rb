@@ -12,7 +12,7 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
-Rails.application.config.assets.precompile += %w( medium-field.js medium-field.css layouts/print.css recipe_table.css )
+Rails.application.config.assets.precompile += %w[ medium-field.js medium-field.css layouts/print.css recipe_table.css ]
 
 # Fix issue with segmentation fault when precompiling assets
 Rails.application.config.assets.configure do |env|

@@ -16,7 +16,7 @@ class PushMessage
   end
 
   def user
-    Rails.application.secrets.pushover_user
+    Rails.configuration.secrets.pushover_user
   end
 
   def enabled?(user_key)

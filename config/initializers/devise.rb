@@ -100,7 +100,7 @@ Devise.setup do |config|
 
   # Setup a pepper to generate the encrypted password.
   # config.pepper = '4b486a443577d00ad1accbb725af9365236fcb58cfd05099575e73b14d54af46b20c7cba20681199a39ccb705bfed23d1db5c5147e3bd15d8102df6865ff41a4'
-  config.pepper = Rails.application.secrets.devise_pepper
+  config.pepper = Rails.configuration.secrets.devise_pepper
 
   # Send a notification email when the user's password is changed
   # config.send_password_change_notification = false
@@ -271,7 +271,7 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 
-  config.omniauth :google_oauth2, Rails.application.secrets.google_client_id, Rails.application.secrets.google_client_secret, {
+  config.omniauth :google_oauth2, Rails.configuration.secrets.google_client_id, Rails.configuration.secrets.google_client_secret, {
     name: 'google',
     prompt: 'select_account',
     image_aspect_ratio: 'square',

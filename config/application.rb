@@ -2,11 +2,6 @@ require_relative "boot"
 
 require "rails/all"
 
-if Rails.env.production?
-  ActiveSupport::Deprecation.silenced = true
-  ActiveSupport::Deprecation.behavior = :silence
-end
-
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -19,7 +14,7 @@ module Brewnit
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
-    config.autoload_lib(ignore: %w(assets tasks))
+    config.autoload_lib(ignore: %w[assets tasks])
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -43,6 +38,8 @@ module Brewnit
       'AuthorizationException' => :unauthorized
     )
 
+    config.secrets = config_for(:secrets)
+
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.perform_deliveries = true
     config.action_mailer.raise_delivery_errors = true
@@ -57,7 +54,7 @@ module Brewnit
       port:                 587,
       domain:               'brygglogg.se',
       user_name:            'api',
-      password:             Rails.application.credentials.smtp_password,
+      password:             Rails.configuration.secrets.smtp_password,
       authentication:       :login,
       enable_starttls_auto: true
     }
