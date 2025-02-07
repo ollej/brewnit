@@ -1,0 +1,15 @@
+{
+  "name": "brewnit",
+  "description": "Swedish site for homebrew recipes",
+  "keywords": [
+    "homebrew",
+    "hembryggning",
+    "swedish"
+  ],
+  "scripts": {
+    "dokku": {
+      "postdeploy": "bundle exec rake db:migrate assets:precompile"
+    }
+  }
+}
+
