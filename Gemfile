@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '3.4.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '7.0.8.7'
+gem 'rails', '7.1.5.1'
 
 gem 'bootsnap'
 # Use sqlite3 as the database for Active Record
