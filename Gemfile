@@ -79,15 +79,11 @@ gem 'matrix'
 gem 'will_paginate'
 
 # Ruby 3.3.x gems
-gem 'base64'
-gem 'bigdecimal'
 gem 'mutex_m'
 gem 'csv'
 
 # Ruby 3.4.x gems
 gem 'ostruct'
-gem 'logger'
-gem 'benchmark'
 
 group :production do
   #gem 'rails_12factor'
