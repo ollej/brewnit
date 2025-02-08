@@ -1,7 +1,7 @@
 class RecipeDetailsController < ApplicationController
   before_action :deny_spammers!, only: [:update]
   before_action :load_and_authorize_recipe!
-  invisible_captcha only: [:create, :update], on_spam: :redirect_spammers!
+  invisible_captcha only: [:update], on_spam: :redirect_spammers!
 
   def show
     # Never cache this page to ensure browser reloads
