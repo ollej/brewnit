@@ -82,6 +82,8 @@ Rails.application.routes.draw do
     root to: 'pages#show', page: 'about'
   end
 
+  get '/health', to: proc { [200, {}, ['success']] }
+
   get '/404.html', to: redirect('/404.html')
   get '/500.html', to: redirect('/500.html')
 
