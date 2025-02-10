@@ -34,7 +34,7 @@ module RecipesHelper
   end
 
   def comments_badge(recipe)
-    badge(I18n.t(:'recipes.comments_count', count: recipe.comments), type: 'comments', icon: 'comments', class: 'badge-link')
+    badge(I18n.t(:'recipes.comments_count', count: recipe.comment_count), type: 'comments', icon: 'comments', class: 'badge-link')
   end
 
   def likes_badge(recipe)

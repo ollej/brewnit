@@ -104,8 +104,8 @@ class Recipe < ApplicationRecord
     placements.sort_by { |p| p.medal }.last
   end
 
-  def comments
-    commontator_thread.comments.size
+  def comment_count
+    commontator_thread.comments.count
   end
 
   def registration_message_for(event)
