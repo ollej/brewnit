@@ -32,7 +32,7 @@ Requirements
 
 This application needs the following:
 
- * Ruby v3.4.1
+ * Ruby v3.4.9
  * Postgres v9.6
  * Docker for development environment
 
