@@ -63,7 +63,8 @@ Rails.application.configure do
     password: Rails.application.credentials.dig(:smtp, :password),
     address: "smtp.migadu.com",
     port: 465,
-    authentication: :plain
+    authentication: :plain,
+    tls: true
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
