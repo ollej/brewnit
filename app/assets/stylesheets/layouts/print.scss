@@ -75,6 +75,19 @@ body.print-body {
         max-width: 75%;
       }
     }
+    .header-with-qr {
+      display: flex;
+    }
+    .header-info {
+      flex-grow: 4;
+    }
+    .header-qr-code {
+      flex-grow: 1;
+
+      svg {
+        width: 10%;
+      }
+    }
   }
 
   .print-footer {

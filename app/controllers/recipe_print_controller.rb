@@ -6,5 +6,6 @@ class RecipePrintController < ApplicationController
   def show
     @beerxml = BeerxmlParser.new(@recipe.beerxml).recipe
     @presenter = RecipePresenter.new(@recipe, @beerxml)
+    @qrcode = RQRCode::QRCode.new(recipe_url(@recipe)).as_svg(viewbox: true)
   end
 end

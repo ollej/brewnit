@@ -3,8 +3,15 @@
 <% end %>
 
 <div class="print-main beer-recipe">
-  <h1><%= @recipe.name %></h1>
-  <h2><%= @beerxml.style&.name %> <%= @presenter.style_type %></h2>
+  <div class="header-with-qr">
+    <div class="header-info">
+      <h1><%= @recipe.name %></h1>
+      <h2><%= @beerxml.style&.name %> <%= @presenter.style_type %></h2>
+    </div>
+    <div class="header-qr-code">
+      <%= raw @qrcode %>
+    </div>
+  </div>
   <%= render 'shared/recipe_table' %>
 </div>
 
