@@ -1,4 +1,8 @@
 class Fermentable < ApplicationRecord
+  include DirtyConcern
+
+  belongs_to :recipe_detail, inverse_of: :fermentables
+
   enum :grain_type, {
     grain: 'Grain',
     sugar: 'Sugar',

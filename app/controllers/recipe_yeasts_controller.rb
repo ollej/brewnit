@@ -11,10 +11,12 @@ class RecipeYeastsController < ApplicationController
   end
 
   def create
-    @yeast = Yeast.new(yeast_params)
+    @yeast = @details.yeasts.build(yeast_params)
+
     respond_to do |format|
       if @yeast.save
         @details.yeasts << @yeast
+        dirty_notice
         format.html { redirect_to recipe_details_path }
         format.json { render json: @yeast, status: :ok, location: recipe_details_path }
         format.js { render layout: false, status: :ok, location: recipe_details_path }
@@ -34,6 +36,7 @@ class RecipeYeastsController < ApplicationController
     @yeast = @details.yeasts.find(params[:id])
     respond_to do |format|
       if @yeast.destroy
+        dirty_notice
         format.html { redirect_to recipe_details_path }
         format.json { render layout: false, status: :ok, location: recipe_details_path }
         format.js { render layout: false, status: :ok, location: recipe_details_path }

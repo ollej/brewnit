@@ -467,6 +467,7 @@ sv:
   recipe_details:
     build:
       save: Spara
+    dirty_recipe: Du har gjort ändringar i receptet. Du måste klicka på Publicera-knappen för att det ska synas på siten.
   recipe_shopping_list:
     header: 'Inköpslista för:'
     type:

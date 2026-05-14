@@ -145,4 +145,10 @@ class ApplicationController < ActionController::Base
   def can_modify?(resource)
     user_signed_in? && current_user.can_modify?(resource)
   end
+
+  def dirty_notice
+    if @details.dirty
+      flash.now.notice = I18n.t('recipe_details.dirty_recipe')
+    end
+  end
 end

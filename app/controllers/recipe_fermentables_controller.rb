@@ -11,11 +11,12 @@ class RecipeFermentablesController < ApplicationController
   end
 
   def create
-    @fermentable = Fermentable.new(fermentable_params)
+    @fermentable = @details.fermentables.build(fermentable_params)
 
     respond_to do |format|
       if @fermentable.save
         @details.fermentables << @fermentable
+        dirty_notice
         format.html { redirect_to recipe_details_path }
         format.json { render json: @fermentable, status: :ok, location: recipe_details_path }
         format.js { render layout: false, status: :ok, location: recipe_details_path }
@@ -36,6 +37,7 @@ class RecipeFermentablesController < ApplicationController
 
     respond_to do |format|
       if @fermentable.destroy
+        dirty_notice
         format.html { redirect_to recipe_details_path }
         format.json { render layout: false, status: :ok, location: recipe_details_path }
         format.js { render layout: false, status: :ok, location: recipe_details_path }

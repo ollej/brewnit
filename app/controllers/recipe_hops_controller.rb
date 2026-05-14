@@ -11,10 +11,12 @@ class RecipeHopsController < ApplicationController
   end
 
   def create
-    @hop = Hop.new(hop_params)
+    @hop = @details.hops.build(hop_params)
+
     respond_to do |format|
       if @hop.save
         @details.hops << @hop
+        dirty_notice
         format.html { redirect_to recipe_details_path }
         format.json { render json: @hop, status: :ok, location: recipe_details_path }
         format.js { render layout: false, status: :ok, location: recipe_details_path }
@@ -34,6 +36,7 @@ class RecipeHopsController < ApplicationController
     @hop = @details.hops.find(params[:id])
     respond_to do |format|
       if @hop.destroy
+        dirty_notice
         format.html { redirect_to recipe_details_path }
         format.json { render layout: false, status: :ok, location: recipe_details_path }
         format.js { render layout: false, status: :ok, location: recipe_details_path }

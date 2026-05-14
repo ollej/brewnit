@@ -1,0 +1,8 @@
+<% if flash[:notice] %>
+  $('body').trigger('flasher:show', {
+    message: '<%= j(flash[:notice]) %>',
+    level: 'info',
+    clear: true,
+    noscroll: true
+  })
+<% end %>

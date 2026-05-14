@@ -1,10 +1,10 @@
 class RecipeDetail < ApplicationRecord
   belongs_to :recipe
-  has_many :fermentables, dependent: :destroy
-  has_many :hops, dependent: :destroy
-  has_many :miscs, dependent: :destroy
-  has_many :yeasts, dependent: :destroy
-  has_many :mash_steps, dependent: :destroy
+  has_many :fermentables, dependent: :destroy, inverse_of: :recipe_detail
+  has_many :hops, dependent: :destroy, inverse_of: :recipe_detail
+  has_many :miscs, dependent: :destroy, inverse_of: :recipe_detail
+  has_many :yeasts, dependent: :destroy, inverse_of: :recipe_detail
+  has_many :mash_steps, dependent: :destroy, inverse_of: :recipe_detail
   belongs_to :style, optional: true
 
   validates :batch_size, numericality: true, allow_blank: true

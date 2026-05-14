@@ -11,10 +11,12 @@ class RecipeMiscsController < ApplicationController
   end
 
   def create
-    @misc = Misc.new(misc_params)
+    @misc = @details.miscs.build(misc_params)
+
     respond_to do |format|
       if @misc.save
         @details.miscs << @misc
+        dirty_notice
         format.html { redirect_to recipe_details_path }
         format.json { render json: @misc, status: :ok, location: recipe_details_path }
         format.js { render layout: false, status: :ok, location: recipe_details_path }
@@ -34,6 +36,7 @@ class RecipeMiscsController < ApplicationController
     @misc = @details.miscs.find(params[:id])
     respond_to do |format|
       if @misc.destroy
+        dirty_notice
         format.html { redirect_to recipe_details_path }
         format.json { render layout: false, status: :ok, location: recipe_details_path }
         format.js { render layout: false, status: :ok, location: recipe_details_path }

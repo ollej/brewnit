@@ -1,6 +1,7 @@
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
@@ -8,6 +9,13 @@ SET check_function_bodies = false;
 SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
+
+--
+-- Name: public; Type: SCHEMA; Schema: -; Owner: -
+--
+
+-- *not* creating schema, since initdb creates it
+
 
 --
 -- Name: pg_trgm; Type: EXTENSION; Schema: -; Owner: -
@@ -436,6 +444,120 @@ CREATE TABLE public.events_recipes (
 
 
 --
+-- Name: federails_activities; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.federails_activities (
+    id bigint NOT NULL,
+    entity_type character varying NOT NULL,
+    entity_id bigint NOT NULL,
+    action character varying NOT NULL,
+    actor_id bigint NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    uuid character varying
+);
+
+
+--
+-- Name: federails_activities_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.federails_activities_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: federails_activities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.federails_activities_id_seq OWNED BY public.federails_activities.id;
+
+
+--
+-- Name: federails_actors; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.federails_actors (
+    id bigint NOT NULL,
+    name character varying,
+    federated_url character varying,
+    username character varying,
+    server character varying,
+    inbox_url character varying,
+    outbox_url character varying,
+    followers_url character varying,
+    followings_url character varying,
+    profile_url character varying,
+    entity_id integer,
+    entity_type character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    uuid character varying,
+    public_key text,
+    private_key text
+);
+
+
+--
+-- Name: federails_actors_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.federails_actors_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: federails_actors_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.federails_actors_id_seq OWNED BY public.federails_actors.id;
+
+
+--
+-- Name: federails_followings; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.federails_followings (
+    id bigint NOT NULL,
+    actor_id bigint NOT NULL,
+    target_actor_id bigint NOT NULL,
+    status integer DEFAULT 0,
+    federated_url character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    uuid character varying
+);
+
+
+--
+-- Name: federails_followings_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.federails_followings_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: federails_followings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.federails_followings_id_seq OWNED BY public.federails_followings.id;
+
+
+--
 -- Name: fermentables; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -684,7 +806,8 @@ CREATE TABLE public.recipe_details (
     fg numeric DEFAULT 0.0 NOT NULL,
     brewed_at date,
     carbonation numeric DEFAULT 0.0 NOT NULL,
-    style_id bigint
+    style_id bigint,
+    dirty boolean DEFAULT false NOT NULL
 );
 
 
@@ -734,7 +857,8 @@ CREATE TABLE public.recipes (
     media_main_id integer,
     cached_votes_up integer DEFAULT 0,
     equipment character varying DEFAULT ''::character varying,
-    complete boolean DEFAULT false NOT NULL
+    complete boolean DEFAULT false NOT NULL,
+    federated_url character varying
 );
 
 
@@ -1001,6 +1125,27 @@ ALTER TABLE ONLY public.events ALTER COLUMN id SET DEFAULT nextval('public.event
 
 
 --
+-- Name: federails_activities id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.federails_activities ALTER COLUMN id SET DEFAULT nextval('public.federails_activities_id_seq'::regclass);
+
+
+--
+-- Name: federails_actors id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.federails_actors ALTER COLUMN id SET DEFAULT nextval('public.federails_actors_id_seq'::regclass);
+
+
+--
+-- Name: federails_followings id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.federails_followings ALTER COLUMN id SET DEFAULT nextval('public.federails_followings_id_seq'::regclass);
+
+
+--
 -- Name: fermentables id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -1138,6 +1283,30 @@ ALTER TABLE ONLY public.event_registrations
 
 ALTER TABLE ONLY public.events
     ADD CONSTRAINT events_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: federails_activities federails_activities_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.federails_activities
+    ADD CONSTRAINT federails_activities_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: federails_actors federails_actors_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.federails_actors
+    ADD CONSTRAINT federails_actors_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: federails_followings federails_followings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.federails_followings
+    ADD CONSTRAINT federails_followings_pkey PRIMARY KEY (id);
 
 
 --
@@ -1431,6 +1600,76 @@ CREATE UNIQUE INDEX index_events_recipes_on_event_id_and_recipe_id ON public.eve
 --
 
 CREATE UNIQUE INDEX index_events_recipes_on_recipe_id_and_event_id ON public.events_recipes USING btree (recipe_id, event_id);
+
+
+--
+-- Name: index_federails_activities_on_actor_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_federails_activities_on_actor_id ON public.federails_activities USING btree (actor_id);
+
+
+--
+-- Name: index_federails_activities_on_entity; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_federails_activities_on_entity ON public.federails_activities USING btree (entity_type, entity_id);
+
+
+--
+-- Name: index_federails_activities_on_uuid; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_federails_activities_on_uuid ON public.federails_activities USING btree (uuid);
+
+
+--
+-- Name: index_federails_actors_on_entity; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_federails_actors_on_entity ON public.federails_actors USING btree (entity_type, entity_id);
+
+
+--
+-- Name: index_federails_actors_on_federated_url; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_federails_actors_on_federated_url ON public.federails_actors USING btree (federated_url);
+
+
+--
+-- Name: index_federails_actors_on_uuid; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_federails_actors_on_uuid ON public.federails_actors USING btree (uuid);
+
+
+--
+-- Name: index_federails_followings_on_actor_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_federails_followings_on_actor_id ON public.federails_followings USING btree (actor_id);
+
+
+--
+-- Name: index_federails_followings_on_actor_id_and_target_actor_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_federails_followings_on_actor_id_and_target_actor_id ON public.federails_followings USING btree (actor_id, target_actor_id);
+
+
+--
+-- Name: index_federails_followings_on_target_actor_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_federails_followings_on_target_actor_id ON public.federails_followings USING btree (target_actor_id);
+
+
+--
+-- Name: index_federails_followings_on_uuid; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_federails_followings_on_uuid ON public.federails_followings USING btree (uuid);
 
 
 --
@@ -1738,6 +1977,14 @@ ALTER TABLE ONLY public.event_registrations
 
 
 --
+-- Name: federails_followings fk_rails_2e62338faa; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.federails_followings
+    ADD CONSTRAINT fk_rails_2e62338faa FOREIGN KEY (actor_id) REFERENCES public.federails_actors(id);
+
+
+--
 -- Name: placements fk_rails_344f224d46; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1751,6 +1998,14 @@ ALTER TABLE ONLY public.placements
 
 ALTER TABLE ONLY public.recipe_details
     ADD CONSTRAINT fk_rails_426b7d6920 FOREIGN KEY (style_id) REFERENCES public.styles(id);
+
+
+--
+-- Name: federails_followings fk_rails_4a2870c181; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.federails_followings
+    ADD CONSTRAINT fk_rails_4a2870c181 FOREIGN KEY (target_actor_id) REFERENCES public.federails_actors(id);
 
 
 --
@@ -1791,6 +2046,14 @@ ALTER TABLE ONLY public.users
 
 ALTER TABLE ONLY public.placements
     ADD CONSTRAINT fk_rails_7f5b80573c FOREIGN KEY (event_id) REFERENCES public.events(id);
+
+
+--
+-- Name: federails_activities fk_rails_85ef6259df; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.federails_activities
+    ADD CONSTRAINT fk_rails_85ef6259df FOREIGN KEY (actor_id) REFERENCES public.federails_actors(id);
 
 
 --
@@ -1880,72 +2143,79 @@ ALTER TABLE ONLY public.placements
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
-('20151214195013'),
-('20151214200025'),
-('20151214210544'),
-('20151214210606'),
-('20151215200333'),
-('20151223113228'),
-('20151223125714'),
-('20160102165716'),
-('20160102173544'),
-('20160102210028'),
-('20160105190205'),
-('20160105234837'),
-('20160112215316'),
-('20160119204655'),
-('20160119214911'),
-('20160124162437'),
-('20160124174400'),
-('20160209201838'),
-('20160307193952'),
-('20161213184727'),
-('20170127111423'),
-('20170130190351'),
-('20171025204911'),
-('20171027223202'),
-('20171028120552'),
-('20171028145021'),
-('20171029201125'),
-('20171102202524'),
-('20171107191308'),
-('20171113205317'),
-('20171114204510'),
-('20171115220620'),
-('20171115220627'),
-('20171115221112'),
-('20171115221353'),
-('20171115221645'),
-('20171119161104'),
-('20171119165458'),
-('20171119182201'),
-('20171119190427'),
-('20171121184814'),
-('20171122201201'),
-('20171126121130'),
-('20171126161659'),
-('20171202132847'),
-('20171203174307'),
-('20171212222842'),
-('20171228154504'),
-('20180205191232'),
-('20180205201540'),
-('20180205203125'),
-('20180501134640'),
-('20180501150416'),
-('20180501151104'),
-('20190324004643'),
-('20200613142912'),
-('20200613154041'),
-('20200613182041'),
-('20200613184054'),
-('20200616170418'),
-('20200620114227'),
-('20200620124947'),
-('20210308201612'),
-('20221117125254'),
-('20230504114826'),
+('20260514151104'),
+('20250208204815'),
+('20250208194851'),
+('20250208193323'),
+('20250208193322'),
+('20250208193321'),
+('20250208193320'),
+('20250208193319'),
+('20230504114828'),
 ('20230504114827'),
-('20230504114828');
-
+('20230504114826'),
+('20221117125254'),
+('20210308201612'),
+('20200620124947'),
+('20200620114227'),
+('20200616170418'),
+('20200613184054'),
+('20200613182041'),
+('20200613154041'),
+('20200613142912'),
+('20190324004643'),
+('20180501151104'),
+('20180501150416'),
+('20180501134640'),
+('20180205203125'),
+('20180205201540'),
+('20180205191232'),
+('20171228154504'),
+('20171212222842'),
+('20171203174307'),
+('20171202132847'),
+('20171126161659'),
+('20171126121130'),
+('20171122201201'),
+('20171121184814'),
+('20171119190427'),
+('20171119182201'),
+('20171119165458'),
+('20171119161104'),
+('20171115221645'),
+('20171115221353'),
+('20171115221112'),
+('20171115220627'),
+('20171115220620'),
+('20171114204510'),
+('20171113205317'),
+('20171107191308'),
+('20171102202524'),
+('20171029201125'),
+('20171028145021'),
+('20171028120552'),
+('20171027223202'),
+('20171025204911'),
+('20170130190351'),
+('20170127111423'),
+('20161213184727'),
+('20160307193952'),
+('20160209201838'),
+('20160124174400'),
+('20160124162437'),
+('20160119214911'),
+('20160119204655'),
+('20160112215316'),
+('20160105234837'),
+('20160105190205'),
+('20160102210028'),
+('20160102173544'),
+('20160102165716'),
+('20151223125714'),
+('20151223113228'),
+('20151215200333'),
+('20151214210606'),
+('20151214210544'),
+('20151214200025'),
+('20151214195013');
 

@@ -1,4 +1,8 @@
 class Hop < ApplicationRecord
+  include DirtyConcern
+
+  belongs_to :recipe_detail, inverse_of: :hops
+
   enum :use, {
     mash: 'Mash',
     first_wort: 'First Wort',

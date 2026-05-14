@@ -1,4 +1,8 @@
 class Yeast < ApplicationRecord
+  include DirtyConcern
+
+  belongs_to :recipe_detail, inverse_of: :yeasts
+
   enum :form, {
     liquid: 'Liquid',
     dry: 'Dry',

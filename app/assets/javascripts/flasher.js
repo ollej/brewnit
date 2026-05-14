@@ -23,7 +23,10 @@ class Flasher {
   }
 
   handler(ev, options) {
-    this.flash(options.message, options.level);
+    if (options.clear) {
+      this.clear();
+    }
+    this.flash(options.message, options.level, !options.noscroll);
   }
 
   scroll() {
@@ -31,10 +34,12 @@ class Flasher {
     this.div().children().effect("highlight", {}, 750);
   }
 
-  flash(msg, level) {
+  flash(msg, level, scroll = true) {
     if (level == null) { level = "error"; }
     this.div().append(`<div class='pure-alert pure-alert-${level}'>${msg}</div>`);
-    this.scroll();
+    if (scroll) {
+      this.scroll();
+    }
   }
 }
 

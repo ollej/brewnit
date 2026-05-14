@@ -6,6 +6,7 @@ class RecipeCompleteController < ApplicationController
     @recipe.beerxml = BeerxmlExport.new(@recipe).render
     beer_recipe = BeerxmlParser.new(@recipe.beerxml).recipes.first
     BeerxmlImport.new(@recipe, beer_recipe).extract_recipe
+    @recipe.detail.update(dirty: false)
     @recipe.save!
 
     respond_to do |format|

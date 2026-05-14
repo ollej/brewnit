@@ -1,4 +1,4 @@
-<%= form_with model: Hop.new, url: recipe_hops_path(@recipe),
+<%= form_with model: Hop.new, id: "new_hop", url: recipe_hops_path(@recipe),
       local: false, class: 'pure-form pure-form-stacked' do |f| %>
   <fieldset>
     <legend><%= I18n.t(:'recipe_detail.hops') %></legend>

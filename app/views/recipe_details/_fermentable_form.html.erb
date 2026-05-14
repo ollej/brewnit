@@ -1,5 +1,5 @@
-<%= form_with model: Fermentable.new, url: recipe_fermentables_path(@recipe),
-      local: false, class: 'pure-form pure-form-stacked' do |f| %>
+<%= form_with model: Fermentable.new, id: "new_fermentable", url: recipe_fermentables_path(@recipe),
+      local: false, class: "pure-form pure-form-stacked" do |f| %>
   <fieldset>
     <legend><%= I18n.t(:'recipe_detail.fermentables') %></legend>
 

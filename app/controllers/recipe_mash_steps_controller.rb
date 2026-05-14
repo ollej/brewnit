@@ -11,11 +11,12 @@ class RecipeMashStepsController < ApplicationController
   end
 
   def create
-    @mash_step = MashStep.new(mash_step_params)
+    @mash_step = @details.mash_steps.build(mash_step_params)
 
     respond_to do |format|
       if @mash_step.save
         @details.mash_steps << @mash_step
+        dirty_notice
         format.html { redirect_to recipe_details_path }
         format.json { render json: @mash_step, status: :ok, location: recipe_details_path }
         format.js { render layout: false, status: :ok, location: recipe_details_path }
@@ -36,6 +37,7 @@ class RecipeMashStepsController < ApplicationController
 
     respond_to do |format|
       if @mash_step.destroy
+        dirty_notice
         format.html { redirect_to recipe_details_path }
         format.json { render layout: false, status: :ok, location: recipe_details_path }
         format.js { render layout: false, status: :ok, location: recipe_details_path }

@@ -1,5 +1,5 @@
-<%= form_with model: MashStep.new, url: recipe_mash_steps_path(@recipe),
-             local: false, class: 'pure-form pure-form-stacked' do |f| %>
+<%= form_with model: MashStep.new, id: "new_mash_step", url: recipe_mash_steps_path(@recipe),
+             local: false, class: "pure-form pure-form-stacked" do |f| %>
   <fieldset>
     <legend><%= I18n.t(:'recipe_detail.mash_steps') %></legend>
 

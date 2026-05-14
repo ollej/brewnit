@@ -1,4 +1,8 @@
 class Misc < ApplicationRecord
+  include DirtyConcern
+
+  belongs_to :recipe_detail, inverse_of: :miscs
+
   enum :use, {
     mash: 'Mash',
     boil: 'Boil',

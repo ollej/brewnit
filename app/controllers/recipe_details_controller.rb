@@ -16,6 +16,8 @@ class RecipeDetailsController < ApplicationController
     @style = @details.style
     @styles = Style.style_options(@style&.style_guide || Style::DEFAULT_GUIDE)
 
+    dirty_notice
+
     respond_to do |format|
       format.html
       format.xml {
@@ -29,7 +31,9 @@ class RecipeDetailsController < ApplicationController
 
   def update
     respond_to do |format|
+      Rails.logger.debug { "############## Details update: #{details_params}" }
       if @details.update(details_params)
+        dirty_notice
         format.html { redirect_to recipe_details_path }
         format.json { render json: @details, status: :ok }
         format.js { render layout: false, status: :ok }
@@ -53,6 +57,7 @@ class RecipeDetailsController < ApplicationController
       :og, :fg, :brewed_at, :carbonation, :style
     )
     details[:style] = Style.find(details[:style]) if details[:style].present?
+    details[:dirty] = true
     details
   end
 end

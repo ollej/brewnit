@@ -1,5 +1,5 @@
-<%= form_with model: Misc.new, url: recipe_miscs_path(@recipe),
-             local: false, class: 'pure-form pure-form-stacked' do |f| %>
+<%= form_with model: Misc.new, id: "new_misc", url: recipe_miscs_path(@recipe),
+             local: false, class: "pure-form pure-form-stacked" do |f| %>
   <fieldset>
     <legend><%= I18n.t(:'recipe_detail.miscs') %></legend>
 

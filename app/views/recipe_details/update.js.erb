@@ -1,3 +1,9 @@
+<% if flash[:notice] %>
+  $('body').trigger('flasher:show', {
+    message: '<%= j(flash[:notice]) %>',
+    level: 'info'
+  })
+<% end %>
 <% if @error.nil? %>
   let changed_fields = <%= raw @details.previous_changes.keys - ['updated_at'] %>;
   changed_fields.forEach(function(element) {
