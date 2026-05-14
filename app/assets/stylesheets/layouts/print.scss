@@ -77,15 +77,17 @@ body.print-body {
     }
     .header-with-qr {
       display: flex;
+      justify-content: space-between;
     }
     .header-info {
-      flex-grow: 4;
+      flex-grow: 9;
     }
     .header-qr-code {
       flex-grow: 1;
+      text-align: right;
 
       svg {
-        width: 10%;
+        width: 130px;
       }
     }
   }
