@@ -1,4 +1,4 @@
-FROM ruby:3.4.1
+FROM ruby:4.0.4
 
 RUN apt-get update -qq && \
     apt-get install -qy nodejs postgresql-client inkscape && \

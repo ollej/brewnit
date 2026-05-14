@@ -5,7 +5,8 @@ class PushMessage
 
   def defaults
     {
-      user: user,
+      user:,
+      token:,
       title: I18n.t(:'common.notification.default_title'),
       sound: :incoming
     }
@@ -15,9 +16,9 @@ class PushMessage
     defaults.merge(@values)
   end
 
-  def user
-    Rails.configuration.secrets.pushover_user
-  end
+  def user = Rails.configuration.secrets.pushover_user
+
+  def token = Rails.configuration.secrets.pushover_token
 
   def enabled?(user_key)
     user_key.present? && Rails.env.production?

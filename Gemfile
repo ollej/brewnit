@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '3.4.9'
+ruby '4.0.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '8.0.1'
@@ -35,7 +35,7 @@ gem 'devise'
 gem 'omniauth', '~> 2.1.0'
 gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection"
-gem 'unicorn-rails'
+gem 'puma'
 
 gem 'nrb-beerxml', git: 'https://github.com/ollej/beerxml.git', ref: '3c3a9c6d7b138a1160e481f276bb2d0923c83911'
 gem 'beer_recipe' #, path: './vendor/beer_recipe/'
@@ -43,7 +43,7 @@ gem 'commontator'
 gem 'acts_as_votable'
 gem 'search_cop', git: 'https://github.com/mrkamel/search_cop.git', ref: '1082a2f7862321cf8f1c4560a2b6602a0c256e59' # Use Ruby v2.4 compatible fork
 gem 'meta-tags'
-gem 'pushover', git: 'https://github.com/vito-lbs/pushover.git', ref: '3bbb7ea026b3d30c043ba033d596dab6fec2a031' # Use Ruby v2.4 compatible fork
+gem 'pushover' #, git: 'https://github.com/vito-lbs/pushover.git', ref: '3bbb7ea026b3d30c043ba033d596dab6fec2a031' # Use Ruby v2.4 compatible fork
 gem "kt-paperclip"
 gem 'chronic', require: true
 gem 'actionview-encoded_mail_to'
@@ -94,9 +94,6 @@ end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-# Use Unicorn as the app server
-# gem 'unicorn'
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -111,9 +108,6 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console'
-
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
 
   gem 'rails_real_favicon'
   gem 'listen'
