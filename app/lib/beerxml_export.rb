@@ -19,8 +19,10 @@ class BeerxmlExport
   def render
     # TODO: Validate xml with BeerRecipe
     ApplicationController.render(
-      template: 'recipe_details/show.xml.builder',
-      assigns: assigns
+      template: 'recipe_details/show',
+      assigns: assigns,
+      formats: :xml,
+      layout: false
     )
   end
 end
