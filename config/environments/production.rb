@@ -98,4 +98,6 @@ Rails.application.configure do
   config.active_record.logger = nil
   config.assets.quiet = true
   config.lograge.enabled = true
+
+  config.active_storage.variant_processor = :disabled
 end
